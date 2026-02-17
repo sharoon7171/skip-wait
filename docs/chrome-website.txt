@@ -1,0 +1,104 @@
+═══════════════════════════════════════════════════════════════
+CHROME WEB STORE — DETAILED DESCRIPTION (max 16,000 chars)
+═══════════════════════════════════════════════════════════════
+▼ COPY FROM BELOW ▼
+
+Skip Wait — Skip Countdown Timers & Bypass Waiting Pages Instantly
+
+Tired of countdown timers, link shortener delays, and waiting pages? Skip Wait is a free Chrome extension that automatically bypasses countdown timers, skip wait pages, and gets you to your destination link faster—no clicking, no waiting.
+
+═══════════════════════════════════════════════════════════════
+WHY INSTALL SKIP WAIT?
+═══════════════════════════════════════════════════════════════
+
+• Save time — Skip countdown timers and waiting pages in one click. No more 5-, 10-, or 30-second delays.
+• One extension, many sites — Works across link shorteners, file hosts, and sites that force you to wait before continuing.
+• Automatic — No manual steps. Install once and the extension handles bypass and redirect for you.
+• Always up to date — Supported sites are updated remotely, so you get new bypasses without reinstalling the extension.
+• Lightweight & private — Runs only when needed. No unnecessary data collection.
+
+═══════════════════════════════════════════════════════════════
+WHAT SKIP WAIT DOES
+═══════════════════════════════════════════════════════════════
+
+Skip Wait helps you:
+
+✓ Skip countdown timers — Automatically bypass countdown and delay timers on download and link pages.
+✓ Bypass link shorteners — Get past short-link and redirect pages and land on the final URL.
+✓ Skip waiting pages — Avoid “please wait” and “click to continue” hold screens.
+✓ Instant redirect — When a full bypass is possible, you’re sent straight to the target URL.
+✓ Automation where needed — On sites where a full bypass isn’t possible, Skip Wait can automate waiting and clicking so you still save time.
+
+Whether you’re downloading files, opening shortened links, or visiting sites that force a wait, Skip Wait reduces friction and gets you where you’re going faster.
+
+═══════════════════════════════════════════════════════════════
+WHO IS IT FOR?
+═══════════════════════════════════════════════════════════════
+
+• Anyone who clicks short links and hates countdown timers
+• Users who download from file hosts with mandatory wait times
+• People who want to skip “wait X seconds” or “click to proceed” pages
+• Anyone looking for a countdown bypass, timer skip, or link shortener bypass extension
+
+═══════════════════════════════════════════════════════════════
+HOW IT WORKS
+═══════════════════════════════════════════════════════════════
+
+1. Install Skip Wait from the Chrome Web Store.
+2. Browse as usual. When you land on a supported waiting page, countdown page, or short-link page, Skip Wait runs automatically.
+3. You’re either redirected to the final URL or the extension automates the wait/click so you reach your destination faster.
+
+No configuration required for supported sites. Just install and use.
+
+═══════════════════════════════════════════════════════════════
+REQUEST SUPPORT FOR YOUR SITE
+═══════════════════════════════════════════════════════════════
+
+We add support for new sites over time. If you use a site with a countdown timer, waiting page, or link shortener that you’d like to skip or automate:
+
+📧 Contact us: sharoon7171@gmail.com
+
+Tell us the site or type of page (timer, short link, file host, etc.). We’ll add timer bypass, skip-wait, or automation where possible. If a full bypass isn’t feasible, we’ll try to create automation (e.g. auto-click, auto-wait) so you still save time.
+
+SUMMARY
+═══════════════════════════════════════════════════════════════
+
+Skip Wait is a free Chrome extension that skips countdown timers, bypasses waiting pages, and helps you get past link shorteners and file-host delays. Install once, save time every time. Need support for a specific site? Email sharoon7171@gmail.com—we’ll add bypass or automation when we can.
+
+Install Skip Wait and stop waiting.
+
+▲ COPY UNTIL HERE ▲
+
+═══════════════════════════════════════════════════════════════
+CHROME WEB STORE — SINGLE PURPOSE DESCRIPTION (max 1000 chars)
+═══════════════════════════════════════════════════════════════
+▼ COPY FROM BELOW ▼
+
+Skip Wait has one purpose: to skip countdown timers and waiting pages so you reach your destination link faster. When you visit link shorteners, file hosts, or other sites that show a countdown or "please wait" screen before continuing, the extension automatically bypasses or automates that wait. You get to the final URL or download without manually waiting or clicking through. No configuration needed on supported sites—install and browse as usual. The extension runs only on relevant pages and does not collect your data.
+
+▲ COPY UNTIL HERE ▲
+
+═══════════════════════════════════════════════════════════════
+CHROME WEB STORE — SCRIPTING JUSTIFICATION (max 1000 chars)
+═══════════════════════════════════════════════════════════════
+▼ COPY FROM BELOW ▼
+
+Skip Wait uses the scripting API to register and run content scripts on pages that show countdown timers or waiting pages. The extension fetches a configuration that lists which domains need a bypass; it then uses chrome.scripting.registerContentScripts to inject the appropriate script (from the extension package) on those domains. This is required to fulfill the single purpose: skipping countdowns and waiting pages on configurable sites. No other API allows dynamic registration of content scripts based on that config.
+
+▲ COPY UNTIL HERE ▲
+
+═══════════════════════════════════════════════════════════════
+CHROME WEB STORE — HOST PERMISSION JUSTIFICATION (max 1000 chars)
+═══════════════════════════════════════════════════════════════
+▼ COPY FROM BELOW ▼
+
+The extension must inject content scripts on many different domains (link shorteners, file hosts, etc.). The exact list of domains is updated remotely so new sites can be supported without a new extension version. Because the list is dynamic and can include any number of domains, the extension requests host access so the registered content scripts can run on the URLs specified in the configuration. Scripts run only on pages matching the configured patterns, not on all browsing.
+
+▲ COPY UNTIL HERE ▲
+
+═══════════════════════════════════════════════════════════════
+CHROME WEB STORE — REMOTE CODE
+═══════════════════════════════════════════════════════════════
+Select: No, I am not using Remote code
+
+═══════════════════════════════════════════════════════════════

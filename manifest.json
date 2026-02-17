@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Skip Wait",
   "version": "1.0.0",
-  "description": "Skip countdown timers and waiting pages. Get instant access to download links and content. No more waiting—one-click bypass for link shorteners and file hosts.",
+  "description": "Skip countdown timers and waiting pages. One-click bypass for link shorteners and file hosts.",
   "icons": {
     "16": "icons/icon.png",
     "48": "icons/icon.png",
