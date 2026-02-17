@@ -1,0 +1,23 @@
+{
+  "name": "skip-wait",
+  "version": "1.0.0",
+  "description": "Skip countdown timers and waiting pages. Get instant access to download links and content. No more waiting—one-click bypass for link shorteners and file hosts.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "watch": "vite build --watch",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.317",
+    "@types/node": "^25.2.3",
+    "terser": "^5.46.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
