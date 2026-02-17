@@ -1,6 +1,6 @@
 {
   "name": "skip-wait",
-  "version": "1.0.0",
+  "version": "1.1",
   "description": "Skip countdown timers and waiting pages. Get instant access to download links and content. No more waiting—one-click bypass for link shorteners and file hosts.",
   "type": "module",
   "scripts": {
