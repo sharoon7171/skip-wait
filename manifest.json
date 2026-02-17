@@ -3,52 +3,9 @@
   "name": "Skip Wait",
   "version": "1.0.0",
   "description": "Skip countdown timers and waiting pages. Get instant access to download links and content. No more waiting—one-click bypass for link shorteners and file hosts.",
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["multiup-content-script.js"],
-      "run_at": "document_start"
-    },
-    {
-      "matches": ["*://hubcdn.fans/*"],
-      "js": ["hubcdn-redirect-content-script.js"],
-      "run_at": "document_start"
-    },
-    {
-      "matches": ["*://inventoryidea.com/*", "*://taazabull24.com/*", "*://gadgetsweb.xyz/*"],
-      "js": ["hdhub4u-timer-bypass-content-script.js"],
-      "run_at": "document_start"
-    },
-    {
-      "matches": ["*://hdhublist.com/*"],
-      "js": ["hdhublist-main-domain-content-script.js"],
-      "run_at": "document_start"
-    },
-    {
-      "matches": ["*://hdhub4u.gs/*", "*://hdhub4u.gd/*", "*://hdhub4u.catering/*"],
-      "js": ["hdhub4u-main-domain-instant-redirect-content-script.js"],
-      "run_at": "document_start"
-    },
-    {
-      "matches": ["*://srtslug.biz/*"],
-      "js": ["shrtfly-redirect-content-script.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": ["*://fc-lc.xyz/*"],
-      "js": ["fc-lc-redirect-content-script.js"],
-      "run_at": "document_end"
-    },
-    {
-      "matches": ["*://prmovies.mba/*"],
-      "js": ["prmovies-redirect-content-script.js"],
-      "run_at": "document_start"
-    }
-  ],
-  "permissions": [
-    "scripting"
-  ],
-  "host_permissions": [
-    "<all_urls>"
-  ]
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["scripting"],
+  "host_permissions": ["<all_urls>"]
 }

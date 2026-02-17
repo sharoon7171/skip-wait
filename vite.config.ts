@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => {
     build: {
       rollupOptions: {
         input: {
+          'background': resolve(__dirname, 'src/background.ts'),
           'multiup-content-script': resolve(__dirname, 'src/content-scripts/multiup-content-script.ts'),
           'hubcdn-redirect-content-script': resolve(__dirname, 'src/content-scripts/hubcdn-redirect-content-script.ts'),
           'hdhub4u-timer-bypass-content-script': resolve(__dirname, 'src/content-scripts/hdhub4u-timer-bypass-content-script.ts'),
