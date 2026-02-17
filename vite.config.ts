@@ -47,7 +47,8 @@ export default defineConfig(({ mode }) => {
           'hdhub4u-main-domain-instant-redirect-content-script': resolve(__dirname, 'src/content-scripts/hdhub4u-main-domain-instant-redirect-content-script.ts'),
           'shrtfly-redirect-content-script': resolve(__dirname, 'src/content-scripts/shrtfly-redirect-content-script.ts'),
           'fc-lc-redirect-content-script': resolve(__dirname, 'src/content-scripts/fc-lc-redirect-content-script.ts'),
-          'prmovies-redirect-content-script': resolve(__dirname, 'src/content-scripts/prmovies-redirect-content-script.ts')
+          'prmovies-redirect-content-script': resolve(__dirname, 'src/content-scripts/prmovies-redirect-content-script.ts'),
+          'sub2get-redirect-content-script': resolve(__dirname, 'src/content-scripts/sub2get-redirect-content-script.ts')
         },
         output: {
           entryFileNames: '[name].js',

@@ -38,5 +38,10 @@
     "js": "prmovies-redirect-content-script.js",
     "matches": ["prmovies.mba"],
     "run_at": "document_start"
+  },
+  {
+    "js": "sub2get-redirect-content-script.js",
+    "matches": ["*://www.sub2get.com/*"],
+    "run_at": "document_end"
   }
 ]
