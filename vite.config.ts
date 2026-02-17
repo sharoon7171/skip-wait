@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
 import { resolve, dirname } from 'path';
-import { copyFileSync, existsSync } from 'fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// Plugin to copy manifest.json to dist folder
+// Plugin to copy manifest.json and icons to dist folder
 const copyManifestPlugin = () => {
   return {
     name: 'copy-manifest',
@@ -15,6 +15,15 @@ const copyManifestPlugin = () => {
 
       if (existsSync(manifestPath)) {
         copyFileSync(manifestPath, distManifestPath);
+      }
+
+      const iconsDir = resolve(__dirname, 'icons');
+      const distIconsDir = resolve(__dirname, 'dist/icons');
+      if (existsSync(iconsDir)) {
+        mkdirSync(distIconsDir, { recursive: true });
+        for (const file of readdirSync(iconsDir)) {
+          copyFileSync(resolve(iconsDir, file), resolve(distIconsDir, file));
+        }
       }
     }
   };
