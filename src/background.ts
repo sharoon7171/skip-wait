@@ -10,8 +10,16 @@ type ConfigRule = {
   run_at: 'document_start' | 'document_end' | 'document_idle';
 };
 
+/** Convert simple "domain.com" or "sub.domain.com" into Chrome match pattern "*://domain.com/*" */
 function normalizeMatches(matches: string[]): string[] {
-  return matches.map((m) => (m === '<all_urls>' ? '*://*/*' : m));
+  return matches.map((m) => {
+    const t = m.trim();
+    if (t === '<all_urls>') return '*://*/*';
+    // Already a match pattern (contains ://)
+    if (t.includes('://')) return t;
+    // Plain domain → full URL pattern
+    return `*://${t}/*`;
+  });
 }
 
 async function fetchConfig(): Promise<ConfigRule[]> {
