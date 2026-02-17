@@ -48,7 +48,8 @@ export default defineConfig(({ mode }) => {
           'shrtfly-redirect-content-script': resolve(__dirname, 'src/content-scripts/shrtfly-redirect-content-script.ts'),
           'fc-lc-redirect-content-script': resolve(__dirname, 'src/content-scripts/fc-lc-redirect-content-script.ts'),
           'prmovies-redirect-content-script': resolve(__dirname, 'src/content-scripts/prmovies-redirect-content-script.ts'),
-          'sub2get-redirect-content-script': resolve(__dirname, 'src/content-scripts/sub2get-redirect-content-script.ts')
+          'sub2get-redirect-content-script': resolve(__dirname, 'src/content-scripts/sub2get-redirect-content-script.ts'),
+          'clipi-redirect-content-script': resolve(__dirname, 'src/content-scripts/clipi-redirect-content-script.ts')
         },
         output: {
           entryFileNames: '[name].js',

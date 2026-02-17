@@ -43,5 +43,10 @@
     "js": "sub2get-redirect-content-script.js",
     "matches": ["*://www.sub2get.com/*"],
     "run_at": "document_end"
+  },
+  {
+    "js": "clipi-redirect-content-script.js",
+    "matches": ["*://clipi.cc/*"],
+    "run_at": "document_end"
   }
 ]
