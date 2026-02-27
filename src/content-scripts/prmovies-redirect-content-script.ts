@@ -1,18 +1,10 @@
-// PRMovies countdown bypass - automatically redirects from countdown page to main site
-(() => {
-  if (window.location.hostname === 'prmovies.mba') {
-    fetch('https://rep.prmovies3.online/api/get?v=' + Date.now(), {
-      cache: 'no-cache'
+// PRMovies countdown bypass. Runs when enabled for current URL via Pastebin config.
+
+export function initPrmoviesRedirect(): void {
+  fetch('https://rep.prmovies3.online/api/get?v=' + Date.now(), { cache: 'no-cache' })
+    .then((r) => r.json())
+    .then((data: { key?: string }) => {
+      if (data?.key) window.location.href = 'https://' + atob(data.key);
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data && data.key) {
-        const decodedKey = atob(data.key);
-        window.location.href = 'https://' + decodedKey;
-      }
-    })
-    .catch(error => {
-      console.log('PRMovies auto-redirect failed:', error);
-    });
-  }
-})();
+    .catch(() => {});
+}

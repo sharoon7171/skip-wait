@@ -1,19 +1,7 @@
 /**
- * Background entry: register content scripts from remote config on startup/install and when tabs complete (throttled).
+ * Background service worker: fetches Pastebin config so content scripts don't hit CORS.
+ * Content script requests config via chrome.runtime.sendMessage.
  */
-import { registerFromConfig } from './registration';
+import { registerMessageListener } from './message-listener';
 
-chrome.runtime.onStartup.addListener(() => registerFromConfig().catch(() => {}));
-chrome.runtime.onInstalled.addListener(() =>
-  registerFromConfig().catch(() => {})
-);
-
-const THROTTLE_MS = 30_000;
-let lastRegisterTime = 0;
-
-chrome.tabs.onUpdated.addListener((_tabId, changeInfo) => {
-  if (changeInfo.status !== 'complete') return;
-  if (Date.now() - lastRegisterTime < THROTTLE_MS) return;
-  lastRegisterTime = Date.now();
-  registerFromConfig().catch(() => {});
-});
+registerMessageListener();

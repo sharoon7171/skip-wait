@@ -37,26 +37,28 @@ export default defineConfig((_env) => ({
       copyManifestPlugin()
     ],
     build: {
+      modulePreload: false,
       rollupOptions: {
         input: {
           'popup': resolve(__dirname, 'popup.html'),
           'options': resolve(__dirname, 'options.html'),
           'background': resolve(__dirname, 'src/background/index.ts'),
-          'multiup-content-script': resolve(__dirname, 'src/content-scripts/multiup-content-script.ts'),
-          'hubcdn-redirect-content-script': resolve(__dirname, 'src/content-scripts/hubcdn-redirect-content-script.ts'),
-          'hdhub4u-timer-bypass-content-script': resolve(__dirname, 'src/content-scripts/hdhub4u-timer-bypass-content-script.ts'),
-          'hdhublist-main-domain-content-script': resolve(__dirname, 'src/content-scripts/hdhublist-main-domain-content-script.ts'),
-          'hdhub4u-main-domain-instant-redirect-content-script': resolve(__dirname, 'src/content-scripts/hdhub4u-main-domain-instant-redirect-content-script.ts'),
-          'shrtfly-redirect-content-script': resolve(__dirname, 'src/content-scripts/shrtfly-redirect-content-script.ts'),
-          'fc-lc-redirect-content-script': resolve(__dirname, 'src/content-scripts/fc-lc-redirect-content-script.ts'),
-          'prmovies-redirect-content-script': resolve(__dirname, 'src/content-scripts/prmovies-redirect-content-script.ts'),
-          'sub2get-redirect-content-script': resolve(__dirname, 'src/content-scripts/sub2get-redirect-content-script.ts'),
-          'clipi-redirect-content-script': resolve(__dirname, 'src/content-scripts/clipi-redirect-content-script.ts')
         },
         output: {
           entryFileNames: '[name].js',
           chunkFileNames: '[name].js',
-          assetFileNames: '[name].[ext]'
+          assetFileNames: '[name].[ext]',
+          // Name shared chunk explicitly; without this Rollup names it from a module path (e.g. footer.js)
+          manualChunks(id) {
+            if (
+              id.includes('node_modules/react/') ||
+              id.includes('node_modules/react-dom/') ||
+              id.includes('components/footer') ||
+              id.includes('components/header') ||
+              id.includes('components/contact')
+            )
+              return 'client';
+          },
         }
       },
       outDir: 'dist',
@@ -65,7 +67,7 @@ export default defineConfig((_env) => ({
       target: 'es2020',
       terserOptions: {
         compress: { drop_console: true, drop_debugger: true },
-        mangle: false // Keep variable names – no a/b/c conflicts across content scripts
+        mangle: true,
       }
     }
 }));

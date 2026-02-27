@@ -1,16 +1,8 @@
-// HDHubList Main Domain Content Script
+// HDHubList main-domain redirect. Runs when enabled for current URL via Pastebin config.
 
-// TypeScript type definitions
-type RedirectUrl = 'https://hdhublist.com/?re=hdhub';
+const REDIRECT_URL = 'https://hdhublist.com/?re=hdhub';
 
-// Main function with TypeScript
-(function(): void {
-  const currentUrl: string = window.location.href;
-  const hasReParam: boolean = currentUrl.includes('re=hdhub');
-  const redirectUrl: RedirectUrl = 'https://hdhublist.com/?re=hdhub';
-
-  // Only redirect if we don't already have the re=hdhub parameter
-  if (!hasReParam) {
-    window.location.href = redirectUrl;
-  }
-})();
+export function initHdhublistMainDomain(): void {
+  if (window.location.href.includes('re=hdhub')) return;
+  window.location.href = REDIRECT_URL;
+}

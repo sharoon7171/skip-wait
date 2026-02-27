@@ -1,22 +1,10 @@
-// HubCDN Redirect Content Script - Simple version
-// Only execute if URL contains /dl/
+// HubCDN redirect. Runs when enabled for current URL via Pastebin config.
 
-(function(): void {
+export function initHubcdnRedirect(): void {
   const url = window.location.href;
-
-  // Only execute if URL contains /dl/
-  if (!url.includes('/dl/')) {
-    return;
-  }
-
-  // Extract link parameter
+  if (!url.includes('/dl/')) return;
   const linkMatch = url.match(/\/dl\/\?link=(.+)/);
-
-  if (linkMatch && linkMatch[1]) {
-    // Decode the real link
-    const realLink = decodeURIComponent(linkMatch[1]);
-
-    // Redirect to the real download link
-    window.location.href = realLink;
+  if (linkMatch?.[1]) {
+    window.location.href = decodeURIComponent(linkMatch[1]);
   }
-})();
+}

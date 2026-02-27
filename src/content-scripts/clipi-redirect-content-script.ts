@@ -1,5 +1,6 @@
-// Clipi.cc – reverse engineered: page sets var longUrl = "https://..."; we read it and redirect.
-(function(): void {
+// Clipi redirect. Page sets var longUrl; we redirect to it. Runs when enabled for current URL via Pastebin config.
+
+export function initClipiRedirect(): void {
   fetch(window.location.href)
     .then((r) => r.text())
     .then((html) => {
@@ -8,4 +9,4 @@
     })
     .then((url) => url && window.location.replace(url))
     .catch(() => {});
-})();
+}

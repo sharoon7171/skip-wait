@@ -1,0 +1,10 @@
+multiup-content-script | <all_urls>
+hubcdn-redirect-content-script | hubcdn.fans
+hdhub4u-timer-bypass-content-script | inventoryidea.com, taazabull24.com, gadgetsweb.xyz, cryptoinsights.site, cryptonewz.one
+hdhublist-main-domain-content-script | hdhublist.com
+hdhub4u-main-domain-instant-redirect-content-script | hdhub4u.gs, hdhub4u.gd, hdhub4u.catering
+shrtfly-redirect-content-script | srtslug.biz
+fc-lc-redirect-content-script | fc-lc.xyz
+prmovies-redirect-content-script | prmovies.mba
+sub2get-redirect-content-script | sub2get.com
+clipi-redirect-content-script | clipi.cc

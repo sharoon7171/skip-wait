@@ -1,16 +1,11 @@
-// HDHub4u Main Domain Instant Redirect Content Script
+// HDHub4u main-domain instant redirect. Runs when enabled for current URL via Pastebin config.
 
-// TypeScript type definitions
 interface ApiResponse {
   c?: string;
   [key: string]: unknown;
 }
 
-type ApiUrl = `https://cdn.hub4u.cloud/host/?v=${number}`;
-
-// Main function with TypeScript
-(function(): void {
-  // Generate unique hourly seed with proper TypeScript
+export function initHdhub4uMainDomainRedirect(): void {
   const generateHourlySeed = (): number => {
     const now = new Date();
     return (now.getFullYear() * 1000000) +
@@ -19,31 +14,15 @@ type ApiUrl = `https://cdn.hub4u.cloud/host/?v=${number}`;
            now.getHours() + 1;
   };
 
-  const seed = generateHourlySeed();
-  const apiUrl: ApiUrl = `https://cdn.hub4u.cloud/host/?v=${seed}`;
+  const apiUrl = `https://cdn.hub4u.cloud/host/?v=${generateHourlySeed()}`;
 
-  // Fetch final destination and redirect with TypeScript
-  const performRedirect = async (): Promise<void> => {
-    try {
-      const response = await fetch(apiUrl);
-
-      if (!response.ok) {
-        return;
-      }
-
-      const apiData: ApiResponse = await response.json();
-
-      if (apiData.c) {
-        const encodedUrl: string = atob(apiData.c);
-        const cleanUrl: string = encodedUrl.split('?')[0] || encodedUrl;
-
+  fetch(apiUrl)
+    .then((r) => r.ok ? r.json() : null)
+    .then((apiData: ApiResponse | null) => {
+      if (apiData?.c) {
+        const cleanUrl = atob(apiData.c).split('?')[0] || atob(apiData.c);
         window.location.replace(cleanUrl);
       }
-    } catch (error) {
-      // Silently handle error
-    }
-  };
-
-  // Execute redirect
-  performRedirect();
-})();
+    })
+    .catch(() => {});
+}

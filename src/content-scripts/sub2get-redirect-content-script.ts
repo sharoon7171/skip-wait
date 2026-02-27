@@ -1,15 +1,10 @@
-// Sub2Get.com Redirect Content Script
-// Destination URL is in #butunlock a (hidden until "unlock" — we read it and redirect)
-// Use raw href: page may store "fb.com" or "/fb.com"; resolved .href would become sub2get.com/fb.com
+// Sub2Get redirect. #butunlock a holds real href. Runs when enabled for current URL via Pastebin config.
 
-(function(): void {
+export function initSub2getRedirect(): void {
   const el = document.getElementById('butunlock')?.querySelector('a');
   const raw = el?.getAttribute('href');
-  if (!raw || !raw.trim()) return;
+  if (!raw?.trim()) return;
   const s = raw.trim();
-  let url: string;
-  if (/^https?:\/\//i.test(s)) url = s;
-  else if (s.startsWith('//')) url = 'https:' + s;
-  else url = 'https://' + s.replace(/^\//, '');
+  const url = /^https?:\/\//i.test(s) ? s : s.startsWith('//') ? 'https:' + s : 'https://' + s.replace(/^\//, '');
   window.location.href = url;
-})();
+}
