@@ -70,6 +70,7 @@ import { initCutyGate } from '../sites/cuty';
 import { initCutwinGate } from '../sites/cutwin';
 import { initExeioGate } from '../sites/exeio';
 import { initRinkuGate } from '../sites/rinku';
+import { initBstshrtGate } from '../sites/bstshrt';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 
 const INITS = [
@@ -80,6 +81,7 @@ const INITS = [
   initCutwinGate,
   initExeioGate,
   initRinkuGate,
+  initBstshrtGate,
   initLootlabsUnlock,
   initLlSafelinkHqChain,
   initLinkjust,
