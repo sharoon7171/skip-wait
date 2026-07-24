@@ -61,7 +61,7 @@ const mountUi = (status = 'Getting ready…'): FullPageOverlay => {
 };
 
 const isAccessPath = (): boolean =>
-  /^\/access\/[^/]+\/[^/]+(?:\/dynamic)?\/?$/i.test(location.pathname);
+  /^\/(?:access\/)?[^/]+\/[^/]+(?:\/dynamic)?\/?$/i.test(location.pathname);
 
 const openDestination = (url: string, overlay: FullPageOverlay): void => {
   overlay.hideCountdown();

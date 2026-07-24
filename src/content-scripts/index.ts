@@ -71,6 +71,7 @@ import { initCutwinGate } from '../sites/cutwin';
 import { initExeioGate } from '../sites/exeio';
 import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
+import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 
 const INITS = [
@@ -82,6 +83,7 @@ const INITS = [
   initExeioGate,
   initRinkuGate,
   initBstshrtGate,
+  initLinkunlockerGate,
   initLootlabsUnlock,
   initLlSafelinkHqChain,
   initLinkjust,

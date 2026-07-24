@@ -115,7 +115,9 @@ export function parseAccessIdentifier(href = location.href): AccessIdentifier | 
     return null;
   }
   const path = url.pathname;
-  const dynamic = path.match(/^\/access\/([^/]+)\/([^/]+)\/dynamic\/?$/i);
+  const dynamic =
+    path.match(/^\/access\/([^/]+)\/([^/]+)\/dynamic\/?$/i) ||
+    path.match(/^\/([^/]+)\/([^/]+)\/dynamic\/?$/i);
   if (dynamic?.[1]) {
     const hash = url.searchParams.get('r')?.trim() ?? '';
     if (!hash) return null;
@@ -133,13 +135,37 @@ export function parseAccessIdentifier(href = location.href): AccessIdentifier | 
   return { userIdAndUrl: { user_id: classic[1], url: decodeURIComponent(classic[2]) } };
 }
 
+const isHttpUrl = (s: string): boolean => /^https?:\/\//i.test(s);
+
+export function destinationFromDynamicR(href = location.href): string | null {
+  let url: URL;
+  try {
+    url = new URL(href);
+  } catch {
+    return null;
+  }
+  if (!/\/dynamic\/?$/i.test(url.pathname)) return null;
+  const encoded = url.searchParams.get('r')?.trim() ?? '';
+  if (!encoded) return null;
+  let raw: string;
+  try {
+    raw = atob(encoded).trim();
+  } catch {
+    return null;
+  }
+  if (!isHttpUrl(raw)) return null;
+  try {
+    return new URL(raw).href;
+  } catch {
+    return null;
+  }
+}
+
 const activeAd = (tasks: AccessTask[]): AccessTask | null =>
   tasks.find((t) => t.__typename === 'AdTask' && t.status !== 'DONE') ?? null;
 
 const activeWait = (tasks: AccessTask[]): AccessTask | null =>
   tasks.find((t) => t.__typename === 'WaitTask' && t.status !== 'DONE') ?? null;
-
-const isHttpUrl = (s: string): boolean => /^https?:\/\//i.test(s);
 
 type SuccessHistoryState = {
   target?: TargetData | null;
@@ -189,6 +215,11 @@ export async function unlockAccessDestination(
   progress: UnlockProgress = {},
 ): Promise<SuccessTarget> {
   const { onStatus, onWait, onWaitDone } = progress;
+  const fromR = destinationFromDynamicR();
+  if (fromR) {
+    onStatus?.('Opening your link…');
+    return { kind: 'url', url: fromR };
+  }
   const maxSteps = 24;
   const sessionRequestId = requestId();
 
