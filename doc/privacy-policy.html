@@ -10,10 +10,10 @@
     <header>
       <p>Skip Wait - Bypass Timers & Countdowns</p>
       <h1>Privacy Policy</h1>
-      <p>Last updated: May 29, 2026</p>
+      <p>Last updated: July 24, 2026</p>
     </header>
 
-    <p>This privacy policy describes how the Skip Wait Chrome extension (“Extension”) handles information. The Extension bypasses countdown timers and skip-wait pages on supported link shorteners and file hosts.</p>
+    <p>This privacy policy describes how the Skip Wait Chrome extension (“Extension”) handles information. The Extension helps you get past mandatory delays on supported link shorteners and file hosts.</p>
 
     <ol>
       <li>
@@ -21,10 +21,11 @@
           <h2>1. Permissions</h2>
           <p>The Extension requests the following Chrome permissions:</p>
           <ul>
-            <li><strong>Scripting</strong> - Used to run bypass logic on supported wait and short-link pages.</li>
-            <li><strong>Storage</strong> - Used only on your device to remember your global on/off setting and short-lived bypass progress (for example, which step of a multi-page shortener flow you are on). Nothing in storage is sent to the developer or third parties.</li>
-            <li><strong>Web navigation</strong> - Used only to detect when you open certain v2links shorteners (such as shr2.link and nitro-link.com) before the page redirects away, so the Extension can send you to the verification step in time. It is not used to read your browsing history broadly.</li>
-            <li><strong>Access to all URLs</strong> - Required so the Extension can run on wait pages and link shorteners where it provides bypass.</li>
+            <li><strong>Scripting</strong> - Used to run small helpers in the page context on supported unlock flows (for example, main-world hooks or visibility helpers some sites require).</li>
+            <li><strong>Storage</strong> - Used only on your device for short-lived progress during multi-step shortener chains. There is no global on/off preference stored. Nothing in storage is sent to the developer or third parties.</li>
+            <li><strong>Cookies</strong> - Used only so the background worker can read a site-set cookie on certain prolink pages when the destination URL is stored in an HttpOnly cookie that page scripts cannot read. Cookie values are processed locally to finish that redirect. The Extension does not upload cookie values and does not set or delete cookies for this purpose.</li>
+            <li><strong>Web navigation</strong> - Used to catch supported navigations early enough for the bypass to work (for example, fast shortener hops and early injects on specific unlock hosts). It is not used to build or sell a browsing-history profile.</li>
+            <li><strong>Access to all URLs</strong> - Declared because supported wait pages and mediators span many domains and change over time. Real bypass work still runs only on supported flows; unrelated sites are not modified for that purpose.</li>
           </ul>
         </section>
       </li>
@@ -32,16 +33,24 @@
       <li>
         <section>
           <h2>2. Data handling</h2>
-          <p>The Extension does not collect or transmit your personal data, browsing history, or page content to the developer or any third party. It does not use analytics, tracking, or telemetry.</p>
-          <p>Chrome’s local storage is used only for your on/off preference and temporary bypass state on your device, as described under Permissions.</p>
-          <p>On certain supported sites, the Extension may read or clear data stored by that site in your browser (for example, in that page’s localStorage) only to perform the bypass. That data is not sent to the developer or any third party.</p>
+          <p>The Extension does not collect or transmit your personal data, browsing history, or page content to the developer for analytics, advertising, or resale. It does not include analytics, tracking, or telemetry SDKs.</p>
+          <p>Chrome’s local storage (<code>chrome.storage.local</code>) is used only for temporary bypass state on your device, as described under Permissions.</p>
+          <p>On certain supported sites, the Extension may read, write, or clear data that those sites already store in the page context (for example, that page’s <code>localStorage</code> or <code>sessionStorage</code>) only to complete the bypass. That data stays in your browser for the flow and is not sent to the developer.</p>
         </section>
       </li>
 
       <li>
         <section>
-          <h2>3. Third parties</h2>
-          <p>The Extension does not send any data to the developer or to any third-party services. Any network requests made by the Extension are only to the current page or to the link shortener or file host you are using, as required to perform the bypass.</p>
+          <h2>3. Network requests</h2>
+          <p>The Extension does not operate a developer backend that receives your browsing data. Network requests it makes are only those needed to complete a supported bypass—typically to the page you are on, or to related shortener, mediator, unlock, or file-host endpoints involved in that same flow.</p>
+          <p>On a small number of supported flows, a request may go to a helper endpoint required by that site’s unlock logic (for example, an IP check used by a mediator). Those requests are not used by the Extension for advertising or analytics.</p>
+        </section>
+      </li>
+
+      <li>
+        <section>
+          <h2>4. Third parties</h2>
+          <p>The Extension does not sell or share your data with third-party advertisers. Contact options in the popup (GitHub issues, email, Telegram) are opened only when you choose them; the Extension does not auto-send messages on your behalf.</p>
         </section>
       </li>
     </ol>
