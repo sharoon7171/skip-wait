@@ -12,8 +12,10 @@ import { initExeioAdblockInject } from '../sites/exeio';
 import { initCutyAdblockInject } from '../sites/cuty';
 import { initRinkuPageHooksInject } from '../sites/rinku';
 import { initStorylineScormMainWorldInject } from '../sites/storyline-scorm';
+import { initTech8sBackground } from '../sites/tech8s/background';
 
 initCoomeetMainWorldInject();
+initTech8sBackground();
 initDocumentVisibilitySpoof();
 initFclcAlertSuppress();
 initFclcLinksGo();
