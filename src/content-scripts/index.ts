@@ -73,8 +73,12 @@ import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
+import { init1shortlink } from '../sites/1shortlink';
+import { initTech8sSafeRedirect } from '../sites/tech8s';
 
 const INITS = [
+  init1shortlink,
+  initTech8sSafeRedirect,
   initStorylineCoursePlayBrand,
   initLinknextGate,
   initLinkvertiseAccessPage,
