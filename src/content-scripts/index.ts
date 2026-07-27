@@ -65,12 +65,12 @@ import { initMirroredFilesPage } from '../sites/mirrored';
 import { initMove2linkGate } from '../sites/move2link';
 import { initMp4uploadCountdownBypass } from '../sites/mp4upload';
 import { initPlingDirectDownload } from '../sites/pling';
-import { initStudyratnaProlinkBypass } from '../sites/studyratna';
 import { initTipsguruRedirect } from '../sites/tipsguru';
 import { initWahmiCountdownBypass } from '../sites/wahmi';
 import { initCutyGate } from '../sites/cuty';
 import { initCutwinGate } from '../sites/cutwin';
 import { initExeioGate } from '../sites/exeio';
+import { initLksfyGate, initLksfyMediator } from '../sites/lksfy';
 import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
@@ -83,6 +83,8 @@ const INITS = [
   initCutyGate,
   initCutwinGate,
   initExeioGate,
+  initLksfyMediator,
+  initLksfyGate,
   initRinkuGate,
   initBstshrtGate,
   initLinkunlockerGate,
@@ -154,7 +156,6 @@ const INITS = [
   initMirroredFilesPage,
   initMove2linkGate,
   initMp4uploadCountdownBypass,
-  initStudyratnaProlinkBypass,
   initTipsguruRedirect,
   initPlingDirectDownload,
   initWahmiCountdownBypass,

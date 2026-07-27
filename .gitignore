@@ -4,3 +4,4 @@ build/
 .next/
 tsconfig.tsbuildinfo
 .DS_Store
+.vercel

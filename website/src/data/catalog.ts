@@ -234,6 +234,19 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['linknext.io', 'shorte.io', 'starkroboticsfrc.com', 'randevuayir.com'],
   },
   {
+    name: 'LinkShortify',
+    bypass: 'Mediator Skip & Turnstile Unlock',
+    description:
+      'Skips LinkShortify mediator wait pages and unlocks the destination without the article steps.',
+    domains: [
+      'recruitmentaim.in',
+      'mahitiplus.com',
+      'lksfy.com',
+      'linkshortify.com',
+      'lite.pw4free.in',
+    ],
+  },
+  {
     name: 'Linksterr',
     bypass: 'Gateway Redirect',
     description: 'Passes the Linksterr gateway and redirects instantly.',
@@ -435,8 +448,16 @@ export const bypasses: readonly SupportedBypass[] = [
   {
     name: 'TipsGuru',
     bypass: 'Redirect & Wait-Host Skip',
-    description: 'Skips TipsGuru redirects and its wait-host pages.',
-    domains: ['tipsguru.in', 'stream.testuk.org', 'rarestudy.in'],
+    description:
+      'Skips TipsGuru-family prolink pages and opens the destination after the access wait.',
+    domains: [
+      'tipsguru.in',
+      'vidyarays.com',
+      'mineverse360.com',
+      'stream.testuk.org',
+      'rarestudy.in',
+      's3-cdn.samfygros.com',
+    ],
   },
   {
     name: 'UsersDrive',

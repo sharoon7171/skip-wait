@@ -1,5 +1,6 @@
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { initTipsguruCookieDest, TIPSGURU_GET_DEST } from './cookie-dest';
 import {
   decodeProlinkDest,
   isTimedDestUrl,
@@ -7,10 +8,12 @@ import {
   TIPSGURU_WAIT_MS,
 } from './hosts';
 
+export { initTipsguruCookieDest };
+
 const OVERLAY_ID = 'skip-wait-tipsguru-overlay';
 const WAIT_KEY = 'skip-wait-tipsguru-wait';
 const FINAL_URL_RE = /"finalUrl"\s*:\s*"([^"]+)"/;
-const COOKIE_RE = /(?:^|;\s*)tipsguru=([^;]+)/i;
+const COOKIE_RE = /(?:^|;\s*)(?:tipsguru|vidyays|mineverse360|mineverse)=([^;]+)/i;
 
 type WaitState = { dest: string; endAt: number };
 
@@ -51,19 +54,43 @@ function destFromFinalUrl(): string | null {
   return /^https?:\/\//i.test(dest) ? dest : null;
 }
 
-function destFromCookie(): string | null {
+function destFromDocumentCookie(): string | null {
   const m = COOKIE_RE.exec(document.cookie);
   if (!m?.[1]) return null;
   return decodeProlinkDest(decodeUriComponent(m[1]));
 }
 
-function resolveDest(): string | null {
-  return destFromId() ?? destFromFinalUrl() ?? destFromCookie();
+function requestDestFromBackground(): Promise<string | null> {
+  return new Promise((resolve) => {
+    try {
+      chrome.runtime.sendMessage({ type: TIPSGURU_GET_DEST }, (resp: { url?: string | null }) => {
+        if (chrome.runtime.lastError) {
+          resolve(null);
+          return;
+        }
+        const url = typeof resp?.url === 'string' ? resp.url.trim() : '';
+        resolve(url || null);
+      });
+    } catch {
+      resolve(null);
+    }
+  });
 }
 
-function isExternalDest(href: string): boolean {
+async function resolveDest(): Promise<string | null> {
+  for (let i = 0; i < 20; i++) {
+    const local = destFromId() ?? destFromFinalUrl() ?? destFromDocumentCookie();
+    if (local) return local;
+    const fromBg = await requestDestFromBackground();
+    if (fromBg) return fromBg;
+    await new Promise((r) => setTimeout(r, 50));
+  }
+  return null;
+}
+
+function isOffsiteDest(href: string): boolean {
   try {
-    return !hostnameMatches(new URL(href).hostname, TIPSGURU_HOSTS);
+    return new URL(href).hostname.toLowerCase() !== location.hostname.toLowerCase();
   } catch {
     return false;
   }
@@ -125,7 +152,7 @@ function startTimedWait(dest: string): void {
     brand: 'Skip Wait',
     note: {
       lead: 'Skip Wait is generating your access.',
-      detail: 'Starting wait on TipsGuru…',
+      detail: 'Starting wait…',
     },
     status: 'Starting wait…',
   });
@@ -136,15 +163,25 @@ function startTimedWait(dest: string): void {
   location.replace(`${location.origin}/`);
 }
 
-function redirect(): void {
+async function redirect(): Promise<void> {
   if (started) return;
-  const dest = resolveDest();
-  if (!dest || !isExternalDest(dest)) return;
+  const dest = await resolveDest();
+  if (!dest || !isOffsiteDest(dest)) return;
   if (isTimedDestUrl(dest)) {
     startTimedWait(dest);
     return;
   }
   started = true;
+  stopPageTimers();
+  createFullPageOverlay({
+    id: OVERLAY_ID,
+    brand: 'Skip Wait',
+    note: {
+      lead: 'Skip Wait found your destination.',
+      detail: 'Opening now…',
+    },
+    status: 'Redirecting…',
+  });
   location.replace(dest);
 }
 
@@ -158,6 +195,8 @@ export function initTipsguruRedirect(): void {
     return;
   }
 
-  redirect();
-  whenDomParsed(redirect);
+  void redirect();
+  whenDomParsed(() => {
+    void redirect();
+  });
 }

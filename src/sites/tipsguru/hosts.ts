@@ -1,8 +1,18 @@
 import { hostnameMatches } from '../../utils/domain-check';
 
-export const TIPSGURU_HOSTS = ['tipsguru.in'] as const;
+export const TIPSGURU_HOSTS = [
+  'tipsguru.in',
+  'vidyarays.com',
+  'mineverse360.com',
+] as const;
+
 export const TIPSGURU_WAIT_MS = 252_000;
-export const TIPSGURU_WAIT_HOSTS = ['stream.testuk.org', 'rarestudy.in'] as const;
+
+export const TIPSGURU_WAIT_HOSTS = [
+  'stream.testuk.org',
+  'rarestudy.in',
+  's3-cdn.samfygros.com',
+] as const;
 
 export function decodeProlinkDest(id: string): string | null {
   try {
