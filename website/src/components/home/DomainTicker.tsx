@@ -1,0 +1,48 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { allDomains } from '@/data/catalog-queries';
+
+function shuffled(items: readonly string[]): string[] {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const current = next[i]!;
+    next[i] = next[j]!;
+    next[j] = current;
+  }
+  return next;
+}
+
+export function DomainTicker(): React.ReactElement {
+  const [domains, setDomains] = useState(() => [...allDomains()]);
+
+  useEffect(() => {
+    setDomains(shuffled(allDomains()));
+  }, []);
+
+  const marqueeSeconds = Math.round(domains.length * 0.95);
+
+  return (
+    <div aria-hidden className="overflow-hidden border-y border-primary-700 bg-primary-600 py-3.5">
+      <div
+        className="flex w-max animate-marquee motion-reduce:animate-none"
+        style={{ animationDuration: `${marqueeSeconds}s` }}
+      >
+        {[0, 1].map((copy) => (
+          <ul key={copy} className="flex shrink-0 list-none items-center p-0">
+            {domains.map((domain) => (
+              <li
+                key={`${copy}-${domain}`}
+                className="flex items-center gap-7 pr-7 font-mono text-caption font-medium tracking-[0.06em] whitespace-nowrap text-white uppercase"
+              >
+                {domain}
+                <span className="text-white/45">✦</span>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
+  );
+}

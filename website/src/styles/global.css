@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+::selection {
+  background: oklch(0.55 0.22 255 / 0.28);
+}
