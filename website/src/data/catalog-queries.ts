@@ -5,6 +5,17 @@ function byName(a: SupportedBypass, b: SupportedBypass): number {
   return a.name.localeCompare(b.name);
 }
 
+function shuffled<T>(items: readonly T[]): T[] {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const current = next[i]!;
+    next[i] = next[j]!;
+    next[j] = current;
+  }
+  return next;
+}
+
 export function totalBypasses(): number {
   return bypasses.length;
 }
@@ -17,7 +28,15 @@ export function totalDomains(): number {
   return allDomains().length;
 }
 
-export function matchesSearch(entry: SupportedBypass, query: string): boolean {
+export function shuffledDomains(): string[] {
+  return shuffled(allDomains());
+}
+
+export function sampleBypasses(count: number): SupportedBypass[] {
+  return shuffled(bypasses).slice(0, count);
+}
+
+function matchesSearch(entry: SupportedBypass, query: string): boolean {
   const needle = query.trim().toLowerCase();
   if (!needle) {
     return true;
@@ -38,47 +57,4 @@ export function matchesSearch(entry: SupportedBypass, query: string): boolean {
 
 export function searchCatalog(query: string): SupportedBypass[] {
   return bypasses.filter((entry) => matchesSearch(entry, query)).sort(byName);
-}
-
-const FEATURED_BYPASS_NAMES = [
-  'Linkvertise',
-  'LootLabs',
-  'Ouo',
-  'Droplink',
-  'ShrinkMe',
-  'AdFocus',
-  'Mirrored.to',
-  'MultiUp',
-  'MP4Upload',
-  'FilePress',
-] as const;
-
-export function featuredBypasses(count: number): SupportedBypass[] {
-  const entriesByName = new Map(bypasses.map((entry) => [entry.name, entry]));
-  const picked: SupportedBypass[] = [];
-
-  for (const name of FEATURED_BYPASS_NAMES) {
-    if (picked.length >= count) {
-      break;
-    }
-    const entry = entriesByName.get(name);
-    if (entry) {
-      picked.push(entry);
-    }
-  }
-
-  if (picked.length >= count) {
-    return picked;
-  }
-
-  for (const entry of [...bypasses].sort(byName)) {
-    if (picked.length >= count) {
-      break;
-    }
-    if (!picked.some((item) => item.name === entry.name)) {
-      picked.push(entry);
-    }
-  }
-
-  return picked;
 }

@@ -1,8 +1,10 @@
 import { systemSans } from '../../../tokens/typography';
 
+const poppins = ['Poppins', ...systemSans] as const;
+
 export const fontFamilies = {
-  sans: ['Poppins', ...systemSans],
-  display: ['Poppins', ...systemSans],
+  sans: poppins,
+  display: poppins,
   mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
 } as const;
 
@@ -36,9 +38,5 @@ export const fontSize = {
   metric: [
     'clamp(2.25rem, 4vw, 3.25rem)',
     { lineHeight: '1.05', fontWeight: '800', letterSpacing: '-0.025em' },
-  ],
-  wordmark: [
-    'clamp(3rem, 10vw, 7rem)',
-    { lineHeight: '1', fontWeight: '800', letterSpacing: '-0.035em' },
   ],
 } as const;

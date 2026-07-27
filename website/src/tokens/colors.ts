@@ -1,22 +1,19 @@
 import {
-  accent,
   neutral,
   primary,
   success,
   warning,
 } from '../../../tokens/colors';
 
-export { accent, neutral, primary, success, warning };
+export { neutral, primary, success, warning };
 
 export const surface = {
   canvas: 'oklch(1 0 0)',
   muted: neutral[50],
-  tint: primary[50],
 } as const;
 
 export const ink = {
   DEFAULT: neutral[900],
-  deep: primary[950],
   body: neutral[700],
   soft: neutral[500],
   inverse: 'oklch(0.985 0.004 250)',

@@ -1,24 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { allDomains } from '@/data/catalog-queries';
-
-function shuffled(items: readonly string[]): string[] {
-  const next = [...items];
-  for (let i = next.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const current = next[i]!;
-    next[i] = next[j]!;
-    next[j] = current;
-  }
-  return next;
-}
+import { allDomains, shuffledDomains } from '@/data/catalog-queries';
 
 export function DomainTicker(): React.ReactElement {
-  const [domains, setDomains] = useState(() => [...allDomains()]);
+  const [domains, setDomains] = useState(allDomains);
 
   useEffect(() => {
-    setDomains(shuffled(allDomains()));
+    setDomains(shuffledDomains());
   }, []);
 
   const marqueeSeconds = Math.round(domains.length * 0.95);

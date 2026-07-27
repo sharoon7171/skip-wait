@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss';
 import {
-  accent,
   animation,
   fontFamilies,
   fontSize,
@@ -20,7 +19,6 @@ export default {
     extend: {
       colors: {
         primary: { ...primary },
-        accent: { ...accent },
         neutral: { ...neutral },
         warning: { ...warning },
         success: { ...success },

@@ -99,14 +99,10 @@ export function SiteFooter(): React.ReactElement {
       </Shell>
 
       <div className="border-t border-white/10">
-        <Shell className="flex flex-col gap-2 py-5 text-caption text-ink-inverse-soft sm:flex-row sm:items-center sm:justify-between">
+        <Shell className="py-5 text-caption text-ink-inverse-soft">
           <p>
             © {new Date().getFullYear()} {SITE.name}
           </p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span>Privacy Policy</span>
-            <span>Terms and Conditions</span>
-          </div>
         </Shell>
       </div>
     </footer>

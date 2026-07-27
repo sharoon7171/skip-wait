@@ -1,6 +1,6 @@
 import { LuArrowRight, LuArrowUpRight } from 'react-icons/lu';
 import Link from 'next/link';
-import { featuredBypasses, totalBypasses, totalDomains } from '@/data/catalog-queries';
+import { sampleBypasses, totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { routes } from '@/lib/routes';
 import { BypassRow } from '@/components/sites/BypassRow';
 import { SectionHeader } from '@/components/ui/SectionHeader';
@@ -9,19 +9,19 @@ import { Shell } from '@/components/ui/Shell';
 const SAMPLE_SIZE = 5;
 
 export function ShowcaseSection(): React.ReactElement {
-  const featured = featuredBypasses(SAMPLE_SIZE);
+  const sample = sampleBypasses(SAMPLE_SIZE);
 
   return (
     <section className="bg-surface-muted py-20 lg:py-28">
       <Shell>
         <SectionHeader
-          title="Link Shortener and Countdown Bypasses People Use Most"
-          description={`${totalBypasses()} bypasses across ${totalDomains()} domains — including Linkvertise, LootLabs, file hosts, and more.`}
+          title="Link Shortener and Countdown Bypasses from the Catalog"
+          description={`${totalBypasses()} bypasses across ${totalDomains()} domains — a random sample below, full list on Supported Sites.`}
         />
 
         <div className="mt-14 overflow-hidden rounded-panel bg-surface-canvas shadow-sm ring-1 ring-neutral-200">
           <ul className="m-0 list-none divide-y divide-neutral-200 p-0">
-            {featured.map((entry) => (
+            {sample.map((entry) => (
               <li key={entry.name}>
                 <Link
                   href={routes.sites}
