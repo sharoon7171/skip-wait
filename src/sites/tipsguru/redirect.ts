@@ -2,9 +2,9 @@ import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
 import {
   decodeProlinkDest,
-  isTestukDestUrl,
+  isTimedDestUrl,
   TIPSGURU_HOSTS,
-  TIPSGURU_TESTUK_WAIT_MS,
+  TIPSGURU_WAIT_MS,
 } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-tipsguru-overlay';
@@ -74,7 +74,7 @@ function readWait(): WaitState | null {
     const raw = sessionStorage.getItem(WAIT_KEY);
     if (!raw) return null;
     const state = JSON.parse(raw) as WaitState;
-    if (!state?.dest || !isTestukDestUrl(state.dest) || typeof state.endAt !== 'number') {
+    if (!state?.dest || !isTimedDestUrl(state.dest) || typeof state.endAt !== 'number') {
       sessionStorage.removeItem(WAIT_KEY);
       return null;
     }
@@ -114,11 +114,11 @@ function waitOnHome(state: WaitState): void {
   }, left);
 }
 
-function startTestukWait(dest: string): void {
+function startTimedWait(dest: string): void {
   if (started) return;
   started = true;
   stopPageTimers();
-  const state: WaitState = { dest, endAt: Date.now() + TIPSGURU_TESTUK_WAIT_MS };
+  const state: WaitState = { dest, endAt: Date.now() + TIPSGURU_WAIT_MS };
   sessionStorage.setItem(WAIT_KEY, JSON.stringify(state));
   createFullPageOverlay({
     id: OVERLAY_ID,
@@ -140,8 +140,8 @@ function redirect(): void {
   if (started) return;
   const dest = resolveDest();
   if (!dest || !isExternalDest(dest)) return;
-  if (isTestukDestUrl(dest)) {
-    startTestukWait(dest);
+  if (isTimedDestUrl(dest)) {
+    startTimedWait(dest);
     return;
   }
   started = true;

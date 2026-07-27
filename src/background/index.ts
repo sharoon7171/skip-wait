@@ -12,6 +12,7 @@ import { initExeioAdblockInject } from '../sites/exeio';
 import { initCutyAdblockInject } from '../sites/cuty';
 import { initRinkuPageHooksInject } from '../sites/rinku';
 import { initStorylineScormMainWorldInject } from '../sites/storyline-scorm';
+import { initLink4mRedirect } from '../sites/tech8s';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -21,6 +22,7 @@ initFlightsimDownloadPatch();
 initShortxlinksFetchChain();
 initXdmoviesLandingPageNav();
 initMultiup();
+initLink4mRedirect();
 initLootlabsMainWorldInject();
 initXdmoviesMainWorldInject();
 initStudyratnaCookieDest();

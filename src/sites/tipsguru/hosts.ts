@@ -1,8 +1,8 @@
 import { hostnameMatches } from '../../utils/domain-check';
 
 export const TIPSGURU_HOSTS = ['tipsguru.in'] as const;
-export const TIPSGURU_TESTUK_WAIT_MS = 252_000;
-export const TIPSGURU_TESTUK_HOSTS = ['stream.testuk.org'] as const;
+export const TIPSGURU_WAIT_MS = 252_000;
+export const TIPSGURU_WAIT_HOSTS = ['stream.testuk.org', 'rarestudy.in'] as const;
 
 export function decodeProlinkDest(id: string): string | null {
   try {
@@ -15,9 +15,9 @@ export function decodeProlinkDest(id: string): string | null {
   }
 }
 
-export function isTestukDestUrl(href: string): boolean {
+export function isTimedDestUrl(href: string): boolean {
   try {
-    return hostnameMatches(new URL(href).hostname, TIPSGURU_TESTUK_HOSTS);
+    return hostnameMatches(new URL(href).hostname, TIPSGURU_WAIT_HOSTS);
   } catch {
     return false;
   }

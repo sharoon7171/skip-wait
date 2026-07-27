@@ -5,6 +5,7 @@ import {
   isOnCoomeetIframeHost,
   runCoomeetMainWorldAccelerator,
 } from './coomeet-iframe';
+import { init1shortlinkRedirect } from '../sites/1shortlink';
 import { initAdfocusRedirect } from '../sites/adfocus';
 import {
   initAdlinkClickVerifyPoll,
@@ -54,6 +55,8 @@ import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../
 import { initShrtslugRedirect } from '../sites/shrtslug';
 import { initStbemuiptvcodesWpsafelink, initWpSafelinkRedirect } from '../sites/wp-safelink';
 import { initSub2getRedirect } from '../sites/sub2get';
+import { initDroplinkUnlock } from '../sites/droplink';
+import { initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
 import { initTinurlzSoftinfoFragment } from './tinurlz-softinfo-fragment';
 import { initKaranpcMediatorPage } from '../sites/karanpc';
 import { initUsersdriveAutomation } from '../sites/usersdrive';
@@ -62,7 +65,6 @@ import { initMirroredFilesPage } from '../sites/mirrored';
 import { initMove2linkGate } from '../sites/move2link';
 import { initMp4uploadCountdownBypass } from '../sites/mp4upload';
 import { initPlingDirectDownload } from '../sites/pling';
-import { initRarestudyProlinkWait } from '../sites/rarestudy';
 import { initStudyratnaProlinkBypass } from '../sites/studyratna';
 import { initTipsguruRedirect } from '../sites/tipsguru';
 import { initWahmiCountdownBypass } from '../sites/wahmi';
@@ -89,6 +91,7 @@ const INITS = [
   initLinkjust,
   initLinksterrGateway,
   initShortxlinksSafelinkChain,
+  init1shortlinkRedirect,
   initAdfocusRedirect,
   initGplinksGate,
   initGplinksMediator,
@@ -141,6 +144,9 @@ const INITS = [
   initShrtslugRedirect,
   initStbemuiptvcodesWpsafelink,
   initSub2getRedirect,
+  initDroplinkUnlock,
+  initTech8sRedirect,
+  initTech8sGate,
   initTinurlzSoftinfoFragment,
   initKaranpcMediatorPage,
   initUsersdriveAutomation,
@@ -149,7 +155,6 @@ const INITS = [
   initMove2linkGate,
   initMp4uploadCountdownBypass,
   initStudyratnaProlinkBypass,
-  initRarestudyProlinkWait,
   initTipsguruRedirect,
   initPlingDirectDownload,
   initWahmiCountdownBypass,
