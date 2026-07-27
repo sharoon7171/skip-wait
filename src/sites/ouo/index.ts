@@ -1,2 +1,2 @@
-export { initOuoBypass } from './auto-submit';
+export { initOuoBypass } from './gate';
 export { OUO_HOSTS } from './hosts';
