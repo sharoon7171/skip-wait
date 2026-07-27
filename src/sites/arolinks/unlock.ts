@@ -6,7 +6,7 @@ import {
   clearArolinksChain,
   ensureArolinksChain,
 } from './chain';
-import { AROLINKS_HOSTS } from './hosts';
+import { AROLINKS_HOSTS, AROLINKS_WAIT_MS, isTimedDestUrl } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-arolinks-unlock';
 const BOOT_STYLE_ID = 'skip-wait-arolinks-unlock-boot';
@@ -17,6 +17,8 @@ const NOTE = {
 
 let ui: FullPageOverlay | null = null;
 let started = false;
+
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 const requestVisibilitySpoof = (): void => {
   chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
@@ -71,6 +73,18 @@ const recordChain = (): void => {
   void ensureArolinksChain(alias, location.origin);
 };
 
+const openDest = async (url: string, overlay: FullPageOverlay): Promise<void> => {
+  void clearArolinksChain();
+  if (isTimedDestUrl(url)) {
+    overlay.setStatus('Waiting for access window…');
+    overlay.startCountdown(Date.now() + AROLINKS_WAIT_MS);
+    await sleep(AROLINKS_WAIT_MS);
+    overlay.hideCountdown();
+  }
+  overlay.setStatus('Opening your link…');
+  location.replace(url);
+};
+
 const runUnlock = (): void => {
   if (started || !isUnlockShell()) return;
   const url = gtLinkDestination();
@@ -78,9 +92,7 @@ const runUnlock = (): void => {
   started = true;
   requestVisibilitySpoof();
   const overlay = mountUi('Opening your link…');
-  void clearArolinksChain();
-  overlay.setStatus('Opening your link…');
-  location.replace(url);
+  void openDest(url, overlay);
 };
 
 export function initArolinksUnlock(): void {
