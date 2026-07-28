@@ -1,10 +1,12 @@
 # Skip Wait - Bypass Timers & Countdowns
 
-Skip wait pages and countdown timers on link shorteners and file hosts. One-click bypass - no more 5-30 second delays. Get to your link faster.
+Bypass countdown timers and waiting pages on link shorteners and file hosts—or automate waits and continue clicks when a full skip isn’t possible.
 
 ![Skip Wait icon](public/icon.png)
 
 [![Available in Chrome Web Store](https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png)](https://chromewebstore.google.com/detail/skip-wait/hdoecnlghjglmnjpnhaaeofcgocdgkhd)
+
+Website: [skip-wait-website.vercel.app](https://skip-wait-website.vercel.app)
 
 ---
 
@@ -14,14 +16,14 @@ Skip wait pages and countdown timers on link shorteners and file hosts. One-clic
 - **Bypass link shorteners** - Get past short-link and redirect pages to the final URL.
 - **Skip waiting pages** - Avoid “please wait” and “click to continue” screens.
 - **Instant redirect** - When possible, you’re sent straight to the target URL.
-- **Automation when needed** - On sites where full bypass isn’t possible, Skip Wait can automate waiting and clicking so you still save time.
+- **Automation when needed** - On sites where full bypass isn’t possible, Skip Wait automates waiting and clicking so you still save time.
 
 ## Who it’s for
 
 - Anyone who clicks short links and hates countdown timers
 - People who download from file hosts with mandatory wait times
-- Anyone who wants to skip “wait X seconds” or “click to proceed” pages
-- Anyone looking for a countdown bypass, timer skip, or link shortener bypass
+- Anyone who wants to skip or automate “wait X seconds” or “click to proceed” pages
+- Anyone looking for a countdown bypass, timer skip, wait automation, or link shortener bypass
 
 ## How it works
 

@@ -41,14 +41,14 @@ function HeroVisual(): React.ReactElement {
           <div className="rounded-card bg-primary-600 px-3 py-4 sm:px-4 sm:py-5">
             <p className="text-overline uppercase text-primary-100">With {SITE.name}</p>
             <p className="mt-2 font-display text-title text-white sm:mt-3 sm:text-title-lg">
-              Redirected
+              Done for you
             </p>
             <p className="mt-2 truncate rounded-full bg-white/15 px-2.5 py-1 font-mono text-domain text-white sm:mt-3 sm:px-3 sm:py-1.5">
               destination.example/file
             </p>
             <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success-100 px-2.5 py-1 text-caption font-semibold text-success-700 sm:mt-4 sm:px-3 sm:py-1.5">
               <span className="size-1.5 rounded-full bg-success-600" />
-              Timer Skipped
+              Bypassed or Automated
             </p>
           </div>
         </div>
@@ -61,19 +61,19 @@ export function Hero(): React.ReactElement {
   return (
     <section className="relative bg-surface-canvas">
       <HeroBackdrop />
-      <Shell className="relative grid items-center gap-10 py-12 sm:gap-12 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:py-28">
+      <Shell className="relative grid items-center gap-10 py-10 sm:gap-12 sm:py-14 lg:grid-cols-2 lg:gap-16 lg:py-20">
         <div className="min-w-0 text-center lg:text-left">
           <h1 className="font-display text-display text-ink">
             {SITE.name}
             <span className="mt-1 block text-primary-600 sm:mt-2">
-              Bypass Countdown Timers.
+              Bypass Timers. Automate Waits.
             </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-[40ch] text-body text-ink-body sm:mt-6 sm:max-w-[44ch] sm:text-lead lg:mx-0">
-            Free Chrome extension that skips waiting pages and link shortener redirects on{' '}
-            {totalBypasses()} supported bypasses across {totalDomains()} domains — as soon as the
-            page loads.
+          <p className="mx-auto mt-5 max-w-[42ch] text-body text-ink-body sm:mt-6 sm:max-w-[46ch] sm:text-lead lg:mx-0">
+            Free Chrome extension that skips countdown timers and link shortener redirects—or
+            automates waiting pages and continue clicks when a full bypass isn’t possible. {' '}
+            {totalBypasses()} supported flows across {totalDomains()} domains.
           </p>
 
           <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:justify-start">

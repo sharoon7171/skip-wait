@@ -10,28 +10,28 @@ const steps: readonly { number: string; title: string; body: string; tone: strin
   },
   {
     number: '02',
-    title: 'Open Any Short Link',
-    body: 'Click link shorteners, file hosts, and download pages the same way you always do.',
+    title: 'Open Any Supported Link',
+    body: 'Click link shorteners, safelinks, file hosts, and download countdown pages the same way you always do.',
     tone: 'bg-warning-100 text-warning-700',
   },
   {
     number: '03',
-    title: 'Skip the Countdown',
-    body: 'On supported pages, Skip Wait bypasses the timer, skips the waiting page, and lands you on the destination.',
+    title: 'Bypass or Automate',
+    body: 'Skip Wait bypasses the timer when possible, or automates the wait and continue steps when the site still requires them—then lands you on the destination.',
     tone: 'bg-success-100 text-success-700',
   },
 ];
 
 export function FlowSection(): React.ReactElement {
   return (
-    <section id="how-it-works" className="scroll-mt-20 bg-surface-canvas py-20 lg:py-28">
+    <section id="how-it-works" className="scroll-mt-20 bg-surface-canvas py-12 lg:py-16">
       <Shell>
         <SectionHeader
-          title="How to Bypass Link Shorteners in Three Steps"
-          description="Skip Wait stays idle everywhere else — it only runs on countdown and short-link pages it recognizes."
+          title="How to Skip Countdown Timers and Waiting Pages"
+          description="Skip Wait stays idle everywhere else—it only runs on countdown, short-link, and delay pages it recognizes, then bypasses or automates the flow."
         />
 
-        <ol className="mt-14 grid list-none gap-5 p-0 lg:grid-cols-3">
+        <ol className="mt-8 grid list-none gap-5 p-0 lg:grid-cols-3">
           {steps.map((step) => (
             <li
               key={step.number}
@@ -42,7 +42,7 @@ export function FlowSection(): React.ReactElement {
               >
                 {step.number}
               </span>
-              <h3 className="mt-8 font-display text-title-lg text-ink">{step.title}</h3>
+              <h3 className="mt-5 font-display text-title-lg text-ink">{step.title}</h3>
               <p className="mt-3 text-body-sm text-ink-body">{step.body}</p>
             </li>
           ))}

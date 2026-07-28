@@ -1,0 +1,18 @@
+{
+  "name": "Skip Wait",
+  "short_name": "Skip Wait",
+  "description": "Bypass countdown timers and waiting pages—or automate waits and continue clicks on supported link shorteners and file hosts.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1d4ed8",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

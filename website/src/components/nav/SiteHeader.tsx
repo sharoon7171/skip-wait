@@ -77,6 +77,9 @@ export function SiteHeader(): React.ReactElement {
             <Link href={`${routes.home}#how-it-works`} className={navLink}>
               How It Works
             </Link>
+            <Link href={`${routes.home}#faq`} className={navLink}>
+              FAQ
+            </Link>
             <a
               href={CONTACT.github}
               target="_blank"
@@ -126,6 +129,9 @@ export function SiteHeader(): React.ReactElement {
                 onClick={closeMenu}
               >
                 How It Works
+              </Link>
+              <Link href={`${routes.home}#faq`} className={mobileNavLink} onClick={closeMenu}>
+                FAQ
               </Link>
               <a
                 href={CONTACT.github}

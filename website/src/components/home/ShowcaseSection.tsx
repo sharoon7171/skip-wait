@@ -19,14 +19,14 @@ export function ShowcaseSection(): React.ReactElement {
   }, []);
 
   return (
-    <section className="bg-surface-muted py-20 lg:py-28">
+    <section className="bg-surface-muted py-12 lg:py-16">
       <Shell>
         <SectionHeader
-          title="Link Shortener and Countdown Bypasses from the Catalog"
-          description={`${totalBypasses()} bypasses across ${totalDomains()} domains — a random sample below, full list on Supported Sites.`}
+          title="Link Shortener Bypasses and Wait Automations"
+          description={`${totalBypasses()} supported flows across ${totalDomains()} domains—bypass timers when possible, automate waits when required. Sample below; full list on Supported Sites.`}
         />
 
-        <div className="mt-14 overflow-hidden rounded-panel bg-surface-canvas shadow-sm ring-1 ring-neutral-200">
+        <div className="mt-8 overflow-hidden rounded-panel bg-surface-canvas shadow-sm ring-1 ring-neutral-200">
           <ul className="m-0 list-none divide-y divide-neutral-200 p-0">
             {sample.map((entry) => (
               <li key={entry.name}>
@@ -50,7 +50,7 @@ export function ShowcaseSection(): React.ReactElement {
             href={routes.sites}
             className="flex items-center justify-between gap-4 border-t border-neutral-200 px-6 py-5 text-ui text-primary-700 no-underline transition-colors hover:bg-primary-50/60 sm:px-8"
           >
-            View All {totalBypasses()} Bypasses Across {totalDomains()} Domains
+            View All {totalBypasses()} Flows Across {totalDomains()} Domains
             <LuArrowRight className="size-4 shrink-0" aria-hidden />
           </Link>
         </div>

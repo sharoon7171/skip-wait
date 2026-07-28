@@ -24,7 +24,7 @@ export function SupportedSitesPage(): React.ReactElement {
         { value: String(visibleDomains), label: visibleDomains === 1 ? 'Domain' : 'Domains' },
       ]
     : [
-        { value: String(totalBypasses()), label: 'Bypasses' },
+        { value: String(totalBypasses()), label: 'Flows' },
         { value: String(totalDomains()), label: 'Domains' },
       ];
 
@@ -35,11 +35,11 @@ export function SupportedSitesPage(): React.ReactElement {
         <Shell className="relative py-8 sm:py-10 lg:py-12">
           <div className="max-w-xl">
             <h1 className="font-display text-title-lg text-ink sm:text-headline">
-              Supported Link Shortener & Countdown Bypasses
+              Supported Sites — Bypass & Automate Countdowns
             </h1>
             <p className="mt-2 text-body-sm text-ink-body">
-              Skip countdown timers, waiting pages, and short-link redirects automatically. Search
-              by site name, domain, or bypass type.
+              Skip countdown timers and short-link redirects, or automate waiting pages and continue
+              clicks when a full bypass isn’t possible. Search by site name, domain, or flow type.
             </p>
           </div>
 
@@ -53,7 +53,7 @@ export function SupportedSitesPage(): React.ReactElement {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search Linkvertise, domain, or bypass…"
+                placeholder="Search Linkvertise, domain, bypass, or automation…"
                 className="h-12 w-full rounded-full bg-surface-muted pr-4 pl-10 text-body-sm text-ink ring-1 ring-neutral-300 outline-none placeholder:text-ink-soft focus:ring-2 focus:ring-primary-500"
               />
             </label>
@@ -90,7 +90,7 @@ export function SupportedSitesPage(): React.ReactElement {
                   No Matches for “{query.trim()}”.
                 </p>
                 <p className="mt-2 text-body-sm text-ink-body">
-                  Try another name, domain, or bypass type.
+                  Try another name, domain, bypass, or automation type.
                 </p>
                 <button
                   type="button"
