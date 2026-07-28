@@ -430,6 +430,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['cloud.unblockedgames.world', 'health.jkssbworld.in', 'tech.examzculture.in'],
   },
   {
+    name: 'Softpedia',
+    bypass: 'Direct Mirror Download',
+    description:
+      'Opens Softpedia mirror downloads straight to the file, skipping the dyn-postdownload wait page.',
+    domains: ['softpedia.com'],
+  },
+  {
     name: 'Storyline SCORM',
     bypass: 'Course-Play Unlock',
     description: 'Skips the Storyline SCORM course-play wait on hosted trainings.',

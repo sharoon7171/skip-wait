@@ -31,6 +31,7 @@ import { initIcutlinkLinksGo, initIcutlinkMediatorPage } from '../sites/icutlink
 import { initFilecrFileDownload, initFilecrProductPage } from '../sites/filecr';
 import { initFilehippoBypass } from '../sites/filehippo';
 import { initFilePressDirectDownload } from '../sites/filepress';
+import { initSoftpediaBypass } from '../sites/softpedia';
 import {
   initHdhub4uLandingPageMed,
   initHdhub4uMediatorPage,
@@ -131,6 +132,7 @@ const INITS = [
   initFilecrFileDownload,
   initFilehippoBypass,
   initFilePressDirectDownload,
+  initSoftpediaBypass,
   initFclcShortlinkPage,
   initFclcMediatorPage,
   initIcutlinkMediatorPage,
