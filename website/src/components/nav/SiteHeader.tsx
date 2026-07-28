@@ -45,9 +45,7 @@ export function SiteHeader(): React.ReactElement {
     setOpen(false);
   };
 
-  const sitesClass = sitesActive
-    ? 'text-ink underline decoration-primary-500 decoration-2 underline-offset-8'
-    : '';
+  const sitesClass = sitesActive ? 'text-ink' : '';
 
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-surface-canvas/85 backdrop-blur-md">
