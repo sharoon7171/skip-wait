@@ -1,16 +1,73 @@
-import { hostnameMatches } from '../../utils/domain-check';
+import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
+import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
+import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
 
 const LANDING_PAGE_HOSTS = ['xdmovies.com'] as const;
-const MIRROR_URL = 'https://xdmovies.site/';
+const OVERLAY_ID = 'skip-wait-xdmovies-landing-overlay';
+const BOOT_STYLE_ID = 'skip-wait-xdmovies-landing-boot';
+const CTA_HREF =
+  /href="(https:\/\/[^"]+)"[^>]*>[\s\S]{0,400}?Open\s+(?:Main\s+Site|XDMovies)/i;
 
-export function initXdmoviesLandingPageNav(): void {
-  chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-    if (details.frameId !== 0) return;
-    try {
-      if (!hostnameMatches(new URL(details.url).hostname, LANDING_PAGE_HOSTS)) return;
-    } catch {
-      return;
-    }
-    void chrome.tabs.update(details.tabId, { url: MIRROR_URL });
+const NOTE = {
+  lead: 'Opening the main site.',
+  detail: 'Skip Wait is taking you to the live XDMovies destination.',
+} as const;
+
+let ui: FullPageOverlay | null = null;
+
+function bootOverlayLock(): void {
+  const active = overlayActiveClass(OVERLAY_ID);
+  document.documentElement.classList.add(active);
+  if (document.getElementById(BOOT_STYLE_ID)) return;
+  const style = document.createElement('style');
+  style.id = BOOT_STYLE_ID;
+  style.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
+  (document.head || document.documentElement).appendChild(style);
+}
+
+function mountUi(status: string): FullPageOverlay {
+  bootOverlayLock();
+  if (ui) {
+    ui.setNote(NOTE);
+    ui.setStatus(status);
+    ui.setError(null);
+    return ui;
+  }
+  ui = createFullPageOverlay({
+    id: OVERLAY_ID,
+    brand: 'Skip Wait',
+    note: NOTE,
+    status,
   });
+  return ui;
+}
+
+function destinationFromCta(): string | null {
+  const href = document.documentElement.innerHTML.match(CTA_HREF)?.[1];
+  if (!href) return null;
+  try {
+    const u = new URL(href);
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+    u.hash = '';
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
+function openMainSite(): void {
+  const overlay = mountUi('Opening destination…');
+  const dest = destinationFromCta();
+  if (!dest) {
+    overlay.setError('Could not find the main site link on this page.');
+    return;
+  }
+  overlay.setStatus('Opening destination…');
+  location.replace(dest);
+}
+
+export function initXdmoviesLandingPageMed(): void {
+  if (!isAllowedHost(LANDING_PAGE_HOSTS)) return;
+  bootOverlayLock();
+  whenDomParsed(openMainSite);
 }

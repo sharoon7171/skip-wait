@@ -479,8 +479,8 @@ export const bypasses: readonly SupportedBypass[] = [
   },
   {
     name: 'XDMovies',
-    bypass: 'Landing Mirror Redirect',
-    description: 'Resolves XDMovies landing pages straight to the mirror host.',
+    bypass: 'Landing CTA Redirect',
+    description: 'Opens the live XDMovies main site from the landing page CTA.',
     domains: ['xdmovies.com'],
   },
   {
