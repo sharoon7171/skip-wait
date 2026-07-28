@@ -1,9 +1,27 @@
 import { hostnameMatches } from '../../utils/domain-check';
 
-export const LOOT_HOSTS = ['speedy-links.com', 'best-links.org', 'free-leaks.com'] as const;
-export const LOOT_PATH_RE = /^\/s(?:\/|\?)/i;
+export const LOOT_HOSTS = [
+  'lootlabs.gg',
+  'loot-link.com',
+  'lootlinks.com',
+  'lootlinks.co',
+  'lootdest.org',
+  'lootdest.com',
+  'lootdest.net',
+  'speedy-links.com',
+  'best-links.org',
+  'free-leaks.com',
+  'fast-links.org',
+  'free-content.pro',
+  'rapid-links.com',
+  'rapid-links.net',
+  'direct-links.net',
+  'direct-links.org',
+  'ultra-links.net',
+] as const;
 
-const lootPath = (pathname: string, search: string) => LOOT_PATH_RE.test(`${pathname}${search}`);
+const lootPath = (pathname: string, search: string) =>
+  pathname === '/s' && search.length > 1;
 
 export function isLootLockerUrl(url: string): boolean {
   try {
@@ -15,8 +33,5 @@ export function isLootLockerUrl(url: string): boolean {
 }
 
 export function isLootLockerPage(): boolean {
-  if (!hostnameMatches(location.hostname, LOOT_HOSTS) || !lootPath(location.pathname, location.search)) {
-    return false;
-  }
-  return [...document.scripts].some((s) => /WrappedBotd|\/\d+\.js(?:\?|$)/.test(s.src));
+  return hostnameMatches(location.hostname, LOOT_HOSTS) && lootPath(location.pathname, location.search);
 }

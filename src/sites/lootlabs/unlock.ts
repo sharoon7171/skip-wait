@@ -1,5 +1,5 @@
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { whenDomReady } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { isLootLockerPage } from './locker';
 import { LOOT_MSG_SOURCE, MSG_INJECT_LOOT } from './main-world-hook';
 
@@ -13,7 +13,9 @@ type LootMessage =
 export function initLootlabsUnlock(): void {
   if (window !== window.top) return;
 
-  void whenDomReady(isLootLockerPage).then(() => {
+  whenDomParsed(() => {
+    if (!isLootLockerPage()) return;
+
     const ui = createFullPageOverlay({
       id: OVERLAY_ID,
       brand: 'Skip Wait',

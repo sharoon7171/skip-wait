@@ -288,7 +288,7 @@ export const bypasses: readonly SupportedBypass[] = [
     bypass: 'Skip Access Steps',
     description:
       'Linkvertise bypass—skip the access and waiting steps and open your target link.',
-    domains: ['linkvertise.com'],
+    domains: ['linkvertise.com', 'beta.luadefender.xyz'],
   },
   {
     name: 'LL Safelink',
@@ -300,7 +300,17 @@ export const bypasses: readonly SupportedBypass[] = [
     name: 'LootLabs',
     bypass: 'Skip Content Locker',
     description: 'LootLabs bypass—skip content locker waits and open the destination.',
-    domains: ['speedy-links.com', 'best-links.org', 'free-leaks.com'],
+    domains: [
+      'links.lootlabs.gg',
+      'rapid-links.com',
+      'loot-link.com',
+      'lootlinks.com',
+      'speedy-links.com',
+      'best-links.org',
+      'free-leaks.com',
+      'fast-links.org',
+      'beta.luadefender.xyz',
+    ],
   },
   {
     name: 'Mega4Upload',
