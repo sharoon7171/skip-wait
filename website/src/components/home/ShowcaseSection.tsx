@@ -1,6 +1,9 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { LuArrowRight, LuArrowUpRight } from 'react-icons/lu';
 import Link from 'next/link';
-import { sampleBypasses, totalBypasses, totalDomains } from '@/data/catalog-queries';
+import { firstBypasses, sampleBypasses, totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { routes } from '@/lib/routes';
 import { BypassRow } from '@/components/sites/BypassRow';
 import { SectionHeader } from '@/components/ui/SectionHeader';
@@ -9,7 +12,11 @@ import { Shell } from '@/components/ui/Shell';
 const SAMPLE_SIZE = 5;
 
 export function ShowcaseSection(): React.ReactElement {
-  const sample = sampleBypasses(SAMPLE_SIZE);
+  const [sample, setSample] = useState(() => firstBypasses(SAMPLE_SIZE));
+
+  useEffect(() => {
+    setSample(sampleBypasses(SAMPLE_SIZE));
+  }, []);
 
   return (
     <section className="bg-surface-muted py-20 lg:py-28">

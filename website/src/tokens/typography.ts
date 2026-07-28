@@ -15,7 +15,7 @@ export const fontSize = {
   ],
   domain: ['0.8125rem', { lineHeight: '1.5', fontWeight: '400' }],
   caption: ['0.875rem', { lineHeight: '1.5', fontWeight: '500' }],
-  'body-sm': ['0.9375rem', { lineHeight: '1.65', fontWeight: '400' }],
+  'body-sm': ['1rem', { lineHeight: '1.65', fontWeight: '400' }],
   body: ['1.0625rem', { lineHeight: '1.7', fontWeight: '400' }],
   ui: ['0.9375rem', { lineHeight: '1.3', fontWeight: '600' }],
   title: [

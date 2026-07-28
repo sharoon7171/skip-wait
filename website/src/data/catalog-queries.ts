@@ -32,6 +32,10 @@ export function shuffledDomains(): string[] {
   return shuffled(allDomains());
 }
 
+export function firstBypasses(count: number): SupportedBypass[] {
+  return bypasses.slice(0, count);
+}
+
 export function sampleBypasses(count: number): SupportedBypass[] {
   return shuffled(bypasses).slice(0, count);
 }

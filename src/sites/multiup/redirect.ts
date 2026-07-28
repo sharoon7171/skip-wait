@@ -1,11 +1,17 @@
 const BASE = 'https://multiup.io/en/mirror/';
 const MIRROR = '/en/mirror/';
+const DOWNLOAD_RE = /\/(?:[a-z]{2}\/)?download\/([a-zA-Z0-9]+)/;
 const DIRECT_RE = /multiup\.io\/([a-zA-Z0-9]+)/;
 const PHP_RE = /\/multiup\.php\?id=([a-zA-Z0-9]+)/;
 
 function mirrorId(url: string): string | null {
   if (!url.includes('multiup') || url.includes(MIRROR)) return null;
-  return url.match(PHP_RE)?.[1] ?? url.match(DIRECT_RE)?.[1] ?? null;
+  return (
+    url.match(PHP_RE)?.[1] ??
+    url.match(DOWNLOAD_RE)?.[1] ??
+    url.match(DIRECT_RE)?.[1] ??
+    null
+  );
 }
 
 export function initMultiup(): void {
