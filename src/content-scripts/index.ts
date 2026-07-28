@@ -28,6 +28,8 @@ import { initCookiesceoCopy } from './cookiesceo-copy';
 import { initFastdlZipRedirect } from './fastdl-zip-redirect';
 import { initFclcMediatorPage, initFclcShortlinkPage } from '../sites/fclc';
 import { initIcutlinkLinksGo, initIcutlinkMediatorPage } from '../sites/icutlink';
+import { initFilecrFileDownload, initFilecrProductPage } from '../sites/filecr';
+import { initFilehippoBypass } from '../sites/filehippo';
 import { initFilePressDirectDownload } from '../sites/filepress';
 import {
   initHdhub4uLandingPageMed,
@@ -125,6 +127,9 @@ const INITS = [
   initClipiRedirect,
   initCookiesceoCopy,
   initFastdlZipRedirect,
+  initFilecrProductPage,
+  initFilecrFileDownload,
+  initFilehippoBypass,
   initFilePressDirectDownload,
   initFclcShortlinkPage,
   initFclcMediatorPage,

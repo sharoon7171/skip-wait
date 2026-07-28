@@ -1,6 +1,8 @@
 import { initCoomeetMainWorldInject } from './coomeet-main-world-inject';
 import { initDocumentVisibilitySpoof } from './document-visibility-spoof';
 import { initFclcAlertSuppress, initFclcLinksGo } from '../sites/fclc';
+import { initFilecrExtractLink } from '../sites/filecr';
+import { initFilecrRouteWatch } from '../sites/filecr/route-watch';
 import { initFlightsimDownloadPatch } from '../sites/flightsim';
 import { initShortxlinksFetchChain } from '../sites/shortxlinks';
 import { initMultiup } from '../sites/multiup';
@@ -18,6 +20,8 @@ initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
 initFclcAlertSuppress();
 initFclcLinksGo();
+initFilecrExtractLink();
+initFilecrRouteWatch();
 initFlightsimDownloadPatch();
 initShortxlinksFetchChain();
 initMultiup();

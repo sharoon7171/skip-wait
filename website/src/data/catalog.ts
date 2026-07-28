@@ -124,6 +124,20 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['fc-lc.xyz', 'fc.lc', 'oii.io', 'jobzhub.store'],
   },
   {
+    name: 'FileCR',
+    bypass: 'Direct, Torrent & Fast Download',
+    description:
+      'Resolves FileCR Direct Download, torrent, and Fast Download Beta links immediately without the wait page or their Assistant extension.',
+    domains: ['filecr.com'],
+  },
+  {
+    name: 'FileHippo',
+    bypass: 'Direct Download on Click',
+    description:
+      'Enables FileHippo download buttons immediately and opens the real launch URL in a new tab on click, skipping the lag and mediator pages.',
+    domains: ['filehippo.com', 'filehippo.de', 'filehippo.jp', 'filehippo.pl'],
+  },
+  {
     name: 'FilePress',
     bypass: 'Direct Download Resolve',
     description: 'Resolves FilePress download pages straight to the file.',
