@@ -72,8 +72,9 @@ export function Hero(): React.ReactElement {
 
           <p className="mx-auto mt-5 max-w-[42ch] text-body text-ink-body sm:mt-6 sm:max-w-[46ch] sm:text-lead lg:mx-0">
             Free Chrome extension that skips countdown timers and link shortener redirects—or
-            automates waiting pages and continue clicks when a full bypass isn’t possible. {' '}
-            {totalBypasses()} supported flows across {totalDomains()} domains.
+            finishes waiting pages for you when a full skip isn’t possible. Works on{' '}
+            {totalBypasses()} sites across {totalDomains()} websites, including popular short links
+            and file hosts.
           </p>
 
           <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:justify-start">

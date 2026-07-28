@@ -5,7 +5,7 @@ export const SITE = {
     'Bypass countdown timers and link shorteners or automate waits and clicks when a full skip isn’t possible.',
   title: 'Skip Wait — Bypass & Automate Countdown Timers & Waiting Pages',
   description:
-    'Free Chrome extension that bypasses countdown timers, skips waiting pages, and clears link shortener redirects—or automates waits and continue clicks when a timer can’t be skipped. Works on supported file hosts and short links. No account required.',
+    'Free Chrome extension to bypass countdown timers and skip waiting pages on link shorteners and file hosts—or finish the wait for you when a full skip isn’t possible. Linkvertise bypass, GPLinks bypass, Ouo bypass, and more. No account required.',
   keywords: [
     'skip countdown timer',
     'bypass countdown timer',
@@ -20,7 +20,14 @@ export const SITE = {
     'skip click to continue',
     'timer skip extension',
     'bypass short link',
-    'Linkvertise bypass extension',
+    'Linkvertise bypass',
+    'GPLinks bypass',
+    'Ouo bypass',
+    'ShrinkMe bypass',
+    'AdFocus bypass',
+    'Filecrypt bypass',
+    'Softpedia bypass',
+    'FileCR bypass',
     'free countdown bypass',
   ],
 } as const;

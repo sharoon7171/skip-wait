@@ -23,7 +23,7 @@ export const faqs: readonly FaqItem[] = [
   },
   {
     question: 'What sites are supported?',
-    answer: `Skip Wait covers ${totalBypasses()} supported flows across ${totalDomains()} domains—link shorteners, safelinks, file hosts, and download countdown pages. Browse the full list on the Supported Sites page and search by name or domain.`,
+    answer: `Skip Wait works on ${totalBypasses()} sites across ${totalDomains()} websites—link shorteners like Linkvertise, GPLinks, and Ouo, plus safelinks, file hosts, and download countdown pages. Open Supported Sites and search by name or website address.`,
   },
   {
     question: 'Can it handle “please wait” and “click to continue” pages?',

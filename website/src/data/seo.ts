@@ -104,7 +104,7 @@ export function supportedSitesJsonLd(): Record<string, unknown> {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `Supported Sites | ${SITE.name}`,
-    description: `Link shortener bypasses, countdown skips, and wait automations across ${totalDomains()} domains.`,
+    description: `Linkvertise bypass, GPLinks bypass, Ouo bypass, and other short-link and download countdown skips across ${totalDomains()} websites.`,
     url: `${SITE.url}${routes.sites}`,
     isPartOf: {
       '@type': 'WebSite',

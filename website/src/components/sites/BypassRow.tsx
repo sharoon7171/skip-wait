@@ -36,24 +36,27 @@ export function BypassRow({
         {entry.description}
       </p>
 
-      <ul
-        className="mt-3 m-0 flex list-none flex-wrap gap-2 p-0"
-        aria-label={`Domains for ${entry.name}`}
-      >
-        {shown.map((domain) => (
-          <li
-            key={domain}
-            className="rounded-chip bg-neutral-100 px-3 py-1.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-300"
-          >
-            {domain}
-          </li>
-        ))}
-        {hiddenCount > 0 ? (
-          <li className="rounded-chip bg-primary-50 px-3 py-1.5 text-caption font-semibold text-primary-700 ring-1 ring-primary-200">
-            +{hiddenCount} more
-          </li>
-        ) : null}
-      </ul>
+      <div className="mt-3">
+        <p className="text-caption font-semibold text-ink-soft">Works on</p>
+        <ul
+          className="mt-2 m-0 flex list-none flex-wrap gap-2 p-0"
+          aria-label={`Websites supported for ${entry.name}`}
+        >
+          {shown.map((domain) => (
+            <li
+              key={domain}
+              className="rounded-chip bg-neutral-100 px-3 py-1.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-300"
+            >
+              {domain}
+            </li>
+          ))}
+          {hiddenCount > 0 ? (
+            <li className="rounded-chip bg-primary-50 px-3 py-1.5 text-caption font-semibold text-primary-700 ring-1 ring-primary-200">
+              +{hiddenCount} more
+            </li>
+          ) : null}
+        </ul>
+      </div>
     </article>
   );
 }

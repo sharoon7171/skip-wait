@@ -21,11 +21,14 @@ export function SupportedSitesPage(): React.ReactElement {
   const countStats = filtering
     ? [
         { value: String(results.length), label: results.length === 1 ? 'Match' : 'Matches' },
-        { value: String(visibleDomains), label: visibleDomains === 1 ? 'Domain' : 'Domains' },
+        {
+          value: String(visibleDomains),
+          label: visibleDomains === 1 ? 'Website' : 'Websites',
+        },
       ]
     : [
-        { value: String(totalBypasses()), label: 'Flows' },
-        { value: String(totalDomains()), label: 'Domains' },
+        { value: String(totalBypasses()), label: 'Sites' },
+        { value: String(totalDomains()), label: 'Websites' },
       ];
 
   return (
@@ -38,8 +41,9 @@ export function SupportedSitesPage(): React.ReactElement {
               Supported Sites — Bypass & Automate Countdowns
             </h1>
             <p className="mt-2 text-body-sm text-ink-body">
-              Skip countdown timers and short-link redirects, or automate waiting pages and continue
-              clicks when a full bypass isn’t possible. Search by site name, domain, or flow type.
+              Looking for a Linkvertise bypass, GPLinks bypass, Ouo bypass, or another short-link /
+              download countdown skip? Search by site name or website address—Skip Wait bypasses the
+              timer when it can, or finishes the wait for you when it can’t.
             </p>
           </div>
 
@@ -53,7 +57,7 @@ export function SupportedSitesPage(): React.ReactElement {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search Linkvertise, domain, bypass, or automation…"
+                placeholder="Search Linkvertise bypass, gplinks.co, ouo.io…"
                 className="h-12 w-full rounded-full bg-surface-muted pr-4 pl-10 text-body-sm text-ink ring-1 ring-neutral-300 outline-none placeholder:text-ink-soft focus:ring-2 focus:ring-primary-500"
               />
             </label>
@@ -90,7 +94,7 @@ export function SupportedSitesPage(): React.ReactElement {
                   No Matches for “{query.trim()}”.
                 </p>
                 <p className="mt-2 text-body-sm text-ink-body">
-                  Try another name, domain, bypass, or automation type.
+                  Try another site name or website address—or request support if we don’t have it yet.
                 </p>
                 <button
                   type="button"

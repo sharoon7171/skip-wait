@@ -7,7 +7,7 @@ import { breadcrumbJsonLd, sitesCanonical, supportedSitesJsonLd } from '@/data/s
 import { routes } from '@/lib/routes';
 
 const title = 'Supported Sites — Bypass & Automate Countdowns';
-const description = `Browse ${totalBypasses()} link shortener bypasses, countdown skips, and wait automations across ${totalDomains()} domains supported by ${SITE.name}. Search by site name or domain.`;
+const description = `Find a Linkvertise bypass, GPLinks bypass, Ouo bypass, ShrinkMe bypass, and more. ${SITE.name} supports ${totalBypasses()} sites across ${totalDomains()} websites—skip countdowns and short-link waits, or finish them for you.`;
 
 export const metadata: Metadata = {
   title,
@@ -15,8 +15,13 @@ export const metadata: Metadata = {
   keywords: [
     ...SITE.keywords,
     'supported sites',
-    'link shortener list',
-    'countdown bypass list',
+    'Linkvertise bypass',
+    'GPLinks bypass',
+    'Ouo bypass',
+    'ShrinkMe bypass',
+    'AdFocus bypass',
+    'Filecrypt bypass',
+    'link shortener bypass list',
   ],
   alternates: {
     canonical: routes.sites,

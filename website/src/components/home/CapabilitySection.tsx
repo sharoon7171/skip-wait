@@ -18,7 +18,7 @@ export function CapabilitySection(): React.ReactElement {
       <Shell>
         <SectionHeader
           title="Bypass Countdowns or Automate the Wait"
-          description="People search for timer skips and link shortener bypasses—and for tools that finish “please wait” flows when a full skip isn’t allowed. Skip Wait does both."
+          description="Looking for a timer skip, link shortener bypass, or a tool that finishes “please wait” pages when a full skip isn’t allowed? Skip Wait does both."
         />
 
         <ul className="mt-8 m-0 grid list-none gap-5 p-0 lg:grid-cols-2">
