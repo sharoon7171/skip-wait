@@ -1,0 +1,1 @@
+Uses the "scripting" permission to run small helpers in the page context on supported unlock flows—for example main-world hooks or visibility helpers that some countdown and gate pages require. Scripts run only to complete those supported flows. This permission is not used for analytics, advertising, or unrelated page modification.

@@ -1,0 +1,1 @@
+One job only: remove unlock delays on supported link shorteners and file hosts so you reach the destination faster. It is not a general ad blocker, not a paywall tool, and not a bundle of unrelated browser utilities. Other browsing stays unchanged unless the page matches a supported flow.

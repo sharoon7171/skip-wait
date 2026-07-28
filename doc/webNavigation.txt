@@ -1,0 +1,1 @@
+Uses "webNavigation" to catch supported navigations early enough for the unlock flow to work—for example instant shortener hops and early main-world injects on specific unlock hosts. It is not used to track general browsing. Destinations come from the site’s own responses or page flow, not from a hardcoded end URL invented by the extension.

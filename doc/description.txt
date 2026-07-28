@@ -1,0 +1,141 @@
+Skip Wait is a free Chrome extension that helps you bypass countdown timers and clear delay pages on supported link shorteners, safelinks, and file hosts. On matching pages it either opens the destination right away or finishes the on-page unlock steps so you reach the final URL or file sooner.
+
+No account, subscription, or paid plan is required. There is nothing to configure for supported sites. Pages outside supported short-link and delay flows are left alone.
+
+
+--------------------------------------------------------------------------------
+OVERVIEW
+--------------------------------------------------------------------------------
+
+Mandatory pauses, “please wait” screens, and multi-step unlock chains slow down ordinary browsing. This product targets that single problem: on supported flows it removes or completes the unlock delay so you spend less time babysitting the page.
+
+Open a supported link as you normally would. The content script detects the page type and runs the matching handler. Some sites allow an instant jump to the destination. Others still need gate unlocks, mediator hops, or timed steps—in those cases the handler completes the supported path for you instead of leaving the continue button or delay UI untouched.
+
+Coverage is site-specific and grows over time. Unsupported sites are not modified for this purpose.
+
+
+--------------------------------------------------------------------------------
+WHAT IT DOES
+--------------------------------------------------------------------------------
+
+• Bypass countdown screens on supported file-host and link pages
+• Skip waiting UI and “click to continue” gates where a supported unlock path exists
+• Short-link delay relief when the destination can be resolved from the page or chain
+• Short-link and short-URL unshorten-style jumps on matching hosts
+• Safelink flows and multi-step unlock chains—walk hops until the real link appears
+• File-host delay relief on supported hosts
+• Instant destination open when the site allows it
+• When a full jump is not possible, finish the unlock steps so you still arrive sooner
+• Runs automatically on supported pages—no site-by-site setup
+
+
+--------------------------------------------------------------------------------
+FEATURES
+--------------------------------------------------------------------------------
+
+• Free to use—no sign-up, subscription, or paywall
+• Automatic detection when you land on a matching short link, safelink, or file host
+• Popup focused on help—not a settings panel
+• “View supported sites” opens the current coverage list
+• Request a missing website via GitHub, email, or Telegram from the popup
+• No global on/off switch; real work stays limited to matched supported flows
+• Does not collect personal data for ads, inject advertisements, or add unrelated tools
+
+
+--------------------------------------------------------------------------------
+HOW TO USE
+--------------------------------------------------------------------------------
+
+1. Install from the Chrome Web Store.
+2. Browse as usual. Open any supported short link, delay page, or file interstitial.
+3. The product detects the page and either opens the destination or completes the unlock flow.
+4. No configuration or account is required for supported sites.
+
+That is the full workflow. You do not turn sites on one by one, and you do not paste URLs into a separate tool—the handler runs on the page when it matches a supported flow.
+
+
+--------------------------------------------------------------------------------
+SUPPORTED BEHAVIOR
+--------------------------------------------------------------------------------
+
+Coverage is organized by behavior, not by a fixed brand list (hosts change and new ones are added):
+
+• Short links and safelinks — follow the chain to the final URL when possible
+• File hosts and file pages — complete unlock steps where supported
+• Pages that delay access with gates or session checks — complete the supported unlock path
+• Multi-step mediator or blog-hop chains — keep progress locally while the chain advances
+• Instant hop pages — open the destination early when it is already known from the site’s own flow
+
+For the live list of domains and flows, open the popup and choose “View supported sites.” If a delay page you use is missing, send the URL through the popup support options and we will add an unlock path when it is possible.
+
+
+--------------------------------------------------------------------------------
+WHO IT IS FOR
+--------------------------------------------------------------------------------
+
+• Anyone who opens short links and wants less time on interstitial screens
+• People who get files from hosts with mandatory pauses before the link appears
+• Users who hit continue gates or multi-step unlock pages on supported sites
+• Anyone looking for a free Chrome tool that clears supported short-link and file-host delays without an account
+
+
+--------------------------------------------------------------------------------
+REQUEST A WEBSITE
+--------------------------------------------------------------------------------
+
+New sites are added over time. If a page you use is not covered yet:
+
+1. Open the popup from the toolbar.
+2. Use Ask on GitHub, Email, or Telegram.
+3. Include the page URL and a short note about how the unlock works.
+
+We add a handler when the flow can be completed reliably. The popup is for support and the supported-sites list—it is not a control panel for disabling the product.
+
+
+--------------------------------------------------------------------------------
+HOW SUPPORT WORKS OVER TIME
+--------------------------------------------------------------------------------
+
+Supported hosts and mediators change. New shorteners appear; old domains move. Because of that:
+
+• Handlers are added and updated as flows are verified
+• The live domain list lives on the supported-sites page linked from the popup
+• You keep the same install and the same automatic behavior—no reconfiguration when coverage expands
+• Requests from users help prioritize the next unlock paths
+
+This keeps the listing accurate without freezing a brand roster that would go stale.
+
+
+--------------------------------------------------------------------------------
+PRIVACY AND DATA
+--------------------------------------------------------------------------------
+
+• No account and no sign-in
+• No ads injected by the product
+• Device-local storage only for short-lived progress on multi-step shortener chains
+• Cookie reads only on certain supported pages where the destination lives in an HttpOnly cookie, and only to finish that jump locally
+• Permissions exist to complete supported unlock flows—not for analytics, advertising, or selling browsing history
+
+See the store listing permission justifications and the privacy policy for the exact permission reasons.
+
+
+--------------------------------------------------------------------------------
+PERMISSIONS AT A GLANCE
+--------------------------------------------------------------------------------
+
+Chrome will show permissions for scripting, storage, cookies, web navigation, and broad host access. Each exists only so supported unlock flows can run:
+
+• Scripting — small page-context helpers some gates require
+• Storage — short-lived chain progress on the device
+• Cookies — read HttpOnly destination values on certain supported pages
+• Web navigation — catch supported navigations early enough for the flow
+• Host access — many short-link and mediator domains change over time
+
+Detailed justifications for each permission are provided in the Chrome Web Store developer dashboard fields for this item.
+
+
+--------------------------------------------------------------------------------
+SUMMARY
+--------------------------------------------------------------------------------
+
+Install once, open a supported short link or delay page, and let the product handle the interstitial, gate, or unlock chain. Free, automatic on supported sites—so you get to the final URL or file with less friction.
