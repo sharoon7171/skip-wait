@@ -90,8 +90,18 @@ export function SiteFooter(): React.ReactElement {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="text-overline uppercase text-primary-300">Contact</p>
+              <p className="text-overline uppercase text-primary-300">Legal</p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
+                <li>
+                  <Link href={routes.privacy} className={footerLink}>
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href={routes.terms} className={footerLink}>
+                    Terms of Use
+                  </Link>
+                </li>
                 <li>
                   <a href={`mailto:${CONTACT.email}`} className={footerLink}>
                     {CONTACT.email}

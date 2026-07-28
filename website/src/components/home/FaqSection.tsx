@@ -1,7 +1,8 @@
 import { JsonLd } from '@/components/seo/JsonLd';
-import { faqs, faqPageJsonLd } from '@/data/seo';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
+import { faqs } from '@/data/faqs';
+import { faqPageJsonLd } from '@/data/seo';
 
 export function FaqSection(): React.ReactElement {
   return (
