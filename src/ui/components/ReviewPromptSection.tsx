@@ -44,7 +44,7 @@ export function ReviewPromptSection(): React.ReactElement {
       className="overflow-hidden rounded-lg border border-warning-200/90 bg-gradient-to-br from-warning-50 via-white to-primary-50/80"
       aria-labelledby="review-prompt-heading"
     >
-      <div className="flex flex-col gap-2.5 px-3 py-3">
+      <div className="flex flex-col gap-2 px-3 py-2.5">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <p className="font-poppins text-[10px] font-bold text-warning-800">Chrome Web Store</p>
           <div
@@ -76,9 +76,6 @@ export function ReviewPromptSection(): React.ReactElement {
           <ExternalLinkIcon />
           Rate on Chrome Web Store
         </a>
-        <p className="text-center font-poppins text-[10px] font-bold text-neutral-600">
-          Opens in a new tab · ~1&nbsp;min
-        </p>
       </div>
     </section>
   );

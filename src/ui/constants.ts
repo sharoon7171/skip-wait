@@ -3,6 +3,10 @@ const REPO_ISSUES_NEW = 'https://github.com/sharoon7171/skip-wait-bypass-timers-
 export const CHROME_WEB_STORE_LISTING_URL =
   'https://chromewebstore.google.com/detail/hdoecnlghjglmnjpnhaaeofcgocdgkhd';
 
+export const WEBSITE_URL = 'https://skip-wait-website.vercel.app';
+
+export const SUPPORTED_SITES_URL = `${WEBSITE_URL}/sites`;
+
 export const CONTACT = {
   email: 'sharoon7171@gmail.com',
   telegram: 'https://t.me/sharoon1998',

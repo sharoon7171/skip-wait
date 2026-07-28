@@ -29,6 +29,7 @@ import { initFastdlZipRedirect } from './fastdl-zip-redirect';
 import { initFclcMediatorPage, initFclcShortlinkPage } from '../sites/fclc';
 import { initIcutlinkLinksGo, initIcutlinkMediatorPage } from '../sites/icutlink';
 import { initFilecrFileDownload, initFilecrProductPage } from '../sites/filecr';
+import { initFilecryptGate } from '../sites/filecrypt';
 import { initFilehippoBypass } from '../sites/filehippo';
 import { initFilePressDirectDownload } from '../sites/filepress';
 import { initSoftpediaBypass } from '../sites/softpedia';
@@ -130,6 +131,7 @@ const INITS = [
   initFastdlZipRedirect,
   initFilecrProductPage,
   initFilecrFileDownload,
+  initFilecryptGate,
   initFilehippoBypass,
   initFilePressDirectDownload,
   initSoftpediaBypass,

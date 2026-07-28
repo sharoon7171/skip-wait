@@ -131,6 +131,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['filecr.com'],
   },
   {
+    name: 'Filecrypt',
+    bypass: 'Security Check Skip',
+    description:
+      'Skips the Filecrypt “I am a human” check and opens the download list as soon as the page loads.',
+    domains: ['filecrypt.cc', 'filecrypt.to', 'filecrypt.co'],
+  },
+  {
     name: 'FileHippo',
     bypass: 'Direct Download on Click',
     description:
