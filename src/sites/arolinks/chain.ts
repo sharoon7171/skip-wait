@@ -1,7 +1,7 @@
 import { AROLINKS_HOSTS } from './hosts';
 
 const CHAIN_KEY = 'sw-arolinks-chain' as const;
-const UNLOCK_READY_MS = 30_000;
+const UNLOCK_READY_MS = 25_000;
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
 
 export type ArolinksChain = {
