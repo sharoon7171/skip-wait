@@ -71,6 +71,7 @@ import { initMirroredFilesPage } from '../sites/mirrored';
 import { initMove2linkGate } from '../sites/move2link';
 import { initMp4uploadCountdownBypass } from '../sites/mp4upload';
 import { initPlingDirectDownload } from '../sites/pling';
+import { initMuhammadniazCountdownBypass } from '../sites/muhammadniaz';
 import { initTipsguruRedirect } from '../sites/tipsguru';
 import { initWahmiCountdownBypass } from '../sites/wahmi';
 import { initCutyGate } from '../sites/cuty';
@@ -170,6 +171,7 @@ const INITS = [
   initMirroredFilesPage,
   initMove2linkGate,
   initMp4uploadCountdownBypass,
+  initMuhammadniazCountdownBypass,
   initTipsguruRedirect,
   initPlingDirectDownload,
   initWahmiCountdownBypass,

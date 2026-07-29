@@ -365,6 +365,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['mp4upload.com'],
   },
   {
+    name: 'MuhammadNiaz',
+    bypass: 'Skip Countdown Timer',
+    description:
+      'MuhammadNiaz bypass skips the download countdown timer on muhammadniaz.link so the download link is shown sooner.',
+    domains: ['muhammadniaz.link'],
+  },
+  {
     name: 'MultiUp',
     bypass: 'Skip Waiting Page',
     description: 'MultiUp bypass—skip the wait and open the mirror download list.',
