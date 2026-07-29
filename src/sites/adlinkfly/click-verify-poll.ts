@@ -1,3 +1,4 @@
+/*
 const VERIFY_PATH = '/verify.php';
 const POLL_MS = 10;
 
@@ -102,3 +103,6 @@ export function initAdlinkClickVerifyPoll(): void {
   document.addEventListener('readystatechange', onReadyState);
   onReadyState();
 }
+*/
+
+export function initAdlinkClickVerifyPoll(): void {}
