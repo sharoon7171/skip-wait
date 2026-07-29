@@ -34,11 +34,18 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['apkteal.com'],
   },
   {
-    name: 'AdLinkFly Network',
+    name: 'AdLinkFly Links Go',
+    bypass: 'Skip Waiting Page',
+    description:
+      'AdLinkFly links go bypass skips the continue gate and unlocks your short link automatically.',
+    domains: ['linkjust.com', 'pahe.plus', 'go.zovo.ink'],
+  },
+  {
+    name: 'AdLinkFly Token Payload',
     bypass: 'Skip Short Link',
     description:
-      'AdLinkFly short link bypass—skip the unlock waits and open the destination.',
-    domains: ['oii.la', 'tpi.li', 'aii.sh', 'lnbz.la', 'shrink.pe', 'pahe.plus'],
+      'AdLinkFly token payload bypass opens your destination from the unlock token without waiting steps.',
+    domains: ['oii.la', 'tpi.li', 'aii.sh', 'lnbz.la', 'shrink.pe'],
   },
   {
     name: 'Arolinks',
@@ -259,12 +266,6 @@ export const bypasses: readonly SupportedBypass[] = [
     bypass: 'Skip Waiting Page',
     description: 'Linclik bypass—skip the continue gate and open your link without waiting.',
     domains: ['linclik.com'],
-  },
-  {
-    name: 'LinkJust',
-    bypass: 'Skip Waiting Page',
-    description: 'LinkJust bypass—skip the blog wait and unlock steps to reach your link.',
-    domains: ['linkjust.com'],
   },
   {
     name: 'LinkNext / Shorte.io',

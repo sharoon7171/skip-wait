@@ -1,8 +1,9 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { ADLINKFLY_TOKEN_PAYLOAD_HOSTS } from './hosts';
 
-const HOSTS = ['oii.la', 'tpi.li', 'aii.sh', 'lnbz.la', 'shrink.pe'] as const;
+const HOSTS = ADLINKFLY_TOKEN_PAYLOAD_HOSTS;
 const OVERLAY_ID = 'skip-wait-adlinkfly-token-overlay';
 const BOOT_STYLE_ID = 'skip-wait-adlinkfly-token-boot';
 const TOKEN_INPUT_SELECTOR = 'input[name="token"]';
