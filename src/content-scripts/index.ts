@@ -28,6 +28,8 @@ import { initCookiesceoCopy } from './cookiesceo-copy';
 import { initFastdlZipRedirect } from './fastdl-zip-redirect';
 import { initFclcMediatorPage, initFclcShortlinkPage } from '../sites/fclc';
 import { initIcutlinkLinksGo, initIcutlinkMediatorPage } from '../sites/icutlink';
+import { initAnygameProductPage } from '../sites/anygame';
+import { initApktealProductPage } from '../sites/apkteal';
 import { initFilecrFileDownload, initFilecrProductPage } from '../sites/filecr';
 import { initFilecryptGate } from '../sites/filecrypt';
 import { initFilehippoBypass } from '../sites/filehippo';
@@ -129,6 +131,8 @@ const INITS = [
   initClipiRedirect,
   initCookiesceoCopy,
   initFastdlZipRedirect,
+  initAnygameProductPage,
+  initApktealProductPage,
   initFilecrProductPage,
   initFilecrFileDownload,
   initFilecryptGate,

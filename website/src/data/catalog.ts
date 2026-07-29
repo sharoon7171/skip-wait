@@ -20,6 +20,20 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['adfoc.us'],
   },
   {
+    name: 'AnyGame',
+    bypass: 'Direct Download',
+    description:
+      'AnyGame MOD APK direct download. Bypass the download countdown timer and waiting page for Android games on anygame.net.',
+    domains: ['anygame.net'],
+  },
+  {
+    name: 'ApkTeal',
+    bypass: 'Direct Download',
+    description:
+      'ApkTeal Premium APK direct download. Bypass the download waiting page for MOD APK Latest Release and Version History on apkteal.com.',
+    domains: ['apkteal.com'],
+  },
+  {
     name: 'AdLinkFly Network',
     bypass: 'Skip Short Link',
     description:
