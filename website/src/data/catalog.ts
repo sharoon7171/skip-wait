@@ -233,6 +233,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['gplinks.co', 'gplinks.com', 'skrresults.com'],
   },
   {
+    name: 'HaxPC',
+    bypass: 'Direct Download',
+    description:
+      'HaxPC bypass skips the extra waiting page on software downloads so the download buttons open the file host directly.',
+    domains: ['haxpc.net'],
+  },
+  {
     name: 'HDHub4u',
     bypass: 'Skip Landing Wait',
     description:
@@ -615,6 +622,13 @@ export const bypasses: readonly SupportedBypass[] = [
       'rarestudy.in',
       's3-cdn.samfygros.com',
     ],
+  },
+  {
+    name: 'Theuser.cloud',
+    bypass: 'Direct Download',
+    description:
+      'Theuser.cloud bypass solves the custom captcha gate and starts your direct file download in one click without the generated-link waiting page.',
+    domains: ['theuser.cloud'],
   },
   {
     name: 'UsersDrive',

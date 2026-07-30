@@ -41,6 +41,7 @@ import {
   initHubcdnDl,
   initHubcloudDrive,
 } from '../sites/hdhub4u';
+import { initHaxpcGoPage, initHaxpcListing } from '../sites/haxpc';
 import { initKitokolaDlGetBypass } from './kitokola-dl-get-bypass';
 import { initKotakanimeidOutPage } from '../sites/kotakanimeid';
 import { initLinkjust } from '../sites/linkjust';
@@ -83,6 +84,7 @@ import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
+import { initTheuserCloudBypass } from '../sites/theuser-cloud';
 import { initAnkergamesDirectDownload } from '../sites/ankergames';
 import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
@@ -161,6 +163,8 @@ const INITS = [
   initHdhub4uMediatorPage,
   initHubcdnDl,
   initHubcloudDrive,
+  initHaxpcListing,
+  initHaxpcGoPage,
   initKitokolaDlGetBypass,
   initKotakanimeidOutPage,
   initOnhaxpkCopy,
@@ -190,6 +194,7 @@ const INITS = [
   initWahmiCountdownBypass,
   initWpSafelinkRedirect,
   initSwiftuploadsDirectDownload,
+  initTheuserCloudBypass,
 ];
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;
