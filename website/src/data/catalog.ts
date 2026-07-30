@@ -226,6 +226,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['genlink.site', 'rplinks.in', 'jazbaat.in', 'crazymindhub.xyz'],
   },
   {
+    name: 'Goost',
+    bypass: 'Skip Short Link',
+    description:
+      'Goost bypass skips the continue and blog wait timers, pins the reCAPTCHA for you to solve, then opens the destination from the statistics unlock URL.',
+    domains: ['goo.st', 'kreditexperte.online'],
+  },
+  {
     name: 'GPLinks',
     bypass: 'Skip Short Link',
     description:

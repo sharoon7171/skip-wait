@@ -86,6 +86,7 @@ import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
 import { initTheuserCloudBypass } from '../sites/theuser-cloud';
 import { initOceanofdmgBypass } from '../sites/oceanofdmg';
+import { initGoostEntry, initGoostMediator } from '../sites/goost';
 import { initAnkergamesDirectDownload } from '../sites/ankergames';
 import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
@@ -128,6 +129,8 @@ const INITS = [
   initGenlinkEntry,
   initGenlinkMediator,
   initGenlinkUnlock,
+  initGoostEntry,
+  initGoostMediator,
   initSflGate,
   initAdlinkClickVerifyPoll,
   initAdlinkflyLinksGo,
