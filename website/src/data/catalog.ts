@@ -198,6 +198,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['flightsim.to'],
   },
   {
+    name: 'GamesNostalgia',
+    bypass: 'Direct Download',
+    description:
+      'GamesNostalgia bypass skips the download modal and generates the CDN file link in the background so Download this File opens the archive directly.',
+    domains: ['gamesnostalgia.com'],
+  },
+  {
     name: 'Genlink',
     bypass: 'Skip Multi-Step Waits',
     description:
@@ -219,6 +226,7 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: [
       'hdhub4u.med',
       'hdhub4u.catering',
+      'hdhub4u.ec',
       'hdhub4u.gd',
       'hdhub4u.gives',
       'hdhub4u.glass',
@@ -420,6 +428,13 @@ export const bypasses: readonly SupportedBypass[] = [
     description:
       'Nitrolink bypass skips the multi page waiting chain and blog mediator steps on this link shortener to reach your destination URL.',
     domains: ['nitro-link.com', 'almontsf.com'],
+  },
+  {
+    name: 'OceansOfGamess',
+    bypass: 'Direct Download',
+    description:
+      'OceansOfGamess bypass skips getsoft, IPC Games, and Please-Wait pages and opens the signed CDN file link directly from the download button.',
+    domains: ['oceansofgamess.com', 'wickradio.com', 'studysmoke.online'],
   },
   {
     name: 'OnhaxPK',

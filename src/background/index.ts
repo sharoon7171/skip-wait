@@ -18,6 +18,7 @@ import { initCutyAdblockInject } from '../sites/cuty';
 import { initRinkuPageHooksInject } from '../sites/rinku';
 import { initStorylineScormMainWorldInject } from '../sites/storyline-scorm';
 import { initLink4mRedirect } from '../sites/tech8s';
+import { initOceansofgamessResolve } from '../sites/oceansofgamess';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -40,3 +41,4 @@ initLksfyAdblockInject();
 initCutyAdblockInject();
 initRinkuPageHooksInject();
 initStorylineScormMainWorldInject();
+initOceansofgamessResolve();

@@ -83,6 +83,11 @@ import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
+import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
+import {
+  initOceansofgamessDirectDownload,
+  initOceansofgamessPleaseWait,
+} from '../sites/oceansofgamess';
 import { initYasir252DirectLinks, initYasir252MediatorPage } from '../sites/yasir252';
 
 const INITS = [
@@ -125,6 +130,9 @@ const INITS = [
   initAdlinkClickVerifyPoll,
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
+  initGamesnostalgiaDirectDownload,
+  initOceansofgamessDirectDownload,
+  initOceansofgamessPleaseWait,
   initYasir252DirectLinks,
   initYasir252MediatorPage,
   initXdmoviesLandingPageMed,

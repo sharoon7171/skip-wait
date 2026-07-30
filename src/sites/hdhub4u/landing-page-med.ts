@@ -3,6 +3,7 @@ import { isAllowedHost } from '../../utils/domain-check';
 const LANDING_PAGE_HOSTS = [
   'hdhub4u.med',
   'hdhub4u.catering',
+  'hdhub4u.ec',
   'hdhub4u.gd',
   'hdhub4u.gives',
   'hdhub4u.glass',
