@@ -83,11 +83,9 @@ import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
+import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
-import {
-  initOceansofgamessDirectDownload,
-  initOceansofgamessPleaseWait,
-} from '../sites/oceansofgamess';
+import { initOceansofgamessDirectDownload } from '../sites/oceansofgamess';
 import { initYasir252DirectLinks, initYasir252MediatorPage } from '../sites/yasir252';
 
 const INITS = [
@@ -130,9 +128,10 @@ const INITS = [
   initAdlinkClickVerifyPoll,
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
+  initApunkagamesVlink,
+  initApunkagamesDownloadProcess,
   initGamesnostalgiaDirectDownload,
   initOceansofgamessDirectDownload,
-  initOceansofgamessPleaseWait,
   initYasir252DirectLinks,
   initYasir252MediatorPage,
   initXdmoviesLandingPageMed,

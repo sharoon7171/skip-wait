@@ -37,6 +37,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['apkteal.com'],
   },
   {
+    name: 'ApunKaGames',
+    bypass: 'Skip Waiting Page',
+    description:
+      'ApunKaGames bypass skips the download-process timer on ApunKaSoftware and AKG Links vlink pages and opens each part destination link directly.',
+    domains: ['akglinks.com', 'apunkasoftware.net'],
+  },
+  {
     name: 'AdLinkFly Links Go',
     bypass: 'Skip Waiting Page',
     description:
@@ -434,7 +441,7 @@ export const bypasses: readonly SupportedBypass[] = [
     bypass: 'Direct Download',
     description:
       'OceansOfGamess bypass skips getsoft, IPC Games, and Please-Wait pages and opens the signed CDN file link directly from the download button.',
-    domains: ['oceansofgamess.com', 'wickradio.com', 'studysmoke.online'],
+    domains: ['oceansofgamess.com'],
   },
   {
     name: 'OnhaxPK',

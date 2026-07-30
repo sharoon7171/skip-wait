@@ -60,10 +60,8 @@ function wire(form: HTMLFormElement): void {
 export function initOceansofgamessDirectDownload(): void {
   if (!isAllowedHost(OCEANSOFGAMESS_HOSTS)) return;
   whenDomParsed(() => {
-    for (const form of document.querySelectorAll('form')) {
+    for (const form of document.querySelectorAll('form[action*="getsoft.php"]')) {
       if (!(form instanceof HTMLFormElement)) continue;
-      const action = form.getAttribute('action') || '';
-      if (!/getsoft\.php/i.test(action) && form.id !== 'ponyo_form') continue;
       if (!form.querySelector('input[name="filename"]')) continue;
       wire(form);
     }

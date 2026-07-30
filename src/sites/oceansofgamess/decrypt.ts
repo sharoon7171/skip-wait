@@ -120,21 +120,21 @@ async function decryptBlob(json: string): Promise<string | null> {
   }
 }
 
-export async function cdnFromPleaseWaitHtml(html: string, originId?: string): Promise<string | null> {
+export async function cdnFromPleaseWaitHtml(html: string, originId: string): Promise<string | null> {
   const blobs = [...html.matchAll(BLOB_RE)].map((m) => m[1]).filter(Boolean) as string[];
   if (blobs.length < 2) return null;
   const url = await decryptBlob(blobs[blobs.length - 1]!);
-  return url && originId ? pinCdnToOrigin(url, originId) : url;
+  return url ? pinCdnToOrigin(url, originId) : null;
 }
 
-export function pinCdnToOrigin(url: string, id: string): string {
-  if (!/^\d{1,3}(?:\.\d{1,3}){3}$/.test(id)) return url;
+export function pinCdnToOrigin(url: string, id: string): string | null {
+  if (!/^\d{1,3}(?:\.\d{1,3}){3}$/.test(id)) return null;
   try {
     const u = new URL(url);
     u.protocol = 'https:';
     u.host = `${id.replaceAll('.', '-')}.top`;
     return u.href;
   } catch {
-    return url;
+    return null;
   }
 }
