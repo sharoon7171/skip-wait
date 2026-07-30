@@ -451,6 +451,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['nitro-link.com', 'almontsf.com'],
   },
   {
+    name: 'OceanofDMG',
+    bypass: 'Direct Download',
+    description:
+      'OceanofDMG bypass skips the please-wait download page and opens the signed CDN file link directly from the software listing.',
+    domains: ['oceanofdmg.com'],
+  },
+  {
     name: 'OceansOfGamess',
     bypass: 'Direct Download',
     description:
