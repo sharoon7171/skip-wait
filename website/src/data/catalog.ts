@@ -37,6 +37,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['apkteal.com'],
   },
   {
+    name: 'AnkerGames',
+    bypass: 'Direct Download',
+    description:
+      'AnkerGames bypass skips the treasure-box scroll delay and opens the signed CDN file link directly from each Direct button in the download modal.',
+    domains: ['ankergames.net'],
+  },
+  {
     name: 'ApunKaGames',
     bypass: 'Skip Waiting Page',
     description:

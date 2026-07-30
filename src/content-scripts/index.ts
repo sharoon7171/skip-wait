@@ -83,6 +83,7 @@ import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
+import { initAnkergamesDirectDownload } from '../sites/ankergames';
 import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
 import { initOceansofgamessDirectDownload } from '../sites/oceansofgamess';
@@ -128,6 +129,7 @@ const INITS = [
   initAdlinkClickVerifyPoll,
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
+  initAnkergamesDirectDownload,
   initApunkagamesVlink,
   initApunkagamesDownloadProcess,
   initGamesnostalgiaDirectDownload,
