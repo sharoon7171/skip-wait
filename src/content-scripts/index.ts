@@ -82,6 +82,7 @@ import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
+import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
 
 const INITS = [
   initStorylineCoursePlayBrand,
@@ -176,6 +177,7 @@ const INITS = [
   initPlingDirectDownload,
   initWahmiCountdownBypass,
   initWpSafelinkRedirect,
+  initSwiftuploadsDirectDownload,
 ];
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;

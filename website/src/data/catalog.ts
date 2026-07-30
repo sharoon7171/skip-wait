@@ -498,6 +498,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['sub2get.com'],
   },
   {
+    name: 'SwiftUploads',
+    bypass: 'Direct Download',
+    description:
+      'Skip the free download wait and get your file in one click. Bypass create link steps, generating timers, and redirect pages so your download starts right away.',
+    domains: ['swiftuploads.com'],
+  },
+  {
     name: 'Tech8s / Ez4Short',
     bypass: 'Skip Short Link',
     description: 'Tech8s and Ez4Short bypass—skip the gate waits and open your link.',
