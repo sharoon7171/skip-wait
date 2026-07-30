@@ -83,6 +83,7 @@ import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
+import { initYasir252DirectLinks, initYasir252MediatorPage } from '../sites/yasir252';
 
 const INITS = [
   initStorylineCoursePlayBrand,
@@ -124,6 +125,8 @@ const INITS = [
   initAdlinkClickVerifyPoll,
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
+  initYasir252DirectLinks,
+  initYasir252MediatorPage,
   initXdmoviesLandingPageMed,
   initXdmoviesMediatorPage,
   initMoviesModContentScript,

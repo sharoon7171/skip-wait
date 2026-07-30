@@ -602,6 +602,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['wahmi.org'],
   },
   {
+    name: 'Yasir252',
+    bypass: 'Direct Download',
+    description:
+      'Yasir252 bypass decodes locked download buttons into direct PixelDrain, MediaFire, and file host links without the mediator page or 8 second timer.',
+    domains: ['yasir252.com', 'download.yasir252.com'],
+  },
+  {
     name: 'WP Safelink',
     bypass: 'Skip Safelink Wait',
     description:
