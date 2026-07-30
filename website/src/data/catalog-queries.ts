@@ -21,7 +21,7 @@ export function totalBypasses(): number {
 }
 
 export function allDomains(): string[] {
-  return bypasses.flatMap((entry) => [...entry.domains]);
+  return [...new Set(bypasses.flatMap((entry) => [...entry.domains]))];
 }
 
 export function totalDomains(): number {
