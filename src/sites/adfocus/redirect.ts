@@ -1,7 +1,7 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { ADFOCUS_HOSTS } from './hosts';
+import { adfocusAliasFromPath, ADFOCUS_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-adfocus-overlay';
 const BOOT_STYLE_ID = 'skip-wait-adfocus-boot';
@@ -13,11 +13,19 @@ const NOTE = {
 } as const;
 
 let ui: FullPageOverlay | null = null;
+let started = false;
 
 function decodeHtml(s: string): string {
   const el = document.createElement('textarea');
   el.innerHTML = s;
   return el.value;
+}
+
+function hasGateMarkers(): boolean {
+  return (
+    Boolean(document.getElementById('showSkip')) ||
+    CLICK_URL_RE.test(document.documentElement.innerHTML)
+  );
 }
 
 function destinationFromPage(): string | null {
@@ -75,9 +83,19 @@ function redirect(): void {
   location.replace(dest);
 }
 
+function kick(): void {
+  if (started || !adfocusAliasFromPath() || !hasGateMarkers()) return;
+  started = true;
+  redirect();
+}
+
 export function initAdfocusRedirect(): void {
-  if (!isAllowedHost(ADFOCUS_HOSTS)) return;
-  bootOverlayLock();
-  mountUi('Getting things ready…');
-  whenDomParsed(redirect);
+  if (window !== window.top || !isAllowedHost(ADFOCUS_HOSTS) || !adfocusAliasFromPath()) return;
+
+  whenDomParsed(kick);
+  const mo = new MutationObserver(() => {
+    kick();
+    if (started) mo.disconnect();
+  });
+  mo.observe(document.documentElement, { childList: true, subtree: true });
 }
