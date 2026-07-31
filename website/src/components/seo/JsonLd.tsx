@@ -3,10 +3,19 @@ type JsonLdProps = {
 };
 
 export function JsonLd({ data }: JsonLdProps): React.ReactElement {
+  const items = Array.isArray(data) ? data : [data];
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <>
+      {items.map((item, index) => (
+        <script
+          key={`${String(item['@type'] ?? 'ld')}-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(item).replace(/</g, '\\u003c'),
+          }}
+        />
+      ))}
+    </>
   );
 }

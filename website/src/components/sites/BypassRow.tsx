@@ -1,26 +1,37 @@
+import Link from 'next/link';
 import type { SupportedBypass } from '@/types/catalog';
+import { bypassSlug } from '@/lib/catalog-slug';
+import { bypassSitePath } from '@/lib/routes';
 
 type BypassRowProps = {
   entry: SupportedBypass;
   domains?: 'full' | 'summary';
   titleAs?: 'h2' | 'h3';
+  linked?: boolean;
+  className?: string;
 };
 
 export function BypassRow({
   entry,
   domains = 'full',
   titleAs: Title = 'h2',
+  linked = false,
+  className = '',
 }: BypassRowProps): React.ReactElement {
   const shown =
     domains === 'summary' && entry.domains.length > 3
       ? entry.domains.slice(0, 3)
       : entry.domains;
   const hiddenCount = entry.domains.length - shown.length;
+  const titleClass = 'font-display text-title text-ink';
+  const detailPath = bypassSitePath(bypassSlug(entry));
 
-  return (
+  const body = (
     <article className="min-w-0 flex-1">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <Title className="font-display text-title text-ink">{entry.name}</Title>
+        <Title className={linked ? `${titleClass} transition-colors group-hover:text-primary-700` : titleClass}>
+          {entry.name}
+        </Title>
         <p className="rounded-full bg-primary-50 px-2.5 py-0.5 text-caption font-semibold text-primary-700 ring-1 ring-primary-100">
           {entry.bypass}
         </p>
@@ -58,5 +69,18 @@ export function BypassRow({
         </ul>
       </div>
     </article>
+  );
+
+  if (!linked) {
+    return body;
+  }
+
+  return (
+    <Link
+      href={detailPath}
+      className={`group block no-underline transition-colors hover:bg-primary-50/60 ${className}`.trim()}
+    >
+      {body}
+    </Link>
   );
 }

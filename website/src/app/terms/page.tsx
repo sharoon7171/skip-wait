@@ -3,28 +3,41 @@ import Link from 'next/link';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
-import { breadcrumbJsonLd, termsCanonical } from '@/data/seo';
+import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Terms of Use';
-const description = `Terms for using the ${SITE.name} Chrome extension.`;
-const updated = 'July 28, 2026';
+const description = `Terms of use for the free ${SITE.name} Chrome extension: license, supported sites, acceptable use, disclaimers, and contact for Skip Wait.`;
+const updated = '2026-07-28';
+const path = routes.terms;
+const url = `${SITE.url}${path}`;
 
 export const metadata: Metadata = {
   title,
   description,
+  robots: indexRobots,
   alternates: {
-    canonical: routes.terms,
+    canonical: path,
   },
   openGraph: {
+    type: 'website',
     title: `${title} | ${SITE.name}`,
     description,
-    url: termsCanonical,
+    url,
+    images: [
+      {
+        url: '/icon.png',
+        width: 128,
+        height: 128,
+        alt: `${SITE.name} terms of use`,
+      },
+    ],
   },
   twitter: {
     card: 'summary',
     title: `${title} | ${SITE.name}`,
     description,
+    images: ['/icon.png'],
   },
 };
 
@@ -35,8 +48,14 @@ export default function TermsPage(): React.ReactElement {
         data={[
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },
-            { name: 'Terms of Use', path: routes.terms },
+            { name: 'Terms of Use', path },
           ]),
+          legalWebPageJsonLd({
+            title,
+            description,
+            path,
+            dateModified: updated,
+          }),
         ]}
       />
       <LegalPage

@@ -1,5 +1,6 @@
 import type { SupportedBypass } from '@/types/catalog';
 import { bypasses } from '@/data/catalog';
+import { bypassSlug } from '@/lib/catalog-slug';
 
 function byName(a: SupportedBypass, b: SupportedBypass): number {
   return a.name.localeCompare(b.name);
@@ -55,10 +56,21 @@ function matchesSearch(entry: SupportedBypass, query: string): boolean {
   if (entry.description.toLowerCase().includes(needle)) {
     return true;
   }
+  if (entry.keywords.some((keyword) => keyword.toLowerCase().includes(needle))) {
+    return true;
+  }
 
   return entry.domains.some((domain) => domain.toLowerCase().includes(needle));
 }
 
 export function searchCatalog(query: string): SupportedBypass[] {
   return bypasses.filter((entry) => matchesSearch(entry, query)).sort(byName);
+}
+
+export function bypassBySlug(slug: string): SupportedBypass | undefined {
+  return bypasses.find((entry) => bypassSlug(entry) === slug);
+}
+
+export function allBypassSlugs(): readonly string[] {
+  return bypasses.map((entry) => bypassSlug(entry));
 }

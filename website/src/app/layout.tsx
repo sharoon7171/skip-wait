@@ -4,8 +4,13 @@ import { SiteFooter } from '@/components/nav/SiteFooter';
 import { SiteHeader } from '@/components/nav/SiteHeader';
 import { HashScroll } from '@/components/nav/HashScroll';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { ORGANIZATION, SITE } from '@/data/constants';
-import { softwareApplicationJsonLd, websiteJsonLd } from '@/data/seo';
+import { CONTACT, ORGANIZATION, SITE } from '@/data/constants';
+import {
+  indexRobots,
+  organizationJsonLd,
+  softwareApplicationJsonLd,
+  websiteJsonLd,
+} from '@/data/seo';
 import '@/styles/global.css';
 
 export const viewport: Viewport = {
@@ -21,23 +26,17 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
-  keywords: [...SITE.keywords],
-  authors: [{ name: 'Sharoon', url: SITE.url }],
+  authors: [{ name: 'Sharoon', url: CONTACT.github }],
   creator: 'Sharoon',
   publisher: ORGANIZATION.name,
   category: 'technology',
   icons: {
-    icon: [{ url: '/icon.png', type: 'image/png' }],
-    apple: [{ url: '/icon.png', type: 'image/png' }],
-  },
-  manifest: '/site.webmanifest',
-  alternates: {
-    canonical: '/',
+    icon: [{ url: '/icon.png', type: 'image/png', sizes: '128x128' }],
+    apple: [{ url: '/icon.png', type: 'image/png', sizes: '128x128' }],
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: SITE.url,
     siteName: SITE.name,
     title: SITE.title,
     description: SITE.description,
@@ -56,17 +55,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: ['/icon.png'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-    },
-  },
+  robots: indexRobots,
 };
 
 export default function RootLayout({
@@ -85,7 +74,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-surface-canvas font-sans text-ink antialiased">
-        <JsonLd data={[websiteJsonLd(), softwareApplicationJsonLd()]} />
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd(), softwareApplicationJsonLd()]} />
         <HashScroll />
         <SiteHeader />
         <main className="flex-1">{children}</main>

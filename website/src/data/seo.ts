@@ -1,17 +1,55 @@
+import type { Metadata } from 'next';
 import { CHROME_WEB_STORE_URL, CONTACT, ORGANIZATION, SITE } from '@/data/constants';
-import { bypasses } from '@/data/catalog';
-import { totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { faqs } from '@/data/faqs';
-import { routes } from '@/lib/routes';
+
+export const indexRobots: NonNullable<Metadata['robots']> = {
+  index: true,
+  follow: true,
+  googleBot: {
+    index: true,
+    follow: true,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+    'max-video-preview': -1,
+  },
+};
+
+export function organizationJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE.url}/icon.png`,
+    },
+    sameAs: [CONTACT.github, CHROME_WEB_STORE_URL],
+    parentOrganization: {
+      '@type': 'Organization',
+      name: ORGANIZATION.name,
+      url: ORGANIZATION.url,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: CONTACT.email,
+      contactType: 'customer support',
+    },
+  };
+}
 
 export function softwareApplicationJsonLd(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: SITE.name,
-    alternateName: 'Skip Wait — Bypass Timers & Countdowns',
+    alternateName: [
+      'Skip Wait — Bypass Timers & Countdowns',
+      'Skip Wait Chrome Extension',
+    ],
     description: SITE.description,
     url: SITE.url,
+    image: `${SITE.url}/icon.png`,
     applicationCategory: 'BrowserApplication',
     applicationSubCategory: 'Chrome Extension',
     operatingSystem: 'Chrome',
@@ -21,13 +59,7 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'USD',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.6',
-      ratingCount: '18',
-      bestRating: '5',
-      worstRating: '1',
+      availability: 'https://schema.org/InStock',
     },
     author: {
       '@type': 'Person',
@@ -39,8 +71,6 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
       '@type': 'Organization',
       name: ORGANIZATION.name,
       url: ORGANIZATION.url,
-      logo: `${SITE.url}/icon.png`,
-      sameAs: [CONTACT.github, CHROME_WEB_STORE_URL, ORGANIZATION.url],
     },
     featureList: [
       'Bypass countdown timers on supported download and link pages',
@@ -58,13 +88,46 @@ export function websiteJsonLd(): Record<string, unknown> {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE.name,
+    alternateName: 'Skip Wait Chrome Extension',
     url: SITE.url,
     description: SITE.description,
     inLanguage: 'en',
     publisher: {
       '@type': 'Organization',
-      name: ORGANIZATION.name,
-      url: ORGANIZATION.url,
+      name: SITE.name,
+      url: SITE.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE.url}/icon.png`,
+      },
+    },
+  };
+}
+
+export function homeWebPageJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${SITE.url}/#webpage`,
+    name: SITE.title,
+    description: SITE.description,
+    url: SITE.url,
+    inLanguage: 'en',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE.name,
+      url: SITE.url,
+    },
+    about: {
+      '@type': 'SoftwareApplication',
+      name: SITE.name,
+      applicationCategory: 'BrowserApplication',
+      operatingSystem: 'Chrome',
+      downloadUrl: CHROME_WEB_STORE_URL,
+    },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: `${SITE.url}/icon.png`,
     },
   };
 }
@@ -73,6 +136,8 @@ export function faqPageJsonLd(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    '@id': `${SITE.url}/#faq`,
+    url: SITE.url,
     mainEntity: faqs.map((item) => ({
       '@type': 'Question',
       name: item.question,
@@ -94,37 +159,38 @@ export function breadcrumbJsonLd(
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${SITE.url}${item.path}`,
+      item: `${SITE.url}${item.path === '/' ? '' : item.path}`,
     })),
   };
 }
 
-export function supportedSitesJsonLd(): Record<string, unknown> {
+export function legalWebPageJsonLd(input: {
+  title: string;
+  description: string;
+  path: string;
+  dateModified: string;
+}): Record<string, unknown> {
+  const url = `${SITE.url}${input.path}`;
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: `Supported Sites | ${SITE.name}`,
-    description: `Linkvertise bypass, GPLinks bypass, Ouo bypass, and other short-link and download countdown skips across ${totalDomains()} websites.`,
-    url: `${SITE.url}${routes.sites}`,
+    '@type': 'WebPage',
+    name: `${input.title} | ${SITE.name}`,
+    description: input.description,
+    url,
+    inLanguage: 'en',
+    dateModified: input.dateModified,
     isPartOf: {
       '@type': 'WebSite',
       name: SITE.name,
       url: SITE.url,
     },
-    mainEntity: {
-      '@type': 'ItemList',
-      numberOfItems: totalBypasses(),
-      itemListElement: bypasses.slice(0, 50).map((entry, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        name: entry.name,
-        description: entry.description,
-      })),
+    about: {
+      '@type': 'SoftwareApplication',
+      name: SITE.name,
+      applicationCategory: 'BrowserApplication',
+      operatingSystem: 'Chrome',
+      downloadUrl: CHROME_WEB_STORE_URL,
     },
   };
 }
-
-export const homeCanonical = SITE.url;
-export const sitesCanonical = `${SITE.url}${routes.sites}`;
-export const privacyCanonical = `${SITE.url}${routes.privacy}`;
-export const termsCanonical = `${SITE.url}${routes.terms}`;

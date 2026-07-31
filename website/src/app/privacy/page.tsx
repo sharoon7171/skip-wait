@@ -3,28 +3,41 @@ import Link from 'next/link';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
-import { breadcrumbJsonLd, privacyCanonical } from '@/data/seo';
+import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Privacy Policy';
-const description = `How the ${SITE.name} Chrome extension handles information.`;
-const updated = 'July 28, 2026';
+const description = `Privacy policy for the ${SITE.name} Chrome extension: what data the extension accesses, what it stores, and how Skip Wait handles information on supported sites.`;
+const updated = '2026-07-28';
+const path = routes.privacy;
+const url = `${SITE.url}${path}`;
 
 export const metadata: Metadata = {
   title,
   description,
+  robots: indexRobots,
   alternates: {
-    canonical: routes.privacy,
+    canonical: path,
   },
   openGraph: {
+    type: 'website',
     title: `${title} | ${SITE.name}`,
     description,
-    url: privacyCanonical,
+    url,
+    images: [
+      {
+        url: '/icon.png',
+        width: 128,
+        height: 128,
+        alt: `${SITE.name} privacy policy`,
+      },
+    ],
   },
   twitter: {
     card: 'summary',
     title: `${title} | ${SITE.name}`,
     description,
+    images: ['/icon.png'],
   },
 };
 
@@ -35,8 +48,14 @@ export default function PrivacyPage(): React.ReactElement {
         data={[
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },
-            { name: 'Privacy Policy', path: routes.privacy },
+            { name: 'Privacy Policy', path },
           ]),
+          legalWebPageJsonLd({
+            title,
+            description,
+            path,
+            dateModified: updated,
+          }),
         ]}
       />
       <LegalPage

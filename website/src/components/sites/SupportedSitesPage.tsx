@@ -83,8 +83,8 @@ export function SupportedSitesPage(): React.ReactElement {
             {results.length > 0 ? (
               <ul className="m-0 list-none divide-y divide-neutral-200 p-0">
                 {results.map((entry) => (
-                  <li key={entry.name} className="px-6 py-5 sm:px-8">
-                    <BypassRow entry={entry} />
+                  <li key={entry.name}>
+                    <BypassRow entry={entry} linked className="px-6 py-5 sm:px-8" />
                   </li>
                 ))}
               </ul>

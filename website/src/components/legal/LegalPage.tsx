@@ -9,6 +9,15 @@ type LegalPageProps = {
   children: ReactNode;
 };
 
+function formatUpdatedDate(isoDate: string): string {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return new Date(year!, month! - 1, day!).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 export function LegalPage({
   title,
   updated,
@@ -22,7 +31,7 @@ export function LegalPage({
         <Shell className="relative py-8 sm:py-10 lg:py-12">
           <div className="max-w-xl">
             <h1 className="font-display text-title-lg text-ink sm:text-headline">{title}</h1>
-            <p className="mt-2 text-caption text-ink-soft">Last updated: {updated}</p>
+            <p className="mt-2 text-caption text-ink-soft">Last updated: {formatUpdatedDate(updated)}</p>
             <p className="mt-4 text-body-sm text-ink-body">{summary}</p>
           </div>
         </Shell>

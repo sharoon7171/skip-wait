@@ -1,51 +1,86 @@
 import type { Metadata } from 'next';
 import { SupportedSitesPage } from '@/components/sites/SupportedSitesPage';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { bypasses } from '@/data/catalog';
 import { totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { SITE } from '@/data/constants';
-import { breadcrumbJsonLd, sitesCanonical, supportedSitesJsonLd } from '@/data/seo';
-import { routes } from '@/lib/routes';
+import { breadcrumbJsonLd, indexRobots } from '@/data/seo';
+import { bypassSlug } from '@/lib/catalog-slug';
+import { bypassSitePath, routes } from '@/lib/routes';
 
-const title = 'Supported Sites — Bypass & Automate Countdowns';
-const description = `Find a Linkvertise bypass, GPLinks bypass, Ouo bypass, ShrinkMe bypass, and more. ${SITE.name} supports ${totalBypasses()} sites across ${totalDomains()} websites—skip countdowns and short-link waits, or finish them for you.`;
+const title = 'Supported Sites — Link Shortener & Countdown Bypasses';
+const description = `Browse ${totalBypasses()} bypasses across ${totalDomains()} websites. Search by site name or domain for countdown skips, waiting-page bypasses, and link shortener support with Skip Wait.`;
+const keywords = [
+  'supported sites',
+  'skip wait supported sites',
+  'link shortener bypass list',
+  'countdown bypass list',
+  'waiting page bypass sites',
+  'download timer bypass sites',
+  'safelink bypass list',
+  'ad link bypass list',
+] as const;
+const path = routes.sites;
+const url = `${SITE.url}${path}`;
 
 export const metadata: Metadata = {
   title,
   description,
-  keywords: [
-    ...SITE.keywords,
-    'supported sites',
-    'Linkvertise bypass',
-    'GPLinks bypass',
-    'Ouo bypass',
-    'ShrinkMe bypass',
-    'AdFocus bypass',
-    'Filecrypt bypass',
-    'link shortener bypass list',
-  ],
+  keywords: [...keywords],
+  robots: indexRobots,
   alternates: {
-    canonical: routes.sites,
+    canonical: path,
   },
   openGraph: {
-    title: `Supported Sites | ${SITE.name}`,
+    type: 'website',
+    title: `${title} | ${SITE.name}`,
     description,
-    url: sitesCanonical,
+    url,
     images: [
       {
         url: '/icon.png',
         width: 128,
         height: 128,
-        alt: `${SITE.name} supported sites`,
+        alt: `${SITE.name} supported bypass sites`,
       },
     ],
   },
   twitter: {
     card: 'summary',
-    title: `Supported Sites | ${SITE.name}`,
+    title: `${title} | ${SITE.name}`,
     description,
     images: ['/icon.png'],
   },
 };
+
+function supportedSitesJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${title} | ${SITE.name}`,
+    description,
+    url,
+    inLanguage: 'en',
+    keywords: keywords.join(', '),
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE.name,
+      url: SITE.url,
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      name: `${SITE.name} supported bypasses`,
+      numberOfItems: totalBypasses(),
+      itemListElement: bypasses.map((entry, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: `${entry.name} Bypass`,
+        description: entry.description,
+        url: `${SITE.url}${bypassSitePath(bypassSlug(entry))}`,
+      })),
+    },
+  };
+}
 
 export default function SitesPage(): React.ReactElement {
   return (
@@ -54,7 +89,7 @@ export default function SitesPage(): React.ReactElement {
         data={[
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },
-            { name: 'Supported Sites', path: routes.sites },
+            { name: 'Supported Sites', path },
           ]),
           supportedSitesJsonLd(),
         ]}

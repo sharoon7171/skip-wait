@@ -26,6 +26,11 @@ export function SiteFooter(): React.ReactElement {
               <p className="text-overline uppercase text-primary-300">Product</p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
                 <li>
+                  <Link href={routes.home} className={footerLink}>
+                    Home
+                  </Link>
+                </li>
+                <li>
                   <a
                     href={CHROME_WEB_STORE_URL}
                     target="_blank"

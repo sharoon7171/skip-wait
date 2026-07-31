@@ -1,4 +1,5 @@
 import { JsonLd } from '@/components/seo/JsonLd';
+import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
 import { faqs } from '@/data/faqs';
@@ -15,26 +16,7 @@ export function FaqSection(): React.ReactElement {
             description="How Skip Wait bypasses countdowns, when it automates waits instead, what’s free, and how to request a site."
           />
 
-          <ul className="m-0 flex list-none flex-col gap-3 p-0">
-            {faqs.map((item) => (
-              <li key={item.question}>
-                <details className="group rounded-panel bg-surface-muted px-5 py-4 shadow-sm ring-1 ring-neutral-200 open:ring-primary-200 sm:px-6 sm:py-5">
-                  <summary className="cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden">
-                    <span className="flex items-start justify-between gap-4">
-                      <span className="font-display text-title text-ink">{item.question}</span>
-                      <span
-                        aria-hidden
-                        className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-primary-100 text-caption font-bold text-primary-700 transition-transform group-open:rotate-45"
-                      >
-                        +
-                      </span>
-                    </span>
-                  </summary>
-                  <p className="mt-3 max-w-prose text-body-sm text-ink-body">{item.answer}</p>
-                </details>
-              </li>
-            ))}
-          </ul>
+          <FaqAccordion items={faqs} />
         </div>
       </Shell>
     </section>

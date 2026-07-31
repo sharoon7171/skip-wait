@@ -9,34 +9,40 @@ import { FaqSection } from '@/components/home/FaqSection';
 import { SupportCta } from '@/components/home/SupportCta';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { SITE } from '@/data/constants';
-import { breadcrumbJsonLd } from '@/data/seo';
+import { homeWebPageJsonLd, indexRobots } from '@/data/seo';
+
+const title = SITE.title;
+const description = SITE.description;
+const keywords = [...SITE.keywords];
 
 export const metadata: Metadata = {
   title: {
-    absolute: SITE.title,
+    absolute: title,
   },
-  description: SITE.description,
-  keywords: [...SITE.keywords],
+  description,
+  keywords,
+  robots: indexRobots,
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: SITE.title,
-    description: SITE.description,
+    type: 'website',
+    title,
+    description,
     url: SITE.url,
     images: [
       {
         url: '/icon.png',
         width: 128,
         height: 128,
-        alt: `${SITE.name} Chrome extension`,
+        alt: `${SITE.name} — skip countdown timers and link shorteners`,
       },
     ],
   },
   twitter: {
     card: 'summary',
-    title: SITE.title,
-    description: SITE.description,
+    title,
+    description,
     images: ['/icon.png'],
   },
 };
@@ -44,9 +50,7 @@ export const metadata: Metadata = {
 export default function HomePage(): React.ReactElement {
   return (
     <>
-      <JsonLd
-        data={breadcrumbJsonLd([{ name: 'Home', path: '/' }])}
-      />
+      <JsonLd data={homeWebPageJsonLd()} />
       <Hero />
       <DomainTicker />
       <StatsBand />

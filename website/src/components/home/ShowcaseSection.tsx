@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LuArrowRight, LuArrowUpRight } from 'react-icons/lu';
+import { LuArrowRight } from 'react-icons/lu';
 import Link from 'next/link';
 import { firstBypasses, sampleBypasses, totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { routes } from '@/lib/routes';
@@ -30,18 +30,13 @@ export function ShowcaseSection(): React.ReactElement {
           <ul className="m-0 list-none divide-y divide-neutral-200 p-0">
             {sample.map((entry) => (
               <li key={entry.name}>
-                <Link
-                  href={routes.sites}
-                  className="group flex items-center gap-4 px-6 py-5 no-underline transition-colors hover:bg-primary-50/60 sm:px-8"
-                >
-                  <div className="min-w-0 flex-1 [&_h3]:transition-colors group-hover:[&_h3]:text-primary-700">
-                    <BypassRow entry={entry} domains="summary" titleAs="h3" />
-                  </div>
-                  <LuArrowUpRight
-                    className="size-4 shrink-0 text-ink-soft transition-colors group-hover:text-primary-600"
-                    aria-hidden
-                  />
-                </Link>
+                <BypassRow
+                  entry={entry}
+                  domains="summary"
+                  titleAs="h3"
+                  linked
+                  className="px-6 py-5 sm:px-8"
+                />
               </li>
             ))}
           </ul>
