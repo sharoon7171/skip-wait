@@ -62,6 +62,7 @@ import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../
 import { initShrtslugRedirect } from '../sites/shrtslug';
 import { initStbemuiptvcodesWpsafelink, initWpSafelinkRedirect } from '../sites/wp-safelink';
 import { initSub2getRedirect } from '../sites/sub2get';
+import { initSub2unlockUnlock } from '../sites/sub2unlock';
 import {
   initSub4unlockComUnlock,
   initSub4unlockIoUnlock,
@@ -188,6 +189,7 @@ const INITS = [
   initShrtslugRedirect,
   initStbemuiptvcodesWpsafelink,
   initSub2getRedirect,
+  initSub2unlockUnlock,
   initSub4unlockComUnlock,
   initSub4unlockIoUnlock,
   initSub4unlockMeUnlock,

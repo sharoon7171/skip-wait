@@ -60,14 +60,22 @@ const formFromEl = (form: HTMLFormElement): LinksGoForm => {
 };
 
 const destFromGoUrl = (url: string): string | null => {
-  const lnk1 = new URLSearchParams(url.replace(/^\?/, '')).get('lnk1');
-  if (!lnk1) return null;
-  try {
-    const dest = decodeURIComponent(atob(lnk1)).trim();
-    return /^https?:\/\//i.test(dest) ? dest : null;
-  } catch {
-    return null;
+  const trimmed = url.trim();
+  const query = trimmed.startsWith('?')
+    ? trimmed.slice(1)
+    : trimmed.includes('?')
+      ? trimmed.slice(trimmed.indexOf('?') + 1)
+      : trimmed;
+  const lnk1 = new URLSearchParams(query).get('lnk1');
+  if (lnk1) {
+    try {
+      const dest = decodeURIComponent(atob(lnk1)).trim();
+      return /^https?:\/\//i.test(dest) ? dest : null;
+    } catch {
+      return null;
+    }
   }
+  return /^https?:\/\//i.test(trimmed) ? trimmed : null;
 };
 
 const postForm = async (form: LinksGoForm, referer: string, ajax: boolean): Promise<Response> =>

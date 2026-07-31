@@ -8,6 +8,7 @@ const description = "Sub4Unlock.me bypass skips the full social locker—YouTube
 
 const domains = [
   "sub4unlock.me",
+  "sub2unlock.me",
 ] as const;
 
 const keywords = [
@@ -16,6 +17,9 @@ const keywords = [
   "sub4unlock me bypass",
   "sub4unlock.me timer bypass",
   "sub4unlock.me social unlock",
+  "sub2unlock.me bypass",
+  "Sub2Unlock.me bypass extension",
+  "sub2unlock me bypass",
   "sub4unlock whatsapp telegram tiktok discord",
   "sub4unlock instagram facebook twitter",
   "skip waiting page",
@@ -45,7 +49,7 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Open a supported link",
-    body: "Visit a sub4unlock.me short link as usual. Whatever mix of locker actions is shown, Skip Wait targets the unlock forms rather than each network button.",
+    body: "Visit a sub4unlock.me or sub2unlock.me short link as usual. Whatever mix of locker actions is shown, Skip Wait targets the unlock forms rather than each network button.",
   },
   {
     title: "Reach the destination faster",
@@ -63,15 +67,15 @@ const skips = [
 const faq: readonly BypassFaq[] = [
   {
     question: "Which locker actions does Skip Wait cover on Sub4Unlock.me?",
-    answer: "YouTube subscribe, like, and comment; WhatsApp, Telegram, and Discord join; TikTok, Instagram, Facebook, and Twitter follow or like; custom links; continue steps; password; and the AdLinkFly countdown on sub4unlock.me.",
+    answer: "YouTube subscribe, like, and comment; WhatsApp, Telegram, and Discord join; TikTok, Instagram, Facebook, and Twitter follow or like; custom links; continue steps; password; and the AdLinkFly countdown on sub4unlock.me and sub2unlock.me.",
   },
   {
     question: "What does Skip Wait bypass on Sub4Unlock.me?",
-    answer: "The full social locker and the AdLinkFly unlock countdown on sub4unlock.me for instant redirect to your link.",
+    answer: "The full social locker and the AdLinkFly unlock countdown on sub4unlock.me and sub2unlock.me for instant redirect to your link.",
   },
   {
-    question: "Which domain does this Sub4Unlock.me bypass cover?",
-    answer: "This entry covers sub4unlock.me only. Separate catalog pages cover sub4unlock.com, sub4unlock.pro, and sub4unlock.io.",
+    question: "Which domains does this Sub4Unlock.me bypass cover?",
+    answer: "This entry covers sub4unlock.me and sub2unlock.me. Separate catalog pages cover sub4unlock.com, sub4unlock.pro, and sub4unlock.io.",
   },
   {
     question: "Is the Sub4Unlock.me bypass free with Skip Wait?",
