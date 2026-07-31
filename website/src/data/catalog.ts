@@ -677,7 +677,7 @@ export const bypasses: readonly SupportedBypass[] = [
     bypass: 'Skip Safelink Wait',
     description:
       'WP Safelink bypass skips the safelink countdown and generate link steps on WordPress safelink plugin pages for instant destination redirect.',
-    domains: ['stbemuiptvcodes.com', 'demo-safelink.themeson.com', 'dev-safelink.themeson.com'],
+    domains: ['stbemuiptvcodes.com', 'techedubyte.com', 'demo-safelink.themeson.com', 'dev-safelink.themeson.com'],
   },
   {
     name: 'XDMovies',

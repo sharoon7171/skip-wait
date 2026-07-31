@@ -1,7 +1,7 @@
 import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
 import { showWpSafelinkRedirectOverlay } from './redirect';
 
-const HOSTS = ['stbemuiptvcodes.com'] as const;
+const HOSTS = ['stbemuiptvcodes.com', 'techedubyte.com'] as const;
 const GO_RE = /var\s+go\s*=\s*"([A-Za-z0-9+/=]+)"/;
 const TOKEN_RE = /var\s+token\s*=\s*"([^"]*)"/;
 const VERIFY_RE = /var\s+enableHumanVerification\s*=\s*"([^"]*)"/;

@@ -12,6 +12,7 @@ const HOSTS = [
   'demo-safelink.themeson.com',
   'dev-safelink.themeson.com',
   'stbemuiptvcodes.com',
+  'techedubyte.com',
 ] as const;
 const SAFELINK_RE = /https?:\/\/[^"'\s]+safelink_redirect=[A-Za-z0-9+/=]+/;
 const WAIT_MARKERS = '#wpsafe-wait1, #wpsafelink-countdown, #wpsafe-generate, #wpsafe-link, a[href*="safelink_redirect="]';
