@@ -46,14 +46,14 @@ export function SiteFooter(): React.ReactElement {
                   </Link>
                 </li>
                 <li>
-                  <Link href={`${routes.home}#how-it-works`} className={footerLink}>
+                  <a href={`${routes.home}#how-it-works`} className={footerLink}>
                     How It Works
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href={`${routes.home}#faq`} className={footerLink}>
+                  <a href={`${routes.home}#faq`} className={footerLink}>
                     FAQ
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>

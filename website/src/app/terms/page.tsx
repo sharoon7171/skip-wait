@@ -12,6 +12,9 @@ const updated = '2026-07-28';
 const path = routes.terms;
 const url = `${SITE.url}${path}`;
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export const metadata: Metadata = {
   title,
   description,

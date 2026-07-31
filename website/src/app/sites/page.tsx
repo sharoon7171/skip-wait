@@ -23,6 +23,9 @@ const keywords = [
 const path = routes.sites;
 const url = `${SITE.url}${path}`;
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export const metadata: Metadata = {
   title,
   description,

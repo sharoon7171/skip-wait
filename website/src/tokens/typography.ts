@@ -1,4 +1,14 @@
-import { systemSans } from '../../../tokens/typography';
+const systemSans = [
+  'Segoe UI Variable',
+  'Segoe UI',
+  'system-ui',
+  '-apple-system',
+  'BlinkMacSystemFont',
+  'Roboto',
+  'Helvetica Neue',
+  'Arial',
+  'sans-serif',
+] as const;
 
 const poppins = ['Poppins', ...systemSans] as const;
 

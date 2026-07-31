@@ -4,6 +4,9 @@ import { ButtonLink } from '@/components/ui/Button';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
 import { Shell } from '@/components/ui/Shell';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export const metadata: Metadata = {
   title: 'Page Not Found',
   robots: {

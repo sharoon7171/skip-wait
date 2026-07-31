@@ -15,6 +15,9 @@ const title = SITE.title;
 const description = SITE.description;
 const keywords = [...SITE.keywords];
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export const metadata: Metadata = {
   title: {
     absolute: title,

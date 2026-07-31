@@ -13,6 +13,9 @@ import {
 } from '@/data/seo';
 import '@/styles/global.css';
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export const viewport: Viewport = {
   themeColor: '#1d4ed8',
   colorScheme: 'light',

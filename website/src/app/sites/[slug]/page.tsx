@@ -13,6 +13,10 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+export const dynamicParams = false;
+
 export function generateStaticParams(): { slug: string }[] {
   return allBypassSlugs().map((slug) => ({ slug }));
 }

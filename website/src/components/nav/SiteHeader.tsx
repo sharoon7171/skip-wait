@@ -72,12 +72,12 @@ export function SiteHeader(): React.ReactElement {
             <Link href={routes.sites} className={`${navLink} ${sitesClass}`}>
               Supported Sites
             </Link>
-            <Link href={`${routes.home}#how-it-works`} className={navLink}>
+            <a href={`${routes.home}#how-it-works`} className={navLink}>
               How It Works
-            </Link>
-            <Link href={`${routes.home}#faq`} className={navLink}>
+            </a>
+            <a href={`${routes.home}#faq`} className={navLink}>
               FAQ
-            </Link>
+            </a>
             <a
               href={CONTACT.github}
               target="_blank"
@@ -121,16 +121,16 @@ export function SiteHeader(): React.ReactElement {
               >
                 Supported Sites
               </Link>
-              <Link
+              <a
                 href={`${routes.home}#how-it-works`}
                 className={mobileNavLink}
                 onClick={closeMenu}
               >
                 How It Works
-              </Link>
-              <Link href={`${routes.home}#faq`} className={mobileNavLink} onClick={closeMenu}>
+              </a>
+              <a href={`${routes.home}#faq`} className={mobileNavLink} onClick={closeMenu}>
                 FAQ
-              </Link>
+              </a>
               <a
                 href={CONTACT.github}
                 target="_blank"

@@ -2,11 +2,12 @@
 
 Bypass countdown timers and waiting pages on link shorteners and file hosts—or automate waits and continue clicks when a full skip isn’t possible.
 
-![Skip Wait icon](public/icon.png)
+![Skip Wait icon](extension/public/icon.png)
 
 [![Available in Chrome Web Store](https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png)](https://chromewebstore.google.com/detail/skip-wait/hdoecnlghjglmnjpnhaaeofcgocdgkhd)
 
-Website: [skip-wait-website.vercel.app](https://skip-wait-website.vercel.app)
+- Website: [skip-wait-website.vercel.app](https://skip-wait-website.vercel.app)
+- Supported sites: [skip-wait-website.vercel.app/sites](https://skip-wait-website.vercel.app/sites)
 
 ---
 
@@ -17,6 +18,12 @@ Website: [skip-wait-website.vercel.app](https://skip-wait-website.vercel.app)
 - **Skip waiting pages** - Avoid “please wait” and “click to continue” screens.
 - **Instant redirect** - When possible, you’re sent straight to the target URL.
 - **Automation when needed** - On sites where full bypass isn’t possible, Skip Wait automates waiting and clicking so you still save time.
+
+## Website & supported sites
+
+The [Skip Wait website](https://skip-wait-website.vercel.app) covers how the extension works, FAQs, and install links.
+
+Browse the full [supported sites](https://skip-wait-website.vercel.app/sites) list for every link shortener, file host, and waiting page Skip Wait can bypass or automate. Each entry has a short page with what the site does and how Skip Wait handles it.
 
 ## Who it’s for
 
@@ -33,4 +40,4 @@ Website: [skip-wait-website.vercel.app](https://skip-wait-website.vercel.app)
 
 ## Request support for a site
 
-We add support for new sites over time. If you use a site with a countdown timer, waiting page, or link shortener you’d like to skip or automate, [open an issue](https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns/issues/new?template=request_support.yml) and we’ll add a bypass or automation where possible.
+We add support for new sites over time. If you use a site with a countdown timer, waiting page, or link shortener you’d like to skip or automate, [open an issue](https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns/issues/new?template=request_support.yml) and we’ll add a bypass or automation where possible. Check [supported sites](https://skip-wait-website.vercel.app/sites) first to see what’s already covered.
