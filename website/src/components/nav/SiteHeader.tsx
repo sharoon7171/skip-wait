@@ -5,6 +5,7 @@ import { LuMenu, LuX } from 'react-icons/lu';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
+import { trackChromeWebStoreClick, trackOutboundClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
 import { ButtonAnchor } from '@/components/ui/Button';
 import { ChromeIcon } from '@/components/ui/ChromeIcon';
@@ -83,6 +84,7 @@ export function SiteHeader(): React.ReactElement {
               target="_blank"
               rel="noopener noreferrer"
               className={navLink}
+              onClick={() => trackOutboundClick('github')}
             >
               GitHub
             </a>
@@ -91,6 +93,7 @@ export function SiteHeader(): React.ReactElement {
               target="_blank"
               rel="noopener noreferrer"
               className="h-10 px-5"
+              onClick={() => trackChromeWebStoreClick('header')}
             >
               <ChromeIcon className="size-4" />
               Add to Chrome
@@ -136,7 +139,10 @@ export function SiteHeader(): React.ReactElement {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={mobileNavLink}
-                onClick={closeMenu}
+                onClick={() => {
+                  trackOutboundClick('github');
+                  closeMenu();
+                }}
               >
                 GitHub
               </a>
@@ -145,7 +151,10 @@ export function SiteHeader(): React.ReactElement {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 h-11 w-full"
-                onClick={closeMenu}
+                onClick={() => {
+                  trackChromeWebStoreClick('header');
+                  closeMenu();
+                }}
               >
                 <ChromeIcon className="size-4" />
                 Add to Chrome

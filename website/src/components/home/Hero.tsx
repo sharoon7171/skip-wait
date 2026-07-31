@@ -1,6 +1,9 @@
+'use client';
+
 import { LuArrowDown, LuArrowRight } from 'react-icons/lu';
 import { totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { CHROME_WEB_STORE_URL, SITE } from '@/data/constants';
+import { trackChromeWebStoreClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
 import { ButtonAnchor, ButtonLink } from '@/components/ui/Button';
 import { ChromeIcon } from '@/components/ui/ChromeIcon';
@@ -83,6 +86,7 @@ export function Hero(): React.ReactElement {
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto"
+              onClick={() => trackChromeWebStoreClick('hero')}
             >
               <ChromeIcon className="size-5" />
               Add to Chrome

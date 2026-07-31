@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { CHROME_WEB_STORE_URL, CONTACT, REQUEST_SUPPORT_URL, SITE } from '@/data/constants';
+import { trackChromeWebStoreClick, trackOutboundClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
 import { Shell } from '@/components/ui/Shell';
 
@@ -36,6 +39,7 @@ export function SiteFooter(): React.ReactElement {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
+                    onClick={() => trackChromeWebStoreClick('footer')}
                   >
                     Chrome Web Store
                   </a>
@@ -67,6 +71,7 @@ export function SiteFooter(): React.ReactElement {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
+                    onClick={() => trackOutboundClick('request_support')}
                   >
                     Request a Site
                   </a>
@@ -77,6 +82,7 @@ export function SiteFooter(): React.ReactElement {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
+                    onClick={() => trackOutboundClick('github')}
                   >
                     GitHub
                   </a>
@@ -87,6 +93,7 @@ export function SiteFooter(): React.ReactElement {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
+                    onClick={() => trackOutboundClick('telegram')}
                   >
                     Telegram
                   </a>
@@ -108,7 +115,11 @@ export function SiteFooter(): React.ReactElement {
                   </Link>
                 </li>
                 <li>
-                  <a href={`mailto:${CONTACT.email}`} className={footerLink}>
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    className={footerLink}
+                    onClick={() => trackOutboundClick('email')}
+                  >
                     {CONTACT.email}
                   </a>
                 </li>

@@ -1,4 +1,7 @@
+'use client';
+
 import { CONTACT, REQUEST_SUPPORT_URL } from '@/data/constants';
+import { trackOutboundClick } from '@/lib/analytics';
 import { ButtonAnchor } from '@/components/ui/Button';
 import { GitHubIcon } from '@/components/ui/GitHubIcon';
 import { GmailIcon } from '@/components/ui/GmailIcon';
@@ -28,6 +31,7 @@ export function SupportCta(): React.ReactElement {
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="light"
+                onClick={() => trackOutboundClick('request_support')}
               >
                 <GitHubIcon className="size-5" />
                 Request on GitHub
@@ -37,11 +41,16 @@ export function SupportCta(): React.ReactElement {
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="light"
+                onClick={() => trackOutboundClick('telegram')}
               >
                 <TelegramIcon className="size-5" />
                 Telegram
               </ButtonAnchor>
-              <ButtonAnchor href={`mailto:${CONTACT.email}`} variant="light">
+              <ButtonAnchor
+                href={`mailto:${CONTACT.email}`}
+                variant="light"
+                onClick={() => trackOutboundClick('email')}
+              >
                 <GmailIcon className="size-5" />
                 Email
               </ButtonAnchor>

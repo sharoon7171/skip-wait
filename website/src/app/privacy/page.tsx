@@ -8,7 +8,7 @@ import { routes } from '@/lib/routes';
 
 const title = 'Privacy Policy';
 const description = `Privacy policy for the ${SITE.name} Chrome extension: what data the extension accesses, what it stores, and how Skip Wait handles information on supported sites.`;
-const updated = '2026-07-28';
+const updated = '2026-08-01';
 const path = routes.privacy;
 const url = `${SITE.url}${path}`;
 
@@ -64,7 +64,7 @@ export default function PrivacyPage(): React.ReactElement {
       <LegalPage
         title="Privacy Policy"
         updated={updated}
-        summary={`This policy describes how the ${SITE.name} Chrome extension (“Extension”) handles information. It applies only to the Extension, not to third-party websites you visit.`}
+        summary={`This policy describes how the ${SITE.name} Chrome extension (“Extension”) and the ${SITE.name} marketing website (“Website”) handle information.`}
       >
         <LegalSection title="1. Scope">
           <p>
@@ -74,12 +74,45 @@ export default function PrivacyPage(): React.ReactElement {
             <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. No account is required.
           </p>
           <p>
-            This policy covers the Extension only. Third-party shortener, mediator, and file-host
-            sites have their own policies.
+            The Website is the marketing site at{' '}
+            <a href={SITE.url}>{SITE.url.replace(/^https?:\/\//, '')}</a>. It describes the Extension
+            and supported flows. Third-party shortener, mediator, and file-host sites have their own
+            policies.
           </p>
         </LegalSection>
 
-        <LegalSection title="2. Permissions">
+        <LegalSection title="2. Website Analytics">
+          <p>
+            When configured, the Website uses Google Analytics 4 (GA4) via the Google tag (gtag.js)
+            to understand how visitors use the site.
+          </p>
+          <p>GA4 may collect:</p>
+          <ul>
+            <li>page views and in-site navigation</li>
+            <li>approximate location, device, and browser information</li>
+            <li>
+              interaction events such as Chrome Web Store clicks and outbound contact or support
+              links
+            </li>
+          </ul>
+          <p>
+            That data is processed by Google under Google’s terms and privacy policy. See{' '}
+            <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">
+              Google Privacy Policy
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://business.safety.google/privacy/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Google Business Data Responsibility
+            </a>
+            . The Extension does not use Google Analytics.
+          </p>
+        </LegalSection>
+
+        <LegalSection title="3. Extension Permissions">
           <p>
             The Extension declares these permissions in its Chrome manifest. Each is used only as
             described below.
@@ -135,7 +168,7 @@ export default function PrivacyPage(): React.ReactElement {
           </p>
         </LegalSection>
 
-        <LegalSection title="3. Data Handling">
+        <LegalSection title="4. Extension Data Handling">
           <p>
             The Extension does not collect or transmit your personal data, browsing history, or page
             content to the developer for analytics, advertising, or resale. It does not include
@@ -164,7 +197,7 @@ export default function PrivacyPage(): React.ReactElement {
           </p>
         </LegalSection>
 
-        <LegalSection title="4. Network Requests">
+        <LegalSection title="5. Extension Network Requests">
           <p>
             The Extension does not operate a developer backend that receives your browsing data.
           </p>
@@ -182,21 +215,21 @@ export default function PrivacyPage(): React.ReactElement {
           <p>Those requests are not used by the Extension for advertising or analytics.</p>
         </LegalSection>
 
-        <LegalSection title="5. Contact Links">
+        <LegalSection title="6. Contact Links">
           <p>
             The Extension popup can open GitHub, email, or Telegram when you choose those links. The
             Extension does not auto-send messages on your behalf.
           </p>
         </LegalSection>
 
-        <LegalSection title="6. Changes">
+        <LegalSection title="7. Changes">
           <p>
             This policy may be updated when the Extension changes. The “Last updated” date at the top
             is the current version.
           </p>
         </LegalSection>
 
-        <LegalSection title="7. Contact">
+        <LegalSection title="8. Contact">
           <p>Questions about this policy:</p>
           <ul>
             <li>

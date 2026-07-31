@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import { LuArrowLeft, LuChevronRight } from 'react-icons/lu';
 import type { SupportedBypass } from '@/types/catalog';
 import { CHROME_WEB_STORE_URL } from '@/data/constants';
+import { trackChromeWebStoreClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
 import { BypassArticleToc, type BypassTocItem } from '@/components/sites/BypassArticleToc';
 import { SupportCta } from '@/components/home/SupportCta';
@@ -76,7 +79,12 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonAnchor href={CHROME_WEB_STORE_URL} target="_blank" rel="noopener noreferrer">
+            <ButtonAnchor
+              href={CHROME_WEB_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackChromeWebStoreClick('bypass_detail')}
+            >
               <ChromeIcon className="size-5" />
               Add to Chrome — Free
             </ButtonAnchor>
@@ -129,7 +137,12 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
                 </ol>
 
                 <div className="mt-8">
-                  <ButtonAnchor href={CHROME_WEB_STORE_URL} target="_blank" rel="noopener noreferrer">
+                  <ButtonAnchor
+                    href={CHROME_WEB_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackChromeWebStoreClick('bypass_detail')}
+                  >
                     <ChromeIcon className="size-5" />
                     Add Skip Wait to Chrome
                   </ButtonAnchor>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Analytics } from '@vercel/analytics/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { SiteFooter } from '@/components/nav/SiteFooter';
 import { SiteHeader } from '@/components/nav/SiteHeader';
 import { HashScroll } from '@/components/nav/HashScroll';
@@ -11,6 +11,7 @@ import {
   softwareApplicationJsonLd,
   websiteJsonLd,
 } from '@/data/seo';
+import { GA_MEASUREMENT_ID, isAnalyticsEnabled } from '@/lib/analytics';
 import '@/styles/global.css';
 
 export const dynamic = 'force-static';
@@ -82,8 +83,8 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
-        <Analytics />
       </body>
+      {isAnalyticsEnabled() ? <GoogleAnalytics gaId={GA_MEASUREMENT_ID} /> : null}
     </html>
   );
 }
