@@ -86,6 +86,7 @@ import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
 import { initTheuserCloudBypass } from '../sites/theuser-cloud';
 import { initOceanofdmgBypass } from '../sites/oceanofdmg';
+import { initPesktopBypass } from '../sites/pesktop';
 import { initGoostEntry, initGoostMediator } from '../sites/goost';
 import { initAnkergamesDirectDownload } from '../sites/ankergames';
 import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
@@ -200,6 +201,7 @@ const INITS = [
   initSwiftuploadsDirectDownload,
   initTheuserCloudBypass,
   initOceanofdmgBypass,
+  initPesktopBypass,
 ];
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;

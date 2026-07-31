@@ -500,6 +500,13 @@ export const bypasses: readonly SupportedBypass[] = [
     domains: ['ouo.io', 'ouo.press'],
   },
   {
+    name: 'PeskTop',
+    bypass: 'Direct Download',
+    description:
+      'PeskTop bypass skips the downloads waiting page and opens the signed peskfree CDN file link directly from the Direct download button.',
+    domains: ['pesktop.com'],
+  },
+  {
     name: 'Pling / openDesktop',
     bypass: 'Direct Download',
     description:
