@@ -73,6 +73,9 @@ import { bypass as sidMediatorBypass } from './bypasses/sid-mediator-bypass';
 import { bypass as softpediaBypass } from './bypasses/softpedia-bypass';
 import { bypass as storylineScormBypass } from './bypasses/storyline-scorm-bypass';
 import { bypass as sub2getBypass } from './bypasses/sub2get-bypass';
+import { bypass as sub4unlockBypass } from './bypasses/sub4unlock-bypass';
+import { bypass as sub4unlockIoBypass } from './bypasses/sub4unlock-io-bypass';
+import { bypass as sub4unlockMeBypass } from './bypasses/sub4unlock-me-bypass';
 import { bypass as swiftuploadsBypass } from './bypasses/swiftuploads-bypass';
 import { bypass as tech8sEz4shortBypass } from './bypasses/tech8s-ez4short-bypass';
 import { bypass as tflyBypass } from './bypasses/tfly-bypass';
@@ -164,6 +167,9 @@ export const bypasses: readonly SupportedBypass[] = [
   softpediaBypass,
   storylineScormBypass,
   sub2getBypass,
+  sub4unlockBypass,
+  sub4unlockIoBypass,
+  sub4unlockMeBypass,
   swiftuploadsBypass,
   tech8sEz4shortBypass,
   tflyBypass,

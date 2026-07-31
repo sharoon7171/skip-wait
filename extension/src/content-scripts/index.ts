@@ -62,6 +62,11 @@ import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../
 import { initShrtslugRedirect } from '../sites/shrtslug';
 import { initStbemuiptvcodesWpsafelink, initWpSafelinkRedirect } from '../sites/wp-safelink';
 import { initSub2getRedirect } from '../sites/sub2get';
+import {
+  initSub4unlockComUnlock,
+  initSub4unlockIoUnlock,
+  initSub4unlockMeUnlock,
+} from '../sites/sub4unlock';
 import { initDroplinkUnlock } from '../sites/droplink';
 import { initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
 import { initTinurlzSoftinfoFragment } from './tinurlz-softinfo-fragment';
@@ -183,6 +188,9 @@ const INITS = [
   initShrtslugRedirect,
   initStbemuiptvcodesWpsafelink,
   initSub2getRedirect,
+  initSub4unlockComUnlock,
+  initSub4unlockIoUnlock,
+  initSub4unlockMeUnlock,
   initDroplinkUnlock,
   initTech8sRedirect,
   initTech8sGate,
