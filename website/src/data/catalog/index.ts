@@ -84,6 +84,7 @@ import { bypass as theuserCloudBypass } from './bypasses/theuser-cloud-bypass';
 import { bypass as tinurlzSoftinfoBypass } from './bypasses/tinurlz-softinfo-bypass';
 import { bypass as tipsguruBypass } from './bypasses/tipsguru-bypass';
 import { bypass as usersdriveBypass } from './bypasses/usersdrive-bypass';
+import { bypass as vegamoviesBypass } from './bypasses/vegamovies-bypass';
 import { bypass as wahmiBypass } from './bypasses/wahmi-bypass';
 import { bypass as wpSafelinkBypass } from './bypasses/wp-safelink-bypass';
 import { bypass as xdmoviesBypass } from './bypasses/xdmovies-bypass';
@@ -179,6 +180,7 @@ export const bypasses: readonly SupportedBypass[] = [
   tinurlzSoftinfoBypass,
   tipsguruBypass,
   usersdriveBypass,
+  vegamoviesBypass,
   wahmiBypass,
   wpSafelinkBypass,
   xdmoviesBypass,

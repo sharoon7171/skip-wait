@@ -13,19 +13,34 @@ const LANDING_PAGE_HOSTS = [
   'hdhub4u.insure',
 ] as const;
 
-const MIRROR_HOST_LOOKUP_URL = 'https://cdn.hub4u.cloud/host/';
+const HOST_LOOKUP_URLS = [
+  'https://h4.suncdn.org/host/',
+  'https://points.topapii.com/host/',
+  'https://ml.theapii.org/host/',
+  'https://dns.pingora.fyi/v2/host',
+  'https://cdn.hub4u.cloud/host/',
+] as const;
 
 export function initHdhub4uLandingPageMed(): void {
   if (!isAllowedHost(LANDING_PAGE_HOSTS)) return;
   const d = new Date();
   const v = d.getFullYear() * 1e6 + (d.getMonth() + 1) * 1e4 + d.getDate() * 100 + d.getHours() + 1;
-  void fetch(`${MIRROR_HOST_LOOKUP_URL}?v=${v}`, { cache: 'no-store' })
-    .then((r) => (r.ok ? r.json() : null))
-    .then((data: { c?: string } | null) => {
-      const encoded = data?.c;
-      if (!encoded) return;
-      const mirror = atob(encoded);
-      location.replace(mirror.includes('?') ? mirror.slice(0, mirror.indexOf('?')) : mirror);
-    })
+  void Promise.any(
+    HOST_LOOKUP_URLS.map(async (base) => {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 5000);
+      try {
+        const r = await fetch(`${base}?v=${v}`, { cache: 'no-store', signal: ctrl.signal });
+        if (!r.ok) throw new Error();
+        const data = (await r.json()) as { c?: string };
+        if (!data?.c) throw new Error();
+        const mirror = atob(data.c);
+        return mirror.includes('?') ? mirror.slice(0, mirror.indexOf('?')) : mirror;
+      } finally {
+        clearTimeout(timer);
+      }
+    }),
+  )
+    .then((mirror) => location.replace(mirror))
     .catch(() => {});
 }

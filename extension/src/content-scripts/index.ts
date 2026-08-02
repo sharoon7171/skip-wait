@@ -99,6 +99,7 @@ import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/a
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
 import { initOceansofgamessDirectDownload } from '../sites/oceansofgamess';
 import { initYasir252DirectLinks, initYasir252MediatorPage } from '../sites/yasir252';
+import { initVegamoviesLandingRedirect } from '../sites/vegamovies';
 
 const INITS = [
   initStorylineCoursePlayBrand,
@@ -182,6 +183,7 @@ const INITS = [
   initOnlinetoolsDirectDownload,
   initOuoBypass,
   initPrmoviesRedirect,
+  initVegamoviesLandingRedirect,
   initRomsfunDownloadInstant,
   initShrinkmeEntry,
   initShrinkmeMediator,
