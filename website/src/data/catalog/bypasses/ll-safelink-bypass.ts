@@ -4,16 +4,19 @@ const name = "LL Safelink";
 
 const bypassType = "Skip Safelink Wait";
 
-const description = "LL Safelink bypass skips the safelink waiting chain and multi form unlock steps on WordPress safelink pages to reach your final URL right away.";
+const description = "LL Safelink bypass skips WordPress safelink forms and LLAC Continue ad hops by decoding the ddx unlock into your destination URL.";
 
 const domains = [
   "teknoasian.com",
+  "linegee.net",
 ] as const;
 
 const keywords = [
   "ll safelink bypass",
   "LL Safelink bypass extension",
   "ll safelink timer bypass",
+  "linegee bypass",
+  "llac bypass",
   "skip safelink wait",
   "skip countdown timer",
   "bypass countdown timer",
@@ -24,11 +27,11 @@ const keywords = [
   "wordpress safelink bypass",
 ] as const;
 
-const intro = "LL Safelink bypass skips the safelink waiting chain and multi form unlock steps on WordPress safelink pages to reach your final URL right away. Install Skip Wait once and it runs automatically on supported pages.";
+const intro = "LL Safelink bypass skips WordPress safelink forms and LLAC Continue ad hops by decoding the ddx unlock into your destination URL. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "LL Safelink wraps destination links in a safelink countdown and generate link flow.";
+const problem = "LL Safelink wraps destinations in WordPress safelink forms, then an LLAC Continue page that opens ads before releasing the real link.";
 
-const howItWorks = "Skip Wait bypasses safelink countdowns on supported pages and resolves the decoded destination URL for you. Safelink countdowns on the supported website are skipped so the final URL opens without the multi form chain.";
+const howItWorks = "On teknoasian.com Skip Wait completes the safelink form chain to the next hop. On linegee.net it decodes the LLAC atob ddx token, fetches the unlock response, and opens the destination from #xxc without the Continue ad.";
 
 const steps: readonly BypassStep[] = [
   {
@@ -41,32 +44,32 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Open a supported link",
-    body: "Open a LL Safelink link the same way you usually do. No paste tool or special settings.",
+    body: "Open a teknoasian.com or linegee.net unlock link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported LL Safelink delay.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported LL Safelink and LLAC steps.",
   },
 ];
 
 const skips = [
-  "Safelink Wait that block the destination",
-  "Safelink countdown chains",
-  "Generate link form steps",
+  "WordPress safelink form and generate-link waits",
+  "LLAC Continue ad popups on linegee.net",
+  "Manual ddx unlock after Continue",
 ] as const;
 
 const faq: readonly BypassFaq[] = [
   {
     question: "What safelink waiting chain does Skip Wait bypass on LL Safelink pages?",
-    answer: "Skip Wait bypasses the safelink waiting chain and multi-form unlock steps on WordPress safelink pages like teknoasian.com to reach your final URL.",
+    answer: "Skip Wait completes the safelink form chain on teknoasian.com and decodes the LLAC ddx unlock on linegee.net so the destination opens without Continue ads.",
   },
   {
-    question: "Does Skip Wait skip multi-form unlock steps on teknoasian.com safelinks?",
-    answer: "Yes. Safelink countdown chains and generate link form steps are bypassed without you clicking through each manual unlock form.",
+    question: "Does Skip Wait skip the Continue ad on linegee.net?",
+    answer: "Yes. Skip Wait reads the LLAC atob ddx token from the page, fetches the unlock response, and opens the #xxc destination without clicking Continue or loading the ad tab.",
   },
   {
     question: "Can I avoid the manual generate-link routine on WordPress safelink pages?",
-    answer: "Yes. Click an LL Safelink and Skip Wait resolves the decoded destination URL instead of making you run the generate link routine yourself.",
+    answer: "Yes. Open an LL Safelink and Skip Wait resolves through the supported forms and LLAC hop instead of making you run each step yourself.",
   },
   {
     question: "Is the LL Safelink bypass free with Skip Wait?",
