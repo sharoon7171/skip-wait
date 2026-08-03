@@ -16,6 +16,7 @@ const domains = [
   "free-leaks.com",
   "fast-links.org",
   "beta.luadefender.xyz",
+  "egirls.wtf",
 ] as const;
 
 const keywords = [
@@ -36,7 +37,7 @@ const intro = "LootLabs bypass skips content locker waits and ad gate timers on 
 
 const problem = "LootLabs locks the destination behind content locker waits and ad gates. A LootLabs bypass unlocks the link without sitting through those timers.";
 
-const howItWorks = "Skip Wait works through the locker flow on supported hosts and redirects you when the destination becomes available.";
+const howItWorks = "Skip Wait works through the locker flow on supported hosts and redirects you when the destination becomes available. Sites like egirls.wtf send unlock links through rapid-links.com, so the same LootLabs bypass covers that path after the redirect.";
 
 const steps: readonly BypassStep[] = [
   {
@@ -49,7 +50,7 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Open a supported link",
-    body: "Open a LootLabs link the same way you usually do. No paste tool or special settings.",
+    body: "Open a LootLabs link the same way you usually do—including unlock links from sites like egirls.wtf that land on rapid-links.com. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
@@ -65,8 +66,8 @@ const skips = [
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "How many LootLabs domains like links.lootlabs.gg does Skip Wait cover?",
-    answer: "Skip Wait supports nine LootLabs hosts including links.lootlabs.gg, loot-link.com, speedy-links.com, and best-links.org.",
+    question: "Does Skip Wait work on egirls.wtf unlock links?",
+    answer: "Yes. egirls.wtf unlock links redirect to rapid-links.com, which is a supported LootLabs host, so Skip Wait runs on that locker page after the redirect.",
   },
   {
     question: "What content locker ad gates does Skip Wait bypass on LootLabs links?",
