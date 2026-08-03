@@ -415,6 +415,11 @@ const runAliasPipeline = (): void => {
       });
       return;
     }
+    if (continueCaptchaForm()) {
+      aliasFetchSettled = true;
+      runAliasDomPhases();
+      return;
+    }
   }
 
   if (aliasFetchInFlight) return;
