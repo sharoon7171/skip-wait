@@ -12,7 +12,7 @@ const domains = [
   "mineverse360.com",
   "stream.testuk.org",
   "rarestudy.in",
-  "s3-cdn.samfygros.com",
+  "samfygros.com",
 ] as const;
 
 const keywords = [

@@ -4,8 +4,10 @@ export const AROLINKS_HOSTS = ['arolinks.com', 'vplink.in'] as const;
 
 export const AROLINKS_MEDIATOR_HOSTS = [
   'darkguruji.com',
+  'howdyrecipes.com',
   'srtak.com',
   'techcornernews.com',
+  'theimmigrationworld.com',
 ] as const;
 
 export const AROLINKS_WAIT_MS = 60_000;
