@@ -32,33 +32,33 @@ const keywords = [
   "loot link bypass",
 ] as const;
 
-const intro = "LootLabs content lockers add ad gates before downloads unlock. Skip Wait bypasses those locker waits on 9 supported websites in this network and opens the destination when the server releases the link.";
+const intro = "LootLabs bypass skips content locker waits and ad gate timers on LootLabs monetized links for automatic redirect to your destination URL instantly. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "LootLabs locks the destination behind content locker waits and ad gates. A LootLabs bypass unlocks the link without sitting through those timers.";
 
-const howItWorks = "With Skip Wait enabled, open a LootLabs locker link and keep the tab active. The extension works through the locker flow on supported hosts and redirects you when the destination becomes available. Locker waits on 9 supported websites are bypassed for an automatic redirect to the destination.";
+const howItWorks = "Skip Wait works through the locker flow on supported hosts and redirects you when the destination becomes available.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the LootLabs bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The LootLabs bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for LootLabs; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for LootLabs.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a LootLabs link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a LootLabs link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported LootLabs delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported LootLabs delay.",
   },
 ];
 
 const skips = [
-  "LootLabs skip content locker flows",
+  "Content Locker that block the destination",
   "Content locker ad gates",
   "Locker release wait timers",
 ] as const;

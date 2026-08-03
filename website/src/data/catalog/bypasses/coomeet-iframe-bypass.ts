@@ -24,20 +24,20 @@ const keywords = [
   "embedded countdown skip",
 ] as const;
 
-const intro = "Coomeet Iframe embeds long please wait timers inside iframes. Skip Wait accelerates those embedded countdowns on the supported website so the page finishes loading in seconds.";
+const intro = "Coomeet bypass speeds up embedded please wait countdown timers inside the iframe so loading screens finish in seconds instead of long minutes. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Coomeet Iframe embeds long please wait countdown timers inside iframes. A Coomeet Iframe bypass speeds those timers up so loading screens finish in seconds instead of minutes.";
+const problem = "Coomeet embeds a long loading countdown inside an iframe before the chat or video UI becomes usable.";
 
-const howItWorks = "Install Skip Wait, browse to a supported Coomeet Iframe page, and use the site normally. The extension activates on recognized skip embedded wait flows and bypasses or automates the wait so you reach the content faster. Embedded countdowns finish in seconds so you are not stuck on a long loading screen.";
+const howItWorks = "Skip Wait shortens the embedded please-wait countdown so the iframe finishes loading much sooner. Embedded countdowns finish in seconds so you are not stuck on a long loading screen.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Coomeet Iframe bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Coomeet Iframe bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Coomeet Iframe; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Coomeet Iframe.",
   },
   {
     title: "Let the iframe load",
@@ -45,12 +45,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait speeds up the embedded please wait countdown so the Coomeet Iframe loading screen finishes quickly.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Coomeet Iframe delay.",
   },
 ];
 
 const skips = [
-  "Coomeet Iframe skip embedded wait flows",
+  "Embedded iframe countdowns",
   "Embedded iframe countdown timers",
   "Long please wait loading screens",
 ] as const;

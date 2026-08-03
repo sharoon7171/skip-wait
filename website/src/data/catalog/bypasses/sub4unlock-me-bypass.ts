@@ -32,28 +32,28 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Want a Sub4Unlock.me bypass for monetized short links with a full social locker? Skip Wait skips YouTube, WhatsApp, Telegram, TikTok, Instagram, Facebook, Twitter, Discord, custom link, password, and continue steps, then clears the AdLinkFly wait so you get the destination immediately.";
+const intro = "Sub4Unlock.me bypass skips the full social locker—YouTube subscribe, like, and comment; WhatsApp, Telegram, and Discord join; TikTok, Instagram, Facebook, and Twitter follow or like; custom links; password; and continue steps—plus the AdLinkFly countdown for instant redirect to your destination. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Sub4Unlock.me stacks a social locker and an AdLinkFly gate before the real URL. Creators can require YouTube subscribe, like, or comment; WhatsApp, Telegram, or Discord joins; TikTok, Instagram, Facebook, or Twitter follow or like; custom links; continue hops; and a password. A Sub4Unlock.me bypass is what people want when any of those actions block the destination.";
+const problem = "Sub4Unlock.me stacks a social locker and an AdLinkFly gate before the real URL. Creators can require YouTube subscribe, like, or comment; WhatsApp, Telegram, or Discord joins; TikTok, Instagram, Facebook, or Twitter follow or like; custom links; continue hops; and a password.";
 
-const howItWorks = "Add Skip Wait to Chrome and open a Sub4Unlock.me unlock link. When the locker or go-link form is present, the extension completes the server unlock path and redirects to the destination without finishing each locker action by hand.";
+const howItWorks = "Me unlock link. When the locker or go-link form is present, Skip Wait completes the server unlock path and redirects to the destination without finishing each locker action by hand.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Sub4Unlock.me bypass activates on supported unlock pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Sub4Unlock.me bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle for Sub4Unlock.me; supported unlock pages run when the locker or go-link form matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Sub4Unlock.me.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a sub4unlock.me or sub2unlock.me short link as usual. Whatever mix of locker actions is shown, Skip Wait targets the unlock forms rather than each network button.",
+    body: "Open a Sub4Unlock.me link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait completes the unlock forms and sends you to the destination URL from /links/go.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Sub4Unlock.me delay.",
   },
 ];
 

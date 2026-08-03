@@ -24,33 +24,33 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Sub2Get wraps links behind waiting pages and continue gates. Skip Wait detects those flows on the supported website and bypasses the delay so you are not stuck on filler screens.";
+const intro = "Sub2Get bypass skips the subscribe to unlock waiting page and jumps straight to your destination link from this monetized shortener instantly. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Sub2Get places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens. People search for a Sub2Get bypass to skip that delay and reach the destination without the manual gate.";
+const problem = "Sub2Get places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
 
-const howItWorks = "After you add Skip Wait, visit a Sub2Get link as usual. When the waiting page loads, the extension runs in the background, skips the delay layer, and sends you straight to the target URL supported for Sub2Get. You get past continue loops on the supported website and land on the real destination instead of another gate screen.";
+const howItWorks = "When the waiting page loads, Skip Wait runs in the background, skips the delay layer, and sends you straight to the target URL supported for Sub2Get.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Sub2Get bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Sub2Get bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Sub2Get; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Sub2Get.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Sub2Get link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Sub2Get link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported Sub2Get delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Sub2Get delay.",
   },
 ];
 
 const skips = [
-  "Sub2Get skip waiting page flows",
+  "Waiting pages and continue gates",
   "Please wait and click to continue screens",
   "Gate pages before the destination URL",
   "Manual continue button loops",

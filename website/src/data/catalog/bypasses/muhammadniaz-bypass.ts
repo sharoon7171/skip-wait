@@ -23,33 +23,33 @@ const keywords = [
   "download wait skip",
 ] as const;
 
-const intro = "MuhammadNiaz locks the create download link button behind a countdown. Skip Wait bypasses that timer on the supported website so you can generate the file link without waiting.";
+const intro = "MuhammadNiaz bypass skips the download countdown timer before create download link so you unlock software files from this host faster every time. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "MuhammadNiaz forces a download countdown before create download link. A MuhammadNiaz bypass skips that timer so the file unlocks faster.";
 
-const howItWorks = "Install Skip Wait, browse to a supported MuhammadNiaz page, and use the site normally. The extension activates on recognized skip countdown timer flows and bypasses or automates the wait so you reach the content faster. The create download link countdown on the supported website is skipped so files unlock faster.";
+const howItWorks = "Skip Wait activates on recognized skip countdown timer flows and bypasses or automates the wait so you reach the content faster. The create download link countdown on the supported website is skipped so files unlock faster.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the MuhammadNiaz bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The MuhammadNiaz bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for MuhammadNiaz; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for MuhammadNiaz.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a MuhammadNiaz link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a MuhammadNiaz link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported MuhammadNiaz delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported MuhammadNiaz delay.",
   },
 ];
 
 const skips = [
-  "MuhammadNiaz skip countdown timer flows",
+  "Countdown Timer that block the destination",
   "Create download link countdowns",
   "Pre generate file waits",
 ] as const;

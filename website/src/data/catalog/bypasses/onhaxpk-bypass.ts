@@ -24,20 +24,20 @@ const keywords = [
   "session cookie copy",
 ] as const;
 
-const intro = "OnhaxPK pages make you copy session data by hand after a wait. Skip Wait adds a one click copy flow on the supported website so you bypass the manual copy step entirely.";
+const intro = "OnhaxPK bypass skips the countdown wait and copies session share data to your clipboard so you unlock software downloads without manual copy. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "OnhaxPK makes you wait and copy session data by hand before downloads unlock. Users want a OnhaxPK bypass that copies the needed data without the manual wait and paste dance.";
 
-const howItWorks = "Install Skip Wait and open a OnhaxPK page that normally asks you to copy session data manually. The extension fetches the cookie or share string, copies it to your clipboard, and shows a Copy button if you need it again. On the supported website, that means less waiting and fewer manual copy steps before you can use the session data. Session data on the supported website is easier to copy without the site wait and manual paste dance.";
+const howItWorks = "Skip Wait fetches the cookie or share string, copies it to your clipboard, and shows a Copy button if you need it again. On the supported website, that means less waiting and fewer manual copy steps before you can use the session data. Session data on the supported website is easier to copy without the site wait and manual paste dance.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the OnhaxPK bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The OnhaxPK bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for OnhaxPK; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for OnhaxPK.",
   },
   {
     title: "Stay on the cookie or share page",
@@ -45,12 +45,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait prepares the session data and lets you copy it without the manual wait loop on OnhaxPK.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported OnhaxPK delay.",
   },
 ];
 
 const skips = [
-  "OnhaxPK skip copy step flows",
+  "Manual cookie copy waits",
   "Manual copy and wait instructions",
   "Session cookie copy steps",
 ] as const;

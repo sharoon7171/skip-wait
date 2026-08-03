@@ -24,33 +24,33 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Tired of Clipi waiting pages that block every link? Skip Wait is a free Chrome extension built to bypass those gate screens on the supported website without extra setup.";
+const intro = "Clipi bypass skips the short link waiting page on this URL shortener and sends you straight to the long destination URL without delay or clicks. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Clipi places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens. People search for a Clipi bypass to skip that delay and reach the destination without the manual gate.";
+const problem = "Clipi places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
 
-const howItWorks = "Install Skip Wait from the Chrome Web Store, open any Clipi waiting page, and keep browsing normally. The extension detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly. You get past continue loops on the supported website and land on the real destination instead of another gate screen.";
+const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Clipi bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Clipi bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Clipi; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Clipi.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Clipi link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Clipi link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported Clipi delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Clipi delay.",
   },
 ];
 
 const skips = [
-  "Clipi skip waiting page flows",
+  "Waiting pages and continue gates",
   "Please wait and click to continue screens",
   "Gate pages before the destination URL",
   "Manual continue button loops",

@@ -22,12 +22,12 @@ const sectionClassName = 'scroll-mt-24 border-b border-neutral-200 py-8 sm:py-9'
 
 export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactElement {
   const { article } = entry;
+  const showWhatItDoes = Boolean(article.problem) || article.skips.length > 0;
   const toc: BypassTocItem[] = [
-    article.problem ? { id: 'problem', label: 'Why the wait exists' } : null,
-    article.steps && article.steps.length > 0 ? { id: 'how-to-use', label: 'How to use' } : null,
-    { id: 'how-it-works', label: 'How it works' },
-    { id: 'what-gets-skipped', label: 'What gets skipped' },
+    showWhatItDoes ? { id: 'what-it-does', label: `What ${entry.name} does` } : null,
+    { id: 'how-we-bypass', label: 'How Skip Wait bypasses it' },
     { id: 'supported-websites', label: 'Supported websites' },
+    article.steps && article.steps.length > 0 ? { id: 'how-to-use', label: 'How to use' } : null,
     { id: 'faq', label: 'FAQ' },
   ].filter((item): item is BypassTocItem => item !== null);
 
@@ -103,22 +103,67 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
       <section className="border-t border-neutral-200 bg-surface-canvas">
         <Shell className="grid gap-x-10 lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-x-12 xl:grid-cols-[minmax(0,1fr)_16rem]">
           <div className="min-w-0 lg:col-start-1 lg:row-start-1">
-            {article.problem ? (
-              <section id="problem" className={sectionClassName}>
-                <h2 className="font-display text-title text-ink">
-                  Why people search for a {entry.name} bypass
-                </h2>
-                <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
-                  {article.problem}
-                </p>
+            {showWhatItDoes ? (
+              <section id="what-it-does" className={sectionClassName}>
+                <h2 className="font-display text-title text-ink">What {entry.name} does</h2>
+                {article.problem ? (
+                  <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
+                    {article.problem}
+                  </p>
+                ) : null}
+                {article.skips.length > 0 ? (
+                  <>
+                    <h3
+                      className={`font-display text-body font-semibold text-ink ${article.problem ? 'mt-6' : 'mt-4'}`}
+                    >
+                      Delays and gates you hit
+                    </h3>
+                    <ul className="m-0 mt-3 max-w-prose list-disc space-y-2 pl-5 text-body-sm text-ink-body">
+                      {article.skips.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
               </section>
             ) : null}
 
+            <section id="how-we-bypass" className={sectionClassName}>
+              <h2 className="font-display text-title text-ink">
+                How Skip Wait bypasses {entry.name}
+              </h2>
+              <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
+                {article.howItWorks}
+              </p>
+            </section>
+
+            <section id="supported-websites" className={sectionClassName}>
+              <h2 className="font-display text-title text-ink">Supported websites</h2>
+              <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
+                This {entry.name} bypass runs on the hosts below when Skip Wait is enabled in Chrome.
+              </p>
+              <ul
+                className="m-0 mt-4 flex list-none flex-wrap gap-2 p-0"
+                aria-label={`Websites supported for ${entry.name}`}
+              >
+                {entry.domains.map((domain) => (
+                  <li
+                    key={domain}
+                    className="rounded-chip bg-neutral-100 px-3 py-1.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-300"
+                  >
+                    {domain}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
             {article.steps && article.steps.length > 0 ? (
               <section id="how-to-use" className={sectionClassName}>
-                <h2 className="font-display text-title text-ink">
-                  How to use the {entry.name} bypass
-                </h2>
+                <h2 className="font-display text-title text-ink">How to use</h2>
+                <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
+                  Install once, then open {entry.name} links the same way you already do. Skip Wait
+                  handles the rest on supported pages.
+                </p>
                 <ol className="m-0 mt-5 max-w-prose list-none space-y-5 p-0">
                   {article.steps.map((step, index) => (
                     <li key={step.title} className="flex gap-4">
@@ -135,7 +180,6 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
                     </li>
                   ))}
                 </ol>
-
                 <div className="mt-8">
                   <ButtonAnchor
                     href={CHROME_WEB_STORE_URL}
@@ -150,47 +194,8 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
               </section>
             ) : null}
 
-            <section id="how-it-works" className={sectionClassName}>
-              <h2 className="font-display text-title text-ink">
-                How the {entry.name} bypass works
-              </h2>
-              <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
-                {article.howItWorks}
-              </p>
-            </section>
-
-            <section id="what-gets-skipped" className={sectionClassName}>
-              <h2 className="font-display text-title text-ink">
-                What gets bypassed on {entry.name}
-              </h2>
-              <ul className="m-0 mt-4 max-w-prose list-disc space-y-2 pl-5 text-body-sm text-ink-body">
-                {article.skips.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-
-            <section id="supported-websites" className={sectionClassName}>
-              <h2 className="font-display text-title text-ink">
-                {entry.name} supported websites
-              </h2>
-              <ul
-                className="m-0 mt-4 flex list-none flex-wrap gap-2 p-0"
-                aria-label={`Websites supported for ${entry.name}`}
-              >
-                {entry.domains.map((domain) => (
-                  <li
-                    key={domain}
-                    className="rounded-chip bg-neutral-100 px-3 py-1.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-300"
-                  >
-                    {domain}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
             <section id="faq" className="scroll-mt-24 pb-12 pt-12 lg:pb-0 lg:pt-16">
-              <h2 className="font-display text-title text-ink">{entry.name} bypass FAQ</h2>
+              <h2 className="font-display text-title text-ink">FAQ</h2>
               <div className="mt-5">
                 <FaqAccordion
                   items={article.faq}

@@ -26,33 +26,33 @@ const keywords = [
   "monetized link bypass",
 ] as const;
 
-const intro = "Want a iCutLink bypass for monetized short links without clicking through every gate? Skip Wait handles unlock timers and redirect hops on supported websites on this network automatically.";
+const intro = "iCutLink bypass skips go page countdown timers and multi step blog waits on this link shortener to unlock your destination URL faster every time. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "iCutLink monetized short links chain gate pages, captcha screens, and unlock timers before the destination. A iCutLink bypass is what people want when they need the final URL without clicking through every hop.";
+const problem = "iCutLink monetized short links chain gate pages, captcha screens, and unlock timers before the destination.";
 
-const howItWorks = "Once Skip Wait is active, open any supported iCutLink monetized link. The extension automates the short link bypass steps and continues through gates until your destination URL is ready. Gate hops on 2 supported websites keep moving until the destination URL is ready.";
+const howItWorks = "Skip Wait automates the short link bypass steps and continues through gates until your destination URL is ready.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the iCutLink bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The iCutLink bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for iCutLink; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for iCutLink.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a iCutLink link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a iCutLink link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported iCutLink delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported iCutLink delay.",
   },
 ];
 
 const skips = [
-  "iCutLink skip short link flows",
+  "Short-link verification gates",
   "Ad link countdown timers",
   "Go page and unlock redirect hops",
   "Short link verification steps before the destination",

@@ -25,33 +25,33 @@ const keywords = [
   "file host bypass",
 ] as const;
 
-const intro = "Searching for OceanofDMG bypass to skip download waits? Skip Wait targets the supported website and replaces slow download flows with direct file access from the host page.";
+const intro = "OceanofDMG bypass skips the please wait download page and opens the signed CDN file link directly from the software listing without extra delay. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "OceanofDMG often sits a download wait, generating timer, or intermediary screen in front of the real file link. Users look for a OceanofDMG bypass so the direct download opens immediately instead of after the forced delay.";
+const problem = "OceanofDMG often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
 
-const howItWorks = "With Skip Wait installed, go to a OceanofDMG download page and click the same Direct Download, Fast Download, or host button you already use. The extension resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click. Download buttons on the supported website resolve to the real file sooner instead of another generating or wait page.";
+const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the OceanofDMG bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The OceanofDMG bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for OceanofDMG; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for OceanofDMG.",
   },
   {
     title: "Click download as usual",
-    body: "Use the normal download buttons on OceanofDMG. Skip Wait handles the wait layer behind those buttons on supported pages.",
+    body: "Use the same download button you already click on OceanofDMG. Skip Wait resolves the wait behind it.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait removes the download wait and opens or reveals the direct file link on the supported OceanofDMG page.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported OceanofDMG delay.",
   },
 ];
 
 const skips = [
-  "OceanofDMG direct download flows",
+  "Direct-download generating timers",
   "Download generating timers after button clicks",
   "Intermediary redirect pages before the file",
   "Extra wait screens on mirror and host buttons",

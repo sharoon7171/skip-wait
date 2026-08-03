@@ -28,28 +28,28 @@ const keywords = [
   "monetized link bypass",
 ] as const;
 
-const intro = "AdLinkFly token payload pages hide the real destination behind a captcha screen and encoded token field. Skip Wait decodes the unlock token after you verify and redirects you to the final URL on oii.la, tpi.li, and related AdLinkFly hosts.";
+const intro = "AdLinkFly bypass unlocks the destination URL from token payload captcha pages without extra countdown timers, unlock waits, or forced gate delays. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "AdLinkFly Token Payload monetized short links chain gate pages, captcha screens, and unlock timers before the destination. A AdLinkFly Token Payload bypass is what people want when they need the final URL without clicking through every hop.";
+const problem = "AdLinkFly Token Payload monetized short links chain gate pages, captcha screens, and unlock timers before the destination.";
 
-const howItWorks = "Install Skip Wait and open a supported AdLinkFly token payload link such as oii.la or tpi.li. Complete the captcha when it appears. The extension reads the hidden token payload, extracts the destination URL, and redirects you without walking through additional unlock pages. Gate hops on 5 supported websites keep moving until the destination URL is ready.";
+const howItWorks = "La or tpi.li. Complete the captcha when it appears. The extension reads the hidden token payload, extracts the destination URL, and redirects you without walking through additional unlock pages.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the AdLinkFly Token Payload bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The AdLinkFly Token Payload bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for AdLinkFly Token Payload; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for AdLinkFly Token Payload.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a AdLinkFly Token Payload link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a AdLinkFly Token Payload link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported AdLinkFly Token Payload delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported AdLinkFly Token Payload delay.",
   },
 ];
 

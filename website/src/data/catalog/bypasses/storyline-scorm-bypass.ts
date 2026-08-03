@@ -25,20 +25,20 @@ const keywords = [
   "course slide bypass",
 ] as const;
 
-const intro = "Storyline SCORM training slides use timed SCORM blocks that force waiting. Skip Wait bypasses those course play timers on supported websites on this network so you can move past locked slides immediately.";
+const intro = "Storyline bypass skips the course play countdown wait on SCORM training slides so you can advance past timed content blocks immediately and freely. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Storyline SCORM blocks SCORM slides behind a course play countdown. People search for a Storyline SCORM bypass to advance past timed content right away.";
+const problem = "Storyline SCORM blocks SCORM slides behind a course play countdown.";
 
-const howItWorks = "Install Skip Wait, browse to a supported Storyline SCORM page, and use the site normally. The extension activates on recognized skip course wait flows and bypasses or automates the wait so you reach the content faster. Course play countdowns on supported slides are cleared so you can advance without waiting out the timer.";
+const howItWorks = "Skip Wait activates on recognized skip course wait flows and bypasses or automates the wait so you reach the content faster. Course play countdowns on supported slides are cleared so you can advance without waiting out the timer.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Storyline SCORM bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Storyline SCORM bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Storyline SCORM; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Storyline SCORM.",
   },
   {
     title: "Open the training slide",
@@ -46,12 +46,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait clears the course play countdown so you can advance the Storyline SCORM slide immediately.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Storyline SCORM delay.",
   },
 ];
 
 const skips = [
-  "Storyline SCORM skip course wait flows",
+  "Course Wait that block the destination",
   "SCORM slide countdown blocks",
   "Timed training slide locks",
 ] as const;

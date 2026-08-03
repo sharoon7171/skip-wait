@@ -31,33 +31,33 @@ const keywords = [
   "file host bypass",
 ] as const;
 
-const intro = "Need a HubCloud / HubCDN direct download bypass that skips timer pages on file buttons? Skip Wait resolves real download URLs on 7 supported websites in this network so clicks open files instead of waiting screens.";
+const intro = "HubCloud bypass skips cloud drive waiting pages and opens your direct download link from HubCloud and HubCDN file storage without delay or waits. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "HubCloud often sits a download wait, generating timer, or intermediary screen in front of the real file link. Users look for a HubCloud bypass so the direct download opens immediately instead of after the forced delay.";
+const problem = "HubCloud often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
 
-const howItWorks = "Add Skip Wait to Chrome, open a HubCloud / HubCDN file listing, and press download. Instead of sitting on a generating screen, the extension fetches the direct link and starts the file path immediately when the host allows it. Download buttons on 7 supported websites resolve to the real file sooner instead of another generating or wait page.";
+const howItWorks = "Instead of sitting on a generating screen, Skip Wait fetches the direct link and starts the file path immediately when the host allows it.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the HubCloud bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The HubCloud / HubCDN bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for HubCloud; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for HubCloud / HubCDN.",
   },
   {
     title: "Click download as usual",
-    body: "Use the normal download buttons on HubCloud. Skip Wait handles the wait layer behind those buttons on supported pages.",
+    body: "Use the same download button you already click on HubCloud / HubCDN. Skip Wait resolves the wait behind it.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait removes the download wait and opens or reveals the direct file link on the supported HubCloud page.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported HubCloud / HubCDN delay.",
   },
 ];
 
 const skips = [
-  "HubCloud / HubCDN direct download flows",
+  "Direct-download generating timers",
   "Download generating timers after button clicks",
   "Intermediary redirect pages before the file",
   "Extra wait screens on mirror and host buttons",

@@ -32,28 +32,28 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Want a Sub4Unlock.io bypass for one-page social unlocks? Skip Wait skips YouTube subscribe, second subscribe, like and subscribe, sub and hit bell, like, and like and comment; Instagram, Facebook, and Twitter follow; Telegram and Discord join; and the locked-action timers, then opens the destination on Unlock Link.";
+const intro = "Sub4Unlock.io bypass skips all social unlock actions—YouTube subscribe, like, comment, and hit bell; Instagram, Facebook, and Twitter follow; Telegram and Discord join—plus client timers for instant redirect to the destination on the Unlock Link button. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Sub4Unlock.io requires fans to complete the creator’s chosen actions before Unlock Link works. Supported actions include YouTube subscribe variants, video like and comment, Instagram, Facebook, and Twitter follow, and Telegram and Discord join. A Sub4Unlock.io bypass is what people want when those locked actions delay the destination.";
+const problem = "Sub4Unlock.io requires fans to complete the creator’s chosen actions before Unlock Link works. Supported actions include YouTube subscribe variants, video like and comment, Instagram, Facebook, and Twitter follow, and Telegram and Discord join.";
 
-const howItWorks = "Add Skip Wait to Chrome and open a Sub4Unlock.io unlock link. When the Unlock Link control has a destination href, the extension reads it and redirects without waiting through each locked-action timer.";
+const howItWorks = "Io unlock link. When the Unlock Link control has a destination href, Skip Wait reads it and redirects without waiting through each locked-action timer.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Sub4Unlock.io bypass activates on supported unlock pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Sub4Unlock.io bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle for Sub4Unlock.io; supported unlock pages run when the get-link control matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Sub4Unlock.io.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a sub4unlock.io or sub2unlock.io unlock link as usual. Whatever mix of locked actions is shown, Skip Wait opens the destination on Unlock Link.",
+    body: "Open a Sub4Unlock.io link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait reads the Unlock Link destination and sends you there without the social-action delays.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Sub4Unlock.io delay.",
   },
 ];
 

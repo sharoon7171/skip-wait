@@ -25,33 +25,33 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Move2Link wraps links behind waiting pages and continue gates. Skip Wait detects those flows on supported websites on this network and bypasses the delay so you are not stuck on filler screens.";
+const intro = "Move2Link bypass skips blog session waits and go page delays on this link shortener network to open your destination link automatically and fast. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Move2Link places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens. People search for a Move2Link bypass to skip that delay and reach the destination without the manual gate.";
+const problem = "Move2Link places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
 
-const howItWorks = "Install Skip Wait from the Chrome Web Store, open any Move2Link waiting page, and keep browsing normally. The extension detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly. You get past continue loops on 2 supported websites and land on the real destination instead of another gate screen.";
+const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Move2Link bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Move2Link bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Move2Link; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Move2Link.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Move2Link link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Move2Link link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported Move2Link delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Move2Link delay.",
   },
 ];
 
 const skips = [
-  "Move2Link skip waiting page flows",
+  "Waiting pages and continue gates",
   "Please wait and click to continue screens",
   "Gate pages before the destination URL",
   "Manual continue button loops",

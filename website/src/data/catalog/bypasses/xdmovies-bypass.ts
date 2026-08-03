@@ -24,20 +24,20 @@ const keywords = [
   "mirror site bypass",
 ] as const;
 
-const intro = "XDMovies landing pages delay access to the main site or mirror. Skip Wait bypasses that landing wait on the supported website and opens the working destination URL faster.";
+const intro = "XDMovies bypass skips the landing page delay before open main site and takes you to the streaming homepage without any forced waiting on load. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "XDMovies delays the main site behind a landing wait screen. Users look for a XDMovies bypass to open the homepage without sitting through the delay.";
+const problem = "XDMovies delays the main site behind a landing wait screen.";
 
-const howItWorks = "Install Skip Wait, browse to a supported XDMovies page, and use the site normally. The extension activates on recognized skip landing wait flows and bypasses or automates the wait so you reach the content faster. The landing delay on the supported website is skipped so you continue into the main site URL.";
+const howItWorks = "Skip Wait clears the landing wait so you continue into the site without the connection delay.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the XDMovies bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The XDMovies bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for XDMovies; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for XDMovies.",
   },
   {
     title: "Land on the entry page",
@@ -45,12 +45,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait skips the landing delay and opens the main XDMovies site URL.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported XDMovies delay.",
   },
 ];
 
 const skips = [
-  "XDMovies skip landing wait flows",
+  "Landing-page connection delays",
   "Landing page mirror delays",
   "Open main site wait screens",
 ] as const;

@@ -24,33 +24,33 @@ const keywords = [
   "addon download skip",
 ] as const;
 
-const intro = "FlightSim.to shows a download countdown before files start. Skip Wait bypasses that addon download timer on the supported website so the file begins immediately.";
+const intro = "FlightSim bypass skips the addon download countdown timer dialog so flight simulator mods and add ons start downloading immediately for free users. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "FlightSim.to shows a download countdown dialog before the file starts. A FlightSim.to bypass clears that timer so the download begins right away.";
 
-const howItWorks = "Install Skip Wait, browse to a supported FlightSim.to page, and use the site normally. The extension activates on recognized skip download timer flows and bypasses or automates the wait so you reach the content faster. The countdown dialog on the supported website is cleared so the file transfer can start right away.";
+const howItWorks = "To page, and use the site normally. The extension activates on recognized skip download timer flows and bypasses or automates the wait so you reach the content faster. The countdown dialog on the supported website is cleared so the file transfer can start right away.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the FlightSim.to bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The FlightSim.to bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for FlightSim.to; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for FlightSim.to.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a FlightSim.to link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a FlightSim.to link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported FlightSim.to delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported FlightSim.to delay.",
   },
 ];
 
 const skips = [
-  "FlightSim.to skip download timer flows",
+  "Download Timer that block the destination",
   "Addon download countdown dialogs",
   "Pre download delay timers",
 ] as const;

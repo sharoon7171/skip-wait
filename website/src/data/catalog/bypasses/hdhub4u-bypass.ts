@@ -33,20 +33,20 @@ const keywords = [
   "mirror site bypass",
 ] as const;
 
-const intro = "HDHub4u landing pages delay access to the main site or mirror. Skip Wait bypasses that landing wait on 10 supported websites in this network and opens the working destination URL faster.";
+const intro = "HDHub4u bypass skips the landing page mirror wait and opens the current working mirror site so you reach movies and downloads faster every visit. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "HDHub4u delays the main site behind a landing wait screen. Users look for a HDHub4u bypass to open the homepage without sitting through the delay.";
+const problem = "HDHub4u delays the main site behind a landing wait screen.";
 
-const howItWorks = "Install Skip Wait, browse to a supported HDHub4u page, and use the site normally. The extension activates on recognized skip landing wait flows and bypasses or automates the wait so you reach the content faster. The landing delay on 10 supported websites is skipped so you continue into the main site URL.";
+const howItWorks = "Skip Wait clears the landing wait so you continue into the site without the connection delay.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the HDHub4u bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The HDHub4u bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for HDHub4u; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for HDHub4u.",
   },
   {
     title: "Land on the entry page",
@@ -54,12 +54,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait skips the landing delay and opens the main HDHub4u site URL.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported HDHub4u delay.",
   },
 ];
 
 const skips = [
-  "HDHub4u skip landing wait flows",
+  "Landing-page connection delays",
   "Landing page mirror delays",
   "Open main site wait screens",
 ] as const;

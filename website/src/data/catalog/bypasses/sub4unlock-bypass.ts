@@ -29,28 +29,28 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Want a Sub4Unlock bypass for monetized short links with multiple unlock actions? Skip Wait handles every creator task slot, countdown wait, and password gate on sub4unlock.com and sub4unlock.pro so you reach the destination without working through the full unlock list.";
+const intro = "Sub4Unlock bypass skips all creator task slots on sub4unlock.com and sub4unlock.pro—subscribe, follow, join, like, comment, custom links, countdowns, and password gates—for instant redirect to your destination URL. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Sub4Unlock on .com and .pro can require up to ten actions before the destination—subscribe, follow, join, like, comment, or custom links—then countdown waits and an optional password screen. A Sub4Unlock bypass is what people want when those gates stand between them and the real URL.";
+const problem = "Sub4Unlock on .com and .pro can require up to ten actions before the destination—subscribe, follow, join, like, comment, or custom links—then countdown waits and an optional password screen.";
 
-const howItWorks = "Add Skip Wait to Chrome and open a Sub4Unlock short link on .com or .pro. The extension matches the unlock pages, reads the destination already on the page, and redirects you without requiring each task slot to be completed.";
+const howItWorks = "Com or .pro. The extension matches the unlock pages, reads the destination already on the page, and redirects you without requiring each task slot to be completed.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Sub4Unlock bypass activates on supported unlock pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Sub4Unlock bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle for Sub4Unlock; supported unlock paths run when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Sub4Unlock.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a sub4unlock.com or sub4unlock.pro short link as usual. Task slots may include any mix of social or custom actions—Skip Wait skips the unlock layer as a whole.",
+    body: "Open a Sub4Unlock link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait skips the task and password layer on supported pages and sends you to the destination URL.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Sub4Unlock delay.",
   },
 ];
 

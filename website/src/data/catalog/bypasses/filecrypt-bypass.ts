@@ -26,33 +26,33 @@ const keywords = [
   "captcha gate bypass",
 ] as const;
 
-const intro = "Filecrypt blocks access behind a human verification gate. Skip Wait bypasses that check on supported websites on this network and unlocks the mirror list so you can choose a download host right away.";
+const intro = "Filecrypt bypass skips the I am human verification check and unlocks the mirror download list so you can pick your file host right away and download. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Filecrypt blocks the mirror list behind a human verification check. People search for a Filecrypt bypass to skip that gate and pick a file host immediately.";
+const problem = "Filecrypt blocks the mirror list behind a human verification check.";
 
-const howItWorks = "Install Skip Wait, browse to a supported Filecrypt page, and use the site normally. The extension activates on recognized skip security check flows and bypasses or automates the wait so you reach the content faster. The mirror list on 3 supported websites opens without the human verification gate in the way.";
+const howItWorks = "Skip Wait activates on recognized skip security check flows and bypasses or automates the wait so you reach the content faster.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Filecrypt bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Filecrypt bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Filecrypt; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Filecrypt.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Filecrypt link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Filecrypt link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait skips the verification gate and unlocks the Filecrypt mirror download list.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Filecrypt delay.",
   },
 ];
 
 const skips = [
-  "Filecrypt skip security check flows",
+  "Security Check that block the destination",
   "Human verification gates",
   "Mirror list lock screens",
 ] as const;

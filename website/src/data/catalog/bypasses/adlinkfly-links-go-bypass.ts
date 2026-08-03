@@ -26,28 +26,28 @@ const keywords = [
   "skip wait extension",
 ] as const;
 
-const intro = "AdLinkFly Links Go shorteners put a continue gate, captcha check, and unlock timer between you and the final URL. Skip Wait automates that flow on linkjust and related AdLinkFly hosts so you reach the destination without clicking through every step yourself.";
+const intro = "AdLinkFly bypass automates the continue gate, captcha step, and get link flow on Links Go shorteners so your destination URL opens without waiting. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "AdLinkFly Links Go places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens. People search for a AdLinkFly Links Go bypass to skip that delay and reach the destination without the manual gate.";
+const problem = "AdLinkFly Links Go places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
 
-const howItWorks = "Install Skip Wait, open an AdLinkFly Links Go short link, and browse normally. The extension auto submits the continue gate, pins the captcha widget for you to complete when required, waits through the server timer if one is enforced, then posts to the links go unlock path and redirects you to the destination URL. You get past continue loops on 3 supported websites and land on the real destination instead of another gate screen.";
+const howItWorks = "Skip Wait auto submits the continue gate, pins the captcha widget for you to complete when required, waits through the server timer if one is enforced, then posts to the links go unlock path and redirects you to the destination URL.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the AdLinkFly Links Go bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The AdLinkFly Links Go bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for AdLinkFly Links Go; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for AdLinkFly Links Go.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a AdLinkFly Links Go link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a AdLinkFly Links Go link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported AdLinkFly Links Go delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported AdLinkFly Links Go delay.",
   },
 ];
 

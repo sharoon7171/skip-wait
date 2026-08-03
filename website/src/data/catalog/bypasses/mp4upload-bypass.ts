@@ -24,34 +24,33 @@ const keywords = [
   "skip timer unlock",
 ] as const;
 
-const intro = "MP4Upload countdown timers are a common reason people search for a bypass extension. Skip Wait skips those timer screens on the supported website and unlocks the link or download step faster.";
+const intro = "MP4Upload bypass skips the free download countdown timer on this video file host and advances you to the create download link page right away. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "MP4Upload puts a countdown timer or unlock delay in front of the continue or get link step. A MP4Upload bypass removes that wait so the destination opens without watching the clock.";
 
-const howItWorks = "Install Skip Wait, browse to a supported MP4Upload page, and use the site normally. Unlock timers on the supported website no longer block the get link or continue step.";
+const howItWorks = "Unlock timers on the supported website no longer block the get link or continue step.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the MP4Upload bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The MP4Upload bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for MP4Upload; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for MP4Upload.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a MP4Upload link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a MP4Upload link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported MP4Upload delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported MP4Upload delay.",
   },
 ];
 
 const skips = [
-  "MP4Upload skip countdown flows",
-  "Unlock countdown timers",
+  "Countdown timers on unlock pages",
   "Get link delay screens",
 ] as const;
 

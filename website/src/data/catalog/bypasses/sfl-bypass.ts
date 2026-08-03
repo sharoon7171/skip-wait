@@ -25,34 +25,33 @@ const keywords = [
   "skip timer unlock",
 ] as const;
 
-const intro = "Waiting on SFL unlock countdowns adds up fast. Skip Wait bypasses the timer on supported websites on this network and continues the flow automatically when the site allows it.";
+const intro = "SFL bypass skips the gate timer and blog unlock waits on this link shortener for automatic redirect to your destination URL without delay steps. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "SFL puts a countdown timer or unlock delay in front of the continue or get link step. A SFL bypass removes that wait so the destination opens without watching the clock.";
 
-const howItWorks = "Install Skip Wait, browse to a supported SFL page, and use the site normally. Unlock timers on 2 supported websites no longer block the get link or continue step.";
+const howItWorks = "Unlock timers on 2 supported websites no longer block the get link or continue step.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the SFL bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The SFL bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for SFL; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for SFL.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a SFL link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a SFL link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported SFL delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported SFL delay.",
   },
 ];
 
 const skips = [
-  "SFL skip countdown flows",
-  "Unlock countdown timers",
+  "Countdown timers on unlock pages",
   "Get link delay screens",
 ] as const;
 

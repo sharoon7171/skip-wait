@@ -27,28 +27,28 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Want a Sub2Unlock bypass for Next.js social unlock pages? Skip Wait skips every creator block—YouTube subscribe variants, like, comment, and share; Instagram, Facebook, and Twitter steps; and other media actions—then opens the destination without waiting for the unlock button.";
+const intro = "Sub2Unlock bypass skips all social unlock blocks—YouTube subscribe, sub and hit bell, sub and like, like, comment, and share; Instagram, Facebook, and Twitter actions; and other creator media steps—for instant redirect to the destination on sub2unlock.com. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Sub2Unlock requires fans to complete each social block before the unlock button turns green. Supported actions include YouTube subscribe, sub and hit bell, sub and like, like, comment, and share, plus Instagram, Facebook, Twitter, and other media steps. A Sub2Unlock bypass is what people want when those blocks delay the destination.";
+const problem = "Sub2Unlock requires fans to complete each social block before the unlock button turns green. Supported actions include YouTube subscribe, sub and hit bell, sub and like, like, comment, and share, plus Instagram, Facebook, Twitter, and other media steps.";
 
-const howItWorks = "Add Skip Wait to Chrome and open a Sub2Unlock unlock link. When the page embeds the destination in its unlock data, the extension reads it and redirects without completing each social block.";
+const howItWorks = "When the page embeds the destination in its unlock data, Skip Wait reads it and redirects without completing each social block.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Sub2Unlock bypass activates on supported unlock pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Sub2Unlock bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle for Sub2Unlock; supported unlock pages run when unlock data is present.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Sub2Unlock.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a sub2unlock.com unlock link as usual. Whatever mix of social blocks is shown, Skip Wait opens the destination without finishing each step.",
+    body: "Open a Sub2Unlock link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait reads the embedded destination and sends you there without the social-block unlock gate.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Sub2Unlock delay.",
   },
 ];
 

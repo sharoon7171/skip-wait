@@ -24,20 +24,20 @@ const keywords = [
   "session cookie copy",
 ] as const;
 
-const intro = "Instead of following CookiesCEO copy instructions line by line, Skip Wait pulls the session cookie or share string on the supported website and copies it to your clipboard for you.";
+const intro = "CookiesCEO bypass adds a Copy cookie button on premium cookie pages so you copy the session cookie without the site wait or manual copy steps. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "CookiesCEO makes you wait and copy session data by hand before downloads unlock. Users want a CookiesCEO bypass that copies the needed data without the manual wait and paste dance.";
 
-const howItWorks = "Install Skip Wait and open a CookiesCEO page that normally asks you to copy session data manually. The extension fetches the cookie or share string, copies it to your clipboard, and shows a Copy button if you need it again. On the supported website, that means less waiting and fewer manual copy steps before you can use the session data. Session data on the supported website is easier to copy without the site wait and manual paste dance.";
+const howItWorks = "Skip Wait fetches the cookie or share string, copies it to your clipboard, and shows a Copy button if you need it again. On the supported website, that means less waiting and fewer manual copy steps before you can use the session data. Session data on the supported website is easier to copy without the site wait and manual paste dance.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the CookiesCEO bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The CookiesCEO bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for CookiesCEO; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for CookiesCEO.",
   },
   {
     title: "Stay on the cookie or share page",
@@ -45,12 +45,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait prepares the session data and lets you copy it without the manual wait loop on CookiesCEO.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported CookiesCEO delay.",
   },
 ];
 
 const skips = [
-  "CookiesCEO skip copy step flows",
+  "Manual cookie copy waits",
   "Manual copy and wait instructions",
   "Session cookie copy steps",
 ] as const;

@@ -24,33 +24,33 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Tired of PRMovies waiting pages that block every link? Skip Wait is a free Chrome extension built to bypass those gate screens on the supported website without extra setup.";
+const intro = "PRMovies bypass skips the landing page wait screen and opens the main streaming site URL automatically without sitting through the usual delay. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "PRMovies places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens. People search for a PRMovies bypass to skip that delay and reach the destination without the manual gate.";
+const problem = "PRMovies places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
 
-const howItWorks = "After you add Skip Wait, visit a PRMovies link as usual. When the waiting page loads, the extension runs in the background, skips the delay layer, and sends you straight to the target URL supported for PRMovies. You get past continue loops on the supported website and land on the real destination instead of another gate screen.";
+const howItWorks = "When the waiting page loads, Skip Wait runs in the background, skips the delay layer, and sends you straight to the target URL supported for PRMovies.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the PRMovies bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The PRMovies bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for PRMovies; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for PRMovies.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a PRMovies link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a PRMovies link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported PRMovies delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported PRMovies delay.",
   },
 ];
 
 const skips = [
-  "PRMovies skip waiting page flows",
+  "Waiting pages and continue gates",
   "Please wait and click to continue screens",
   "Gate pages before the destination URL",
   "Manual continue button loops",

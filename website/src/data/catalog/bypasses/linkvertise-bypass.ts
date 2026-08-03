@@ -24,33 +24,33 @@ const keywords = [
   "luadefender bypass",
 ] as const;
 
-const intro = "Linkvertise monetized links stack ad tasks and access steps before the final URL. Skip Wait bypasses those access screens on supported websites on this network so you reach the destination or copied content faster.";
+const intro = "Linkvertise bypass skips ad tasks, access steps, and wait timers on monetized links so you reach the final download URL or copied content faster. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "Linkvertise stacks ad tasks and access steps before the final URL or copied content. A Linkvertise bypass skips those access screens so you reach the destination faster.";
 
-const howItWorks = "Add Skip Wait to Chrome and open a Linkvertise access page. The extension completes supported access tasks, bypasses wait timers, and redirects to the final link or copies the result content when that is what the page returns. Access tasks on 2 supported websites are completed where supported, then you get the final URL or copied content.";
+const howItWorks = "Skip Wait completes supported access tasks, bypasses wait timers, and redirects to the final link or copies the result content when that is what the page returns.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Linkvertise bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Linkvertise bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Linkvertise; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Linkvertise.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Linkvertise link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Linkvertise link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported Linkvertise delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Linkvertise delay.",
   },
 ];
 
 const skips = [
-  "Linkvertise skip access steps flows",
+  "Access Steps that block the destination",
   "Ad tasks on monetized links",
   "Access step wait screens",
 ] as const;

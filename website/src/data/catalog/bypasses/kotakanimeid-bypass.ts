@@ -24,33 +24,33 @@ const keywords = [
   "skip click to continue",
 ] as const;
 
-const intro = "Tired of KotakAnimeID waiting pages that block every link? Skip Wait is a free Chrome extension built to bypass those gate screens on the supported website without extra setup.";
+const intro = "KotakAnimeID bypass skips the out page countdown wait and shows anime episode download links by 1080p, 720p, and other resolutions instantly. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "KotakAnimeID places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens. People search for a KotakAnimeID bypass to skip that delay and reach the destination without the manual gate.";
+const problem = "KotakAnimeID places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
 
-const howItWorks = "Install Skip Wait from the Chrome Web Store, open any KotakAnimeID waiting page, and keep browsing normally. The extension detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly. You get past continue loops on the supported website and land on the real destination instead of another gate screen.";
+const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the KotakAnimeID bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The KotakAnimeID bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for KotakAnimeID; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for KotakAnimeID.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a KotakAnimeID link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a KotakAnimeID link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported KotakAnimeID delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported KotakAnimeID delay.",
   },
 ];
 
 const skips = [
-  "KotakAnimeID skip waiting page flows",
+  "Waiting pages and continue gates",
   "Please wait and click to continue screens",
   "Gate pages before the destination URL",
   "Manual continue button loops",

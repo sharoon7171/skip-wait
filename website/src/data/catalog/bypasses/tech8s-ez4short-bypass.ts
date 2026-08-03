@@ -28,33 +28,33 @@ const keywords = [
   "monetized link bypass",
 ] as const;
 
-const intro = "If Tech8s / Ez4Short links keep adding countdowns and go pages, Skip Wait is the Chrome extension that bypasses those short link waits on 4 supported websites in this network for you.";
+const intro = "Tech8s bypass skips gate page waits and redirect hops on Ez4Short style ad link shorteners to open your destination URL automatically and fast. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Tech8s monetized short links chain gate pages, captcha screens, and unlock timers before the destination. A Tech8s bypass is what people want when they need the final URL without clicking through every hop.";
+const problem = "Tech8s monetized short links chain gate pages, captcha screens, and unlock timers before the destination.";
 
-const howItWorks = "Once Skip Wait is active, open any supported Tech8s / Ez4Short monetized link. The extension automates the short link bypass steps and continues through gates until your destination URL is ready. Gate hops on 4 supported websites keep moving until the destination URL is ready.";
+const howItWorks = "Skip Wait automates the short link bypass steps and continues through gates until your destination URL is ready.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Tech8s bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Tech8s / Ez4Short bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Tech8s; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Tech8s / Ez4Short.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Tech8s link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Tech8s / Ez4Short link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported Tech8s delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Tech8s / Ez4Short delay.",
   },
 ];
 
 const skips = [
-  "Tech8s / Ez4Short skip short link flows",
+  "Short-link verification gates",
   "Ad link countdown timers",
   "Go page and unlock redirect hops",
   "Short link verification steps before the destination",

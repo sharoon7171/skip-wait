@@ -25,20 +25,20 @@ const keywords = [
   "hidden link unlock",
 ] as const;
 
-const intro = "MoviesMod hides links until a timed reveal finishes. Skip Wait bypasses that wait on supported websites on this network and shows the episode or download links right away.";
+const intro = "MoviesMod bypass skips the timed content reveal wait and shows episode and download links immediately on modded streaming pages without delay. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "MoviesMod hides episode or download links behind a timed reveal. Users want a MoviesMod bypass that shows the links immediately.";
 
-const howItWorks = "Install Skip Wait, browse to a supported MoviesMod page, and use the site normally. The extension activates on recognized skip timed reveal flows and bypasses or automates the wait so you reach the content faster. Hidden links on 2 supported websites appear without waiting for the timed reveal.";
+const howItWorks = "Skip Wait activates on recognized skip timed reveal flows and bypasses or automates the wait so you reach the content faster.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the MoviesMod bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The MoviesMod bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for MoviesMod; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for MoviesMod.",
   },
   {
     title: "Open the episode or download section",
@@ -46,12 +46,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait reveals the hidden episode or download links on the MoviesMod page without the timed wait.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported MoviesMod delay.",
   },
 ];
 
 const skips = [
-  "MoviesMod skip timed reveal flows",
+  "Timed Reveal that block the destination",
   "Timed hidden link reveals",
   "CSS locked episode links",
 ] as const;

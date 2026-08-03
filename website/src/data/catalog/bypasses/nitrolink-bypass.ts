@@ -25,33 +25,33 @@ const keywords = [
   "redirect chain bypass",
 ] as const;
 
-const intro = "Nitrolink chains multiple blog hops before the final URL appears. Skip Wait automates that multi step bypass across supported websites on this network so you do not click through every mediator page yourself.";
+const intro = "Nitrolink bypass skips the multi page waiting chain and blog mediator steps on this link shortener to reach your destination URL faster every time. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Nitrolink adds delay layers such as blog mediator hops in the redirect chain before you reach the real destination. People search for a Nitrolink bypass to skip those gates with Skip Wait and continue faster.";
+const problem = "Nitrolink adds delay layers such as blog mediator hops in the redirect chain before you reach the real destination.";
 
-const howItWorks = "Skip Wait follows Nitrolink through blog mediators and redirect hops automatically. Install the extension, open the shared link once, and it advances each step in the chain until the final URL opens. Supported Nitrolink flows on 2 supported websites continue automatically toward the destination.";
+const howItWorks = "Skip Wait follows Nitrolink through blog mediators and redirect hops automatically.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Nitrolink bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Nitrolink bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Nitrolink; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Nitrolink.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Nitrolink link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Nitrolink link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported Nitrolink delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Nitrolink delay.",
   },
 ];
 
 const skips = [
-  "Nitrolink skip multi step waits flows",
+  "Multi-step blog hops and countdown waits",
   "Blog mediator hops in the redirect chain",
   "Multi page unlock sequences",
   "Session tracking steps between shortener and destination",

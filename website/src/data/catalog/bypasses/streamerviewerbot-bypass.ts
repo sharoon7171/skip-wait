@@ -24,20 +24,20 @@ const keywords = [
   "preparing countdown bypass",
 ] as const;
 
-const intro = "Streamerviewerbot free trial forms lock the submit button behind a Preparing countdown. Skip Wait skips that timer on the supported website so you can complete reCAPTCHA and claim the trial without waiting.";
+const intro = "Streamerviewerbot bypass skips the free trial Preparing countdown on Stream and Kick follower and viewer forms so the submit button unlocks right away. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Streamerviewerbot embeds a multi-minute Preparing countdown before Start Free Trial on free follower and viewer pages. A Streamerviewerbot bypass unlocks that button immediately.";
+const problem = "Streamerviewerbot embeds a multi-minute Preparing countdown before Start Free Trial on free follower and viewer pages.";
 
-const howItWorks = "Install Skip Wait, open a supported Streamerviewerbot free trial page, and fill the form as usual. The extension patches the trial iframe countdown so the page runs its own unlock path immediately, then you complete reCAPTCHA and submit.";
+const howItWorks = "Skip Wait patches the trial iframe countdown so the page runs its own unlock path immediately, then you complete reCAPTCHA and submit.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Streamerviewerbot bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Streamerviewerbot bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Streamerviewerbot; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Streamerviewerbot.",
   },
   {
     title: "Open a free trial page",
@@ -45,13 +45,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Claim without the wait",
-    body: "Skip Wait unlocks the Preparing submit button and shows reCAPTCHA so you can finish the trial form without watching the countdown.",
+    body: "Skip Wait unlocks the ready state so you can finish the form without watching the countdown.",
   },
 ];
 
 const skips = [
-  "Streamerviewerbot skip preparing timer flows",
-  "Free trial Preparing countdowns",
+  "Preparing countdowns on free trial forms",
   "Locked Start Free Trial buttons",
 ] as const;
 

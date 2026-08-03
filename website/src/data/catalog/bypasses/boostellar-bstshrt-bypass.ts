@@ -26,34 +26,33 @@ const keywords = [
   "skip timer unlock",
 ] as const;
 
-const intro = "Boostellar / Bstshrt countdown timers are a common reason people search for a bypass extension. Skip Wait skips those timer screens on supported websites on this network and unlocks the link or download step faster.";
+const intro = "Boostellar bypass skips the content locker gate and countdown timer on monetized short links for instant redirect to your destination URL every time. Install Skip Wait once and it runs automatically on supported pages.";
 
 const problem = "Boostellar puts a countdown timer or unlock delay in front of the continue or get link step. A Boostellar bypass removes that wait so the destination opens without watching the clock.";
 
-const howItWorks = "Install Skip Wait, browse to a supported Boostellar / Bstshrt page, and use the site normally. Unlock timers on 3 supported websites no longer block the get link or continue step.";
+const howItWorks = "Unlock timers on 3 supported websites no longer block the get link or continue step.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Boostellar bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Boostellar / Bstshrt bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Boostellar; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Boostellar / Bstshrt.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a Boostellar link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a Boostellar / Bstshrt link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported Boostellar delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Boostellar / Bstshrt delay.",
   },
 ];
 
 const skips = [
-  "Boostellar / Bstshrt skip countdown flows",
-  "Unlock countdown timers",
+  "Countdown timers on unlock pages",
   "Get link delay screens",
 ] as const;
 

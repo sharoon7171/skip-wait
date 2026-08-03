@@ -29,33 +29,33 @@ const keywords = [
   "monetized link bypass",
 ] as const;
 
-const intro = "If LinkShortify links keep adding countdowns and go pages, Skip Wait is the Chrome extension that bypasses those short link waits on 5 supported websites in this network for you.";
+const intro = "LinkShortify bypass skips encrypted gate pages, article unlock waits, and countdown timers on this Indian link shortener network for faster access. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "LinkShortify monetized short links chain gate pages, captcha screens, and unlock timers before the destination. A LinkShortify bypass is what people want when they need the final URL without clicking through every hop.";
+const problem = "LinkShortify monetized short links chain gate pages, captcha screens, and unlock timers before the destination.";
 
-const howItWorks = "Install Skip Wait, paste or click a LinkShortify short link, and let the extension handle the unlock flow. It bypasses countdown timers, go pages, and captcha follow ups on supported LinkShortify URLs, then opens the final destination automatically. Gate hops on 5 supported websites keep moving until the destination URL is ready.";
+const howItWorks = "Skip Wait bypasses countdown timers, go pages, and captcha follow ups on supported LinkShortify URLs, then opens the final destination automatically.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the LinkShortify bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The LinkShortify bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for LinkShortify; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for LinkShortify.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a LinkShortify link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a LinkShortify link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported LinkShortify delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported LinkShortify delay.",
   },
 ];
 
 const skips = [
-  "LinkShortify skip short link flows",
+  "Short-link verification gates",
   "Ad link countdown timers",
   "Go page and unlock redirect hops",
   "Short link verification steps before the destination",

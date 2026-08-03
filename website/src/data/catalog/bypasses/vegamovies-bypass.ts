@@ -26,20 +26,20 @@ const keywords = [
   "mirror site bypass",
 ] as const;
 
-const intro = "Vegamovies hub links on vglist send you through a securing-connection wait before VegaMovies, RogMovies, Anime, or Xprime. Skip Wait bypasses that landing wait on the supported websites and opens the live destination faster.";
+const intro = "Vegamovies bypass skips the vglist connecting delay and opens VegaMovies, RogMovies, Anime, and Xprime live servers instantly from the hub. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "Vegamovies delays each Quick Access link behind a connecting page with a forced wait. Users look for a Vegamovies bypass to reach the live server without sitting through that delay.";
+const problem = "Vegamovies delays each Quick Access link behind a connecting page with a forced wait.";
 
-const howItWorks = "Install Skip Wait, open vglist.top or vglist.nl, and use Quick Access as usual. The extension resolves the live destination from the connecting page and skips the wait so VegaMovies, RogMovies, Anime, and Xprime open immediately.";
+const howItWorks = "Top or vglist.nl, and use Quick Access as usual. The extension resolves the live destination from the connecting page and skips the wait so VegaMovies, RogMovies, Anime, and Xprime open immediately.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the Vegamovies bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The Vegamovies bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for Vegamovies; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Vegamovies.",
   },
   {
     title: "Open the Vegamovies hub",
@@ -47,12 +47,12 @@ const steps: readonly BypassStep[] = [
   },
   {
     title: "Reach the destination faster",
-    body: "Choose VegaMovies, RogMovies, Anime, or Xprime. Skip Wait skips the connecting delay and opens the live server URL.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported Vegamovies delay.",
   },
 ];
 
 const skips = [
-  "Vegamovies skip landing wait flows",
+  "Landing-page connection delays",
   "vglist securing-connection delays",
   "Quick Access connecting page waits",
 ] as const;

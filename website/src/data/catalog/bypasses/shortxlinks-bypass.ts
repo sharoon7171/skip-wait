@@ -28,33 +28,33 @@ const keywords = [
   "wordpress safelink bypass",
 ] as const;
 
-const intro = "ShortXLinks safelink pages chain countdowns and generate link steps. Skip Wait bypasses that safelink flow on 5 supported websites in this network and redirects you to the final URL without manual form clicks.";
+const intro = "ShortXLinks bypass skips the safelink waiting chain and multi page ad waits across this link shortener network to unlock your final URL faster. Install Skip Wait once and it runs automatically on supported pages.";
 
-const problem = "ShortXLinks wraps destination links in a safelink countdown and generate link flow. People search for a ShortXLinks bypass to skip that chain and open the final URL.";
+const problem = "ShortXLinks wraps destination links in a safelink countdown and generate link flow.";
 
-const howItWorks = "Install Skip Wait, click a ShortXLinks safelink, and avoid the manual generate link routine. The extension bypasses safelink countdowns on supported pages and resolves the decoded destination URL for you. Safelink countdowns on 5 supported websites are skipped so the final URL opens without the multi form chain.";
+const howItWorks = "Skip Wait bypasses safelink countdowns on supported pages and resolves the decoded destination URL for you.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install the free Skip Wait extension from the Chrome Web Store. No account is required, and the ShortXLinks bypass activates on supported pages automatically.",
+    body: "Install Skip Wait from the Chrome Web Store. The ShortXLinks bypass turns on automatically on supported pages—no account needed.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait turned on in Chrome. There is no per site toggle to configure for ShortXLinks; supported flows run in the background when the page matches.",
+    body: "Leave Skip Wait on in Chrome. There is nothing to configure for ShortXLinks.",
   },
   {
     title: "Open a supported link",
-    body: "Visit a ShortXLinks link the same way you normally would. You do not need a special paste tool or extra settings.",
+    body: "Open a ShortXLinks link the same way you usually do. No paste tool or special settings.",
   },
   {
     title: "Reach the destination faster",
-    body: "Skip Wait runs in the background, skips the supported ShortXLinks delay layer, and sends you to the destination or unlock result.",
+    body: "Skip Wait runs in the background on the matching page and moves you past the supported ShortXLinks delay.",
   },
 ];
 
 const skips = [
-  "ShortXLinks skip safelink wait flows",
+  "Safelink Wait that block the destination",
   "Safelink countdown chains",
   "Generate link form steps",
 ] as const;
