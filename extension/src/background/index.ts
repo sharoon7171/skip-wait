@@ -19,6 +19,7 @@ import { initRinkuPageHooksInject } from '../sites/rinku';
 import { initStorylineScormMainWorldInject } from '../sites/storyline-scorm';
 import { initLink4mRedirect } from '../sites/tech8s';
 import { initOceansofgamessResolve } from '../sites/oceansofgamess';
+import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -41,4 +42,5 @@ initLksfyAdblockInject();
 initCutyAdblockInject();
 initRinkuPageHooksInject();
 initStorylineScormMainWorldInject();
+initStreamerviewerbotMainWorldInject();
 initOceansofgamessResolve();

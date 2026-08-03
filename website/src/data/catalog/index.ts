@@ -72,6 +72,7 @@ import { bypass as shrtslugBypass } from './bypasses/shrtslug-bypass';
 import { bypass as sidMediatorBypass } from './bypasses/sid-mediator-bypass';
 import { bypass as softpediaBypass } from './bypasses/softpedia-bypass';
 import { bypass as storylineScormBypass } from './bypasses/storyline-scorm-bypass';
+import { bypass as streamerviewerbotBypass } from './bypasses/streamerviewerbot-bypass';
 import { bypass as sub2getBypass } from './bypasses/sub2get-bypass';
 import { bypass as sub2unlockBypass } from './bypasses/sub2unlock-bypass';
 import { bypass as sub4unlockBypass } from './bypasses/sub4unlock-bypass';
@@ -168,6 +169,7 @@ export const bypasses: readonly SupportedBypass[] = [
   sidMediatorBypass,
   softpediaBypass,
   storylineScormBypass,
+  streamerviewerbotBypass,
   sub2getBypass,
   sub2unlockBypass,
   sub4unlockBypass,
