@@ -1,14 +1,12 @@
-'use client';
-
-import { LuArrowDown, LuArrowRight } from 'react-icons/lu';
 import { totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { CHROME_WEB_STORE_URL, SITE } from '@/data/constants';
-import { trackChromeWebStoreClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
-import { ButtonAnchor, ButtonLink } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/Button';
 import { ChromeIcon } from '@/components/ui/ChromeIcon';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
+import { IconArrowDown, IconArrowRight } from '@/components/ui/Icons';
 import { Shell } from '@/components/ui/Shell';
+import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
 function HeroVisual(): React.ReactElement {
   return (
@@ -38,7 +36,7 @@ function HeroVisual(): React.ReactElement {
             className="hidden items-center justify-center py-3 text-primary-500 lg:flex"
             aria-hidden
           >
-            <LuArrowDown className="size-5" />
+            <IconArrowDown className="size-5" />
           </div>
 
           <div className="rounded-card bg-primary-600 px-3 py-4 sm:px-4 sm:py-5">
@@ -81,19 +79,20 @@ export function Hero(): React.ReactElement {
           </p>
 
           <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:justify-start">
-            <ButtonAnchor
+            <TrackedAnchor
               href={CHROME_WEB_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              button
               className="w-full sm:w-auto"
-              onClick={() => trackChromeWebStoreClick('hero')}
+              addToChrome="hero"
             >
               <ChromeIcon className="size-5" />
               Add to Chrome
-            </ButtonAnchor>
+            </TrackedAnchor>
             <ButtonLink href={routes.sites} variant="ghost" className="w-full sm:w-auto">
               Browse Supported Sites
-              <LuArrowRight className="size-4" aria-hidden />
+              <IconArrowRight className="size-4" />
             </ButtonLink>
           </div>
         </div>

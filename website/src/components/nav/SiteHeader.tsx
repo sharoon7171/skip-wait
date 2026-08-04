@@ -1,15 +1,14 @@
 'use client';
 
 import { useEffect, useId, useState } from 'react';
-import { LuMenu, LuX } from 'react-icons/lu';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
-import { trackChromeWebStoreClick, trackOutboundClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
-import { ButtonAnchor } from '@/components/ui/Button';
 import { ChromeIcon } from '@/components/ui/ChromeIcon';
+import { IconClose, IconMenu } from '@/components/ui/Icons';
 import { Shell } from '@/components/ui/Shell';
+import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
 const navLink =
   'text-caption font-semibold text-ink-soft no-underline transition-colors hover:text-ink';
@@ -79,25 +78,26 @@ export function SiteHeader(): React.ReactElement {
             <a href={`${routes.home}#faq`} className={navLink}>
               FAQ
             </a>
-            <a
+            <TrackedAnchor
               href={CONTACT.github}
               target="_blank"
               rel="noopener noreferrer"
               className={navLink}
-              onClick={() => trackOutboundClick('github')}
+              cta="github"
             >
               GitHub
-            </a>
-            <ButtonAnchor
+            </TrackedAnchor>
+            <TrackedAnchor
               href={CHROME_WEB_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              button
               className="h-10 px-5"
-              onClick={() => trackChromeWebStoreClick('header')}
+              addToChrome="header"
             >
               <ChromeIcon className="size-4" />
               Add to Chrome
-            </ButtonAnchor>
+            </TrackedAnchor>
           </nav>
 
           <button
@@ -108,7 +108,7 @@ export function SiteHeader(): React.ReactElement {
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((current) => !current)}
           >
-            {open ? <LuX className="size-5" aria-hidden /> : <LuMenu className="size-5" aria-hidden />}
+            {open ? <IconClose className="size-5" /> : <IconMenu className="size-5" />}
           </button>
         </div>
       </Shell>
@@ -134,31 +134,28 @@ export function SiteHeader(): React.ReactElement {
               <a href={`${routes.home}#faq`} className={mobileNavLink} onClick={closeMenu}>
                 FAQ
               </a>
-              <a
+              <TrackedAnchor
                 href={CONTACT.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={mobileNavLink}
-                onClick={() => {
-                  trackOutboundClick('github');
-                  closeMenu();
-                }}
+                cta="github"
+                onClick={closeMenu}
               >
                 GitHub
-              </a>
-              <ButtonAnchor
+              </TrackedAnchor>
+              <TrackedAnchor
                 href={CHROME_WEB_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                button
                 className="mt-2 h-11 w-full"
-                onClick={() => {
-                  trackChromeWebStoreClick('header');
-                  closeMenu();
-                }}
+                addToChrome="header"
+                onClick={closeMenu}
               >
                 <ChromeIcon className="size-4" />
                 Add to Chrome
-              </ButtonAnchor>
+              </TrackedAnchor>
             </nav>
           </Shell>
         </div>

@@ -1,18 +1,16 @@
-'use client';
-
 import Link from 'next/link';
-import { LuArrowLeft, LuChevronRight } from 'react-icons/lu';
 import type { SupportedBypass } from '@/types/catalog';
 import { CHROME_WEB_STORE_URL } from '@/data/constants';
-import { trackChromeWebStoreClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
 import { BypassArticleToc, type BypassTocItem } from '@/components/sites/BypassArticleToc';
 import { SupportCta } from '@/components/home/SupportCta';
-import { ButtonAnchor, ButtonLink } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/Button';
 import { ChromeIcon } from '@/components/ui/ChromeIcon';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
+import { IconArrowLeft, IconChevronRight } from '@/components/ui/Icons';
 import { Shell } from '@/components/ui/Shell';
+import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
 type BypassDetailPageProps = {
   entry: SupportedBypass;
@@ -47,7 +45,7 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
                 </Link>
               </li>
               <li aria-hidden className="flex items-center text-neutral-300">
-                <LuChevronRight className="size-3.5" />
+                <IconChevronRight className="size-3.5" />
               </li>
               <li>
                 <Link
@@ -58,7 +56,7 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
                 </Link>
               </li>
               <li aria-hidden className="flex items-center text-neutral-300">
-                <LuChevronRight className="size-3.5" />
+                <IconChevronRight className="size-3.5" />
               </li>
               <li className="truncate px-1 py-0.5 text-ink" aria-current="page">
                 {entry.name}
@@ -79,17 +77,18 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <ButtonAnchor
+            <TrackedAnchor
               href={CHROME_WEB_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackChromeWebStoreClick('bypass_detail')}
+              button
+              addToChrome="bypass_detail"
             >
               <ChromeIcon className="size-5" />
               Add to Chrome — Free
-            </ButtonAnchor>
+            </TrackedAnchor>
             <ButtonLink href={routes.sites} variant="ghost">
-              <LuArrowLeft className="size-4" aria-hidden />
+              <IconArrowLeft className="size-4" />
               All Supported Sites
             </ButtonLink>
           </div>
@@ -181,15 +180,16 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
                   ))}
                 </ol>
                 <div className="mt-8">
-                  <ButtonAnchor
+                  <TrackedAnchor
                     href={CHROME_WEB_STORE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackChromeWebStoreClick('bypass_detail')}
+                    button
+                    addToChrome="bypass_detail"
                   >
                     <ChromeIcon className="size-5" />
                     Add Skip Wait to Chrome
-                  </ButtonAnchor>
+                  </TrackedAnchor>
                 </div>
               </section>
             ) : null}

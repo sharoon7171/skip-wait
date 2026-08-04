@@ -1,33 +1,64 @@
-import { sendGAEvent } from '@next/third-parties/google';
-
 export const GA_MEASUREMENT_ID = (process.env['NEXT_PUBLIC_GA_MEASUREMENT_ID'] ?? '').trim();
 
 const GA_ID_RE = /^G-[A-Z0-9]+$/i;
 
-export type ChromeWebStorePlacement = 'hero' | 'header' | 'footer' | 'bypass_detail';
+export type AddToChromePlacement = 'header' | 'hero' | 'bypass_detail';
 
-export type OutboundDestination = 'telegram' | 'email' | 'github' | 'request_support';
+export type CtaDestination = 'github' | 'telegram' | 'email';
+
+const ADD_TO_CHROME_EVENT: Record<AddToChromePlacement, string> = {
+  header: 'add_to_chrome_header',
+  hero: 'add_to_chrome_hero',
+  bypass_detail: 'add_to_chrome_bypass',
+};
+
+const CTA_EVENT: Record<CtaDestination, string> = {
+  github: 'cta_github',
+  telegram: 'cta_telegram',
+  email: 'cta_email',
+};
+
+type GtagWindow = Window & {
+  dataLayer?: object[];
+  gtag?: (...args: unknown[]) => void;
+};
 
 export function isAnalyticsEnabled(): boolean {
   return GA_ID_RE.test(GA_MEASUREMENT_ID);
 }
 
-export function trackEvent(
-  name: string,
-  params?: Record<string, string | number | boolean>,
-): void {
-  if (!isAnalyticsEnabled()) return;
-  if (params) {
-    sendGAEvent('event', name, params);
-    return;
+function ensureGtag(): (...args: unknown[]) => void {
+  const win = window as GtagWindow;
+  win.dataLayer = win.dataLayer ?? [];
+  if (typeof win.gtag !== 'function') {
+    win.gtag = function gtag() {
+      win.dataLayer!.push(arguments as unknown as object);
+    };
   }
-  sendGAEvent('event', name);
+  return win.gtag;
 }
 
-export function trackChromeWebStoreClick(placement: ChromeWebStorePlacement): void {
-  trackEvent('chrome_web_store_click', { placement });
+function trackEvent(name: string, params?: Record<string, string>): void {
+  if (!isAnalyticsEnabled() || typeof window === 'undefined') return;
+  const gtag = ensureGtag();
+  if (params) gtag('event', name, params);
+  else gtag('event', name);
 }
 
-export function trackOutboundClick(destination: OutboundDestination): void {
-  trackEvent('outbound_click', { destination });
+export function trackAddToChrome(placement: AddToChromePlacement): void {
+  trackEvent(ADD_TO_CHROME_EVENT[placement]);
+}
+
+export function trackChromeWebStoreFooter(): void {
+  trackEvent('chrome_web_store_footer');
+}
+
+export function trackCtaClick(destination: CtaDestination): void {
+  trackEvent(CTA_EVENT[destination]);
+}
+
+export function trackSearch(searchTerm: string): void {
+  const term = searchTerm.trim();
+  if (!term) return;
+  trackEvent('search', { search_term: term });
 }

@@ -1,21 +1,7 @@
-const systemSans = [
-  'Segoe UI Variable',
-  'Segoe UI',
-  'system-ui',
-  '-apple-system',
-  'BlinkMacSystemFont',
-  'Roboto',
-  'Helvetica Neue',
-  'Arial',
-  'sans-serif',
-] as const;
-
-const poppins = ['Poppins', ...systemSans] as const;
-
 export const fontFamilies = {
-  sans: poppins,
-  display: poppins,
-  mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+  sans: ['var(--font-sans)'],
+  display: ['var(--font-sans)'],
+  mono: ['var(--font-mono)'],
 } as const;
 
 export const fontSize = {

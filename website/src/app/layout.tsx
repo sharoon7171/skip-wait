@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import { SiteFooter } from '@/components/nav/SiteFooter';
 import { SiteHeader } from '@/components/nav/SiteHeader';
 import { HashScroll } from '@/components/nav/HashScroll';
+import { DeferredGoogleAnalytics } from '@/components/seo/DeferredGoogleAnalytics';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { CONTACT, ORGANIZATION, SITE } from '@/data/constants';
 import {
@@ -11,9 +11,9 @@ import {
   softwareApplicationJsonLd,
   websiteJsonLd,
 } from '@/data/seo';
+import { ibmPlexMono, poppins } from '@/fonts';
 import { GA_MEASUREMENT_ID, isAnalyticsEnabled } from '@/lib/analytics';
 import '@/styles/global.css';
-
 export const dynamic = 'force-static';
 export const revalidate = false;
 
@@ -68,15 +68,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): React.ReactElement {
   return (
-    <html lang="en" className="[color-scheme:light]">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang="en"
+      className={`[color-scheme:light] ${poppins.variable} ${ibmPlexMono.variable}`}
+    >
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-surface-canvas font-sans text-ink antialiased">
         <JsonLd data={[organizationJsonLd(), websiteJsonLd(), softwareApplicationJsonLd()]} />
         <HashScroll />
@@ -84,7 +79,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <SiteFooter />
       </body>
-      {isAnalyticsEnabled() ? <GoogleAnalytics gaId={GA_MEASUREMENT_ID} /> : null}
+      {isAnalyticsEnabled() ? <DeferredGoogleAnalytics gaId={GA_MEASUREMENT_ID} /> : null}
     </html>
   );
 }

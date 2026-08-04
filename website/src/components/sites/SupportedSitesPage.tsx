@@ -1,7 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { LuSearch } from 'react-icons/lu';
+import { useEffect, useMemo, useState } from 'react';
 import {
   searchCatalog,
   totalBypasses,
@@ -10,10 +9,19 @@ import {
 import { SupportCta } from '@/components/home/SupportCta';
 import { BypassRow } from '@/components/sites/BypassRow';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
+import { IconSearch } from '@/components/ui/Icons';
 import { Shell } from '@/components/ui/Shell';
+import { trackSearch } from '@/lib/analytics';
 
 export function SupportedSitesPage(): React.ReactElement {
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const term = query.trim();
+    if (!term) return;
+    const id = window.setTimeout(() => trackSearch(term), 500);
+    return () => window.clearTimeout(id);
+  }, [query]);
 
   const results = useMemo(() => searchCatalog(query), [query]);
   const visibleDomains = results.reduce((total, entry) => total + entry.domains.length, 0);
@@ -49,7 +57,7 @@ export function SupportedSitesPage(): React.ReactElement {
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
             <label className="relative block min-w-0 w-full sm:max-w-md sm:flex-1">
-              <LuSearch
+              <IconSearch
                 aria-hidden
                 className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-ink-soft"
               />

@@ -88,11 +88,15 @@ export default function PrivacyPage(): React.ReactElement {
           </p>
           <p>GA4 may collect:</p>
           <ul>
-            <li>page views and in-site navigation</li>
-            <li>approximate location, device, and browser information</li>
+            <li>page views (which pages were opened and how often)</li>
             <li>
-              interaction events such as Chrome Web Store clicks and outbound contact or support
-              links
+              traffic source and approximate location (for example organic, direct, and country)
+            </li>
+            <li>device and browser information</li>
+            <li>
+              Add to Chrome clicks as separate events for header, hero, and bypass pages; footer
+              Chrome Web Store link clicks; contact CTA clicks (GitHub, Telegram, email); and
+              Supported Sites search terms
             </li>
           </ul>
           <p>

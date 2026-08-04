@@ -1,15 +1,7 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { allDomains, shuffledDomains } from '@/data/catalog-queries';
+import { shuffledDomains } from '@/data/catalog-queries';
 
 export function DomainTicker(): React.ReactElement {
-  const [domains, setDomains] = useState(allDomains);
-
-  useEffect(() => {
-    setDomains(shuffledDomains());
-  }, []);
-
+  const domains = shuffledDomains();
   const marqueeSeconds = Math.round(domains.length * 0.95);
 
   return (

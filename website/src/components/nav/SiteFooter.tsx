@@ -1,10 +1,8 @@
-'use client';
-
 import Link from 'next/link';
 import { CHROME_WEB_STORE_URL, CONTACT, REQUEST_SUPPORT_URL, SITE } from '@/data/constants';
-import { trackChromeWebStoreClick, trackOutboundClick } from '@/lib/analytics';
 import { routes } from '@/lib/routes';
 import { Shell } from '@/components/ui/Shell';
+import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
 const footerLink =
   'text-caption font-medium text-ink-inverse-body no-underline transition-colors hover:text-white';
@@ -34,15 +32,15 @@ export function SiteFooter(): React.ReactElement {
                   </Link>
                 </li>
                 <li>
-                  <a
+                  <TrackedAnchor
                     href={CHROME_WEB_STORE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
-                    onClick={() => trackChromeWebStoreClick('footer')}
+                    chromeWebStoreFooter
                   >
                     Chrome Web Store
-                  </a>
+                  </TrackedAnchor>
                 </li>
                 <li>
                   <Link href={routes.sites} className={footerLink}>
@@ -66,37 +64,37 @@ export function SiteFooter(): React.ReactElement {
               <p className="text-overline uppercase text-primary-300">Support</p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
                 <li>
-                  <a
+                  <TrackedAnchor
                     href={REQUEST_SUPPORT_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
-                    onClick={() => trackOutboundClick('request_support')}
+                    cta="github"
                   >
                     Request a Site
-                  </a>
+                  </TrackedAnchor>
                 </li>
                 <li>
-                  <a
+                  <TrackedAnchor
                     href={CONTACT.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
-                    onClick={() => trackOutboundClick('github')}
+                    cta="github"
                   >
                     GitHub
-                  </a>
+                  </TrackedAnchor>
                 </li>
                 <li>
-                  <a
+                  <TrackedAnchor
                     href={CONTACT.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={footerLink}
-                    onClick={() => trackOutboundClick('telegram')}
+                    cta="telegram"
                   >
                     Telegram
-                  </a>
+                  </TrackedAnchor>
                 </li>
               </ul>
             </div>
@@ -115,13 +113,13 @@ export function SiteFooter(): React.ReactElement {
                   </Link>
                 </li>
                 <li>
-                  <a
+                  <TrackedAnchor
                     href={`mailto:${CONTACT.email}`}
                     className={footerLink}
-                    onClick={() => trackOutboundClick('email')}
+                    cta="email"
                   >
                     {CONTACT.email}
-                  </a>
+                  </TrackedAnchor>
                 </li>
               </ul>
             </div>

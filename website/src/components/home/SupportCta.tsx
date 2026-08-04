@@ -1,12 +1,9 @@
-'use client';
-
 import { CONTACT, REQUEST_SUPPORT_URL } from '@/data/constants';
-import { trackOutboundClick } from '@/lib/analytics';
-import { ButtonAnchor } from '@/components/ui/Button';
 import { GitHubIcon } from '@/components/ui/GitHubIcon';
 import { GmailIcon } from '@/components/ui/GmailIcon';
 import { Shell } from '@/components/ui/Shell';
 import { TelegramIcon } from '@/components/ui/TelegramIcon';
+import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
 export function SupportCta(): React.ReactElement {
   return (
@@ -26,34 +23,37 @@ export function SupportCta(): React.ReactElement {
               add a bypass or automation when it’s possible.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <ButtonAnchor
+              <TrackedAnchor
                 href={REQUEST_SUPPORT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                button
                 variant="light"
-                onClick={() => trackOutboundClick('request_support')}
+                cta="github"
               >
                 <GitHubIcon className="size-5" />
                 Request on GitHub
-              </ButtonAnchor>
-              <ButtonAnchor
+              </TrackedAnchor>
+              <TrackedAnchor
                 href={CONTACT.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
+                button
                 variant="light"
-                onClick={() => trackOutboundClick('telegram')}
+                cta="telegram"
               >
                 <TelegramIcon className="size-5" />
                 Telegram
-              </ButtonAnchor>
-              <ButtonAnchor
+              </TrackedAnchor>
+              <TrackedAnchor
                 href={`mailto:${CONTACT.email}`}
+                button
                 variant="light"
-                onClick={() => trackOutboundClick('email')}
+                cta="email"
               >
                 <GmailIcon className="size-5" />
                 Email
-              </ButtonAnchor>
+              </TrackedAnchor>
             </div>
           </div>
         </div>
