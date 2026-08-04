@@ -3,6 +3,7 @@ type Fiber = {
   memoizedProps?: Record<string, unknown>;
   pendingProps?: Record<string, unknown>;
   return?: Fiber | null;
+  child?: Fiber | null;
 };
 
 export function runApktealDirectDownload(): void {
@@ -11,11 +12,13 @@ export function runApktealDirectDownload(): void {
   if (w.__swApktealDirect) return;
   w.__swApktealDirect = true;
 
-  const BRAND = 'data-skipwait-brand';
-  const WIRED = 'data-skipwait-direct';
-  const PENDING = 'data-skipwait-pending';
   const ROW = '[class*="download_wrap"]';
   const CTA = `${ROW} button, ${ROW} a`;
+  const LABEL = 'Free Download · Skip Wait';
+  const wired = new WeakSet<HTMLElement>();
+  const pending = new WeakSet<HTMLElement>();
+  const urls = new WeakMap<HTMLElement, string>();
+  const linkIds = new WeakMap<HTMLElement, number>();
   const cache = new Map<number, Promise<string | null>>();
   let actionId: string | undefined;
   let actionPending: Promise<string | null> | null = null;
@@ -25,6 +28,20 @@ export function runApktealDirectDownload(): void {
   const fiberOf = (el: Element): Fiber | null => {
     const key = Object.keys(el).find((k) => k.startsWith('__reactFiber$'));
     return key ? ((el as unknown as Record<string, Fiber>)[key] ?? null) : null;
+  };
+
+  const brand = (btn: HTMLElement): void => {
+    if (btn.textContent?.trim() === LABEL) return;
+    btn.textContent = LABEL;
+    btn.style.whiteSpace = 'nowrap';
+    for (let fiber = fiberOf(btn); fiber; fiber = fiber.child ?? null) {
+      const props = fiber.memoizedProps ?? fiber.pendingProps;
+      if (!props || typeof props['children'] !== 'string') continue;
+      props['children'] = LABEL;
+      if (fiber.pendingProps) fiber.pendingProps['children'] = LABEL;
+      if (fiber.memoizedProps) fiber.memoizedProps['children'] = LABEL;
+      break;
+    }
   };
 
   const asLinks = (value: unknown): Link[] | null => {
@@ -114,9 +131,9 @@ export function runApktealDirectDownload(): void {
   };
 
   const resolveLink = (linkId: number): Promise<string | null> => {
-    let pending = cache.get(linkId);
-    if (!pending) {
-      pending = getActionId()
+    let job = cache.get(linkId);
+    if (!job) {
+      job = getActionId()
         .then(async (id) => {
           if (!id) return null;
           const res = await fetch(`${location.origin}/download/`, {
@@ -138,66 +155,35 @@ export function runApktealDirectDownload(): void {
           if (!url) cache.delete(linkId);
           return url;
         });
-      cache.set(linkId, pending);
+      cache.set(linkId, job);
     }
-    return pending;
-  };
-
-  const mountBrand = (row: HTMLElement): void => {
-    if (row.querySelector(`[${BRAND}]`)) return;
-    const el = document.createElement('div');
-    el.setAttribute(BRAND, '1');
-    el.setAttribute('role', 'status');
-    el.style.cssText =
-      'display:flex;align-items:flex-start;gap:10px;margin:0;padding:10px 12px;border-radius:12px;' +
-      'background:#ecfdf5;color:#065f46;font:600 13px/1.4 Roboto,ui-sans-serif,system-ui,sans-serif;' +
-      'flex:1 1 100%;width:100%;max-width:100%;min-width:0;box-sizing:border-box;order:-1';
-    el.innerHTML =
-      '<span style="flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:#00a173;color:#fff;' +
-      'display:inline-flex;align-items:center;justify-content:center;font-size:12px;line-height:1;margin-top:1px">✓</span>' +
-      '<span style="min-width:0;flex:1 1 auto">' +
-      '<span style="display:block;font-size:14px;line-height:1.3;color:#065f46">Skip Wait — timers bypassed</span>' +
-      '<span style="display:block;margin-top:2px;font-weight:500;opacity:.78;font-size:12px;line-height:1.4;color:#047857">' +
-      'This download opens the file directly. No wait page.</span></span>';
-    row.prepend(el);
-  };
-
-  const replaceCta = (btn: HTMLElement, url: string): void => {
-    btn.removeAttribute(PENDING);
-    if (btn instanceof HTMLAnchorElement) {
-      btn.href = url;
-      btn.setAttribute(WIRED, '1');
-      return;
-    }
-    const a = document.createElement('a');
-    a.href = url;
-    a.className = btn.className;
-    a.style.cssText = btn.getAttribute('style') ?? '';
-    a.setAttribute(WIRED, '1');
-    a.rel = 'noopener';
-    while (btn.firstChild) a.append(btn.firstChild);
-    btn.replaceWith(a);
+    return job;
   };
 
   const wireCta = (btn: HTMLElement): void => {
-    if (btn.hasAttribute(WIRED) || btn.hasAttribute(PENDING)) return;
+    if (wired.has(btn)) {
+      brand(btn);
+      return;
+    }
+    if (pending.has(btn)) return;
     const links = linksNear(btn);
     const link = links && pickLink(btn, links);
     if (!link) return;
-    btn.setAttribute(PENDING, '1');
+    linkIds.set(btn, link.id);
+    pending.add(btn);
+    brand(btn);
     void resolveLink(link.id).then((url) => {
-      if (!url || !btn.isConnected) {
-        btn.removeAttribute(PENDING);
-        return;
-      }
-      replaceCta(btn, url);
+      pending.delete(btn);
+      if (!btn.isConnected || !url) return;
+      urls.set(btn, url);
+      wired.add(btn);
+      if (btn instanceof HTMLAnchorElement) btn.href = url;
     });
   };
 
   const apply = (): void => {
     if (onDownload()) return;
     for (const row of document.querySelectorAll<HTMLElement>(ROW)) {
-      mountBrand(row);
       const cta = row.querySelector<HTMLElement>('button, a[class*="bg-brand"]');
       if (cta) wireCta(cta);
     }
@@ -211,15 +197,27 @@ export function runApktealDirectDownload(): void {
       if (!(hit instanceof HTMLElement)) return;
       e.preventDefault();
       e.stopImmediatePropagation();
-      if (hit instanceof HTMLAnchorElement && hit.hasAttribute(WIRED) && /^https?:/i.test(hit.href)) {
-        location.assign(hit.href);
+      const ready =
+        urls.get(hit) ||
+        (hit instanceof HTMLAnchorElement && /^https?:/i.test(hit.href) ? hit.href : '');
+      if (ready && /^https?:/i.test(ready)) {
+        location.assign(ready);
         return;
       }
-      const links = linksNear(hit);
-      const link = links && pickLink(hit, links);
-      if (!link) return;
-      void resolveLink(link.id).then((url) => {
-        if (url) location.assign(url);
+      const linkId =
+        linkIds.get(hit) ??
+        (() => {
+          const links = linksNear(hit);
+          return links && pickLink(hit, links)?.id;
+        })();
+      if (!linkId) return;
+      void resolveLink(linkId).then((url) => {
+        if (!url) return;
+        urls.set(hit, url);
+        linkIds.set(hit, linkId);
+        wired.add(hit);
+        if (hit instanceof HTMLAnchorElement) hit.href = url;
+        location.assign(url);
       });
     },
     true,
