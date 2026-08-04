@@ -1,7 +1,3 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
 const CDN_MAX_AGE = 31536000;
 
 /** @type {import('next').NextConfig} */
@@ -9,10 +5,6 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [100],
-  },
-  outputFileTracingRoot: projectRoot,
-  turbopack: {
-    root: projectRoot,
   },
   experimental: {
     useTypeScriptCli: true,
