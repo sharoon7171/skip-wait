@@ -18,7 +18,7 @@ import { initCutyAdblockInject } from '../sites/cuty';
 import { initRinkuPageHooksInject } from '../sites/rinku';
 import { initStorylineScormMainWorldInject } from '../sites/storyline-scorm';
 import { initLink4mRedirect } from '../sites/tech8s';
-import { initOceansofgamessResolve } from '../sites/oceansofgamess';
+import { initOceanofgamesResolve } from '../sites/oceanofgames';
 import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot';
 
 initCoomeetMainWorldInject();
@@ -43,4 +43,4 @@ initCutyAdblockInject();
 initRinkuPageHooksInject();
 initStorylineScormMainWorldInject();
 initStreamerviewerbotMainWorldInject();
-initOceansofgamessResolve();
+initOceanofgamesResolve();

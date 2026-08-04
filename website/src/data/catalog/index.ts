@@ -57,7 +57,7 @@ import { bypass as muhammadniazBypass } from './bypasses/muhammadniaz-bypass';
 import { bypass as multiupBypass } from './bypasses/multiup-bypass';
 import { bypass as nitrolinkBypass } from './bypasses/nitrolink-bypass';
 import { bypass as oceanofdmgBypass } from './bypasses/oceanofdmg-bypass';
-import { bypass as oceansofgamessBypass } from './bypasses/oceansofgamess-bypass';
+import { bypass as oceanofgamesBypass } from './bypasses/oceanofgames-bypass';
 import { bypass as onhaxpkBypass } from './bypasses/onhaxpk-bypass';
 import { bypass as onlinetoolsBypass } from './bypasses/onlinetools-bypass';
 import { bypass as ouoBypass } from './bypasses/ouo-bypass';
@@ -156,7 +156,7 @@ export const bypasses: readonly SupportedBypass[] = [
   multiupBypass,
   nitrolinkBypass,
   oceanofdmgBypass,
-  oceansofgamessBypass,
+  oceanofgamesBypass,
   onhaxpkBypass,
   onlinetoolsBypass,
   ouoBypass,

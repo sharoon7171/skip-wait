@@ -99,7 +99,7 @@ import { initGoostEntry, initGoostMediator } from '../sites/goost';
 import { initAnkergamesDirectDownload } from '../sites/ankergames';
 import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
-import { initOceansofgamessDirectDownload } from '../sites/oceansofgamess';
+import { initOceanofgamesDirectDownload } from '../sites/oceanofgames';
 import { initYasir252DirectLinks, initYasir252MediatorPage } from '../sites/yasir252';
 import { initVegamoviesLandingRedirect } from '../sites/vegamovies';
 
@@ -150,7 +150,7 @@ const INITS = [
   initApunkagamesVlink,
   initApunkagamesDownloadProcess,
   initGamesnostalgiaDirectDownload,
-  initOceansofgamessDirectDownload,
+  initOceanofgamesDirectDownload,
   initYasir252DirectLinks,
   initYasir252MediatorPage,
   initXdmoviesLandingPageMed,
