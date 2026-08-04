@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { CHROME_WEB_STORE_URL, CONTACT, REQUEST_SUPPORT_URL, SITE } from '@/data/constants';
 import { routes } from '@/lib/routes';
+import { BrandIcon } from '@/components/ui/BrandIcon';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
@@ -14,7 +15,7 @@ export function SiteFooter(): React.ReactElement {
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-sm">
             <div className="inline-flex items-center gap-2.5">
-              <img src="/icon.png" alt="" width={28} height={28} className="size-7" />
+              <BrandIcon size={28} className="size-7" />
               <span className="font-display text-title font-extrabold tracking-tight text-ink-inverse">
                 {SITE.name}
               </span>

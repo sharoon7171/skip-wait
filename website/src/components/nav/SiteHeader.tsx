@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
 import { routes } from '@/lib/routes';
+import { BrandIcon } from '@/components/ui/BrandIcon';
 import { ChromeIcon } from '@/components/ui/ChromeIcon';
 import { IconClose, IconMenu } from '@/components/ui/Icons';
 import { Shell } from '@/components/ui/Shell';
@@ -55,13 +56,7 @@ export function SiteHeader(): React.ReactElement {
           className="inline-flex min-w-0 items-center gap-2 sm:gap-2.5 no-underline"
           onClick={closeMenu}
         >
-          <img
-            src="/icon.png"
-            alt=""
-            width={30}
-            height={30}
-            className="size-[1.875rem] shrink-0"
-          />
+          <BrandIcon size={30} priority className="size-[1.875rem] shrink-0" />
           <span className="truncate font-display text-[1.05rem] font-extrabold tracking-tight text-ink sm:text-[1.15rem]">
             {SITE.name}
           </span>
@@ -95,7 +90,7 @@ export function SiteHeader(): React.ReactElement {
               className="h-10 px-5"
               addToChrome="header"
             >
-              <ChromeIcon className="size-4" />
+              <ChromeIcon size={16} className="size-4" />
               Add to Chrome
             </TrackedAnchor>
           </nav>
@@ -153,7 +148,7 @@ export function SiteHeader(): React.ReactElement {
                 addToChrome="header"
                 onClick={closeMenu}
               >
-                <ChromeIcon className="size-4" />
+                <ChromeIcon size={16} className="size-4" />
                 Add to Chrome
               </TrackedAnchor>
             </nav>
