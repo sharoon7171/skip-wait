@@ -90,6 +90,7 @@ import { bypass as uploadrarBypass } from './bypasses/uploadrar-bypass';
 import { bypass as usersdriveBypass } from './bypasses/usersdrive-bypass';
 import { bypass as vegamoviesBypass } from './bypasses/vegamovies-bypass';
 import { bypass as wahmiBypass } from './bypasses/wahmi-bypass';
+import { bypass as workinkBypass } from './bypasses/workink-bypass';
 import { bypass as wpSafelinkBypass } from './bypasses/wp-safelink-bypass';
 import { bypass as xdmoviesBypass } from './bypasses/xdmovies-bypass';
 import { bypass as xdmoviesMediatorBypass } from './bypasses/xdmovies-mediator-bypass';
@@ -190,6 +191,7 @@ export const bypasses: readonly SupportedBypass[] = [
   usersdriveBypass,
   vegamoviesBypass,
   wahmiBypass,
+  workinkBypass,
   wpSafelinkBypass,
   xdmoviesBypass,
   xdmoviesMediatorBypass,

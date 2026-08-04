@@ -20,6 +20,7 @@ import { initStorylineScormMainWorldInject } from '../sites/storyline-scorm';
 import { initLink4mRedirect } from '../sites/tech8s';
 import { initOceanofgamesResolve } from '../sites/oceanofgames';
 import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot';
+import { initWorkinkMainWorldInject } from '../sites/workink';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -43,4 +44,5 @@ initCutyAdblockInject();
 initRinkuPageHooksInject();
 initStorylineScormMainWorldInject();
 initStreamerviewerbotMainWorldInject();
+initWorkinkMainWorldInject();
 initOceanofgamesResolve();

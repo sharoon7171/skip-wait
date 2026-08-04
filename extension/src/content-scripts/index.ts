@@ -89,6 +89,7 @@ import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initGaeaOperationsLockrGate } from '../sites/gaea-operations-lockr';
+import { initWorkinkGate } from '../sites/workink';
 
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
@@ -118,6 +119,7 @@ const INITS = [
   initBstshrtGate,
   initLinkunlockerGate,
   initGaeaOperationsLockrGate,
+  initWorkinkGate,
   initLootlabsUnlock,
   initLlSafelinkHqChain,
   initLlacDdx,
