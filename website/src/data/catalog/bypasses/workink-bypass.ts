@@ -25,13 +25,13 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Work.ink bypass skips short-link unlock gates on work.ink links, pins captcha when required, and opens your destination URL faster. Install Skip Wait once and it runs automatically on supported short URLs. If you are logged in as a publisher at https://auth.work.ink/, the bypass may not work—log out of that publisher session first.';
+  'Work.ink bypass skips short-link unlock gates on work.ink links, pins captcha when required, and opens your destination URL faster. Install Skip Wait once and it runs automatically on supported short URLs.';
 
 const problem =
   'Work.ink short links put captcha and unlock gates between the short URL and your destination so you wait through verification before the real link opens.';
 
 const howItWorks =
-  'Skip Wait detects work.ink short-link pages, shows an overlay, pins hCaptcha when the site requires it, then unlocks and opens the destination after you complete the check. Publisher login sessions from auth.work.ink can block this free-path unlock.';
+  'On a matching work.ink short URL, Skip Wait shows an overlay, pins hCaptcha when required, then unlocks and opens the destination after you complete the check.';
 
 const steps: readonly BypassStep[] = [
   {
@@ -39,16 +39,16 @@ const steps: readonly BypassStep[] = [
     body: 'Install Skip Wait from the Chrome Web Store. The Work.ink bypass turns on automatically on supported short URLs—no account needed.',
   },
   {
-    title: 'Stay logged out of publisher auth',
-    body: 'If you use a Work.ink publisher account, log out at https://auth.work.ink/ first. A publisher session can prevent the free-path bypass from unlocking.',
-  },
-  {
     title: 'Keep the extension enabled',
     body: 'Leave Skip Wait on in Chrome. There is nothing to configure for Work.ink.',
   },
   {
     title: 'Open a supported short link',
-    body: 'Open a work.ink short URL the same way you usually do. Complete captcha when Skip Wait pins it, then the destination opens automatically.',
+    body: 'Open a work.ink short URL the same way you usually do. No paste tool or special settings.',
+  },
+  {
+    title: 'Reach the destination faster',
+    body: 'Complete captcha when Skip Wait pins it. The destination opens automatically after verification.',
   },
 ];
 
@@ -62,17 +62,17 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Which Work.ink links does Skip Wait support?',
     answer:
-      'Skip Wait runs on work.ink short-link URLs (for example paths like /2MVo/test). It does not treat the whole domain the same—only real short-link pages.',
+      'Only work.ink short-link paths (for example /2MVo/test)—not every page on the domain.',
   },
   {
     question: 'Do I still need to solve captcha on Work.ink?',
     answer:
-      'Yes when the site requires it. Skip Wait pins hCaptcha in the overlay; after you solve it, the extension unlocks and opens the destination.',
+      'Yes when the site shows one. Skip Wait pins it in the overlay; after you solve it, unlock continues automatically.',
   },
   {
     question: 'Why might the Work.ink bypass not work?',
     answer:
-      'If you are logged in as a publisher at https://auth.work.ink/, the free-path unlock may fail. Log out of the publisher session, then open the short link again.',
+      'A publisher login at https://auth.work.ink/ can block the free-path unlock. Log out of that session, then open the short link again.',
   },
   {
     question: 'Is the Work.ink bypass free with Skip Wait?',
