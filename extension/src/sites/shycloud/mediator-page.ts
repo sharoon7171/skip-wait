@@ -5,6 +5,7 @@ import { SHYCLOUD_HOSTS } from './hosts';
 const ID = 'skip-wait-shycloud-overlay';
 const DATA_RE = /var\s+data\s*=\s*(\{[\s\S]*?\});/;
 const LINK_RE = /var\s+link\s*=\s*'([^']+)'/;
+const SECURE_LINK_RE = /const\s+secureLink\s*=\s*"([^"]+)"/;
 const GATE_RE = /location\.pathname\s*\+\s*['"]\?secure_dl=1['"]/;
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
@@ -20,6 +21,7 @@ type Data = {
 };
 
 let ui: FullPageOverlay | null = null;
+let started = false;
 
 const mount = (status: string): FullPageOverlay => {
   if (ui) {
@@ -47,16 +49,22 @@ const parseData = (): Data | null => {
   return null;
 };
 
-const linkIn = (html: string): string | null => {
-  const url = LINK_RE.exec(html)?.[1]?.trim();
+const httpUrl = (raw: string | undefined): string | null => {
+  const url = raw?.trim();
   return url && /^https?:\/\//i.test(url) ? url : null;
 };
+
+const pageLink = (): string | null => httpUrl(LINK_RE.exec(document.documentElement.innerHTML)?.[1]);
+
+const pageSecureLink = (): string | null => httpUrl(SECURE_LINK_RE.exec(document.documentElement.innerHTML)?.[1]);
 
 const isDownloadPhase = (): boolean => new URLSearchParams(location.search).has('secure_dl');
 
 const isGatePage = (): boolean => !isDownloadPhase() && GATE_RE.test(document.documentElement.innerHTML);
 
-const isReadyPage = (): boolean => !!document.getElementById('finalDlBtn') && !!linkIn(document.documentElement.innerHTML);
+const isReadyPage = (): boolean => !!document.getElementById('finalDlBtn') && !!pageLink();
+
+const isSavePage = (): boolean => !!document.getElementById('dlBtn') && !!pageSecureLink();
 
 const isWaitPage = (): boolean => {
   const btn = document.getElementById('continueBtn');
@@ -73,22 +81,18 @@ const stopPageTimers = (): void => {
   }
 };
 
-const unlockBody = (d: Data): URLSearchParams => {
-  const body = new URLSearchParams({
-    cf_cache_buster: String(Date.now()),
-    system_route: 'ii',
-    basename: d.basename ?? '',
-  });
-  if (d.post_title) body.set('post_title', d.post_title);
-  if (d.post_link) body.set('post_link', d.post_link);
-  return body;
-};
-
 const submitUnlock = (d: Data): void => {
   const f = document.createElement('form');
   f.method = 'POST';
   f.action = d.actionUrl ?? `${location.origin}/`;
-  for (const [name, value] of unlockBody(d)) {
+  const fields: Record<string, string> = {
+    cf_cache_buster: String(Date.now()),
+    system_route: 'ii',
+    basename: d.basename ?? '',
+  };
+  if (d.post_title) fields['post_title'] = d.post_title;
+  if (d.post_link) fields['post_link'] = d.post_link;
+  for (const [name, value] of Object.entries(fields)) {
     f.appendChild(Object.assign(document.createElement('input'), { type: 'hidden', name, value }));
   }
   document.body.append(f);
@@ -108,42 +112,46 @@ const triggerDownload = (url: string): void => {
   a.remove();
 };
 
-const unlock = async (d: Data): Promise<void> => {
-  mount('Decoding your link…');
-  const res = await fetch(d.actionUrl ?? `${location.origin}/`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: unlockBody(d),
-    credentials: 'include',
-    redirect: 'manual',
-  });
-  if (res.type === 'opaqueredirect' || (res.status >= 300 && res.status < 400)) {
-    submitUnlock(d);
-    return;
-  }
-  const url = res.ok ? linkIn(await res.text()) : null;
-  if (!url) throw new Error('shycloud unlock');
-  navigate(url);
+const finishDownload = async (url: string, flush = false): Promise<void> => {
+  const o = mount('Starting download…');
+  if (flush) await fetch(new URL('iii/index.php?action=flush_session', location.href).href, { credentials: 'include' });
+  triggerDownload(url);
+  o.remove();
+  ui = null;
 };
 
 const run = (): void => {
-  if (isDownloadPhase()) return;
+  if (started || isDownloadPhase()) return;
+
   if (isGatePage()) {
+    started = true;
     stopPageTimers();
-    const o = mount('Starting download…');
-    triggerDownload(`${location.pathname}?secure_dl=1`);
-    o.remove();
-    ui = null;
+    void finishDownload(`${location.pathname}?secure_dl=1`);
     return;
   }
+
+  if (isSavePage()) {
+    const url = pageSecureLink();
+    if (!url) return;
+    started = true;
+    void finishDownload(url, true);
+    return;
+  }
+
   if (isReadyPage()) {
-    const url = linkIn(document.documentElement.innerHTML);
-    if (url) navigate(url);
+    const url = pageLink();
+    if (!url) return;
+    started = true;
+    navigate(url);
     return;
   }
+
   if (!isWaitPage()) return;
   const data = parseData();
-  if (data?.canPost && data.basename) void unlock(data);
+  if (!data?.canPost || !data.basename) return;
+  started = true;
+  mount('Decoding your link…');
+  submitUnlock(data);
 };
 
 export function initShycloudMediatorPage(): void {
