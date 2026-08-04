@@ -27,6 +27,7 @@ import { bypass as filehippoBypass } from './bypasses/filehippo-bypass';
 import { bypass as filepressBypass } from './bypasses/filepress-bypass';
 import { bypass as filespayoutsBypass } from './bypasses/filespayouts-bypass';
 import { bypass as flightsimToBypass } from './bypasses/flightsim-to-bypass';
+import { bypass as gaeaOperationsLockrBypass } from './bypasses/gaea-operations-lockr-bypass';
 import { bypass as gamesnostalgiaBypass } from './bypasses/gamesnostalgia-bypass';
 import { bypass as genlinkBypass } from './bypasses/genlink-bypass';
 import { bypass as goostBypass } from './bypasses/goost-bypass';
@@ -126,6 +127,7 @@ export const bypasses: readonly SupportedBypass[] = [
   filepressBypass,
   filespayoutsBypass,
   flightsimToBypass,
+  gaeaOperationsLockrBypass,
   gamesnostalgiaBypass,
   genlinkBypass,
   goostBypass,
