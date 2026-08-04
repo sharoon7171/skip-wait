@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import type { SupportedBypass } from '@/types/catalog';
 import { bypassSlug } from '@/lib/catalog-slug';
 import { bypassSitePath } from '@/lib/routes';
+import { AppLink } from '@/components/nav/AppLink';
 
 type BypassRowProps = {
   entry: SupportedBypass;
@@ -76,11 +76,11 @@ export function BypassRow({
   }
 
   return (
-    <Link
+    <AppLink
       href={detailPath}
       className={`group block no-underline transition-colors hover:bg-primary-50/60 ${className}`.trim()}
     >
       {body}
-    </Link>
+    </AppLink>
   );
 }

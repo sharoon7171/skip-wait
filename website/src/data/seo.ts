@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { CHROME_WEB_STORE_URL, CONTACT, ORGANIZATION, SITE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
+import { homeSections } from '@/lib/routes';
 
 export const indexRobots: NonNullable<Metadata['robots']> = {
   index: true,
@@ -136,7 +137,7 @@ export function faqPageJsonLd(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${SITE.url}/#faq`,
+    '@id': `${SITE.url}${homeSections.faq}`,
     url: SITE.url,
     mainEntity: faqs.map((item) => ({
       '@type': 'Question',

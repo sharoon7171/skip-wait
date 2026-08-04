@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { CHROME_WEB_STORE_URL, CONTACT, REQUEST_SUPPORT_URL, SITE } from '@/data/constants';
-import { routes } from '@/lib/routes';
+import { homeSections, routes } from '@/lib/routes';
+import { AppLink } from '@/components/nav/AppLink';
 import { BrandIcon } from '@/components/ui/BrandIcon';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
@@ -28,9 +28,9 @@ export function SiteFooter(): React.ReactElement {
               <p className="text-overline uppercase text-primary-300">Product</p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
                 <li>
-                  <Link href={routes.home} className={footerLink}>
+                  <AppLink href={routes.home} className={footerLink}>
                     Home
-                  </Link>
+                  </AppLink>
                 </li>
                 <li>
                   <TrackedAnchor
@@ -44,19 +44,19 @@ export function SiteFooter(): React.ReactElement {
                   </TrackedAnchor>
                 </li>
                 <li>
-                  <Link href={routes.sites} className={footerLink}>
+                  <AppLink href={routes.sites} className={footerLink}>
                     Supported Sites
-                  </Link>
+                  </AppLink>
                 </li>
                 <li>
-                  <a href={`${routes.home}#how-it-works`} className={footerLink}>
+                  <AppLink href={homeSections.howItWorks} className={footerLink}>
                     How It Works
-                  </a>
+                  </AppLink>
                 </li>
                 <li>
-                  <a href={`${routes.home}#faq`} className={footerLink}>
+                  <AppLink href={homeSections.faq} className={footerLink}>
                     FAQ
-                  </a>
+                  </AppLink>
                 </li>
               </ul>
             </div>
@@ -104,14 +104,14 @@ export function SiteFooter(): React.ReactElement {
               <p className="text-overline uppercase text-primary-300">Legal</p>
               <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
                 <li>
-                  <Link href={routes.privacy} className={footerLink}>
+                  <AppLink href={routes.privacy} className={footerLink}>
                     Privacy Policy
-                  </Link>
+                  </AppLink>
                 </li>
                 <li>
-                  <Link href={routes.terms} className={footerLink}>
+                  <AppLink href={routes.terms} className={footerLink}>
                     Terms of Use
-                  </Link>
+                  </AppLink>
                 </li>
                 <li>
                   <TrackedAnchor

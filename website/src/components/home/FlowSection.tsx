@@ -1,3 +1,4 @@
+import { homeHash } from '@/lib/routes';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
 
@@ -24,7 +25,7 @@ const steps: readonly { number: string; title: string; body: string; tone: strin
 
 export function FlowSection(): React.ReactElement {
   return (
-    <section id="how-it-works" className="scroll-mt-20 bg-surface-canvas py-12 lg:py-16">
+    <section id={homeHash.howItWorks} className="scroll-mt-20 bg-surface-canvas py-12 lg:py-16">
       <Shell>
         <SectionHeader
           title="How to Skip Countdown Timers and Waiting Pages"

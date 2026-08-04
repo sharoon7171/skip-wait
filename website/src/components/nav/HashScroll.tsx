@@ -2,20 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-
-function scrollToHash(smooth: boolean): void {
-  const hash = window.location.hash;
-  if (!hash) {
-    return;
-  }
-
-  const id = hash.slice(1);
-  requestAnimationFrame(() => {
-    document
-      .getElementById(id)
-      ?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-  });
-}
+import { syncScrollFromLocation } from '@/lib/hash-nav';
 
 export function HashScroll(): null {
   const pathname = usePathname();
@@ -25,17 +12,21 @@ export function HashScroll(): null {
     if (isFirstLoad.current) {
       isFirstLoad.current = false;
       if (window.location.hash) {
-        scrollToHash(false);
+        syncScrollFromLocation(false);
       }
-    } else if (window.location.hash) {
-      scrollToHash(true);
     } else {
-      window.scrollTo(0, 0);
+      syncScrollFromLocation(Boolean(window.location.hash));
     }
 
-    const onHashChange = (): void => scrollToHash(true);
+    const onHashChange = (): void => syncScrollFromLocation(true);
+    const onPopState = (): void => syncScrollFromLocation(Boolean(window.location.hash));
+
     window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    window.addEventListener('popstate', onPopState);
+    return () => {
+      window.removeEventListener('hashchange', onHashChange);
+      window.removeEventListener('popstate', onPopState);
+    };
   }, [pathname]);
 
   return null;

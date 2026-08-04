@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useId, useState } from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
-import { routes } from '@/lib/routes';
+import { homeSections, routes } from '@/lib/routes';
+import { AppLink } from '@/components/nav/AppLink';
 import { BrandIcon } from '@/components/ui/BrandIcon';
 import { ChromeIcon } from '@/components/ui/ChromeIcon';
 import { IconClose, IconMenu } from '@/components/ui/Icons';
@@ -51,7 +51,7 @@ export function SiteHeader(): React.ReactElement {
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-surface-canvas/85 backdrop-blur-md">
       <Shell className="flex h-[4.5rem] items-center justify-between gap-3 sm:gap-6">
-        <Link
+        <AppLink
           href={routes.home}
           className="inline-flex min-w-0 items-center gap-2 sm:gap-2.5 no-underline"
           onClick={closeMenu}
@@ -60,19 +60,19 @@ export function SiteHeader(): React.ReactElement {
           <span className="truncate font-display text-[1.05rem] font-extrabold tracking-tight text-ink sm:text-[1.15rem]">
             {SITE.name}
           </span>
-        </Link>
+        </AppLink>
 
         <div className="flex shrink-0 items-center gap-3 lg:gap-8">
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-            <Link href={routes.sites} className={`${navLink} ${sitesClass}`}>
+            <AppLink href={routes.sites} className={`${navLink} ${sitesClass}`}>
               Supported Sites
-            </Link>
-            <a href={`${routes.home}#how-it-works`} className={navLink}>
+            </AppLink>
+            <AppLink href={homeSections.howItWorks} className={navLink}>
               How It Works
-            </a>
-            <a href={`${routes.home}#faq`} className={navLink}>
+            </AppLink>
+            <AppLink href={homeSections.faq} className={navLink}>
               FAQ
-            </a>
+            </AppLink>
             <TrackedAnchor
               href={CONTACT.github}
               target="_blank"
@@ -112,23 +112,27 @@ export function SiteHeader(): React.ReactElement {
         <div id={menuId} className="border-t border-neutral-200 bg-surface-canvas lg:hidden">
           <Shell>
             <nav className="flex flex-col gap-1 py-3" aria-label="Primary">
-              <Link
+              <AppLink
                 href={routes.sites}
                 className={`${mobileNavLink} ${sitesActive ? 'bg-primary-50 text-primary-700' : ''}`}
                 onClick={closeMenu}
               >
                 Supported Sites
-              </Link>
-              <a
-                href={`${routes.home}#how-it-works`}
+              </AppLink>
+              <AppLink
+                href={homeSections.howItWorks}
                 className={mobileNavLink}
                 onClick={closeMenu}
               >
                 How It Works
-              </a>
-              <a href={`${routes.home}#faq`} className={mobileNavLink} onClick={closeMenu}>
+              </AppLink>
+              <AppLink
+                href={homeSections.faq}
+                className={mobileNavLink}
+                onClick={closeMenu}
+              >
                 FAQ
-              </a>
+              </AppLink>
               <TrackedAnchor
                 href={CONTACT.github}
                 target="_blank"

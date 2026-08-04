@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import type { SupportedBypass } from '@/types/catalog';
 import { CHROME_WEB_STORE_URL } from '@/data/constants';
 import { routes } from '@/lib/routes';
+import { AppLink } from '@/components/nav/AppLink';
 import { BypassArticleToc, type BypassTocItem } from '@/components/sites/BypassArticleToc';
 import { SupportCta } from '@/components/home/SupportCta';
 import { ButtonLink } from '@/components/ui/Button';
@@ -37,23 +37,23 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
           <nav aria-label="Breadcrumb" className="mb-5">
             <ol className="m-0 flex list-none flex-wrap items-center gap-1 p-0 text-caption text-ink-soft">
               <li>
-                <Link
+                <AppLink
                   href={routes.home}
                   className="rounded-sm px-1 py-0.5 no-underline transition-colors hover:text-ink"
                 >
                   Home
-                </Link>
+                </AppLink>
               </li>
               <li aria-hidden className="flex items-center text-neutral-300">
                 <IconChevronRight className="size-3.5" />
               </li>
               <li>
-                <Link
+                <AppLink
                   href={routes.sites}
                   className="rounded-sm px-1 py-0.5 no-underline transition-colors hover:text-ink"
                 >
                   Supported Sites
-                </Link>
+                </AppLink>
               </li>
               <li aria-hidden className="flex items-center text-neutral-300">
                 <IconChevronRight className="size-3.5" />

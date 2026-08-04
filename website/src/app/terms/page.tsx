@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
@@ -181,7 +181,7 @@ export default function TermsPage(): React.ReactElement {
         <LegalSection title="9. Privacy">
           <p>
             How the Extension handles information is described in the{' '}
-            <Link href={routes.privacy}>Privacy Policy</Link>. Read it together with these Terms.
+            <AppLink href={routes.privacy}>Privacy Policy</AppLink>. Read it together with these Terms.
           </p>
         </LegalSection>
 

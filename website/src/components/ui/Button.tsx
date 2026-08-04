@@ -1,5 +1,5 @@
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
-import Link from 'next/link';
+import { AppLink } from '@/components/nav/AppLink';
 
 const base =
   'inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-7 text-ui whitespace-nowrap no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500';
@@ -24,9 +24,9 @@ export function ButtonLink({
   children,
 }: Common & { href: string }): React.ReactElement {
   return (
-    <Link href={href} className={buttonClasses(variant, className)}>
+    <AppLink href={href} className={buttonClasses(variant, className)}>
       {children}
-    </Link>
+    </AppLink>
   );
 }
 

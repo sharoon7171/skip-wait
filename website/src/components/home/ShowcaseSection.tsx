@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { sampleBypasses, totalBypasses, totalDomains } from '@/data/catalog-queries';
 import { routes } from '@/lib/routes';
+import { AppLink } from '@/components/nav/AppLink';
 import { BypassRow } from '@/components/sites/BypassRow';
 import { IconArrowRight } from '@/components/ui/Icons';
 import { SectionHeader } from '@/components/ui/SectionHeader';
@@ -34,13 +34,13 @@ export function ShowcaseSection(): React.ReactElement {
             ))}
           </ul>
 
-          <Link
+          <AppLink
             href={routes.sites}
             className="flex items-center justify-between gap-4 border-t border-neutral-200 px-6 py-5 text-ui text-primary-700 no-underline transition-colors hover:bg-primary-50/60 sm:px-8"
           >
             View All {totalBypasses()} Sites Across {totalDomains()} Websites
             <IconArrowRight className="size-4 shrink-0" />
-          </Link>
+          </AppLink>
         </div>
       </Shell>
     </section>
