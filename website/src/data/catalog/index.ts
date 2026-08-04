@@ -25,6 +25,7 @@ import { bypass as filecrBypass } from './bypasses/filecr-bypass';
 import { bypass as filecryptBypass } from './bypasses/filecrypt-bypass';
 import { bypass as filehippoBypass } from './bypasses/filehippo-bypass';
 import { bypass as filepressBypass } from './bypasses/filepress-bypass';
+import { bypass as filespayoutsBypass } from './bypasses/filespayouts-bypass';
 import { bypass as flightsimToBypass } from './bypasses/flightsim-to-bypass';
 import { bypass as gamesnostalgiaBypass } from './bypasses/gamesnostalgia-bypass';
 import { bypass as genlinkBypass } from './bypasses/genlink-bypass';
@@ -84,6 +85,7 @@ import { bypass as tflyBypass } from './bypasses/tfly-bypass';
 import { bypass as theuserCloudBypass } from './bypasses/theuser-cloud-bypass';
 import { bypass as tinurlzSoftinfoBypass } from './bypasses/tinurlz-softinfo-bypass';
 import { bypass as tipsguruBypass } from './bypasses/tipsguru-bypass';
+import { bypass as uploadrarBypass } from './bypasses/uploadrar-bypass';
 import { bypass as usersdriveBypass } from './bypasses/usersdrive-bypass';
 import { bypass as vegamoviesBypass } from './bypasses/vegamovies-bypass';
 import { bypass as wahmiBypass } from './bypasses/wahmi-bypass';
@@ -122,6 +124,7 @@ export const bypasses: readonly SupportedBypass[] = [
   filecryptBypass,
   filehippoBypass,
   filepressBypass,
+  filespayoutsBypass,
   flightsimToBypass,
   gamesnostalgiaBypass,
   genlinkBypass,
@@ -181,6 +184,7 @@ export const bypasses: readonly SupportedBypass[] = [
   theuserCloudBypass,
   tinurlzSoftinfoBypass,
   tipsguruBypass,
+  uploadrarBypass,
   usersdriveBypass,
   vegamoviesBypass,
   wahmiBypass,

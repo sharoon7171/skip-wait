@@ -90,6 +90,8 @@ import { initBstshrtGate } from '../sites/bstshrt';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
+import { initUploadrarBypass } from '../sites/uploadrar';
+import { initFilespayoutsBypass } from '../sites/filespayouts';
 import { initTheuserCloudBypass } from '../sites/theuser-cloud';
 import { initOceanofdmgBypass } from '../sites/oceanofdmg';
 import { initPesktopBypass } from '../sites/pesktop';
@@ -212,6 +214,8 @@ const INITS = [
   initWahmiCountdownBypass,
   initWpSafelinkRedirect,
   initSwiftuploadsDirectDownload,
+  initUploadrarBypass,
+  initFilespayoutsBypass,
   initTheuserCloudBypass,
   initOceanofdmgBypass,
   initPesktopBypass,
