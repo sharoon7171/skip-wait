@@ -71,7 +71,7 @@ import {
 import { initDroplinkUnlock } from '../sites/droplink';
 import { initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
 import { initTinurlzSoftinfoFragment } from './tinurlz-softinfo-fragment';
-import { initKaranpcMediatorPage } from '../sites/karanpc';
+import { initShycloudMediatorPage } from '../sites/shycloud';
 import { initUsersdriveAutomation } from '../sites/usersdrive';
 import { initMega4uploadBypass } from '../sites/mega4upload';
 import { initMirroredFilesPage } from '../sites/mirrored';
@@ -202,7 +202,7 @@ const INITS = [
   initTech8sRedirect,
   initTech8sGate,
   initTinurlzSoftinfoFragment,
-  initKaranpcMediatorPage,
+  initShycloudMediatorPage,
   initUsersdriveAutomation,
   initMega4uploadBypass,
   initMirroredFilesPage,

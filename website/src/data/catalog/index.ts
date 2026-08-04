@@ -36,7 +36,6 @@ import { bypass as hdhub4uBypass } from './bypasses/hdhub4u-bypass';
 import { bypass as hdhub4uMediatorBypass } from './bypasses/hdhub4u-mediator-bypass';
 import { bypass as hubcloudHubcdnBypass } from './bypasses/hubcloud-hubcdn-bypass';
 import { bypass as icutlinkBypass } from './bypasses/icutlink-bypass';
-import { bypass as karanpcBypass } from './bypasses/karanpc-bypass';
 import { bypass as kitokolaBypass } from './bypasses/kitokola-bypass';
 import { bypass as kotakanimeidBypass } from './bypasses/kotakanimeid-bypass';
 import { bypass as linclikBypass } from './bypasses/linclik-bypass';
@@ -70,6 +69,7 @@ import { bypass as sflBypass } from './bypasses/sfl-bypass';
 import { bypass as shortxlinksBypass } from './bypasses/shortxlinks-bypass';
 import { bypass as shrinkmeBypass } from './bypasses/shrinkme-bypass';
 import { bypass as shrtslugBypass } from './bypasses/shrtslug-bypass';
+import { bypass as shycloudBypass } from './bypasses/shycloud-bypass';
 import { bypass as sidMediatorBypass } from './bypasses/sid-mediator-bypass';
 import { bypass as softpediaBypass } from './bypasses/softpedia-bypass';
 import { bypass as storylineScormBypass } from './bypasses/storyline-scorm-bypass';
@@ -135,7 +135,6 @@ export const bypasses: readonly SupportedBypass[] = [
   hdhub4uMediatorBypass,
   hubcloudHubcdnBypass,
   icutlinkBypass,
-  karanpcBypass,
   kitokolaBypass,
   kotakanimeidBypass,
   linclikBypass,
@@ -169,6 +168,7 @@ export const bypasses: readonly SupportedBypass[] = [
   shortxlinksBypass,
   shrinkmeBypass,
   shrtslugBypass,
+  shycloudBypass,
   sidMediatorBypass,
   softpediaBypass,
   storylineScormBypass,
