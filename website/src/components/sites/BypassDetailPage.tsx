@@ -85,7 +85,7 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
               addToChrome="bypass_detail"
             >
               <ChromeIcon className="size-5" />
-              Add to Chrome — Free
+              Add to Chrome
             </TrackedAnchor>
             <ButtonLink href={routes.sites} variant="ghost">
               <IconArrowLeft className="size-4" />
@@ -179,18 +179,6 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
                     </li>
                   ))}
                 </ol>
-                <div className="mt-8">
-                  <TrackedAnchor
-                    href={CHROME_WEB_STORE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    button
-                    addToChrome="bypass_detail"
-                  >
-                    <ChromeIcon className="size-5" />
-                    Add Skip Wait to Chrome
-                  </TrackedAnchor>
-                </div>
               </section>
             ) : null}
 
