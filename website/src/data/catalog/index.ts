@@ -10,6 +10,7 @@ import { bypass as apunkagamesBypass } from './bypasses/apunkagames-bypass';
 import { bypass as arolinksBypass } from './bypasses/arolinks-bypass';
 import { bypass as bitcotasksBypass } from './bypasses/bitcotasks-bypass';
 import { bypass as boostellarBstshrtBypass } from './bypasses/boostellar-bstshrt-bypass';
+import { bypass as boostylinkBypass } from './bypasses/boostylink-bypass';
 import { bypass as clipiBypass } from './bypasses/clipi-bypass';
 import { bypass as cookiesceoBypass } from './bypasses/cookiesceo-bypass';
 import { bypass as coomeetIframeBypass } from './bypasses/coomeet-iframe-bypass';
@@ -111,6 +112,7 @@ export const bypasses: readonly SupportedBypass[] = [
   arolinksBypass,
   bitcotasksBypass,
   boostellarBstshrtBypass,
+  boostylinkBypass,
   clipiBypass,
   cookiesceoBypass,
   coomeetIframeBypass,

@@ -87,6 +87,8 @@ import { initExeioGate } from '../sites/exeio';
 import { initLksfyGate, initLksfyMediator } from '../sites/lksfy';
 import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
+import { initBoostylinkGate } from '../sites/boostylink';
+import { initKeyforgeGate } from '../sites/keyforge';
 import { initLinkunlockerGate } from '../sites/linkunlocker';
 import { initGaeaOperationsLockrGate } from '../sites/gaea-operations-lockr';
 import { initWorkinkGate } from '../sites/workink';
@@ -117,6 +119,8 @@ const INITS = [
   initLksfyGate,
   initRinkuGate,
   initBstshrtGate,
+  initBoostylinkGate,
+  initKeyforgeGate,
   initLinkunlockerGate,
   initGaeaOperationsLockrGate,
   initWorkinkGate,
