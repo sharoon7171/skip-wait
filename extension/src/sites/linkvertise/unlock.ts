@@ -130,8 +130,13 @@ export function parseAccessIdentifier(href = location.href): AccessIdentifier | 
     if (version) userIdAndHash.version = version;
     return { userIdAndHash };
   }
-  const classic = path.match(/^\/access\/([^/]+)\/([^/]+)\/?$/i);
+  const classic =
+    path.match(/^\/access\/([^/]+)\/([^/]+)\/?$/i) ||
+    path.match(/^\/([^/]+)\/([^/]+)\/?$/i);
   if (!classic?.[1] || !classic[2]) return null;
+  if (/^(access|your-target|for-you|explore|login|account)$/i.test(classic[1])) {
+    return null;
+  }
   return { userIdAndUrl: { user_id: classic[1], url: decodeURIComponent(classic[2]) } };
 }
 
