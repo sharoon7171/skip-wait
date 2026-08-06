@@ -4,74 +4,84 @@ const name = "MoviesMod";
 
 const bypassType = "Skip Timed Reveal";
 
-const description = "MoviesMod bypass skips the timed content reveal wait and shows episode and download links immediately on modded streaming pages without delay.";
+const description =
+  "MoviesMod bypass that skips WordPress timed-content waits so download and episode links show immediately instead of after a please-wait countdown.";
 
 const domains = [
   "episodes.modpro.blog",
   "links.modpro.blog",
+  "leechpro.blog",
 ] as const;
 
 const keywords = [
   "moviesmod bypass",
-  "MoviesMod bypass extension",
-  "moviesmod timer bypass",
+  "leechpro bypass",
+  "leechpro.blog bypass",
+  "modpro timed content bypass",
   "skip timed reveal",
   "skip countdown timer",
   "bypass countdown timer",
+  "please wait seconds bypass",
   "skip waiting page",
-  "link shortener bypass",
+  "hidden download links unlock",
   "skip wait extension",
-  "timed reveal bypass",
-  "hidden link unlock",
+  "timed content plugin bypass",
 ] as const;
 
-const intro = "MoviesMod bypass skips the timed content reveal wait and shows episode and download links immediately on modded streaming pages without delay. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  "Install Skip Wait once and timed download sections on MoviesMod-style blogs unlock as soon as the page loads—no watching a five-second generate-links timer.";
 
-const problem = "MoviesMod hides episode or download links behind a timed reveal. Users want a MoviesMod bypass that shows the links immediately.";
+const problem =
+  "These blogs hide server buttons behind a WordPress Timed Content client timer, so you stare at “wait N seconds to generate links” before any download option appears.";
 
-const howItWorks = "Skip Wait activates on recognized skip timed reveal flows and bypasses or automates the wait so you reach the content faster.";
+const howItWorks =
+  "Skip Wait injects CSS that flips Timed Content hide/show classes on load, revealing the already-rendered download buttons and episode links without waiting for the plugin timer.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The MoviesMod bypass turns on automatically on supported pages—no account needed.",
+    body: "Install from the Chrome Web Store. Timed-reveal support for MoviesMod-related blogs enables itself automatically.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for MoviesMod.",
+    body: "Leave Skip Wait on. No per-site toggle is required for timed download pages.",
   },
   {
-    title: "Open the episode or download section",
-    body: "Browse to the content section on MoviesMod. Skip Wait reveals links that would normally stay hidden until the timer ends.",
+    title: "Open the archive or episode page",
+    body: "Load the post that shows a please-wait countdown before download servers. Links are already in the HTML.",
   },
   {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported MoviesMod delay.",
+    title: "Pick a download server right away",
+    body: "Fast Server, G-Drive, OneDrive, and other buttons appear immediately so you can continue without the fake generate delay.",
   },
 ];
 
 const skips = [
-  "Timed Reveal that block the destination",
-  "Timed hidden link reveals",
-  "CSS locked episode links",
+  "Please-wait N seconds generate-links messages",
+  "WordPress Timed Content client hide/show delays",
+  "CSS-locked download and episode button blocks",
 ] as const;
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What timed content reveal does Skip Wait skip on MoviesMod pages?",
-    answer: "Skip Wait bypasses the timed content reveal wait on episodes.modpro.blog and links.modpro.blog, showing episode and download links immediately.",
+    question: "Which sites get this timed reveal bypass?",
+    answer:
+      "episodes.modpro.blog, links.modpro.blog, and leechpro.blog—blogs that hide download or episode links with the Timed Content plugin.",
   },
   {
-    question: "Which MoviesMod domains like episodes.modpro.blog are covered?",
-    answer: "Both episodes.modpro.blog and links.modpro.blog are supported, with CSS-locked episode links revealed right away.",
+    question: "Are the download links already on the page during the timer?",
+    answer:
+      "Yes. The buttons are rendered in the HTML and only CSS-hidden for a few seconds. Skip Wait shows that block immediately.",
   },
   {
-    question: "Can I see episode and download links immediately on modded streaming pages?",
-    answer: "Yes. Timed hidden link reveals that normally force you to wait are bypassed so links appear as soon as the page loads.",
+    question: "Does this remove the counter text as well?",
+    answer:
+      "The wait message lives in the Timed Content hide block, so revealing the show block and hiding the wait block removes that countdown UI with the links.",
   },
   {
-    question: "Is the MoviesMod bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The MoviesMod bypass runs on supported pages with no account or paid plan required.",
+    question: "Is the MoviesMod timed reveal bypass free?",
+    answer:
+      "Yes. Skip Wait is a free Chrome extension with no account required for these timed-content pages.",
   },
 ];
 

@@ -3,6 +3,7 @@ import { isAllowedHost } from '../../utils/domain-check';
 const HOSTS = [
   'episodes.modpro.blog',
   'links.modpro.blog',
+  'leechpro.blog',
 ] as const;
 const STYLE_ID = 'skipwait-movies-mod-timed-content';
 
