@@ -3,12 +3,12 @@ import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/o
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
 import { finishUnlock, formAction, postUnlock, unlockForm } from './api';
-import { MEDIATOR_ACTIONS, MEDIATOR_HOSTS } from './hosts';
+import { SHRTFLY_MEDIATOR_ACTIONS, SHRTFLY_MEDIATOR_HOSTS } from './hosts';
 
-const OVERLAY_ID = 'skip-wait-shrtslug-mediator-overlay';
-const BOOT_STYLE_ID = 'skip-wait-shrtslug-mediator-boot';
-const PIN_STYLE_ID = 'skip-wait-shrtslug-mediator-turnstile-pin';
-const WIDGET_ID = 'skip-wait-shrtslug-mediator-turnstile';
+const OVERLAY_ID = 'skip-wait-shrtfly-mediator-overlay';
+const BOOT_STYLE_ID = 'skip-wait-shrtfly-mediator-boot';
+const PIN_STYLE_ID = 'skip-wait-shrtfly-mediator-turnstile-pin';
+const WIDGET_ID = 'skip-wait-shrtfly-mediator-turnstile';
 const TURNSTILE_IFRAMES = [
   'iframe[src*="challenges.cloudflare.com"]',
   'iframe[src*="turnstile"]',
@@ -59,10 +59,10 @@ const mountUi = (
 
 const isMediatorPage = (): boolean => {
   const form = unlockForm();
-  if (!form || !MEDIATOR_ACTIONS.has(formAction(form))) return false;
+  if (!form || !SHRTFLY_MEDIATOR_ACTIONS.has(formAction(form))) return false;
   if (!form.querySelector('input[name="payload"]')) return false;
   return (
-    isAllowedHost(MEDIATOR_HOSTS) ||
+    isAllowedHost(SHRTFLY_MEDIATOR_HOSTS) ||
     !!document.querySelector('a[href*="shrtfly.com/account/premium-access"]')
   );
 };
@@ -163,7 +163,7 @@ const unlock = async (): Promise<void> => {
   const form = unlockForm();
   if (!form) throw new Error('missing form');
   const action = formAction(form);
-  if (!MEDIATOR_ACTIONS.has(action)) throw new Error('not mediator');
+  if (!SHRTFLY_MEDIATOR_ACTIONS.has(action)) throw new Error('not mediator');
 
   const overlay = mountUi(NOTE, 'Unlocking your link…');
   revealGate();
@@ -181,7 +181,7 @@ const unlock = async (): Promise<void> => {
   finishUnlock(overlay, res.data);
 };
 
-export function initShrtslugMediator(): void {
+export function initShrtflyMediator(): void {
   if (window !== window.top) return;
 
   const mo = new MutationObserver(() => tick());

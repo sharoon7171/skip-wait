@@ -69,8 +69,8 @@ import { bypass as rinkuBypass } from './bypasses/rinku-bypass';
 import { bypass as romsfunBypass } from './bypasses/romsfun-bypass';
 import { bypass as sflBypass } from './bypasses/sfl-bypass';
 import { bypass as shortxlinksBypass } from './bypasses/shortxlinks-bypass';
+import { bypass as shrtflyBypass } from './bypasses/shrtfly-bypass';
 import { bypass as shrinkmeBypass } from './bypasses/shrinkme-bypass';
-import { bypass as shrtslugBypass } from './bypasses/shrtslug-bypass';
 import { bypass as shycloudBypass } from './bypasses/shycloud-bypass';
 import { bypass as sidMediatorBypass } from './bypasses/sid-mediator-bypass';import { bypass as softpediaBypass } from './bypasses/softpedia-bypass';
 import { bypass as storylineScormBypass } from './bypasses/storyline-scorm-bypass';
@@ -170,8 +170,8 @@ export const bypasses: readonly SupportedBypass[] = [
   romsfunBypass,
   sflBypass,
   shortxlinksBypass,
+  shrtflyBypass,
   shrinkmeBypass,
-  shrtslugBypass,
   shycloudBypass,
   sidMediatorBypass,
   softpediaBypass,

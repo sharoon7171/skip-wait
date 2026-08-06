@@ -58,8 +58,8 @@ import { initPrmoviesRedirect } from '../sites/prmovies';
 import { initSidMediatorBypass } from '../sites/sid-mediator';
 import { initRomsfunDownloadInstant } from '../sites/romsfun';
 import { initShortxlinksSafelinkChain } from '../sites/shortxlinks';
+import { initShrtflyEntry, initShrtflyMediator } from '../sites/shrtfly';
 import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../sites/shrinkme';
-import { initShrtslugEntry, initShrtslugMediator } from '../sites/shrtslug';
 import { initStbemuiptvcodesWpsafelink, initWpSafelinkRedirect } from '../sites/wp-safelink';
 import { initSub2getRedirect } from '../sites/sub2get';
 import { initSub2unlockUnlock } from '../sites/sub2unlock';
@@ -197,11 +197,11 @@ const INITS = [
   initPrmoviesRedirect,
   initVegamoviesLandingRedirect,
   initRomsfunDownloadInstant,
+  initShrtflyEntry,
+  initShrtflyMediator,
   initShrinkmeEntry,
   initShrinkmeMediator,
   initShrinkmeUnlock,
-  initShrtslugEntry,
-  initShrtslugMediator,
   initStbemuiptvcodesWpsafelink,
   initSub2getRedirect,
   initSub2unlockUnlock,

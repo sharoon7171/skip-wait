@@ -2,10 +2,10 @@ import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/f
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
 import { finishUnlock, formAction, postUnlock, unlockForm } from './api';
-import { ENTRY_HOSTS } from './hosts';
+import { SHRTFLY_ENTRY_HOSTS } from './hosts';
 
-const OVERLAY_ID = 'skip-wait-shrtslug-overlay';
-const BOOT_STYLE_ID = 'skip-wait-shrtslug-boot';
+const OVERLAY_ID = 'skip-wait-shrtfly-overlay';
+const BOOT_STYLE_ID = 'skip-wait-shrtfly-boot';
 const ENTRY_ACTION = 'human-verification';
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
@@ -42,7 +42,7 @@ const mountUi = (status = 'Getting things ready…'): FullPageOverlay => {
 };
 
 const isEntry = (): boolean => {
-  if (!isAllowedHost(ENTRY_HOSTS)) return false;
+  if (!isAllowedHost(SHRTFLY_ENTRY_HOSTS)) return false;
   return location.pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean).length === 1;
 };
 
@@ -57,7 +57,7 @@ const unlock = async (): Promise<void> => {
   finishUnlock(overlay, res.data);
 };
 
-export function initShrtslugEntry(): void {
+export function initShrtflyEntry(): void {
   if (window !== window.top || !isEntry()) return;
 
   const mo = new MutationObserver(() => tick());
