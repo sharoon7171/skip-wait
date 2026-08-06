@@ -208,24 +208,26 @@ const resolveUnlockUrl = async (
   const form = linksGoFormFromHtml(html, referer);
   if (!form) return null;
 
-  const sec = counterSec(html);
-  if (sec > 0) {
-    requestVisibilitySpoof();
-    overlay.setStatus('Waiting for the short timer…');
-    overlay.startCountdown(Date.now() + sec * 1000);
-    await sleep(sec * 1000 + 500);
-    overlay.hideCountdown();
-  }
-
   overlay.setStatus('Unlocking your link…');
   let url = await postLinksGo(form, referer);
-  if (!url && sec > 0) {
-    const endAt = Date.now() + 3000;
-    while (!url && Date.now() < endAt) {
-      url = await postLinksGo(form, referer);
-      if (url) break;
-      await sleep(200);
-    }
+  if (url) return url;
+
+  const sec = counterSec(html);
+  if (sec <= 0) return null;
+
+  requestVisibilitySpoof();
+  overlay.setStatus('Waiting for the short timer…');
+  overlay.startCountdown(Date.now() + sec * 1000);
+  await sleep(sec * 1000 + 500);
+  overlay.hideCountdown();
+  overlay.setStatus('Unlocking your link…');
+  url = await postLinksGo(form, referer);
+  if (url) return url;
+  const endAt = Date.now() + 3000;
+  while (!url && Date.now() < endAt) {
+    url = await postLinksGo(form, referer);
+    if (url) break;
+    await sleep(200);
   }
   return url;
 };

@@ -10,12 +10,14 @@ const domains = [
   "linkjust.com",
   "pahe.plus",
   "go.zovo.ink",
+  "shortnest.com",
 ] as const;
 
 const keywords = [
   "adlinkfly bypass",
   "AdLinkFly Links Go bypass",
   "linkjust bypass",
+  "shortnest bypass",
   "tpi.li bypass",
   "ad link shortener bypass",
   "links go bypass",
@@ -30,7 +32,8 @@ const intro = "AdLinkFly bypass automates the continue gate, captcha step, and g
 
 const problem = "AdLinkFly Links Go places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
 
-const howItWorks = "Skip Wait auto submits the continue gate, pins the captcha widget for you to complete when required, waits through the server timer if one is enforced, then posts to the links go unlock path and redirects you to the destination URL.";
+const howItWorks =
+  "Skip Wait auto submits the continue gate, pins the captcha widget when required, posts to the links go unlock path immediately when the server allows (otherwise waits the enforced timer), then redirects you to the destination URL.";
 
 const steps: readonly BypassStep[] = [
   {
@@ -61,7 +64,7 @@ const skips = [
 const faq: readonly BypassFaq[] = [
   {
     question: "What steps does Skip Wait automate on AdLinkFly Links Go shorteners?",
-    answer: "Skip Wait auto-submits the continue gate, waits through any server-enforced timer, posts to the links-go unlock path, and redirects you to the destination on linkjust and related AdLinkFly hosts.",
+    answer: "Skip Wait auto-submits the continue gate, posts to the links-go unlock path (skipping the client timer when the server allows), and redirects you to the destination on linkjust, shortnest, and related AdLinkFly hosts.",
   },
   {
     question: "Do I still need to solve the captcha on linkjust-style AdLinkFly links?",
