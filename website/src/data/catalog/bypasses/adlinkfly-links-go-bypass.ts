@@ -4,7 +4,8 @@ const name = "AdLinkFly Links Go";
 
 const bypassType = "Skip Waiting Page";
 
-const description = "AdLinkFly bypass automates the continue gate, captcha step, and get link flow on Links Go shorteners so your destination URL opens without waiting.";
+const description =
+  "AdLinkFly bypass that skips please-wait countdowns, continue gates, and get-link delays on Links Go shorteners so you reach the destination faster.";
 
 const domains = [
   "linkjust.com",
@@ -15,68 +16,80 @@ const domains = [
 
 const keywords = [
   "adlinkfly bypass",
-  "AdLinkFly Links Go bypass",
+  "bypass adlinkfly",
+  "links go bypass",
   "linkjust bypass",
   "shortnest bypass",
-  "tpi.li bypass",
-  "ad link shortener bypass",
-  "links go bypass",
-  "skip waiting page",
+  "pahe.plus bypass",
+  "pahe links bypass",
+  "skip countdown timer",
   "bypass countdown timer",
+  "skip waiting page",
+  "please wait seconds bypass",
+  "get link shortener bypass",
   "link shortener bypass",
-  "monetized link bypass",
   "skip wait extension",
 ] as const;
 
-const intro = "AdLinkFly bypass automates the continue gate, captcha step, and get link flow on Links Go shorteners so your destination URL opens without waiting. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  "Add the free Skip Wait Chrome extension and AdLinkFly Links Go pages unlock in the background—no paste box, userscript manager, or manual timer watching.";
 
-const problem = "AdLinkFly Links Go places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const problem =
+  "Monetized AdLinkFly short links force a please-wait countdown, click-to-continue steps, and a final get-link action before the real URL appears.";
 
 const howItWorks =
-  "Skip Wait auto submits the continue gate, pins the captcha widget when required, posts to the links go unlock path immediately when the server allows (otherwise waits the enforced timer), then redirects you to the destination URL.";
+  "On a matching waiting page the overlay advances continue steps, pins captcha when the site requires it, requests unlock as soon as the host accepts it, and only holds for a server-enforced timer when an early unlock fails.";
 
 const steps: readonly BypassStep[] = [
   {
     title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The AdLinkFly Links Go bypass turns on automatically on supported pages—no account needed.",
+    body: "Install from the Chrome Web Store. AdLinkFly Links Go handling starts on its own after install.",
   },
   {
     title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for AdLinkFly Links Go.",
+    body: "Leave Skip Wait active in Chrome. Supported Links Go shorteners need zero configuration.",
   },
   {
-    title: "Open a supported link",
-    body: "Open a AdLinkFly Links Go link the same way you usually do. No paste tool or special settings.",
+    title: "Open the short link as usual",
+    body: "Click the shortened URL the same way you always do. When the interstitial loads, Skip Wait takes over.",
   },
   {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported AdLinkFly Links Go delay.",
+    title: "Solve captcha only if shown",
+    body: "Some hosts pin a human check on the overlay. Complete it once; the unlock chain continues without further clicks.",
+  },
+  {
+    title: "Arrive at the real URL",
+    body: "When unlock succeeds, you are redirected to the destination instead of hunting for a get-link button.",
   },
 ];
 
 const skips = [
-  "Continue gate and get link steps",
-  "AdLinkFly unlock countdown timers",
-  "Manual links go form submission",
-  "Repeated click to continue loops",
+  "Forced please-wait countdown screens",
+  "Click continue / proceed interstitial loops",
+  "Manual get-link button hunting after the timer",
+  "Watching client-side timers the server does not enforce",
 ] as const;
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What steps does Skip Wait automate on AdLinkFly Links Go shorteners?",
-    answer: "Skip Wait auto-submits the continue gate, posts to the links-go unlock path (skipping the client timer when the server allows), and redirects you to the destination on linkjust, shortnest, and related AdLinkFly hosts.",
+    question: "What is an AdLinkFly Links Go bypass?",
+    answer:
+      "It is automation for AdLinkFly-style short links that normally show a countdown and get-link step. Skip Wait handles that flow so you spend less time on the waiting page.",
   },
   {
-    question: "Do I still need to solve the captcha on linkjust-style AdLinkFly links?",
-    answer: "When a captcha appears, Skip Wait pins the widget so you can complete it, then continues the get link flow automatically after verification.",
+    question: "Can Skip Wait skip the countdown timer on these pages?",
+    answer:
+      "It tries unlock immediately. If the host only uses a client timer, you move on without sitting through every second. If the server rejects early unlock, Skip Wait waits the enforced delay then retries.",
   },
   {
-    question: "How does Skip Wait unlock the destination after the server timer on Links Go pages?",
-    answer: "The extension waits through enforced countdowns when required, then submits the unlock request and opens your final URL without extra manual steps.",
+    question: "Do I still need a captcha or userscript for AdLinkFly links?",
+    answer:
+      "Captcha only when the page shows one—Skip Wait pins it for you. You do not need Tampermonkey or a separate AdLinkFly userscript for supported Links Go hosts.",
   },
   {
-    question: "Is the AdLinkFly Links Go bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The AdLinkFly Links Go bypass runs on supported pages with no account or paid plan required.",
+    question: "Is this AdLinkFly bypass free?",
+    answer:
+      "Yes. Skip Wait is a free Chrome extension with no account and no paid tier required for AdLinkFly Links Go support.",
   },
 ];
 
