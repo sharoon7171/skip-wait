@@ -59,7 +59,7 @@ import { initSidMediatorBypass } from '../sites/sid-mediator';
 import { initRomsfunDownloadInstant } from '../sites/romsfun';
 import { initShortxlinksSafelinkChain } from '../sites/shortxlinks';
 import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../sites/shrinkme';
-import { initShrtslugRedirect } from '../sites/shrtslug';
+import { initShrtslugEntry, initShrtslugMediator } from '../sites/shrtslug';
 import { initStbemuiptvcodesWpsafelink, initWpSafelinkRedirect } from '../sites/wp-safelink';
 import { initSub2getRedirect } from '../sites/sub2get';
 import { initSub2unlockUnlock } from '../sites/sub2unlock';
@@ -200,7 +200,8 @@ const INITS = [
   initShrinkmeEntry,
   initShrinkmeMediator,
   initShrinkmeUnlock,
-  initShrtslugRedirect,
+  initShrtslugEntry,
+  initShrtslugMediator,
   initStbemuiptvcodesWpsafelink,
   initSub2getRedirect,
   initSub2unlockUnlock,
