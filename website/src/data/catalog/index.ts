@@ -18,7 +18,9 @@ import { bypass as cpmlinkBypass } from './bypasses/cpmlink-bypass';
 import { bypass as cut4moneyBypass } from './bypasses/cut4money-bypass';
 import { bypass as cutwinBypass } from './bypasses/cutwin-bypass';
 import { bypass as cutyBypass } from './bypasses/cuty-bypass';
+import { bypass as devuploadsBypass } from './bypasses/devuploads-bypass';
 import { bypass as droplinkBypass } from './bypasses/droplink-bypass';
+import { bypass as earnlinksBypass } from './bypasses/earnlinks-bypass';
 import { bypass as exeIoBypass } from './bypasses/exe-io-bypass';
 import { bypass as fastdlBypass } from './bypasses/fastdl-bypass';
 import { bypass as fcLcBypass } from './bypasses/fc-lc-bypass';
@@ -121,7 +123,9 @@ export const bypasses: readonly SupportedBypass[] = [
   cut4moneyBypass,
   cutwinBypass,
   cutyBypass,
+  devuploadsBypass,
   droplinkBypass,
+  earnlinksBypass,
   exeIoBypass,
   fastdlBypass,
   fcLcBypass,

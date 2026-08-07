@@ -8,7 +8,6 @@ import {
 import { init1shortlinkRedirect } from '../sites/1shortlink';
 import { initAdfocusRedirect } from '../sites/adfocus';
 import {
-  initAdlinkClickVerifyPoll,
   initAdlinkflyLinksGo,
   initAdlinkflyTokenPayload,
 } from '../sites/adlinkfly';
@@ -73,6 +72,8 @@ import {
   initSub4unlockMeUnlock,
 } from '../sites/sub4unlock';
 import { initDroplinkUnlock } from '../sites/droplink';
+import { initDevuploadsMediator } from '../sites/devuploads';
+import { initEarnlinksIntermediate, initEarnlinksUnlock } from '../sites/earnlinks';
 import { initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
 import { initTinurlzSoftinfoFragment } from './tinurlz-softinfo-fragment';
 import { initShycloudMediatorPage } from '../sites/shycloud';
@@ -156,7 +157,6 @@ const INITS = [
   initGoostEntry,
   initGoostMediator,
   initSflGate,
-  initAdlinkClickVerifyPoll,
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
   initAnkergamesDirectDownload,
@@ -215,6 +215,9 @@ const INITS = [
   initSub4unlockIoUnlock,
   initSub4unlockMeUnlock,
   initDroplinkUnlock,
+  initDevuploadsMediator,
+  initEarnlinksIntermediate,
+  initEarnlinksUnlock,
   initTech8sRedirect,
   initTech8sGate,
   initTinurlzSoftinfoFragment,
