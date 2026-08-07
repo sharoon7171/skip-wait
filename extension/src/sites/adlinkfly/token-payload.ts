@@ -10,6 +10,8 @@ const TOKEN_INPUT_SELECTOR = 'input[name="token"]';
 const CAPTCHA_WIDGET_ID = 'captchaShortlink';
 const TOKEN_HTTP_B64_PREFIX = 'aHR0c';
 const TOKEN_HTTP_B64_RE = /^(aHR0c[A-Za-z0-9+/]+={0,2})/;
+const OLA_DRIVE_HOST = 'drive.olamovies.download';
+const OLA_DRIVE_HOLD_MS = 155_000;
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
@@ -19,13 +21,13 @@ const NOTE = {
 let done = false;
 let ui: FullPageOverlay | null = null;
 
-function padBase64(s: string): string {
+const padBase64 = (s: string): string => {
   const raw = s.replace(/=+$/, '');
   const p = raw.length % 4;
   return p ? raw + '='.repeat(4 - p) : raw;
-}
+};
 
-export function destinationUrlFromAdlinkflyTokenPayload(token: string): string | null {
+export const destinationUrlFromAdlinkflyTokenPayload = (token: string): string | null => {
   const idx = token.indexOf(TOKEN_HTTP_B64_PREFIX);
   if (idx === -1) return null;
   const rest = token.slice(idx).replace(/-/g, '+').replace(/_/g, '/');
@@ -40,13 +42,23 @@ export function destinationUrlFromAdlinkflyTokenPayload(token: string): string |
   } catch {
     return null;
   }
-}
+};
 
-function isTokenPayloadPage(): boolean {
-  return !!document.querySelector(TOKEN_INPUT_SELECTOR) && !!document.getElementById(CAPTCHA_WIDGET_ID);
-}
+const isTokenPayloadPage = (): boolean =>
+  !!document.querySelector(TOKEN_INPUT_SELECTOR) && !!document.getElementById(CAPTCHA_WIDGET_ID);
 
-function bootOverlayLock(): void {
+const isOlaDriveDest = (url: string): boolean => {
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    return host === OLA_DRIVE_HOST || host.endsWith(`.${OLA_DRIVE_HOST}`);
+  } catch {
+    return false;
+  }
+};
+
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+
+const bootOverlayLock = (): void => {
   const active = overlayActiveClass(OVERLAY_ID);
   document.documentElement.classList.add(active);
   if (document.getElementById(BOOT_STYLE_ID)) return;
@@ -54,9 +66,9 @@ function bootOverlayLock(): void {
   style.id = BOOT_STYLE_ID;
   style.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
   (document.head || document.documentElement).appendChild(style);
-}
+};
 
-function mountUi(status = 'Getting things ready…'): FullPageOverlay {
+const mountUi = (status = 'Getting things ready…'): FullPageOverlay => {
   bootOverlayLock();
   if (ui) {
     ui.setNote(NOTE);
@@ -69,20 +81,28 @@ function mountUi(status = 'Getting things ready…'): FullPageOverlay {
     brand: 'Skip Wait',
     note: NOTE,
     status,
+    countdownLabel: 'Your link opens in',
   });
   return ui;
-}
+};
 
-function redirectFromToken(): void {
+const redirectFromToken = async (): Promise<void> => {
   if (done || !isTokenPayloadPage()) return;
   const token = document.querySelector<HTMLInputElement>(TOKEN_INPUT_SELECTOR)?.value?.trim();
   if (!token) return;
   const url = destinationUrlFromAdlinkflyTokenPayload(token);
   if (!url) return;
   done = true;
-  mountUi('Redirecting now…');
+  const overlay = mountUi();
+  if (isOlaDriveDest(url)) {
+    overlay.setStatus('Opening soon…');
+    overlay.startCountdown(Date.now() + OLA_DRIVE_HOLD_MS);
+    await sleep(OLA_DRIVE_HOLD_MS);
+    overlay.hideCountdown();
+  }
+  overlay.setStatus('Redirecting now…');
   location.replace(url);
-}
+};
 
 export function initAdlinkflyTokenPayload(): void {
   if (!isAllowedHost(HOSTS)) return;
@@ -90,10 +110,10 @@ export function initAdlinkflyTokenPayload(): void {
     bootOverlayLock();
     mountUi('Unlocking destination…');
   }
-  redirectFromToken();
+  void redirectFromToken();
   whenDomParsed(() => {
     if (!isTokenPayloadPage()) return;
     mountUi('Unlocking destination…');
-    redirectFromToken();
+    void redirectFromToken();
   });
 }

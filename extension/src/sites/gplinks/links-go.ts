@@ -13,6 +13,8 @@ const TURNSTILE_IFRAMES = [
   'iframe[src*="challenges.cloudflare.com"]',
   'iframe[src*="turnstile"]',
 ] as const;
+const OLA_DRIVE_HOST = 'drive.olamovies.download';
+const OLA_DRIVE_HOLD_MS = 5_000;
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
   detail: "You don't need to tap anything on the page.",
@@ -29,6 +31,15 @@ type TurnstilePhase = {
 };
 
 const isRealUrl = (s: string): boolean => s.startsWith('http://') || s.startsWith('https://');
+
+const isOlaDriveDest = (url: string): boolean => {
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    return host === OLA_DRIVE_HOST || host.endsWith(`.${OLA_DRIVE_HOST}`);
+  } catch {
+    return false;
+  }
+};
 
 let ui: FullPageOverlay | null = null;
 
@@ -102,8 +113,15 @@ const finishTimerUnlock = async (overlay: FullPageOverlay): Promise<string | nul
   return postFromPage();
 };
 
-const redirectTo = (url: string): void => {
-  mountUi().setStatus('Redirecting now…');
+const redirectTo = async (url: string): Promise<void> => {
+  const overlay = mountUi();
+  if (isOlaDriveDest(url)) {
+    overlay.setStatus('Opening soon…');
+    overlay.startCountdown(Date.now() + OLA_DRIVE_HOLD_MS);
+    await sleep(OLA_DRIVE_HOLD_MS);
+    overlay.hideCountdown();
+  }
+  overlay.setStatus('Redirecting now…');
   location.href = url;
 };
 
@@ -124,13 +142,16 @@ const hasLinksGoHint = (): boolean => {
 };
 
 const runWhenNotLoading = (run: () => void): void => {
-  if (document.readyState !== 'loading') run();
-  else
-    document.addEventListener('readystatechange', function onReady() {
-      if (document.readyState === 'loading') return;
-      document.removeEventListener('readystatechange', onReady);
-      run();
-    });
+  if (document.readyState !== 'loading') {
+    run();
+    return;
+  }
+  const onReady = (): void => {
+    if (document.readyState === 'loading') return;
+    document.removeEventListener('readystatechange', onReady);
+    run();
+  };
+  document.addEventListener('readystatechange', onReady);
 };
 
 const hasTurnstileToken = (form: HTMLFormElement): boolean => {
@@ -184,7 +205,7 @@ const runTimerPhase = async (state: { done: boolean; inFlight: boolean }): Promi
   const link = document.querySelector<HTMLAnchorElement>('a.get-link');
   if (link?.href && isRealUrl(link.href)) {
     state.done = true;
-    redirectTo(link.href);
+    await redirectTo(link.href);
     return true;
   }
 
@@ -198,7 +219,7 @@ const runTimerPhase = async (state: { done: boolean; inFlight: boolean }): Promi
     const url = await finishTimerUnlock(overlay);
     state.done = true;
     if (url) {
-      redirectTo(url);
+      await redirectTo(url);
       return true;
     }
     overlay.setStatus('Opening destination…');
