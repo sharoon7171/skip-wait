@@ -27,6 +27,7 @@ export const overlayClasses = {
   err: 'sw-err',
   hidden: 'sw-hidden',
   turnstile: 'sw-turnstile',
+  action: 'sw-action',
 } as const;
 
 export function overlayActiveClass(overlayId: string): string {
@@ -53,7 +54,7 @@ export function overlayCardCss(id: string): string {
   const c = overlayColors;
   const f = OVERLAY_FONT;
   const cl = overlayClasses;
-  return `#${id} .${cl.card}{max-width:440px;width:100%;border-radius:16px;padding:clamp(22px,4vw,28px);background:${c.cardGradient};border:1px solid ${c.cardBorder};box-shadow:${c.cardShadow};pointer-events:none;font-family:${f}}#${id} .${cl.brand}{font-family:${f};font-size:clamp(1em,2.5vw,1.25em);font-weight:700;letter-spacing:-.02em;color:${c.accent};margin-bottom:8px}#${id} .${cl.note}{font-family:${f};font-size:.875em;line-height:1.55;color:${c.textDetail};margin-bottom:14px}#${id} .${cl.noteLead}{color:${c.textPrimary};font-weight:600}#${id} .${cl.status}{font-family:${f};font-size:.9em;color:${c.textPrimary};min-height:1.4em;margin-bottom:10px}#${id} .${cl.hidden}{display:none!important}`;
+  return `#${id} .${cl.card}{max-width:440px;width:100%;border-radius:16px;padding:clamp(22px,4vw,28px);background:${c.cardGradient};border:1px solid ${c.cardBorder};box-shadow:${c.cardShadow};pointer-events:none;font-family:${f}}#${id} .${cl.brand}{font-family:${f};font-size:clamp(1em,2.5vw,1.25em);font-weight:700;letter-spacing:-.02em;color:${c.accent};margin-bottom:8px}#${id} .${cl.note}{font-family:${f};margin-bottom:14px}#${id} .${cl.noteLead}{display:block;font-size:clamp(1em,2.8vw,1.15em);font-weight:700;line-height:1.35;color:${c.textPrimary};word-break:break-word;overflow-wrap:anywhere}#${id} .${cl.noteDetail}{display:block;margin-top:8px;font-size:.875em;font-weight:500;line-height:1.4;color:${c.textMuted}}#${id} .${cl.status}{font-family:${f};font-size:.9em;color:${c.textPrimary};min-height:1.4em;margin-bottom:10px}#${id} .${cl.hidden}{display:none!important}`;
 }
 
 export function overlayCountdownCss(id: string): string {
@@ -65,7 +66,13 @@ export function overlayCountdownCss(id: string): string {
 
 export function overlayTurnstileMountCss(id: string): string {
   const cl = overlayClasses;
-  return `#${id} .${cl.turnstile}{display:flex;align-items:center;justify-content:center;min-height:72px;margin-top:16px;pointer-events:auto!important;isolation:isolate}#${id} .${cl.turnstile} iframe,#${id} .${cl.turnstile} input{pointer-events:auto!important}`;
+  const c = overlayColors;
+  const f = OVERLAY_FONT;
+  return (
+    `#${id} .${cl.turnstile}{display:flex;align-items:center;justify-content:center;min-height:72px;margin-top:16px;pointer-events:auto!important;isolation:isolate}#${id} .${cl.turnstile} iframe,#${id} .${cl.turnstile} input{pointer-events:auto!important}` +
+    `#${id} .${cl.action}{display:block;width:100%;box-sizing:border-box;margin-top:16px;padding:14px 18px;border-radius:10px;background:${c.accent};color:#0f172a;font-family:${f};font-size:1em;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;pointer-events:auto!important;cursor:pointer}` +
+    `#${id} .${cl.action}.${cl.hidden}{display:none!important}`
+  );
 }
 
 export function buildFullPageOverlayCss(id: string, activeClass: string): string {

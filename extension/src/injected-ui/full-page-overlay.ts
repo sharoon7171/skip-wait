@@ -33,6 +33,7 @@ export type FullPageOverlay = {
   setStatus: (text: string) => void;
   setNote: (note: FullPageOverlayNote) => void;
   setError: (text: string | null) => void;
+  setAction: (href: string | null, label?: string) => void;
   startCountdown: (endTs: number) => void;
   stopCountdown: () => void;
   hideCountdown: () => void;
@@ -41,13 +42,12 @@ export type FullPageOverlay = {
 
 function fillNote(el: HTMLElement, note: FullPageOverlayNote): void {
   el.replaceChildren();
-  const lead = document.createElement('span');
+  const lead = document.createElement('div');
   lead.className = overlayClasses.noteLead;
   lead.textContent = note.lead;
   el.appendChild(lead);
   if (note.detail) {
-    el.append(' ');
-    const detail = document.createElement('span');
+    const detail = document.createElement('div');
     detail.className = overlayClasses.noteDetail;
     detail.textContent = note.detail;
     el.appendChild(detail);
@@ -63,10 +63,13 @@ function mountOverlayRoot(id: string, css: string): HTMLElement {
   return root;
 }
 
-function isInteractiveTarget(root: HTMLElement, event: Event): boolean {
-  const mount = root.querySelector(`.${overlayClasses.turnstile}`);
-  if (!mount) return false;
-  return event.composedPath().includes(mount);
+function isInteractiveTarget(_root: HTMLElement, event: Event): boolean {
+  return event.composedPath().some(
+    (n) =>
+      n instanceof Element &&
+      (n.closest(`.${overlayClasses.turnstile}`) != null ||
+        n.closest(`.${overlayClasses.action}`) != null),
+  );
 }
 
 function blockOverlayEvents(root: HTMLElement): void {
@@ -119,6 +122,10 @@ export function createFullPageOverlay(options: FullPageOverlayOptions): FullPage
   turnstileMount.className = cl.turnstile;
   turnstileMount.id = `${id}-turnstile`;
 
+  const actionEl = document.createElement('a');
+  actionEl.className = `${cl.action} ${cl.hidden}`;
+  actionEl.rel = 'noopener';
+
   card.append(brandEl, noteEl, statusEl, count, countLabel);
 
   let countHint: HTMLElement | null = null;
@@ -131,7 +138,7 @@ export function createFullPageOverlay(options: FullPageOverlayOptions): FullPage
 
   const err = document.createElement('div');
   err.className = cl.err;
-  card.append(err, turnstileMount);
+  card.append(err, actionEl, turnstileMount);
   root.appendChild(card);
   document.documentElement.appendChild(root);
 
@@ -171,6 +178,17 @@ export function createFullPageOverlay(options: FullPageOverlayOptions): FullPage
     },
     setError(text) {
       err.textContent = text ?? '';
+    },
+    setAction(href, label = 'Direct Download · Skip Wait') {
+      if (!href) {
+        actionEl.removeAttribute('href');
+        actionEl.classList.add(cl.hidden);
+        actionEl.textContent = '';
+        return;
+      }
+      actionEl.href = href;
+      actionEl.textContent = label;
+      actionEl.classList.remove(cl.hidden);
     },
     startCountdown(endTs) {
       setCountdownVisible(true);

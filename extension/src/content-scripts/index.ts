@@ -74,10 +74,12 @@ import {
 import { initDroplinkUnlock } from '../sites/droplink';
 import { initDevuploadsMediator } from '../sites/devuploads';
 import { initEarnlinksIntermediate, initEarnlinksUnlock } from '../sites/earnlinks';
+import { initTendrivesMediator } from '../sites/tendrives';
 import { initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
 import { initTinurlzSoftinfoFragment } from './tinurlz-softinfo-fragment';
 import { initShycloudMediatorPage } from '../sites/shycloud';
 import { initUsersdriveAutomation } from '../sites/usersdrive';
+import { initVexfileBypass } from '../sites/vexfile';
 import { initMega4uploadBypass } from '../sites/mega4upload';
 import { initMirroredFilesPage } from '../sites/mirrored';
 import { initMove2linkGate } from '../sites/move2link';
@@ -218,11 +220,13 @@ const INITS = [
   initDevuploadsMediator,
   initEarnlinksIntermediate,
   initEarnlinksUnlock,
+  initTendrivesMediator,
   initTech8sRedirect,
   initTech8sGate,
   initTinurlzSoftinfoFragment,
   initShycloudMediatorPage,
   initUsersdriveAutomation,
+  initVexfileBypass,
   initMega4uploadBypass,
   initMirroredFilesPage,
   initMove2linkGate,

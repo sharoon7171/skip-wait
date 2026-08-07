@@ -86,6 +86,7 @@ import { bypass as sub4unlockIoBypass } from './bypasses/sub4unlock-io-bypass';
 import { bypass as sub4unlockMeBypass } from './bypasses/sub4unlock-me-bypass';
 import { bypass as swiftuploadsBypass } from './bypasses/swiftuploads-bypass';
 import { bypass as tech8sEz4shortBypass } from './bypasses/tech8s-ez4short-bypass';
+import { bypass as tendrivesBypass } from './bypasses/tendrives-bypass';
 import { bypass as tflyBypass } from './bypasses/tfly-bypass';
 import { bypass as theuserCloudBypass } from './bypasses/theuser-cloud-bypass';
 import { bypass as tinurlzSoftinfoBypass } from './bypasses/tinurlz-softinfo-bypass';
@@ -93,6 +94,7 @@ import { bypass as tipsguruBypass } from './bypasses/tipsguru-bypass';
 import { bypass as uploadrarBypass } from './bypasses/uploadrar-bypass';
 import { bypass as usersdriveBypass } from './bypasses/usersdrive-bypass';
 import { bypass as vegamoviesBypass } from './bypasses/vegamovies-bypass';
+import { bypass as vexfileBypass } from './bypasses/vexfile-bypass';
 import { bypass as wahmiBypass } from './bypasses/wahmi-bypass';
 import { bypass as workinkBypass } from './bypasses/workink-bypass';
 import { bypass as wpSafelinkBypass } from './bypasses/wp-safelink-bypass';
@@ -192,6 +194,7 @@ export const bypasses: readonly SupportedBypass[] = [
   sub4unlockMeBypass,
   swiftuploadsBypass,
   tech8sEz4shortBypass,
+  tendrivesBypass,
   tflyBypass,
   theuserCloudBypass,
   tinurlzSoftinfoBypass,
@@ -199,6 +202,7 @@ export const bypasses: readonly SupportedBypass[] = [
   uploadrarBypass,
   usersdriveBypass,
   vegamoviesBypass,
+  vexfileBypass,
   wahmiBypass,
   workinkBypass,
   wpSafelinkBypass,
