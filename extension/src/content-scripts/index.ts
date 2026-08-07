@@ -54,6 +54,7 @@ import { initMoviesModContentScript } from '../sites/movies-mod';
 import { initOnhaxpkCopy } from '../sites/onhaxpk';
 import { initOnlinetoolsDirectDownload } from '../sites/onlinetools';
 import { initOuoBypass } from '../sites/ouo';
+import { initOlamoviesLandingRedirect } from '../sites/olamovies';
 import { initPrmoviesRedirect } from '../sites/prmovies';
 import { initSidMediatorBypass } from '../sites/sid-mediator';
 import { initRomsfunDownloadInstant } from '../sites/romsfun';
@@ -194,6 +195,7 @@ const INITS = [
   initOnhaxpkCopy,
   initOnlinetoolsDirectDownload,
   initOuoBypass,
+  initOlamoviesLandingRedirect,
   initPrmoviesRedirect,
   initVegamoviesLandingRedirect,
   initRomsfunDownloadInstant,
