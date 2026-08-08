@@ -76,6 +76,7 @@ import { initDroplinkUnlock } from '../sites/droplink';
 import { initDevuploadsMediator } from '../sites/devuploads';
 import { initDuploadBypass } from '../sites/dupload';
 import { initEarnlinksIntermediate, initEarnlinksUnlock } from '../sites/earnlinks';
+import { initFinityredeBypass } from '../sites/finityrede';
 import { initTendrivesMediator } from '../sites/tendrives';
 import { initTech8sAdrinolinks, initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
 import { initTinurlzSoftinfoFragment } from './tinurlz-softinfo-fragment';
@@ -225,6 +226,7 @@ const INITS = [
   initDuploadBypass,
   initEarnlinksIntermediate,
   initEarnlinksUnlock,
+  initFinityredeBypass,
   initTendrivesMediator,
   initTech8sRedirect,
   initTech8sAdrinolinks,
