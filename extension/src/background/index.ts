@@ -20,6 +20,7 @@ import { initStorylineScormMainWorldInject } from '../sites/storyline-scorm';
 import { initLink4mRedirect } from '../sites/tech8s';
 import { initOceanofgamesResolve } from '../sites/oceanofgames';
 import { initDevuploadsResolve } from '../sites/devuploads';
+import { initDuploadHoldNav, initDuploadResolve } from '../sites/dupload';
 import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot';
 import { initWorkinkMainWorldInject } from '../sites/workink';
 
@@ -48,3 +49,5 @@ initStreamerviewerbotMainWorldInject();
 initWorkinkMainWorldInject();
 initOceanofgamesResolve();
 initDevuploadsResolve();
+initDuploadHoldNav();
+initDuploadResolve();

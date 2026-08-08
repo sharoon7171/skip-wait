@@ -20,6 +20,7 @@ import { bypass as cutwinBypass } from './bypasses/cutwin-bypass';
 import { bypass as cutyBypass } from './bypasses/cuty-bypass';
 import { bypass as devuploadsBypass } from './bypasses/devuploads-bypass';
 import { bypass as droplinkBypass } from './bypasses/droplink-bypass';
+import { bypass as duploadBypass } from './bypasses/dupload-bypass';
 import { bypass as earnlinksBypass } from './bypasses/earnlinks-bypass';
 import { bypass as exeIoBypass } from './bypasses/exe-io-bypass';
 import { bypass as fastdlBypass } from './bypasses/fastdl-bypass';
@@ -48,6 +49,7 @@ import { bypass as linkshortifyBypass } from './bypasses/linkshortify-bypass';
 import { bypass as linksterrBypass } from './bypasses/linksterr-bypass';
 import { bypass as linkunlockerBypass } from './bypasses/linkunlocker-bypass';
 import { bypass as linkvertiseBypass } from './bypasses/linkvertise-bypass';
+import { bypass as liteshortBypass } from './bypasses/liteshort-bypass';
 import { bypass as llSafelinkBypass } from './bypasses/ll-safelink-bypass';
 import { bypass as lootlabsBypass } from './bypasses/lootlabs-bypass';
 import { bypass as mega4uploadBypass } from './bypasses/mega4upload-bypass';
@@ -127,6 +129,7 @@ export const bypasses: readonly SupportedBypass[] = [
   cutyBypass,
   devuploadsBypass,
   droplinkBypass,
+  duploadBypass,
   earnlinksBypass,
   exeIoBypass,
   fastdlBypass,
@@ -155,6 +158,7 @@ export const bypasses: readonly SupportedBypass[] = [
   linksterrBypass,
   linkunlockerBypass,
   linkvertiseBypass,
+  liteshortBypass,
   llSafelinkBypass,
   lootlabsBypass,
   mega4uploadBypass,

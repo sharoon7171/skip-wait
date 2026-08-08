@@ -1,20 +1,27 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { TECH8S_HOSTS } from './hosts';
+import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
+import { TECH8S_HOSTS, TECH8S_OPEN_PHP_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-tech8s-gate';
 const BOOT_STYLE_ID = 'skip-wait-tech8s-gate-boot';
 const SAFE_PHP_RE = /^\/safe2?\.php$/i;
 const ST_RE = /^\/st$/i;
+const TP_NAME_RE = /^tp\d+$/i;
+const MAX_HOPS = 8;
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
   detail: "You don't need to tap anything on the page.",
 } as const;
 
+type TpPost = { action: string; fields: Record<string, string> };
+
 let ui: FullPageOverlay | null = null;
 let started = false;
+
+const isOpenPhpHost = (): boolean =>
+  hostnameMatches(location.hostname.toLowerCase(), TECH8S_OPEN_PHP_HOSTS);
 
 const bootOverlayLock = (): void => {
   const active = overlayActiveClass(OVERLAY_ID);
@@ -23,7 +30,7 @@ const bootOverlayLock = (): void => {
   const style = document.createElement('style');
   style.id = BOOT_STYLE_ID;
   style.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
-  (document.head || document.documentElement).appendChild(style);
+  (document.head ?? document.documentElement).appendChild(style);
 };
 
 const mountUi = (status = 'Getting things ready…'): FullPageOverlay => {
@@ -48,66 +55,71 @@ const httpHref = (href: string | null | undefined): string | null => {
   return s && /^https?:\/\//i.test(s) ? s : null;
 };
 
-const continueHref = (root: ParentNode = document): string | null => {
-  const a = root.querySelector<HTMLAnchorElement>('a#go_d2[href]');
-  return httpHref(a?.href);
+const absHref = (href: string, base: string): string => {
+  const abs = httpHref(new URL(href.trim(), base).href);
+  if (!abs) throw new Error('tech8s href');
+  return abs;
 };
 
-const tpForm = (): HTMLFormElement | null => {
-  const form = document.querySelector<HTMLFormElement>('form[name="tp"]');
-  if (!form?.querySelector('input[name="tp2"]')) return null;
-  return form;
-};
-
-const isGatePage = (): boolean => !!tpForm() || !!continueHref();
-
-const nextFromHtml = (html: string, base: string): string | null => {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  const a = doc.querySelector<HTMLAnchorElement>('a#go_d2[href]');
-  const href = a?.getAttribute('href')?.trim();
-  if (!href) return null;
-  try {
-    const abs = new URL(href, base).href;
-    return httpHref(abs);
-  } catch {
-    return null;
+const terminalFrom = (root: ParentNode, base: string): string | null => {
+  if (isOpenPhpHost()) {
+    const open = root.querySelector<HTMLAnchorElement>('a[href*="/includes/open.php?"]');
+    const href = open?.getAttribute('href');
+    return href ? absHref(href, base) : null;
   }
+  const go = root.querySelector<HTMLAnchorElement>('a#go_d2[href]');
+  const href = go?.getAttribute('href');
+  return href ? absHref(href, base) : null;
 };
 
-const postTp2 = async (form: HTMLFormElement): Promise<string> => {
-  const body = new URLSearchParams();
-  new FormData(form).forEach((v, k) => body.append(k, String(v)));
-  const action = form.getAttribute('action')?.trim() || location.href;
-  const url = new URL(action, location.href).href;
-  const res = await fetch(url, {
+const tpPostFrom = (root: ParentNode, base: string): TpPost | null => {
+  const form = root.querySelector<HTMLFormElement>('form[name="tp"]');
+  if (!form) return null;
+  const fields: Record<string, string> = {};
+  for (const inp of form.querySelectorAll<HTMLInputElement>('input[name]')) {
+    if (!TP_NAME_RE.test(inp.name)) continue;
+    fields[inp.name] = inp.value ?? '';
+  }
+  if (!Object.keys(fields).length) return null;
+  const action = form.getAttribute('action')?.trim() || base;
+  return { action: new URL(action, base).href, fields };
+};
+
+const isGatePage = (): boolean => !!tpPostFrom(document, location.href);
+
+const postTp = async (post: TpPost): Promise<{ html: string; base: string }> => {
+  const res = await fetch(post.action, {
     method: 'POST',
-    body,
+    body: new URLSearchParams(post.fields),
     credentials: 'include',
     headers: {
       Accept: 'text/html,application/xhtml+xml',
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     },
   });
-  const html = await res.text();
-  const next = nextFromHtml(html, res.url || location.href);
-  if (!next) throw new Error('tech8s go_d2');
-  return next;
+  if (!res.ok) throw new Error('tech8s post');
+  return { html: await res.text(), base: res.url || post.action };
 };
 
 const run = async (): Promise<void> => {
   const overlay = mountUi('Skipping blog steps…');
-  const form = tpForm();
-  if (form) {
-    overlay.setStatus('Unlocking blog gate…');
-    const next = await postTp2(form);
-    overlay.setStatus('Opening next step…');
-    location.replace(next);
-    return;
+  let html = document.documentElement.outerHTML;
+  let base = location.href;
+
+  for (let hop = 0; hop < MAX_HOPS; hop++) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const post = tpPostFrom(doc, base);
+    if (!post) {
+      const terminal = terminalFrom(doc, base);
+      if (!terminal) throw new Error('tech8s terminal');
+      overlay.setStatus('Opening next step…');
+      location.replace(terminal);
+      return;
+    }
+    overlay.setStatus(hop === 0 ? 'Unlocking blog gate…' : `Skipping step ${hop + 1}…`);
+    ({ html, base } = await postTp(post));
   }
-  const href = continueHref();
-  if (!href) throw new Error('tech8s continue');
-  overlay.setStatus('Opening next step…');
-  location.replace(href);
+  throw new Error('tech8s hops');
 };
 
 const kick = (): void => {
@@ -115,11 +127,10 @@ const kick = (): void => {
   started = true;
   void run().catch(() => {
     mountUi().setError('Unlock failed. Reload and try again.');
-    started = false;
   });
 };
 
-export function initTech8sGate(): void {
+export const initTech8sGate = (): void => {
   if (window !== window.top) return;
   if (!isAllowedHost(TECH8S_HOSTS)) return;
   if (SAFE_PHP_RE.test(location.pathname) || ST_RE.test(location.pathname)) return;
@@ -142,4 +153,4 @@ export function initTech8sGate(): void {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', tick, true);
   }
-}
+};

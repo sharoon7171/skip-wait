@@ -47,6 +47,7 @@ import { initLinkjust } from '../sites/linkjust';
 import { initLinknextGate } from '../sites/linknext';
 import { initLinksterrGateway } from '../sites/linksterr';
 import { initLinkvertiseAccessPage } from '../sites/linkvertise';
+import { initLiteshortEntry, initLiteshortMediator } from '../sites/liteshort';
 import { initLlSafelinkHqChain, initLlacDdx } from '../sites/ll-safelink';
 import { initLootlabsUnlock } from '../sites/lootlabs';
 import { initMoviesModContentScript } from '../sites/movies-mod';
@@ -73,9 +74,10 @@ import {
 } from '../sites/sub4unlock';
 import { initDroplinkUnlock } from '../sites/droplink';
 import { initDevuploadsMediator } from '../sites/devuploads';
+import { initDuploadBypass } from '../sites/dupload';
 import { initEarnlinksIntermediate, initEarnlinksUnlock } from '../sites/earnlinks';
 import { initTendrivesMediator } from '../sites/tendrives';
-import { initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
+import { initTech8sAdrinolinks, initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
 import { initTinurlzSoftinfoFragment } from './tinurlz-softinfo-fragment';
 import { initShycloudMediatorPage } from '../sites/shycloud';
 import { initUsersdriveAutomation } from '../sites/usersdrive';
@@ -135,6 +137,8 @@ const INITS = [
   initLlSafelinkHqChain,
   initLlacDdx,
   initLinkjust,
+  initLiteshortEntry,
+  initLiteshortMediator,
   initLinksterrGateway,
   initShortxlinksSafelinkChain,
   init1shortlinkRedirect,
@@ -218,10 +222,12 @@ const INITS = [
   initSub4unlockMeUnlock,
   initDroplinkUnlock,
   initDevuploadsMediator,
+  initDuploadBypass,
   initEarnlinksIntermediate,
   initEarnlinksUnlock,
   initTendrivesMediator,
   initTech8sRedirect,
+  initTech8sAdrinolinks,
   initTech8sGate,
   initTinurlzSoftinfoFragment,
   initShycloudMediatorPage,

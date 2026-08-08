@@ -3,6 +3,7 @@ export const ADLINKFLY_LINKS_GO_HOSTS = [
   'pahe.plus',
   'go.zovo.ink',
   'shortnest.com',
+  'link.liteshort.com',
 ] as const;
 
 export const ADLINKFLY_TOKEN_PAYLOAD_HOSTS = [
