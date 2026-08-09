@@ -1,49 +1,52 @@
-import { MSG_RINKU_PAGE_HOOKS, RINKU_LAND_HOSTS } from './hosts';
+import { runDocumentVisibilitySpoof } from '../../background/document-visibility-spoof';
+import { hostnameMatches } from '../../utils/domain-check';
+import { MSG_RINKU_PAGE_HOOKS, RINKU_GATE_HOSTS, RINKU_MEDIATOR_HOSTS } from './hosts';
 import { runRinkuPageHooks } from './page-hooks';
 
-const rinkuTabs = new Set<number>();
-
-const hostMatch = (h: string, d: string): boolean => h === d || h.endsWith('.' + d);
-
-const isSeedUrl = (url: string): boolean => {
-  const u = new URL(url);
-  const h = u.hostname.toLowerCase();
-  if (RINKU_LAND_HOSTS.some((d) => hostMatch(h, d))) return true;
-  if (['7mb.io', 'rinku.pro', 'rinku.me'].some((d) => hostMatch(h, d))) return true;
-  return /\/rinku\//i.test(u.pathname) || /\/backup\/w/i.test(u.pathname) || /redirect_to=random/i.test(u.search);
+const isRinkuHookUrl = (url: string): boolean => {
+  try {
+    const hostname = new URL(url).hostname;
+    return hostnameMatches(hostname, RINKU_MEDIATOR_HOSTS) || hostnameMatches(hostname, RINKU_GATE_HOSTS);
+  } catch {
+    return false;
+  }
 };
 
 const inject = (tabId: number, frameId = 0): void => {
+  const target: chrome.scripting.InjectionTarget = { tabId, frameIds: [frameId] };
   void chrome.scripting.executeScript({
-    target: { tabId, frameIds: [frameId] },
+    target,
+    world: 'MAIN',
+    injectImmediately: true,
+    func: runDocumentVisibilitySpoof,
+  });
+  void chrome.scripting.executeScript({
+    target,
     world: 'MAIN',
     injectImmediately: true,
     func: runRinkuPageHooks,
   });
 };
 
-export function initRinkuPageHooksInject(): void {
-  chrome.tabs.onRemoved.addListener((tabId) => rinkuTabs.delete(tabId));
-
+export const initRinkuPageHooksInject = (): void => {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !/^https?:/i.test(details.url)) return;
-    const h = new URL(details.url).hostname.toLowerCase();
-    if (hostMatch(h, 'google.com') || /\/bypass\.(php|html)$/i.test(new URL(details.url).pathname)) {
-      rinkuTabs.delete(details.tabId);
-      return;
-    }
-    if (isSeedUrl(details.url) || rinkuTabs.has(details.tabId)) {
-      rinkuTabs.add(details.tabId);
-      inject(details.tabId);
-    }
+    if (details.frameId !== 0 || !isRinkuHookUrl(details.url)) return;
+    inject(details.tabId);
   });
 
-  chrome.runtime.onMessage.addListener((message, sender) => {
-    if (message?.type !== MSG_RINKU_PAGE_HOOKS) return false;
+  chrome.runtime.onMessage.addListener((message: unknown, sender) => {
+    if (
+      !message ||
+      typeof message !== 'object' ||
+      !('type' in message) ||
+      message.type !== MSG_RINKU_PAGE_HOOKS
+    ) {
+      return false;
+    }
     const tabId = sender.tab?.id;
     if (tabId === undefined) return false;
-    rinkuTabs.add(tabId);
+    if (sender.tab?.url && !isRinkuHookUrl(sender.tab.url)) return false;
     inject(tabId, sender.frameId ?? 0);
     return false;
   });
-}
+};

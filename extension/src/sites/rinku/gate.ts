@@ -13,7 +13,8 @@ import {
   rinkuHexForm,
   rinkuUnlockForm,
 } from './detect';
-import { MSG_RINKU_PAGE_HOOKS, RINKU_LAND_HOSTS } from './hosts';
+import { MSG_INJECT_VISIBILITY_SPOOF } from '../../background/document-visibility-spoof';
+import { MSG_RINKU_PAGE_HOOKS, RINKU_GATE_HOSTS, RINKU_MEDIATOR_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-rinku-overlay';
 const BOOT_STYLE_ID = 'skip-wait-rinku-boot';
@@ -22,7 +23,7 @@ const CAPTCHA_WIDGET_ID = 'skip-wait-rinku-captcha';
 const LAND_ONCE_KEY = 'skip-wait-rinku-land-once';
 const OUT_ONCE_KEY = 'skip-wait-rinku-out-once';
 const FORM_DONE = 'data-skip-wait-submitted';
-const UNLOCK_MS = 15_000;
+const UNLOCK_MS = 20_000;
 const CAPTCHA_IFRAMES = ['iframe[src*="turnstile"]'] as const;
 
 const NOTE = {
@@ -45,7 +46,7 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 
 const requestHooks = (): void => {
   chrome.runtime.sendMessage({ type: MSG_RINKU_PAGE_HOOKS }).catch(() => {});
-  chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
+  chrome.runtime.sendMessage({ type: MSG_INJECT_VISIBILITY_SPOOF }).catch(() => {});
 };
 
 const clearSiteTimers = (): void => {
@@ -68,7 +69,7 @@ const submitOnce = (form: HTMLFormElement): void => {
   fresh.action = action;
   fresh.method = method;
   fresh.setAttribute(FORM_DONE, '1');
-  (document.body || document.documentElement).appendChild(fresh);
+  (document.body ?? document.documentElement).appendChild(fresh);
   HTMLFormElement.prototype.submit.call(fresh);
 };
 
@@ -85,7 +86,7 @@ const bootOverlay = (): void => {
   const style = document.createElement('style');
   style.id = BOOT_STYLE_ID;
   style.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
-  (document.head || document.documentElement).appendChild(style);
+  (document.head ?? document.documentElement).appendChild(style);
 };
 
 const mountUi = (
@@ -141,6 +142,7 @@ const runCaptchaGate = (): void => {
   requestHooks();
   const overlay = mountUi('Complete the captcha below.', CAPTCHA_NOTE);
   if (!widget.id) widget.id = CAPTCHA_WIDGET_ID;
+  document.getElementById('delulu-overlay')?.style.setProperty('display', 'none', 'important');
 
   let stopPin: (() => void) | null = null;
   const pin = (): void => {
@@ -167,6 +169,8 @@ const runCaptchaGate = (): void => {
       return;
     }
     stopPin?.();
+    document.getElementById('sf-lock')?.style.setProperty('display', 'none', 'important');
+    document.getElementById('sf-go-btn')?.style.setProperty('display', 'none', 'important');
     overlay.setNote(NOTE);
     overlay.setStatus('Continuing…');
     submitOnce(form);
@@ -187,24 +191,27 @@ const runCountdownUnlock = async (): Promise<void> => {
   overlay.hideCountdown();
   if (!document.contains(form)) return;
 
+  document.getElementById('redirect-link')?.style.setProperty('display', 'none', 'important');
+  document.getElementById('redirect-message')?.style.setProperty('display', 'none', 'important');
+  document.getElementById('sf-lock-t')?.style.setProperty('display', 'none', 'important');
   form.style.setProperty('display', 'block', 'important');
   const count = document.getElementById('count');
   if (count) count.textContent = '0';
-  document.getElementById('redirect-message')?.style.setProperty('display', 'none', 'important');
-  document.getElementById('redirect-link')?.style.setProperty('display', 'block', 'important');
+  document.getElementById('overlay')?.remove();
   submitOnce(form);
 };
 
 const tick = (): void => {
   if (isCloudflareChallenge()) return;
-  if (isAllowedHost(RINKU_LAND_HOSTS) && isRinkuLandPath()) {
+  if (isAllowedHost(RINKU_MEDIATOR_HOSTS) && isRinkuLandPath()) {
     runHexContinue('land');
     return;
   }
-  if (isAllowedHost(RINKU_LAND_HOSTS) && isRinkuOutPath()) {
+  if (isAllowedHost(RINKU_MEDIATOR_HOSTS) && isRinkuOutPath()) {
     runHexContinue('out');
     return;
   }
+  if (!isAllowedHost(RINKU_GATE_HOSTS)) return;
   if (isRinkuCaptchaGate()) {
     runCaptchaGate();
     return;
@@ -212,9 +219,12 @@ const tick = (): void => {
   if (isRinkuCountdownGate()) void runCountdownUnlock();
 };
 
-export function initRinkuGate(): void {
+export const initRinkuGate = (): void => {
   if (window !== window.top) return;
-  if (isRinkuCountdownGate() || isRinkuCaptchaGate()) requestHooks();
+  const onMediator = isAllowedHost(RINKU_MEDIATOR_HOSTS);
+  const onGate = isAllowedHost(RINKU_GATE_HOSTS);
+  if (!onMediator && !onGate) return;
+  requestHooks();
   tick();
   new MutationObserver(tick).observe(document.documentElement, {
     attributeFilter: ['href', 'value', 'disabled', 'class', 'style'],
@@ -224,4 +234,4 @@ export function initRinkuGate(): void {
   });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
   window.addEventListener('load', tick, true);
-}
+};
