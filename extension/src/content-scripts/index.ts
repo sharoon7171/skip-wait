@@ -75,6 +75,7 @@ import {
 import { initDroplinkUnlock } from '../sites/droplink';
 import { initDevuploadsMediator } from '../sites/devuploads';
 import { initDuploadBypass } from '../sites/dupload';
+import { initEarn4linkMediator, initEarn4linkUnlock } from '../sites/earn4link';
 import { initEarnlinksIntermediate, initEarnlinksUnlock } from '../sites/earnlinks';
 import { initFinityredeBypass } from '../sites/finityrede';
 import { initTendrivesMediator } from '../sites/tendrives';
@@ -224,6 +225,8 @@ const INITS = [
   initDroplinkUnlock,
   initDevuploadsMediator,
   initDuploadBypass,
+  initEarn4linkMediator,
+  initEarn4linkUnlock,
   initEarnlinksIntermediate,
   initEarnlinksUnlock,
   initFinityredeBypass,
