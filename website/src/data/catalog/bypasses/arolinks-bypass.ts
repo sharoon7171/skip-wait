@@ -9,6 +9,7 @@ const description = "Arolinks bypass skips blog hop pages and countdown timers o
 const domains = [
   "arolinks.com",
   "vplink.in",
+  "apnahirework.com",
   "darkguruji.com",
   "srtak.com",
   "techcornernews.com",

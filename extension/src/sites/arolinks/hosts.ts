@@ -3,6 +3,7 @@ import { hostnameMatches } from '../../utils/domain-check';
 export const AROLINKS_HOSTS = ['arolinks.com', 'vplink.in'] as const;
 
 export const AROLINKS_MEDIATOR_HOSTS = [
+  'apnahirework.com',
   'darkguruji.com',
   'howdyrecipes.com',
   'srtak.com',
