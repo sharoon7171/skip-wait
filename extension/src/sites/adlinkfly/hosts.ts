@@ -2,6 +2,7 @@ export const ADLINKFLY_LINKS_GO_HOSTS = [
   'linkjust.com',
   'pahe.plus',
   'go.zovo.ink',
+  'go.babylinks.in',
   'shortnest.com',
   'link.liteshort.com',
 ] as const;

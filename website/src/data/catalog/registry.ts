@@ -95,6 +95,8 @@ import { bypass as tflyBypass } from './bypasses/tfly-bypass';
 import { bypass as theuserCloudBypass } from './bypasses/theuser-cloud-bypass';
 import { bypass as tinurlzSoftinfoBypass } from './bypasses/tinurlz-softinfo-bypass';
 import { bypass as tipsguruBypass } from './bypasses/tipsguru-bypass';
+import { bypass as jobsheelBypass } from './bypasses/jobsheel-bypass';
+import { bypass as unlocktoearnBypass } from './bypasses/unlocktoearn-bypass';
 import { bypass as uploadrarBypass } from './bypasses/uploadrar-bypass';
 import { bypass as usersdriveBypass } from './bypasses/usersdrive-bypass';
 import { bypass as vegamoviesBypass } from './bypasses/vegamovies-bypass';
@@ -154,6 +156,7 @@ export const bypasses: readonly SupportedBypass[] = [
   hdhub4uMediatorBypass,
   hubcloudHubcdnBypass,
   icutlinkBypass,
+  jobsheelBypass,
   kitokolaBypass,
   kotakanimeidBypass,
   linclikBypass,
@@ -207,6 +210,7 @@ export const bypasses: readonly SupportedBypass[] = [
   theuserCloudBypass,
   tinurlzSoftinfoBypass,
   tipsguruBypass,
+  unlocktoearnBypass,
   uploadrarBypass,
   usersdriveBypass,
   vegamoviesBypass,

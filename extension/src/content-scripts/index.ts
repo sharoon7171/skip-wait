@@ -12,6 +12,8 @@ import {
   initAdlinkflyTokenPayload,
 } from '../sites/adlinkfly';
 import { initArolinksUnlock, initArolinksMediator } from '../sites/arolinks';
+import { initJobsheelBaby, initJobsheelMediator } from '../sites/jobsheel';
+import { initUnlocktoearnEntry, initUnlocktoearnMediator } from '../sites/unlocktoearn';
 import { initGplinksGate, initGplinksLinksGo, initGplinksMediator } from '../sites/gplinks';
 import { initNitrolinkMediator, initNitrolinkUnlock } from '../sites/nitrolink';
 import { initCut4moneyMediator, initCut4moneyUnlock } from '../sites/cut4money';
@@ -150,6 +152,10 @@ const INITS = [
   initGplinksLinksGo,
   initArolinksMediator,
   initArolinksUnlock,
+  initUnlocktoearnMediator,
+  initUnlocktoearnEntry,
+  initJobsheelMediator,
+  initJobsheelBaby,
   initNitrolinkMediator,
   initNitrolinkUnlock,
   initCut4moneyMediator,
