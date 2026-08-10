@@ -1,127 +1,68 @@
-import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { isAllowedHost } from '../../utils/domain-check';
 import {
   arolinksAliasFromPath,
   clearArolinksChain,
-  ensureArolinksChain,
+  isArolinksShortenerHref,
+  writeArolinksChain,
 } from './chain';
-import { AROLINKS_HOSTS, AROLINKS_WAIT_MS, isTimedDestUrl } from './hosts';
+import { gtLinkDestination, isUnlockShell, jsRedirect } from './gate';
+import { AROLINKS_DEST_WAIT_MS, AROLINKS_HOSTS, isTimedDestUrl } from './hosts';
+import { createOverlay, spoofVisibility } from './overlay';
 
-const OVERLAY_ID = 'skip-wait-arolinks-unlock';
-const BOOT_STYLE_ID = 'skip-wait-arolinks-unlock-boot';
-const NOTE = {
-  lead: 'Hang tight — unlocking your link.',
-  detail: 'Skip Wait is working. You don’t need to tap anything.',
-} as const;
-
-let ui: FullPageOverlay | null = null;
-let started = false;
-
-const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
-
-const requestVisibilitySpoof = (): void => {
-  chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
-};
-
-const bootOverlayLock = (): void => {
-  const active = overlayActiveClass(OVERLAY_ID);
-  document.documentElement.classList.add(active);
-  if (document.getElementById(BOOT_STYLE_ID)) return;
-  const style = document.createElement('style');
-  style.id = BOOT_STYLE_ID;
-  style.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
-  (document.head || document.documentElement).appendChild(style);
-};
-
-const isRealHttp = (href: string): boolean => /^https?:\/\//i.test(href);
-
-const isUnlockShell = (): boolean => {
-  if (!document.querySelector('#gt-link')) return false;
-  if (!document.querySelector('#go-link')) return false;
-  return document.documentElement.innerHTML.includes('ad_form_data');
-};
-
-const gtLinkDestination = (): string | null => {
-  const a = document.querySelector<HTMLAnchorElement>('#gt-link');
-  if (!a) return null;
-  const raw = (a.getAttribute('href') || '').trim();
-  if (isRealHttp(raw)) return raw;
-  const abs = (a.href || '').trim();
-  return isRealHttp(abs) ? abs : null;
-};
-
-const mountUi = (status = 'Getting things ready…'): FullPageOverlay => {
-  bootOverlayLock();
-  if (ui) {
-    ui.setStatus(status);
-    return ui;
-  }
-  ui = createFullPageOverlay({
-    id: OVERLAY_ID,
-    brand: 'Skip Wait',
-    note: NOTE,
-    status,
-    countdownLabel: 'Your link opens in',
-  });
-  return ui;
-};
-
-const recordChain = (): void => {
-  const alias = arolinksAliasFromPath(location.pathname);
-  if (!alias) return;
-  void ensureArolinksChain(alias, location.origin);
-};
-
-const openDest = async (url: string, overlay: FullPageOverlay): Promise<void> => {
-  void clearArolinksChain();
-  if (isTimedDestUrl(url)) {
-    overlay.setStatus('Waiting for access window…');
-    overlay.startCountdown(Date.now() + AROLINKS_WAIT_MS);
-    await sleep(AROLINKS_WAIT_MS);
-    overlay.hideCountdown();
-  }
-  overlay.setStatus('Opening your link…');
-  location.replace(url);
-};
-
-const runUnlock = (): void => {
-  if (started || !isUnlockShell()) return;
-  const url = gtLinkDestination();
-  if (!url) return;
-  started = true;
-  requestVisibilitySpoof();
-  const overlay = mountUi('Opening your link…');
-  void openDest(url, overlay);
-};
+const mount = createOverlay('skip-wait-arolinks-unlock', 'skip-wait-arolinks-unlock-boot');
+const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function initArolinksUnlock(): void {
   if (!isAllowedHost(AROLINKS_HOSTS)) return;
-
   const alias = arolinksAliasFromPath(location.pathname);
-  if (alias) recordChain();
+  if (!alias) return;
 
-  const tick = (): void => {
-    if (started) return;
-    if (!isUnlockShell()) return;
-    mountUi('Opening your link…');
-    runUnlock();
+  const chainWrite = writeArolinksChain(alias, location.origin);
+  mount('Getting things ready…');
+  spoofVisibility();
+
+  let done = false;
+
+  const run = async (): Promise<void> => {
+    if (done) return;
+
+    if (isUnlockShell()) {
+      const dest = gtLinkDestination();
+      if (!dest) return;
+      done = true;
+      await clearArolinksChain();
+      if (isTimedDestUrl(dest)) {
+        const overlay = mount('Waiting for access window…');
+        overlay.startCountdown(Date.now() + AROLINKS_DEST_WAIT_MS);
+        await sleep(AROLINKS_DEST_WAIT_MS);
+        overlay.hideCountdown();
+      }
+      mount('Opening your link…');
+      location.replace(dest);
+      return;
+    }
+
+    const next = jsRedirect(document.documentElement.innerHTML, location.href);
+    if (!next || isArolinksShortenerHref(next, alias)) return;
+    done = true;
+    mount('Moving to the next page…');
+    await chainWrite;
+    location.replace(next);
   };
 
-  tick();
-  if (started) return;
+  void run();
+  if (done) return;
 
-  const mo = new MutationObserver(() => {
-    tick();
-    if (started) mo.disconnect();
+  const observer = new MutationObserver(() => {
+    void (async () => {
+      await run();
+      if (done) observer.disconnect();
+    })();
   });
-  mo.observe(document.documentElement, {
+  observer.observe(document.documentElement, {
     attributeFilter: ['href'],
     attributes: true,
     childList: true,
     subtree: true,
   });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 }

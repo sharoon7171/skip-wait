@@ -1,8 +1,8 @@
-import { AROLINKS_HOSTS } from './hosts';
+import { AROLINKS_HOSTS, AROLINKS_UNLOCK_READY_MS } from './hosts';
 
 const CHAIN_KEY = 'sw-arolinks-chain' as const;
-const UNLOCK_READY_MS = 25_000;
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
+const MAX_AGE_MS = 10 * 60_000;
 
 export type ArolinksChain = {
   alias: string;
@@ -10,47 +10,50 @@ export type ArolinksChain = {
   startedAt: number;
 };
 
-const storageReady = (): boolean => {
+function storageReady(): boolean {
   try {
-    return Boolean(chrome?.runtime?.id && chrome.storage?.local);
+    return Boolean(chrome.runtime?.id && chrome.storage?.local);
   } catch {
     return false;
   }
-};
+}
 
 export function arolinksAliasFromPath(pathname: string): string | null {
-  const parts = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
-  if (parts.length !== 1) return null;
-  const seg = parts[0]!;
+  const [seg, ...rest] = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+  if (!seg || rest.length > 0) return null;
   return ALIAS_RE.test(seg) ? seg : null;
 }
 
 export async function readArolinksChain(): Promise<ArolinksChain | null> {
   if (!storageReady()) return null;
   try {
-    const data = await chrome.storage.local.get(CHAIN_KEY);
-    const raw = data[CHAIN_KEY] as Partial<ArolinksChain> | undefined;
+    const raw = (await chrome.storage.local.get(CHAIN_KEY))[CHAIN_KEY];
     if (!raw || typeof raw !== 'object') return null;
-    if (typeof raw.alias !== 'string' || !ALIAS_RE.test(raw.alias)) return null;
-    if (typeof raw.origin !== 'string' || !/^https?:\/\//i.test(raw.origin)) return null;
-    if (typeof raw.startedAt !== 'number' || raw.startedAt <= 0) return null;
-    return { alias: raw.alias, origin: raw.origin.replace(/\/$/, ''), startedAt: raw.startedAt };
+    const { alias, origin, startedAt } = raw as Partial<ArolinksChain>;
+    if (typeof alias !== 'string' || !ALIAS_RE.test(alias)) return null;
+    if (typeof origin !== 'string' || !/^https?:\/\//i.test(origin)) return null;
+    if (typeof startedAt !== 'number' || startedAt <= 0) return null;
+    if (Date.now() - startedAt > MAX_AGE_MS) {
+      await chrome.storage.local.remove(CHAIN_KEY);
+      return null;
+    }
+    return { alias, origin: origin.replace(/\/$/, ''), startedAt };
   } catch {
     return null;
   }
 }
 
-export async function ensureArolinksChain(alias: string, origin: string): Promise<ArolinksChain> {
-  const normalized = origin.replace(/\/$/, '');
-  const existing = await readArolinksChain();
-  if (existing && existing.alias === alias && existing.origin === normalized) {
-    return existing;
+export async function writeArolinksChain(alias: string, origin: string): Promise<ArolinksChain> {
+  const chain: ArolinksChain = {
+    alias,
+    origin: origin.replace(/\/$/, ''),
+    startedAt: Date.now(),
+  };
+  if (storageReady()) {
+    try {
+      await chrome.storage.local.set({ [CHAIN_KEY]: chain });
+    } catch {}
   }
-  const chain: ArolinksChain = { alias, origin: normalized, startedAt: Date.now() };
-  if (!storageReady()) return chain;
-  try {
-    await chrome.storage.local.set({ [CHAIN_KEY]: chain });
-  } catch {}
   return chain;
 }
 
@@ -62,19 +65,19 @@ export async function clearArolinksChain(): Promise<void> {
 }
 
 export function msUntilUnlockReady(chain: ArolinksChain): number {
-  return Math.max(0, chain.startedAt + UNLOCK_READY_MS - Date.now());
+  return Math.max(0, chain.startedAt + AROLINKS_UNLOCK_READY_MS - Date.now());
 }
 
 export function shortenerUrl(chain: ArolinksChain): string {
   return `${chain.origin}/${chain.alias}`;
 }
 
-export function isArolinksShortenerHref(href: string): boolean {
+export function isArolinksShortenerHref(href: string, alias: string): boolean {
   try {
-    const u = new URL(href);
-    const host = u.hostname.toLowerCase();
+    const { hostname, pathname } = new URL(href);
+    const host = hostname.toLowerCase();
     if (!AROLINKS_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return false;
-    return arolinksAliasFromPath(u.pathname) !== null;
+    return arolinksAliasFromPath(pathname) === alias;
   } catch {
     return false;
   }
