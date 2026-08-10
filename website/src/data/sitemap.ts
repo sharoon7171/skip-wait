@@ -3,7 +3,7 @@ import { allBypassSlugs } from '@/data/catalog';
 import { SITE } from '@/data/constants';
 import { bypassSitePath, routes } from '@/lib/routes';
 
-const SITEMAP_CONTENT_UPDATED = new Date('2026-07-31T00:00:00.000Z');
+const SITEMAP_CONTENT_UPDATED = new Date('2026-08-10T00:00:00.000Z');
 
 const SITEMAP_PATHS = {
   static: '/sitemap.xml',
@@ -33,6 +33,7 @@ export function staticSitemapEntries(): MetadataRoute.Sitemap {
   return [
     entry(routes.home, 'weekly', 1),
     entry(routes.sites, 'weekly', 0.9),
+    entry(routes.guidesAndroid, 'monthly', 0.7),
     entry(routes.privacy, 'yearly', 0.3),
     entry(routes.terms, 'yearly', 0.3),
   ];

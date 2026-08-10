@@ -43,6 +43,11 @@ export const SITE = {
 export const CHROME_WEB_STORE_URL =
   'https://chromewebstore.google.com/detail/hdoecnlghjglmnjpnhaaeofcgocdgkhd';
 
+export const QUETTA = {
+  playStore: 'https://play.google.com/store/apps/details?id=net.quetta.browser',
+  installGuide: 'https://www.quetta.net/blog/how-to-use-browser-extensions-on-android-phone',
+} as const;
+
 export const REQUEST_SUPPORT_URL =
   'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns/issues/new?template=request_support.yml&labels=request-support';
 

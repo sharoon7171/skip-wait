@@ -49,6 +49,11 @@ export function SiteFooter(): React.ReactElement {
                   </AppLink>
                 </li>
                 <li>
+                  <AppLink href={routes.guidesAndroid} className={footerLink}>
+                    Install on Android
+                  </AppLink>
+                </li>
+                <li>
                   <AppLink href={homeSections.howItWorks} className={footerLink}>
                     How It Works
                   </AppLink>

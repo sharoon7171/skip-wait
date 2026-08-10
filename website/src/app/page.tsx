@@ -4,6 +4,7 @@ import { DomainTicker } from '@/components/home/DomainTicker';
 import { StatsBand } from '@/components/home/StatsBand';
 import { CapabilitySection } from '@/components/home/CapabilitySection';
 import { FlowSection } from '@/components/home/FlowSection';
+import { AndroidGuideSection } from '@/components/home/AndroidGuideSection';
 import { ShowcaseSection } from '@/components/home/ShowcaseSection';
 import { FaqSection } from '@/components/home/FaqSection';
 import { SupportCta } from '@/components/layout/SupportCta';
@@ -59,6 +60,7 @@ export default function HomePage(): React.ReactElement {
       <StatsBand />
       <CapabilitySection />
       <FlowSection />
+      <AndroidGuideSection />
       <ShowcaseSection />
       <FaqSection />
       <SupportCta />

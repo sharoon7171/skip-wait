@@ -1,6 +1,6 @@
 import { totalBypasses, totalDomains } from '@/data/catalog';
 
-type FaqItem = {
+export type FaqItem = {
   question: string;
   answer: string;
 };
@@ -10,6 +10,11 @@ export const faqs: readonly FaqItem[] = [
     question: 'How do I use Skip Wait?',
     answer:
       'Install Skip Wait from the Chrome Web Store, then open supported links as usual. On matching pages the extension either bypasses the countdown and redirects, or automates the wait and continue steps so you reach the file or destination faster.',
+  },
+  {
+    question: 'Can I use Skip Wait on Android?',
+    answer:
+      'Yes on Android with Quetta Browser, which installs Chrome Web Store extensions. Chrome for Android itself does not. Follow the Install on Android guide for Quetta’s official install steps. Quetta’s iOS app does not document Chrome extension support, so Skip Wait is not offered there.',
   },
   {
     question: 'Does it bypass timers, or only automate waits?',

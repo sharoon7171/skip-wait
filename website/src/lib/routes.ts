@@ -1,6 +1,7 @@
 export const routes = {
   home: '/',
   sites: '/sites',
+  guidesAndroid: '/guides/android',
   privacy: '/privacy',
   terms: '/terms',
 } as const;

@@ -39,7 +39,7 @@ export function LegalPage({
 
       <section className="bg-surface-canvas pb-16 lg:pb-20">
         <Shell>
-          <div className="divide-y divide-neutral-200 border-t border-neutral-200 text-body-sm leading-relaxed text-ink-body [&_a]:font-medium [&_a]:text-primary-700 [&_a]:underline [&_a]:underline-offset-2 [&_code]:rounded-sm [&_code]:bg-surface-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-caption [&_code]:text-ink [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-ui [&_h3]:font-bold [&_h3]:text-ink [&_h3:first-child]:mt-0 [&_li+li]:mt-2 [&_ol]:mt-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mt-3 [&_p:first-child]:mt-0 [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-5">
+          <div className="divide-y divide-neutral-200 border-t border-neutral-200 text-body-sm leading-relaxed text-ink-body [&_a]:font-medium [&_a]:text-primary-700 [&_a]:underline [&_a]:underline-offset-2 [&_code]:rounded-sm [&_code]:bg-surface-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-caption [&_code]:text-ink [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-ui [&_h3]:font-bold [&_h3]:text-ink [&_h3:first-child]:mt-0 [&_p]:mt-3 [&_p:first-child]:mt-0 [&_section>div>ol]:mt-3 [&_section>div>ol]:list-decimal [&_section>div>ol]:pl-5 [&_section>div>ol>li+li]:mt-2 [&_section>div>ul]:mt-3 [&_section>div>ul]:list-disc [&_section>div>ul]:pl-5 [&_section>div>ul>li+li]:mt-2 [&_strong]:font-semibold [&_strong]:text-ink">
             {children}
           </div>
         </Shell>

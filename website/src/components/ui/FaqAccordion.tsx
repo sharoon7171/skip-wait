@@ -1,11 +1,12 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { useId, useState } from 'react';
 import { IconChevronRight } from '@/components/ui/icons';
 
-type FaqAccordionItem = {
+export type FaqAccordionItem = {
   question: string;
-  answer: string;
+  answer: ReactNode;
 };
 
 type FaqAccordionProps = {
@@ -53,7 +54,7 @@ export function FaqAccordion({ items }: FaqAccordionProps): React.ReactElement {
                 aria-labelledby={buttonId}
                 className="bg-white px-5 py-4 ring-1 ring-neutral-200 ring-inset sm:px-6 sm:py-5"
               >
-                <p className="m-0 max-w-prose text-body-sm leading-relaxed text-ink">
+                <p className="m-0 max-w-prose text-body-sm leading-relaxed text-ink [&_a]:font-medium [&_a]:text-primary-700 [&_a]:underline [&_a]:underline-offset-2 [&_a]:hover:text-primary-800">
                   {item.answer}
                 </p>
               </div>
