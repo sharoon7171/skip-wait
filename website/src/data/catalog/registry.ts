@@ -51,6 +51,7 @@ import { bypass as linkshortifyBypass } from './bypasses/linkshortify-bypass';
 import { bypass as linksterrBypass } from './bypasses/linksterr-bypass';
 import { bypass as linkunlockerBypass } from './bypasses/linkunlocker-bypass';
 import { bypass as linkvertiseBypass } from './bypasses/linkvertise-bypass';
+import { bypass as liteapksBypass } from './bypasses/liteapks-bypass';
 import { bypass as liteshortBypass } from './bypasses/liteshort-bypass';
 import { bypass as llSafelinkBypass } from './bypasses/ll-safelink-bypass';
 import { bypass as lootlabsBypass } from './bypasses/lootlabs-bypass';
@@ -165,6 +166,7 @@ export const bypasses: readonly SupportedBypass[] = [
   linksterrBypass,
   linkunlockerBypass,
   linkvertiseBypass,
+  liteapksBypass,
   liteshortBypass,
   llSafelinkBypass,
   lootlabsBypass,
