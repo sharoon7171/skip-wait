@@ -2,7 +2,6 @@ import { AROLINKS_HOSTS, AROLINKS_UNLOCK_READY_MS } from './hosts';
 
 const CHAIN_KEY = 'sw-arolinks-chain' as const;
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
-const MAX_AGE_MS = 10 * 60_000;
 
 export type ArolinksChain = {
   alias: string;
@@ -33,10 +32,6 @@ export async function readArolinksChain(): Promise<ArolinksChain | null> {
     if (typeof alias !== 'string' || !ALIAS_RE.test(alias)) return null;
     if (typeof origin !== 'string' || !/^https?:\/\//i.test(origin)) return null;
     if (typeof startedAt !== 'number' || startedAt <= 0) return null;
-    if (Date.now() - startedAt > MAX_AGE_MS) {
-      await chrome.storage.local.remove(CHAIN_KEY);
-      return null;
-    }
     return { alias, origin: origin.replace(/\/$/, ''), startedAt };
   } catch {
     return null;

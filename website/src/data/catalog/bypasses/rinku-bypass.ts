@@ -7,16 +7,7 @@ const bypassType = "Skip Short Link";
 const description =
   "Rinku bypass for people tired of please-wait screens: skip the Rinku countdown, clear the waiting page, and move past unlock checks on monetized ad links so the real destination shows up sooner.";
 
-const domains = [
-  "excelad.top",
-  "7mb.io",
-  "rinku.pro",
-  "rinku.me",
-  "halo.cararabic.com",
-  "biosjourney.com",
-  "noble.postalcode.com.pk",
-  "esladvice.com",
-] as const;
+const domains = ['rinku.me', 'rinku.pro', '7mb.io'] as const;
 
 const keywords = [
   "rinku bypass",
@@ -51,7 +42,7 @@ const problem =
   "Ad link networks get paid when you linger. Rinku is good at that: the clock runs, the continue button stays locked, a captcha may appear, and leaving the tab can reset progress. Searching “skip rinku” or “rinku countdown bypass” is what people do after the third identical waiting page. The friction is the product—not a bug.";
 
 const howItWorks =
-  "On a supported Rinku flow, Skip Wait watches for the waiting page and unlock UI the shortener actually serves. It advances countdown and continue steps it can handle, keeps captcha follow-ups in view when a check is required, and lets the shortener itself hand back the next URL. Nothing is invented offline—the destination still comes from the live unlock path, just with less idle staring.";
+  "Open a Rinku short link and Skip Wait starts the chain from that URL only. It follows the live unlock path across rotating blog hops and exit pages by how those pages behave—not by a fixed host list—posts the same unlock tokens the page already carries, keeps captcha checks in view when required, and opens the destination the shortener releases. Nothing is invented offline.";
 
 const steps: readonly BypassStep[] = [
   {

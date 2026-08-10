@@ -47,17 +47,19 @@ export const rinkuStepButton = (): HTMLButtonElement | null => {
 };
 
 export const rinkuCaptchaWidget = (): HTMLElement | null =>
-  document.getElementById('captcha-container');
+  document.getElementById('captcha-container') ??
+  document.querySelector<HTMLElement>('.cf-turnstile, [name="cf-turnstile-response"]');
 
 export const rinkuCaptchaForm = (): HTMLFormElement | null => {
-  const hex = document.getElementById('sf-frm2');
-  if (hex instanceof HTMLFormElement && hexInputs(hex)) return hex;
+  const byId = document.getElementById('sf-frm2');
+  if (byId instanceof HTMLFormElement && hexInputs(byId)) return byId;
   for (const form of document.querySelectorAll('form')) {
-    if (form instanceof HTMLFormElement && form.querySelector('#captcha-container') && hexInputs(form)) {
+    if (!(form instanceof HTMLFormElement) || !hexInputs(form)) continue;
+    if (form.querySelector('#captcha-container, .cf-turnstile, [name="cf-turnstile-response"]')) {
       return form;
     }
   }
-  return rinkuHexForm();
+  return null;
 };
 
 export const rinkuUnlockForm = (): HTMLFormElement | null => {
@@ -69,19 +71,15 @@ export const rinkuUnlockForm = (): HTMLFormElement | null => {
   }
   const step = rinkuStepButton()?.closest('form');
   if (step instanceof HTMLFormElement && hexInputs(step)) return step;
-  return rinkuHexForm();
+  return null;
 };
 
 export const isRinkuCaptchaGate = (): boolean =>
   !isCloudflareChallenge() &&
-  Boolean(rinkuCaptchaWidget() && rinkuCaptchaForm() && (isRinkuSflinkPage() || rinkuStepButton()));
+  !document.getElementById('redirect-link') &&
+  Boolean(rinkuCaptchaForm() && rinkuCaptchaWidget());
 
 export const isRinkuCountdownGate = (): boolean =>
   !isCloudflareChallenge() &&
   !isRinkuCaptchaGate() &&
-  Boolean(
-    rinkuUnlockForm() &&
-      document.getElementById('redirect-link') &&
-      document.getElementById('count') &&
-      (isRinkuSflinkPage() || document.getElementById('redirect-message') || HEX64.test(rinkuUnlockForm()?.id ?? '')),
-  );
+  Boolean(rinkuUnlockForm() && document.getElementById('redirect-link') && document.getElementById('count'));

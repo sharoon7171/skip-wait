@@ -1,12 +1,21 @@
 import { runDocumentVisibilitySpoof } from '../../background/document-visibility-spoof';
 import { hostnameMatches } from '../../utils/domain-check';
-import { MSG_RINKU_PAGE_HOOKS, RINKU_GATE_HOSTS, RINKU_MEDIATOR_HOSTS } from './hosts';
+import { readRinkuChain, rinkuAliasFromPath, writeRinkuChain } from './chain';
+import { RINKU_MAIN_HOSTS, MSG_RINKU_PAGE_HOOKS } from './hosts';
 import { runRinkuPageHooks } from './page-hooks';
+
+const seedChainFromShortUrl = async (url: string): Promise<void> => {
+  try {
+    const u = new URL(url);
+    if (!hostnameMatches(u.hostname, RINKU_MAIN_HOSTS)) return;
+    const alias = rinkuAliasFromPath(u.pathname);
+    if (alias) await writeRinkuChain(alias, u.origin);
+  } catch {}
+};
 
 const isRinkuHookUrl = (url: string): boolean => {
   try {
-    const hostname = new URL(url).hostname;
-    return hostnameMatches(hostname, RINKU_MEDIATOR_HOSTS) || hostnameMatches(hostname, RINKU_GATE_HOSTS);
+    return /^\/rinku\/(land|out)\/?$/i.test(new URL(url).pathname);
   } catch {
     return false;
   }
@@ -30,8 +39,13 @@ const inject = (tabId: number, frameId = 0): void => {
 
 export const initRinkuPageHooksInject = (): void => {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isRinkuHookUrl(details.url)) return;
-    inject(details.tabId);
+    if (details.frameId !== 0) return;
+    void (async () => {
+      await seedChainFromShortUrl(details.url);
+      if (!isRinkuHookUrl(details.url)) return;
+      if (!(await readRinkuChain())) return;
+      inject(details.tabId);
+    })();
   });
 
   chrome.runtime.onMessage.addListener((message: unknown, sender) => {
@@ -45,8 +59,10 @@ export const initRinkuPageHooksInject = (): void => {
     }
     const tabId = sender.tab?.id;
     if (tabId === undefined) return false;
-    if (sender.tab?.url && !isRinkuHookUrl(sender.tab.url)) return false;
-    inject(tabId, sender.frameId ?? 0);
+    void (async () => {
+      if (!(await readRinkuChain())) return;
+      inject(tabId, sender.frameId ?? 0);
+    })();
     return false;
   });
 };

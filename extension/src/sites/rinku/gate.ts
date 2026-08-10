@@ -1,7 +1,14 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
+import { MSG_INJECT_VISIBILITY_SPOOF } from '../../background/document-visibility-spoof';
+import {
+  clearRinkuChain,
+  isRinkuMainHost,
+  readRinkuChain,
+  rinkuAliasFromPath,
+  writeRinkuChain,
+} from './chain';
 import {
   isCloudflareChallenge,
   isRinkuCaptchaGate,
@@ -13,8 +20,7 @@ import {
   rinkuHexForm,
   rinkuUnlockForm,
 } from './detect';
-import { MSG_INJECT_VISIBILITY_SPOOF } from '../../background/document-visibility-spoof';
-import { MSG_RINKU_PAGE_HOOKS, RINKU_GATE_HOSTS, RINKU_MEDIATOR_HOSTS } from './hosts';
+import { MSG_RINKU_PAGE_HOOKS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-rinku-overlay';
 const BOOT_STYLE_ID = 'skip-wait-rinku-boot';
@@ -23,7 +29,6 @@ const CAPTCHA_WIDGET_ID = 'skip-wait-rinku-captcha';
 const LAND_ONCE_KEY = 'skip-wait-rinku-land-once';
 const OUT_ONCE_KEY = 'skip-wait-rinku-out-once';
 const FORM_DONE = 'data-skip-wait-submitted';
-const UNLOCK_MS = 20_000;
 const CAPTCHA_IFRAMES = ['iframe[src*="turnstile"]'] as const;
 
 const NOTE = {
@@ -41,8 +46,6 @@ let landStarted = false;
 let outStarted = false;
 let captchaStarted = false;
 let unlockStarted = false;
-
-const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 const requestHooks = (): void => {
   chrome.runtime.sendMessage({ type: MSG_RINKU_PAGE_HOOKS }).catch(() => {});
@@ -126,9 +129,11 @@ const runHexContinue = (kind: 'land' | 'out'): void => {
   if (!claimOnce(isLand ? LAND_ONCE_KEY : OUT_ONCE_KEY)) return;
   if (isLand) landStarted = true;
   else outStarted = true;
+  requestHooks();
   mountUi(isLand ? 'Skipping land wait…' : 'Finishing exit hop…');
   if (isLand) document.getElementById('delulu-overlay')?.style.setProperty('display', 'none', 'important');
   clearSiteTimers();
+  if (!isLand) void clearRinkuChain();
   requestAnimationFrame(() => requestAnimationFrame(() => submitOnce(form)));
 };
 
@@ -178,19 +183,14 @@ const runCaptchaGate = (): void => {
   requestAnimationFrame(tickCaptcha);
 };
 
-const runCountdownUnlock = async (): Promise<void> => {
+const runCountdownUnlock = (): void => {
   if (unlockStarted || !isRinkuCountdownGate()) return;
   const form = rinkuUnlockForm();
   if (!form || form.getAttribute(FORM_DONE) === '1') return;
 
   unlockStarted = true;
   requestHooks();
-  const overlay = mountUi('Opening destination…');
-  overlay.startCountdown(Date.now() + UNLOCK_MS);
-  await sleep(UNLOCK_MS);
-  overlay.hideCountdown();
-  if (!document.contains(form)) return;
-
+  mountUi('Opening destination…');
   document.getElementById('redirect-link')?.style.setProperty('display', 'none', 'important');
   document.getElementById('redirect-message')?.style.setProperty('display', 'none', 'important');
   document.getElementById('sf-lock-t')?.style.setProperty('display', 'none', 'important');
@@ -203,28 +203,22 @@ const runCountdownUnlock = async (): Promise<void> => {
 
 const tick = (): void => {
   if (isCloudflareChallenge()) return;
-  if (isAllowedHost(RINKU_MEDIATOR_HOSTS) && isRinkuLandPath()) {
+  if (isRinkuLandPath()) {
     runHexContinue('land');
     return;
   }
-  if (isAllowedHost(RINKU_MEDIATOR_HOSTS) && isRinkuOutPath()) {
+  if (isRinkuOutPath()) {
     runHexContinue('out');
     return;
   }
-  if (!isAllowedHost(RINKU_GATE_HOSTS)) return;
   if (isRinkuCaptchaGate()) {
     runCaptchaGate();
     return;
   }
-  if (isRinkuCountdownGate()) void runCountdownUnlock();
+  if (isRinkuCountdownGate()) runCountdownUnlock();
 };
 
-export const initRinkuGate = (): void => {
-  if (window !== window.top) return;
-  const onMediator = isAllowedHost(RINKU_MEDIATOR_HOSTS);
-  const onGate = isAllowedHost(RINKU_GATE_HOSTS);
-  if (!onMediator && !onGate) return;
-  requestHooks();
+const watch = (): void => {
   tick();
   new MutationObserver(tick).observe(document.documentElement, {
     attributeFilter: ['href', 'value', 'disabled', 'class', 'style'],
@@ -234,4 +228,19 @@ export const initRinkuGate = (): void => {
   });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
   window.addEventListener('load', tick, true);
+};
+
+export const initRinkuGate = (): void => {
+  if (window !== window.top) return;
+
+  if (isRinkuMainHost()) {
+    const alias = rinkuAliasFromPath(location.pathname);
+    if (alias) void writeRinkuChain(alias, location.origin);
+    return;
+  }
+
+  void (async () => {
+    if (!(await readRinkuChain())) return;
+    watch();
+  })();
 };
