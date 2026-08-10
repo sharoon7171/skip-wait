@@ -1,77 +1,82 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Linclik";
+const name = 'Linclik';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Linclik bypass skips the continue gate and AdLinkFly unlock countdown on this link shortener for automatic redirect to your destination URL.";
+const description =
+  'Linclik bypass that clears the continue gate and AdLinkFly-style unlock countdown so Skip Wait can redirect to the destination without babysitting Get Link.';
 
-const domains = [
-  "linclik.com",
-] as const;
+const domains = ['linclik.com'] as const;
 
 const keywords = [
-  "linclik bypass",
-  "Linclik bypass extension",
-  "linclik timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'linclik bypass',
+  'linclik bypass chrome',
+  'linclik bypass extension',
+  'bypass linclik',
+  'skip linclik',
+  'linclik timer bypass',
+  'linclik countdown bypass',
+  'linclik continue',
+  'adlinkfly unlock',
+  'skip waiting page',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
 ] as const;
 
-const intro = "Linclik bypass skips the continue gate and AdLinkFly unlock countdown on this link shortener for automatic redirect to your destination URL. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Linclik bypass search usually means a short URL parked you on a continue gate and an AdLinkFly-style unlock countdown instead of the destination. Skip Wait is the free Chrome extension that advances that waiting page and redirects when unlock is ready.';
 
-const problem = "Linclik places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Continue, then unlock countdown, then the real URL
 
-const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
+Linclik shares follow a familiar AdLinkFly pattern: a continue gate under ads, a please-wait strip, then an unlock countdown before Get Link or the redirect fires. Miss Continue or leave early and you restart the gate.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Linclik bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Linclik.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Linclik link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Linclik delay.",
-  },
-];
+That is why linclik timer bypass and skip click to continue sit next to waiting page bypass—the destination is delayed by UI chores, not a mystery URL.
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+### Gates people actually sit through
+
+- Continue buttons that stay disabled until the client timer ends
+- Please-wait strips stacked over the unlock control
+- AdLinkFly-style countdown before redirect
+- Manual retries when ads hide Get Link
+
+## Finishing unlock on the live waiting page
+
+Skip Wait detects the gate, completes the continue flow the page expects, and covers unlock countdown busywork so the redirect can fire when allowed.
+
+You open the short link as usual—no paste tool. Client-only clutter gets out of the way; any server-enforced hold still finishes honestly before the destination opens.
+
+## Why re-clicking Continue never teaches you anything new
+
+The unlock pattern stays the same even when ad layouts shuffle. A Linclik bypass extension that runs on the live page keeps skip waiting page useful without learning a new paste site every time the shortener tweaks chrome.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What continue gate does Skip Wait bypass on linclik.com?",
-    answer: "Skip Wait skips the continue gate and AdLinkFly unlock countdown on linclik.com for automatic redirect to your destination link.",
+    question: 'What does a Linclik bypass skip?',
+    answer:
+      'The continue gate and AdLinkFly-style unlock countdown busywork so the destination opens when unlock is allowed.',
   },
   {
-    question: "Does Skip Wait skip the AdLinkFly unlock countdown on Linclik?",
-    answer: "Yes. Gate pages and manual continue button loops are bypassed so you are not stuck on filler screens between the short link and your URL.",
+    question: 'Do I still press Continue myself?',
+    answer:
+      'On supported pages, no. Skip Wait completes the continue flow and advances unlock without hunting buttons through ads.',
   },
   {
-    question: "Can I get automatic redirect to my destination from Linclik links?",
-    answer: "Yes. Open any Linclik waiting page with Skip Wait installed and the extension handles the bypass without repeated continue clicks.",
+    question: 'Is every timer removed instantly?',
+    answer:
+      'Client-only delays go away. When unlock still needs a real wait, Skip Wait stays until it is allowed—so the linclik countdown bypass stays stable.',
   },
   {
-    question: "Is the Linclik bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Linclik bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The Linclik path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -83,10 +88,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

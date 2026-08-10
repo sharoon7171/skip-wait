@@ -5,9 +5,7 @@ import { usePathname } from 'next/navigation';
 import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
 import { homeSections, routes } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
-import { BrandIcon } from '@/components/ui/BrandIcon';
-import { ChromeIcon } from '@/components/ui/ChromeIcon';
-import { IconClose, IconMenu } from '@/components/ui/Icons';
+import { BrandIcon, ChromeIcon, IconClose, IconMenu } from '@/components/ui/icons';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 

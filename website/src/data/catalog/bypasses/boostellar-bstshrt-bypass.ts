@@ -1,77 +1,83 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Boostellar / Bstshrt";
+const name = 'Boostellar / Bstshrt';
 
-const bypassType = "Skip Countdown";
+const bypassType = 'Skip Countdown';
 
-const description = "Boostellar bypass skips the content locker gate and countdown timer on monetized short links for instant redirect to your destination URL every time.";
+const description =
+  'Boostellar / Bstshrt bypass that clears content locker gates and unlock countdowns on monetized short links so the destination opens without watching the locker clock.';
 
-const domains = [
-  "bstshrt.com",
-  "bstlar.com",
-  "boostellar.com",
-] as const;
+const domains = ['bstshrt.com', 'bstlar.com', 'boostellar.com'] as const;
 
 const keywords = [
-  "boostellar / bstshrt bypass",
-  "Boostellar / Bstshrt bypass extension",
-  "boostellar / bstshrt timer bypass",
-  "skip countdown",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "countdown timer bypass",
-  "skip timer unlock",
+  'boostellar bypass',
+  'bstshrt bypass',
+  'bstlar bypass',
+  'boostellar bstshrt bypass',
+  'Boostellar bypass extension',
+  'boostellar timer bypass',
+  'bstshrt timer bypass',
+  'boostellar content locker',
+  'content locker bypass',
+  'content locker countdown skip',
+  'skip countdown',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'countdown timer bypass',
+  'skip timer unlock',
+  'get link delay bypass',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
 ] as const;
 
-const intro = "Boostellar bypass skips the content locker gate and countdown timer on monetized short links for instant redirect to your destination URL every time. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Boostellar bypass or Bstshrt bypass search usually starts when a monetized short link freezes behind a content locker countdown. Skip Wait is the free Chrome extension that clears that locker gate so the destination opens without watching the unlock clock by hand.';
 
-const problem = "Boostellar puts a countdown timer or unlock delay in front of the continue or get link step. A Boostellar bypass removes that wait so the destination opens without watching the clock.";
+const body = `## Content lockers that freeze Get Link
 
-const howItWorks = "Unlock timers on 3 supported websites no longer block the get link or continue step.";
+Boostellar and Bstshrt shares park a content locker between the short alias and the long URL. Continue or Get Link stays disabled until the countdown finishes, even when the destination is already known. That stall is why boostellar content locker, content locker countdown skip, and get link delay bypass queries sit next to generic skip countdown timer searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Boostellar / Bstshrt bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Boostellar / Bstshrt.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Boostellar / Bstshrt link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Boostellar / Bstshrt delay.",
-  },
-];
+### What the locker holds
 
-const skips = [
-  "Countdown timers on unlock pages",
-  "Get link delay screens",
-] as const;
+- Unlock countdowns before Continue enables
+- Content locker chrome on monetized short URLs
+- Get Link delay screens after the timer
+- Manual babysitting when the page resets mid-count
+
+## Monetized short URLs past the locker clock
+
+Skip Wait runs on the live locker page in Chrome, advances past countdown busywork when the flow allows, and opens the destination once unlock is permitted. One Boostellar / Bstshrt bypass extension install covers the matching hosts listed on this page—no paste form and no per-link toggle.
+
+Client-only delay theater clears; if the locker still enforces a real server hold, Skip Wait finishes that hold honestly, then continues.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which Boostellar domains like bstshrt.com and bstlar.com are covered?",
-    answer: "Skip Wait supports bstshrt.com, bstlar.com, and boostellar.com, bypassing content locker gates and countdown timers on monetized short links across all three.",
+    question: 'Which Boostellar / Bstshrt hosts are covered?',
+    answer:
+      'The hosts listed in the domains section on this page. Open any of those monetized short links with Skip Wait enabled and the locker path starts automatically.',
   },
   {
-    question: "What content locker gate does Skip Wait skip on Boostellar links?",
-    answer: "The content locker that blocks instant redirect is bypassed so Skip Wait unlocks your destination link without waiting through the full gate timer.",
+    question: 'What content locker gate does Skip Wait clear?',
+    answer:
+      'The locker that blocks instant redirect—countdown chrome and Get Link delay—so the destination opens when unlock is allowed.',
   },
   {
-    question: "Does Skip Wait bypass the countdown before redirect on monetized Boostellar short links?",
-    answer: "Yes. Unlock countdown timers and get link delay screens are skipped for instant redirect to your destination URL.",
+    question: 'Does it skip the full countdown every time?',
+    answer:
+      'It removes client busywork and advances as soon as unlock is permitted. Server-enforced holds are waited once, then the redirect continues.',
   },
   {
-    question: "Is the Boostellar bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Boostellar bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this the same as BoostyLink?',
+    answer:
+      'Related locker family, different action loop. Boostellar / Bstshrt focuses on countdown gates; BoostyLink also automates stacked locker actions.',
+  },
+  {
+    question: 'Is the Boostellar path free?',
+    answer:
+      'Yes. Skip Wait is free. The Boostellar / Bstshrt bypass runs on supported pages with no account or paid plan.',
   },
 ];
 
@@ -83,10 +89,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

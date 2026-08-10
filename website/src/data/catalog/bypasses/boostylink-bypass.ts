@@ -1,76 +1,84 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "BoostyLink";
+const name = 'BoostyLink';
 
-const bypassType = "Skip Countdown";
+const bypassType = 'Skip Countdown';
 
-const description = "BoostyLink bypass automates the content locker actions and unlock timer on monetized short links so your destination opens without tapping each step.";
+const description =
+  'BoostyLink bypass that runs content locker actions and the server unlock timer on monetized short links so the destination opens without tapping every step.';
 
-const domains = [
-  "boostylink.com",
-] as const;
+const domains = ['boostylink.com'] as const;
 
 const keywords = [
-  "boostylink bypass",
-  "BoostyLink bypass extension",
-  "boostylink timer bypass",
-  "skip countdown",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "countdown timer bypass",
-  "skip timer unlock",
+  'boostylink bypass',
+  'BoostyLink bypass extension',
+  'boostylink bypass chrome',
+  'bypass boostylink',
+  'skip boostylink',
+  'boostylink timer bypass',
+  'boostylink content locker',
+  'content locker action bypass',
+  'locker unlock timer',
+  'skip countdown',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'countdown timer bypass',
+  'skip timer unlock',
+  'get link delay bypass',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
 ] as const;
 
-const intro = "BoostyLink bypass automates the content locker actions and unlock timer on monetized short links so your destination opens without tapping each step. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A BoostyLink bypass search usually means a content locker still wants a stack of actions plus a server unlock timer before Continue works. Skip Wait is the free Chrome extension that runs those locker steps for you and opens the destination when unlock completes.';
 
-const problem = "BoostyLink puts locker actions and a server unlock timer in front of the continue step. A BoostyLink bypass runs those actions for you and opens the destination when the unlock completes.";
+const body = `## Locker actions stacked before unlock
 
-const howItWorks = "Skip Wait starts the locker actions, waits out the unlock timer, completes each action, and opens the destination URL automatically.";
+BoostyLink pages are not a single countdown strip. You start locker actions, wait a server-side unlock timer, complete each step, then finally navigate. Miss an action or leave mid-timer and the sequence resets. That is why boostylink content locker, content locker action bypass, and locker unlock timer queries show up beside generic skip countdown timer searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The BoostyLink bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for BoostyLink.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a BoostyLink link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported BoostyLink delay.",
-  },
-];
+### What you would tap by hand
 
-const skips = [
-  "Manual locker action clicks",
-  "Unlock timer busywork on the page",
-  "Get link delay screens",
-] as const;
+- Manual locker action starts and completes
+- Server unlock timer busywork on the page
+- Get Link delay screens after the actions finish
+- Return-URL navigation you still have to click
+
+## Completing the action loop in Chrome
+
+Skip Wait starts the locker actions, waits out the unlock timer the server still enforces, completes each action, and opens the destination URL automatically. Cosmetic UI babysitting disappears; the honest server hold remains. One BoostyLink bypass extension install covers matching pages—no paste box and no userscript pack.
+
+## Return URLs after the timer finishes
+
+When the locker returns a destination—including return links from sites that use BoostyLink as their shortener—Skip Wait navigates there once unlock is allowed.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which BoostyLink domain does Skip Wait support?",
-    answer: "Skip Wait supports boostylink.com locker pages, automating action start and complete calls before opening the destination URL.",
+    question: 'Which BoostyLink pages does Skip Wait support?',
+    answer:
+      'Supported locker pages are listed in the domains section on this page. The extension automates action start and complete calls before opening the destination URL.',
   },
   {
-    question: "Does Skip Wait remove the BoostyLink unlock timer completely?",
-    answer: "The unlock timer is server-side. Skip Wait runs the locker flow for you and opens the destination as soon as the unlock is allowed—no manual action clicks.",
+    question: 'Does Skip Wait remove the unlock timer completely?',
+    answer:
+      'The unlock timer is server-side. Skip Wait runs the locker flow for you and opens the destination as soon as unlock is allowed—no manual action clicks.',
   },
   {
-    question: "Will BoostyLink still open my return URL after unlock?",
-    answer: "Yes. When the locker returns a destination URL—including return links from sites that use BoostyLink as their shortener—Skip Wait navigates there automatically after unlock.",
+    question: 'Will BoostyLink still open my return URL after unlock?',
+    answer:
+      'Yes. When the locker returns a destination URL—including return links from sites that use BoostyLink as their shortener—Skip Wait navigates there automatically after unlock.',
   },
   {
-    question: "Is the BoostyLink bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The BoostyLink bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this just a countdown skip?',
+    answer:
+      'No. BoostyLink often stacks locker actions with the timer. Skip Wait automates both the taps and the wait choreography.',
+  },
+  {
+    question: 'Is the BoostyLink path free?',
+    answer:
+      'Yes. Skip Wait is free. The BoostyLink bypass runs on supported pages with no account or paid plan.',
   },
 ];
 
@@ -82,10 +90,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,3 +1,5 @@
+import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
+import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
 
 const HUBCLOUD_DRIVE_HOSTS = [
@@ -6,17 +8,30 @@ const HUBCLOUD_DRIVE_HOSTS = [
   'hubcloud.club',
   'hubcloud.fans',
   'vcloud.zip',
+  'vcloud.fit',
 ] as const;
 
-const VCLOUD_HOSTS = ['vcloud.zip'] as const;
+const VCLOUD_HOSTS = ['vcloud.zip', 'vcloud.fit'] as const;
 const HUBCLOUD_PHP_RE = /https?:\/\/[^'"\s]+\/hubcloud\.php\?[^'"\s]+/i;
 const VCLOUD_URL_RE = /var\s+url\s*=\s*atob\s*\(\s*atob\s*\(\s*['"]([A-Za-z0-9+/=]+)['"]\s*\)\s*\)/;
 const HUBCLOUD_DRIVE_PATH_RE = /^\/drive\/(?!admin(?:\/|$))[\w-]+\/?$/i;
 const VCLOUD_FILE_PATH_RE = /^\/(?!admin(?:\/|$))[\w-]+\/?$/i;
+const OVERLAY_ID = 'skip-wait-hubcloud-overlay';
+const BOOT_STYLE_ID = 'skip-wait-hubcloud-boot';
+const NOTE = {
+  lead: 'Hang tight — opening the next page.',
+  detail: "You don't need to tap anything on the page.",
+} as const;
+
+let ui: FullPageOverlay | null = null;
+let started = false;
+
+const isVcloud = (): boolean => hostnameMatches(location.hostname, VCLOUD_HOSTS);
 
 const isSharePath = (): boolean => {
   const { pathname } = location;
-  if (hostnameMatches(location.hostname, VCLOUD_HOSTS)) {
+  if (isVcloud()) {
+    if (new URLSearchParams(location.search).has('token')) return false;
     return pathname !== '/' && VCLOUD_FILE_PATH_RE.test(pathname);
   }
   return HUBCLOUD_DRIVE_PATH_RE.test(pathname);
@@ -41,18 +56,45 @@ const resolveTarget = (): string | null => {
   return null;
 };
 
+const boot = (): void => {
+  const active = overlayActiveClass(OVERLAY_ID);
+  document.documentElement.classList.add(active);
+  if (document.getElementById(BOOT_STYLE_ID)) return;
+  const s = document.createElement('style');
+  s.id = BOOT_STYLE_ID;
+  s.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
+  (document.head ?? document.documentElement).appendChild(s);
+};
+
+const mount = (): FullPageOverlay => {
+  boot();
+  if (ui) return ui;
+  ui = createFullPageOverlay({
+    id: OVERLAY_ID,
+    brand: 'Skip Wait',
+    note: NOTE,
+    status: 'Opening the next page…',
+  });
+  return ui;
+};
+
 export function initHubcloudDrive(): void {
-  if (!isAllowedHost(HUBCLOUD_DRIVE_HOSTS) || !isSharePath()) return;
+  if (window !== window.top || !isAllowedHost(HUBCLOUD_DRIVE_HOSTS) || !isSharePath() || started) {
+    return;
+  }
+  started = true;
+  mount();
 
-  const redirect = (): boolean => {
-    const url = resolveTarget();
-    if (!url || !/^https?:\/\//i.test(url)) return false;
+  const url = resolveTarget();
+  if (url && /^https?:\/\//i.test(url)) {
     location.replace(url);
-    return true;
-  };
+    return;
+  }
 
-  if (redirect()) return;
   const id = window.setInterval(() => {
-    if (redirect()) clearInterval(id);
+    const next = resolveTarget();
+    if (!next || !/^https?:\/\//i.test(next)) return;
+    clearInterval(id);
+    location.replace(next);
   }, 50);
 }

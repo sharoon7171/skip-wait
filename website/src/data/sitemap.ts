@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
-import { allBypassSlugs } from '@/data/catalog-queries';
+import { allBypassSlugs } from '@/data/catalog';
 import { SITE } from '@/data/constants';
 import { bypassSitePath, routes } from '@/lib/routes';
 
-export const SITEMAP_CONTENT_UPDATED = new Date('2026-07-31T00:00:00.000Z');
+const SITEMAP_CONTENT_UPDATED = new Date('2026-07-31T00:00:00.000Z');
 
-export const SITEMAP_PATHS = {
+const SITEMAP_PATHS = {
   static: '/sitemap.xml',
   bypasses: '/sites/sitemap.xml',
 } as const;

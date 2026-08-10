@@ -1,77 +1,84 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Cutwin";
+const name = 'Cutwin';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Cutwin bypass skips the blog waiting page gate and unlocks your destination link from this cut URL style shortener automatically and instantly.";
+const description =
+  'Cutwin bypass that clears blog-style waiting page gates on cut URL shorteners and opens the destination when unlock is ready—without continue hunting.';
 
-const domains = [
-  "masrawytrend.com",
-] as const;
+const domains = ['masrawytrend.com'] as const;
 
 const keywords = [
-  "cutwin bypass",
-  "Cutwin bypass extension",
-  "cutwin timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'cutwin bypass',
+  'Cutwin bypass extension',
+  'cutwin bypass chrome',
+  'bypass cutwin',
+  'skip cutwin',
+  'cutwin timer bypass',
+  'cutwin countdown bypass',
+  'cutwin waiting page',
+  'cut url shortener bypass',
+  'blog waiting page bypass',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
 ] as const;
 
-const intro = "Cutwin bypass skips the blog waiting page gate and unlocks your destination link from this cut URL style shortener automatically and instantly. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Cutwin bypass search usually means a shared cut-style short link parked you on a blog waiting page instead of the file or page you wanted. Skip Wait is the free Chrome extension that clears that please-wait gate and opens the destination when unlock is ready.';
 
-const problem = "Cutwin places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Cut-style aliases that land on blog gates
 
-const howItWorks = "When the waiting page loads, Skip Wait runs in the background, skips the delay layer, and sends you straight to the target URL supported for Cutwin.";
+Cutwin-style shorteners rarely hand you the destination in one click. You leave the short alias, land on a blog-style gate with a please wait screen or click-to-continue loop, then finally unlock. Close the tab early, miss the control under ads, or refresh mid-wait and the same cutwin waiting page hunt starts over.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Cutwin bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Cutwin.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Cutwin link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Cutwin delay.",
-  },
-];
+That friction is why cutwin timer bypass, blog waiting page bypass, and cut url shortener bypass searches stay next to generic please wait bypass queries—the pain is the gate, not finding the long URL.
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+### What the blog gate inserts
+
+- Blog waiting pages before the real URL
+- Please-wait strips that re-enable Continue on a client clock
+- Gate chrome between the short alias and the destination
+- Manual continue loops under overlays
+
+## Advancing Continue under the article chrome
+
+Skip Wait’s Cutwin support runs inside Chrome on the waiting page you already opened. It detects the delay layer, advances the continue flow the page expects, and sends you to the destination without hunting buttons through ads.
+
+Client-only clutter gets out of the way; required waits still finish honestly.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What blog waiting gate does Skip Wait bypass on Cutwin-style links?",
-    answer: "Skip Wait skips the blog waiting page gate on Cutwin cut-URL shorteners and unlocks your destination link from masrawytrend.com automatically.",
+    question: 'What is a Cutwin bypass?',
+    answer:
+      'It is a way to skip the blog waiting page gate on Cutwin-style short links. Skip Wait runs in Chrome, clears the please-wait step, and opens the destination when unlock is ready.',
   },
   {
-    question: "Does Skip Wait work on masrawytrend.com Cutwin pages?",
-    answer: "Yes. When the waiting page loads on supported Cutwin hosts, the extension bypasses the delay layer and redirects to your target URL.",
+    question: 'Does Skip Wait skip every timer instantly?',
+    answer:
+      'It removes busywork and client-only delays. When a step still requires a real wait before unlock, Skip Wait stays on that step until it is allowed, then continues—a reliable cutwin countdown bypass, not a fake zero-second cheat.',
   },
   {
-    question: "Can I reach my destination without the Cutwin please wait screen?",
-    answer: "Yes. Gate pages and manual continue button loops are skipped so you go straight to the destination link.",
+    question: 'Do I need to click Continue on the waiting page?',
+    answer:
+      'No. On supported gates Skip Wait completes the continue flow so you are not hunting click-to-continue buttons through ads.',
   },
   {
-    question: "Is the Cutwin bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Cutwin bypass runs on supported pages with no account or paid plan required.",
+    question: 'Will this still work when the blog gate changes layout?',
+    answer:
+      'Yes for the supported unlock pattern. Skip Wait follows how the waiting page behaves, so a reshuffled gate in the same flow does not force you into a third-party paste tool.',
+  },
+  {
+    question: 'Is the Cutwin path free?',
+    answer:
+      'Yes. Skip Wait is free. The Cutwin bypass runs on supported pages with no account or paid plan required.',
   },
 ];
 
@@ -83,10 +90,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

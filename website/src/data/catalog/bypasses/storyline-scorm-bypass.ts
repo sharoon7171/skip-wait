@@ -1,77 +1,80 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Storyline SCORM";
+const name = 'Storyline SCORM';
 
-const bypassType = "Skip Course Wait";
+const bypassType = 'Skip Course Wait';
 
-const description = "Storyline bypass skips the course play countdown wait on SCORM training slides so you can advance past timed content blocks immediately and freely.";
+const description =
+  'Storyline bypass skips the course play countdown wait on SCORM training slides so you can advance past timed content blocks immediately.';
 
 const domains = [
-  "mrtzn.com",
-  "vocationaltraininghub.com",
+  'mrtzn.com',
+  'vocationaltraininghub.com',
 ] as const;
 
 const keywords = [
-  "storyline scorm bypass",
-  "Storyline SCORM bypass extension",
-  "storyline scorm timer bypass",
-  "skip course wait",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "scorm timer bypass",
-  "course slide bypass",
+  'storyline scorm bypass',
+  'Storyline SCORM bypass extension',
+  'storyline scorm timer bypass',
+  'skip course wait',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'scorm timer bypass',
+  'course slide bypass',
 ] as const;
 
-const intro = "Storyline bypass skips the course play countdown wait on SCORM training slides so you can advance past timed content blocks immediately and freely. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Storyline SCORM bypass or skip course wait search usually means a training slide locked Next behind a play countdown. Skip Wait is the free Chrome extension that clears that scorm timer bypass path so course slide bypass busywork is not the lesson itself.';
 
-const problem = "Storyline SCORM blocks SCORM slides behind a course play countdown.";
+const body = `## Play countdowns on SCORM training slides
 
-const howItWorks = "Skip Wait activates on recognized skip course wait flows and bypasses or automates the wait so you reach the content faster. Course play countdowns on supported slides are cleared so you can advance without waiting out the timer.";
+Articulate Storyline-style SCORM packages often force you to sit through a timed content block before Next enables. The slide already loaded; the course play countdown is the gate—exactly why storyline scorm timer bypass and skip countdown timer queries appear next to generic skip waiting page help when you only wanted to finish the module.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Storyline SCORM bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Storyline SCORM.",
-  },
-  {
-    title: "Open the training slide",
-    body: "Open the SCORM or training content on Storyline SCORM. Skip Wait clears the play countdown on supported slides.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Storyline SCORM delay.",
-  },
-];
+This is not a shortener chain. It is in-player lockouts on supported training hosts.
 
-const skips = [
-  "Course Wait that block the destination",
-  "SCORM slide countdown blocks",
-  "Timed training slide locks",
-] as const;
+### Locks that pad every slide
+
+- Course play countdown waits before advance
+- SCORM slide timer blocks on Next / Continue
+- Timed content locks that ignore reading speed
+- Manual scrubbing that still refuses until the clock ends
+
+## Advancing when the slide is already ready
+
+Skip Wait activates on recognized skip course wait flows. On supported training pages it clears or automates the play countdown so you can move to the next block without watching the full timer.
+
+You open the SCORM content as usual—no paste tool. That is a Storyline SCORM bypass extension for timed slides, not a link shortener helper. Client delay theater disappears; any LMS check that still must complete finishes honestly.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What course play countdown does Skip Wait skip on Storyline SCORM slides?",
-    answer: "Skip Wait bypasses the course play countdown wait on SCORM training slides so you advance past timed content blocks immediately.",
+    question: 'What course play countdown does Skip Wait skip?',
+    answer:
+      'It bypasses the play countdown wait on supported SCORM training slides so you can advance past timed content blocks without sitting through the full clock.',
   },
   {
-    question: "Which training domains like mrtzn.com does Skip Wait support?",
-    answer: "Skip Wait works on mrtzn.com and vocationaltraininghub.com, bypassing SCORM slide countdown blocks on both.",
+    question: 'Is this a link shortener bypass?',
+    answer:
+      'No. Storyline SCORM support targets timed course slides on supported training hosts, not monetized short URLs.',
   },
   {
-    question: "Can I advance past timed content blocks in SCORM training immediately?",
-    answer: "Yes. Timed training slide locks that force you to wait before continuing are bypassed on supported Storyline SCORM pages.",
+    question: 'Can I advance as soon as I finish reading?',
+    answer:
+      'On supported slides, yes—timed training locks that force a wait before continuing are cleared so Next is not held hostage by the clock alone.',
   },
   {
-    question: "Is the Storyline SCORM bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Storyline SCORM bypass runs on supported pages with no account or paid plan required.",
+    question: 'Does every LMS rule disappear?',
+    answer:
+      'Client play-countdown theater goes away. If the package still requires a real completion check, that step still finishes before advance.',
+  },
+  {
+    question: 'Is the Storyline SCORM bypass free?',
+    answer:
+      'Yes. Skip Wait is free. The Storyline SCORM path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -83,10 +86,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

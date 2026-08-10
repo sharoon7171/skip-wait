@@ -1,84 +1,98 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "HubCloud / HubCDN";
+const name = 'HubCloud / HubCDN';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "HubCloud bypass skips cloud drive waiting pages and opens your direct download link from HubCloud and HubCDN file storage without delay or waits.";
+const description =
+  'HubCloud / HubCDN bypass that covers vcloud and HubCloud drive pages with an overlay, skips generating waits, and opens the next download-links page automatically.';
 
 const domains = [
-  "hubcloud.cx",
-  "hubcloud.foo",
-  "hubcloud.club",
-  "hubcloud.fans",
-  "vcloud.zip",
-  "hubcdn.sbs",
-  "hubcdn.fans",
+  'hubcloud.cx',
+  'hubcloud.foo',
+  'hubcloud.club',
+  'hubcloud.fans',
+  'vcloud.zip',
+  'vcloud.fit',
+  'hubcdn.sbs',
+  'hubcdn.fans',
 ] as const;
 
 const keywords = [
-  "hubcloud / hubcdn bypass",
-  "HubCloud / HubCDN bypass extension",
-  "hubcloud / hubcdn timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'hubcloud bypass',
+  'hubcdn bypass',
+  'hubcloud hubcdn bypass',
+  'hubcloud bypass chrome',
+  'hubcloud bypass extension',
+  'hubcloud timer bypass',
+  'hubcdn timer bypass',
+  'vcloud bypass',
+  'vcloud.zip bypass',
+  'vcloud.fit bypass',
+  'direct download',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
+  'cloud drive download bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'skip wait extension',
 ] as const;
 
-const intro = "HubCloud bypass skips cloud drive waiting pages and opens your direct download link from HubCloud and HubCDN file storage without delay or waits. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A HubCloud bypass, vcloud bypass, or HubCDN download timer skip usually starts after a cloud-drive page shows a generating wait instead of the file. Skip Wait is the free Chrome extension that covers that page with an overlay and opens the next download-links page without the forced delay.';
 
-const problem = "HubCloud often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Cloud drives that invent a generating pause
 
-const howItWorks = "Instead of sitting on a generating screen, Skip Wait fetches the direct link and starts the file path immediately when the host allows it.";
+HubCloud, vcloud, and HubCDN mirrors often sit a download wait, generating timer, or intermediary redirect in front of the real file. The bytes are already on the host—the pause only delays the path you clicked.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The HubCloud / HubCDN bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for HubCloud / HubCDN.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on HubCloud / HubCDN. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported HubCloud / HubCDN delay.",
-  },
-];
+That is why direct download bypass and cloud drive download bypass searches pair with hubcloud timer bypass and vcloud bypass: people want the file URL, not another spinner after every mirror press.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### What stalls after you press download
+
+- Generating timers on cloud-drive buttons
+- Intermediary redirect pages before the file starts
+- Extra wait screens that repeat on each mirror
+- Manual retries when the generating page hangs
+
+## Overlay, then the download links page
+
+On a matching HubCloud or vcloud drive page, Skip Wait draws a full-page overlay so the noisy download UI cannot steal clicks. It resolves the same next download-links URL the finished generating flow would open, then navigates there automatically.
+
+No paste tool and no extra tap on this step—client-only wait chrome stays under the overlay while the real links page loads.
+
+## One install across rotating storage hosts
+
+Mirrors reshuffle while the generating pattern stays familiar. A HubCloud bypass extension that runs on the live page keeps the hop working across supported storage hosts—including vcloud.zip and vcloud.fit—without relearning each mirror’s delay UI.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which HubCloud and HubCDN domains does Skip Wait support?",
-    answer: "Skip Wait covers seven sites including hubcloud.cx, hubcloud.foo, vcloud.zip, hubcdn.sbs, and hubcdn.fans, skipping cloud drive waiting pages on all of them.",
+    question: 'What does a HubCloud / HubCDN bypass skip?',
+    answer:
+      'Cloud-drive generating waits and intermediary delay screens so the next download-links page opens without babysitting the spinner.',
   },
   {
-    question: "What cloud drive waiting pages does Skip Wait skip?",
-    answer: "Generating timers and intermediary redirect pages before HubCloud and HubCDN files are bypassed so your direct download link opens without delay.",
+    question: 'Does it cover vcloud as well as HubCloud and HubCDN?',
+    answer:
+      'Yes on supported hosts, including vcloud.zip and vcloud.fit. The same overlay-and-navigate pattern runs across the listed pages.',
   },
   {
-    question: "Can I open direct download links from HubCloud storage without delay?",
-    answer: "Yes. Click download on any supported HubCloud or HubCDN page and Skip Wait fetches the direct link immediately when the host allows it.",
+    question: 'Do I tap a download button on the overlay?',
+    answer:
+      'Not on the drive page. Skip Wait covers the wait, then opens the next download-links page for you.',
   },
   {
-    question: "Is the HubCloud bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The HubCloud bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is every delay removed instantly?',
+    answer:
+      'Waiting-page busywork goes away. When the host still gates release on a later page, that path still applies there.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. HubCloud, vcloud, and HubCDN support runs on matching pages with no paid plan.',
   },
 ];
 
@@ -90,10 +104,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

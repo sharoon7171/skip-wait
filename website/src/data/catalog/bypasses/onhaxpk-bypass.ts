@@ -1,76 +1,65 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "OnhaxPK";
+const name = 'OnhaxPK';
 
-const bypassType = "Skip Copy Step";
+const bypassType = 'Skip Copy Step';
 
-const description = "OnhaxPK bypass skips the countdown wait and copies session share data to your clipboard so you unlock software downloads without manual copy.";
+const description =
+  'OnhaxPK bypass for countdown waits before session share copy: Skip Wait places the share string on your clipboard so software unlocks without the manual copy-and-wait dance.';
 
-const domains = [
-  "onhaxpk.net",
-] as const;
+const domains = ['onhaxpk.net'] as const;
 
 const keywords = [
-  "onhaxpk bypass",
-  "OnhaxPK bypass extension",
-  "onhaxpk timer bypass",
-  "skip copy step",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "copy cookie bypass",
-  "session cookie copy",
+  'onhaxpk bypass',
+  'OnhaxPK bypass extension',
+  'onhaxpk timer bypass',
+  'skip copy step',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'copy cookie bypass',
+  'session cookie copy',
 ] as const;
 
-const intro = "OnhaxPK bypass skips the countdown wait and copies session share data to your clipboard so you unlock software downloads without manual copy. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'An OnhaxPK bypass or skip copy step search usually means a software page made you wait, then copy session share data by hand before downloads unlocked. Skip Wait is the free Chrome extension that skips that countdown and copies the string for you.';
 
-const problem = "OnhaxPK makes you wait and copy session data by hand before downloads unlock. Users want a OnhaxPK bypass that copies the needed data without the manual wait and paste dance.";
+const body = `## Unlock pages that demand a timed copy
 
-const howItWorks = "Skip Wait fetches the cookie or share string, copies it to your clipboard, and shows a Copy button if you need it again. On the supported website, that means less waiting and fewer manual copy steps before you can use the session data. Session data on the supported website is easier to copy without the site wait and manual paste dance.";
+OnhaxPK-style software unlocks often gate the file behind session share data: wait for a countdown, copy a cookie or share string, paste it somewhere else, then retry the download. Miss the window or fumble the clipboard and the instructions restart—why onhaxpk timer bypass, copy cookie bypass, and session cookie copy queries show up together.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The OnhaxPK bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for OnhaxPK.",
-  },
-  {
-    title: "Stay on the cookie or share page",
-    body: "Keep the OnhaxPK page open. Skip Wait works on the supported copy flow without sending you through extra hops.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported OnhaxPK delay.",
-  },
-];
+The useful payload is the share string. The wait and manual copy are the tax.
 
-const skips = [
-  "Manual cookie copy waits",
-  "Manual copy and wait instructions",
-  "Session cookie copy steps",
-] as const;
+### Clipboard without the babysitting
+
+Skip Wait fetches the cookie or share string on the supported page, copies it to your clipboard, and keeps a Copy control available if you need it again. Client countdown busywork before that copy stops blocking you; you still use the session data the site already issued.
+
+That is skip copy step for this host in one OnhaxPK bypass extension install—less waiting and fewer paste mistakes before the software path continues.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What session share data does Skip Wait copy from OnhaxPK pages?",
-    answer: "Skip Wait skips the countdown wait on onhaxpk.net and copies session share data to your clipboard so you unlock software downloads without manual copying.",
+    question: 'What session data does Skip Wait copy?',
+    answer:
+      'The share string or cookie payload the unlock page exposes after its wait. Skip Wait copies it so you are not doing the manual copy step by hand.',
   },
   {
-    question: "Does Skip Wait skip the countdown before copying on onhaxpk.net?",
-    answer: "Yes. The timer that precedes the copy step is bypassed and the session data is placed on your clipboard automatically.",
+    question: 'Does the countdown before copy still run?',
+    answer:
+      'Client wait busywork is cleared when possible. Required holds still finish—so the onhaxpk timer bypass stays reliable.',
   },
   {
-    question: "How does Skip Wait replace the manual copy step for software unlocks?",
-    answer: "Instead of following copy instructions by hand, the extension fetches the share string and copies it for you, with a Copy button available if you need it again.",
+    question: 'What if I need the string again?',
+    answer:
+      'A Copy control remains available so you can re-copy without restarting the whole page flow.',
   },
   {
-    question: "Is the OnhaxPK bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The OnhaxPK bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free with no paid plan for supported pages.',
   },
 ];
 
@@ -82,10 +71,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

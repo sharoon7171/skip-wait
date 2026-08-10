@@ -1,78 +1,83 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "ApunKaGames";
+const name = 'ApunKaGames';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "ApunKaGames bypass skips the download process timer on ApunKaSoftware and AKG Links vlink pages and opens each part destination link directly.";
+const description =
+  'ApunKaGames bypass that clears download process timers on ApunKaSoftware and AKG Links vlink pages so each part destination opens without restarting the wait.';
 
-const domains = [
-  "akglinks.com",
-  "apunkasoftware.net",
-] as const;
+const domains = ['akglinks.com', 'apunkasoftware.net'] as const;
 
 const keywords = [
-  "apunkagames bypass",
-  "ApunKaGames bypass extension",
-  "apunkagames timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'apunkagames bypass',
+  'ApunKaGames bypass extension',
+  'apunkagames bypass chrome',
+  'bypass apunkagames',
+  'skip apunkagames',
+  'apunkagames timer bypass',
+  'apunkasoftware bypass',
+  'akg links bypass',
+  'akg vlink bypass',
+  'multi part download bypass',
+  'download process timer skip',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
 ] as const;
 
-const intro = "ApunKaGames bypass skips the download process timer on ApunKaSoftware and AKG Links vlink pages and opens each part destination link directly. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'An ApunKaGames bypass search usually means a multi-part game pack still forces a download process timer on every vlink before the part opens. Skip Wait is the free Chrome extension that clears those waiting pages on ApunKaSoftware and AKG Links flows so each part destination unlocks without restarting the please-wait loop.';
 
-const problem = "ApunKaGames places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Multi-part game packs and process timers
 
-const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
+ApunKaGames shares often split a title across several part links. Each part still parks you on a download process timer or continue gate before the real destination appears. Miss one hop or refresh mid-wait and you babysit the same waiting page again—exactly the pain behind apunkagames timer bypass, akg vlink bypass, and multi part download bypass searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The ApunKaGames bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for ApunKaGames.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a ApunKaGames link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported ApunKaGames delay.",
-  },
-];
+### What each part link inserts
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+- Download process timers before the destination
+- Please-wait and click-to-continue chrome
+- Gate pages between the vlink and the host
+- Manual continue loops when ads hide the control
+
+## Opening each part without restarting the wait
+
+Skip Wait detects the gate on supported ApunKaSoftware and AKG Links pages, advances the continue flow the page already expects, and redirects to the part destination when unlock is allowed. You keep clicking the same part list you already use; the extension only removes the process-timer busywork between parts.
+
+Client-only delay theater clears; required holds still finish honestly. That keeps an ApunKaGames bypass extension install useful across a whole pack instead of pasting every vlink into a third-party tool.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which ApunKaGames domains does Skip Wait support?",
-    answer: "Skip Wait works on akglinks.com and apunkasoftware.net, bypassing download process timers on ApunKaSoftware and AKG Links vlink pages.",
+    question: 'Which ApunKaGames flows does Skip Wait support?',
+    answer:
+      'Supported hosts are listed in the domains section on this page. The path covers download process timers on ApunKaSoftware and AKG Links vlink pages.',
   },
   {
-    question: "What timer does Skip Wait skip on AKG Links vlink pages?",
-    answer: "The download process timer that delays each part link is bypassed so ApunKaGames destination links open directly instead of after a timed wait.",
+    question: 'What timer does Skip Wait skip on AKG Links vlink pages?',
+    answer:
+      'The download process timer that delays each part link is cleared so destination links open without sitting through the full timed wait.',
   },
   {
-    question: "Can I open multi-part download links on ApunKaSoftware without the download process wait?",
-    answer: "Yes. Skip Wait detects the vlink waiting flow and redirects you to each part destination link without sitting on please wait screens.",
+    question: 'Can I open multi-part downloads without the process wait?',
+    answer:
+      'Yes on supported pages. Skip Wait detects the vlink waiting flow and redirects you to each part destination without babysitting please-wait screens.',
   },
   {
-    question: "Is the ApunKaGames bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The ApunKaGames bypass runs on supported pages with no account or paid plan required.",
+    question: 'Do I still click Continue under ads?',
+    answer:
+      'On supported gates, no. Skip Wait completes the continue flow so you are not hunting buttons through overlays.',
+  },
+  {
+    question: 'Is the ApunKaGames path free?',
+    answer:
+      'Yes. Skip Wait is free. The ApunKaGames bypass runs on supported pages with no account or paid plan.',
   },
 ];
 
@@ -84,10 +89,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

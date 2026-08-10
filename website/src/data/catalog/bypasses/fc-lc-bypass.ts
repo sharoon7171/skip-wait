@@ -1,81 +1,79 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "FC.LC";
+const name = 'FC.LC';
 
-const bypassType = "Skip Short Link";
+const bypassType = 'Skip Short Link';
 
-const description = "FC.LC bypass skips short link verification steps, captcha gates, and countdown timers on this monetized URL shortener platform right away for you.";
+const description =
+  'FC.LC bypass skips short link verification steps, captcha gates, and countdown timers on this monetized URL shortener platform right away for you.';
 
-const domains = [
-  "fc-lc.xyz",
-  "fc.lc",
-  "oii.io",
-  "jobzhub.store",
-] as const;
+const domains = ['fc-lc.xyz', 'fc.lc', 'oii.io', 'jobzhub.store'] as const;
 
 const keywords = [
-  "fc.lc bypass",
-  "FC.LC bypass extension",
-  "fc.lc timer bypass",
-  "skip short link",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "ad link bypass",
-  "short link bypass",
-  "monetized link bypass",
+  'fc.lc bypass',
+  'FC.LC bypass extension',
+  'fc.lc timer bypass',
+  'skip short link',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'ad link bypass',
+  'short link bypass',
+  'monetized link bypass',
 ] as const;
 
-const intro = "FC.LC bypass skips short link verification steps, captcha gates, and countdown timers on this monetized URL shortener platform right away for you. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'An FC.LC bypass search usually starts after a monetized short URL chained verification pages, captcha gates, and unlock timers before the destination. Skip Wait is the free Chrome extension that walks that short link path so you are not clicking through every hop by hand.';
 
-const problem = "FC.LC monetized short links chain gate pages, captcha screens, and unlock timers before the destination.";
+const body = `## Verification hops stacked on monetized aliases
 
-const howItWorks = "LC monetized link. The extension automates the short link bypass steps and continues through gates until your destination URL is ready.";
+FC.LC-network shares rarely end in one redirect. You hit short-link verification, ad countdown chrome, go-page unlocks, and sometimes a captcha pin before the real URL appears. Leave mid-chain or miss a continue control and the same monetized link bypass loop restarts.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The FC.LC bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for FC.LC.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a FC.LC link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported FC.LC delay.",
-  },
-];
+That sequence is why skip short link, ad link bypass, and FC.LC timer bypass sit next to FC.LC bypass extension queries—the product is the stack of gates, not a single interstitial.
 
-const skips = [
-  "Short-link verification gates",
-  "Ad link countdown timers",
-  "Go page and unlock redirect hops",
-  "Short link verification steps before the destination",
-] as const;
+### Go pages and unlock redirects in sequence
+
+After verification you often land on a go or unlock surface with another timer. Manual babysitting means hunting buttons under ads on each step. Skip Wait treats those surfaces as one continuous short link bypass inside Chrome.
+
+## Automating the short-link chain in Chrome
+
+On supported network hosts the extension detects matching pages, advances verification and unlock steps the site already expects, and continues until the destination is ready. Client countdown theater stops owning the tab; holds the shortener still enforces are waited honestly.
+
+Captcha, when required, stays visible once. After the token exists, unlock continues—so short link bypass stays a browser session, not a paste API that dies when intermediate hosts rotate.
+
+## When the network rotates intermediate hosts
+
+Publisher blogs and go hosts change. A skip wait extension keyed to the live unlock pattern stays useful without re-copying the alias into a third-party tool each week.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which FC.LC domains like fc.lc and oii.io does Skip Wait support?",
-    answer: "Skip Wait covers fc-lc.xyz, fc.lc, oii.io, and jobzhub.store, automating unlock steps across all four FC.LC network sites.",
+    question: 'Which FC.LC-network hosts does Skip Wait cover?',
+    answer:
+      'Supported pages across the listed FC.LC network domains. Unlock steps are automated until the destination URL is ready.',
   },
   {
-    question: "What verification steps does Skip Wait skip on FC.LC monetized links?",
-    answer: "Short link verification steps, captcha gates, countdown timers, and go page redirect hops are handled automatically until your destination URL is ready.",
+    question: 'What verification steps get skipped?',
+    answer:
+      'Short-link verification busywork, ad countdown chrome, go-page redirect hops, and client timer theater. Required captcha still needs a human once.',
   },
   {
-    question: "Can Skip Wait bypass captcha gates and countdown timers on FC.LC?",
-    answer: "Yes. Open any supported FC.LC monetized link and the extension continues through gates without manual clicking at each step.",
+    question: 'Do I click every continue gate myself?',
+    answer:
+      'On supported pages, no. Skip Wait continues through gates without manual clicking at each step.',
   },
   {
-    question: "Is the FC.LC bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The FC.LC bypass runs on supported pages with no account or paid plan required.",
+    question: 'Will timers always vanish instantly?',
+    answer:
+      'Client-only delays go away. If the shortener still enforces a real wait, Skip Wait stays on that step until unlock is allowed.',
+  },
+  {
+    question: 'Is the FC.LC bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -87,10 +85,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,5 +1,5 @@
 import type { SupportedBypass } from '@/types/catalog';
-import { bypassSlug } from '@/lib/catalog-slug';
+import { bypassSlug } from '@/data/catalog';
 import { bypassSitePath } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
 

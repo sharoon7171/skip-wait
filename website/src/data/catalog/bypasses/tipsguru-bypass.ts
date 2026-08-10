@@ -1,81 +1,86 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "TipsGuru";
+const name = 'TipsGuru';
 
-const bypassType = "Skip Prolink Wait";
+const bypassType = 'Skip Prolink Wait';
 
-const description = "TipsGuru bypass skips prolink access waits and unlock timers on this Indian link monetization network to open your destination faster every time.";
+const description =
+  'TipsGuru bypass for prolink access waits and unlock timers across this Indian link monetization network—Skip Wait advances supported hops so the destination opens without babysitting each gate.';
 
 const domains = [
-  "tipsguru.in",
-  "vidyarays.com",
-  "mineverse360.com",
-  "stream.testuk.org",
-  "rarestudy.in",
-  "samfygros.com",
+  'tipsguru.in',
+  'vidyarays.com',
+  'mineverse360.com',
+  'stream.testuk.org',
+  'rarestudy.in',
+  'samfygros.com',
 ] as const;
 
 const keywords = [
-  "tipsguru bypass",
-  "TipsGuru bypass extension",
-  "tipsguru timer bypass",
-  "skip prolink wait",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "prolink bypass",
-  "unlock timer bypass",
+  'tipsguru bypass',
+  'tipsguru bypass extension',
+  'tipsguru timer bypass',
+  'vidyarays bypass',
+  'rarestudy bypass',
+  'skip prolink wait',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'prolink bypass',
+  'unlock timer bypass',
+  'indian link bypass',
 ] as const;
 
-const intro = "TipsGuru bypass skips prolink access waits and unlock timers on this Indian link monetization network to open your destination faster every time. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A TipsGuru bypass or skip prolink wait search usually starts after a study or stream share dumps you into prolink access waits and unlock timers across rotating network hosts. Skip Wait is the free Chrome extension that runs those gates so unlock timer bypass does not mean watching every clock yourself.';
 
-const problem = "TipsGuru uses prolink access waits and unlock timers on monetized links. A TipsGuru bypass opens the destination without those delays.";
+const body = `## Prolink waits across a rotating network
 
-const howItWorks = "Skip Wait activates on recognized skip prolink wait flows and bypasses or automates the wait so you reach the content faster.";
+TipsGuru-style shares rarely unlock in one page. You hit a prolink access wait, sit through an unlock timer, sometimes bounce to another host in the same network, then finally reach the destination. Leave mid-wait and progress often resets—classic indian link bypass pain next to tipsguru timer bypass queries.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The TipsGuru bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for TipsGuru.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a TipsGuru link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported TipsGuru delay.",
-  },
-];
+The product is the network: multiple hosts, shared wait chrome, and an unlock that only releases after the prolink step cooperates.
 
-const skips = [
-  "Prolink Wait that block the destination",
-  "Prolink access wait screens",
-  "Unlock timer windows",
-] as const;
+### Waits people restart by accident
+
+- Prolink access screens before any destination hint
+- Unlock timer windows on the go step
+- Host hops that reuse the same wait pattern
+- Lost sessions when a tab closes early
+
+## Running skip prolink wait inside Chrome
+
+Skip Wait activates on recognized TipsGuru network flows. It bypasses or automates the wait the page already expects, then continues when unlock is allowed—without a paste decoder for each host.
+
+Client busywork disappears; server-side holds still finish honestly. That is a durable prolink bypass reading for people who just want the destination.
+
+## Hosts that reshuffle between Telegram shares
+
+Hardcoded userscripts break when the next network domain appears. A TipsGuru bypass extension keyed to prolink and unlock behavior stays useful across the supported set without reconfiguring per host.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "How many TipsGuru network sites does Skip Wait cover?",
-    answer: "Skip Wait supports six TipsGuru sites including tipsguru.in, vidyarays.com, mineverse360.com, and rarestudy.in.",
+    question: 'What does a TipsGuru bypass skip?',
+    answer:
+      'Prolink access waits and unlock timer busywork on supported network hosts. Skip Wait advances those steps so you are not babysitting each gate.',
   },
   {
-    question: "What prolink access waits does Skip Wait skip on tipsguru.in?",
-    answer: "Prolink access wait screens and unlock timer windows on this Indian link monetization network are bypassed for faster destination access.",
+    question: 'Does every unlock timer vanish instantly?',
+    answer:
+      'No. Client-only delays go away. When unlock still needs a real wait, Skip Wait stays until it is allowed, then continues.',
   },
   {
-    question: "Can Skip Wait bypass unlock timers on this Indian link monetization network?",
-    answer: "Yes. The extension activates on prolink wait flows across supported TipsGuru hosts and resolves the final link faster.",
+    question: 'Does one install cover the whole network?',
+    answer:
+      'Yes for hosts in this TipsGuru entry. Matching pages wake the scripts automatically—no per-site toggle.',
   },
   {
-    question: "Is the TipsGuru bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The TipsGuru bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
   },
 ];
 
@@ -87,10 +92,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

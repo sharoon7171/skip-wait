@@ -1,85 +1,97 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "HDHub4u";
+const name = 'HDHub4u';
 
-const bypassType = "Skip Landing Wait";
+const bypassType = 'Skip Landing Wait';
 
-const description = "HDHub4u bypass skips the landing page mirror wait and opens the current working mirror site so you reach movies and downloads faster every visit.";
+const description =
+  'HDHub4u bypass that clears the entry-page mirror wait and opens the current working catalog host so you reach movies and downloads without sitting on the connection screen.';
 
 const domains = [
-  "hdhub4u.med",
-  "hdhub4u.catering",
-  "hdhub4u.ec",
-  "hdhub4u.gd",
-  "hdhub4u.gives",
-  "hdhub4u.glass",
-  "hdhub4u.gs",
-  "hdhub4u.hn",
-  "hdhub4u.ht",
-  "hdhub4u.insure",
+  'hdhub4u.med',
+  'hdhub4u.catering',
+  'hdhub4u.ec',
+  'hdhub4u.gd',
+  'hdhub4u.gives',
+  'hdhub4u.glass',
+  'hdhub4u.gs',
+  'hdhub4u.hn',
+  'hdhub4u.ht',
+  'hdhub4u.insure',
 ] as const;
 
 const keywords = [
-  "hdhub4u bypass",
-  "HDHub4u bypass extension",
-  "hdhub4u timer bypass",
-  "skip landing wait",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "landing page bypass",
-  "mirror site bypass",
+  'hdhub4u bypass',
+  'hdhub4u bypass chrome',
+  'hdhub4u bypass extension',
+  'bypass hdhub4u',
+  'skip hdhub4u',
+  'hdhub4u timer bypass',
+  'hdhub4u landing bypass',
+  'hdhub4u waiting page',
+  'hdhub4u mirror bypass',
+  'skip landing wait',
+  'landing page bypass',
+  'mirror site bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'skip wait extension',
 ] as const;
 
-const intro = "HDHub4u bypass skips the landing page mirror wait and opens the current working mirror site so you reach movies and downloads faster every visit. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Looking for an HDHub4u bypass or HDHub4u landing bypass usually means the entry URL parked you on a mirror wait before the catalog. Skip Wait is the free Chrome extension that clears that landing delay and continues into the working mirror so movies and downloads load without the connection screen.';
 
-const problem = "HDHub4u delays the main site behind a landing wait screen.";
+const body = `## Entry URLs that stall before the catalog
 
-const howItWorks = "Skip Wait clears the landing wait so you continue into the site without the connection delay.";
+HDHub4u bookmarks often open a landing wait first: connection delay, open-main-site countdown, rotating entry hosts that still show the same pause. The catalog is not broken—it is gated behind that mirror screen every visit.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The HDHub4u bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for HDHub4u.",
-  },
-  {
-    title: "Land on the entry page",
-    body: "Visit the HDHub4u landing URL as usual. Skip Wait advances past the delay into the main site.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported HDHub4u delay.",
-  },
-];
+That is why hdhub4u mirror bypass and skip landing wait searches spike next to generic landing page bypass queries. People want the working host, not another refresh loop.
 
-const skips = [
-  "Landing-page connection delays",
-  "Landing page mirror delays",
-  "Open main site wait screens",
-] as const;
+### What the landing screen actually costs
+
+- Connection delays before any title list appears
+- Open-main-site countdowns on rotating entry hosts
+- Manual mirror hunting when the wrong host is bookmarked
+- Repeat waits on every return visit
+
+## Clearing the wait into the live mirror
+
+Skip Wait detects the landing pattern on supported entry hosts and advances past it into the current working mirror. You visit the entry URL the same way as always; the extension clears the delay so the catalog loads without babysitting the connection screen.
+
+Supported entry hosts share that landing pattern, so one HDHub4u bypass extension install covers the list without per-mirror toggles.
+
+## Bookmarks vs live entry behavior
+
+Saving a random mirror still leaves you on landing waits when that host rotates. Skip Wait keeps skip landing wait inside Chrome so each visit reaches the live catalog instead of sitting on the entry delay.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "How many HDHub4u mirror domains does Skip Wait cover?",
-    answer: "Skip Wait supports ten HDHub4u mirror domains including hdhub4u.med, hdhub4u.catering, hdhub4u.ec, and others, bypassing landing page waits on each.",
+    question: 'What does an HDHub4u bypass skip?',
+    answer:
+      'The landing-page mirror wait so the current working catalog opens without sitting on the entry connection delay.',
   },
   {
-    question: "What landing page wait does Skip Wait skip before the main HDHub4u site?",
-    answer: "The landing page mirror delay and open-main-site wait screen are bypassed so you reach movies and downloads on the working mirror faster.",
+    question: 'Does it cover rotating entry hosts?',
+    answer:
+      'Yes for supported hosts that share the same landing pattern. Skip Wait advances past the delay into the working mirror on each listed entry.',
   },
   {
-    question: "Can I reach movies and downloads faster on HDHub4u with Skip Wait?",
-    answer: "Yes. Skip Wait opens the current working mirror site automatically instead of making you sit through the landing page delay.",
+    question: 'Do I still open the landing URL myself?',
+    answer:
+      'Yes. Visit the entry page as usual. Skip Wait clears the wait and continues into the catalog.',
   },
   {
-    question: "Is the HDHub4u bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The HDHub4u bypass runs on supported pages with no account or paid plan required.",
+    question: 'What about blog waits after I pick a download?',
+    answer:
+      'Those mediator gates are a separate flow. Use the HDHub4u Mediator guide when a download hop parks you on a please-wait blog.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The HDHub4u landing path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -91,10 +103,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

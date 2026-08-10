@@ -1,11 +1,11 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = '10Drives';
 
 const bypassType = 'Direct Download';
 
 const description =
-  '10Drives bypass skips Continue, Create link, and Get Now waits on gamesmain.xyz. Free Chrome extension unlocks Direct Download · Skip Wait with the real CDN link—no timer, no article hops.';
+  '10Drives bypass that locks the partner download card, resolves the CDN URL, and shows Direct Download · Skip Wait—skipping Continue, Create link, and Get Now.';
 
 const domains = ['10drives.com', 'gamesmain.xyz'] as const;
 
@@ -45,77 +45,58 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching for a 10Drives bypass, how to download from 10Drives, or skip the gamesmain Continue button usually opened a shared 10drives.com/b/… link and landed on a file card with ads, a spinner, and Continue that only leads into more blog posts, Create link delays, Link is Ready waits, and a Get Now countdown before the real file. 10Drives is a file host many APK and archive shares use, so queries like 10Drives timer bypass, 10Drives free download, 10Drives direct download, gamesmain.xyz bypass, and 10Drives Get Now show up next to generic download timer skip and file host bypass searches. Skip Wait is a free Chrome extension that takes over on the gamesmain.xyz download card: it locks the whole page so ads and Continue clicks stay unreachable, resolves the direct CDN download URL in the background, and shows one Direct Download · Skip Wait control inside the overlay—no paste tool, no Please wait, and no hunting for Get Now under another article.';
+  'People hunting a 10Drives bypass, how to download from 10Drives, or a Create link skip usually opened a shared file short link and landed on a partner blog card—ads, Continue hops, Link is Ready waits, Get Now. Skip Wait is the free Chrome extension that covers that card and exposes one Direct Download · Skip Wait control with the real CDN URL.';
 
-const problem =
-  'A typical 10Drives.com free link does not hand you the file in one click. First the short link sends you to a partner blog (gamesmain.xyz / TechBlogverse-style posts) where your filename and size sit above ads, then Continue opens another tab or post, Create link forces a wait until Link is Ready, and Get Now only unlocks after another countdown while the current tab is pushed into ad redirects. Leave early, miss the buried button, or fight the ad stack and you restart the same maze. That loop is exactly why people look for a 10Drives create link bypass, gamesmain Continue bypass, 10Drives Get Now skip, and 10Drives chrome extension instead of finishing every hop by hand every time someone shares an APK or archive.';
+const body = `## Filename on a blog card, not a clean save dialog
 
-const howItWorks =
-  'Skip Wait treats the gamesmain file card as the place you actually download from—not the brief auto-redirect on 10drives.com itself. When that card loads with your filename and size, the extension covers the page with a full-page overlay that blocks interaction with ads and Continue steps, resolves the direct CDN download URL the same way a completed Get Now path would (no click automation through the article hops), and shows one branded Direct Download · Skip Wait control inside the overlay. You click when you want the file; nothing auto-starts. Partner posts on gamesmain.xyz are recognized when they host that 10Drives unlock card, so rotating article URLs do not make you relearn a new layout.';
+A typical 10Drives free share does not hand you the archive in one click. The short host parks you on a partner post where filename and size sit above ads. Continue opens another article, Create link forces a wait until Link is Ready, and Get Now only unlocks after another countdown while the tab is shoved into ad redirects.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: 'Install Skip Wait from the Chrome Web Store',
-    body: 'Add the free Skip Wait Chrome extension. Searches for 10Drives chrome extension, 10Drives bypass chrome, or skip wait chrome extension all point at the same install. 10Drives rules load automatically—no account and no developer mode.',
-  },
-  {
-    title: 'Keep Skip Wait enabled',
-    body: 'Leave the extension on. There is nothing to configure for a 10Drives.com bypass or the gamesmain.xyz download card.',
-  },
-  {
-    title: 'Open the 10Drives file link as usual',
-    body: 'Click the shared 10drives.com/b/… URL the same way you always do. When the host sends you to the file card on gamesmain.xyz, Skip Wait locks that page behind the overlay.',
-  },
-  {
-    title: 'Use Direct Download in the overlay',
-    body: 'Wait for Direct Download · Skip Wait inside the Skip Wait overlay. Click it when you are ready—the CDN link is already prepared, without Continue, Create link, Link is Ready, or Get Now.',
-  },
-];
+Leave early or miss the buried button and you restart the same maze—the loop behind 10drives create link bypass, gamesmain Continue bypass, and 10drives Get Now skip searches.
 
-const skips = [
-  'Continue buttons and second-tab article hops on gamesmain.xyz',
-  'Create link delays and Link is Ready waits',
-  'Get Now countdowns on the final unlock card',
-  'Please wait spinners before the download control',
-  'Ad redirects that fire when native download controls are used',
-  'Ads and page clicks while the overlay locks the mediator',
-] as const;
+### Card steps that stall free saves
+
+- Continue buttons and second-tab article hops
+- Create link delays that only end at Link is Ready
+- Get Now countdowns on the final unlock card
+- Please-wait spinners and ad redirects around native controls
+
+## Resolving the CDN URL under one overlay
+
+Skip Wait treats the partner file card as the real download UI—not the brief redirect on the short host. When that card loads with your filename and size, the extension covers the page, blocks ads and Continue steps, resolves the direct CDN URL the same way a finished Get Now path would, and shows Direct Download · Skip Wait inside the overlay.
+
+You click when you want the file; nothing auto-starts. Rotating article URLs that still host the same unlock card do not make you relearn a new layout.
+
+## Partner posts that reshuffle weekly
+
+Manual Continue tours fail when the next blog skin appears. A 10Drives chrome extension that runs on the live download card skips Create link, Link is Ready, and Get Now while the unlock pattern stays the same—without pasting the short URL into another website.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
     question: 'Where does the Skip Wait button appear for 10Drives?',
     answer:
-      'Inside the full-page Skip Wait overlay on gamesmain.xyz after a 10drives.com/b/… short link sends you there—not on the brief redirect screen on 10drives.com itself.',
+      'Inside the full-page overlay on the partner download card after the short file link sends you there—not on the brief redirect screen on the short host.',
   },
   {
-    question: 'Why did I land on gamesmain.xyz instead of my file?',
+    question: 'Why did I land on a blog post instead of my file?',
     answer:
-      '10Drives monetizes free downloads by parking you on partner blog posts (TechBlogverse-style articles) with Continue, Create link, and Get Now steps before the CDN URL is shown. That blog is the real free-download UI. Skip Wait locks that page and skips those hops so you are not reading random posts to reach an APK.',
+      'Free downloads are monetized by parking you on partner posts with Continue, Create link, and Get Now before the CDN URL is shown. That card is the real free-download UI; Skip Wait locks it and skips those hops.',
   },
   {
     question: 'Does Skip Wait skip Continue, Create link, and Get Now?',
     answer:
-      'Yes. Those native wait controls stay blocked under the overlay. The extension prepares the direct CDN URL and exposes it on the Skip Wait button instead of making you finish each article hop and countdown.',
-  },
-  {
-    question: 'Can I still click ads or Continue on gamesmain?',
-    answer:
-      'No. While the overlay is active the mediator page is locked—ads, Continue, Create link, and Get Now stay unreachable. Only the Skip Wait overlay (and its download button once ready) stays interactive.',
-  },
-  {
-    question: 'What is the Create link / Link is Ready step on 10Drives?',
-    answer:
-      'After Continue, partner posts show a Create link button that waits (often about ten seconds) before Link is Ready appears. Skip Wait skips that delay and the later Get Now countdown by resolving the CDN URL directly.',
+      'Yes. Those native wait controls stay under the overlay. The extension prepares the direct CDN URL and exposes it on the Skip Wait button instead.',
   },
   {
     question: 'Will the download start by itself?',
     answer:
-      'No. Skip Wait only shows a ready Direct Download button in the overlay. You choose when to click so nothing auto-downloads in the background.',
+      'No. Skip Wait only shows a ready Direct Download button. You choose when to click.',
   },
   {
     question: 'Is the 10Drives bypass free?',
     answer:
-      'Yes. Skip Wait is a free Chrome extension with no account and no paid tier required for 10Drives or gamesmain.xyz download cards.',
+      'Yes. Skip Wait is free with no account and no paid tier for these download cards.',
   },
 ];
 
@@ -127,10 +108,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

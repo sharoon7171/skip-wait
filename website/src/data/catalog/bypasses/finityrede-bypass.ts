@@ -1,4 +1,4 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'Finity Rede';
 
@@ -35,39 +35,29 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Finity Rede short link rarely means one click. You hit a Download File screen with a matching-shape (or math, emoji, color, slider) captcha, get told Brave, Opera GX, Thorium, and Tor are “unsupported,” then walk Encurtafy article steps packed with ads. Skip Wait is a free Chrome extension that clears that Finity Rede captcha bypass path for you—overlay on, destination next—without solving puzzles or babysitting every hop.';
+  'A Finity Rede short link rarely means one click. You hit a Download File screen with a matching-shape (or math, emoji, color, slider) captcha, get told Brave, Opera GX, Thorium, and Tor are unsupported, then walk Encurtafy article steps packed with ads. Skip Wait is a free Chrome extension that clears that path—overlay on, destination next—without solving puzzles or babysitting every hop.';
 
-const problem =
-  'The free path is built to stall. The captcha looks like security, the unsupported-browser panel steers you off ad-blocking browsers, and each blog step exists to burn time before the destination. Refresh mid-flow, miss a continue, or fight the ad wall on a partner post and the same Finity Rede timer maze starts again.';
+const body = `## Download File puzzles and browser scare panels
 
-const howItWorks =
-  'When a matching Finity Rede link or its captcha screen loads, Skip Wait covers the page and completes the unlock the site already accepts after a correct answer—then opens the destination the publisher set. You skip the shape captcha UI, the browser scare copy, and the Encurtafy article chain. If that destination is another shortener, the next Skip Wait rule for that product takes over.';
+The free path is built to stall. The captcha looks like security, the unsupported-browser panel steers you off ad-blocking browsers, and each blog step exists to burn time before the destination. Refresh mid-flow, miss a continue, or fight the ad wall on a partner post and the same Finity Rede timer maze starts again.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: 'Install Skip Wait',
-    body: 'Add the free extension from the Chrome Web Store. Finity Rede handling starts automatically.',
-  },
-  {
-    title: 'Keep it on',
-    body: 'Leave Skip Wait enabled. No paste box or per-link settings.',
-  },
-  {
-    title: 'Open the shared short link',
-    body: 'Click it the way you always do. The overlay takes over on the link or Download File captcha screen.',
-  },
-  {
-    title: 'Continue to the destination',
-    body: 'When unlock finishes, Skip Wait opens the next URL—no matching-shape puzzle and no article tour.',
-  },
-];
+That is why finity rede captcha bypass, matching shape captcha, unsupported browser bypass, and encurtafy bypass searches spike around the same shares—the pain is the ritual, not finding the URL.
 
-const skips = [
-  'Download File matching-shape, math, emoji, color, and slider captchas',
-  'Unsupported-browser warnings aimed at Brave, Opera GX, Thorium, and Tor',
-  'Encurtafy article steps and between-step ad popups',
-  'Manual continue clicks on partner posts',
-] as const;
+### Matching shapes, then Encurtafy article steps
+
+First the Download File surface: matching-shape, math, emoji, color, or slider puzzles. Then Encurtafy-style article hops with between-step popups. Neither step is the destination; both exist to monetize the click before unlock.
+
+## Completing unlock without the puzzle tour
+
+When a matching Finity Rede link or its captcha screen loads, Skip Wait covers the page and completes the unlock the site already accepts after a correct answer—then opens the destination the publisher set. You skip the shape captcha UI, the browser scare copy, and the Encurtafy article chain.
+
+If that destination is another shortener, the next Skip Wait rule for that product takes over.
+
+## When the next shortener takes over
+
+Publishers sometimes chain Finity Rede into a second monetized hop. Stay on the tab; Skip Wait hands off to the matching rule for that product instead of making you restart Download File by hand. A finity rede chrome extension install is the durable reading of monetized short link bypass for this gate.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
@@ -93,7 +83,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Is the Finity Rede bypass free?',
     answer:
-      'Yes. Skip Wait is a free Chrome extension with no account required for Finity Rede.',
+      'Yes. Skip Wait is free with no account required for Finity Rede.',
   },
 ];
 
@@ -105,10 +95,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

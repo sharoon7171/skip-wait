@@ -1,76 +1,79 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "CookiesCEO";
+const name = 'CookiesCEO';
 
-const bypassType = "Skip Copy Step";
+const bypassType = 'Skip Copy Step';
 
-const description = "CookiesCEO bypass adds a Copy cookie button on premium cookie pages so you copy the session cookie without the site wait or manual copy steps.";
+const description =
+  'CookiesCEO bypass that adds a Copy cookie control on premium cookie pages so you grab the session string without the site wait and manual copy dance.';
 
-const domains = [
-  "cookiesceo.com",
-] as const;
+const domains = ['cookiesceo.com'] as const;
 
 const keywords = [
-  "cookiesceo bypass",
-  "CookiesCEO bypass extension",
-  "cookiesceo timer bypass",
-  "skip copy step",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "copy cookie bypass",
-  "session cookie copy",
+  'cookiesceo bypass',
+  'CookiesCEO bypass extension',
+  'cookiesceo bypass chrome',
+  'bypass cookiesceo',
+  'skip cookiesceo',
+  'cookiesceo timer bypass',
+  'copy cookie bypass',
+  'session cookie copy',
+  'premium cookie copy',
+  'skip copy step',
+  'cookie copy wait skip',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'skip wait extension',
 ] as const;
 
-const intro = "CookiesCEO bypass adds a Copy cookie button on premium cookie pages so you copy the session cookie without the site wait or manual copy steps. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A CookiesCEO bypass search usually means a premium cookie page still forces a wait plus line-by-line copy instructions before the session string is usable. Skip Wait is the free Chrome extension that fetches the cookie, puts it on your clipboard, and shows a Copy cookie control if you need it again.';
 
-const problem = "CookiesCEO makes you wait and copy session data by hand before downloads unlock. Users want a CookiesCEO bypass that copies the needed data without the manual wait and paste dance.";
+const body = `## Premium cookie pages and copy choreography
 
-const howItWorks = "Skip Wait fetches the cookie or share string, copies it to your clipboard, and shows a Copy button if you need it again. On the supported website, that means less waiting and fewer manual copy steps before you can use the session data. Session data on the supported website is easier to copy without the site wait and manual paste dance.";
+CookiesCEO-style pages do not behave like a normal shortener redirect. You wait, then follow manual copy steps to grab a session cookie or share string before downloads unlock elsewhere. That choreography is why copy cookie bypass, session cookie copy, and skip copy step searches show up—people want the data, not the ritual.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The CookiesCEO bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for CookiesCEO.",
-  },
-  {
-    title: "Stay on the cookie or share page",
-    body: "Keep the CookiesCEO page open. Skip Wait works on the supported copy flow without sending you through extra hops.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported CookiesCEO delay.",
-  },
-];
+### What slows the grab
 
-const skips = [
-  "Manual cookie copy waits",
-  "Manual copy and wait instructions",
-  "Session cookie copy steps",
-] as const;
+- Site waits before cookie data is ready
+- Line-by-line manual copy instructions
+- Repeat visits when the clipboard clear loses the string
+- Extra hops that only restate how to paste
+
+## One Copy cookie control instead of waiting
+
+Skip Wait fetches the cookie or share string on supported premium cookie pages, copies it to your clipboard, and surfaces a Copy cookie button if you need another grab. You stay on the cookie page; the CookiesCEO bypass extension removes the wait-and-paste dance without sending you through unrelated gates.
+
+No decoding puzzles and no third-party paste site. The extension works on the live copy flow so session data is easier to reuse when you need it again.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "How does Skip Wait copy the session cookie from CookiesCEO pages?",
-    answer: "Skip Wait fetches the session cookie or share string from premium cookie pages on cookiesceo.com and copies it to your clipboard automatically.",
+    question: 'How does Skip Wait copy the session cookie?',
+    answer:
+      'It fetches the session cookie or share string from supported premium cookie pages and copies it to your clipboard automatically.',
   },
   {
-    question: "Is there a Copy cookie button on premium CookiesCEO pages with Skip Wait?",
-    answer: "Yes. Skip Wait adds a Copy cookie button so you can grab the session cookie again without repeating the site wait and manual copy instructions.",
+    question: 'Is there a Copy cookie button?',
+    answer:
+      'Yes. Skip Wait adds a Copy cookie control so you can grab the session string again without repeating the site wait and manual instructions.',
   },
   {
-    question: "What manual copy steps does Skip Wait replace on cookiesceo.com?",
-    answer: "Instead of following line-by-line copy instructions after a wait, the extension pulls the cookie data and places it on your clipboard in one step.",
+    question: 'What manual steps does this replace?',
+    answer:
+      'Instead of following line-by-line copy instructions after a wait, the extension pulls the cookie data and places it on your clipboard in one step.',
   },
   {
-    question: "Is the CookiesCEO bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The CookiesCEO bypass runs on supported pages with no account or paid plan required.",
+    question: 'Does this redirect me to a download host?',
+    answer:
+      'No. CookiesCEO support is a skip copy step helper. It focuses on getting the session string into your clipboard cleanly.',
+  },
+  {
+    question: 'Is the CookiesCEO path free?',
+    answer:
+      'Yes. Skip Wait is free. The CookiesCEO bypass runs on supported pages with no account or paid plan.',
   },
 ];
 
@@ -82,10 +85,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,78 +1,74 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Move2Link";
+const name = 'Move2Link';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Move2Link bypass skips blog session waits and go page delays on this link shortener network to open your destination link automatically and fast.";
+const description =
+  'Move2Link bypass for blog session waits and go-page please-wait loops: Skip Wait advances continue gates so the destination opens without restarting the hop chain.';
 
-const domains = [
-  "siendu.com",
-  "go.move2link.co",
-] as const;
+const domains = ['siendu.com', 'go.move2link.co'] as const;
 
 const keywords = [
-  "move2link bypass",
-  "Move2Link bypass extension",
-  "move2link timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'move2link bypass',
+  'Move2Link bypass extension',
+  'move2link timer bypass',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
 ] as const;
 
-const intro = "Move2Link bypass skips blog session waits and go page delays on this link shortener network to open your destination link automatically and fast. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Looking for a Move2Link bypass or please wait bypass usually means a short link sent you through blog session waits and a go page before the real URL. Skip Wait is the free Chrome extension that clears those waiting pages so continue loops stop eating the session.';
 
-const problem = "Move2Link places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Shortener entry, blog middle, go-page exit
 
-const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
+Move2Link shares are built as a tour. You leave the short URL, sit through blog session tracking, then land on a go page with please-wait and click-to-continue chrome. Miss a hop, close a tab early, or lose the session cookie and the whole chain restarts—classic fuel for move2link timer bypass, waiting page bypass, and skip click to continue searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Move2Link bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Move2Link.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Move2Link link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Move2Link delay.",
-  },
-];
+That stacked path is different from a single interstitial. Progress depends on blogs cooperating before the go page will release the destination.
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+### Continue loops people restart by hand
+
+Blog hops hide Continue under ads until a client timer flips. The go page repeats the pattern with another please-wait strip. Each screen expects you to babysit the button; leave mid-flow and Move2Link treats you as a new visitor.
+
+## Following the live waiting-page path
+
+Skip Wait treats Move2Link as a skip waiting page flow inside Chrome. On supported hosts it detects the gate, advances please-wait steps when the page allows, and redirects to the destination without asking you to click continue on every hop.
+
+Client clutter gets out of the way; required holds still finish honestly. Paste tools fail when intermediate blogs rotate. A Move2Link bypass extension that follows behavior—not a hardcoded hop list—stays useful for link shortener bypass and skip waiting page searches as long as the pattern matches.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which Move2Link domains like go.move2link.co does Skip Wait support?",
-    answer: "Skip Wait handles siendu.com and go.move2link.co, bypassing blog session waits and go page delays on both Move2Link hosts.",
+    question: 'What does a Move2Link bypass clear?',
+    answer:
+      'Blog session waits, go-page please-wait strips, and repeated continue hunting after the chain is ready. Required holds still complete before the destination opens.',
   },
   {
-    question: "What blog session waits does Skip Wait skip on Move2Link?",
-    answer: "please wait screens and continue gates in the Move2Link network are bypassed so you reach the destination link without filler pages.",
+    question: 'Does every waiting page disappear instantly?',
+    answer:
+      'Busywork and client-only delays go away. When a step still needs a real wait, Skip Wait stays until unlock is allowed—so the move2link timer bypass stays reliable.',
   },
   {
-    question: "Can Skip Wait bypass go page delays in the Move2Link network?",
-    answer: "Yes. The extension detects waiting pages and redirects you past gate screens and manual continue loops automatically.",
+    question: 'Do I click Continue on every blog hop?',
+    answer:
+      'On supported hops, no. Skip Wait completes the continue flow so ads do not hide the control you were meant to press.',
   },
   {
-    question: "Is the Move2Link bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Move2Link bypass runs on supported pages with no account or paid plan required.",
+    question: 'What if tomorrow’s share uses a new blog host?',
+    answer:
+      'If the waiting-page pattern is the same, the extension follows live behavior. You do not paste the URL into a third-party tool when mediators rotate.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The Move2Link path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -84,10 +80,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

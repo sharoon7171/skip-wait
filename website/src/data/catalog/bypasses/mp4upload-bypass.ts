@@ -1,75 +1,69 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "MP4Upload";
+const name = 'MP4Upload';
 
-const bypassType = "Skip Countdown";
+const bypassType = 'Skip Countdown';
 
-const description = "MP4Upload bypass skips the free download countdown timer on this video file host and advances you to the create download link page right away.";
+const description =
+  'MP4Upload bypass for free download countdown timers: Skip Wait advances you to the create download link step so video files are not stuck behind a please-wait clock.';
 
-const domains = [
-  "mp4upload.com",
-] as const;
+const domains = ['mp4upload.com'] as const;
 
 const keywords = [
-  "mp4upload bypass",
-  "MP4Upload bypass extension",
-  "mp4upload timer bypass",
-  "skip countdown",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "countdown timer bypass",
-  "skip timer unlock",
+  'mp4upload bypass',
+  'MP4Upload bypass extension',
+  'mp4upload timer bypass',
+  'skip countdown',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'countdown timer bypass',
+  'skip timer unlock',
 ] as const;
 
-const intro = "MP4Upload bypass skips the free download countdown timer on this video file host and advances you to the create download link page right away. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'An MP4Upload bypass search usually means free download parked you on a countdown before create download link. Skip Wait is the free Chrome extension that clears that unlock delay on the video host page you already opened.';
 
-const problem = "MP4Upload puts a countdown timer or unlock delay in front of the continue or get link step. A MP4Upload bypass removes that wait so the destination opens without watching the clock.";
+const body = `## Free download clocks before create link
 
-const howItWorks = "Unlock timers on the supported website no longer block the get link or continue step.";
+MP4Upload’s free tier often puts a countdown between the download click and the create download link page. You watch the timer, hope Continue enables, then finally build the file URL. Refresh early or mistime the unlock and the same clock returns—classic mp4upload timer bypass and skip timer unlock territory.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The MP4Upload bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for MP4Upload.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a MP4Upload link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported MP4Upload delay.",
-  },
-];
+This is a file-host free path, not a multi-blog shortener. The friction is one concentrated wait wall before the create-link step.
 
-const skips = [
-  "Countdown timers on unlock pages",
-  "Get link delay screens",
-] as const;
+### Client timer vs host handshake
+
+Much of the free countdown is client chrome meant to slow casual grabbers. When the host still expects a short server hold before create download link, that step still needs to finish. Skip Wait removes busywork; it does not invent a zero-second cheat that errors out.
+
+## Advancing to create download link
+
+On matching video pages, Skip Wait covers the free download countdown UI inside Chrome and moves you to create download link when the page allows. You keep using the normal download control—no paste tool, no separate decoder site.
+
+That is skip countdown for this host in one install: less staring at please-wait, same create-link outcome. Compare listings under MP4Upload bypass extension or skip wait extension if you are choosing helpers.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What free download countdown does Skip Wait skip on mp4upload.com?",
-    answer: "Skip Wait bypasses the free download countdown timer on mp4upload.com and advances you to the create download link page faster.",
+    question: 'What countdown does an MP4Upload bypass clear?',
+    answer:
+      'The free download timer that blocks the create download link step. Skip Wait advances past that unlock chrome when the host allows it.',
   },
   {
-    question: "Does Skip Wait advance me to the create download link page faster?",
-    answer: "Yes. Unlock countdown timers and get link delay screens are skipped so you reach the download link creation step without the full wait.",
+    question: 'Do I reach create download link faster?',
+    answer:
+      'Yes on supported flows. Client delay screens stop blocking you so the create-link step opens without the full babysitting wait.',
   },
   {
-    question: "How does Skip Wait help with MP4Upload video file downloads?",
-    answer: "The extension activates on MP4Upload countdown flows and automates the wait so your video file download path opens sooner.",
+    question: 'Is every second removed instantly?',
+    answer:
+      'Client-only delays go away. If the host still needs a brief hold, Skip Wait finishes it, then continues—so the mp4upload timer bypass stays reliable.',
   },
   {
-    question: "Is the MP4Upload bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The MP4Upload bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free on the Chrome Web Store with no paid plan for supported pages.',
   },
 ];
 
@@ -81,10 +75,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

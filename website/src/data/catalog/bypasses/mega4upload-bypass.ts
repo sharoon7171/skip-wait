@@ -1,78 +1,80 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Mega4Upload";
+const name = 'Mega4Upload';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "Mega4Upload bypass skips the free download countdown and captcha gate to open the direct torrent download link from this file host instantly.";
+const description =
+  'Mega4Upload bypass for free download generating screens and captcha-style gates: Skip Wait resolves the torrent path so you are not restarting the countdown after every mistimed click.';
 
-const domains = [
-  "mega4upload.net",
-] as const;
+const domains = ['mega4upload.net'] as const;
 
 const keywords = [
-  "mega4upload bypass",
-  "Mega4Upload bypass extension",
-  "mega4upload timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'mega4upload bypass',
+  'Mega4Upload bypass extension',
+  'mega4upload timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "Mega4Upload bypass skips the free download countdown and captcha gate to open the direct torrent download link from this file host instantly. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Mega4Upload bypass search usually starts after free download leaves you on a generating countdown or captcha-style gate instead of the torrent. Skip Wait is the free Chrome extension that resolves that direct download path on the page you already opened.';
 
-const problem = "Mega4Upload often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Free download that stalls on generating
 
-const howItWorks = "Instead of sitting on a generating screen, Skip Wait fetches the direct link and starts the file path immediately when the host allows it.";
+Mega4Upload’s free path rarely hands over a torrent in one click. You press download, then sit through a generating screen, a short timer, or a check that only unlocks the link when the host says so. Miss the button window, close the tab, or fight an interstitial and the same clock starts again—exactly the loop behind mega4upload timer bypass and download timer skip searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Mega4Upload bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Mega4Upload.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on Mega4Upload. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Mega4Upload delay.",
-  },
-];
+Unlike a plain shortener hop, the product here is the file-host free tier: delay first, torrent second.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### Stages on a typical free grab
+
+1. Click the free download control on the file page
+2. Survive generating or captcha-style chrome
+3. Wait for the torrent destination to appear
+4. Hope a refresh did not wipe the session mid-wait
+
+## Resolving the torrent inside Chrome
+
+Skip Wait’s Mega4Upload support watches the download click you already make. When the host exposes the torrent path, the extension advances past client-only generating theater and opens that link without a paste box or mirror guess.
+
+Server-side holds still finish honestly. What disappears is babysitting a please-wait strip that only existed to slow free users. That is the practical reading of direct download bypass and file host bypass on this host: one Chrome install, the live file page, less time restarting generating screens.
+
+Compare helpers under mega4upload bypass extension or skip wait extension if you are choosing tools—the same listing covers this path with no account.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What free download countdown does Skip Wait skip on mega4upload.net?",
-    answer: "Skip Wait bypasses the free download countdown and captcha gate on mega4upload.net to open the direct torrent download link.",
+    question: 'What does a Mega4Upload bypass actually skip?',
+    answer:
+      'It skips free-download busywork: generating screens, client timers, and hunting the unlock after the host is ready. Required checks still complete before the torrent opens.',
   },
   {
-    question: "Does Skip Wait handle the captcha gate before Mega4Upload torrent links?",
-    answer: "The extension bypasses generating timers and redirect pages so your torrent download starts from the resolved link when the host allows it.",
+    question: 'Is every captcha removed instantly?',
+    answer:
+      'No. Client-only delays go away. When the host still needs a real check, Skip Wait stays on that step, then continues—so the mega4upload timer bypass stays stable.',
   },
   {
-    question: "Can I open direct torrent downloads from Mega4Upload with Skip Wait?",
-    answer: "Yes. Click download on mega4upload.net and Skip Wait fetches the direct torrent link instead of making you wait through the countdown first.",
+    question: 'Do I need a paste tool for the torrent URL?',
+    answer:
+      'No. Open the file page and click download normally. Skip Wait works on the page you already have open.',
   },
   {
-    question: "Is the Mega4Upload bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Mega4Upload bypass runs on supported pages with no account or paid plan required.",
+    question: 'Will a refresh reset progress?',
+    answer:
+      'If you reload mid-gate you may restart the free path. Stay on the tab while the extension finishes the supported unlock.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free on the Chrome Web Store. The Mega4Upload path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -84,10 +86,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

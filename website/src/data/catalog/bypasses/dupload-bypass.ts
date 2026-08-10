@@ -1,4 +1,4 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'DUpload';
 
@@ -29,39 +29,29 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A shared DUpload link should mean getting the file—not proving you survived a partner blog. Skip Wait is a free Chrome extension that keeps you on the file page, prepares the real direct download in the background, and shows one Direct Download · Skip Wait control when it is ready. How to download from DUpload becomes open the link, wait for the overlay button, click once—no Create download link babysitting and no Google first-result scavenger hunt.';
+  'A shared DUpload link should mean getting the file—not surviving a partner blog and Create download link wait. Skip Wait is a free Chrome extension that keeps you on the file page, prepares the direct URL, and shows one Direct Download · Skip Wait control when it is ready.';
 
-const problem =
-  'Free DUpload downloads are gated on purpose. Open the file and the page tries to shove you into a rotating blog mediator, then a site-search delay, then more continues before the host will treat the visit as “earned.” Miss the first result, refresh mid-hop, or bail early and the same loop starts again. Even back on the file card you still face Create download link and ad noise—the classic file-host bypass frustration dressed as a free download.';
+const body = `## Auto hops that yank you off the file card
 
-const howItWorks =
-  'On a matching DUpload file page Skip Wait drops a full-page overlay and stops the auto form posts that leave for mediators or fire the free-download submit. It resolves the same direct file URL the finished Create download link path would mint, then exposes that URL on Direct Download · Skip Wait. Nothing auto-starts; you click when you want the file.';
+Free DUpload downloads are gated on purpose. Open the file and the page tries to shove you into a rotating blog mediator, then more continues before the host treats the visit as earned. Even back on the file card you still face Create download link and ad noise—the classic how to download from DUpload frustration.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: 'Install Skip Wait',
-    body: 'Add the free extension from the Chrome Web Store. DUpload support turns on by itself—no account or paste box.',
-  },
-  {
-    title: 'Leave it on',
-    body: 'Keep Skip Wait enabled. File pages need no extra settings.',
-  },
-  {
-    title: 'Open the shared file link',
-    body: 'Use the URL the way you always do. When the file page loads, the overlay takes over.',
-  },
-  {
-    title: 'Click Direct Download when ready',
-    body: 'When Direct Download · Skip Wait appears, tap it to open the unlocked file.',
-  },
-];
+Miss the first hop, refresh mid-flow, or bail early and the same DUpload mediator bypass loop starts again. That is why create download link bypass, DUpload timer bypass, and file host bypass searches cluster around the same shares.
 
-const skips = [
-  'Auto jumps into rotating blog mediators',
-  'Google-style site-search first-result hops',
-  'Create download link button waits',
-  'Ad clicks while the overlay locks the page',
-] as const;
+### Create download link after the blog tour
+
+The button on the file page is not instant. It waits, generates, and still sits under ads. People who want a DUpload direct download are usually done with both the auto jump and the minting theater.
+
+## Holding the file page and minting the CDN URL
+
+On a matching file page Skip Wait drops a full-page overlay and stops the auto form posts that leave for mediators. It resolves the same direct file URL the finished Create download link path would mint, then exposes that URL on Direct Download · Skip Wait.
+
+Nothing auto-starts; you click when you want the file.
+
+## One overlay instead of another scavenger hunt
+
+Paste-site helpers often fail when the host expects a live session on the file page. A DUpload chrome extension or skip wait chrome extension install keeps unlock on the card you already opened, so DUpload free download stays one click away once the button is ready.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
@@ -87,7 +77,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Is the DUpload bypass free?',
     answer:
-      'Yes. Skip Wait is a free Chrome extension with no account required for DUpload.',
+      'Yes. Skip Wait is free with no account required for DUpload.',
   },
 ];
 
@@ -99,10 +89,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

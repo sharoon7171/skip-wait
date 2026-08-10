@@ -5,11 +5,11 @@ import {
   searchCatalog,
   totalBypasses,
   totalDomains,
-} from '@/data/catalog-queries';
-import { SupportCta } from '@/components/home/SupportCta';
+} from '@/data/catalog';
+import { SupportCta } from '@/components/layout/SupportCta';
 import { BypassRow } from '@/components/sites/BypassRow';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
-import { IconSearch } from '@/components/ui/Icons';
+import { IconSearch } from '@/components/ui/icons';
 import { Shell } from '@/components/ui/Shell';
 import { trackSearch } from '@/lib/analytics';
 
@@ -35,7 +35,7 @@ export function SupportedSitesPage(): React.ReactElement {
         },
       ]
     : [
-        { value: String(totalBypasses()), label: 'Sites' },
+        { value: String(totalBypasses()), label: 'Bypasses' },
         { value: String(totalDomains()), label: 'Websites' },
       ];
 

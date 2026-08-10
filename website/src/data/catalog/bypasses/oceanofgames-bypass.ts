@@ -1,88 +1,90 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Ocean of Games";
+const name = 'Ocean of Games';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "Ocean of Games bypass skips getsoft, IPC Games, wait-for-resource, and please wait pages and opens the signed CDN file link directly from the download button instantly.";
+const description =
+  'Ocean of Games bypass for getsoft, IPC Games, wait-for-resource, and please-wait hops: Skip Wait opens the signed CDN file from the download button without that intermediary tour.';
 
 const domains = [
-  "oceanofgames.com",
-  "oceansofgamess.com",
-  "oceantogames.com",
+  'oceanofgames.com',
+  'oceansofgamess.com',
+  'oceantogames.com',
 ] as const;
 
 const keywords = [
-  "ocean of games bypass",
-  "oceanofgames bypass",
-  "oceansofgamess bypass",
-  "oceantogames bypass",
-  "Ocean of Games bypass extension",
-  "oceanofgames bypass extension",
-  "oceansofgamess bypass extension",
-  "oceantogames bypass extension",
-  "oceanofgames timer bypass",
-  "oceansofgamess timer bypass",
-  "oceantogames timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'ocean of games bypass',
+  'oceanofgames bypass',
+  'oceansofgamess bypass',
+  'oceantogames bypass',
+  'Ocean of Games bypass extension',
+  'oceanofgames bypass extension',
+  'oceansofgamess bypass extension',
+  'oceantogames bypass extension',
+  'oceanofgames timer bypass',
+  'oceansofgamess timer bypass',
+  'oceantogames timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "Ocean of Games bypass skips getsoft, IPC Games, wait-for-resource, and please wait pages and opens the signed CDN file link directly from the download button instantly. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'An Ocean of Games bypass search usually means download sent you through getsoft, IPC Games, or wait-for-resource please-wait pages before the file. Skip Wait is the free Chrome extension that resolves the signed CDN link straight from the download button.';
 
-const problem = "Ocean of Games often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Game downloads that detour through mediators
 
-const howItWorks = "Instead of sitting on a generating screen, Skip Wait fetches the direct link and starts the file path immediately when the host allows it.";
+Ocean of Games listings often do not start the archive on the first click. The download button can bounce through getsoft-style helpers, IPC Games gates, wait-for-resource screens, or plain please-wait pages before a signed CDN URL appears. Each hop has its own timer flavor—why oceanofgames timer bypass, oceansofgamess bypass, and download timer skip searches cluster around the same frustration.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Ocean of Games bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Ocean of Games.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on Ocean of Games. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Ocean of Games delay.",
-  },
-];
+Mirror hostnames rotate; the intermediary pattern stays familiar.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### Intermediaries the button used to force
+
+- getsoft-style generating hops after download
+- IPC Games style gates before the package
+- wait-for-resource and please-wait strips
+- Extra mirror waits when you retry the same button
+
+## Fetching the CDN from the live button
+
+Skip Wait watches the download control on matching Ocean of Games pages inside Chrome. Instead of sitting on each generating screen, it fetches the direct signed link the listing already prepares and starts the file path when the host allows it.
+
+You keep clicking the same button. There is no paste workflow—just a direct download bypass that clears intermediary theater while respecting required server steps. That is the durable Ocean of Games bypass extension path across mirror frontends that reuse the same wait pattern.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which intermediate pages like getsoft and IPC Games does Skip Wait skip?",
-    answer: "Skip Wait bypasses getsoft, IPC Games, wait-for-resource, and please wait pages on oceanofgames.com, oceansofgamess.com, and oceantogames.com, opening signed CDN file links directly from the download button.",
+    question: 'Which intermediate pages does Ocean of Games bypass skip?',
+    answer:
+      'getsoft, IPC Games, wait-for-resource, and please-wait hops that normally follow the download button. Skip Wait opens the signed CDN file when the listing exposes it.',
   },
   {
-    question: "How does Skip Wait open signed CDN links from Ocean of Games download buttons?",
-    answer: "The extension fetches the direct CDN link in the background and bypasses generating timers and redirect hops that normally follow each click.",
+    question: 'How does the signed CDN link open?',
+    answer:
+      'The extension fetches the direct CDN URL in the background after your click, instead of leaving you on generating timers and redirect hops.',
   },
   {
-    question: "What please wait screens does Skip Wait bypass on Ocean of Games mirrors?",
-    answer: "Download generating timers and intermediary redirect pages before the file are skipped so your game download starts from the resolved link.",
+    question: 'Do mirror frontends still work the same way?',
+    answer:
+      'When they reuse the same download-wait pattern, yes. Skip Wait follows the live button behavior rather than a brittle hostname-only script.',
   },
   {
-    question: "Is the Ocean of Games bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Ocean of Games bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is every delay removed instantly?',
+    answer:
+      'Client intermediary waits go away. Brief server handshakes still finish—so oceanofgames timer bypass stays reliable.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free with no paid plan for supported pages.',
   },
 ];
 
@@ -94,10 +96,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,78 +1,74 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "FileCR";
+const name = 'FileCR';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "FileCR bypass opens real file links from Direct Download, Fast Download, and torrent buttons instantly without wait pages or FileCR Assistant.";
+const description =
+  'FileCR bypass opens real file links from Direct Download, Fast Download, and torrent buttons instantly without wait pages or FileCR Assistant.';
 
-const domains = [
-  "filecr.com",
-] as const;
+const domains = ['filecr.com'] as const;
 
 const keywords = [
-  "filecr bypass",
-  "FileCR bypass extension",
-  "filecr timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'filecr bypass',
+  'FileCR bypass extension',
+  'filecr timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "FileCR bypass opens real file links from Direct Download, Fast Download, and torrent buttons instantly without wait pages or FileCR Assistant. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A FileCR bypass search usually means Direct Download, Fast Download, or a torrent button stalled on a generating page—or someone told you to install FileCR Assistant just to finish. Skip Wait is the free Chrome extension that resolves those buttons to real file URLs without the wait theater or a second helper.';
 
-const problem = "FileCR often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Download buttons that stall on generating pages
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+FileCR software pages offer Direct Download, Fast Download, and torrent controls that often sit behind a generating timer or intermediary redirect before the real file link appears. You click the path you want, then babysit chrome that adds nothing to the archive itself.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The FileCR bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for FileCR.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on FileCR. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported FileCR delay.",
-  },
-];
+That is why filecr timer bypass, direct download bypass, and download timer skip show up next to FileCR bypass extension queries—people want the button they pressed to open a real URL.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### Direct, Fast, and torrent paths on one install
+
+All three button families resolve through the same Skip Wait path on supported pages. You do not pick a different userscript per mirror style; one install covers the wait behind each click.
+
+## Opening real file URLs without FileCR Assistant
+
+Skip Wait runs on the catalog page you already opened. After you click a supported download control, it resolves the real file URL in the background and skips the generating or redirect page that normally follows. No FileCR Assistant install, no paste box, no alternate storefront.
+
+Client wait theater gets out of the way when the host allows the link. You still choose which button to press—Direct, Fast, or torrent—so nothing auto-downloads a format you did not pick.
+
+## Mirror waits that never add a better file
+
+Extra wait screens on mirror-style controls get the same treatment on supported paths: the click opens the file link instead of another timer page. A skip wait extension keeps that direct download path working without babysitting every generate screen.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Do I need the FileCR Assistant extension when using Skip Wait on FileCR?",
-    answer: "No. Skip Wait opens real file links from Direct Download, Fast Download, and torrent buttons on filecr.com without wait pages or the FileCR Assistant extension.",
+    question: 'Do I need FileCR Assistant when using Skip Wait?',
+    answer:
+      'No. Skip Wait opens real file links from Direct Download, Fast Download, and torrent buttons without wait pages or the Assistant extension.',
   },
   {
-    question: "Which FileCR download buttons open real links instantly with Skip Wait?",
-    answer: "Direct Download, Fast Download, and torrent buttons all resolve to actual file URLs in the background, bypassing generating timers after each click.",
+    question: 'Which buttons are covered?',
+    answer:
+      'Direct Download, Fast Download, and torrent controls on supported pages all resolve to actual file URLs in the background.',
   },
   {
-    question: "What wait pages does Skip Wait bypass on filecr.com downloads?",
-    answer: "Intermediary redirect pages, download generating timers, and extra wait screens on mirror buttons are skipped so files open from the button you clicked.",
+    question: 'What wait pages get skipped?',
+    answer:
+      'Intermediary redirect pages, download generating timers, and extra wait screens on mirror-style buttons after the click.',
   },
   {
-    question: "Is the FileCR bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The FileCR bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the FileCR bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -84,10 +80,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

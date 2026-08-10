@@ -1,79 +1,80 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Yasir252";
+const name = 'Yasir252';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "Yasir252 bypass decodes locked download buttons into direct PixelDrain, MediaFire, and file host links without the mediator page or wait timer.";
+const description =
+  'Yasir252 bypass that decodes locked download buttons into direct PixelDrain, MediaFire, and other host links—skipping the mediator page and generate timer so the file path opens when the host allows it.';
 
-const domains = [
-  "yasir252.com",
-  "download.yasir252.com",
-] as const;
+const domains = ['yasir252.com', 'download.yasir252.com'] as const;
 
 const keywords = [
-  "yasir252 bypass",
-  "Yasir252 bypass extension",
-  "yasir252 timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'yasir252 bypass',
+  'yasir252 bypass extension',
+  'yasir252 timer bypass',
+  'yasir252 pixeldrain',
+  'yasir252 mediafire',
+  'yasir252 download button',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "Yasir252 bypass decodes locked download buttons into direct PixelDrain, MediaFire, and file host links without the mediator page or wait timer. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Yasir252 bypass or yasir252 timer bypass search usually means a locked download button forced an eight-second generate wait and a mediator page before PixelDrain, MediaFire, or another host. Skip Wait is the free Chrome extension that decodes those buttons into direct links so download timer skip is not sitting through every generate screen.';
 
-const problem = "Yasir252 often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Locked buttons, then a generate timer
 
-const howItWorks = "Instead of sitting on a generating screen, Skip Wait fetches the direct link and starts the file path immediately when the host allows it.";
+Yasir252 download pages often wrap real host links behind locked buttons. You click, sit through a generate timer, land on a mediator screen, then finally reach PixelDrain, MediaFire, or another file host. Miss the unlock window or close the mediator early and the same direct download bypass loop restarts.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Yasir252 bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Yasir252.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on Yasir252. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Yasir252 delay.",
-  },
-];
+That locked-button pattern—not a generic shortener—is why people search yasir252 pixeldrain, yasir252 mediafire, and skip waiting page together.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### Steps between the button and the host
+
+- Generate timers after locked download clicks
+- Mediator pages before the real host URL
+- Extra waits on mirror and host buttons
+- Restarting when the decoded token expires
+
+## Decoding the button into a direct host link
+
+Skip Wait runs on supported Yasir252 download pages inside Chrome. Use the same download button you already click; the extension fetches the direct host link in the background and starts the file path when the host allows it—without the mediator tour.
+
+Client generate theater goes away; required host unlock still finishes honestly.
+
+## Host buttons that reshuffle between posts
+
+Manual “wait eight seconds then click” habits fail when the next locked-button skin appears. A Yasir252 bypass extension that decodes the live button target stays useful without relearning each mediator page.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What 8-second timer does Skip Wait skip on Yasir252 downloads?",
-    answer: "Skip Wait decodes locked download buttons on yasir252.com and download.yasir252.com without the mediator page or 8-second timer delay.",
+    question: 'What timer does Skip Wait skip on Yasir252 downloads?',
+    answer:
+      'The generate / unlock timer on locked download buttons, plus the mediator page that normally follows. Skip Wait decodes the direct host link instead.',
   },
   {
-    question: "Which file hosts like PixelDrain and MediaFire does Skip Wait decode on Yasir252?",
-    answer: "The extension unlocks direct PixelDrain, MediaFire, and other file host links from Yasir252 download buttons in the background.",
+    question: 'Which hosts can it decode?',
+    answer:
+      'Supported buttons that resolve to PixelDrain, MediaFire, and other file hosts Yasir252 wraps—decoded in the background when you click download.',
   },
   {
-    question: "Does Skip Wait bypass the mediator page on yasir252.com download buttons?",
-    answer: "Yes. Instead of sitting on a generating screen, Skip Wait fetches the direct link and starts the file path immediately when the host allows it.",
+    question: 'Do I still sit on a generating screen?',
+    answer:
+      'No on supported flows. Skip Wait fetches the direct link and starts the file path when the host allows it.',
   },
   {
-    question: "Is the Yasir252 bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Yasir252 bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the Yasir252 bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
   },
 ];
 
@@ -85,10 +86,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

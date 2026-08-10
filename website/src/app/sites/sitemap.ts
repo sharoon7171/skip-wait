@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { bypassSitemapEntries } from '@/data/sitemap-config';
+import { bypassSitemapEntries } from '@/data/sitemap';
 
 export const dynamic = 'force-static';
 export const revalidate = false;

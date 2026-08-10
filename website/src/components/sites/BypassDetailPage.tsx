@@ -1,14 +1,16 @@
 import type { SupportedBypass } from '@/types/catalog';
 import { CHROME_WEB_STORE_URL } from '@/data/constants';
+import { tocFromMarkdown, type BypassTocItem } from '@/components/sites/markdown-toc';
 import { routes } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
-import { BypassArticleToc, type BypassTocItem } from '@/components/sites/BypassArticleToc';
-import { SupportCta } from '@/components/home/SupportCta';
+import { BypassArticleMarkdown } from '@/components/sites/BypassArticleMarkdown';
+import { BypassArticleToc } from '@/components/sites/BypassArticleToc';
+import { BypassHowToUse } from '@/components/sites/BypassHowToUse';
+import { SupportCta } from '@/components/layout/SupportCta';
 import { ButtonLink } from '@/components/ui/Button';
-import { ChromeIcon } from '@/components/ui/ChromeIcon';
+import { ChromeIcon, IconArrowLeft, IconChevronRight } from '@/components/ui/icons';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
-import { IconArrowLeft, IconChevronRight } from '@/components/ui/Icons';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
@@ -20,14 +22,12 @@ const sectionClassName = 'scroll-mt-24 border-b border-neutral-200 py-8 sm:py-9'
 
 export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactElement {
   const { article } = entry;
-  const showWhatItDoes = Boolean(article.problem) || article.skips.length > 0;
   const toc: BypassTocItem[] = [
-    showWhatItDoes ? { id: 'what-it-does', label: `What ${entry.name} does` } : null,
-    { id: 'how-we-bypass', label: 'How Skip Wait bypasses it' },
-    { id: 'supported-websites', label: 'Supported websites' },
-    article.steps && article.steps.length > 0 ? { id: 'how-to-use', label: 'How to use' } : null,
+    ...tocFromMarkdown(article.body),
     { id: 'faq', label: 'FAQ' },
-  ].filter((item): item is BypassTocItem => item !== null);
+    { id: 'supported-websites', label: 'Supported websites' },
+    { id: 'how-to-use', label: 'How to use' },
+  ];
 
   return (
     <>
@@ -102,38 +102,13 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
       <section className="border-t border-neutral-200 bg-surface-canvas">
         <Shell className="grid gap-x-10 lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-x-12 xl:grid-cols-[minmax(0,1fr)_16rem]">
           <div className="min-w-0 lg:col-start-1 lg:row-start-1">
-            {showWhatItDoes ? (
-              <section id="what-it-does" className={sectionClassName}>
-                <h2 className="font-display text-title text-ink">What {entry.name} does</h2>
-                {article.problem ? (
-                  <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
-                    {article.problem}
-                  </p>
-                ) : null}
-                {article.skips.length > 0 ? (
-                  <>
-                    <h3
-                      className={`font-display text-body font-semibold text-ink ${article.problem ? 'mt-6' : 'mt-4'}`}
-                    >
-                      Delays and gates you hit
-                    </h3>
-                    <ul className="m-0 mt-3 max-w-prose list-disc space-y-2 pl-5 text-body-sm text-ink-body">
-                      {article.skips.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </>
-                ) : null}
-              </section>
-            ) : null}
+            <BypassArticleMarkdown markdown={article.body} />
 
-            <section id="how-we-bypass" className={sectionClassName}>
-              <h2 className="font-display text-title text-ink">
-                How Skip Wait bypasses {entry.name}
-              </h2>
-              <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
-                {article.howItWorks}
-              </p>
+            <section id="faq" className={sectionClassName}>
+              <h2 className="font-display text-title text-ink">FAQ</h2>
+              <div className="mt-5">
+                <FaqAccordion items={article.faq} />
+              </div>
             </section>
 
             <section id="supported-websites" className={sectionClassName}>
@@ -156,41 +131,7 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
               </ul>
             </section>
 
-            {article.steps && article.steps.length > 0 ? (
-              <section id="how-to-use" className={sectionClassName}>
-                <h2 className="font-display text-title text-ink">How to use</h2>
-                <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
-                  Install once, then open {entry.name} links the same way you already do. Skip Wait
-                  handles the rest on supported pages.
-                </p>
-                <ol className="m-0 mt-5 max-w-prose list-none space-y-5 p-0">
-                  {article.steps.map((step, index) => (
-                    <li key={step.title} className="flex gap-4">
-                      <span
-                        aria-hidden
-                        className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-50 font-display text-caption font-semibold text-primary-700 ring-1 ring-primary-100"
-                      >
-                        {index + 1}
-                      </span>
-                      <div className="min-w-0 pt-0.5">
-                        <h3 className="font-display text-body font-semibold text-ink">{step.title}</h3>
-                        <p className="mt-1.5 text-body-sm leading-relaxed text-ink-body">{step.body}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            ) : null}
-
-            <section id="faq" className="scroll-mt-24 pb-12 pt-12 lg:pb-0 lg:pt-16">
-              <h2 className="font-display text-title text-ink">FAQ</h2>
-              <div className="mt-5">
-                <FaqAccordion
-                  items={article.faq}
-                  questionClassName="font-display text-body font-semibold text-ink sm:text-title"
-                />
-              </div>
-            </section>
+            <BypassHowToUse />
           </div>
 
           <aside className="hidden min-w-0 lg:col-start-2 lg:row-start-1 lg:block">

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { staticSitemapEntries } from '@/data/sitemap-config';
+import { staticSitemapEntries } from '@/data/sitemap';
 
 export const dynamic = 'force-static';
 export const revalidate = false;

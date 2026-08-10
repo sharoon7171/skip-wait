@@ -1,78 +1,85 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "4Download";
+const name = '4Download';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "4Download bypass unlocks direct download links on every mirror button, skipping the loading wait for Google Drive, MediaFire, and torrent files.";
+const description =
+  '4Download bypass that resolves Direct Download and mirror buttons past generating waits so cloud, file-host, and torrent picks open the real file path sooner.';
 
-const domains = [
-  "4download.net",
-] as const;
+const domains = ['4download.net'] as const;
 
 const keywords = [
-  "4download bypass",
-  "4Download bypass extension",
-  "4download timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  '4download bypass',
+  '4Download bypass extension',
+  '4download bypass chrome',
+  'bypass 4download',
+  'skip 4download',
+  '4download timer bypass',
+  '4download generating wait',
+  '4download mirror bypass',
+  'direct download',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
+  'mirror download bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'skip wait extension',
 ] as const;
 
-const intro = "4Download bypass unlocks direct download links on every mirror button, skipping the loading wait for Google Drive, MediaFire, and torrent files. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'People hunt a 4Download bypass or direct download bypass after every mirror still dumps them on a generating spinner before the host. Skip Wait is the free Chrome extension that resolves those buttons in the background so cloud, file-host, and torrent picks move you to the file instead of another timer page.';
 
-const problem = "4Download often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Software mirrors stuck on generating
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+Listing pages often put a loading wait or intermediary hop in front of each Direct Download style control. You click once, stare at a spinner, then hope the next screen is the host you meant. Across multi-part softwares that ritual stacks fast—hence 4download generating wait, download timer skip, and mirror download bypass queries.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The 4Download bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for 4Download.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on 4Download. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported 4Download delay.",
-  },
-];
+### What sits between click and host
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+- Generating timers after Direct Download presses
+- Redirect screens before the real cloud or file host
+- Extra waits on alternate mirror rows
+- Manual restarts when a tab closes mid-spin
+
+## Background resolve for Direct Download clicks
+
+Skip Wait watches the download controls already on the page. When you press a supported mirror button, it fetches the real file URL behind the wait and opens that path instead of leaving you on a generating screen. Cloud drives, popular file hosts, and torrent picks follow the same idea: one click, less dead time.
+
+You do not copy URLs into a third-party tool. A 4Download bypass extension install covers the mirrors you already use on the live listing.
+
+## Multi-part releases and mirror lists
+
+Large packs mean many buttons. Sitting through every generating screen turns a short grab into an afternoon of babysitting. Resolving each supported control as soon as the host allows it keeps the same UI you trust while cutting the spinner tax.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which download hosts does Skip Wait unlock on 4Download?",
-    answer: "Skip Wait resolves real file links from Google Drive, MediaFire, and torrent buttons on 4download.net, bypassing the loading wait that normally appears after each click.",
+    question: 'What does a 4Download bypass unlock?',
+    answer:
+      'It unlocks the real file path behind supported Direct Download and mirror buttons so you skip generating waits before the host.',
   },
   {
-    question: "What happens when I click Direct Download on 4Download with Skip Wait?",
-    answer: "The extension fetches the actual file URL in the background and opens it directly, skipping the generating timer and intermediary redirect page that usually follows the button press.",
+    question: 'Which mirror types are covered?',
+    answer:
+      'Supported cloud, file-host, and torrent buttons on the listing page. Click them as usual and Skip Wait resolves the destination.',
   },
   {
-    question: "Does Skip Wait skip the generating download screen on 4Download?",
-    answer: "Yes. Extra wait screens on mirror and host buttons are bypassed so your download starts from the resolved link instead of sitting on a timer page.",
+    question: 'Does it skip every spinner instantly?',
+    answer:
+      'It bypasses the intermediary timer and redirect layer in front of supported buttons. You still land on the real host—just without the busywork wait.',
   },
   {
-    question: "Is the 4Download bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The 4Download bypass runs on supported pages with no account or paid plan required.",
+    question: 'Do I need a paste tool per file?',
+    answer:
+      'No. Stay on the listing, click download, and let Skip Wait run on that tab.',
+  },
+  {
+    question: 'Is the 4Download path free?',
+    answer:
+      'Yes. Skip Wait is free. No account or paid plan is required on supported pages.',
   },
 ];
 
@@ -84,10 +91,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

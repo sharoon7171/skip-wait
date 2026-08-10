@@ -1,6 +1,6 @@
 import type { SupportedBypass } from '@/types/catalog';
-import { bypasses } from '@/data/catalog';
-import { bypassSlug } from '@/lib/catalog-slug';
+import { bypasses } from './registry';
+import { bypassSlug } from './slug';
 
 function byName(a: SupportedBypass, b: SupportedBypass): number {
   return a.name.localeCompare(b.name);
@@ -21,7 +21,7 @@ export function totalBypasses(): number {
   return bypasses.length;
 }
 
-export function allDomains(): string[] {
+function allDomains(): string[] {
   return [...new Set(bypasses.flatMap((entry) => [...entry.domains]))];
 }
 
@@ -31,10 +31,6 @@ export function totalDomains(): number {
 
 export function shuffledDomains(): string[] {
   return shuffled(allDomains());
-}
-
-export function firstBypasses(count: number): SupportedBypass[] {
-  return bypasses.slice(0, count);
 }
 
 export function sampleBypasses(count: number): SupportedBypass[] {

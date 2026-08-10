@@ -1,6 +1,6 @@
-import { totalBypasses, totalDomains } from '@/data/catalog-queries';
+import { totalBypasses, totalDomains } from '@/data/catalog';
 
-export type FaqItem = {
+type FaqItem = {
   question: string;
   answer: string;
 };
@@ -23,7 +23,7 @@ export const faqs: readonly FaqItem[] = [
   },
   {
     question: 'What sites are supported?',
-    answer: `Skip Wait works on ${totalBypasses()} sites across ${totalDomains()} websites—link shorteners like Linkvertise, GPLinks, and Ouo, plus safelinks, file hosts, and download countdown pages. Open Supported Sites and search by name or website address.`,
+    answer: `Skip Wait works on ${totalBypasses()} bypasses across ${totalDomains()} websites—link shorteners like Linkvertise, GPLinks, and Ouo, plus safelinks, file hosts, and download countdown pages. Open Supported Sites and search by name or website address.`,
   },
   {
     question: 'Can it handle “please wait” and “click to continue” pages?',

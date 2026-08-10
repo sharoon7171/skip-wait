@@ -1,4 +1,4 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'DevUploads';
 
@@ -48,82 +48,60 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching for a DevUploads bypass, how to download from DevUploads, or skip Generate Download Link usually opened a shared file URL and got bounced into a long news-style article with a Scroll Down banner, then a Generate Download Link or Go To Free Download Page button that only unlocks after waiting. DevUploads is a file host many APK, PDF, and archive posts use, so queries like DevUploads timer bypass, DevUploads free download, DevUploads direct download, and DevUploads scroll down show up next to generic download timer skip and file host bypass searches. Skip Wait is a free Chrome extension that takes over on the real download card (the mediator page after DevUploads posts you there): it locks the whole page so ads and article clicks stay unreachable, resolves the CDN in the background, and shows one Direct Download · Skip Wait control inside the overlay—no paste tool, no watching Link Generated for five seconds, and no hunting for Download Now under the post.';
+  'Searching how to download from DevUploads or for a DevUploads bypass usually means a shared file URL bounced you into a long article with Scroll Down, Generate Download Link, and Link Generated waits. Skip Wait is a free Chrome extension that locks the mediator file card, prepares the CDN link, and shows one Direct Download · Skip Wait control.';
 
-const problem =
-  'A typical DevUploads.com file does not hand you the file in one click. First the host auto-sends you to a rotating partner blog (healthcare, fees, PDF books, and similar articles) where you are told to scroll, wait for Generate Download Link, then often hit Link Generated and Download Now—or get pushed through another Go To Free Download Page hop. Leave early, keep an ad blocker on (the host itself warns downloads may fail), or miss the button buried under the article and you restart the same maze. That loop is exactly why people look for a DevUploads generate download link bypass, DevUploads mediator skip, and DevUploads chrome extension instead of finishing the scroll ritual by hand every time someone shares an APK or archive.';
+const body = `## Partner articles that bury Download Now
 
-const howItWorks =
-  'Skip Wait treats the mediator file card as the place you actually download from—not the blank auto-post page on DevUploads itself. When that card loads with your filename and size, the extension covers the page with a full-page overlay that blocks interaction with ads and scroll steps, resolves the direct CDN download URL the same way a completed Generate Download Link path would (server-side POST, not click automation), and shows one branded Direct Download · Skip Wait control inside the overlay. You click when you want the file; nothing auto-starts. Partner blogs such as gujjukhabar.in, djxmaza.in, smartfeecalculator.com, and pdfhindibook.com are recognized when they host that DevUploads file card, so rotating article domains do not make you relearn a new layout.';
+A typical DevUploads free download does not hand you the archive in one click. The host parks you on a rotating partner post with Scroll Down banners, then a Generate Download Link or Go To Free Download Page control that only unlocks after waiting. Miss the buried Download Now, leave early, or trip an ad-blocker warning and you restart the same mediator loop.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: 'Install Skip Wait from the Chrome Web Store',
-    body: 'Add the free Skip Wait Chrome extension. Searches for DevUploads chrome extension, DevUploads bypass chrome, or skip wait chrome extension all point at the same install. DevUploads rules load automatically—no account and no developer mode.',
-  },
-  {
-    title: 'Keep Skip Wait enabled',
-    body: 'Leave the extension on. There is nothing to configure for a DevUploads.com bypass or its partner download cards.',
-  },
-  {
-    title: 'Open the DevUploads file link as usual',
-    body: 'Click the shared DevUploads URL the same way you always do. When the host sends you to the file card on a partner blog, Skip Wait locks that page behind the overlay.',
-  },
-  {
-    title: 'Use Direct Download in the overlay',
-    body: 'Wait for Direct Download · Skip Wait inside the Skip Wait overlay. Click it when you are ready—the CDN link is already prepared, without Generate Download Link, Link Generated, or another free-download detour.',
-  },
-];
+That is why generate download link bypass, DevUploads timer bypass, and DevUploads direct download queries spike next to APK and PDF shares—the pain is the article ritual, not finding the filename.
 
-const skips = [
-  'Generate Download Link and Link Generated waits on the file card',
-  'Scroll Down banners and long article posts before the download control',
-  'Go To Free Download Page and second-hop free download screens',
-  'Buried Download Now buttons after forced reading',
-  'Ads and page clicks while the overlay locks the mediator',
-  'Rotating partner blog layouts that wrap the same DevUploads file',
-] as const;
+### Scroll Down is the product, not a tip
+
+The blog is the free-user download UI. Generate Download Link, Link Generated, and Download Now are staged on that card after forced reading. Searching DevUploads scroll down or DevUploads mediator is searching for a way off that stage.
+
+## Locking the file card under one overlay
+
+Skip Wait treats the mediator file card—the page that shows your filename after the host posts you there—as the place you actually download from. When that card loads, a full-page overlay blocks ads and scroll steps, resolves the direct CDN URL the finished Generate Download Link path would mint, and shows Direct Download · Skip Wait inside the overlay.
+
+You click when you want the file; nothing auto-starts. Partner layouts that wrap the same card are recognized by pattern, so rotating hosts do not force a new scavenger hunt.
+
+## When the next blog host rotates
+
+Paste tools and userscripts die when yesterday’s article domain disappears. A DevUploads chrome extension install keeps unlock on the live file card—skip wait chrome extension searches point at one tool for DevUploads free download and download timer skip without re-pasting URLs.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'Where does the Skip Wait button appear for DevUploads?',
+    question: 'Where does the Skip Wait button appear?',
     answer:
-      'Inside the full-page Skip Wait overlay on the mediator download card—the page that shows your filename after DevUploads posts you to a partner blog—not on the brief auto-redirect screen on DevUploads.com itself.',
+      'Inside the full-page overlay on the mediator download card—the page that shows your filename after DevUploads posts you to a partner article—not on the brief auto-redirect screen on the host itself.',
   },
   {
     question: 'Why did I land on a random blog instead of my file?',
     answer:
-      'DevUploads monetizes free downloads by parking you on partner articles with Scroll Down instructions before Generate Download Link. That blog is the real download UI for free users. Skip Wait locks that page and skips the article scroll path so you are not reading scholarship or fee posts to reach an APK.',
+      'Free downloads are monetized by parking you on partner articles with Scroll Down before Generate Download Link. That blog is the real download UI. Skip Wait locks that page and skips the scroll path.',
   },
   {
-    question: 'Does Skip Wait skip Generate Download Link and Download Now?',
+    question: 'Does this skip Generate Download Link and Download Now?',
     answer:
-      'Yes. The extension prepares the direct CDN URL via the host download protocol and exposes it on the overlay button instead of making you wait for Link Generated and then Download Now.',
+      'Yes. The extension prepares the direct CDN URL via the host download protocol and exposes it on the overlay button.',
   },
   {
-    question: 'Can I still click ads or scroll the article?',
+    question: 'Can I still scroll the article or click ads?',
     answer:
-      'No. While the overlay is active the mediator page is locked—ads, scroll banners, and native download controls stay unreachable. Only the Skip Wait overlay (and its download button once ready) stays interactive.',
-  },
-  {
-    question: 'Do I need to disable my ad blocker for DevUploads?',
-    answer:
-      'The host warns that ad blockers can break free downloads. If the card never loads or the Skip Wait button fails, allow the DevUploads file URL and the partner blog for that session, then reload. Skip Wait still avoids the scroll-and-wait ritual once the card is available.',
-  },
-  {
-    question: 'Which partner sites does this DevUploads bypass cover?',
-    answer:
-      'Skip Wait matches DevUploads file cards on the listed partner domains (including gujjukhabar.in, djxmaza.in, smartfeecalculator.com, pdfhindibook.com, and rfiql.com when they host the download form). If a publisher rotates to a new article host, open a support request with that URL.',
+      'No. While the overlay is active, ads, scroll banners, and native download controls stay unreachable. Only the overlay (and its download button once ready) stays interactive.',
   },
   {
     question: 'Will the download start by itself?',
     answer:
-      'No. Skip Wait only shows a ready Direct Download button in the overlay. You choose when to click so nothing auto-downloads in the background.',
+      'No. Skip Wait only shows a ready Direct Download button. You choose when to click.',
   },
   {
     question: 'Is the DevUploads bypass free?',
     answer:
-      'Yes. Skip Wait is a free Chrome extension with no account and no paid tier required for DevUploads or the listed partner download cards.',
+      'Yes. Skip Wait is free with no account and no paid tier for DevUploads or the listed partner cards.',
   },
 ];
 
@@ -135,10 +113,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

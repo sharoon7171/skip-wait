@@ -2,10 +2,15 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BypassDetailPage } from '@/components/sites/BypassDetailPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { allBypassSlugs, bypassBySlug } from '@/data/catalog-queries';
+import {
+  allBypassSlugs,
+  bypassBySlug,
+  bypassHowToSteps,
+  bypassPageTitle,
+  bypassSlug,
+} from '@/data/catalog';
 import { CHROME_WEB_STORE_URL, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots } from '@/data/seo';
-import { bypassPageTitle, bypassSlug } from '@/lib/catalog-slug';
 import { bypassSitePath, routes } from '@/lib/routes';
 import type { SupportedBypass } from '@/types/catalog';
 
@@ -70,7 +75,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 function bypassPageJsonLd(entry: SupportedBypass): Record<string, unknown> {
   const path = bypassSitePath(bypassSlug(entry));
   const url = `${SITE.url}${path}`;
-  const steps = entry.article.steps;
 
   return {
     '@context': 'https://schema.org',
@@ -98,25 +102,21 @@ function bypassPageJsonLd(entry: SupportedBypass): Record<string, unknown> {
       '@type': 'ImageObject',
       url: `${SITE.url}/icon.png`,
     },
-    ...(steps && steps.length > 0
-      ? {
-          mainEntity: {
-            '@type': 'HowTo',
-            name: `${entry.name} Bypass with ${SITE.name}`,
-            description: entry.description,
-            step: steps.map((step, index) => ({
-              '@type': 'HowToStep',
-              position: index + 1,
-              name: step.title,
-              text: step.body,
-            })),
-            tool: {
-              '@type': 'HowToTool',
-              name: SITE.name,
-            },
-          },
-        }
-      : {}),
+    mainEntity: {
+      '@type': 'HowTo',
+      name: `${entry.name} Bypass with ${SITE.name}`,
+      description: entry.description,
+      step: bypassHowToSteps.map((step, index) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.title,
+        text: step.body,
+      })),
+      tool: {
+        '@type': 'HowToTool',
+        name: SITE.name,
+      },
+    },
   };
 }
 

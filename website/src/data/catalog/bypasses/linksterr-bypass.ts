@@ -1,77 +1,81 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Linksterr";
+const name = 'Linksterr';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Linksterr bypass skips the gateway waiting page on this URL shortener and redirects you to the destination link without manual steps or waits.";
+const description =
+  'Linksterr bypass that clears the gateway waiting page on this URL shortener and redirects to the destination without manual continue loops or filler delays.';
 
-const domains = [
-  "linksterr.com",
-] as const;
+const domains = ['linksterr.com'] as const;
 
 const keywords = [
-  "linksterr bypass",
-  "Linksterr bypass extension",
-  "linksterr timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'linksterr bypass',
+  'linksterr bypass chrome',
+  'linksterr bypass extension',
+  'bypass linksterr',
+  'skip linksterr',
+  'linksterr timer bypass',
+  'linksterr gateway',
+  'linksterr waiting page',
+  'skip waiting page',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
 ] as const;
 
-const intro = "Linksterr bypass skips the gateway waiting page on this URL shortener and redirects you to the destination link without manual steps or waits. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Searching for a Linksterr bypass usually means a short URL opened a gateway waiting page instead of the destination. Skip Wait is the free Chrome extension that clears that please-wait gate and redirects without you tapping Continue through ads.';
 
-const problem = "Linksterr places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Gateway pages that sit between you and the URL
 
-const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
+Linksterr puts a waiting gateway after the short link: please wait, click to continue, overlays that hide the real destination until the UI decides you waited long enough. Leave early and you restart the gate.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Linksterr bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Linksterr.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Linksterr link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Linksterr delay.",
-  },
-];
+That is why linksterr waiting page and skip click to continue searches appear next to generic waiting page bypass—the shortener already knows where you are going; the gateway is the product.
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+### What the gateway adds
+
+- Please-wait screens before any redirect
+- Click-to-continue loops under ad clutter
+- Gate pages that hold the destination behind UI
+- Manual retries when the wrong tab closes mid-wait
+
+## Redirecting when the page already holds the target
+
+Skip Wait detects the gateway, bypasses filler wait chrome when the destination is present, and sends you there without hunting Continue.
+
+You open the short link as usual—no paste tool. Client-only delay UI gets out of the way so the redirect can fire on the live page.
+
+## One waiting pattern, fewer manual steps
+
+Gateway layouts shuffle; the continue-then-redirect behavior stays familiar. A Linksterr bypass extension that runs on that live gate keeps skip waiting page useful without inventing a new paste workflow each week.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What gateway waiting page does Skip Wait bypass on linksterr.com?",
-    answer: "Skip Wait skips the gateway waiting page on linksterr.com and redirects you to the destination link without manual steps.",
+    question: 'What does a Linksterr bypass skip?',
+    answer:
+      'The gateway waiting page and continue loops so the destination opens without manual please-wait steps.',
   },
   {
-    question: "Do I need manual steps to reach my link from Linksterr with Skip Wait?",
-    answer: "No. please wait screens and click-to-continue gates are bypassed automatically when you open a Linksterr URL.",
+    question: 'Do I still click Continue myself?',
+    answer:
+      'On supported gates, no. Skip Wait advances past please wait and continue screens.',
   },
   {
-    question: "How does Skip Wait redirect me from Linksterr to the destination?",
-    answer: "The extension detects the gate screen and sends you to the real destination URL instead of asking you to click continue repeatedly.",
+    question: 'Is every timer removed instantly?',
+    answer:
+      'Filler wait chrome goes away when the destination is present. Required holds still finish before redirect if the page enforces them.',
   },
   {
-    question: "Is the Linksterr bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Linksterr bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The Linksterr path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -83,10 +87,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

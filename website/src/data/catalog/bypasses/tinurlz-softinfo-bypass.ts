@@ -1,78 +1,80 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Tinurlz / Softinfo";
+const name = 'Tinurlz / Softinfo';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Tinurlz bypass skips the short link waiting page and unwraps nested download redirects to open your target file or URL right away without delay.";
+const description =
+  'Tinurlz / Softinfo bypass that clears short-link waiting pages and unwraps nested download redirects so the target file or URL opens without babysitting continue loops.';
 
-const domains = [
-  "tinurlz.com",
-  "softinfo.blog",
-] as const;
+const domains = ['tinurlz.com', 'softinfo.blog'] as const;
 
 const keywords = [
-  "tinurlz / softinfo bypass",
-  "Tinurlz / Softinfo bypass extension",
-  "tinurlz / softinfo timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'tinurlz bypass',
+  'softinfo bypass',
+  'tinurlz / softinfo bypass',
+  'tinurlz bypass extension',
+  'tinurlz timer bypass',
+  'softinfo waiting page',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
+  'nested redirect bypass',
 ] as const;
 
-const intro = "Tinurlz bypass skips the short link waiting page and unwraps nested download redirects to open your target file or URL right away without delay. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Tinurlz bypass or Softinfo waiting page search usually means a short URL parked you on please-wait chrome, then nested download redirects, instead of the file. Skip Wait is the free Chrome extension that clears those gates and follows the nested hops so skip click to continue is not a manual chore.';
 
-const problem = "Tinurlz places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Short wait, then another redirect
 
-const howItWorks = "When the waiting page loads, Skip Wait runs in the background, skips the delay layer, and sends you straight to the target URL supported for Tinurlz / Softinfo.";
+Tinurlz and Softinfo shares often put a waiting page between the short link and the real destination, then wrap the download in another redirect layer. You sit through please wait, tap Continue, land on another interstitial, and only then reach the target. Close early and the chain restarts.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Tinurlz / Softinfo bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Tinurlz / Softinfo.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Tinurlz / Softinfo link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Tinurlz / Softinfo delay.",
-  },
-];
+That nested shape—not one countdown alone—is why people hunt for a waiting page bypass, please wait bypass, and nested redirect bypass next to Tinurlz.
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+### Layers that keep you clicking
+
+- Please-wait and click-to-continue gates on Softinfo-style pages
+- Short-link waiting chrome before any real URL appears
+- Nested download redirects after the first unlock
+- Manual continue loops when a hop opens wrong
+
+## Unwrapping the chain on the page you opened
+
+Skip Wait runs in Chrome on the matching waiting page. It skips the delay layer the flow already expects, then follows nested redirects to the target file or URL without a paste box.
+
+You keep opening the shared link as usual. Required holds still finish honestly; client-only continue theater does not.
+
+## Softinfo skins that change between shares
+
+Bookmark workarounds break when the next blog skin appears. A Tinurlz / Softinfo bypass extension keyed to waiting-page behavior stays useful without re-copying the short URL into a third-party unlocker each time.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which Tinurlz and Softinfo domains does Skip Wait support?",
-    answer: "Skip Wait handles tinurlz.com and softinfo.blog, bypassing short link waiting pages and nested download redirects on both.",
+    question: 'What does a Tinurlz / Softinfo bypass clear?',
+    answer:
+      'Short-link waiting pages, please-wait / continue gates, and nested download redirects on supported shares. Skip Wait opens the target without a full manual click-through.',
   },
   {
-    question: "Does Skip Wait unwrap nested download redirects from tinurlz.com links?",
-    answer: "Yes. The extension skips the waiting page and follows through nested redirects to open your target file or URL right away.",
+    question: 'Does it unwrap nested download redirects?',
+    answer:
+      'Yes on supported flows. After the waiting page, the extension follows nested redirects to the file or URL instead of leaving you on each interstitial.',
   },
   {
-    question: "What short link waiting page does Skip Wait bypass on Softinfo?",
-    answer: "please wait and click-to-continue gate screens on Softinfo links are bypassed for direct redirect to the destination.",
+    question: 'Do I still press Continue myself?',
+    answer:
+      'On supported gates, no. Skip Wait completes the continue path the page already expects.',
   },
   {
-    question: "Is the Tinurlz bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Tinurlz bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
   },
 ];
 
@@ -84,10 +86,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

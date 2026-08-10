@@ -1,77 +1,81 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Clipi";
+const name = 'Clipi';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Clipi bypass skips the short link waiting page on this URL shortener and sends you straight to the long destination URL without delay or clicks.";
+const description =
+  'Clipi bypass that clears the short link waiting page on this URL shortener and sends you to the long destination without continue loops.';
 
-const domains = [
-  "clipi.cc",
-] as const;
+const domains = ['clipi.cc'] as const;
 
 const keywords = [
-  "clipi bypass",
-  "Clipi bypass extension",
-  "clipi timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'clipi bypass',
+  'Clipi bypass extension',
+  'clipi bypass chrome',
+  'bypass clipi',
+  'skip clipi',
+  'clipi timer bypass',
+  'clipi waiting page',
+  'clipi short link bypass',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
+  'url shortener waiting page',
 ] as const;
 
-const intro = "Clipi bypass skips the short link waiting page on this URL shortener and sends you straight to the long destination URL without delay or clicks. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Clipi bypass search usually means a compact short URL still parks you on a waiting page before the long destination. Skip Wait is the free Chrome extension that clears that gate and redirects when unlock is ready—without continue hunting.';
 
-const problem = "Clipi places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Compact short URLs with a stall screen
 
-const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
+Clipi shares look tiny in a chat, then open a please-wait or click-to-continue screen instead of the long URL. Refresh too soon and the same waiting page bypass hunt starts over. That single stall is why clipi waiting page, clipi timer bypass, and url shortener waiting page queries stay common even for a simple alias.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Clipi bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Clipi.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Clipi link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Clipi delay.",
-  },
-];
+### What sits on the gate
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+- Please-wait chrome before the long URL
+- Skip click to continue controls under ads
+- Gate pages between the short alias and the destination
+- Manual continue loops when the button hides
+
+## Jumping to the long URL from the gate
+
+Skip Wait detects the Clipi gate in Chrome, advances the continue flow the page expects, and redirects to the long destination without asking you to babysit the timer. One Clipi bypass extension install covers matching pages—no paste tool and no userscript manager.
+
+Client-only delay theater clears; required holds still finish honestly. That keeps a clipi short link bypass reliable instead of inventing a broken zero-second cheat.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What waiting page does Skip Wait bypass on clipi.cc links?",
-    answer: "Skip Wait skips the short link waiting page on clipi.cc and sends you straight to the long URL without sitting on please wait or click-to-continue screens.",
+    question: 'What waiting page does Skip Wait clear on Clipi?',
+    answer:
+      'The short link waiting page that sits between the alias and the long URL—please-wait and click-to-continue chrome included.',
   },
   {
-    question: "Do I need to manually continue past Clipi gate screens?",
-    answer: "No. The extension detects gate pages before the destination URL and bypasses manual continue button loops automatically.",
+    question: 'Do I need to manually continue past gate screens?',
+    answer:
+      'No on supported pages. Skip Wait detects the gate and bypasses manual continue button loops.',
   },
   {
-    question: "How fast does Skip Wait redirect me to the long URL from a Clipi short link?",
-    answer: "When the waiting page loads, Skip Wait runs in the background and redirects immediately to the target URL instead of after a timed delay.",
+    question: 'How fast is the redirect to the long URL?',
+    answer:
+      'As soon as unlock is allowed after the gate flow is handled. Cosmetic timers go away; enforced holds finish once.',
   },
   {
-    question: "Is the Clipi bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Clipi bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is every timer removed instantly?',
+    answer:
+      'Client busywork is skipped. When a real hold is still required, Skip Wait waits that step, then continues—a stable clipi timer bypass.',
+  },
+  {
+    question: 'Is the Clipi path free?',
+    answer:
+      'Yes. Skip Wait is free. The Clipi bypass runs on supported pages with no account or paid plan.',
   },
 ];
 
@@ -83,10 +87,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,80 +1,77 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Pling / openDesktop";
+const name = 'Pling / openDesktop';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "Pling bypass skips the download redirect delay on openDesktop and KDE store pages so add ons and project files download immediately without waiting.";
+const description =
+  'Pling bypass for download redirect delays on openDesktop and KDE-style stores: Skip Wait starts add-on and project packages without a post-click waiting screen.';
 
 const domains = [
-  "addons.videolan.org",
-  "opendesktop.org",
-  "store.kde.org",
+  'addons.videolan.org',
+  'opendesktop.org',
+  'store.kde.org',
 ] as const;
 
 const keywords = [
-  "pling / opendesktop bypass",
-  "Pling / openDesktop bypass extension",
-  "pling / opendesktop timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'pling / opendesktop bypass',
+  'Pling / openDesktop bypass extension',
+  'pling / opendesktop timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "Pling bypass skips the download redirect delay on openDesktop and KDE store pages so add ons and project files download immediately without waiting. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Looking for a Pling / openDesktop bypass usually means an add-on or project file sat behind a redirect delay after download. Skip Wait is the free Chrome extension that resolves the real package URL so direct download replaces that store wait.';
 
-const problem = "Pling often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Storefront clicks that pause before the archive
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+openDesktop, KDE Store, and related Pling storefronts often insert a short redirect or generating wait between your download click and the actual theme, plasmoid, or VLC add-on package. Click, wait, hope the file starts—fuel for pling / opendesktop timer bypass, download timer skip, and skip waiting page searches when you only wanted the archive.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Pling / openDesktop bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Pling / openDesktop.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on Pling / openDesktop. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Pling / openDesktop delay.",
-  },
-];
+### Same delay pattern across sibling stores
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+VLC add-on pages, KDE project pages, and openDesktop listings share the habit even when branding differs. Refreshing the wait page or hopping mirrors rarely helps if every host uses the same post-click delay.
+
+## Resolving the package on the live store button
+
+Skip Wait runs inside Chrome on matching store pages. After you click download it resolves the real file URL the store already prepares, skips client-only delay pages, and lets the transfer begin. You keep the normal store button—no paste workflow and no account gate for the bypass itself.
+
+Required server handshakes still finish. What disappears is busywork redirect theater—the practical Pling / openDesktop bypass extension reading of file host bypass on these storefronts.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which stores like store.kde.org and opendesktop.org does Skip Wait support?",
-    answer: "Skip Wait handles addons.videolan.org, opendesktop.org, and store.kde.org, skipping download redirect delays on all three.",
+    question: 'What does a Pling / openDesktop bypass clear?',
+    answer:
+      'Post-click redirect delays on openDesktop and KDE-style store pages. Skip Wait opens the real package after your download click without the usual wait screen.',
   },
   {
-    question: "What download redirect delay does Skip Wait skip on Pling pages?",
-    answer: "The redirect delay that sits between your download click and the file on openDesktop and KDE store pages is bypassed for immediate download.",
+    question: 'Does this cover VLC add-ons and KDE projects?',
+    answer:
+      'Yes on supported storefronts. The same direct download path applies when those stores sit a redirect delay in front of the package.',
   },
   {
-    question: "Can KDE add-ons and project files download immediately with Skip Wait?",
-    answer: "Yes. The extension resolves real download URLs so add-ons and project files start downloading without a timer or redirect page.",
+    question: 'Do I still click the normal download button?',
+    answer:
+      'Yes. Skip Wait watches the button you already use. It does not invent a separate download UI.',
   },
   {
-    question: "Is the Pling bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Pling bypass runs on supported pages with no account or paid plan required.",
+    question: 'Will every timer vanish instantly?',
+    answer:
+      'Client-only redirect waits are cleared. Brief server handshakes still finish—so the pling / opendesktop timer bypass stays reliable.',
+  },
+  {
+    question: 'Is the Pling bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no paid plan for supported pages.',
   },
 ];
 
@@ -86,10 +83,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

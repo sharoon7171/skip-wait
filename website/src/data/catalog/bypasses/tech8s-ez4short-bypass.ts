@@ -1,11 +1,11 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'Tech8s / Ez4Short';
 
 const bypassType = 'Skip Short Link';
 
 const description =
-  'Tech8s / Ez4Short bypass skips gate-page waits, PLEASE WAIT screens, and redirect hops on Ez4Short-style ad link shorteners so your destination opens without clicking through every step.';
+  'Tech8s / Ez4Short bypass for safe-redirect gates, PLEASE WAIT blogs, and unlock hops on Ez4Short-style ad shorteners—Skip Wait advances the chain inside Chrome.';
 
 const domains = [
   'ez4short.com',
@@ -23,6 +23,9 @@ const keywords = [
   'tech8s / ez4short bypass',
   'ez4short timer bypass',
   'tech8s timer bypass',
+  'ez4short please wait',
+  'tech8s gate page',
+  'adrinolinks bypass',
   'skip short link',
   'skip countdown timer',
   'bypass countdown timer',
@@ -39,66 +42,58 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Ez4Short-style ad links rarely mean one page. You get a safe redirect, a PLEASE WAIT gate, another continue form, sometimes a second shortener, then finally an unlock hop—classic Tech8s monetized-link theater. Skip Wait is the free Chrome extension that treats that whole gate-page bypass as one job: it reads redirect targets, walks blog continue steps behind an overlay, and opens the next URL when the path is ready. You keep the short link; you drop the ritual of tapping every please-wait screen yourself.';
+  'An Ez4Short bypass or Tech8s bypass search usually starts after a game or APK share opens a safe redirect, then a PLEASE WAIT blog, then another continue hop. Skip Wait is the free Chrome extension that walks that ad-link chain so a skip short link path does not mean tapping every gate yourself.';
 
-const problem =
-  'Each hop exists to look like progress while delaying the destination. Safe redirects hide the next URL in the page, PLEASE WAIT screens demand patience, and blog gates chain continue posts until an unlock link appears. Related ad-link entries dump you into the same maze under a different skin. One missed continue or a mid-chain refresh and the short-link bypass problem resets from the top.';
+const body = `## Safe redirects stacked with blog continues
 
-const howItWorks =
-  'As soon as a supported Tech8s / Ez4Short-style page loads, Skip Wait identifies which kind of hop you are on. Redirect interstitials yield their real next URL and move you along. Blog gates run their continue sequence in the background under the overlay until the unlock link is available. Entry pages that only exist to shove you into those gates are jumped the same way—Skip Wait grabs the gate target and continues—so the ad-link chain collapses into fewer stops instead of a full click-through.';
+Ez4Short-style ad links are built as a tour. You leave the shortener, land on a “safe” interstitial, wait for Continue under ads, bounce through another article, and only then see an unlock hop. Close a tab mid-chain and the monetized link bypass hunt restarts—exactly the loop behind tech8s gate page and ez4short please wait searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: 'Install from the Chrome Web Store',
-    body: 'Add Skip Wait once. Tech8s / Ez4Short-style short links and gates are included automatically.',
-  },
-  {
-    title: 'Do not turn it off',
-    body: 'Leave Skip Wait running. Ad-link and gate pages need no extra options.',
-  },
-  {
-    title: 'Follow the shared ad link',
-    body: 'Open it like any other short URL. Matching redirects, gates, and entry pages pick up the overlay on their own.',
-  },
-  {
-    title: 'Let the chain finish',
-    body: 'Skip Wait advances supported hops and opens the next destination when unlock is ready—without a manual PLEASE WAIT tour.',
-  },
-];
+The product is the stack: redirect skin, session cookies, and a final unlock that only appears after the blogs cooperate.
 
-const skips = [
-  'Safe-redirect interstitials',
-  'PLEASE WAIT and continue gates',
-  'Multi-step blog continue chains',
-  'Entry hops that only feed the same gates',
-  'Hunting the unlock link after the last gate',
-] as const;
+### Stops that eat the most time
+
+- Safe-redirect interstitials that hide the next location
+- PLEASE WAIT strips that re-enable Continue after a client timer
+- Extra entry hops that only feed the same gate family
+- Lost progress when a hop opens in the wrong tab
+
+## Collapsing the live ad-link path in Chrome
+
+Skip Wait treats Tech8s / Ez4Short as a short-link chain, not a paste-box riddle. On redirect hops it reads the real next URL and moves on. On blog gates it completes the continue sequence the page already expects under the overlay. Entry pages that only shove you into those gates are jumped the same way.
+
+Client chrome gets out of the way; server-side holds still finish honestly—so an ez4short timer bypass stays reliable instead of inventing a zero-second cheat that errors out.
+
+## When intermediate blogs rotate
+
+Paste unlockers die the moment the next mediator host appears. A skip wait chrome extension install stays useful because it keys off gate behavior—continue release, unlock link—not a hardcoded blog list you must update by hand.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'What is the Tech8s / Ez4Short bypass for?',
+    question: 'What does a Tech8s / Ez4Short bypass actually clear?',
     answer:
-      'Clearing gate pages, PLEASE WAIT screens, and redirect hops on Ez4Short-style ad links so the next destination opens without a full manual click-through. Skip Wait runs on the domains listed here.',
+      'Safe-redirect stalls, PLEASE WAIT / continue gates, and unlock hops on this ad-shortener family. Skip Wait advances those steps on supported pages so you are not the one hunting Continue through ads.',
   },
   {
-    question: 'What kinds of pages are supported?',
+    question: 'Is every timer removed instantly?',
     answer:
-      'The shortener and gate domains on this page, plus related ad-link entries that feed the same gate theater. With Skip Wait on, those links start the bypass themselves.',
+      'No. Client-only delays and button hunting go away. When a gate still needs a real wait, Skip Wait stays on that step, then continues—so the Ez4Short timer bypass stays stable.',
   },
   {
-    question: 'Which waits go away?',
+    question: 'Do I still click Continue on article pages?',
     answer:
-      'Safe-redirect stalls, PLEASE WAIT / continue gates, and the blog continue chain that ends in an unlock link. Skip Wait handles those steps and opens the next URL when it is ready.',
+      'On supported hops, no. The extension completes the continue flow the page already expects.',
   },
   {
-    question: 'Are redirect hops automatic?',
+    question: 'What if tomorrow’s share uses a new blog host?',
     answer:
-      'On supported redirects and unlock hops, yes—Skip Wait moves you to the real next URL instead of leaving you on the interstitial.',
+      'If the unlock pattern is the same, Skip Wait follows behavior on the live page. You do not re-paste the URL into a third-party tool when mediators rotate.',
   },
   {
-    question: 'Do I pay for Tech8s / Ez4Short support?',
+    question: 'Is this free?',
     answer:
-      'No. Skip Wait is free, with no account and no paid plan for this bypass.',
+      'Yes. Skip Wait is free on the Chrome Web Store. The Tech8s / Ez4Short path runs with no paid plan.',
   },
 ];
 
@@ -110,10 +105,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,76 +1,69 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "FlightSim.to";
+const name = 'FlightSim.to';
 
-const bypassType = "Skip Download Timer";
+const bypassType = 'Skip Download Timer';
 
-const description = "FlightSim bypass skips the addon download countdown timer dialog so flight simulator mods and add ons start downloading immediately for free users.";
+const description =
+  'FlightSim bypass skips the addon download countdown timer dialog so flight simulator mods and add ons start downloading immediately for free users.';
 
-const domains = [
-  "flightsim.to",
-] as const;
+const domains = ['flightsim.to'] as const;
 
 const keywords = [
-  "flightsim.to bypass",
-  "FlightSim.to bypass extension",
-  "flightsim.to timer bypass",
-  "skip download timer",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "download countdown bypass",
-  "addon download skip",
+  'flightsim.to bypass',
+  'FlightSim.to bypass extension',
+  'flightsim.to timer bypass',
+  'skip download timer',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'download countdown bypass',
+  'addon download skip',
 ] as const;
 
-const intro = "FlightSim bypass skips the addon download countdown timer dialog so flight simulator mods and add ons start downloading immediately for free users. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A FlightSim.to bypass search usually means a free addon download opened a countdown dialog before the transfer started. Skip Wait is the free Chrome extension that clears that timer dialog so flight simulator mods begin downloading without sitting through Unlocks in chrome.';
 
-const problem = "FlightSim.to shows a download countdown dialog before the file starts. A FlightSim.to bypass clears that timer so the download begins right away.";
+const body = `## Free addon downloads stuck on a countdown dialog
 
-const howItWorks = "To page, and use the site normally. The extension activates on recognized skip download timer flows and bypasses or automates the wait so you reach the content faster. The countdown dialog on the supported website is cleared so the file transfer can start right away.";
+FlightSim.to lets free users download mods and add-ons, then parks a timed dialog in front of the file. You trigger download, watch the countdown, and wait for the transfer to arm. Close early or miss the release and you restart the same skip download timer ritual.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The FlightSim.to bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for FlightSim.to.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a FlightSim.to link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported FlightSim.to delay.",
-  },
-];
+That dialog is why FlightSim.to timer bypass, download countdown bypass, and addon download skip queries cluster around FlightSim.to bypass extension installs—the file is ready; the UI just stalls free traffic.
 
-const skips = [
-  "Download Timer that block the destination",
-  "Addon download countdown dialogs",
-  "Pre download delay timers",
-] as const;
+## Clearing the timer so the transfer starts
+
+Skip Wait activates on supported download-timer flows. When the countdown dialog appears, the extension bypasses or automates the wait the page already expects and lets the file transfer start as soon as the host allows it. You keep using the addon page normally—no paste box and no alternate mirror hunt.
+
+Client countdown theater gets out of the way. Required holds still finish honestly so the download does not fail with a fake zero-second cheat.
+
+## Mods without babysitting every free download
+
+Sitting through the dialog on every community addon adds nothing to the package. A skip wait extension install keeps skip countdown timer and bypass countdown timer behavior on the live page so free users spend time installing the mod, not watching the clock.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What countdown dialog does Skip Wait skip before FlightSim.to addon downloads?",
-    answer: "Skip Wait bypasses the addon download countdown timer dialog on flightsim.to so flight simulator mods and add-ons start downloading immediately.",
+    question: 'What countdown does Skip Wait skip?',
+    answer:
+      'The addon download countdown timer dialog that appears before free downloads start. Skip Wait clears that wait so the transfer can begin.',
   },
   {
-    question: "Can flight simulator mods start downloading immediately with Skip Wait?",
-    answer: "Yes. The pre-download delay timer is bypassed and the file download begins as soon as you trigger it on supported FlightSim.to pages.",
+    question: 'Do flight simulator mods start immediately?',
+    answer:
+      'As soon as the host allows the file. Client dialog busywork goes away; required holds are still respected.',
   },
   {
-    question: "Does Skip Wait bypass timed locks on FlightSim.to download pages?",
-    answer: "Yes. Skip Wait activates on download timer flows and bypasses the wait so you reach the file without sitting through the countdown dialog.",
+    question: 'Do I still click download myself?',
+    answer:
+      'Yes. Trigger download the normal way. Skip Wait handles the timed dialog behind that click.',
   },
   {
-    question: "Is the FlightSim.to bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The FlightSim.to bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the FlightSim.to bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -82,10 +75,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,76 +1,78 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "XDMovies";
+const name = 'XDMovies';
 
-const bypassType = "Skip Landing Wait";
+const bypassType = 'Skip Landing Wait';
 
-const description = "XDMovies bypass skips the landing page delay before open main site and takes you to the streaming homepage without any forced waiting on load.";
+const description =
+  'XDMovies bypass that clears the landing delay before Open main site so you reach the streaming homepage without a forced connection wait on load.';
 
-const domains = [
-  "xdmovies.com",
-] as const;
+const domains = ['xdmovies.com'] as const;
 
 const keywords = [
-  "xdmovies bypass",
-  "XDMovies bypass extension",
-  "xdmovies timer bypass",
-  "skip landing wait",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "landing page bypass",
-  "mirror site bypass",
+  'xdmovies bypass',
+  'xdmovies bypass extension',
+  'xdmovies timer bypass',
+  'xdmovies open main site',
+  'xdmovies landing page',
+  'skip landing wait',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'landing page bypass',
+  'mirror site bypass',
 ] as const;
 
-const intro = "XDMovies bypass skips the landing page delay before open main site and takes you to the streaming homepage without any forced waiting on load. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'An XDMovies bypass or skip landing wait search usually means the entry page forced an Open main site delay before the streaming homepage. Skip Wait is the free Chrome extension that clears that landing wait so you start browsing without sitting through connection chrome on every visit.';
 
-const problem = "XDMovies delays the main site behind a landing wait screen.";
+const body = `## Landing first, homepage second
 
-const howItWorks = "Skip Wait clears the landing wait so you continue into the site without the connection delay.";
+XDMovies parks the working homepage behind a landing wait. You load the entry URL, watch Open main site / connection delay chrome, then finally reach the streaming homepage. Refresh early and the same landing page bypass loop restarts.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The XDMovies bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for XDMovies.",
-  },
-  {
-    title: "Land on the entry page",
-    body: "Visit the XDMovies landing URL as usual. Skip Wait advances past the delay into the main site.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported XDMovies delay.",
-  },
-];
+That entry stall—not a file shortener—is why people search xdmovies timer bypass and mirror site bypass next to skip landing wait.
 
-const skips = [
-  "Landing-page connection delays",
-  "Landing page mirror delays",
-  "Open main site wait screens",
-] as const;
+### Entry delays before browsing
+
+- Landing-page connection stalls on load
+- Open main site wait screens
+- Mirror delays before the homepage
+- Restarting the entry URL when a hop fails
+
+## Advancing past Open main site in Chrome
+
+Skip Wait runs on the landing page inside Chrome. It clears the landing wait and opens the working destination so you continue into the site without the forced connection delay.
+
+You visit the same entry URL as always. No paste tool. The delay chrome goes away; the homepage route still completes honestly.
+
+## Entry skins that change between mirrors
+
+Hardcoded “click Open main site after N seconds” habits fail when the landing skin changes. An XDMovies bypass extension keyed to landing-wait release stays useful without relearning each entry layout.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What landing page delay does Skip Wait skip before opening XDMovies main site?",
-    answer: "Skip Wait bypasses the landing page delay before open main site on xdmovies.com and takes you to the streaming homepage without waiting.",
+    question: 'What landing delay does Skip Wait skip on XDMovies?',
+    answer:
+      'The Open main site / connection wait on the entry page. Skip Wait advances into the streaming homepage without that forced delay.',
   },
   {
-    question: "Does Skip Wait take me to the streaming homepage without waiting?",
-    answer: "Yes. Landing page mirror delays and open-main-site wait screens are bypassed so you start browsing immediately.",
+    question: 'Do I still visit the landing URL?',
+    answer:
+      'Yes. Open the same entry page; Skip Wait only removes the landing wait behind it.',
   },
   {
-    question: "How does Skip Wait bypass the open main site screen on xdmovies.com?",
-    answer: "The extension activates on landing wait flows and opens the working destination URL faster instead of making you sit through the delay.",
+    question: 'Is this the same as the download mediator hop?',
+    answer:
+      'No. This entry covers the homepage landing wait. Mediator please-wait pages after download clicks are a separate path.',
   },
   {
-    question: "Is the XDMovies bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The XDMovies bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the XDMovies bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
   },
 ];
 
@@ -82,10 +84,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

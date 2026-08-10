@@ -1,80 +1,80 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Sub2Unlock";
+const name = 'Sub2Unlock';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Sub2Unlock bypass skips all social unlock blocks—YouTube subscribe, sub and hit bell, sub and like, like, comment, and share; Instagram, Facebook, and Twitter actions; and other creator media steps—for instant redirect to the destination on sub2unlock.com.";
+const description =
+  'Sub2Unlock bypass skips YouTube subscribe, bell, like, comment, and share blocks plus Instagram, Facebook, and Twitter creator steps so the embedded destination opens without finishing every social action.';
 
-const domains = [
-  "sub2unlock.com",
-] as const;
+const domains = ['sub2unlock.com'] as const;
 
 const keywords = [
-  "sub2unlock bypass",
-  "Sub2Unlock bypass extension",
-  "sub2unlock.com bypass",
-  "sub2unlock timer bypass",
-  "sub2unlock social unlock",
-  "sub2unlock youtube instagram facebook twitter",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'sub2unlock bypass',
+  'Sub2Unlock bypass extension',
+  'sub2unlock.com bypass',
+  'sub2unlock timer bypass',
+  'sub2unlock social unlock',
+  'sub2unlock youtube instagram facebook twitter',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
 ] as const;
 
-const intro = "Sub2Unlock bypass skips all social unlock blocks—YouTube subscribe, sub and hit bell, sub and like, like, comment, and share; Instagram, Facebook, and Twitter actions; and other creator media steps—for instant redirect to the destination on sub2unlock.com. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'People searching for a Sub2Unlock bypass or sub2unlock social unlock usually hit a page where YouTube subscribe, hit bell, like, comment, and share must turn green before Instagram, Facebook, or Twitter steps unlock the link. Skip Wait is the free Chrome extension that reads the destination already on the page so skip waiting page busywork is not a full social checklist.';
 
-const problem = "Sub2Unlock requires fans to complete each social block before the unlock button turns green. Supported actions include YouTube subscribe, sub and hit bell, sub and like, like, comment, and share, plus Instagram, Facebook, Twitter, and other media steps.";
+const body = `## YouTube-first lockers that greenlight one block at a time
 
-const howItWorks = "When the page embeds the destination in its unlock data, Skip Wait reads it and redirects without completing each social block.";
+A typical Sub2Unlock share is a creator locker, not a shortener timer. Fans are told to subscribe, hit the bell, like the video, leave a comment, or share—then often follow on Instagram, Facebook, or Twitter—before the unlock control turns usable. Miss one block or fight overlays and the whole sub2unlock timer bypass hunt restarts.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Sub2Unlock bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Sub2Unlock.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Sub2Unlock link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Sub2Unlock delay.",
-  },
-];
+The destination is commonly already embedded in the page’s unlock data. The product is forcing every social proof step before redirect.
 
-const skips = [
-  "YouTube subscribe, sub & hit bell, sub & like, like, comment, and share",
-  "Instagram, Facebook, and Twitter unlock blocks",
-  "Other creator media steps before the unlock button",
-  "Client-only unlock gating that waits for every block",
-] as const;
+### Creator actions this flow usually stacks
+
+- YouTube subscribe, sub and hit bell, sub and like
+- Video like, comment, and share requirements
+- Instagram, Facebook, and Twitter follow or like blocks
+- Client-only gating that waits for every block to clear
+
+## Reading the embedded destination in Chrome
+
+When the unlock page embeds the destination in its unlock data, Skip Wait reads it and redirects without completing each social block by hand.
+
+That is a Sub2Unlock bypass extension for social unlock pages—not a multi-slot password locker and not a paste decoder. Client gating disappears; you open the same share URL you already received. If your link uses the Unlock Link button pattern on the .
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which unlock actions does Skip Wait cover on Sub2Unlock?",
-    answer: "YouTube subscribe, sub and hit bell, sub and like, like, comment, and share; Instagram, Facebook, and Twitter blocks; and other creator media steps on sub2unlock.com.",
+    question: 'Which unlock actions does Skip Wait cover on Sub2Unlock?',
+    answer:
+      'YouTube subscribe, sub and hit bell, sub and like, like, comment, and share; Instagram, Facebook, and Twitter blocks; and other creator media steps on supported unlock pages.',
   },
   {
-    question: "What does Skip Wait bypass on Sub2Unlock?",
-    answer: "All social unlock blocks and the client unlock gate on sub2unlock.com, then instant redirect to the embedded destination link.",
+    question: 'Does Skip Wait invent the destination?',
+    answer:
+      'No. When the page embeds the destination in unlock data, the extension reads that value and redirects. The URL still comes from the locker page.',
   },
   {
-    question: "Which domain does this Sub2Unlock bypass cover?",
-    answer: "This entry covers sub2unlock.com. Separate catalog pages cover sub2unlock.io, sub2unlock.me, and the Sub4Unlock hosts.",
+    question: 'Is this the same as Sub4Unlock multi-slot checklists?',
+    answer:
+      'No. This entry targets Sub2Unlock social-block lockers. Multi-slot subscribe/follow/password flows are separate catalog pages.',
   },
   {
-    question: "Is the Sub2Unlock bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Sub2Unlock bypass runs on supported pages with no account or paid plan required.",
+    question: 'Do I still need a YouTube account?',
+    answer:
+      'Not for Skip Wait’s redirect path on supported pages. The extension does not require you to complete each subscribe or like step when the destination is already on the page.',
+  },
+  {
+    question: 'Is the Sub2Unlock bypass free?',
+    answer:
+      'Yes. Skip Wait is free. The Sub2Unlock path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -86,10 +86,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

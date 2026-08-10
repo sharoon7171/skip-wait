@@ -1,78 +1,69 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Filecrypt";
+const name = 'Filecrypt';
 
-const bypassType = "Skip Security Check";
+const bypassType = 'Skip Security Check';
 
-const description = "Filecrypt bypass skips the I am human verification check and unlocks the mirror download list so you can pick your file host right away and download.";
+const description =
+  'Filecrypt bypass skips the I am human verification check and unlocks the mirror download list so you can pick your file host right away and download.';
 
-const domains = [
-  "filecrypt.cc",
-  "filecrypt.to",
-  "filecrypt.co",
-] as const;
+const domains = ['filecrypt.cc', 'filecrypt.to', 'filecrypt.co'] as const;
 
 const keywords = [
-  "filecrypt bypass",
-  "Filecrypt bypass extension",
-  "filecrypt timer bypass",
-  "skip security check",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "human verification bypass",
-  "captcha gate bypass",
+  'filecrypt bypass',
+  'Filecrypt bypass extension',
+  'filecrypt timer bypass',
+  'skip security check',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'human verification bypass',
+  'captcha gate bypass',
 ] as const;
 
-const intro = "Filecrypt bypass skips the I am human verification check and unlocks the mirror download list so you can pick your file host right away and download. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'People search Filecrypt bypass or skip security check after a shared container blocks the mirror list behind an I am human gate. Skip Wait is the free Chrome extension that clears that verification lock so you can pick a host and download without staring at the security check.';
 
-const problem = "Filecrypt blocks the mirror list behind a human verification check.";
+const body = `## Mirror lists locked behind I am human
 
-const howItWorks = "Skip Wait activates on recognized skip security check flows and bypasses or automates the wait so you reach the content faster.";
+Filecrypt containers hide the download host list until a human verification check passes. You land on the folder page, face the I am human gate, and only then see mirrors. Refresh mid-check or fail the widget and the same lock screen returns—exactly the loop behind human verification bypass and Filecrypt bypass extension searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Filecrypt bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Filecrypt.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Filecrypt link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Filecrypt delay.",
-  },
-];
+The destination is not a single file URL; it is the unlocked mirror list you still choose from.
 
-const skips = [
-  "Security Check that block the destination",
-  "Human verification gates",
-  "Mirror list lock screens",
-] as const;
+## Unlocking hosts so you can pick a mirror
+
+Skip Wait activates on supported Filecrypt container pages. It advances the security-check path the site already expects, unlocks the mirror list, and leaves host selection to you. You are not auto-sent to a random mirror; you still pick Mega, Rapidgator, or whatever the publisher listed.
+
+Client lock-screen busywork stops owning the tab. If a real human widget still appears, finish it once; afterward the list stays reachable so skip security check stays practical inside Chrome.
+
+## Security check busywork vs choosing a host
+
+Paste tools that claim a Filecrypt bypass often return a guessed single link and miss multi-mirror containers. A skip wait extension that unlocks the live list matches how publishers actually share files—one container, several hosts, your choice.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What human verification check does Skip Wait skip on Filecrypt?",
-    answer: "Skip Wait bypasses the I am human verification gate on Filecrypt and unlocks the mirror download list so you can pick a file host immediately.",
+    question: 'What human verification does Skip Wait skip?',
+    answer:
+      'The I am human gate that locks the mirror download list. After unlock, you pick a file host from the list yourself.',
   },
   {
-    question: "Which Filecrypt domains like filecrypt.cc and filecrypt.to are covered?",
-    answer: "Skip Wait supports filecrypt.cc, filecrypt.to, and filecrypt.co, bypassing security check flows on all three mirror list hosts.",
+    question: 'Does Skip Wait choose a mirror for me?',
+    answer:
+      'No. It unlocks the list. You still select which host to download from.',
   },
   {
-    question: "Can I see the mirror download list on Filecrypt without the security gate?",
-    answer: "Yes. The mirror list lock screen is bypassed so you choose your download host right away instead of after manual verification.",
+    question: 'What if a captcha widget still appears?',
+    answer:
+      'Complete it once. After the token exists, Skip Wait continues so the mirror list becomes usable.',
   },
   {
-    question: "Is the Filecrypt bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Filecrypt bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the Filecrypt bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -84,10 +75,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

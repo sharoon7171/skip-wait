@@ -10,10 +10,7 @@ export type BypassFaq = {
 
 export type BypassArticle = {
   intro: string;
-  problem?: string;
-  howItWorks: string;
-  steps?: readonly BypassStep[];
-  skips: readonly string[];
+  body: string;
   faq: readonly BypassFaq[];
 };
 

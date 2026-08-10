@@ -1,95 +1,91 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Rinku";
+const name = 'Rinku';
 
-const bypassType = "Skip Short Link";
+const bypassType = 'Skip Short Link';
 
 const description =
-  "Rinku bypass for people tired of please-wait screens: skip the Rinku countdown, clear the waiting page, and move past unlock checks on monetized ad links so the real destination shows up sooner.";
+  'Rinku bypass for people tired of please-wait screens: skip the countdown, clear the waiting page, and move past unlock checks on monetized ad links so the destination shows sooner.';
 
 const domains = ['rinku.me', 'rinku.pro', '7mb.io'] as const;
 
 const keywords = [
-  "rinku bypass",
-  "bypass rinku",
-  "skip rinku",
-  "rinku.me bypass",
-  "rinku.pro bypass",
-  "7mb.io bypass",
-  "fly.inc bypass",
-  "rinku timer bypass",
-  "rinku countdown bypass",
-  "rinku waiting page",
-  "rinku chrome extension",
-  "rinku bypass extension",
-  "skip short link",
-  "short link bypass",
-  "ad link bypass",
-  "monetized link bypass",
-  "link shortener bypass",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "please wait bypass",
-  "skip wait chrome extension",
-  "skip wait extension",
+  'rinku bypass',
+  'bypass rinku',
+  'skip rinku',
+  'rinku.me bypass',
+  'rinku.pro bypass',
+  '7mb.io bypass',
+  'fly.inc bypass',
+  'rinku timer bypass',
+  'rinku countdown bypass',
+  'rinku waiting page',
+  'rinku chrome extension',
+  'rinku bypass extension',
+  'skip short link',
+  'short link bypass',
+  'ad link bypass',
+  'monetized link bypass',
+  'link shortener bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'please wait bypass',
+  'skip wait chrome extension',
+  'skip wait extension',
 ] as const;
 
 const intro =
-  "Searching for a Rinku bypass usually means one thing: you clicked a short link and got parked on a timer instead of the file, video, or page you wanted. Fly.inc-style monetized shorteners lean on that delay—Rinku waiting pages, a countdown you cannot ignore, sometimes a human check, then another unlock hop. Skip Wait is a free Chrome extension built for that exact mess. It does not ask you to paste the URL into another site. You open the Rinku link like normal; when the page matches, the extension runs a rinku timer bypass and short link bypass in place so less of your day disappears into please-wait theater.";
+  'Searching for a Rinku bypass usually means a short link parked you on a timer instead of the file or page you wanted. Skip Wait is the free Chrome extension that runs a rinku timer bypass and short link bypass in place—no paste site—so monetized ad-link waits eat less of your day.';
 
-const problem =
-  "Ad link networks get paid when you linger. Rinku is good at that: the clock runs, the continue button stays locked, a captcha may appear, and leaving the tab can reset progress. Searching “skip rinku” or “rinku countdown bypass” is what people do after the third identical waiting page. The friction is the product—not a bug.";
+const body = `## Ad-gated timers on monetized short URLs
 
-const howItWorks =
-  "Open a Rinku short link and Skip Wait starts the chain from that URL only. It follows the live unlock path across rotating blog hops and exit pages by how those pages behave—not by a fixed host list—posts the same unlock tokens the page already carries, keeps captcha checks in view when required, and opens the destination the shortener releases. Nothing is invented offline.";
+Rinku-style shorteners lean on delay: a countdown holds Continue, a waiting page resets if you leave, a captcha may appear, then another unlock hop. Ad networks get paid when you linger, so the friction is intentional—exactly why people search skip rinku, rinku countdown bypass, please wait bypass, and monetized link bypass after the third identical gate.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Install the Rinku Chrome extension path",
-    body: "Get Skip Wait from the Chrome Web Store. That single install is your rinku bypass extension—no separate app, no signup wall.",
-  },
-  {
-    title: "Click the short link you already have",
-    body: "Use the same Rinku or Fly.inc-style link from Discord, Telegram, or a download page. Skip Wait wakes up on matching pages only.",
-  },
-  {
-    title: "Finish any human check if one shows",
-    body: "If a captcha appears, complete it once. The extension stays on the unlock path so you are not hunting for a hidden continue button afterward.",
-  },
-  {
-    title: "Land on what you came for",
-    body: "When the shortener releases the next hop or final URL, you follow it—without replaying the full please-wait loop by hand.",
-  },
-];
+This is not one interstitial. It is a sequence that only releases the destination after each step cooperates.
 
-const skips = [
-  "Rinku countdown timers that hold the continue button",
-  "Waiting-page delays on monetized short links",
-  "Unlock hops after the timer finally ends",
-  "Captcha follow-ups that sit on top of the gate",
-] as const;
+### Pieces of the unlock tour
+
+- Countdown timers that keep Continue disabled
+- Waiting-page delays on ad-gated short links
+- Unlock hops after the clock ends
+- Captcha follow-ups stacked on the same gate
+
+## Following the live unlock path
+
+Open the short URL you already have and Skip Wait starts from that tab only. It follows the unlock path across rotating blog hops by how those pages behave—not a fixed host list—keeps human checks in view when required, and opens the destination the shortener releases.
+
+Nothing is invented offline. Required waits still finish; client-only busywork does not. That is a full skip short link flow in one rinku chrome extension install.
+
+Paste boxes fail when intermediate blogs rotate. A rinku bypass extension that runs on the pages you opened keeps working as the chain reshuffles—as long as the unlock pattern stays the same.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Is this a paste-a-link rinku.me bypass website?",
+    question: 'What is a Rinku bypass?',
     answer:
-      "No. Skip Wait is a Chrome extension. You never paste the short URL into a third-party bypass page—the rinku chrome extension work happens on the page you already opened.",
+      'It is a way to skip please-wait and countdown gates on Rinku monetized short links. Skip Wait advances the unlock path in Chrome so you spend less time on waiting pages.',
   },
   {
-    question: "Will a rinku timer bypass still need a captcha sometimes?",
+    question: 'Is this a paste-a-link bypass website?',
     answer:
-      "Often yes. Human checks stay with you; what disappears is the busywork around them—watching the clock, hunting continue, restarting after every stall.",
+      'No. Skip Wait is a Chrome extension. You never paste the short URL into a third-party page—the work happens on the page you already opened.',
   },
   {
-    question: "Does skip rinku mean the destination is guessed?",
+    question: 'Will a rinku timer bypass still need a captcha sometimes?',
     answer:
-      "No. Skip Wait drives the real short-link unlock. The final address still comes from the shortener after those steps succeed.",
+      'Often yes. Human checks stay with you; what disappears is watching the clock, hunting Continue, and restarting after every stall.',
   },
   {
-    question: "Is the Skip Wait rinku bypass free?",
+    question: 'Does skip rinku mean the destination is guessed?',
     answer:
-      "Yes. Free Chrome extension, no account, no paid tier required for the supported Rinku short link bypass.",
+      'No. Skip Wait drives the real short-link unlock. The final address still comes from the shortener after those steps succeed.',
+  },
+  {
+    question: 'Is the Rinku bypass free?',
+    answer:
+      'Yes. Free Chrome extension, no account, no paid tier required for the supported short link bypass.',
   },
 ];
 
@@ -101,10 +97,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

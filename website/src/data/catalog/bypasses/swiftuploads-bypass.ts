@@ -1,78 +1,78 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "SwiftUploads";
+const name = 'SwiftUploads';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "SwiftUploads bypass skips free download waits, generating timers, and redirect pages on this file host so your download starts in one click.";
+const description =
+  'SwiftUploads bypass skips free download waits, generating timers, and redirect pages on this file host so your download starts faster with Skip Wait.';
 
-const domains = [
-  "swiftuploads.com",
-] as const;
+const domains = ['swiftuploads.com'] as const;
 
 const keywords = [
-  "swiftuploads bypass",
-  "SwiftUploads bypass extension",
-  "swiftuploads timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'swiftuploads bypass',
+  'SwiftUploads bypass extension',
+  'swiftuploads timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "SwiftUploads bypass skips free download waits, generating timers, and redirect pages on this file host so your download starts in one click. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Looking for a SwiftUploads bypass or download timer skip usually means a free file page stuck you behind generating timers and redirect hops before the real save. Skip Wait is the free Chrome extension that resolves the file URL and opens the download path when the host allows it.';
 
-const problem = "SwiftUploads often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Free users, generating screens, then another hop
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+A SwiftUploads file card rarely starts the save in one click. Free users hit generating timers, intermediary redirect pages, and extra waits on mirror or host buttons before the real CDN path appears. Close a tab early, miss the buried control, or fight overlays and you restart the same download timer skip loop—why swiftuploads timer bypass, direct download bypass, and file host bypass searches spike next to generic skip countdown timer help.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The SwiftUploads bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for SwiftUploads.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on SwiftUploads. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported SwiftUploads delay.",
-  },
-];
+The archive is already on the host. The free path sells dwell time between button and byte.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### Delays after the free download click
+
+- Generating timers before the file URL appears
+- Intermediary redirect pages before the CDN
+- Extra wait screens on mirror and host buttons
+- Manual hunting for the real path under ads
+
+## Resolving the CDN path on the file page
+
+Skip Wait’s SwiftUploads support runs on the file page inside Chrome. When you use the same download control you already click, the extension resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.
+
+Client-only clutter gets out of the way; required host checks still finish honestly. That is a direct download path in one SwiftUploads bypass extension install—not a paste tool that breaks when the next mirror host changes.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What free download waits does Skip Wait skip on swiftuploads.com?",
-    answer: "Skip Wait bypasses free download waits, generating timers, and redirect pages on swiftuploads.com so your download starts in one click.",
+    question: 'What is a SwiftUploads bypass?',
+    answer:
+      'It is a way to skip free download waits and generating timers on SwiftUploads file pages. Skip Wait resolves the real file URL in Chrome and starts the download path with less intermediary sitting.',
   },
   {
-    question: "Can my download start in one click on SwiftUploads with Skip Wait?",
-    answer: "Yes. The extension resolves the real file URL in the background and bypasses intermediary pages that normally appear after the download button.",
+    question: 'Does Skip Wait skip every timer instantly?',
+    answer:
+      'It removes busywork and client-only delays. When the host still requires a real check before the file URL is available, Skip Wait stays until allowed, then continues.',
   },
   {
-    question: "Does Skip Wait bypass generating timers and redirect pages on SwiftUploads?",
-    answer: "Yes. Extra wait screens on mirror and host buttons are also skipped so the file path opens immediately when the host allows it.",
+    question: 'Can my download start in one click?',
+    answer:
+      'Yes when the host allows it. The extension resolves the file URL in the background and bypasses intermediary pages that normally appear after the download button.',
   },
   {
-    question: "Is the SwiftUploads bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The SwiftUploads bypass runs on supported pages with no account or paid plan required.",
+    question: 'Are mirror and host button waits covered?',
+    answer:
+      'Yes on supported free-download flows. Extra wait screens on mirror and host buttons are skipped so the file path opens when the host is ready.',
+  },
+  {
+    question: 'Is the SwiftUploads bypass free?',
+    answer:
+      'Yes. Skip Wait is free. The SwiftUploads path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -84,10 +84,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

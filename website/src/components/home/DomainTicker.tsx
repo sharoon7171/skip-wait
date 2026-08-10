@@ -1,4 +1,4 @@
-import { shuffledDomains } from '@/data/catalog-queries';
+import { shuffledDomains } from '@/data/catalog';
 
 export function DomainTicker(): React.ReactElement {
   const domains = shuffledDomains();

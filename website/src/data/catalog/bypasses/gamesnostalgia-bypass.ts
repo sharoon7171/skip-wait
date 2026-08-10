@@ -1,78 +1,80 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "GamesNostalgia";
+const name = 'GamesNostalgia';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "GamesNostalgia bypass skips the download modal and generates the CDN file link in the background so Download this File opens the archive directly.";
+const description =
+  'GamesNostalgia bypass skips the download modal and generates the CDN file link in the background so Download this File opens the archive directly.';
 
-const domains = [
-  "gamesnostalgia.com",
-] as const;
+const domains = ['gamesnostalgia.com'] as const;
 
 const keywords = [
-  "gamesnostalgia bypass",
-  "GamesNostalgia bypass extension",
-  "gamesnostalgia timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'gamesnostalgia bypass',
+  'gamesnostalgia bypass chrome',
+  'gamesnostalgia bypass extension',
+  'bypass gamesnostalgia',
+  'skip gamesnostalgia',
+  'gamesnostalgia timer bypass',
+  'gamesnostalgia download bypass',
+  'gamesnostalgia waiting page',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'skip wait extension',
+  'retro game download bypass',
+  'cdn download bypass',
 ] as const;
 
-const intro = "GamesNostalgia bypass skips the download modal and generates the CDN file link in the background so Download this File opens the archive directly. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A GamesNostalgia bypass search usually means you clicked Download this File and got stuck in a generating modal instead of the archive. Skip Wait is a free Chrome extension that resolves the CDN link in the background so the same button opens the file without the forced wait.';
 
-const problem = "GamesNostalgia often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Generating modal between Download this File and the archive
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+GamesNostalgia stores classic game archives behind a download modal that generates a CDN URL after you click. That generating timer, intermediary redirect, and extra wait on mirror buttons sit between you and the zip or iso you already chose.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The GamesNostalgia bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for GamesNostalgia.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on GamesNostalgia. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported GamesNostalgia delay.",
-  },
-];
+People look for a GamesNostalgia timer bypass, direct download bypass, and download timer skip because babysitting the modal every time adds nothing to the download itself.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+## CDN resolve behind the same button
+
+Skip Wait’s GamesNostalgia support watches the download click you already make. It resolves the real CDN file URL in the background and skips the modal wait so Download this File opens the archive directly when the host allows it.
+
+Client-only generating chrome gets out of the way. You still use the same download button—no paste tool, no alternate mirror hunt. Retro archives stay one intentional click, not a second scavenger hunt.
+
+## Retro archives without babysitting the modal
+
+Sitting through the modal on every archive wastes time without changing the file. A GamesNostalgia bypass chrome or GamesNostalgia bypass extension install keeps the direct path working on supported pages so classic downloads start from the button you pressed.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What download modal step does Skip Wait skip on GamesNostalgia?",
-    answer: "Skip Wait skips the download modal wait and generates the CDN file link in the background so Download this File opens the archive directly.",
+    question: 'What is a GamesNostalgia bypass?',
+    answer:
+      'A way to skip the download modal wait and open the CDN archive link directly. Skip Wait generates the file URL in the background so Download this File starts without the generating screen.',
   },
   {
-    question: "How does Skip Wait generate the CDN file link for Download this File?",
-    answer: "When you click download on gamesnostalgia.com, the extension resolves the real CDN URL instead of making you wait through the modal generating step.",
+    question: 'Does Skip Wait skip the generating timer instantly?',
+    answer:
+      'It removes the modal busywork and resolves the CDN link when the host allows it—a reliable GamesNostalgia download bypass, not a broken zero-second cheat.',
   },
   {
-    question: "Can I open retro game archives directly from GamesNostalgia?",
-    answer: "Yes. Download generating timers and intermediary redirect pages are bypassed so the archive opens from the button you already clicked.",
+    question: 'Do I still click Download this File myself?',
+    answer:
+      'Yes. Use the same button you always use. Skip Wait handles the wait behind that click.',
   },
   {
-    question: "Is the GamesNostalgia bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The GamesNostalgia bypass runs on supported pages with no account or paid plan required.",
+    question: 'Will this work on mirror and host buttons?',
+    answer:
+      'Yes on supported download paths. Extra wait screens and intermediary redirects before the file are skipped so the archive opens from the button you pressed.',
+  },
+  {
+    question: 'Is the GamesNostalgia bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -84,10 +86,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

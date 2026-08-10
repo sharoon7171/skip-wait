@@ -1,75 +1,78 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Droplink";
+const name = 'Droplink';
 
-const bypassType = "Skip Countdown";
+const bypassType = 'Skip Countdown';
 
-const description = "Droplink bypass skips the download countdown timer and reveals the hidden file link from this AdLinkFly based shortener instantly without delay.";
+const description =
+  'Droplink bypass skips the download countdown timer and reveals the hidden file link from this AdLinkFly based shortener instantly without delay.';
 
-const domains = [
-  "droplink.co",
-] as const;
+const domains = ['droplink.co'] as const;
 
 const keywords = [
-  "droplink bypass",
-  "Droplink bypass extension",
-  "droplink timer bypass",
-  "skip countdown",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "countdown timer bypass",
-  "skip timer unlock",
+  'droplink bypass',
+  'Droplink bypass extension',
+  'droplink timer bypass',
+  'skip countdown',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'countdown timer bypass',
+  'skip timer unlock',
 ] as const;
 
-const intro = "Droplink bypass skips the download countdown timer and reveals the hidden file link from this AdLinkFly based shortener instantly without delay. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Droplink bypass search usually means an AdLinkFly-style short link hid the file behind a download countdown. Skip Wait is the free Chrome extension that clears that unlock timer and reveals the destination without watching Get Link die on the clock.';
 
-const problem = "Droplink puts a countdown timer or unlock delay in front of the continue or get link step. A Droplink bypass removes that wait so the destination opens without watching the clock.";
+const body = `## Get Link that only unlocks after the clock
 
-const howItWorks = "Unlock timers on the supported website no longer block the get link or continue step.";
+Droplink parks a countdown or get-link delay in front of the real file URL. You sit through the timer, hunt Continue under ads, or miss the unlock moment and restart the same Droplink timer bypass hunt. Searches for skip countdown, countdown timer bypass, and skip timer unlock sit next to Droplink bypass extension for that reason.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Droplink bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Droplink.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Droplink link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Droplink delay.",
-  },
-];
+The product is the hold: client chrome that keeps the destination hidden until the shortener says the visit earned a reveal.
 
-const skips = [
-  "Countdown timers on unlock pages",
-  "Get link delay screens",
-] as const;
+### Hidden destinations behind AdLinkFly chrome
+
+Unlike a plain 302 redirect, AdLinkFly-style unlocks expect a live browser context before the file link appears. Closing the tab mid-countdown or pasting the alias into a third-party resolver often returns nothing useful—the session never finished.
+
+## Revealing the file from the live unlock tab
+
+Skip Wait runs on the supported unlock page. It advances the get-link path the shortener already expects, clears client-only countdown theater, and opens the file when unlock is ready. You keep using the same shared URL—no paste box.
+
+Required server waits still finish honestly so the session does not die with a fake zero-second cheat. That is a Droplink bypass that stays stable when the UI still enforces a short hold.
+
+## Session cookies beat unshorten paste forms
+
+AdLinkFly unlocks lean on cookies and a real tab. A skip wait extension install stays on the page you opened, which is why link shortener bypass inside Chrome beats one-shot paste tools for this host.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What hidden file link does Skip Wait reveal on droplink.co?",
-    answer: "Skip Wait skips the download countdown timer on this AdLinkFly shortener and reveals the hidden file link instantly instead of after a timed wait.",
+    question: 'What is a Droplink bypass?',
+    answer:
+      'A way to skip the download countdown and reveal the hidden file URL. Skip Wait runs in Chrome so you spend less time on get-link delay screens.',
   },
   {
-    question: "Does Skip Wait skip the download countdown on this AdLinkFly shortener?",
-    answer: "Yes. Unlock countdown timers and get link delay screens on droplink.co are bypassed so the file link appears right away.",
+    question: 'Does the countdown vanish instantly every time?',
+    answer:
+      'Client-only timer busywork goes away. If the shortener still enforces a real wait, Skip Wait stays on that step until unlock is allowed.',
   },
   {
-    question: "How quickly can I get past the Droplink get link timer?",
-    answer: "As soon as the Droplink page loads, Skip Wait automates the countdown bypass and continues the flow to your download link.",
+    question: 'Do I click Get Link myself?',
+    answer:
+      'On supported pages, no. Skip Wait advances the unlock path once the shortener allows it.',
   },
   {
-    question: "Is the Droplink bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Droplink bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this the same as pasting into an unshorten site?',
+    answer:
+      'Usually not. Unlock often needs a live browser session. Skip Wait runs on the real page.',
+  },
+  {
+    question: 'Is it free?',
+    answer:
+      'Yes. Skip Wait is free. The Droplink path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -81,10 +84,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

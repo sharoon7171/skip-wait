@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
 import { SupportedSitesPage } from '@/components/sites/SupportedSitesPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { bypasses } from '@/data/catalog';
-import { totalBypasses, totalDomains } from '@/data/catalog-queries';
+import { bypasses, bypassSlug, totalBypasses, totalDomains } from '@/data/catalog';
 import { SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots } from '@/data/seo';
-import { bypassSlug } from '@/lib/catalog-slug';
 import { bypassSitePath, routes } from '@/lib/routes';
 
 const title = 'Supported Sites — Link Shortener & Countdown Bypasses';

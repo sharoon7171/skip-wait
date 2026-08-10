@@ -1,77 +1,85 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "KotakAnimeID";
+const name = 'KotakAnimeID';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "KotakAnimeID bypass skips the out page countdown wait and shows anime episode download links by 1080p, 720p, and other resolutions instantly.";
+const description =
+  'KotakAnimeID bypass that clears the out-page countdown so episode download links by resolution appear without sitting through the please-wait gate.';
 
-const domains = [
-  "kotakanimeid.link",
-] as const;
+const domains = ['kotakanimeid.link'] as const;
 
 const keywords = [
-  "kotakanimeid bypass",
-  "KotakAnimeID bypass extension",
-  "kotakanimeid timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'kotakanimeid bypass',
+  'kotakanimeid bypass chrome',
+  'kotakanimeid bypass extension',
+  'bypass kotakanimeid',
+  'skip kotakanimeid',
+  'kotakanimeid timer bypass',
+  'kotakanimeid out page',
+  'anime download bypass',
+  'skip waiting page',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip wait extension',
 ] as const;
 
-const intro = "KotakAnimeID bypass skips the out page countdown wait and shows anime episode download links by 1080p, 720p, and other resolutions instantly. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Looking for a KotakAnimeID bypass or kotakanimeid out page skip usually means an episode share parked you on a countdown before any 1080p or 720p link appears. Skip Wait is the free Chrome extension that clears that waiting gate so resolution links show without babysitting Continue.';
 
-const problem = "KotakAnimeID places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Out pages that hide episode mirrors behind a clock
 
-const howItWorks = "Skip Wait detects the gate screen, bypasses the please wait step when possible, and redirects you to the destination link without asking you to click continue repeatedly.";
+KotakAnimeID download flows often insert an out-page wait between the episode post and the host list. You sit through a please-wait or continue loop, then finally see links sorted by resolution. Refresh mid-wait and the gate restarts.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The KotakAnimeID bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for KotakAnimeID.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a KotakAnimeID link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported KotakAnimeID delay.",
-  },
-];
+That is why anime download bypass and skip waiting page searches pair with kotakanimeid timer bypass—the mirrors are ready; the out page is the choke point.
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+### What blocks the resolution list
+
+- Out-page countdowns before any host appears
+- Please wait and click-to-continue screens
+- Gate pages that hold 1080p / 720p links behind UI
+- Manual continue loops under ads
+
+## Revealing the episode links on the live gate
+
+Skip Wait detects the out-page pattern, bypasses the filler wait when the destination links are already present, and surfaces the resolution list without asking you to click continue repeatedly.
+
+You open the episode hop the same way as always—no paste tool. Client-only delay chrome gets out of the way so 1080p, 720p, and other mirrors become usable once the page holds them.
+
+## Episode posts vs inventing a new download site
+
+Userscripts that hardcode one out-page host break when the gate rotates. A KotakAnimeID bypass extension that follows live waiting-page behavior keeps the same episode flow working on supported pages without relearning Continue each season.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What out-page countdown does Skip Wait skip on KotakAnimeID?",
-    answer: "Skip Wait bypasses the out page countdown wait on kotakanimeid.link and reveals anime episode download links without the timed gate.",
+    question: 'What does a KotakAnimeID bypass skip?',
+    answer:
+      'The out-page countdown and continue gate so episode download links by resolution appear without the filler wait.',
   },
   {
-    question: "Does Skip Wait reveal anime episode links by 1080p and 720p resolution?",
-    answer: "Yes. After bypassing the waiting page, episode download links organized by 1080p, 720p, and other resolutions become available immediately.",
+    question: 'Do 1080p and 720p links show after the bypass?',
+    answer:
+      'Yes when the page already holds them. Skip Wait clears the waiting UI so those resolution mirrors become usable.',
   },
   {
-    question: "How does Skip Wait help reach download links on kotakanimeid.link?",
-    answer: "The extension detects the gate screen and redirects you past please wait and continue screens to the destination link automatically.",
+    question: 'Do I still click Continue myself?',
+    answer:
+      'On supported out pages, no. Skip Wait advances past please wait and continue screens.',
   },
   {
-    question: "Is the KotakAnimeID bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The KotakAnimeID bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is every timer removed instantly?',
+    answer:
+      'Filler wait chrome goes away when the links are present. Required holds still finish before mirrors unlock if the page enforces them.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The KotakAnimeID path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -83,10 +91,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,96 +1,86 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "ShrtFly";
+const name = 'ShrtFly';
 
-const bypassType = "Skip Short Link";
+const bypassType = 'Skip Short Link';
 
 const description =
-  "Free ShrtFly bypass for Chrome that skips ad-gated short-link timers, human checks, and publisher waits so you reach the destination faster.";
+  'Free ShrtFly bypass for Chrome that skips ad-gated short-link timers, human checks, and publisher waits so you reach the destination faster.';
 
 const domains = [
-  "shrtslug.biz",
-  "shrtfly.com",
-  "technons.com",
-  "tournguide.com",
-  "dailyjobposting.xyz",
-  "financefernly.com",
+  'shrtslug.biz',
+  'shrtfly.com',
+  'technons.com',
+  'cloudnguide.com',
+  'dailyjobposting.xyz',
+  'financefernly.com',
 ] as const;
 
 const keywords = [
-  "shrtfly bypass",
-  "shrtfly bypass extension",
-  "bypass shrtfly",
-  "shrtslug bypass",
-  "shrtslug.biz bypass",
-  "skip short link",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "turnstile short link",
-  "ad link shortener bypass",
-  "link shortener bypass",
-  "skip wait extension",
+  'shrtfly bypass',
+  'shrtfly bypass extension',
+  'bypass shrtfly',
+  'shrtslug bypass',
+  'shrtslug.biz bypass',
+  'skip short link',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'turnstile short link',
+  'ad link shortener bypass',
+  'link shortener bypass',
+  'skip wait extension',
 ] as const;
 
 const intro =
-  "Add Skip Wait from the Chrome Web Store and ShrtFly network short links unlock automatically—no paste tool, userscript, or account required.";
+  'People searching for a ShrtFly bypass or shrtslug bypass usually cleared a verify hop only to land on publisher pages with Turnstile, progress bars, and another countdown. Skip Wait is the free Chrome extension that runs that ad link shortener bypass on the live chain so skip waiting page busywork is not your job.';
 
-const problem =
-  "Ad-gated ShrtFly shorteners force a verify step, then rotate you through publisher pages with Turnstile, progress bars, and countdowns before the real URL loads.";
+const body = `## Verify hops into rotating publisher pages
 
-const howItWorks =
-  "Skip Wait shows an unlock overlay, submits the entry verify hop, pins Turnstile on mediator pages when needed, respects only server-enforced unlock timers, follows speed-token redirects, and opens the final link.";
+Ad-gated ShrtFly shorteners force a verify step, then bounce you through publisher articles that pin Turnstile, show progress bars, and hold Continue until a client timer finishes. Only after that tour does a speed-token redirect open the real URL—why turnstile short link and bypass shrtfly queries spike next to generic skip countdown timer searches.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install from the Chrome Web Store. ShrtFly network support enables itself on matching pages.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on. There is nothing to configure for supported short links or mediator hops.",
-  },
-  {
-    title: "Open the short link as usual",
-    body: "Click the monetized URL the same way you always do. The overlay takes over the unlock flow.",
-  },
-  {
-    title: "Solve Turnstile only if shown",
-    body: "When a publisher hop requires a human check, complete the pinned Turnstile once. Unlock continues afterward.",
-  },
-  {
-    title: "Arrive at the destination",
-    body: "After verify and unlock finish, Skip Wait redirects you to the real URL instead of more continue screens.",
-  },
-];
+Entry slug hosts and publisher mediators are one network. Closing a publisher tab early usually voids the unlock session.
 
-const skips = [
-  "Forced human-verification continue clicks",
-  "Publisher interstitial continue loops",
-  "Progress bar and countdown unlock screens",
-  "Manual next-hop form submissions",
-] as const;
+### Screens that dominate the free path
+
+- Forced verify / human-check continue clicks
+- Publisher interstitial continue loops
+- Progress-bar and countdown unlock screens
+- Manual next-hop form submissions after Turnstile
+
+## Overlay, Turnstile, then the final redirect
+
+Skip Wait shows an unlock overlay on matching short links, submits the entry verify hop the page already expects, pins Turnstile on mediator pages when a human check is required, respects only server-enforced unlock timers, follows speed-token redirects, and opens the final link.
+
+You still complete Turnstile once when shown. What disappears is hunting Continue through ads and replaying progress bars by hand. That is a shrtfly bypass extension install that tracks behavior—not last week’s publisher hostname.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What is a ShrtFly bypass?",
+    question: 'What is a ShrtFly bypass?',
     answer:
-      "It is a way to skip the ad-gated waits on ShrtFly short links. Skip Wait runs in Chrome and automates the unlock chain so you spend less time on verify and timer pages.",
+      'It is a way to skip ad-gated waits on ShrtFly short links. Skip Wait automates the unlock chain in Chrome so you spend less time on verify and timer pages.',
   },
   {
-    question: "Does this cover Shrtslug links too?",
+    question: 'Does this cover Shrtslug entry links too?',
     answer:
-      "Yes. Entry links on shrtslug.biz use the ShrtFly unlock network. The same bypass handles that entry hop and the publisher mediator pages that follow.",
+      'Yes. Entry slug hosts use the same unlock network. The bypass handles that hop and the publisher mediator pages that follow.',
   },
   {
-    question: "Do I still need to complete Turnstile?",
+    question: 'Do I still need to complete Turnstile?',
     answer:
-      "Only when a mediator page requires it. Skip Wait pins the widget on the overlay; after you finish the check, the flow continues without more clicks.",
+      'Only when a mediator page requires it. Skip Wait pins the widget; after you finish the check, the flow continues without more Continue hunting.',
   },
   {
-    question: "Is the ShrtFly bypass free?",
+    question: 'Are progress bars skipped instantly?',
     answer:
-      "Yes. Skip Wait is a free Chrome extension with no signup and no paid plan for ShrtFly network unlocks.",
+      'Client busywork and continue loops go away. Timers the network still enforces server-side are waited honestly before redirect.',
+  },
+  {
+    question: 'Is the ShrtFly bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no signup and no paid plan for supported network unlocks.',
   },
 ];
 
@@ -102,10 +92,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

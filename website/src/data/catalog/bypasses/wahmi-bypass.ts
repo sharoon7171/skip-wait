@@ -1,75 +1,79 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Wahmi";
+const name = 'Wahmi';
 
-const bypassType = "Skip Countdown";
+const bypassType = 'Skip Countdown';
 
-const description = "Wahmi bypass skips the file download countdown timer and shows your direct download link immediately on this free file host without waiting.";
+const description =
+  'Wahmi bypass that clears the file download countdown and get-link delay so the direct download link appears without watching the unlock timer on this free file host.';
 
-const domains = [
-  "wahmi.org",
-] as const;
+const domains = ['wahmi.org'] as const;
 
 const keywords = [
-  "wahmi bypass",
-  "Wahmi bypass extension",
-  "wahmi timer bypass",
-  "skip countdown",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "countdown timer bypass",
-  "skip timer unlock",
+  'wahmi bypass',
+  'wahmi bypass extension',
+  'wahmi timer bypass',
+  'wahmi download',
+  'wahmi get link',
+  'skip countdown',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'countdown timer bypass',
+  'skip timer unlock',
+  'file host bypass',
 ] as const;
 
-const intro = "Wahmi bypass skips the file download countdown timer and shows your direct download link immediately on this free file host without waiting. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Wahmi bypass or wahmi timer bypass search usually means a free file page forced a download countdown before Get Link. Skip Wait is the free Chrome extension that clears that unlock delay so skip countdown is not watching the clock on every archive.';
 
-const problem = "Wahmi puts a countdown timer or unlock delay in front of the continue or get link step. A Wahmi bypass removes that wait so the destination opens without watching the clock.";
+const body = `## Countdown before the download link
 
-const howItWorks = "Unlock timers on the supported website no longer block the get link or continue step.";
+Wahmi free saves put a timer or unlock delay in front of Continue / Get Link. You open the file page, wait for the clock, then finally see the direct download link—classic skip timer unlock friction on a small file host.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Wahmi bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Wahmi.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Wahmi link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Wahmi delay.",
-  },
-];
+Miss the moment the button enables, refresh too early, or fight overlays and you restart the same countdown timer bypass loop.
 
-const skips = [
-  "Countdown timers on unlock pages",
-  "Get link delay screens",
-] as const;
+### Delays that block the save
+
+- Countdown timers on unlock pages
+- Get Link delay screens after the clock
+- Disabled continue chrome until the timer ends
+- Restarting the page when the tab sleeps
+
+## Showing the direct link when unlock allows it
+
+Skip Wait runs on the file page inside Chrome. It continues the flow when the site allows it, skipping the timer chrome that normally blocks the download link, and surfaces the direct URL without a paste tool.
+
+Client busywork disappears; required unlock still finishes honestly.
+
+## Timer skins that change between uploads
+
+Hardcoded “click after N seconds” scripts break when the next unlock skin appears. A Wahmi bypass extension keyed to countdown release stays useful without relearning each wait page.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What file download countdown does Skip Wait skip on wahmi.org?",
-    answer: "Skip Wait bypasses the file download countdown timer on wahmi.org and shows your direct download link immediately.",
+    question: 'What download countdown does Skip Wait skip on Wahmi?',
+    answer:
+      'The file download countdown and get-link delay on supported free saves. Skip Wait continues when unlock is allowed so you are not watching the clock.',
   },
   {
-    question: "Does Skip Wait show my direct download link immediately on Wahmi?",
-    answer: "Yes. get link delay screens and unlock countdown timers are bypassed on this free file host.",
+    question: 'Does the direct download link appear immediately?',
+    answer:
+      'As soon as the host allows unlock, yes. Timer UI and get-link delay screens are cleared so the link is usable without a manual wait tour.',
   },
   {
-    question: "How does Skip Wait help with free file host downloads on Wahmi?",
-    answer: "The extension continues the flow automatically when the site allows it, skipping the timer that normally blocks the download link.",
+    question: 'Is every second removed instantly?',
+    answer:
+      'Client-only countdown chrome goes away. When the host still needs a real hold, Skip Wait stays until unlock is allowed, then continues.',
   },
   {
-    question: "Is the Wahmi bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Wahmi bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the Wahmi bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
   },
 ];
 
@@ -81,10 +85,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,8 +1,8 @@
-import { sampleBypasses, totalBypasses, totalDomains } from '@/data/catalog-queries';
+import { sampleBypasses, totalBypasses, totalDomains } from '@/data/catalog';
 import { routes } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
 import { BypassRow } from '@/components/sites/BypassRow';
-import { IconArrowRight } from '@/components/ui/Icons';
+import { IconArrowRight } from '@/components/ui/icons';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
 
@@ -16,7 +16,7 @@ export function ShowcaseSection(): React.ReactElement {
       <Shell>
         <SectionHeader
           title="Link Shortener Bypasses and Wait Automations"
-          description={`${totalBypasses()} sites across ${totalDomains()} websites—Linkvertise, GPLinks, Ouo, file hosts, and more. Bypass the timer when possible, or finish the wait for you. Full list on Supported Sites.`}
+          description={`${totalBypasses()} bypasses across ${totalDomains()} websites—Linkvertise, GPLinks, Ouo, file hosts, and more. Bypass the timer when possible, or finish the wait for you. Full list on Supported Sites.`}
         />
 
         <div className="mt-8 overflow-hidden rounded-panel bg-surface-canvas shadow-sm ring-1 ring-neutral-200">
@@ -38,7 +38,7 @@ export function ShowcaseSection(): React.ReactElement {
             href={routes.sites}
             className="flex items-center justify-between gap-4 border-t border-neutral-200 px-6 py-5 text-ui text-primary-700 no-underline transition-colors hover:bg-primary-50/60 sm:px-8"
           >
-            View All {totalBypasses()} Sites Across {totalDomains()} Websites
+            View All {totalBypasses()} Bypasses Across {totalDomains()} Websites
             <IconArrowRight className="size-4 shrink-0" />
           </AppLink>
         </div>

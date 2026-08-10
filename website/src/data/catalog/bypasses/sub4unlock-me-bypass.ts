@@ -1,85 +1,84 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Sub4Unlock.me";
+const name = 'Sub4Unlock.me';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "Sub4Unlock.me bypass skips the full social locker—YouTube subscribe, like, and comment; WhatsApp, Telegram, and Discord join; TikTok, Instagram, Facebook, and Twitter follow or like; custom links; password; and continue steps—plus the AdLinkFly countdown for instant redirect to your destination.";
+const description =
+  'Sub4Unlock.me bypass clears WhatsApp, Telegram, Discord, TikTok, Instagram, Facebook, Twitter, YouTube, custom link, password, and continue steps—plus the unlock countdown—so you reach the destination faster.';
 
-const domains = [
-  "sub4unlock.me",
-  "sub2unlock.me",
-] as const;
+const domains = ['sub4unlock.me', 'sub2unlock.me'] as const;
 
 const keywords = [
-  "sub4unlock.me bypass",
-  "Sub4Unlock.me bypass extension",
-  "sub4unlock me bypass",
-  "sub4unlock.me timer bypass",
-  "sub4unlock.me social unlock",
-  "sub2unlock.me bypass",
-  "Sub2Unlock.me bypass extension",
-  "sub2unlock me bypass",
-  "sub4unlock whatsapp telegram tiktok discord",
-  "sub4unlock instagram facebook twitter",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'sub4unlock.me bypass',
+  'Sub4Unlock.me bypass extension',
+  'sub4unlock me bypass',
+  'sub4unlock.me timer bypass',
+  'sub4unlock.me social unlock',
+  'sub2unlock.me bypass',
+  'Sub2Unlock.me bypass extension',
+  'sub2unlock me bypass',
+  'sub4unlock whatsapp telegram tiktok discord',
+  'sub4unlock instagram facebook twitter',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
 ] as const;
 
-const intro = "Sub4Unlock.me bypass skips the full social locker—YouTube subscribe, like, and comment; WhatsApp, Telegram, and Discord join; TikTok, Instagram, Facebook, and Twitter follow or like; custom links; password; and continue steps—plus the AdLinkFly countdown for instant redirect to your destination. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Searching for a Sub4Unlock.me bypass or Sub2Unlock.me bypass usually means a locker mixed WhatsApp, Telegram, Discord, and TikTok joins with Instagram/Facebook/Twitter follows, YouTube steps, custom links, a password, and an AdLinkFly-style countdown. Skip Wait is the free Chrome extension that completes the supported unlock path so please wait bypass busywork is not every chat app at once.';
 
-const problem = "Sub4Unlock.me stacks a social locker and an AdLinkFly gate before the real URL. Creators can require YouTube subscribe, like, or comment; WhatsApp, Telegram, or Discord joins; TikTok, Instagram, Facebook, or Twitter follow or like; custom links; continue hops; and a password.";
+const body = `## Chat apps and TikTok before the go-link countdown
 
-const howItWorks = "Me unlock link. When the locker or go-link form is present, Skip Wait completes the server unlock path and redirects to the destination without finishing each locker action by hand.";
+A .me Sub4Unlock share rarely opens in one step. Creators can require WhatsApp, Telegram, or Discord joins; TikTok follow or like; Instagram, Facebook, or Twitter actions; YouTube subscribe/like/comment; custom link visits; continue hops; and a password—then an AdLinkFly-style countdown still sits in front of the URL. Miss one messenger join or fight overlays on every gate and you restart the locker from scratch—why Sub4Unlock.me timer bypass and sub4unlock whatsapp telegram tiktok discord searches feel heavier than a single Unlock Link button.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Sub4Unlock.me bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Sub4Unlock.me.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Sub4Unlock.me link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Sub4Unlock.me delay.",
-  },
-];
+The go-link form already knows the destination. The product is the cross-app locker plus countdown.
 
-const skips = [
-  "YouTube subscribe, like, comment, and like+comment",
-  "WhatsApp, Telegram, and Discord join",
-  "TikTok, Instagram, Facebook, and Twitter follow or like",
-  "Custom link, continue steps, password gate, AdLinkFly countdown",
-] as const;
+### Locker pieces that show up together on .me
+
+- WhatsApp, Telegram, and Discord join requirements
+- TikTok follow or like gates next to Instagram/Facebook/Twitter
+- YouTube subscribe, like, and comment locks
+- Custom links, continue steps, password, and unlock countdowns
+
+## Completing the server unlock path on the go page
+
+Skip Wait’s Sub4Unlock.me support runs on the unlock page inside Chrome. When the locker or go-link form is present, it completes the server unlock path the page already expects, then redirects to the destination without finishing each social action manually.
+
+Client-only busywork gets out of the way; required checks still finish honestly. That is a full skip waiting page path for the .me host family (including Sub2Unlock on the same pattern)—not a ten-slot password checklist on other Sub4Unlock product hosts.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which locker actions does Skip Wait cover on Sub4Unlock.me?",
-    answer: "YouTube subscribe, like, and comment; WhatsApp, Telegram, and Discord join; TikTok, Instagram, Facebook, and Twitter follow or like; custom links; continue steps; password; and the AdLinkFly countdown on sub4unlock.me and sub2unlock.me.",
+    question: 'What is a Sub4Unlock.me bypass?',
+    answer:
+      'It is a way to skip the cross-app social locker and unlock countdown on Sub4Unlock.me-style shares. Skip Wait completes the supported unlock path in Chrome and opens the destination.',
   },
   {
-    question: "What does Skip Wait bypass on Sub4Unlock.me?",
-    answer: "The full social locker and the AdLinkFly unlock countdown on sub4unlock.me and sub2unlock.me for instant redirect to your link.",
+    question: 'Which locker actions does Skip Wait cover?',
+    answer:
+      'WhatsApp, Telegram, and Discord joins; TikTok, Instagram, Facebook, and Twitter follow or like; YouTube subscribe, like, and comment; custom links; continue steps; password; and the AdLinkFly-style unlock countdown on supported .me pages.',
   },
   {
-    question: "Which domains does this Sub4Unlock.me bypass cover?",
-    answer: "This entry covers sub4unlock.me and sub2unlock.me. Separate catalog pages cover sub4unlock.com, sub4unlock.pro, and sub4unlock.io.",
+    question: 'Does Skip Wait skip every social task instantly?',
+    answer:
+      'It removes busywork and client-only delays. When a step still requires a real unlock before redirect, Skip Wait stays until allowed, then continues—so the timer bypass stays reliable.',
   },
   {
-    question: "Is the Sub4Unlock.me bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Sub4Unlock.me bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is Sub2Unlock on .me covered here?',
+    answer:
+      'Yes. This catalog entry covers both Sub4Unlock and Sub2Unlock on the .me hosts that share this locker pattern.',
+  },
+  {
+    question: 'Is the Sub4Unlock.me bypass free?',
+    answer:
+      'Yes. Skip Wait is free. The .me unlock path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -91,10 +90,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

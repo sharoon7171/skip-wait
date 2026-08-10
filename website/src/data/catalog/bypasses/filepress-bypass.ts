@@ -1,78 +1,70 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "FilePress";
+const name = 'FilePress';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "FilePress bypass skips the download page generating timer and opens direct or instant download links when you click the download button on the page.";
+const description =
+  'FilePress bypass skips the download page generating timer and opens direct or instant download links when you click the download button on the page.';
 
-const domains = [
-  "filepress.baby",
-] as const;
+const domains = ['filepress.baby'] as const;
 
 const keywords = [
-  "filepress bypass",
-  "FilePress bypass extension",
-  "filepress timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'filepress bypass',
+  'FilePress bypass extension',
+  'filepress timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "FilePress bypass skips the download page generating timer and opens direct or instant download links when you click the download button on the page. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A FilePress bypass search usually means Instant or Direct download still forced a generating timer before the file URL appeared. Skip Wait is the free Chrome extension that resolves that link in the background so the download button opens the archive without the wait page.';
 
-const problem = "FilePress often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Instant download that still generates first
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+FilePress labels controls as direct or instant, then parks a generating timer or intermediary redirect between the click and the real file. You press download, watch the clock, and hope the CDN path appears before you refresh and lose progress.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The FilePress bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for FilePress.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on FilePress. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported FilePress delay.",
-  },
-];
+That mismatch—instant branding, timed unlock—is why filepress timer bypass, direct download bypass, and download timer skip cluster around FilePress bypass extension installs.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+## Background resolve on the download click
+
+Skip Wait watches the download button on supported pages. It resolves the real file URL in the background and bypasses the timer or redirect page that normally follows the click. You keep using the host you already opened; nothing asks for a paste form.
+
+Client generating chrome gets out of the way when the host allows the link. Required holds still finish honestly so the fetch stays stable.
+
+## Host buttons that add another wait screen
+
+Mirror and host-style buttons often stack a second wait after the first. On supported paths Skip Wait skips those extra screens so your click opens the file link instead of another timer page. A skip wait extension keeps that file host bypass path in one install.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What generating timer does Skip Wait skip on filepress.baby?",
-    answer: "Skip Wait bypasses the download page generating timer on filepress.baby and opens direct or instant download links when you click the download button.",
+    question: 'What generating timer does Skip Wait skip?',
+    answer:
+      'The download-page generating timer and intermediary redirects after you click download. The extension opens the direct or instant link when the host allows it.',
   },
   {
-    question: "Can Skip Wait open instant download links from FilePress buttons?",
-    answer: "Yes. The extension resolves the real file URL in the background and bypasses intermediary redirect pages before the file.",
+    question: 'Do I still click the download button myself?',
+    answer:
+      'Yes. Use the same button. Skip Wait resolves the real file URL in the background.',
   },
   {
-    question: "How does Skip Wait handle extra waits on FilePress mirror buttons?",
-    answer: "Extra wait screens on mirror and host buttons are skipped so your click opens the file link instead of another timer page.",
+    question: 'Are mirror button waits covered?',
+    answer:
+      'Yes on supported paths. Extra wait screens on mirror and host buttons are skipped so the file opens from the click.',
   },
   {
-    question: "Is the FilePress bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The FilePress bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the FilePress bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -84,10 +76,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

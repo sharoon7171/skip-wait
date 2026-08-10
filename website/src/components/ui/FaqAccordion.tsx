@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
+import { IconChevronRight } from '@/components/ui/icons';
 
 type FaqAccordionItem = {
   question: string;
@@ -9,54 +10,54 @@ type FaqAccordionItem = {
 
 type FaqAccordionProps = {
   items: readonly FaqAccordionItem[];
-  questionClassName?: string;
 };
 
-export function FaqAccordion({
-  items,
-  questionClassName = 'font-display text-title text-ink',
-}: FaqAccordionProps): React.ReactElement {
+export function FaqAccordion({ items }: FaqAccordionProps): React.ReactElement {
   const baseId = useId();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <ul className="m-0 flex list-none flex-col gap-3 p-0">
+    <ul className="m-0 flex list-none flex-col gap-2 p-0">
       {items.map((item, index) => {
         const open = openIndex === index;
         const panelId = `${baseId}-panel-${index}`;
         const buttonId = `${baseId}-button-${index}`;
 
         return (
-          <li key={item.question}>
-            <div
-              className={`rounded-panel bg-surface-muted shadow-sm ring-1 ${
-                open ? 'ring-primary-200' : 'ring-neutral-200'
+          <li key={item.question} className="overflow-hidden rounded-card">
+            <button
+              type="button"
+              id={buttonId}
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() => setOpenIndex(open ? null : index)}
+              className={`flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left outline-none transition-colors sm:px-6 sm:py-5 ${
+                open
+                  ? 'bg-neutral-200'
+                  : 'bg-neutral-100 hover:bg-neutral-200/70'
               }`}
             >
-              <button
-                type="button"
-                id={buttonId}
-                aria-expanded={open}
-                aria-controls={panelId}
-                onClick={() => setOpenIndex(open ? null : index)}
-                className="flex w-full cursor-pointer items-start justify-between gap-4 px-5 py-4 text-left sm:px-6 sm:py-5"
+              <span className="min-w-0 flex-1 font-display text-body font-semibold text-ink sm:text-title">
+                {item.question}
+              </span>
+              <IconChevronRight
+                className={`size-5 shrink-0 transition-transform ${
+                  open ? 'rotate-90 text-ink' : 'text-neutral-400'
+                }`}
+              />
+            </button>
+            {open ? (
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={buttonId}
+                className="bg-white px-5 py-4 ring-1 ring-neutral-200 ring-inset sm:px-6 sm:py-5"
               >
-                <span className={questionClassName}>{item.question}</span>
-                <span
-                  aria-hidden
-                  className={`mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-primary-100 text-caption font-bold text-primary-700 transition-transform ${
-                    open ? 'rotate-45' : ''
-                  }`}
-                >
-                  +
-                </span>
-              </button>
-              {open ? (
-                <div id={panelId} role="region" aria-labelledby={buttonId} className="px-5 pb-4 sm:px-6 sm:pb-5">
-                  <p className="m-0 max-w-prose text-body-sm text-ink-body">{item.answer}</p>
-                </div>
-              ) : null}
-            </div>
+                <p className="m-0 max-w-prose text-body-sm leading-relaxed text-ink">
+                  {item.answer}
+                </p>
+              </div>
+            ) : null}
           </li>
         );
       })}

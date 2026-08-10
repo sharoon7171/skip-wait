@@ -1,77 +1,72 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "MultiUp";
+const name = 'MultiUp';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "MultiUp bypass skips the download waiting page and opens the mirror download list automatically on this multi host file aggregator instantly.";
+const description =
+  'MultiUp bypass for download waiting pages on this multi-host aggregator: Skip Wait opens the mirror list so you pick a host without sitting through please-wait continue loops.';
 
-const domains = [
-  "multiup.io",
-] as const;
+const domains = ['multiup.io'] as const;
 
 const keywords = [
-  "multiup bypass",
-  "MultiUp bypass extension",
-  "multiup timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'multiup bypass',
+  'MultiUp bypass extension',
+  'multiup timer bypass',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
 ] as const;
 
-const intro = "MultiUp bypass skips the download waiting page and opens the mirror download list automatically on this multi host file aggregator instantly. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A MultiUp bypass or waiting page bypass search usually means the aggregator parked you on please-wait before any mirror host appeared. Skip Wait is the free Chrome extension that skips that download waiting page and surfaces the mirror list.';
 
-const problem = "MultiUp places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## Aggregator waits before the mirror grid
 
-const howItWorks = "When the waiting page loads, Skip Wait runs in the background, skips the delay layer, and sends you straight to the target URL supported for MultiUp.";
+MultiUp exists to show many host buttons for one file. The useful screen is that mirror download list—but a waiting page or continue gate often sits in front of it. You open the share, click through please-wait, then finally choose Rapidgator, Mega, or whichever mirror is alive. Leave mid-gate and you restart—fuel for multiup timer bypass, please wait bypass, and skip click to continue queries.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The MultiUp bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for MultiUp.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a MultiUp link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported MultiUp delay.",
-  },
-];
+### Waiting page vs choosing a host
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+Skip Wait’s job on MultiUp is the gate before the list, not picking a CDN for you. Once mirrors appear, you still choose the host. The extension only removes the interstitial babysitting that delayed the grid.
+
+## Opening the mirror list automatically
+
+When a supported waiting page loads, Skip Wait runs in the background inside Chrome, clears the delay layer the page uses to stall free visitors, and advances to the mirror download list. No paste decoder; the aggregator already knows the hosts.
+
+That is skip waiting page for a multi-host file aggregator in one MultiUp bypass extension install—less continue hunting, same mirror choices afterward.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What download waiting page does Skip Wait skip on multiup.io?",
-    answer: "Skip Wait bypasses the download waiting page on multiup.io and opens the mirror download list automatically on this multi-host aggregator.",
+    question: 'What waiting page does MultiUp bypass clear?',
+    answer:
+      'The download please-wait or continue gate before the mirror list. Skip Wait advances to host buttons without the usual interstitial loop.',
   },
   {
-    question: "Does Skip Wait open the mirror download list automatically?",
-    answer: "Yes. Instead of sitting on a please wait gate, the extension sends you straight to the mirror list where you pick your file host.",
+    question: 'Does the extension open the mirror list automatically?',
+    answer:
+      'Yes on supported flows. Instead of sitting on a gate, you reach the grid where you pick a file host.',
   },
   {
-    question: "How does Skip Wait help with this multi-host file aggregator?",
-    answer: "Gate pages and manual continue button loops before the mirror list are bypassed so you reach download options without repeated clicks.",
+    question: 'Does Skip Wait choose a mirror for me?',
+    answer:
+      'No. It unlocks the list. You still click the host you want.',
   },
   {
-    question: "Is the MultiUp bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The MultiUp bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is every delay removed instantly?',
+    answer:
+      'Client waiting-page busywork goes away. Required holds still finish—so the multiup timer bypass stays reliable.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free with no paid plan for supported pages.',
   },
 ];
 
@@ -83,10 +78,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

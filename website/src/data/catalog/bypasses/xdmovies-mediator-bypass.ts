@@ -1,77 +1,75 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "XDMovies Mediator";
+const name = 'XDMovies Mediator';
 
-const bypassType = "Skip Waiting Page";
+const bypassType = 'Skip Waiting Page';
 
-const description = "XDMovies bypass skips the extra waiting page and verification steps in the download mediator chain to open your file link faster and automatically.";
+const description =
+  'XDMovies mediator bypass for the extra please-wait hop in the download chain so file links open without hunting Continue under ads.';
 
-const domains = [
-  "latestnewsonline.sbs",
-] as const;
+const domains = ['latestnewsonline.sbs'] as const;
 
 const keywords = [
-  "xdmovies mediator bypass",
-  "XDMovies Mediator bypass extension",
-  "xdmovies mediator timer bypass",
-  "skip waiting page",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "link shortener bypass",
-  "skip wait extension",
-  "please wait bypass",
-  "waiting page bypass",
-  "skip click to continue",
+  'xdmovies mediator bypass',
+  'xdmovies mediator bypass extension',
+  'xdmovies mediator timer bypass',
+  'xdmovies download mediator',
+  'skip waiting page',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'link shortener bypass',
+  'skip wait extension',
+  'please wait bypass',
+  'waiting page bypass',
+  'skip click to continue',
 ] as const;
 
-const intro = "XDMovies bypass skips the extra waiting page and verification steps in the download mediator chain to open your file link faster and automatically. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'An XDMovies mediator bypass search usually means the homepage was fine, but the download path dumped you on another please-wait page before the file. Skip Wait is the free Chrome extension that clears that mediator hop so skip click to continue is not the whole download ritual.';
 
-const problem = "XDMovies Mediator places a waiting page between the short link and your destination so you sit through a please wait screen or continue loop before the real URL opens.";
+const body = `## After the homepage: the download mediator hop
 
-const howItWorks = "When the waiting page loads, Skip Wait runs in the background, skips the delay layer, and sends you straight to the target URL supported for XDMovies Mediator.";
+Streaming entry waits and download mediators are different problems. Once you leave the homepage for a file, some XDMovies shares route through an extra waiting page—verification chrome, continue loops, countdown strips—before the host link appears. Miss Continue under ads or refresh mid-wait and the same waiting page bypass starts again.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The XDMovies Mediator bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for XDMovies Mediator.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a XDMovies Mediator link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported XDMovies Mediator delay.",
-  },
-];
+That mid-chain stall is why xdmovies download mediator and xdmovies mediator timer bypass sit next to generic please wait bypass queries.
 
-const skips = [
-  "Waiting pages and continue gates",
-  "Please wait and click to continue screens",
-  "Gate pages before the destination URL",
-  "Manual continue button loops",
-] as const;
+### What the mediator usually adds
+
+- Extra please-wait screens on the download path
+- Click-to-continue gates buried in overlays
+- Verification delays before the file host
+- Manual continue loops that reset on a bad click
+
+## Clearing the hop inside Chrome
+
+Skip Wait runs on the mediator page you already opened. It skips the busywork delay layer, advances continue when the flow allows, and sends you toward the file URL without a paste box. Client clutter goes away; any hold the hop still requires finishes honestly.
+
+## Why this is not the same as the landing wait
+
+Landing Open main site delays block browsing. Mediator waits block the file after browsing already worked. An xdmovies mediator bypass extension keyed to that second hop stays useful when download partners rotate skins, without relearning each interstitial by hand.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What verification steps does Skip Wait skip in the XDMovies download mediator chain?",
-    answer: "Skip Wait skips the extra waiting page and verification steps in the XDMovies download mediator chain on latestnewsonline.sbs to open your file link faster.",
+    question: 'What does the XDMovies mediator bypass skip?',
+    answer:
+      'The extra waiting page and continue/verification busywork on the download hop after you leave the homepage—not the landing Open main site delay.',
   },
   {
-    question: "Does Skip Wait bypass the extra waiting page on latestnewsonline.sbs?",
-    answer: "Yes. please wait and click-to-continue gate screens are bypassed automatically when you open an XDMovies Mediator link.",
+    question: 'Is this the same as the XDMovies landing bypass?',
+    answer:
+      'No. Landing clears entry into the site. Mediator clears the please-wait chain on the way to the file. Use both when a share hits both layers.',
   },
   {
-    question: "How does Skip Wait help open file links faster from XDMovies mediators?",
-    answer: "When the mediator waiting page loads, the extension skips the delay layer and sends you straight to the target file URL.",
+    question: 'Do I still click Continue on the mediator?',
+    answer:
+      'On supported hops, Skip Wait completes that flow so you are not hunting buttons through ads.',
   },
   {
-    question: "Is the XDMovies bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The XDMovies bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is it free?',
+    answer:
+      'Yes. Skip Wait is free. The mediator path runs on supported pages with no account.',
   },
 ];
 
@@ -83,10 +81,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

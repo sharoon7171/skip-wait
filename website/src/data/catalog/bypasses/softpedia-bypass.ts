@@ -1,78 +1,78 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Softpedia";
+const name = 'Softpedia';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "Softpedia bypass skips the post download waiting page after mirror selection and opens the direct file download link without any extra delay.";
+const description =
+  'Softpedia bypass skips the post download waiting page after mirror selection and opens the direct file download link without any extra delay.';
 
-const domains = [
-  "softpedia.com",
-] as const;
+const domains = ['softpedia.com'] as const;
 
 const keywords = [
-  "softpedia bypass",
-  "Softpedia bypass extension",
-  "softpedia timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'softpedia bypass',
+  'Softpedia bypass extension',
+  'softpedia timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "Softpedia bypass skips the post download waiting page after mirror selection and opens the direct file download link without any extra delay. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'Looking for a Softpedia bypass or download timer skip usually means you already picked a mirror and still hit a generating wait before the real file. Skip Wait is the free Chrome extension that resolves the direct download path after mirror selection so skip waiting page busywork is not another hop.';
 
-const problem = "Softpedia often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Mirror chosen—then another generating screen
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+Softpedia download flows often sit a waiting page, generating timer, or intermediary redirect after you pick a mirror. The software page already knows where the file lives; the extra screen is delay theater before the CDN path starts. That pattern drives softpedia timer bypass, direct download bypass, and file host bypass searches when you only wanted the installer.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Softpedia bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Softpedia.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on Softpedia. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Softpedia delay.",
-  },
-];
+Refreshing the wait page rarely helps. The file URL is resolved separately from the countdown UI.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### After-click delays people actually hit
+
+- Post-download waiting pages after mirror selection
+- Generating timers before the file link appears
+- Intermediary redirect pages before the CDN
+- Extra waits on mirror and host buttons
+
+## Resolving the file URL in the background
+
+Skip Wait runs on matching Softpedia download pages. When you use the same download or mirror control you already click, the extension resolves the real file URL in the background and bypasses the timer or redirect page that normally follows.
+
+Client delay chrome gets out of the way. That is a Softpedia bypass extension for direct download—not a third-party paste site that asks you to copy the page URL again.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What post-download waiting page does Skip Wait skip on Softpedia?",
-    answer: "Skip Wait bypasses the post-download waiting page that appears after mirror selection on softpedia.com and opens the direct file link.",
+    question: 'What post-download wait does Skip Wait skip?',
+    answer:
+      'It bypasses the waiting page that appears after mirror selection and opens the direct file link when Softpedia allows it.',
   },
   {
-    question: "Does Skip Wait open direct file links after mirror selection?",
-    answer: "Yes. The extension resolves the real file URL in the background and skips the timer page that normally follows your mirror choice.",
+    question: 'Does Skip Wait open direct file links after mirror selection?',
+    answer:
+      'Yes. The extension resolves the real file URL in the background and skips the timer page that normally follows your mirror choice.',
   },
   {
-    question: "How does Skip Wait bypass delays after I choose a Softpedia mirror?",
-    answer: "Generating timers and intermediary redirect pages are bypassed so the download starts from the resolved link immediately.",
+    question: 'Do generating timers still run?',
+    answer:
+      'Client generating theater and intermediary redirects are bypassed. If the host still needs a short check before the file URL exists, Skip Wait stays until it is allowed.',
   },
   {
-    question: "Is the Softpedia bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Softpedia bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this a paste-a-link Softpedia decoder?',
+    answer:
+      'No. You click download on Softpedia as usual. The extension works on that page.',
+  },
+  {
+    question: 'Is the Softpedia bypass free?',
+    answer:
+      'Yes. Skip Wait is free. The Softpedia path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -84,10 +84,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

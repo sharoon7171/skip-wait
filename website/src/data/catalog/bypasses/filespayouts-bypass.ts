@@ -1,78 +1,70 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "FilesPayouts";
+const name = 'FilesPayouts';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "FilesPayouts bypass skips free download waits and mediator pages on this file host so Free Download starts the file immediately.";
+const description =
+  'FilesPayouts bypass skips free download waits and mediator pages on this file host so Free Download starts the file immediately.';
 
-const domains = [
-  "filespayouts.com",
-] as const;
+const domains = ['filespayouts.com'] as const;
 
 const keywords = [
-  "filespayouts bypass",
-  "FilesPayouts bypass extension",
-  "filespayouts timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'filespayouts bypass',
+  'FilesPayouts bypass extension',
+  'filespayouts timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "FilesPayouts bypass skips free download waits and mediator pages on this file host so Free Download starts the file immediately. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A FilesPayouts bypass search usually means Free Download still forced a countdown or mediator page before the archive. Skip Wait is the free Chrome extension that posts through to the download step on that click so the free path does not stall on wait chrome.';
 
-const problem = "FilesPayouts shows a Free Download path that normally forces a countdown page before the real file link.";
+const body = `## Free Download that still forces a countdown
 
-const howItWorks = "Skip Wait posts straight through to the download step when you click Free Download, so the countdown and intermediary page never get in the way.";
+FilesPayouts monetizes free traffic with a Free Download control that normally opens a countdown page, Create Download Link delay, or intermediary screen before the real file link. Premium may skip the line; free users babysit the clock.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The FilesPayouts bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for FilesPayouts.",
-  },
-  {
-    title: "Click Free Download as usual",
-    body: "Use Free Download on FilesPayouts. Skip Wait labels the button and resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported FilesPayouts delay.",
-  },
-];
+That free-path stall is why filespayouts timer bypass, direct download bypass, and download timer skip sit next to FilesPayouts bypass extension queries.
 
-const skips = [
-  "Free download countdown timers",
-  "Mediator pages after Free Download",
-  "Intermediary screens before the file link",
-  "Client-side wait before Create Download Link",
-] as const;
+## Posting straight through to the file step
+
+Skip Wait labels and watches Free Download on supported pages. When you click it, the extension posts through to the download step the finished free path would reach, so the countdown and mediator page never get in the way. You stay on the host; no paste tool.
+
+Client wait theater stops owning the tab. Required holds the host still enforces are waited honestly so the session does not die with a fake zero-second cheat.
+
+## Mediator pages after the free button
+
+Some shares bounce free users through an extra interstitial after Free Download. On supported paths Skip Wait skips that hop so the file path opens when the host allows it. A skip wait extension keeps that file host bypass in one install without a userscript per button.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What free download waits does Skip Wait skip on filespayouts.com?",
-    answer: "Skip Wait bypasses free download countdown timers and mediator pages on filespayouts.com so Free Download starts the file immediately.",
+    question: 'What free download waits does Skip Wait skip?',
+    answer:
+      'Free download countdown timers, Create Download Link busywork, and mediator pages after Free Download on supported pages.',
   },
   {
-    question: "Can my download start in one click on FilesPayouts with Skip Wait?",
-    answer: "Yes. The extension resolves the download in the background and bypasses the countdown page that normally appears after Free Download.",
+    question: 'Does Free Download start in one click?',
+    answer:
+      'On supported pages, yes—Skip Wait resolves the download behind Free Download so the countdown page does not block you.',
   },
   {
-    question: "Does Skip Wait bypass mediator pages on FilesPayouts?",
-    answer: "Yes. The wait page after Free Download is skipped so the file path opens immediately when the host allows it.",
+    question: 'Do I need a paid FilesPayouts plan?',
+    answer:
+      'No. Skip Wait automates the free path. Premium is unrelated to the extension.',
   },
   {
-    question: "Is the FilesPayouts bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The FilesPayouts bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the FilesPayouts bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -84,10 +76,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

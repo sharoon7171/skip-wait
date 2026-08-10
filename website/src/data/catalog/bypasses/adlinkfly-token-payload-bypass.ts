@@ -1,11 +1,11 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'AdLinkFly Token Payload';
 
 const bypassType = 'Skip Short Link';
 
 const description =
-  'Skip Wait unlocks ShrinkPe and LoanBuzz style short links after the captcha, skips the blog Continue chain and Get Link countdown for most destinations, and holds briefly before opening sensitive movie drive downloads so arrival looks like a normal visit.';
+  'AdLinkFly token bypass for ShrinkPe and LoanBuzz style captcha shortlinks: after the check, Skip Wait unlocks most destinations without walking blog Continue and Get Link by hand.';
 
 const domains = ['oii.la', 'tpi.li', 'aii.sh', 'lnbz.la', 'shrink.pe'] as const;
 
@@ -14,13 +14,8 @@ const keywords = [
   'ad link fly bypass',
   'AdLinkFly token bypass',
   'shrinkpe bypass',
-  'shrink.pe bypass',
   'loanbuzz bypass',
-  'lnbz.la bypass',
   'lnbz bypass',
-  'oii.la bypass',
-  'tpi.li bypass',
-  'aii.sh bypass',
   'shrinkbixby bypass',
   'adlinkfly captcha skip',
   'adlinkfly turnstile bypass',
@@ -45,46 +40,42 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People look for an AdLinkFly bypass, ShrinkPe bypass, LoanBuzz bypass, or a free short link skip when a download, faucet, or movie share opens a captcha page instead of the file. Those networks often stack a human check, one or more blog Continue screens with long ad modals, then a Get Link countdown on the shortener again. Online paste tools and one shot userscripts break when the blog host or captcha type rotates. Skip Wait is a free Chrome extension that runs on the supported captcha shortlink page itself: after you clear the check, it unlocks the destination without you walking the blog chain by hand for ordinary links. When the unlocked target is a protected OlaMovies drive download, it still waits out a full normal visit length before opening so the drive does not treat the arrival as an instant skip. You keep one install, no paste box, and no separate script to babysit.';
+  'People look for an AdLinkFly bypass, ShrinkPe bypass, LoanBuzz bypass, or a free short link skip when a download or movie share opens a captcha page instead of the file. Skip Wait is the free Chrome extension that runs on the supported captcha shortlink page: after you clear the check, it unlocks ordinary destinations without walking the blog chain by hand.';
 
-const problem =
-  'A typical ShrinkPe or LoanBuzz style short URL does not send you straight to the file. First you land on a captcha shortlink screen where Continue stays locked until Cloudflare Turnstile or a similar check finishes. Submitting that form drops you into rotating blog articles with Step One and Step Two style buttons, minute long ad overlays, and more Continue hops before the shortener will talk to you again. Only then do you reach a banner or interstitial Get Link page with its own countdown. Close a tab early, trip an ad blocker lock, or mistime a step and the session can reset. That is why searches for adlinkfly captcha skip, short link continue bypass, get link countdown bypass, and please wait shortlink bypass stay common: the destination was already known to the shortener, but the site still wants a long click path through ads.';
+const body = `## Turnstile first, then Step One blogs
 
-const howItWorks =
-  'On a supported captcha shortlink page, Skip Wait reads the destination that the shortener already embedded for unlock, shows a clear overlay, and opens that URL after the check is done so you are not forced through every blog Continue and Get Link click. Most destinations open as soon as the unlock is ready. If the destination is an OlaMovies drive download, Skip Wait keeps you on the overlay for the full chain length a careful manual visit would take (blog step waits plus the final Get Link timer), then navigates once. That hold is only for those drive links; other destinations stay fast. The extension does not buy Premium, does not paste your URL into a third party site, and does not ask you to decode anything yourself.';
+A typical ShrinkPe or LoanBuzz style short URL does not send you straight to the file. First you land on a captcha shortlink screen where Continue stays locked until Cloudflare Turnstile finishes. Submitting that form drops you into rotating blog articles with Step One and Step Two buttons, minute-long ad overlays, and more Continue hops before the shortener will talk to you again. Only then do you reach a banner Get Link page with its own countdown.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: 'Install Skip Wait from the Chrome Web Store',
-    body: 'Add the free Skip Wait Chrome extension. Search skip wait chrome extension or chrome extension shortlink bypass if you are comparing helpers. The AdLinkFly token shortlink rules load on supported pages with no account or API key.',
-  },
-  {
-    title: 'Leave the extension enabled',
-    body: 'Keep Skip Wait on in Chrome. There is nothing to configure per link and no paste form. When you open a supported short URL, the overlay appears on the captcha page automatically.',
-  },
-  {
-    title: 'Open the short link and finish the captcha',
-    body: 'Click the shared short URL the same way you always do. Complete the Turnstile or other human check when the page asks. Skip Wait continues from there without sending you through blog Continue screens for a normal unlock.',
-  },
-  {
-    title: 'Wait only when the destination needs it',
-    body: 'For most files the overlay unlocks and opens quickly. If the destination is a protected OlaMovies drive download, stay on the tab while the countdown finishes the full visit length, then the drive opens like a normal arrival.',
-  },
-];
+Close a tab early, trip an ad blocker lock, or mistime a step and the session can reset. That is why adlinkfly captcha skip, short link continue bypass, get link countdown bypass, and please wait shortlink bypass searches stay loud: the destination was already known to the shortener, but the product still wants a long click path through ads.
 
-const skips = [
-  'Manual blog Continue and Step One or Step Two clicking after captcha',
-  'Long ad overlay waits on mediator articles for ordinary destinations',
-  'Repeated Get Link countdown pages when the destination is already unlocked',
-  'Copy paste into an online shortlink bypasser each time',
-  'Guessing or decoding the destination yourself',
-] as const;
+### After the human check
+
+- Manual blog Continue and Step One / Step Two clicking
+- Long ad overlay waits on mediator articles
+- Repeated Get Link countdown pages
+- Copy-paste into an online shortlink bypasser each time
+
+## Reading the unlock payload after the check
+
+On a supported captcha shortlink page, Skip Wait reads the destination the shortener already embedded for unlock, shows a clear overlay, and opens that URL after the check is done so you are not forced through every blog Continue and Get Link click. Most destinations open as soon as the unlock is ready.
+
+The extension does not buy Premium, does not paste your URL into a third-party site, and does not ask you to decode anything yourself. One chrome extension shortlink bypass install covers the listed AdLinkFly token hosts.
+
+## Drive destinations that need a full visit length
+
+If the unlocked target is a protected OlaMovies drive download, Skip Wait still waits out a full normal visit length before opening so the drive does not treat the arrival as an instant skip. That hold is only for those drive links; other destinations stay fast. You keep session integrity without babysitting every blog hop.
+
+## Paste tools vs the live shortlink tab
+
+Online paste tools and one-shot userscripts break when the blog host or captcha type rotates. Skip Wait runs on the live shortlink page in your Chrome tab, so you keep your own captcha result and session—a durable paste shortlink bypass alternative for AdLinkFly token flows.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
     question: 'Which short links does this bypass cover?',
     answer:
-      'It covers the AdLinkFly captcha shortlink hosts listed in the domains section on this page, including ShrinkPe and LoanBuzz style pages that embed the destination behind a human check. Support follows those listed hosts; open a request if you hit a twin brand that still forces the full blog chain after captcha.',
+      'It covers the AdLinkFly captcha shortlink hosts listed in the domains section on this page, including ShrinkPe and LoanBuzz style pages that embed the destination behind a human check.',
   },
   {
     question: 'Do I still need to solve the captcha?',
@@ -94,22 +85,22 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Why is there sometimes a long countdown before the file opens?',
     answer:
-      'When the unlocked destination is a protected OlaMovies drive download, Skip Wait waits the full length of a careful manual visit before opening it. That is only for those drive links. Other destinations skip the blog chain and open once the shortener unlock is ready.',
+      'When the unlocked destination is a protected OlaMovies drive download, Skip Wait waits the full length of a careful manual visit before opening it. That is only for those drive links. Other destinations skip the blog chain and open once unlock is ready.',
   },
   {
     question: 'Is this the same as pasting the URL into an online bypasser?',
     answer:
-      'No. Paste sites and bots often fail when blogs rotate or Turnstile is required. Skip Wait runs in your Chrome tab on the live shortlink page, so you keep your own session and captcha result without handing the link to a third party.',
+      'No. Paste sites and bots often fail when blogs rotate or Turnstile is required. Skip Wait runs in your Chrome tab on the live shortlink page, so you keep your own session and captcha result.',
   },
   {
-    question: 'Will an ad blocker stop the shortlink unlock?',
+    question: 'Will an ad blocker stop the unlock?',
     answer:
       'Aggressive blockers can lock the shortener or blog with an adblock warning. If progress stalls, allow ads or pause the blocker for that tab, reload, finish the captcha again, and let Skip Wait continue.',
   },
   {
     question: 'Is the AdLinkFly Token Payload bypass free?',
     answer:
-      'Yes. Skip Wait is a free Chrome extension. This short link bypass runs on supported pages with no account, paid plan, or unlimited bypass subscription.',
+      'Yes. Skip Wait is free. This short link bypass runs on supported pages with no account, paid plan, or unlimited bypass subscription.',
   },
 ];
 
@@ -121,10 +112,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

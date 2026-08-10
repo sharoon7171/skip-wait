@@ -1,19 +1,20 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'Work.ink';
 
 const bypassType = 'Skip Short Link';
 
 const description =
-  'Work.ink bypass skips short-link unlock gates on work.ink links, pins captcha when required, and opens your destination URL faster.';
+  'Work.ink bypass that pins hCaptcha when required, clears short-link unlock gates, and opens the destination after verification—without post-captcha continue loops.';
 
 const domains = ['work.ink'] as const;
 
 const keywords = [
   'work.ink bypass',
-  'Work.ink bypass extension',
   'workink bypass',
+  'work.ink bypass extension',
   'work.ink timer bypass',
+  'work.ink hcaptcha',
   'skip short link',
   'skip countdown timer',
   'bypass countdown timer',
@@ -25,59 +26,53 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Work.ink bypass skips short-link unlock gates on work.ink links, pins captcha when required, and opens your destination URL faster. Install Skip Wait once and it runs automatically on supported short URLs.';
+  'A Work.ink bypass or workink bypass search usually means a monetized short URL stuck you behind hCaptcha and an unlock gate before the real destination. Skip Wait is the free Chrome extension that pins the check, clears post-captcha unlock waits, and opens the target so skip short link is not a manual continue loop.';
 
-const problem =
-  'Work.ink short links put captcha and unlock gates between the short URL and your destination so you wait through verification before the real link opens.';
+const body = `## Captcha, then unlock, then the real URL
 
-const howItWorks =
-  'On a matching work.ink short URL, Skip Wait shows an overlay, pins hCaptcha when required, then unlocks and opens the destination after you complete the check.';
+Work.ink short links put verification and unlock gates between the short path and your destination. You solve hCaptcha, wait for unlock, and only then reach the target. Miss the pinned check, stay logged into a publisher session that blocks the free path, or leave mid-unlock and the same monetized link bypass loop restarts.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: 'Add Skip Wait to Chrome',
-    body: 'Install Skip Wait from the Chrome Web Store. The Work.ink bypass turns on automatically on supported short URLs—no account needed.',
-  },
-  {
-    title: 'Keep the extension enabled',
-    body: 'Leave Skip Wait on in Chrome. There is nothing to configure for Work.ink.',
-  },
-  {
-    title: 'Open a supported short link',
-    body: 'Open a work.ink short URL the same way you usually do. No paste tool or special settings.',
-  },
-  {
-    title: 'Reach the destination faster',
-    body: 'Complete captcha when Skip Wait pins it. The destination opens automatically after verification.',
-  },
-];
+That two-step stall is why people search Work.ink hCaptcha, hcaptcha short link, and Work.ink timer bypass together.
 
-const skips = [
-  'Short-link unlock gates on work.ink',
-  'Post-captcha unlock waits before the destination',
-  'Manual continue loops after verification',
-] as const;
+### Gates after the short path
+
+- Short-link unlock screens on matching paths
+- hCaptcha before unlock is allowed
+- Post-captcha unlock waits before the destination
+- Manual continue loops after verification
+
+## Pinning the check and finishing unlock
+
+On a matching short URL, Skip Wait shows an overlay, pins hCaptcha when required, then unlocks and opens the destination after you complete the check. Only short-link paths are covered—not every page on the host.
+
+You keep opening the shared short URL as usual. No paste tool.
+
+## Publisher logins that block the free path
+
+If a publisher auth session is active, free-path unlock can stall even with the extension on. Log out of that publisher session, reopen the short link, and let Skip Wait pin captcha again.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
     question: 'Which Work.ink links does Skip Wait support?',
     answer:
-      'Only work.ink short-link paths (for example /2MVo/test)—not every page on the domain.',
+      'Short-link paths only (the monetized unlock URLs)—not every page on the host.',
   },
   {
-    question: 'Do I still need to solve captcha on Work.ink?',
+    question: 'Do I still solve captcha?',
     answer:
-      'Yes when the site shows one. Skip Wait pins it in the overlay; after you solve it, unlock continues automatically.',
+      'Yes when the site shows one. Skip Wait pins hCaptcha in the overlay; after you solve it, unlock continues automatically.',
   },
   {
-    question: 'Why might the Work.ink bypass not work?',
+    question: 'Why might the bypass stall?',
     answer:
-      'A publisher login at https://auth.work.ink/ can block the free-path unlock. Log out of that session, then open the short link again.',
+      'A publisher login session can block free-path unlock. Log out of that publisher session, then open the short link again.',
   },
   {
-    question: 'Is the Work.ink bypass free with Skip Wait?',
+    question: 'Is the Work.ink bypass free?',
     answer:
-      'Yes. Skip Wait is a free Chrome extension. The Work.ink bypass runs on supported short URLs with no account or paid plan required.',
+      'Yes. Skip Wait is free with no account or paid plan on supported short URLs.',
   },
 ];
 
@@ -89,10 +84,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

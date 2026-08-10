@@ -1,7 +1,4 @@
-export type BypassTocItem = {
-  id: string;
-  label: string;
-};
+import type { BypassTocItem } from '@/components/sites/markdown-toc';
 
 type BypassArticleTocProps = {
   items: readonly BypassTocItem[];

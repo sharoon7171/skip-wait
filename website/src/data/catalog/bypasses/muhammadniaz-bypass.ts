@@ -1,75 +1,68 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "MuhammadNiaz";
+const name = 'MuhammadNiaz';
 
-const bypassType = "Skip Countdown Timer";
+const bypassType = 'Skip Countdown Timer';
 
-const description = "MuhammadNiaz bypass skips the download countdown timer before create download link so you unlock software files from this host faster every time.";
+const description =
+  'MuhammadNiaz bypass for pre-generate download countdowns: Skip Wait unlocks create download link on software file pages so you are not watching the clock before every generate.';
 
-const domains = [
-  "muhammadniaz.link",
-] as const;
+const domains = ['muhammadniaz.link'] as const;
 
 const keywords = [
-  "muhammadniaz bypass",
-  "MuhammadNiaz bypass extension",
-  "muhammadniaz timer bypass",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "create download link bypass",
-  "download wait skip",
+  'muhammadniaz bypass',
+  'MuhammadNiaz bypass extension',
+  'muhammadniaz timer bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'create download link bypass',
+  'download wait skip',
 ] as const;
 
-const intro = "MuhammadNiaz bypass skips the download countdown timer before create download link so you unlock software files from this host faster every time. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'People search MuhammadNiaz bypass or create download link bypass after a software page locks generate behind a countdown. Skip Wait is the free Chrome extension that clears that pre-generate wait on the host page you already opened.';
 
-const problem = "MuhammadNiaz forces a download countdown before create download link. A MuhammadNiaz bypass skips that timer so the file unlocks faster.";
+const body = `## Create download link stuck behind a clock
 
-const howItWorks = "Skip Wait activates on recognized skip countdown timer flows and bypasses or automates the wait so you reach the content faster. The create download link countdown on the supported website is skipped so files unlock faster.";
+MuhammadNiaz software pages often disable create download link until a pre-generate timer finishes. The file is ready; the button is not. You sit through download wait skip territory—please-wait chrome, a locked generate control, then a race to click before something refreshes the gate.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The MuhammadNiaz bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for MuhammadNiaz.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a MuhammadNiaz link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported MuhammadNiaz delay.",
-  },
-];
+That single choke point is why muhammadniaz timer bypass and skip countdown timer queries show up next to software mirror shares.
 
-const skips = [
-  "Countdown Timer that block the destination",
-  "Create download link countdowns",
-  "Pre generate file waits",
-] as const;
+### Pre-generate vs later hosts
+
+This page only covers the countdown before create download link. Whatever CDN or shortener opens afterward is a separate hop. Getting generate unlocked without babysitting the clock is the whole job here.
+
+## Unlocking generate inside Chrome
+
+Skip Wait activates on recognized countdown-timer flows for this host. It advances past client-only pre-generate delays so create download link becomes usable when the page allows, without a paste box or userscript edit.
+
+Required server steps still finish honestly. What disappears is staring at a locked button that only existed to slow free downloads—the practical MuhammadNiaz bypass extension path for download wait skip searches.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What countdown blocks the create download link button on MuhammadNiaz?",
-    answer: "A pre-generate file countdown locks the create download link button on muhammadniaz.link, and Skip Wait bypasses that timer so the button unlocks immediately.",
+    question: 'What blocks create download link on MuhammadNiaz?',
+    answer:
+      'A pre-generate countdown locks the button. Skip Wait clears that client wait so generate unlocks when the host allows it.',
   },
   {
-    question: "Can Skip Wait unlock software files from muhammadniaz.link faster?",
-    answer: "Yes. Skip Wait skips the countdown before create download link so you can generate the file link without waiting through the full timer.",
+    question: 'Can I unlock software files faster?',
+    answer:
+      'Yes on supported pages. You skip babysitting the timer before create download link, then continue the normal generate path.',
   },
   {
-    question: "Does Skip Wait skip the pre-generate file wait on MuhammadNiaz?",
-    answer: "Yes. The extension activates on countdown timer flows and bypasses the delay so you reach the download link creation step right away.",
+    question: 'Is the full timer always zeroed?',
+    answer:
+      'Client busywork goes away. If the host still requires a short hold, Skip Wait finishes it—so the muhammadniaz timer bypass stays stable.',
   },
   {
-    question: "Is the MuhammadNiaz bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The MuhammadNiaz bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free with no paid plan for supported pages.',
   },
 ];
 
@@ -81,10 +74,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

@@ -1,10 +1,9 @@
-import { totalBypasses, totalDomains } from '@/data/catalog-queries';
+import { totalBypasses, totalDomains } from '@/data/catalog';
 import { CHROME_WEB_STORE_URL, SITE } from '@/data/constants';
 import { routes } from '@/lib/routes';
 import { ButtonLink } from '@/components/ui/Button';
-import { ChromeIcon } from '@/components/ui/ChromeIcon';
+import { ChromeIcon, IconArrowDown, IconArrowRight } from '@/components/ui/icons';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
-import { IconArrowDown, IconArrowRight } from '@/components/ui/Icons';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
@@ -74,7 +73,7 @@ export function Hero(): React.ReactElement {
           <p className="mx-auto mt-5 max-w-[42ch] text-body text-ink-body sm:mt-6 sm:max-w-[46ch] sm:text-lead lg:mx-0">
             Free Chrome extension that skips countdown timers and link shortener redirects—or
             finishes waiting pages for you when a full skip isn’t possible. Works on{' '}
-            {totalBypasses()} sites across {totalDomains()} websites, including popular short links
+            {totalBypasses()} bypasses across {totalDomains()} websites, including popular short links
             and file hosts.
           </p>
 

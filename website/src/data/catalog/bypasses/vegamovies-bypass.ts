@@ -1,78 +1,79 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Vegamovies";
+const name = 'Vegamovies';
 
-const bypassType = "Skip Landing Wait";
+const bypassType = 'Skip Landing Wait';
 
-const description = "Vegamovies bypass skips the vglist connecting delay and opens VegaMovies, RogMovies, Anime, and Xprime live servers instantly from the hub.";
+const description =
+  'Vegamovies bypass that skips the vglist connecting delay on Quick Access so VegaMovies, RogMovies, Anime, and Xprime live servers open without a forced hub wait.';
 
-const domains = [
-  "vglist.top",
-  "vglist.nl",
-] as const;
+const domains = ['vglist.top', 'vglist.nl'] as const;
 
 const keywords = [
-  "vegamovies bypass",
-  "Vegamovies bypass extension",
-  "vglist bypass",
-  "vegamovies timer bypass",
-  "skip landing wait",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "landing page bypass",
-  "mirror site bypass",
+  'vegamovies bypass',
+  'vegamovies bypass extension',
+  'vglist bypass',
+  'vegamovies timer bypass',
+  'vegamovies quick access',
+  'rogmovies bypass',
+  'skip landing wait',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'landing page bypass',
+  'mirror site bypass',
 ] as const;
 
-const intro = "Vegamovies bypass skips the vglist connecting delay and opens VegaMovies, RogMovies, Anime, and Xprime live servers instantly from the hub. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Vegamovies bypass or vglist bypass search usually means Quick Access parked you on a “securing connection” delay before VegaMovies, RogMovies, Anime, or Xprime. Skip Wait is the free Chrome extension that resolves the live destination from that connecting page so skip landing wait is not a forced hub timer.';
 
-const problem = "Vegamovies delays each Quick Access link behind a connecting page with a forced wait.";
+const body = `## Hub Quick Access, then a connecting stall
 
-const howItWorks = "Top or vglist.nl, and use Quick Access as usual. The extension resolves the live destination from the connecting page and skips the wait so VegaMovies, RogMovies, Anime, and Xprime open immediately.";
+The Vegamovies hub does not open the live server in one click. Quick Access routes through a connecting page with a securing-connection style wait before VegaMovies, RogMovies, Anime, or Xprime. Refresh mid-wait or lose the tab and you sit through the same landing page bypass loop again.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Vegamovies bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Vegamovies.",
-  },
-  {
-    title: "Open the Vegamovies hub",
-    body: "Visit vglist.top or vglist.nl as usual. Skip Wait prepares instant unlocks for the Quick Access destinations.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Vegamovies delay.",
-  },
-];
+That hub delay—not a shortener countdown—is why people also search vegamovies timer bypass and mirror site bypass next to skip landing wait.
 
-const skips = [
-  "Landing-page connection delays",
-  "vglist securing-connection delays",
-  "Quick Access connecting page waits",
-] as const;
+### Delays before the live mirror
+
+- Landing-page connection stalls after Quick Access
+- Securing-connection redirects on the hub
+- Forced waits before each live server open
+- Restarting the hub when a hop fails
+
+## Opening live servers without the connecting tour
+
+Skip Wait runs on the hub pages inside Chrome. Use Quick Access as usual; the extension resolves the live destination from the connecting page and skips the wait so the chosen server opens immediately.
+
+You are not watching a connecting spinner for every mirror. Required hub routing still happens; the forced delay chrome does not.
+
+## Mirrors that move between hub updates
+
+Bookmarking yesterday’s live URL fails when mirrors rotate. A Vegamovies bypass extension that reads the connecting page destination stays useful without chasing every new mirror by hand.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "Which Vegamovies hub domains does Skip Wait support?",
-    answer: "Skip Wait supports vglist.top and vglist.nl, skipping the connecting delay before VegaMovies, RogMovies, Anime, and Xprime.",
+    question: 'What landing wait does Skip Wait skip on the Vegamovies hub?',
+    answer:
+      'The securing-connection / connecting page after Quick Access. Skip Wait resolves the live destination and opens it without the forced hub wait.',
   },
   {
-    question: "What landing wait does Skip Wait skip on the Vegamovies hub?",
-    answer: "The securing-connection redirect page after Quick Access is bypassed so you open the live server without the forced wait.",
+    question: 'Which Quick Access destinations are covered?',
+    answer:
+      'Supported hub flows for VegaMovies, RogMovies, Anime, and Xprime live servers—same Quick Access buttons, without the connecting delay.',
   },
   {
-    question: "Can I open VegaMovies and RogMovies faster with Skip Wait?",
-    answer: "Yes. Skip Wait resolves the live destination and opens it immediately instead of making you sit through the connecting delay.",
+    question: 'Do I still use the hub?',
+    answer:
+      'Yes. Open the hub and Quick Access as usual. Skip Wait only removes the connecting wait behind those links.',
   },
   {
-    question: "Is the Vegamovies bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Vegamovies bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the Vegamovies bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
   },
 ];
 
@@ -84,10 +85,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

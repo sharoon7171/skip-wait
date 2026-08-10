@@ -1,8 +1,6 @@
 import { CONTACT, REQUEST_SUPPORT_URL } from '@/data/constants';
-import { GitHubIcon } from '@/components/ui/GitHubIcon';
-import { GmailIcon } from '@/components/ui/GmailIcon';
+import { GitHubIcon, GmailIcon, TelegramIcon } from '@/components/ui/icons';
 import { Shell } from '@/components/ui/Shell';
-import { TelegramIcon } from '@/components/ui/TelegramIcon';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
 export function SupportCta(): React.ReactElement {

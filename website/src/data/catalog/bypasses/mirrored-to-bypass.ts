@@ -1,75 +1,77 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Mirrored.to";
+const name = 'Mirrored.to';
 
-const bypassType = "Skip Countdown";
+const bypassType = 'Skip Countdown';
 
-const description = "Mirrored.to bypass skips the mirror files countdown and interstitial wait so you reach host download links from this mirror aggregator faster.";
+const description =
+  'Mirrored.to bypass for mirror-files countdowns and interstitial waits: Skip Wait unlocks the host list so you can pick a download mirror without watching the clock first.';
 
-const domains = [
-  "mirrored.to",
-] as const;
+const domains = ['mirrored.to'] as const;
 
 const keywords = [
-  "mirrored.to bypass",
-  "Mirrored.to bypass extension",
-  "mirrored.to timer bypass",
-  "skip countdown",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "countdown timer bypass",
-  "skip timer unlock",
+  'mirrored.to bypass',
+  'Mirrored.to bypass extension',
+  'mirrored.to timer bypass',
+  'skip countdown',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'countdown timer bypass',
+  'skip timer unlock',
 ] as const;
 
-const intro = "Mirrored.to bypass skips the mirror files countdown and interstitial wait so you reach host download links from this mirror aggregator faster. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'People search Mirrored.to bypass or skip timer unlock after a share opens a mirror-files countdown instead of host buttons. Skip Wait is the free Chrome extension that clears that unlock delay so the download list appears sooner.';
 
-const problem = "Mirrored.to puts a countdown timer or unlock delay in front of the continue or get link step. A Mirrored.to bypass removes that wait so the destination opens without watching the clock.";
+const body = `## Mirror landings that hide every host
 
-const howItWorks = "Skip Wait removes unlock timers on Mirrored.to so get-link and continue steps are no longer blocked.";
+Mirrored.to pages are aggregators: the useful part is the row of host download buttons, but those buttons often stay locked behind a mirror-files countdown or interstitial. You open the share, stare at please-wait chrome, then finally choose a CDN. Refresh early or mistime Continue and the interstitial returns—common fuel for Mirrored.to timer bypass and countdown timer bypass queries.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Mirrored.to bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Mirrored.to.",
-  },
-  {
-    title: "Open a supported link",
-    body: "Open a Mirrored.to link the same way you usually do. No paste tool or special settings.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Mirrored.to delay.",
-  },
-];
+The delay is not the file itself. It is the landing that monetizes attention before any mirror is clickable.
 
-const skips = [
-  "Countdown timers on unlock pages",
-  "Get link delay screens",
-] as const;
+### What the unlock screen is doing
+
+- Holding host buttons until a client timer finishes
+- Inserting get-link delay UI between the share and the list
+- Asking for a manual continue after the clock hits zero
+- Resetting progress if you leave mid-interstitial
+
+## Unlocking the list without babysitting
+
+Skip Wait runs on the mirror page inside Chrome. It advances past client-only unlock timers so the host row is no longer blocked by a fake wait wall. When a step still needs a real hold, the extension stays until unlock is allowed, then continues—skip countdown without inventing dead mirrors.
+
+You pick the host yourself once the list is live. That keeps a Mirrored.to bypass extension install useful when interstitial markup rotates but the same unlock pattern remains.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What mirror files countdown does Skip Wait skip on mirrored.to?",
-    answer: "Skip Wait bypasses the mirror files countdown and interstitial wait on mirrored.to so you reach host download links from this aggregator faster.",
+    question: 'What does a Mirrored.to bypass unlock?',
+    answer:
+      'It clears mirror-files countdowns and interstitial waits so host download buttons appear without you watching the clock on every share.',
   },
   {
-    question: "Can I reach host download links faster from this mirror aggregator?",
-    answer: "Yes. Unlock countdown timers and get link delay screens are skipped so mirror host links appear without the usual interstitial wait.",
+    question: 'Does every timer vanish instantly?',
+    answer:
+      'Client-only delays go away. When unlock still needs a real wait, Skip Wait finishes that step, then continues—so the Mirrored.to timer bypass stays reliable.',
   },
   {
-    question: "Does Skip Wait bypass interstitial waits on Mirrored.to?",
-    answer: "Yes. The extension activates on Mirrored.to countdown flows and continues automatically when the site allows the bypass.",
+    question: 'Do I still click Continue after the countdown?',
+    answer:
+      'On supported flows the extension advances unlock for you, so you spend less time hunting continue controls after the timer.',
   },
   {
-    question: "Is the Mirrored.to bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Mirrored.to bypass runs on supported pages with no account or paid plan required.",
+    question: 'Does Skip Wait pick a host for me?',
+    answer:
+      'No. It unlocks the list. You still choose which mirror download button to use.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The Mirrored.to path runs on supported pages with no account or paid plan.',
   },
 ];
 
@@ -81,10 +83,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

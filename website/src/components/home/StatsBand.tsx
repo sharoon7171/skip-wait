@@ -1,8 +1,8 @@
-import { totalBypasses, totalDomains } from '@/data/catalog-queries';
+import { totalBypasses, totalDomains } from '@/data/catalog';
 import { Shell } from '@/components/ui/Shell';
 
 const stats = [
-  { value: String(totalBypasses()), label: 'Supported Sites' },
+  { value: String(totalBypasses()), label: 'Bypasses' },
   { value: String(totalDomains()), label: 'Websites Covered' },
   { value: 'Free', label: 'Chrome Extension, No Account' },
 ] as const;

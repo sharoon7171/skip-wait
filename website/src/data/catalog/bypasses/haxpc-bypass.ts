@@ -1,78 +1,86 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "HaxPC";
+const name = 'HaxPC';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "HaxPC bypass skips the extra waiting page on software downloads so the download buttons open the file host link directly without any forced delay.";
+const description =
+  'HaxPC bypass for software posts: Skip Wait resolves the real file-host URL behind generating waits so download and mirror buttons open the host without the forced delay screen.';
 
-const domains = [
-  "haxpc.net",
-] as const;
+const domains = ['haxpc.net'] as const;
 
 const keywords = [
-  "haxpc bypass",
-  "HaxPC bypass extension",
-  "haxpc timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'haxpc bypass',
+  'haxpc bypass chrome',
+  'haxpc bypass extension',
+  'bypass haxpc',
+  'skip haxpc',
+  'haxpc timer bypass',
+  'haxpc download bypass',
+  'haxpc waiting page',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
+  'software download bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'skip wait extension',
 ] as const;
 
-const intro = "HaxPC bypass skips the extra waiting page on software downloads so the download buttons open the file host link directly without any forced delay. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A HaxPC bypass search usually means you clicked a software download and got a generating wait instead of the file host. Skip Wait is the free Chrome extension that resolves the real link in the background so the same download button opens the host without that delay page.';
 
-const problem = "HaxPC often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Download clicks that stall on a generating screen
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+Software posts on HaxPC often put a waiting or generating intermediary between the button and the file host. The installer or archive does not change during that pause—you only watch a timer or redirect screen before the mirror list appears.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The HaxPC bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for HaxPC.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on HaxPC. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported HaxPC delay.",
-  },
-];
+That is why haxpc timer bypass, direct download bypass, and download timer skip sit next to software download bypass: people want the host URL, not another interstitial after every click.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### What the button actually hides
+
+- Generating timers after Download or mirror presses
+- Intermediary redirect pages before the file host
+- Extra wait screens that repeat on each mirror
+- Manual refreshes when the wait page stalls
+
+## Opening the host from the button you already pressed
+
+Skip Wait’s HaxPC support watches the download UI you already use. It resolves the real file URL in the background and bypasses the timer or redirect that normally appears after the click, so the host opens directly when the page allows it.
+
+You stay on the software post—no paste tool, no alternate download site. Client-only wait chrome gets out of the way; the file path that the host already issued still opens honestly.
+
+## Why sitting through delays never improves the file
+
+Manual waits on every post waste time without changing the archive. A HaxPC bypass chrome install keeps the direct path on supported pages so mirror and host buttons open from the control you pressed, not after another generating screen.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What extra waiting page does Skip Wait skip on HaxPC software downloads?",
-    answer: "Skip Wait bypasses the extra waiting page on haxpc.net so download buttons open the file host directly instead of after a delay screen.",
+    question: 'What does a HaxPC bypass skip?',
+    answer:
+      'The extra waiting or generating page after download clicks so buttons open the file host directly when the link is ready.',
   },
   {
-    question: "Do HaxPC download buttons open file hosts directly with Skip Wait?",
-    answer: "Yes. The extension resolves the real file URL in the background and bypasses generating timers that normally appear after each download click.",
+    question: 'Do mirror buttons get the same treatment?',
+    answer:
+      'Yes on supported paths. Extra wait screens and intermediary redirects before the file are skipped from the button you pressed.',
   },
   {
-    question: "How does Skip Wait bypass delays after clicking download on haxpc.net?",
-    answer: "Intermediary redirect pages and extra wait screens on mirror buttons are skipped so the file link opens from the button you already pressed.",
+    question: 'Does every delay vanish instantly?',
+    answer:
+      'Waiting-page busywork goes away and the host opens when the page allows it—a reliable HaxPC download bypass, not a broken fetch that returns nothing.',
   },
   {
-    question: "Is the HaxPC bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The HaxPC bypass runs on supported pages with no account or paid plan required.",
+    question: 'Do I change how I click download?',
+    answer:
+      'No. Use the same UI. Skip Wait resolves the real URL behind the click.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The HaxPC path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -84,10 +92,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

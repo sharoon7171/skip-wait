@@ -1,78 +1,70 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "FastDL";
+const name = 'FastDL';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "FastDL bypass skips the countdown download page and opens the direct file download link without waiting on any intermediary screen or gate page.";
+const description =
+  'FastDL bypass skips the countdown download page and opens the direct file download link without waiting on any intermediary screen or gate page.';
 
-const domains = [
-  "fastdl.zip",
-] as const;
+const domains = ['fastdl.zip'] as const;
 
 const keywords = [
-  "fastdl bypass",
-  "FastDL bypass extension",
-  "fastdl timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'fastdl bypass',
+  'FastDL bypass extension',
+  'fastdl timer bypass',
+  'direct download',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'link shortener bypass',
+  'skip wait extension',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
 ] as const;
 
-const intro = "FastDL bypass skips the countdown download page and opens the direct file download link without waiting on any intermediary screen or gate page. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A FastDL bypass search usually means you clicked download and got parked on a countdown or generating page instead of the archive. Skip Wait is the free Chrome extension that resolves the real file URL behind that click so the intermediary screen never owns the transfer.';
 
-const problem = "FastDL often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Generating screens between click and file
 
-const howItWorks = "Skip Wait resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click.";
+FastDL sits a download wait, generating timer, or intermediary redirect in front of the real file link. You press the same button you always use, then stare at countdown chrome before the CDN path opens. Miss the moment or refresh mid-generate and you restart the same fastdl timer bypass loop.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The FastDL bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for FastDL.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on FastDL. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported FastDL delay.",
-  },
-];
+That is why direct download bypass, download timer skip, and file host bypass queries cluster around FastDL bypass extension installs—people want the archive from the button, not another gate page.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+## Resolving the archive URL behind the button
+
+Skip Wait watches the download click on supported pages. It resolves the real file URL in the background and bypasses the timer or redirect page that normally appears after the click. You stay on the host you already opened; nothing asks you to paste the share into another website.
+
+Client generating theater gets out of the way when the host allows the link. Required holds still finish honestly so the fetch does not fail with a fake zero-second cheat.
+
+## Mirror clicks without a second timer page
+
+Extra wait screens on mirror and host buttons get the same treatment on supported paths: one click, resolved file, fewer intermediary hops. A skip wait extension install keeps that direct download path working without a separate userscript per button.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What intermediary screen does Skip Wait skip on fastdl.zip downloads?",
-    answer: "Skip Wait bypasses the countdown download page that normally sits between your click and the file, opening the direct download link instead.",
+    question: 'What does Skip Wait skip on FastDL?',
+    answer:
+      'The countdown download page and intermediary screens that normally sit between your click and the file. The extension opens the direct download link when the host allows it.',
   },
   {
-    question: "Does Skip Wait open the direct file link from FastDL download buttons?",
-    answer: "Yes. When you click download on fastdl.zip, the extension resolves the real file URL in the background and skips the timer page.",
+    question: 'Do I still click the download button myself?',
+    answer:
+      'Yes. Use the same button. Skip Wait resolves the real file URL in the background behind that click.',
   },
   {
-    question: "Can I bypass the countdown download page on FastDL with one click?",
-    answer: "Yes. Extra wait screens on mirror and host buttons are also bypassed so your download starts from the resolved link immediately.",
+    question: 'Are mirror button waits covered too?',
+    answer:
+      'Yes on supported paths. Extra wait screens on mirror and host buttons are bypassed so the file opens from the button you pressed.',
   },
   {
-    question: "Is the FastDL bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The FastDL bypass runs on supported pages with no account or paid plan required.",
+    question: 'Is the FastDL bypass free?',
+    answer:
+      'Yes. Skip Wait is free with no account or paid plan required.',
   },
 ];
 
@@ -84,10 +76,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

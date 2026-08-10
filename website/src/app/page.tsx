@@ -6,7 +6,7 @@ import { CapabilitySection } from '@/components/home/CapabilitySection';
 import { FlowSection } from '@/components/home/FlowSection';
 import { ShowcaseSection } from '@/components/home/ShowcaseSection';
 import { FaqSection } from '@/components/home/FaqSection';
-import { SupportCta } from '@/components/home/SupportCta';
+import { SupportCta } from '@/components/layout/SupportCta';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { SITE } from '@/data/constants';
 import { homeWebPageJsonLd, indexRobots } from '@/data/seo';

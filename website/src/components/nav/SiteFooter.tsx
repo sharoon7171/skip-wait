@@ -1,7 +1,7 @@
 import { CHROME_WEB_STORE_URL, CONTACT, REQUEST_SUPPORT_URL, SITE } from '@/data/constants';
 import { homeSections, routes } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
-import { BrandIcon } from '@/components/ui/BrandIcon';
+import { BrandIcon } from '@/components/ui/icons';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 

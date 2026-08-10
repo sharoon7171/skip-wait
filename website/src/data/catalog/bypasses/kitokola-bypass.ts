@@ -1,78 +1,86 @@
-import type { BypassFaq, BypassStep, SupportedBypass } from '@/types/catalog';
+import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = "Kitokola";
+const name = 'Kitokola';
 
-const bypassType = "Direct Download";
+const bypassType = 'Direct Download';
 
-const description = "Kitokola bypass skips the on page download countdown timer and opens your direct file download link without the usual forced delay or wait page.";
+const description =
+  'Kitokola bypass that clears the on-page download countdown so Skip Wait can open the direct file link without the usual forced wait after you press download.';
 
-const domains = [
-  "kitokola.id",
-] as const;
+const domains = ['kitokola.id'] as const;
 
 const keywords = [
-  "kitokola bypass",
-  "Kitokola bypass extension",
-  "kitokola timer bypass",
-  "direct download",
-  "skip countdown timer",
-  "bypass countdown timer",
-  "skip waiting page",
-  "link shortener bypass",
-  "skip wait extension",
-  "direct download bypass",
-  "download timer skip",
-  "file host bypass",
+  'kitokola bypass',
+  'kitokola bypass chrome',
+  'kitokola bypass extension',
+  'bypass kitokola',
+  'skip kitokola',
+  'kitokola timer bypass',
+  'kitokola download bypass',
+  'kitokola countdown',
+  'direct download',
+  'direct download bypass',
+  'download timer skip',
+  'file host bypass',
+  'skip countdown timer',
+  'bypass countdown timer',
+  'skip waiting page',
+  'skip wait extension',
 ] as const;
 
-const intro = "Kitokola bypass skips the on page download countdown timer and opens your direct file download link without the usual forced delay or wait page. Install Skip Wait once and it runs automatically on supported pages.";
+const intro =
+  'A Kitokola bypass search usually means the download button started an on-page countdown instead of the file. Skip Wait is the free Chrome extension that clears that timer busywork and opens the direct link when the page allows it—without a separate wait screen.';
 
-const problem = "Kitokola often sits a download wait, generating timer, or intermediary screen in front of the real file link.";
+const body = `## Download buttons that start a clock first
 
-const howItWorks = "Instead of sitting on a generating screen, Skip Wait fetches the direct link and starts the file path immediately when the host allows it.";
+Kitokola posts often put a countdown between the click and the file path. You press download, watch the timer, then finally get the host or direct link. The archive does not change during that pause.
 
-const steps: readonly BypassStep[] = [
-  {
-    title: "Add Skip Wait to Chrome",
-    body: "Install Skip Wait from the Chrome Web Store. The Kitokola bypass turns on automatically on supported pages—no account needed.",
-  },
-  {
-    title: "Keep the extension enabled",
-    body: "Leave Skip Wait on in Chrome. There is nothing to configure for Kitokola.",
-  },
-  {
-    title: "Click download as usual",
-    body: "Use the same download button you already click on Kitokola. Skip Wait resolves the wait behind it.",
-  },
-  {
-    title: "Reach the destination faster",
-    body: "Skip Wait runs in the background on the matching page and moves you past the supported Kitokola delay.",
-  },
-];
+That is why kitokola timer bypass and download timer skip sit next to direct download bypass: people want the file, not another forced delay on every press.
 
-const skips = [
-  "Direct-download generating timers",
-  "Download generating timers after button clicks",
-  "Intermediary redirect pages before the file",
-  "Extra wait screens on mirror and host buttons",
-] as const;
+### What the countdown actually delays
+
+- On-page timers after Download clicks
+- Intermediary screens before the file path appears
+- Extra waits that repeat on mirror-style buttons
+- Manual refreshes when the countdown stalls mid-way
+
+## Opening the file from the same click
+
+Skip Wait watches the download UI you already use. Instead of sitting on the generating or countdown chrome, it fetches the direct link and starts the file path when the host allows it.
+
+You stay on the post—no paste tool. Client-only wait UI gets out of the way; any host-enforced release still finishes honestly.
+
+## Forced delays that never improve the download
+
+Watching the clock on every file wastes time without changing the bytes. A Kitokola bypass extension install keeps the direct path on supported pages so the button you pressed opens the file instead of another countdown.
+`;
+
 
 const faq: readonly BypassFaq[] = [
   {
-    question: "What on-page countdown does Skip Wait skip on kitokola.id downloads?",
-    answer: "Skip Wait bypasses the on-page download countdown timer on kitokola.id and opens your direct file download link without the usual delay.",
+    question: 'What does a Kitokola bypass skip?',
+    answer:
+      'The on-page download countdown and wait chrome so the direct file link opens when the page allows it.',
   },
   {
-    question: "Can I get a direct file link from Kitokola without the usual delay?",
-    answer: "Yes. The extension fetches the direct link and starts the file path immediately instead of sitting on a generating screen.",
+    question: 'Do I still press the same download button?',
+    answer:
+      'Yes. Skip Wait resolves the wait behind that click—no alternate download page hunt.',
   },
   {
-    question: "How does Skip Wait handle Kitokola download button waits?",
-    answer: "Intermediary redirect pages and extra wait screens on mirror buttons are bypassed after you press download on kitokola.id.",
+    question: 'Is every delay removed instantly?',
+    answer:
+      'Countdown busywork goes away. When the host still gates release, the file opens as soon as that path is allowed—a reliable Kitokola download bypass.',
   },
   {
-    question: "Is the Kitokola bypass free with Skip Wait?",
-    answer: "Yes. Skip Wait is a free Chrome extension. The Kitokola bypass runs on supported pages with no account or paid plan required.",
+    question: 'Will mirror-style buttons also skip the wait?',
+    answer:
+      'Yes on supported paths. Extra wait screens before the file are cleared from the button you pressed.',
+  },
+  {
+    question: 'Is this free?',
+    answer:
+      'Yes. Skip Wait is free. The Kitokola path runs on supported pages with no paid plan.',
   },
 ];
 
@@ -84,10 +92,7 @@ export const bypass = {
   keywords,
   article: {
     intro,
-    problem,
-    howItWorks,
-    steps,
-    skips,
+    body,
     faq,
   },
 } satisfies SupportedBypass;

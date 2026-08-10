@@ -1,4 +1,4 @@
-import { OptimizedIcon } from '@/components/ui/OptimizedIcon';
+import { OptimizedIcon } from '@/components/ui/icons/OptimizedIcon';
 
 type BrandIconProps = {
   size: number;
