@@ -3,6 +3,7 @@ import { bypass as b4downloadBypass } from './bypasses/4download-bypass';
 import { bypass as adfocusBypass } from './bypasses/adfocus-bypass';
 import { bypass as adlinkflyLinksGoBypass } from './bypasses/adlinkfly-links-go-bypass';
 import { bypass as adlinkflyTokenPayloadBypass } from './bypasses/adlinkfly-token-payload-bypass';
+import { bypass as alpharedeBypass } from './bypasses/alpharede-bypass';
 import { bypass as ankergamesBypass } from './bypasses/ankergames-bypass';
 import { bypass as anygameBypass } from './bypasses/anygame-bypass';
 import { bypass as apktealBypass } from './bypasses/apkteal-bypass';
@@ -117,6 +118,7 @@ export const bypasses: readonly SupportedBypass[] = [
   adfocusBypass,
   adlinkflyLinksGoBypass,
   adlinkflyTokenPayloadBypass,
+  alpharedeBypass,
   ankergamesBypass,
   anygameBypass,
   apktealBypass,

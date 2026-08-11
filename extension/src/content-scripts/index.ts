@@ -80,6 +80,7 @@ import { initDevuploadsMediator } from '../sites/devuploads';
 import { initDuploadBypass } from '../sites/dupload';
 import { initEarn4linkMediator, initEarn4linkUnlock } from '../sites/earn4link';
 import { initEarnlinksIntermediate, initEarnlinksUnlock } from '../sites/earnlinks';
+import { initAlpharedeBypass } from '../sites/alpharede';
 import { initFinityredeBypass } from '../sites/finityrede';
 import { initTendrivesMediator } from '../sites/tendrives';
 import { initTech8sAdrinolinks, initTech8sGate, initTech8sRedirect } from '../sites/tech8s';
@@ -237,6 +238,7 @@ const INITS = [
   initEarn4linkUnlock,
   initEarnlinksIntermediate,
   initEarnlinksUnlock,
+  initAlpharedeBypass,
   initFinityredeBypass,
   initTendrivesMediator,
   initTech8sRedirect,
