@@ -32,6 +32,7 @@ import { initIcutlinkLinksGo, initIcutlinkMediatorPage } from '../sites/icutlink
 import { initAnygameProductPage } from '../sites/anygame';
 import { initApktealProductPage } from '../sites/apkteal';
 import { initLiteapksDirectDownload } from '../sites/liteapks';
+import { initLatestmodapksDirectDownload } from '../sites/latestmodapks';
 import { initFilecrFileDownload, initFilecrProductPage } from '../sites/filecr';
 import { initFilecryptGate } from '../sites/filecrypt';
 import { initFilehippoBypass } from '../sites/filehippo';
@@ -194,6 +195,7 @@ const INITS = [
   initAnygameProductPage,
   initApktealProductPage,
   initLiteapksDirectDownload,
+  initLatestmodapksDirectDownload,
   initFilecrProductPage,
   initFilecrFileDownload,
   initFilecryptGate,
