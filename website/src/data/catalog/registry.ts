@@ -36,6 +36,7 @@ import { bypass as finityredeBypass } from './bypasses/finityrede-bypass';
 import { bypass as flightsimToBypass } from './bypasses/flightsim-to-bypass';
 import { bypass as gaeaOperationsLockrBypass } from './bypasses/gaea-operations-lockr-bypass';
 import { bypass as gamesnostalgiaBypass } from './bypasses/gamesnostalgia-bypass';
+import { bypass as gapkmodBypass } from './bypasses/gapkmod-bypass';
 import { bypass as genlinkBypass } from './bypasses/genlink-bypass';
 import { bypass as goostBypass } from './bypasses/goost-bypass';
 import { bypass as gplinksBypass } from './bypasses/gplinks-bypass';
@@ -152,6 +153,7 @@ export const bypasses: readonly SupportedBypass[] = [
   flightsimToBypass,
   gaeaOperationsLockrBypass,
   gamesnostalgiaBypass,
+  gapkmodBypass,
   genlinkBypass,
   goostBypass,
   gplinksBypass,
