@@ -2,8 +2,13 @@ import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/f
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import {
+  MSG_VEXFILE_VERIFY_HOOK,
+  VEXFILE_CODE_RE,
+  VEXFILE_HOSTS,
+  VEXFILE_VERIFIED_ATTR,
+} from './hosts';
 
-const HOSTS = ['vexfile.com'] as const;
 const OVERLAY_ID = 'skip-wait-vexfile-overlay';
 const BOOT_STYLE_ID = 'skip-wait-vexfile-boot';
 const GATE_STYLE_ID = 'skip-wait-vexfile-turnstile-gate';
@@ -11,7 +16,6 @@ const PIN_STYLE_ID = 'skip-wait-vexfile-captcha-pin';
 const WIDGET_ID = 'skip-wait-vexfile-turnstile';
 const ANC_ATTR = 'data-sw-vex-pin';
 const BUCKET_RE = /\/d_bucket\/[A-Za-z0-9]+/;
-const CODE_RE = /^\/download\/([A-Za-z0-9]+)(?:\/|$)/i;
 const SIZE_RE = /(\d+(?:\.\d+)?\s*[KMGT]?B)/i;
 const ACTION = 'Direct Download · Skip Wait — No Timer, No Mediator';
 const VISIBLE = [
@@ -34,8 +38,7 @@ const fileMeta = (): { name: string; size: string } => ({
   size: document.querySelector('.file-size')?.textContent?.match(SIZE_RE)?.[1]?.replace(/\s+/g, ' ').trim() ?? '',
 });
 
-const token = (): string =>
-  document.querySelector<HTMLInputElement>('[name="cf-turnstile-response"]')?.value.trim() ?? '';
+const verified = (): boolean => document.documentElement.getAttribute(VEXFILE_VERIFIED_ATTR) === '1';
 
 const boot = (): void => {
   if (document.getElementById(BOOT_STYLE_ID)) return;
@@ -91,7 +94,7 @@ const stackGate = (widget: HTMLElement): void => {
     `{display:block!important;visibility:visible!important;pointer-events:auto!important;opacity:1!important;z-index:2147483647!important}`;
 };
 
-const waitTurnstile = async (overlay: FullPageOverlay): Promise<() => void> => {
+const waitVerified = async (overlay: FullPageOverlay): Promise<() => void> => {
   overlay.setStatus('Complete the Turnstile check below.');
   let stopPin: (() => void) | null = null;
   let pinnedFor = '';
@@ -119,7 +122,7 @@ const waitTurnstile = async (overlay: FullPageOverlay): Promise<() => void> => {
   const t0 = Date.now();
   while (Date.now() - t0 < 180_000) {
     pin();
-    if (token().length > 20 && Date.now() - t0 >= 400) return release;
+    if (verified()) return release;
     await sleep(200);
   }
   release();
@@ -129,7 +132,6 @@ const waitTurnstile = async (overlay: FullPageOverlay): Promise<() => void> => {
 const mint = async (): Promise<string> => {
   const step2 = document.querySelector<HTMLAnchorElement>('a.generate-link')?.href;
   if (!step2) throw new Error('step2');
-  if (BUCKET_RE.test(step2)) return step2;
   const res = await fetch(step2, { credentials: 'include', cache: 'no-store' });
   if (!res.ok) throw new Error('step2');
   const bucket = (await res.text()).match(BUCKET_RE)?.[0];
@@ -148,11 +150,10 @@ const unlock = async (): Promise<void> => {
       overlay.setAction(ready, ACTION);
       return;
     }
-    releasePin = await waitTurnstile(overlay);
+    releasePin = await waitVerified(overlay);
     overlay.setStatus('Resolving direct CDN…');
     const url = await mint();
-    releasePin?.();
-    releasePin = null;
+    releasePin();
     overlay.setStatus('Ready — tap Direct Download when you want the file.');
     overlay.setAction(url, ACTION);
   } catch {
@@ -164,9 +165,10 @@ const unlock = async (): Promise<void> => {
 };
 
 export const initVexfileBypass = (): void => {
-  if (window !== window.top || !isAllowedHost(HOSTS) || started) return;
-  if (!CODE_RE.test(location.pathname)) return;
+  if (window !== window.top || !isAllowedHost(VEXFILE_HOSTS) || started) return;
+  if (!VEXFILE_CODE_RE.test(location.pathname)) return;
   started = true;
+  chrome.runtime.sendMessage({ type: MSG_VEXFILE_VERIFY_HOOK });
   whenDomParsed(() => {
     void unlock();
   });

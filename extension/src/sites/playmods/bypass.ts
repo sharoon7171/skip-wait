@@ -7,21 +7,31 @@ const WAIT = '…';
 const DONE = 'data-skipwait-playmods';
 const PENDING = 'data-skipwait-playmods-wait';
 const STYLE = 'skipwait-playmods';
-const ALL = /\/all-download\/?$/i;
-const MEDIATOR = /\/download\/?$/i;
 
 const jobs = new Map<string, Promise<string>>();
 const ready = new WeakMap<HTMLAnchorElement, string>();
-
-function isMediator(path: string): boolean {
-  return MEDIATOR.test(path) && !ALL.test(path);
-}
 
 function hop(versionId: string): string {
   return `${location.origin}/download/version/${versionId}?scheme=${location.protocol.slice(0, -1)}`;
 }
 
-function versionIdFrom(root: ParentNode): string {
+function versionIdInPath(pathname: string): string | null {
+  return pathname.match(/\/(\d+)-download\/?$/i)?.[1] ?? null;
+}
+
+function isAllDownload(pathname: string): boolean {
+  return /\/all-download\/?$/i.test(pathname);
+}
+
+function isAllVersions(pathname: string): boolean {
+  return /\/all-versions\/?$/i.test(pathname);
+}
+
+function isMediator(pathname: string): boolean {
+  return /\/download\/?$/i.test(pathname) && !isAllDownload(pathname) && !versionIdInPath(pathname);
+}
+
+function versionIdFromDoc(root: ParentNode): string {
   const id = root.querySelector('#downloadStatejs_id')?.getAttribute('versionId')?.trim();
   if (!id) throw new Error('versionId');
   return id;
@@ -33,17 +43,26 @@ function brand(a: HTMLAnchorElement, text: string): void {
     row.textContent = text;
     return;
   }
+  const hist = a.querySelector('.historyV-exhibition-detail-dn');
+  if (hist) {
+    hist.textContent = text;
+    return;
+  }
   if (!a.classList.contains('btn-download1')) return;
   const size = a.querySelector('span');
   a.replaceChildren(text, ...(size ? [' ', size] : []));
 }
 
-function resolve(href: string): Promise<string> {
+function labelFor(a: HTMLAnchorElement): string {
+  return a.classList.contains('btn-download1') ? LABEL_APK : LABEL;
+}
+
+function resolveMediator(href: string): Promise<string> {
   const hit = jobs.get(href);
   if (hit) return hit;
   const job = fetch(href, { credentials: 'include', cache: 'no-store' }).then(async (res) => {
     if (!res.ok) throw new Error(`mediator ${res.status}`);
-    return hop(versionIdFrom(new DOMParser().parseFromString(await res.text(), 'text/html')));
+    return hop(versionIdFromDoc(new DOMParser().parseFromString(await res.text(), 'text/html')));
   });
   jobs.set(href, job);
   return job;
@@ -55,20 +74,44 @@ function bind(a: HTMLAnchorElement, url: string): void {
   a.removeAttribute('target');
   a.removeAttribute(PENDING);
   a.setAttribute(DONE, '1');
-  brand(a, a.classList.contains('btn-download1') ? LABEL_APK : LABEL);
+  brand(a, labelFor(a));
 }
 
-function wireMediator(a: HTMLAnchorElement): void {
-  if (ready.has(a) || a.hasAttribute(PENDING) || !URL.canParse(a.href)) return;
+function wire(a: HTMLAnchorElement): void {
+  if (ready.has(a) || a.hasAttribute(PENDING) || a.hasAttribute(DONE) || !URL.canParse(a.href)) return;
   const u = new URL(a.href);
-  if (u.hostname !== location.hostname || !isMediator(u.pathname)) return;
+  if (u.hostname !== location.hostname) return;
+
+  const vid = versionIdInPath(u.pathname);
+  if (vid) {
+    a.setAttribute(PENDING, '1');
+    brand(a, WAIT);
+    bind(a, hop(vid));
+    return;
+  }
+
+  if (isAllDownload(u.pathname) || isAllVersions(u.pathname)) {
+    if (a.classList.contains('btn-download1')) {
+      a.setAttribute(DONE, '1');
+      brand(a, LABEL_APK);
+    }
+    return;
+  }
+
+  if (!isMediator(u.pathname)) return;
+  if (!a.classList.contains('btn-download1') && !a.querySelector('.detail-downloadBtn')) return;
+
   const href = u.href;
   a.setAttribute(PENDING, '1');
   a.removeAttribute('href');
   brand(a, WAIT);
-  void resolve(href).then((url) => {
+  void resolveMediator(href).then((url) => {
     if (a.isConnected) bind(a, url);
   });
+}
+
+function apply(): void {
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('a[href]')) wire(a);
 }
 
 function boot(): void {
@@ -79,18 +122,29 @@ function boot(): void {
     `a[${PENDING}],a[${PENDING}] .detail-downloadBtn{pointer-events:none!important;opacity:.55;cursor:wait!important}` +
     `a[${DONE}] .detail-downloadBtn,a[${PENDING}] .detail-downloadBtn{width:auto!important;min-width:99px;padding:0 14px!important;flex:0 0 auto!important;box-sizing:border-box!important}` +
     `a[${DONE}] .detail-downloadBtn>div,a[${PENDING}] .detail-downloadBtn>div{white-space:nowrap!important;overflow:visible!important}` +
-    `.detail-version-card-content .detail-version-desp{width:auto!important;flex:1 1 auto!important;min-width:0!important}`;
+    `.detail-version-card-content .detail-version-desp{width:auto!important;flex:1 1 auto!important;min-width:0!important}` +
+    `a[${DONE}] .historyV-exhibition-detail-dn,a[${DONE}]:hover .historyV-exhibition-detail-dn,a[${PENDING}] .historyV-exhibition-detail-dn{color:#fff!important}`;
   document.documentElement.append(s);
   document.addEventListener(
     'click',
     (e) => {
       const a = (e.target as Element | null)?.closest('a');
-      if (!(a instanceof HTMLAnchorElement)) return;
-      const url = ready.get(a);
-      if (!url) return;
+      if (!(a instanceof HTMLAnchorElement) || !URL.canParse(a.href)) return;
+      const cached = ready.get(a);
+      if (cached) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        location.assign(cached);
+        return;
+      }
+      const u = new URL(a.href);
+      if (u.hostname !== location.hostname) return;
+      const vid = versionIdInPath(u.pathname);
+      if (!vid) return;
       e.preventDefault();
       e.stopImmediatePropagation();
-      location.assign(url);
+      bind(a, hop(vid));
+      location.assign(hop(vid));
     },
     true,
   );
@@ -99,28 +153,19 @@ function boot(): void {
 export function initPlaymodsBypass(): void {
   if (!isAllowedHost(HOSTS)) return;
 
+  const pathVid = versionIdInPath(location.pathname);
+  if (pathVid) {
+    location.replace(hop(pathVid));
+    return;
+  }
   if (isMediator(location.pathname)) {
-    whenDomParsed(() => location.replace(hop(versionIdFrom(document))));
+    whenDomParsed(() => location.replace(hop(versionIdFromDoc(document))));
     return;
   }
 
   boot();
   whenDomParsed(() => {
-    if (ALL.test(location.pathname)) {
-      for (const a of document.querySelectorAll<HTMLAnchorElement>('a[href]')) {
-        if (a.querySelector('.detail-downloadBtn')) wireMediator(a);
-      }
-      return;
-    }
-    for (const a of document.querySelectorAll<HTMLAnchorElement>('a.btn-download1.ptn[href]')) {
-      if (!URL.canParse(a.href)) continue;
-      const u = new URL(a.href);
-      if (u.hostname !== location.hostname) continue;
-      if (isMediator(u.pathname)) wireMediator(a);
-      else if (ALL.test(u.pathname)) {
-        a.setAttribute(DONE, '1');
-        brand(a, LABEL_APK);
-      }
-    }
+    apply();
+    new MutationObserver(apply).observe(document.documentElement, { childList: true, subtree: true });
   });
 }

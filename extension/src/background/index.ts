@@ -25,6 +25,7 @@ import { initDuploadHoldNav, initDuploadResolve } from '../sites/dupload';
 import { initEarnlinksChain } from '../sites/earnlinks';
 import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot';
 import { initWorkinkMainWorldInject } from '../sites/workink';
+import { initVexfileMainWorldInject } from '../sites/vexfile';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -55,3 +56,4 @@ initDevuploadsResolve();
 initDuploadHoldNav();
 initDuploadResolve();
 initEarnlinksChain();
+initVexfileMainWorldInject();
