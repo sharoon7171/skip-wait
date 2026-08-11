@@ -75,6 +75,7 @@ import { bypass as onhaxpkBypass } from './bypasses/onhaxpk-bypass';
 import { bypass as onlinetoolsBypass } from './bypasses/onlinetools-bypass';
 import { bypass as ouoBypass } from './bypasses/ouo-bypass';
 import { bypass as pesktopBypass } from './bypasses/pesktop-bypass';
+import { bypass as playmodsBypass } from './bypasses/playmods-bypass';
 import { bypass as plingOpendesktopBypass } from './bypasses/pling-opendesktop-bypass';
 import { bypass as prmoviesBypass } from './bypasses/prmovies-bypass';
 import { bypass as rinkuBypass } from './bypasses/rinku-bypass';
@@ -193,6 +194,7 @@ export const bypasses: readonly SupportedBypass[] = [
   onlinetoolsBypass,
   ouoBypass,
   pesktopBypass,
+  playmodsBypass,
   plingOpendesktopBypass,
   prmoviesBypass,
   rinkuBypass,
