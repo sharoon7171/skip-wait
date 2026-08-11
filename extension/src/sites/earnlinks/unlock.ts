@@ -1,61 +1,82 @@
 import { linksGoFormFromHtml, postLinksGo } from '../adlinkfly/unlock';
-import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { whenDomReady } from '../../utils/domain-check';
-import { isEarnlinksShortUrl } from './chain';
+import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
+import {
+  EARNLINKS_HOSTS,
+  EARNLINKS_MEDIATOR_HOSTS,
+  earnlinksAliasFromPath,
+} from './hosts';
+import { createOverlay, spoofVisibility } from './overlay';
 
-const ID = 'skip-wait-earnlinks-overlay';
-const BOOT = 'skip-wait-earnlinks-boot';
-const NOTE = {
-  lead: 'Hang tight — unlocking your link.',
-  detail: "You don't need to tap anything on the page.",
-} as const;
-
+const mount = createOverlay('skip-wait-earnlinks-unlock', 'skip-wait-earnlinks-unlock-boot');
 let done = false;
 
-const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+function hasForm(): boolean {
+  return !!document.querySelector('#go-link input[name="ad_form_data"]');
+}
 
-const counterSec = (): number => {
-  const m = document.documentElement.innerHTML.match(/["']counter_value["']\s*:\s*["']?(\d+)/);
-  return m?.[1] ? parseInt(m[1], 10) : 0;
-};
-
-const mount = (status: string) => {
-  const active = overlayActiveClass(ID);
-  document.documentElement.classList.add(active);
-  if (!document.getElementById(BOOT)) {
-    const s = document.createElement('style');
-    s.id = BOOT;
-    s.textContent = buildFullPageOverlayCss(ID, active);
-    document.documentElement.appendChild(s);
+function fromMediator(): boolean {
+  try {
+    return hostnameMatches(new URL(document.referrer).hostname, EARNLINKS_MEDIATOR_HOSTS);
+  } catch {
+    return false;
   }
-  return createFullPageOverlay({ id: ID, brand: 'Skip Wait', note: NOTE, status });
-};
+}
 
-export const initEarnlinksUnlock = (): void => {
-  if (window !== window.top || !isEarnlinksShortUrl() || done) return;
+async function unlock(): Promise<void> {
+  if (done) return;
   done = true;
-  const overlay = mount('Starting Earnlinks…');
-  void (async () => {
-    await whenDomReady(
-      () => !!document.querySelector('#go-link input[name="ad_form_data"]') && counterSec() > 0,
-    );
-    void chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => undefined);
-    try {
-      document.cookie = 'ab=1; path=/';
-    } catch {}
-    const sec = counterSec();
-    overlay.setStatus('Unlocking…');
-    overlay.startCountdown(Date.now() + sec * 1000);
-    await sleep(sec * 1000);
-    overlay.hideCountdown();
-    const form = linksGoFormFromHtml(document.documentElement.outerHTML, location.href);
-    const url = form ? await postLinksGo(form, location.href) : null;
-    if (!url) {
-      overlay.setError('Could not unlock. Reload and try again.');
-      return;
+  spoofVisibility();
+  document.cookie = 'ab=1; path=/';
+  const overlay = mount('Unlocking…');
+  const form = linksGoFormFromHtml(document.documentElement.outerHTML, location.href);
+  if (!form) {
+    overlay.setError('Unlock form missing.');
+    return;
+  }
+  const url = await postLinksGo(form, location.href);
+  if (!url) {
+    overlay.setError('Could not unlock.');
+    return;
+  }
+  overlay.setStatus('Opening…');
+  location.replace(url);
+}
+
+function run(): void {
+  if (done) return;
+  if (!earnlinksAliasFromPath(location.pathname)) return;
+
+  if (hasForm()) {
+    void unlock();
+    return;
+  }
+
+  if (document.readyState === 'loading') return;
+
+  if (fromMediator()) {
+    const overlay = mount('Unlocking…');
+    if (document.readyState === 'complete') {
+      done = true;
+      overlay.setError('Unlock form missing.');
     }
-    overlay.setStatus('Opening…');
-    location.replace(url);
-  })();
-};
+    return;
+  }
+
+  mount('Waiting for unlock…');
+}
+
+export function initEarnlinksUnlock(): void {
+  if (window !== window.top || !isAllowedHost(EARNLINKS_HOSTS)) return;
+  if (!earnlinksAliasFromPath(location.pathname)) return;
+  run();
+  if (done) return;
+  const observer = new MutationObserver(() => {
+    run();
+    if (done) observer.disconnect();
+  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run, true);
+    document.addEventListener('readystatechange', run, true);
+  }
+}

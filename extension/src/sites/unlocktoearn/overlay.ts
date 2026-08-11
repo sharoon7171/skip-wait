@@ -3,13 +3,10 @@ import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/o
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
-  detail: 'Skip Wait is handling the waiting pages for you.',
+  detail: "You don't need to tap anything on the page.",
 } as const;
 
-export function createUnlocktoearnOverlay(
-  id: string,
-  bootStyleId: string,
-): (status: string) => FullPageOverlay {
+export function createOverlay(id: string, bootStyleId: string) {
   let ui: FullPageOverlay | null = null;
   return (status: string): FullPageOverlay => {
     const active = overlayActiveClass(id);
@@ -24,12 +21,7 @@ export function createUnlocktoearnOverlay(
       ui.setStatus(status);
       return ui;
     }
-    ui = createFullPageOverlay({
-      id,
-      brand: 'Skip Wait',
-      note: NOTE,
-      status,
-    });
+    ui = createFullPageOverlay({ id, brand: 'Skip Wait', note: NOTE, status });
     return ui;
   };
 }

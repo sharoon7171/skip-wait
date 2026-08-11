@@ -5,15 +5,17 @@ const name = 'JobSheel';
 const bypassType = 'Skip multi step Waits';
 
 const description =
-  'JobSheel bypass skips the forced Google visit, stacked Continue gates, and Get Link waits so you move on without babysitting each step.';
+  'JobSheel bypass skips the baby.php human-check hop, stacked Continue gates, and go.babylinks.in Get Link waits so you move on without babysitting each step.';
 
-const domains = ['jobsheel.com'] as const;
+const domains = ['jobsheel.com', 'go.babylinks.in'] as const;
 
 const keywords = [
   'jobsheel bypass',
   'jobsheel.com bypass',
   'jobsheel timer bypass',
   'jobsheel countdown bypass',
+  'go.babylinks.in bypass',
+  'babylinks bypass',
   'skip jobsheel',
   'skip multi step waits',
   'please wait bypass',
@@ -25,26 +27,24 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A JobSheel bypass search usually means a short hop parked you on a human check, then sent you to Google to “open the first result,” then stacked Continue pages before Get Link. Skip Wait is the free Chrome extension that starts on that short hop, skips the Google detour, and walks the Continue path so skip multi step waits is not a tab tour.';
+  'A JobSheel bypass search usually means a short hop parked you on a human check, then stacked Continue pages before a Babylinks Get Link wait. Skip Wait is the free Chrome extension that starts on that short hop, opens jobsheel.com after the check, walks Continue, and finishes go.babylinks.in unlock in the same path.';
 
-const body = `## Google first-link busywork, then Continue stacking
+const body = `## Baby check, Continue stack, then Babylinks
 
-[JobSheel](https://jobsheel.com/) sits after unlock shorteners such as [Unlock To Earn](/sites/unlock-to-earn-bypass). After the human check, the site normally pushes you into Google search so you click the first jobsheel.com result—then home and article Continue screens, then Get Link. Miss a hop or close a tab early and the path stalls—why people look for jobsheel timer bypass, skip click to continue, and link shortener bypass help instead of babysitting every gate.
-
-The product is the stack: verify, Google visit, Continue, Get Link. One stalled screen undoes the rest.
+[JobSheel](https://jobsheel.com/) sits after unlock shorteners such as [Unlock To Earn](/sites/unlock-to-earn-bypass). After the baby.php human check, the site expects home and article Continue screens, then Get Link into go.babylinks.in. Miss a hop or close a tab early and the path stalls—why people look for jobsheel timer bypass, babylinks bypass, and link shortener bypass help instead of babysitting every gate.
 
 ### Where progress usually dies
 
-- Human check before anything else starts
-- Forced Google “open the first link” hop
+- Human check on baby.php before anything else starts
 - Home and article Continue buttons under ads
-- Get Link delay before the next shortener opens
+- Client unlock timers before the next form submit
+- go.babylinks.in please-wait / Get Link delay before the destination
 
 ## Walking JobSheel in one tab
 
-Skip Wait follows the live JobSheel path in Chrome. It starts only on a real short-link hop—opening the plain homepage alone does not turn on the bypass. After you finish the human check, it creates the session, opens jobsheel.com directly (no Google visit), and advances Continue steps the page already expects.
+Skip Wait follows the live JobSheel path in Chrome. It starts on a real baby.php short-link hop—opening the plain homepage alone does not turn on the bypass. After you finish the human check, it creates the session, opens jobsheel.com directly, and advances Continue steps the page already expects.
 
-Ads stop hiding each button. Client waits get out of the way. When Get Link is ready, the next hop opens in the same tab—often a Links Go waiting page such as go.babylinks.in, which Skip Wait covers under [AdLinkFly Links Go](/sites/adlinkfly-links-go-bypass).
+When Get Link points at go.babylinks.in, the same JobSheel rule imports the Links Go unlock helpers and finishes that waiting page—no separate AdLinkFly host entry required. Ads stop hiding each button. Client waits get out of the way. The next destination opens in the same tab.
 `;
 
 const faq: readonly BypassFaq[] = [
@@ -56,7 +56,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'When does the JobSheel bypass start?',
     answer:
-      'Only when you land on a JobSheel short-link hop from an unlock chain. Opening the homepage alone does not start it.',
+      'Only when you land on a JobSheel baby.php short-link hop from an unlock chain. Opening the homepage alone does not start it.',
   },
   {
     question: 'Is the human check solved for me?',
@@ -66,12 +66,12 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Do I still click Continue by hand?',
     answer:
-      'On supported hops, no. Skip Wait completes the Continue and Get Link flow so ads do not hide each step.',
+      'On supported hops, no. Skip Wait completes the Continue flow and the go.babylinks.in Get Link unlock so ads do not hide each step.',
   },
   {
-    question: 'Is Get Link the final download?',
+    question: 'Is go.babylinks.in covered here or under AdLinkFly?',
     answer:
-      'Often not. JobSheel Get Link usually opens another waiting page. Stay on the tab—Skip Wait continues on that next host when it is supported.',
+      'Under JobSheel. Babylinks is the usual Get Link hop after JobSheel Continue, so Skip Wait handles it on this path.',
   },
   {
     question: 'Is this free?',

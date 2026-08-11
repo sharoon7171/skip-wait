@@ -1,3 +1,3 @@
-export { initEarnlinksIntermediate } from './intermediate';
+export { initEarnlinksMediator } from './mediator';
 export { initEarnlinksUnlock } from './unlock';
-export { initEarnlinksChain, isEarnlinksShortUrl, readEarnlinksChain } from './chain';
+export { EARNLINKS_HOSTS, EARNLINKS_MEDIATOR_HOSTS } from './hosts';

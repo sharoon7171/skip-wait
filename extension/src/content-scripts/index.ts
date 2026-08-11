@@ -11,8 +11,12 @@ import {
   initAdlinkflyLinksGo,
   initAdlinkflyTokenPayload,
 } from '../sites/adlinkfly';
-import { initArolinksUnlock, initArolinksMediator } from '../sites/arolinks';
-import { initJobsheelBaby, initJobsheelMediator } from '../sites/jobsheel';
+// import { initArolinksUnlock, initArolinksMediator } from '../sites/arolinks';
+import {
+  initJobsheelBaby,
+  initJobsheelBabylinksUnlock,
+  initJobsheelMediator,
+} from '../sites/jobsheel';
 import { initUnlocktoearnEntry, initUnlocktoearnMediator } from '../sites/unlocktoearn';
 import { initGplinksGate, initGplinksLinksGo, initGplinksMediator } from '../sites/gplinks';
 import { initNitrolinkMediator, initNitrolinkUnlock } from '../sites/nitrolink';
@@ -82,7 +86,7 @@ import { initDroplinkUnlock } from '../sites/droplink';
 import { initDevuploadsMediator } from '../sites/devuploads';
 import { initDuploadBypass } from '../sites/dupload';
 import { initEarn4linkMediator, initEarn4linkUnlock } from '../sites/earn4link';
-import { initEarnlinksIntermediate, initEarnlinksUnlock } from '../sites/earnlinks';
+import { initEarnlinksMediator, initEarnlinksUnlock } from '../sites/earnlinks';
 import { initAlpharedeBypass } from '../sites/alpharede';
 import { initFinityredeBypass } from '../sites/finityrede';
 import { initTendrivesMediator } from '../sites/tendrives';
@@ -103,7 +107,7 @@ import { initCutyGate } from '../sites/cuty';
 import { initCutwinGate } from '../sites/cutwin';
 import { initExeioGate } from '../sites/exeio';
 import { initLksfyGate, initLksfyMediator } from '../sites/lksfy';
-import { initRinkuGate } from '../sites/rinku';
+// import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
 import { initBoostylinkGate } from '../sites/boostylink';
 import { initKeyforgeGate } from '../sites/keyforge';
@@ -135,7 +139,7 @@ const INITS = [
   initExeioGate,
   initLksfyMediator,
   initLksfyGate,
-  initRinkuGate,
+  // initRinkuGate,
   initBstshrtGate,
   initBoostylinkGate,
   initKeyforgeGate,
@@ -155,12 +159,13 @@ const INITS = [
   initGplinksGate,
   initGplinksMediator,
   initGplinksLinksGo,
-  initArolinksMediator,
-  initArolinksUnlock,
+  // initArolinksMediator,
+  // initArolinksUnlock,
   initUnlocktoearnMediator,
   initUnlocktoearnEntry,
   initJobsheelMediator,
   initJobsheelBaby,
+  initJobsheelBabylinksUnlock,
   initNitrolinkMediator,
   initNitrolinkUnlock,
   initCut4moneyMediator,
@@ -242,7 +247,7 @@ const INITS = [
   initDuploadBypass,
   initEarn4linkMediator,
   initEarn4linkUnlock,
-  initEarnlinksIntermediate,
+  initEarnlinksMediator,
   initEarnlinksUnlock,
   initAlpharedeBypass,
   initFinityredeBypass,

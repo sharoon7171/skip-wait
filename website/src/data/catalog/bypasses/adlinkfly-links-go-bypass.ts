@@ -11,14 +11,11 @@ const domains = [
   'linkjust.com',
   'pahe.plus',
   'go.zovo.ink',
-  'go.babylinks.in',
   'shortnest.com',
   'link.liteshort.com',
 ] as const;
 
 const keywords = [
-  'go.babylinks.in bypass',
-  'babylinks bypass',
   'adlinkfly bypass',
   'bypass adlinkfly',
   'adlinkfly links go bypass',
@@ -55,7 +52,7 @@ Links Go interstitials are paced to burn minutes. You land on please wait second
 - Client timers the server does not always enforce
 - Ad noise while you dig for the real control
 
-Hosts on this page—including go.babylinks.in—share that same Links Go pattern. If you arrived from a [JobSheel](/sites/jobsheel-bypass) Get Link into go.babylinks.in, this is the layer that finishes the wait.
+Hosts on this page share that same Links Go pattern. If you arrived from a [JobSheel](/sites/jobsheel-bypass) Get Link into go.babylinks.in, that hop is covered on the JobSheel page—not listed here.
 
 ## Running Continue and Proceed for you
 
@@ -77,12 +74,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Which Links Go hosts are covered?',
     answer:
-      'The hosts listed in the domains section on this page, including go.babylinks.in. Open any of those short links with Skip Wait enabled and the waiting-page path starts automatically.',
-  },
-  {
-    question: 'Is go.babylinks.in the final download link?',
-    answer:
-      'No. It is a Links Go waiting page—the same please-wait / Get Link pattern as the other hosts here. Skip Wait finishes that interstitial, then opens the destination when unlock is ready.',
+      'The hosts listed in the domains section on this page. Open any of those short links with Skip Wait enabled and the waiting-page path starts automatically. go.babylinks.in after JobSheel is covered under JobSheel.',
   },
   {
     question: 'Will it always skip the full countdown?',

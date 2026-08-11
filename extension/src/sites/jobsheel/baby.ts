@@ -1,13 +1,8 @@
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { isAllowedHost } from '../../utils/domain-check';
-import { jobsheelBabyAlias, writeJobsheelChain } from './chain';
-import { JOBSHEEL_HOME, JOBSHEEL_HOSTS } from './hosts';
-import {
-  createJobsheelOverlay,
-  JOBSHEEL_CAPTCHA_NOTE,
-  JOBSHEEL_NOTE,
-} from './overlay';
+import { JOBSHEEL_HOME, JOBSHEEL_HOSTS, jobsheelAliasFromCookie, jobsheelBabyAlias } from './hosts';
+import { CAPTCHA_NOTE, createOverlay } from './overlay';
 
 const OVERLAY_ID = 'skip-wait-jobsheel-baby';
 const BOOT_STYLE_ID = 'skip-wait-jobsheel-baby-boot';
@@ -20,7 +15,7 @@ const TURNSTILE_IFRAMES = [
   'iframe[src*="turnstile"]',
 ] as const;
 
-const mount = createJobsheelOverlay(OVERLAY_ID, BOOT_STYLE_ID);
+const mount = createOverlay(OVERLAY_ID, BOOT_STYLE_ID);
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 function turnstileToken(): string | null {
@@ -45,14 +40,7 @@ function disarmAutoSubmit(): () => void {
     childList: true,
     subtree: true,
   });
-  return (): void => observer.disconnect();
-}
-
-function pinHost(): HTMLElement | null {
-  return (
-    document.querySelector<HTMLElement>('.captcha-wrap') ??
-    document.querySelector<HTMLElement>('.cf-turnstile')
-  );
+  return () => observer.disconnect();
 }
 
 function clearPinAncestors(widget: HTMLElement): void {
@@ -72,38 +60,29 @@ function clearPinAncestors(widget: HTMLElement): void {
     style.id = GATE_STYLE_ID;
     (document.head ?? document.documentElement).appendChild(style);
   }
-  style.textContent =
-    sels
-      .map(
-        (sel) =>
-          `html.${active} ${sel}{transform:none!important;filter:none!important;perspective:none!important;contain:none!important;overflow:visible!important;opacity:1!important}`,
-      )
-      .join('') +
-    TURNSTILE_IFRAMES.map(
-      (sel) =>
-        `html.${active} ${sel},html.${active} ${sel} *{display:block!important;visibility:visible!important;pointer-events:auto!important;opacity:1!important;z-index:2147483647!important}`,
-    ).join('');
+  style.textContent = sels
+    .map((sel) => `html.${active} ${sel}{transform:none!important}`)
+    .join('');
 }
 
 async function waitToken(): Promise<string> {
-  const overlay = mount('Complete the captcha below.', JOBSHEEL_CAPTCHA_NOTE);
+  const overlay = mount('Complete the captcha below.', CAPTCHA_NOTE);
   let stopPin: (() => void) | null = null;
-  let pinnedFor = '';
   let pinAt = 0;
   const release = (): void => {
     stopPin?.();
     stopPin = null;
-    pinnedFor = '';
     document.getElementById(GATE_STYLE_ID)?.remove();
   };
   const pin = (): void => {
-    const widget = pinHost();
+    const widget =
+      document.querySelector<HTMLElement>('.captcha-wrap') ??
+      document.querySelector<HTMLElement>('.cf-turnstile');
     if (!widget) return;
     if (!widget.id) widget.id = WIDGET_ID;
     clearPinAncestors(widget);
-    if (stopPin && pinnedFor === widget.id && document.getElementById(widget.id)) return;
+    if (stopPin && document.getElementById(widget.id)) return;
     stopPin?.();
-    pinnedFor = widget.id;
     stopPin = pinSiteWidgetOverOverlay({
       overlayId: OVERLAY_ID,
       mount: overlay.turnstileMount,
@@ -147,22 +126,14 @@ async function createSession(alias: string, token: string): Promise<void> {
   });
 }
 
-function hasTp1(alias: string): boolean {
-  return document.cookie.split(';').some((part) => {
-    const [name, ...rest] = part.trim().split('=');
-    return name === 'tp1' && rest.join('=') === alias;
-  });
-}
-
 export function initJobsheelBaby(): void {
-  if (window !== window.top) return;
-  if (!isAllowedHost(JOBSHEEL_HOSTS)) return;
+  if (window !== window.top || !isAllowedHost(JOBSHEEL_HOSTS)) return;
   const alias = jobsheelBabyAlias(location.pathname, location.search);
   if (!alias) return;
 
-  void (async (): Promise<void> => {
+  void (async () => {
     const releaseDisarm = disarmAutoSubmit();
-    mount('Starting JobSheel…', JOBSHEEL_NOTE);
+    mount('Starting JobSheel…');
     document.querySelector('form')?.addEventListener(
       'submit',
       (event) => {
@@ -173,17 +144,14 @@ export function initJobsheelBaby(): void {
     );
 
     const token = await waitToken();
-    mount('Creating JobSheel session…', JOBSHEEL_NOTE);
+    mount('Creating JobSheel session…');
     await createSession(alias, token);
     releaseDisarm();
-    if (!hasTp1(alias)) {
-      mount('JobSheel session was not created.', JOBSHEEL_NOTE).setError(
-        'Complete the captcha again.',
-      );
+    if (jobsheelAliasFromCookie() !== alias) {
+      mount('JobSheel session was not created.').setError('Complete the captcha again.');
       return;
     }
-    await writeJobsheelChain(alias, location.origin);
-    mount('Opening JobSheel…', JOBSHEEL_NOTE);
+    mount('Opening JobSheel…');
     location.replace(JOBSHEEL_HOME);
   })();
 }

@@ -3,16 +3,8 @@ import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/o
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
-  detail: 'Skip Wait is handling JobSheel for you.',
+  detail: "You don't need to tap anything on the page.",
 } as const;
-
-const CAPTCHA_NOTE = {
-  lead: 'Confirm you’re human.',
-  detail: 'Complete the Turnstile check below. We’ll continue automatically when it’s done.',
-} as const;
-
-export type JobsheelNote = typeof NOTE | typeof CAPTCHA_NOTE;
-export { CAPTCHA_NOTE };
 
 export function spoofVisibility(): void {
   chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
@@ -20,7 +12,7 @@ export function spoofVisibility(): void {
 
 export function createOverlay(id: string, bootStyleId: string) {
   let ui: FullPageOverlay | null = null;
-  return (status: string, note: JobsheelNote = NOTE): FullPageOverlay => {
+  return (status: string): FullPageOverlay => {
     const active = overlayActiveClass(id);
     document.documentElement.classList.add(active);
     if (!document.getElementById(bootStyleId)) {
@@ -30,12 +22,16 @@ export function createOverlay(id: string, bootStyleId: string) {
       (document.head ?? document.documentElement).appendChild(style);
     }
     if (ui) {
-      ui.setNote(note);
       ui.setStatus(status);
-      ui.setError(null);
       return ui;
     }
-    ui = createFullPageOverlay({ id, brand: 'Skip Wait', note, status });
+    ui = createFullPageOverlay({
+      id,
+      brand: 'Skip Wait',
+      note: NOTE,
+      status,
+      countdownLabel: 'Your link opens in',
+    });
     return ui;
   };
 }

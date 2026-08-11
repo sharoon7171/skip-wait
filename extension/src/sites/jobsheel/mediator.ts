@@ -1,12 +1,9 @@
-import { whenDomParsed } from '../../utils/domain-check';
-import { clearJobsheelChain, readJobsheelChain } from './chain';
-import { isJobsheelHost } from './hosts';
-import { createJobsheelOverlay, JOBSHEEL_NOTE } from './overlay';
+import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { JOBSHEEL_HOSTS, jobsheelAliasFromCookie } from './hosts';
+import { createOverlay } from './overlay';
 
-const mount = createJobsheelOverlay(
-  'skip-wait-jobsheel-mediator',
-  'skip-wait-jobsheel-mediator-boot',
-);
+const mount = createOverlay('skip-wait-jobsheel-mediator', 'skip-wait-jobsheel-mediator-boot');
+let done = false;
 
 function safelinkForm(alias: string): HTMLFormElement | null {
   for (const form of document.querySelectorAll<HTMLFormElement>(
@@ -20,47 +17,45 @@ function safelinkForm(alias: string): HTMLFormElement | null {
   return null;
 }
 
-function destination(): string | null {
+function babylinksHref(): string | null {
   const href = document.querySelector<HTMLAnchorElement>('a#btn6[href]')?.href?.trim() ?? '';
   if (!/^https?:\/\//i.test(href)) return null;
   try {
     const host = new URL(href).hostname.toLowerCase();
-    return host === 'babylinks.in' || host.endsWith('.babylinks.in') ? href : null;
+    return host === 'go.babylinks.in' || host.endsWith('.babylinks.in') ? href : null;
   } catch {
     return null;
   }
 }
 
+function run(): void {
+  if (done) return;
+  const dest = babylinksHref();
+  if (dest) {
+    done = true;
+    mount('Opening Babylinks…');
+    location.replace(dest);
+    return;
+  }
+  const alias = jobsheelAliasFromCookie();
+  if (!alias) return;
+  const form = safelinkForm(alias);
+  if (!form) return;
+  done = true;
+  mount('Skipping JobSheel gate…');
+  HTMLFormElement.prototype.submit.call(form);
+}
+
 export function initJobsheelMediator(): void {
-  if (window !== window.top) return;
-  if (!isJobsheelHost(location.hostname)) return;
+  if (window !== window.top || !isAllowedHost(JOBSHEEL_HOSTS)) return;
   if (/\/baby\.php$/i.test(location.pathname)) return;
-
-  void (async (): Promise<void> => {
-    const chain = await readJobsheelChain();
-    if (!chain) return;
-
-    const advance = async (): Promise<boolean> => {
-      const dest = destination();
-      if (dest) {
-        mount('Opening Babylinks…', JOBSHEEL_NOTE);
-        await clearJobsheelChain();
-        location.replace(dest);
-        return true;
-      }
-      const form = safelinkForm(chain.alias);
-      if (!form) return false;
-      mount('Skipping JobSheel gate…', JOBSHEEL_NOTE);
-      HTMLFormElement.prototype.submit.call(form);
-      return true;
-    };
-
-    if (await advance()) return;
-    whenDomParsed(() => {
-      void (async (): Promise<void> => {
-        if (await advance()) return;
-        await clearJobsheelChain();
-      })();
-    });
-  })();
+  if (jobsheelAliasFromCookie() || babylinksHref()) mount('Unlocking…');
+  whenDomParsed(run);
+  run();
+  if (done) return;
+  const observer = new MutationObserver(() => {
+    run();
+    if (done) observer.disconnect();
+  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 }
