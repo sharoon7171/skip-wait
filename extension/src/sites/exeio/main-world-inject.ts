@@ -1,35 +1,38 @@
-import { EXEIO_HOSTS, MSG_EXEIO_ADBLOCK } from './hosts';
+import {
+  type ExeioUnlockResult,
+  isExeioUrl,
+  MSG_EXEIO_ADBLOCK,
+  MSG_EXEIO_GO_UNLOCK,
+} from './hosts';
 import { runExeioAdblockBypass } from './adblock-bypass';
+import { runExeioGoUnlock } from './main-world-unlock';
 
-function isExeioUrl(url: string): boolean {
-  try {
-    const h = new URL(url).hostname.toLowerCase();
-    return EXEIO_HOSTS.some((d) => h === d || h.endsWith('.' + d));
-  } catch {
-    return false;
-  }
-}
-
-function inject(tabId: number, frameId?: number): void {
+const injectMain = (tabId: number, frameId: number, func: () => void): void => {
   void chrome.scripting.executeScript({
-    target: frameId === undefined ? { tabId } : { tabId, frameIds: [frameId] },
+    target: { tabId, frameIds: [frameId] },
     world: 'MAIN',
     injectImmediately: true,
-    func: runExeioAdblockBypass,
+    func,
   });
-}
+};
 
 export function initExeioAdblockInject(): void {
-  chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isExeioUrl(details.url)) return;
-    inject(details.tabId, 0);
+  chrome.webNavigation.onCommitted.addListener(({ frameId, tabId, url }) => {
+    if (frameId === 0 && isExeioUrl(url)) injectMain(tabId, 0, runExeioAdblockBypass);
   });
 
-  chrome.runtime.onMessage.addListener((message, sender) => {
-    if (message?.type !== MSG_EXEIO_ADBLOCK) return false;
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const tabId = sender.tab?.id;
-    if (tabId === undefined) return false;
-    inject(tabId, sender.frameId ?? 0);
-    return false;
+    const frameId = sender.frameId ?? 0;
+    if (message?.type === MSG_EXEIO_ADBLOCK) {
+      if (tabId !== undefined) injectMain(tabId, frameId, runExeioAdblockBypass);
+      return false;
+    }
+    if (message?.type !== MSG_EXEIO_GO_UNLOCK || tabId === undefined) return false;
+    void chrome.scripting
+      .executeScript({ target: { tabId, frameIds: [frameId] }, world: 'MAIN', func: runExeioGoUnlock })
+      .then((r) => sendResponse((r[0]?.result as ExeioUnlockResult | undefined) ?? { ok: false, err: 'no result' }))
+      .catch((e: unknown) => sendResponse({ ok: false, err: String(e) }));
+    return true;
   });
 }
