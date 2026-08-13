@@ -1,0 +1,1 @@
+export { initCinefreakMediator } from './mediator';

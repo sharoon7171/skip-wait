@@ -129,6 +129,7 @@ import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
 import { initOceanofgamesDirectDownload } from '../sites/oceanofgames';
 import { initYasir252DirectLinks, initYasir252MediatorPage } from '../sites/yasir252';
 import { initVegamoviesLandingRedirect } from '../sites/vegamovies';
+import { initCinefreakMediator } from '../sites/cinefreak';
 
 const INITS = [
   initStorylineCoursePlayBrand,
@@ -230,6 +231,7 @@ const INITS = [
   initOlamoviesLinkGenerate,
   initPrmoviesRedirect,
   initVegamoviesLandingRedirect,
+  initCinefreakMediator,
   initRomsfunDownloadInstant,
   initShrtflyEntry,
   initShrtflyMediator,
