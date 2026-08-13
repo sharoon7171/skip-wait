@@ -6,11 +6,24 @@ const NOTE = {
   detail: 'Skip Wait is handling the waiting pages for you.',
 } as const;
 
-export function spoofVisibility(): void {
-  chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
-}
+export const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
-export function createOverlay(id: string, bootStyleId: string) {
+export const spoofVisibility = (): void => {
+  chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
+};
+
+export const countdown = async (
+  overlay: FullPageOverlay,
+  ms: number,
+  status: string,
+): Promise<void> => {
+  overlay.setStatus(status);
+  overlay.startCountdown(Date.now() + ms);
+  await sleep(ms);
+  overlay.hideCountdown();
+};
+
+export const createOverlay = (id: string, bootStyleId: string) => {
   let ui: FullPageOverlay | null = null;
   return (status: string): FullPageOverlay => {
     const active = overlayActiveClass(id);
@@ -34,4 +47,4 @@ export function createOverlay(id: string, bootStyleId: string) {
     });
     return ui;
   };
-}
+};

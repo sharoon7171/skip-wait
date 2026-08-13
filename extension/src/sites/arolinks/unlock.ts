@@ -1,63 +1,61 @@
-import { isAllowedHost } from '../../utils/domain-check';
-import {
-  arolinksAliasFromPath,
-  clearArolinksChain,
-  isArolinksShortenerHref,
-  writeArolinksChain,
-} from './chain';
+import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
 import { gtLinkDestination, isUnlockShell, jsRedirect } from './gate';
-import { AROLINKS_DEST_WAIT_MS, AROLINKS_HOSTS, isTimedDestUrl } from './hosts';
-import { createOverlay, spoofVisibility } from './overlay';
+import {
+  AROLINKS_DEST_WAIT_MS,
+  AROLINKS_HOSTS,
+  arolinksAliasFromPath,
+  isArolinksShortenerHref,
+  isTimedDestUrl,
+} from './hosts';
+import { rememberArolinksOrigin } from './origin';
+import { countdown, createOverlay, spoofVisibility } from './overlay';
 
 const mount = createOverlay('skip-wait-arolinks-unlock', 'skip-wait-arolinks-unlock-boot');
-const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+let done = false;
 
-export function initArolinksUnlock(): void {
-  if (!isAllowedHost(AROLINKS_HOSTS)) return;
-  const alias = arolinksAliasFromPath(location.pathname);
-  if (!alias) return;
+const openDest = async (dest: string): Promise<void> => {
+  const overlay = mount('Opening your link…');
+  if (isTimedDestUrl(dest)) {
+    await countdown(overlay, AROLINKS_DEST_WAIT_MS, 'Waiting for access window…');
+  }
+  overlay.setStatus('Opening your link…');
+  location.replace(dest);
+};
 
-  const chainWrite = writeArolinksChain(alias, location.origin);
-  mount('Getting things ready…');
-  spoofVisibility();
-
-  let done = false;
-
-  const run = async (): Promise<void> => {
-    if (done) return;
-
-    if (isUnlockShell()) {
-      const dest = gtLinkDestination();
-      if (!dest) return;
-      done = true;
-      await clearArolinksChain();
-      if (isTimedDestUrl(dest)) {
-        const overlay = mount('Waiting for access window…');
-        overlay.startCountdown(Date.now() + AROLINKS_DEST_WAIT_MS);
-        await sleep(AROLINKS_DEST_WAIT_MS);
-        overlay.hideCountdown();
-      }
-      mount('Opening your link…');
-      location.replace(dest);
-      return;
-    }
-
-    const next = jsRedirect(document.documentElement.innerHTML, location.href);
-    if (!next || isArolinksShortenerHref(next, alias)) return;
-    done = true;
-    mount('Moving to the next page…');
-    await chainWrite;
-    location.replace(next);
-  };
-
-  void run();
+const run = async (): Promise<void> => {
   if (done) return;
 
+  if (isUnlockShell()) {
+    const dest = gtLinkDestination();
+    if (!dest) return;
+    done = true;
+    spoofVisibility();
+    await openDest(dest);
+    return;
+  }
+
+  const next = jsRedirect(document.documentElement.innerHTML, location.href);
+  if (!next || isArolinksShortenerHref(next)) return;
+  done = true;
+  mount('Moving to the next page…');
+  location.replace(next);
+};
+
+export const initArolinksUnlock = (): void => {
+  if (window !== window.top || !isAllowedHost(AROLINKS_HOSTS)) return;
+  const alias = arolinksAliasFromPath(location.pathname);
+  if (!alias) return;
+  rememberArolinksOrigin(alias, location.origin);
+  mount('Getting things ready…');
+  spoofVisibility();
+  const tick = (): void => {
+    void run();
+  };
+  tick();
+  if (done) return;
   const observer = new MutationObserver(() => {
-    void (async () => {
-      await run();
-      if (done) observer.disconnect();
-    })();
+    tick();
+    if (done) observer.disconnect();
   });
   observer.observe(document.documentElement, {
     attributeFilter: ['href'],
@@ -65,4 +63,5 @@ export function initArolinksUnlock(): void {
     childList: true,
     subtree: true,
   });
-}
+  whenDomParsed(tick);
+};

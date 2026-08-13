@@ -11,7 +11,7 @@ import {
   initAdlinkflyLinksGo,
   initAdlinkflyTokenPayload,
 } from '../sites/adlinkfly';
-// import { initArolinksUnlock, initArolinksMediator } from '../sites/arolinks';
+import { initArolinksUnlock, initArolinksMediator } from '../sites/arolinks';
 import {
   initJobsheelBaby,
   initJobsheelBabylinksUnlock,
@@ -159,8 +159,8 @@ const INITS = [
   initGplinksGate,
   initGplinksMediator,
   initGplinksLinksGo,
-  // initArolinksMediator,
-  // initArolinksUnlock,
+  initArolinksMediator,
+  initArolinksUnlock,
   initUnlocktoearnMediator,
   initUnlocktoearnEntry,
   initJobsheelMediator,
