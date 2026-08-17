@@ -1,35 +1,19 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { MSG_INJECT_VISIBILITY_SPOOF } from '../../background/document-visibility-spoof';
-import {
-  clearRinkuChain,
-  isRinkuMainHost,
-  readRinkuChain,
-  rinkuAliasFromPath,
-  writeRinkuChain,
-} from './chain';
+import { completeRinkuChain, isRinkuChainActive } from './chain';
 import {
   isCloudflareChallenge,
-  isRinkuCaptchaGate,
-  isRinkuCountdownGate,
-  isRinkuLandPath,
-  isRinkuOutPath,
-  rinkuCaptchaForm,
   rinkuCaptchaWidget,
-  rinkuHexForm,
-  rinkuUnlockForm,
+  rinkuForm,
 } from './detect';
-import { MSG_RINKU_PAGE_HOOKS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-rinku-overlay';
-const BOOT_STYLE_ID = 'skip-wait-rinku-boot';
 const CAPTCHA_PIN_STYLE_ID = 'skip-wait-rinku-captcha-pin';
 const CAPTCHA_WIDGET_ID = 'skip-wait-rinku-captcha';
-const LAND_ONCE_KEY = 'skip-wait-rinku-land-once';
-const OUT_ONCE_KEY = 'skip-wait-rinku-out-once';
 const FORM_DONE = 'data-skip-wait-submitted';
+const FORM_PACED = 'data-skip-wait-paced';
 const CAPTCHA_IFRAMES = ['iframe[src*="turnstile"]'] as const;
+const UNLOCK_MIN_MS = 21_000;
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
@@ -42,61 +26,33 @@ const CAPTCHA_NOTE = {
 } as const;
 
 let ui: FullPageOverlay | null = null;
-let landStarted = false;
-let outStarted = false;
 let captchaStarted = false;
-let unlockStarted = false;
-
-const requestHooks = (): void => {
-  chrome.runtime.sendMessage({ type: MSG_RINKU_PAGE_HOOKS }).catch(() => {});
-  chrome.runtime.sendMessage({ type: MSG_INJECT_VISIBILITY_SPOOF }).catch(() => {});
-};
-
-const clearSiteTimers = (): void => {
-  const highest = window.setTimeout(() => {}, 0);
-  for (let i = 0; i <= highest; i++) {
-    window.clearTimeout(i);
-    window.clearInterval(i);
-  }
-};
 
 const submitOnce = (form: HTMLFormElement): void => {
   if (form.getAttribute(FORM_DONE) === '1') return;
-  clearSiteTimers();
-  const action = form.getAttribute('action') ?? form.action;
-  const method = form.getAttribute('method') ?? form.method;
-  const fresh = form.cloneNode(true) as HTMLFormElement;
   form.setAttribute(FORM_DONE, '1');
-  form.action = 'about:blank';
-  form.remove();
-  fresh.action = action;
-  fresh.method = method;
-  fresh.setAttribute(FORM_DONE, '1');
-  (document.body ?? document.documentElement).appendChild(fresh);
-  HTMLFormElement.prototype.submit.call(fresh);
+  HTMLFormElement.prototype.submit.call(form);
 };
 
-const claimOnce = (key: string): boolean => {
-  if (sessionStorage.getItem(key) === '1') return false;
-  sessionStorage.setItem(key, '1');
-  return true;
+const completeAndSubmit = (form: HTMLFormElement): void => {
+  void completeRinkuChain().then(() => submitOnce(form));
 };
 
-const bootOverlay = (): void => {
-  const active = overlayActiveClass(OVERLAY_ID);
-  document.documentElement.classList.add(active);
-  if (document.getElementById(BOOT_STYLE_ID)) return;
-  const style = document.createElement('style');
-  style.id = BOOT_STYLE_ID;
-  style.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
-  (document.head ?? document.documentElement).appendChild(style);
+const submitPaced = (form: HTMLFormElement, overlay: FullPageOverlay): void => {
+  form.setAttribute(FORM_PACED, '1');
+  const wait = UNLOCK_MIN_MS - performance.now();
+  if (wait <= 0) {
+    completeAndSubmit(form);
+    return;
+  }
+  overlay.startCountdown(Date.now() + wait);
+  window.setTimeout(() => completeAndSubmit(form), wait);
 };
 
 const mountUi = (
   status: string,
   note: { lead: string; detail?: string } = NOTE,
 ): FullPageOverlay => {
-  bootOverlay();
   if (ui) {
     ui.setNote(note);
     ui.setStatus(status);
@@ -113,134 +69,93 @@ const mountUi = (
   return ui;
 };
 
-const turnstileToken = (): string | null => {
+const hasTurnstileToken = (): boolean => {
   const el = document.querySelector<HTMLInputElement | HTMLTextAreaElement>(
     '[name="cf-turnstile-response"]',
   );
-  const v = el?.value?.trim() ?? '';
-  return v.length > 20 ? v : null;
+  return (el?.value.trim().length ?? 0) > 20;
 };
 
-const runHexContinue = (kind: 'land' | 'out'): void => {
-  const isLand = kind === 'land';
-  if (isLand ? landStarted || !isRinkuLandPath() : outStarted || !isRinkuOutPath()) return;
-  const form = rinkuHexForm();
-  if (!form || form.getAttribute(FORM_DONE) === '1') return;
-  if (!claimOnce(isLand ? LAND_ONCE_KEY : OUT_ONCE_KEY)) return;
-  if (isLand) landStarted = true;
-  else outStarted = true;
-  requestHooks();
-  mountUi(isLand ? 'Skipping land wait…' : 'Finishing exit hop…');
-  if (isLand) document.getElementById('delulu-overlay')?.style.setProperty('display', 'none', 'important');
-  clearSiteTimers();
-  if (!isLand) void clearRinkuChain();
-  requestAnimationFrame(() => requestAnimationFrame(() => submitOnce(form)));
+const revealCaptcha = (widget: HTMLElement): void => {
+  document.getElementById('overlay')?.remove();
+  for (let el = widget.parentElement; el && el !== document.body; el = el.parentElement) {
+    const style = getComputedStyle(el);
+    if (style.display === 'none') el.style.setProperty('display', 'block', 'important');
+    if (style.visibility === 'hidden') el.style.setProperty('visibility', 'visible', 'important');
+    if (style.pointerEvents === 'none') el.style.setProperty('pointer-events', 'auto', 'important');
+  }
 };
 
-const runCaptchaGate = (): void => {
-  if (captchaStarted || !isRinkuCaptchaGate()) return;
-  const form = rinkuCaptchaForm();
-  const widget = rinkuCaptchaWidget();
-  if (!form || !widget) return;
-
+const runCaptchaGate = (form: HTMLFormElement, widget: HTMLElement): void => {
+  if (captchaStarted) return;
   captchaStarted = true;
-  requestHooks();
   const overlay = mountUi('Complete the captcha below.', CAPTCHA_NOTE);
   if (!widget.id) widget.id = CAPTCHA_WIDGET_ID;
   document.getElementById('delulu-overlay')?.style.setProperty('display', 'none', 'important');
+  revealCaptcha(widget);
 
-  let stopPin: (() => void) | null = null;
-  const pin = (): void => {
-    if (stopPin) return;
-    stopPin = pinSiteWidgetOverOverlay({
-      overlayId: OVERLAY_ID,
-      mount: overlay.turnstileMount,
-      widgetId: widget.id,
-      styleId: CAPTCHA_PIN_STYLE_ID,
-      alsoVisibleSelectors: CAPTCHA_IFRAMES,
-    });
-  };
-  pin();
-
-  const tickCaptcha = (): void => {
+  const stopPin = pinSiteWidgetOverOverlay({
+    overlayId: OVERLAY_ID,
+    mount: overlay.turnstileMount,
+    widgetId: widget.id,
+    styleId: CAPTCHA_PIN_STYLE_ID,
+    alsoVisibleSelectors: CAPTCHA_IFRAMES,
+  });
+  const poll = window.setInterval(() => {
     if (!document.contains(form)) {
-      stopPin?.();
+      window.clearInterval(poll);
+      stopPin();
       captchaStarted = false;
       return;
     }
-    pin();
-    if (!turnstileToken()) {
-      requestAnimationFrame(tickCaptcha);
-      return;
-    }
-    stopPin?.();
+    if (!hasTurnstileToken()) return;
+    window.clearInterval(poll);
+    stopPin();
     document.getElementById('sf-lock')?.style.setProperty('display', 'none', 'important');
     document.getElementById('sf-go-btn')?.style.setProperty('display', 'none', 'important');
     overlay.setNote(NOTE);
     overlay.setStatus('Continuing…');
     submitOnce(form);
-  };
-  requestAnimationFrame(tickCaptcha);
+  }, 100);
 };
 
-const runCountdownUnlock = (): void => {
-  if (unlockStarted || !isRinkuCountdownGate()) return;
-  const form = rinkuUnlockForm();
-  if (!form || form.getAttribute(FORM_DONE) === '1') return;
-
-  unlockStarted = true;
-  requestHooks();
-  mountUi('Opening destination…');
-  document.getElementById('redirect-link')?.style.setProperty('display', 'none', 'important');
-  document.getElementById('redirect-message')?.style.setProperty('display', 'none', 'important');
-  document.getElementById('sf-lock-t')?.style.setProperty('display', 'none', 'important');
-  form.style.setProperty('display', 'block', 'important');
-  const count = document.getElementById('count');
-  if (count) count.textContent = '0';
-  document.getElementById('overlay')?.remove();
-  submitOnce(form);
-};
-
-const tick = (): void => {
-  if (isCloudflareChallenge()) return;
-  if (isRinkuLandPath()) {
-    runHexContinue('land');
-    return;
+const tick = (): boolean => {
+  if (isCloudflareChallenge()) return false;
+  const form = rinkuForm();
+  if (!form) return false;
+  const widget = rinkuCaptchaWidget();
+  const countdown = document.getElementById('redirect-link');
+  if (widget && !countdown) {
+    runCaptchaGate(form, widget);
+    return true;
   }
-  if (isRinkuOutPath()) {
-    runHexContinue('out');
-    return;
+  if (!countdown || !document.getElementById('count')) return false;
+  if (form.getAttribute(FORM_PACED) !== '1') {
+    submitPaced(form, mountUi('Opening destination…'));
   }
-  if (isRinkuCaptchaGate()) {
-    runCaptchaGate();
-    return;
-  }
-  if (isRinkuCountdownGate()) runCountdownUnlock();
+  return true;
 };
 
 const watch = (): void => {
-  tick();
-  new MutationObserver(tick).observe(document.documentElement, {
-    attributeFilter: ['href', 'value', 'disabled', 'class', 'style'],
-    attributes: true,
+  let queued = false;
+  const observer = new MutationObserver(() => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      if (tick()) observer.disconnect();
+    });
+  });
+  observer.observe(document.documentElement, {
     childList: true,
     subtree: true,
   });
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
-  window.addEventListener('load', tick, true);
+  if (tick()) observer.disconnect();
 };
 
 export const initRinkuGate = (): void => {
   if (window !== window.top) return;
-
-  if (isRinkuMainHost()) {
-    const alias = rinkuAliasFromPath(location.pathname);
-    if (alias) void writeRinkuChain(alias, location.origin);
-    return;
-  }
-
-  void (async () => {
-    if (!(await readRinkuChain())) return;
-    watch();
-  })();
+  void isRinkuChainActive().then((active) => {
+    if (active) watch();
+  });
 };

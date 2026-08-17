@@ -107,7 +107,7 @@ import { initCutyGate } from '../sites/cuty';
 import { initCutwinGate } from '../sites/cutwin';
 import { initExeioGate } from '../sites/exeio';
 import { initLksfyGate, initLksfyMediator } from '../sites/lksfy';
-// import { initRinkuGate } from '../sites/rinku';
+import { initRinkuGate } from '../sites/rinku';
 import { initBstshrtGate } from '../sites/bstshrt';
 import { initBoostylinkGate } from '../sites/boostylink';
 import { initKeyforgeGate } from '../sites/keyforge';
@@ -140,7 +140,7 @@ const INITS = [
   initExeioGate,
   initLksfyMediator,
   initLksfyGate,
-  // initRinkuGate,
+  initRinkuGate,
   initBstshrtGate,
   initBoostylinkGate,
   initKeyforgeGate,
