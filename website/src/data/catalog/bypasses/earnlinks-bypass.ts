@@ -12,6 +12,7 @@ const domains = [
   'linksgo.in',
   'itiexamshala.com',
   'nameefy.com',
+  'jobustecher.letest25.co',
 ] as const;
 
 const keywords = [
@@ -34,6 +35,7 @@ const keywords = [
   'linkco.site shortener',
   'nameefy.com continue',
   'itiexamshala earnlinks',
+  'jobustecher earnlinks',
   'earnlinks chrome extension',
   'earnlinks bypass chrome',
   'earn money short link bypass',

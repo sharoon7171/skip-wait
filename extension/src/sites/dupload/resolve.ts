@@ -1,10 +1,11 @@
 const MSG = 'DUPLOAD_DOWNLOAD2' as const;
 const CDN_RE = /^https:\/\/fs\d+\.dupload\.xyz\/files\/\S+/i;
+const MISSING_RE = /File Not Found|could not be found/i;
 
 type Req = { type: typeof MSG; id: string };
-type Res = { url: string | null };
+type Res = { url: string | null; missing?: boolean };
 
-const mintCdn = async (id: string): Promise<string | null> => {
+const mintCdn = async (id: string): Promise<Res> => {
   const page = `https://dupload.net/${id}`;
   const ctrl = new AbortController();
   const res = await fetch(page, {
@@ -27,9 +28,12 @@ const mintCdn = async (id: string): Promise<string | null> => {
       adblock_detected: '0',
     }),
   });
-  const url = res.url;
-  ctrl.abort();
-  return CDN_RE.test(url) ? url : null;
+  if (CDN_RE.test(res.url)) {
+    ctrl.abort();
+    return { url: res.url };
+  }
+  const text = await res.text();
+  return { url: null, missing: MISSING_RE.test(text) };
 };
 
 export const initDuploadResolve = (): void => {
@@ -41,7 +45,7 @@ export const initDuploadResolve = (): void => {
       return false;
     }
     void mintCdn(id)
-      .then((url) => reply({ url } satisfies Res))
+      .then((res) => reply(res))
       .catch(() => reply({ url: null } satisfies Res));
     return true;
   });
@@ -50,7 +54,9 @@ export const initDuploadResolve = (): void => {
 export const requestCdn = (id: string): Promise<string> =>
   new Promise((resolve, reject) => {
     chrome.runtime.sendMessage({ type: MSG, id } satisfies Req, (res?: Res) => {
-      if (chrome.runtime.lastError || !res?.url) reject(new Error('cdn'));
-      else resolve(res.url);
+      if (chrome.runtime.lastError) reject(new Error('cdn'));
+      else if (res?.url) resolve(res.url);
+      else if (res?.missing) reject(new Error('missing'));
+      else reject(new Error('cdn'));
     });
   });
