@@ -2,10 +2,11 @@ import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/f
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import {
   isCloudflareChallenge,
+  isRinkuUnlockGate,
   rinkuCaptchaWidget,
   rinkuForm,
 } from './detect';
-import { isRinkuMediatorHost } from './mediator';
+import { isRinkuFlowTab } from './flow';
 
 const OVERLAY_ID = 'skip-wait-rinku-overlay';
 const CAPTCHA_PIN_STYLE_ID = 'skip-wait-rinku-captcha-pin';
@@ -119,13 +120,13 @@ const tick = (): boolean => {
   if (isCloudflareChallenge()) return false;
   const form = rinkuForm();
   if (!form) return false;
+  const unlock = isRinkuUnlockGate();
   const widget = rinkuCaptchaWidget();
-  const countdown = document.getElementById('redirect-link');
-  if (widget && !countdown) {
+  if (widget && !unlock) {
     runCaptchaGate(form, widget);
     return true;
   }
-  if (!countdown || !document.getElementById('count')) return false;
+  if (!unlock) return false;
   if (form.getAttribute(FORM_PACED) !== '1') {
     submitPaced(form, mountUi('Opening destination…'));
   }
@@ -151,7 +152,7 @@ const watch = (): void => {
 
 export const initRinkuGate = (): void => {
   if (window !== window.top) return;
-  void isRinkuMediatorHost().then((mediator) => {
-    if (mediator) watch();
+  void isRinkuFlowTab().then((inFlow) => {
+    if (inFlow) watch();
   });
 };
