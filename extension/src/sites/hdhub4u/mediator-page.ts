@@ -1,4 +1,5 @@
-import { isAllowedHost } from '../../utils/domain-check';
+import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { createOverlay } from './overlay';
 
 const MEDIATOR_PAGE_HOSTS = [
   'cryptoinsights.site',
@@ -10,52 +11,56 @@ const MEDIATOR_PAGE_HOSTS = [
   'techmirror.click',
 ] as const;
 
-const MEDIATOR_DESTINATION_STORAGE_KEY = 'o';
+const MEDIATOR_PATH = /^\/homelander\/?$/i;
+const STORAGE_KEY = 'o';
 
-const mediatorCipherDecode = (s: string): string =>
+type StoredEntry = { value?: unknown; expiry?: unknown };
+type MediatorPayload = { o?: unknown };
+
+const mount = createOverlay('skip-wait-hdhub4u-mediator', 'skip-wait-hdhub4u-mediator-boot', {
+  lead: 'Hang tight — opening the next page.',
+  detail: "You don't need to tap anything on the page.",
+});
+
+const rotateLetters = (s: string): string =>
   s.replace(/[a-zA-Z]/g, (c) => {
     const n = c.charCodeAt(0);
     return String.fromCharCode(n >= 97 ? ((n - 84) % 26) + 97 : ((n - 52) % 26) + 65);
   });
 
-function readMediatorStorageValue(): string | null {
-  const raw = localStorage.getItem(MEDIATOR_DESTINATION_STORAGE_KEY);
+function resolveDestination(): string | null {
+  const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return null;
   try {
-    const { value, expiry } = JSON.parse(raw) as { value: string; expiry: number };
+    const { value, expiry } = JSON.parse(raw) as StoredEntry;
+    if (typeof value !== 'string' || typeof expiry !== 'number') return null;
     if (Date.now() > expiry) {
-      localStorage.removeItem(MEDIATOR_DESTINATION_STORAGE_KEY);
+      localStorage.removeItem(STORAGE_KEY);
       return null;
     }
-    return value;
-  } catch {
-    return null;
-  }
-}
-
-function decodeMediatorDestination(encoded: string): string | null {
-  try {
-    const payload = atob(mediatorCipherDecode(atob(atob(encoded))));
-    const { o } = JSON.parse(payload) as { o?: string };
-    return o ? atob(o) : null;
+    const { o } = JSON.parse(atob(rotateLetters(atob(atob(value))))) as MediatorPayload;
+    if (typeof o !== 'string') return null;
+    const { protocol, href } = new URL(atob(o));
+    return protocol === 'https:' || protocol === 'http:' ? href : null;
   } catch {
     return null;
   }
 }
 
 export function initHdhub4uMediatorPage(): void {
-  if (!isAllowedHost(MEDIATOR_PAGE_HOSTS)) return;
-  if (!location.pathname.includes('/homelander')) return;
-  const redirect = (): boolean => {
-    const encoded = readMediatorStorageValue();
-    if (!encoded) return false;
-    const destination = decodeMediatorDestination(encoded);
-    if (!destination || !/^https?:\/\//i.test(destination)) return false;
-    location.replace(destination);
-    return true;
+  if (window !== window.top || !isAllowedHost(MEDIATOR_PAGE_HOSTS)) return;
+  const isEntry = new URLSearchParams(location.search).has('id');
+  if (!isEntry && !MEDIATOR_PATH.test(location.pathname)) return;
+
+  const overlay = mount('Opening the next page…');
+  const open = (): boolean => {
+    const destination = resolveDestination();
+    if (destination) location.replace(destination);
+    return destination !== null;
   };
-  if (redirect()) return;
-  const id = setInterval(() => {
-    if (redirect()) clearInterval(id);
-  }, 50);
+
+  if (!isEntry && open()) return;
+  whenDomParsed(() => {
+    if (!open()) overlay.setError('Could not open the next page. Reload and try again.');
+  });
 }

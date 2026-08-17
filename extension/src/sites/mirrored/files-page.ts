@@ -5,6 +5,13 @@ const BRAND_ID = 'skipwait-mirrored-brand';
 const FILE_PATH_RE = /^\/files\/([A-Za-z0-9]+)\/?$/i;
 const GETLINK_PATH_RE = /^\/getlink\/[A-Za-z0-9]+\/\d+\/?$/i;
 const HASH_RE = /^[a-f0-9]{32}$/i;
+const OUT_URL_RE = /\/out_url\/?$/i;
+const HOST_FORM_SELECTOR = 'form[action*="/out_url"], form[action*="/getlink/"]';
+const BRAND_STATUS = 'Short URLs skipped — Download opens the host directly.';
+
+type HostTarget = { href: string; post?: FormData };
+
+const pending = new WeakMap<HTMLFormElement, Promise<HostTarget | null>>();
 
 function fileHash(): string | null {
   const hash = new URLSearchParams(location.search).get('hash');
@@ -27,28 +34,21 @@ function unlockHref(): string | null {
   return null;
 }
 
-function mirstatsPath(): string | null {
-  const html = document.documentElement.innerHTML;
-  const path = html.match(/ajaxRequest\.open\(\s*["']GET["']\s*,\s*["'](\/mirstats\.php\?[^"']+)["']/)?.[1];
-  return path ?? null;
-}
-
 function isInterstitialPage(): boolean {
-  if (!FILE_PATH_RE.test(location.pathname)) return false;
-  if (fileHash()) return false;
+  if (!FILE_PATH_RE.test(location.pathname) || fileHash()) return false;
   if (!document.querySelector('h3.hdark')) return false;
   if (!/You have requested the file/i.test(document.body?.innerText ?? '')) return false;
   return !!unlockHref();
 }
 
 function isMirrorsPage(): boolean {
-  if (!FILE_PATH_RE.test(location.pathname)) return false;
-  if (!fileHash()) return false;
-  if (!document.getElementById('result')) return false;
-  if (!document.querySelector('.fetch') && !/Fetching hosting links/i.test(document.body?.innerText ?? '')) {
-    return false;
-  }
-  return !!mirstatsPath();
+  return FILE_PATH_RE.test(location.pathname) && !!fileHash();
+}
+
+function isGetlinkPage(): boolean {
+  if (!GETLINK_PATH_RE.test(location.pathname)) return false;
+  if (!/^Your .+ Link/i.test(document.title)) return false;
+  return /Awesome!\s*You have chosen the hosting site/i.test(document.body?.innerText ?? '');
 }
 
 function isExternalHostUrl(href: string): boolean {
@@ -56,10 +56,24 @@ function isExternalHostUrl(href: string): boolean {
     const u = new URL(href, location.origin);
     if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
     if (/mirrored\.to$/i.test(u.hostname) || u.hostname.endsWith('.mirrored.to')) return false;
+    if (/cuty\.io$/i.test(u.hostname) || u.hostname.endsWith('.cuty.io')) return false;
     if (/^(www\.)?(x|twitter|facebook|google)\./i.test(u.hostname)) return false;
     return true;
   } catch {
     return false;
+  }
+}
+
+function hostFromCutyWrap(html: string): string | null {
+  const raw =
+    html.match(/URL=(https:\/\/cuty\.io\/quick\?[^"'\s>]+)/i)?.[1] ??
+    html.match(/href="(https:\/\/cuty\.io\/quick\?[^"]+)"/i)?.[1];
+  if (!raw) return null;
+  try {
+    const dest = new URL(raw.replaceAll('&amp;', '&')).searchParams.get('url');
+    return dest && isExternalHostUrl(dest) ? dest : null;
+  } catch {
+    return null;
   }
 }
 
@@ -73,17 +87,7 @@ function hostUrlFromDocument(root: ParentNode): string | null {
   const clip = root.querySelector('[data-clipboard-text^="http"]')?.getAttribute('data-clipboard-text');
   if (clip && isExternalHostUrl(clip)) return clip;
   const code = root.querySelector('code')?.textContent?.trim();
-  if (code && isExternalHostUrl(code)) return code;
-  return null;
-}
-
-function isGetlinkPage(): boolean {
-  if (!GETLINK_PATH_RE.test(location.pathname)) return false;
-  if (!/^Your .+ Link/i.test(document.title)) return false;
-  if (!/Awesome!\s*You have chosen the hosting site/i.test(document.body?.innerText ?? '')) {
-    return false;
-  }
-  return !!hostUrlFromDocument(document);
+  return code && isExternalHostUrl(code) ? code : null;
 }
 
 function mountBrand(): void {
@@ -102,99 +106,155 @@ function mountBrand(): void {
 
   const value = document.createElement('span');
   value.className = 'id_Success';
-  value.textContent = 'Host list ready — click opens the host.';
+  value.textContent = BRAND_STATUS;
 
   row.append(icon, '\u00a0\u00a0Skip Wait : ', value);
   meta.append(document.createElement('br'), row);
 }
 
-async function resolveHostUrl(getlinkUrl: string, body?: FormData): Promise<string | null> {
-  const init: RequestInit = body
-    ? { method: 'POST', body, credentials: 'include', cache: 'no-store' }
-    : { method: 'GET', credentials: 'include', cache: 'no-store' };
-  const res = await fetch(getlinkUrl, init);
-  if (!res.ok) return null;
-  const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
-  return hostUrlFromDocument(doc);
+async function postForm(form: HTMLFormElement): Promise<string | null> {
+  const action = form.getAttribute('action');
+  if (!action) return null;
+  const res = await fetch(new URL(action, location.origin).href, {
+    method: 'POST',
+    body: new FormData(form),
+    credentials: 'include',
+    cache: 'no-store',
+  });
+  return res.ok ? res.text() : null;
 }
 
-function getlinkActionUrl(el: Element): string | null {
+async function resolveDlOut(form: HTMLFormElement): Promise<HostTarget | null> {
+  const html = await postForm(form);
+  if (!html) return null;
+  const next = new DOMParser()
+    .parseFromString(html, 'text/html')
+    .querySelector<HTMLFormElement>('form[action]');
+  if (!next) return null;
   try {
-    if (el instanceof HTMLFormElement) {
-      const action = el.getAttribute('action');
-      if (!action) return null;
-      const u = new URL(action, location.origin);
-      return GETLINK_PATH_RE.test(u.pathname) ? u.href : null;
-    }
-    if (el instanceof HTMLAnchorElement) {
-      const u = new URL(el.href, location.origin);
-      return GETLINK_PATH_RE.test(u.pathname) ? u.href : null;
-    }
+    const u = new URL(next.getAttribute('action') ?? '', location.origin);
+    return isExternalHostUrl(u.href) ? { href: u.href, post: new FormData(next) } : null;
   } catch {
     return null;
   }
-  return null;
 }
 
-function wireMirrorHostClicks(root: Element): void {
+async function resolveHostTarget(form: HTMLFormElement): Promise<HostTarget | null> {
+  const action = new URL(form.getAttribute('action') ?? '', location.origin);
+  const html = await postForm(form);
+  if (!html) return null;
+  if (OUT_URL_RE.test(action.pathname)) {
+    const href = hostFromCutyWrap(html);
+    return href ? { href } : null;
+  }
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const direct = hostUrlFromDocument(doc) ?? hostFromCutyWrap(html);
+  if (direct) return { href: direct };
+  const dl = doc.querySelector<HTMLFormElement>('form[action*="dl_out.php"]');
+  return dl ? resolveDlOut(dl) : null;
+}
+
+function hostTarget(form: HTMLFormElement): Promise<HostTarget | null> {
+  const started = pending.get(form);
+  if (started) return started;
+  const task = resolveHostTarget(form).catch(() => null);
+  pending.set(form, task);
+  return task;
+}
+
+function retargetForm(form: HTMLFormElement, target: HostTarget, windowTarget: string): void {
+  if (!target.post) return;
+  form.setAttribute('action', target.href);
+  form.method = 'POST';
+  form.target = windowTarget;
+  for (const input of form.querySelectorAll('input[type="hidden"]')) input.remove();
+  for (const [name, value] of target.post.entries()) {
+    if (typeof value !== 'string') continue;
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = name;
+    input.value = value;
+    form.append(input);
+  }
+}
+
+function exposeHostLink(form: HTMLFormElement, target: HostTarget): void {
+  if (target.post) {
+    retargetForm(form, target, '_blank');
+    return;
+  }
+  const btn = form.querySelector('button.get_btn');
+  if (!btn) return;
+  const a = document.createElement('a');
+  a.href = target.href;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.append(btn);
+  form.replaceWith(a);
+}
+
+function openHostTarget(form: HTMLFormElement, target: HostTarget): void {
+  if (target.post) {
+    retargetForm(form, target, '_self');
+    form.submit();
+    return;
+  }
+  location.assign(target.href);
+}
+
+function armHostForms(root: ParentNode): void {
+  for (const form of root.querySelectorAll<HTMLFormElement>(HOST_FORM_SELECTOR)) {
+    if (pending.has(form)) continue;
+    void hostTarget(form).then((target) => {
+      if (target && form.isConnected) exposeHostLink(form, target);
+    });
+  }
+}
+
+function wireHostClicks(root: Element): void {
   root.addEventListener(
     'click',
     (e) => {
-      const target = e.target as Element | null;
-      if (!target?.closest('button.get_btn')) return;
-      if (target.closest('a[href^="javascript"], [onclick*="showStatus"]')) return;
-
-      const form = target.closest<HTMLFormElement>('form[action*="/getlink/"]');
-      const anchor = target.closest<HTMLAnchorElement>('a[href*="/getlink/"]');
-      const source = form ?? anchor;
-      if (!source) return;
-
-      const getlinkUrl = getlinkActionUrl(source);
-      if (!getlinkUrl) return;
-
+      const el = e.target as Element | null;
+      if (!el?.closest('button.get_btn')) return;
+      const form = el.closest<HTMLFormElement>(HOST_FORM_SELECTOR);
+      if (!form) return;
       e.preventDefault();
       e.stopImmediatePropagation();
-
-      const body = form ? new FormData(form) : undefined;
-      void resolveHostUrl(getlinkUrl, body).then((host) => {
-        if (host) location.assign(host);
+      void hostTarget(form).then((resolved) => {
+        if (resolved) openHostTarget(form, resolved);
       });
     },
     true,
   );
 }
 
-async function injectMirrors(): Promise<void> {
-  const result = document.getElementById('result');
-  const path = mirstatsPath();
-  if (!result || !path) return;
-
-  const res = await fetch(path, { credentials: 'include', cache: 'no-store' });
-  if (!res.ok) return;
-  const html = await res.text();
-  if (!html.includes('/getlink/') || !html.includes('id="done"')) return;
-  result.innerHTML = html;
-  wireMirrorHostClicks(result);
-}
-
-function runInterstitial(): void {
-  const href = unlockHref();
-  if (href) location.replace(href);
-}
-
 function runMirrorsPage(): void {
+  const result = document.getElementById('result');
+  if (!result) return;
   mountBrand();
-  void injectMirrors();
+  wireHostClicks(result);
+  armHostForms(result);
+  new MutationObserver(() => armHostForms(result)).observe(result, { childList: true, subtree: true });
 }
 
 function runGetlinkPage(): void {
-  const host = hostUrlFromDocument(document);
-  if (host) location.replace(host);
+  const host = hostUrlFromDocument(document) ?? hostFromCutyWrap(document.documentElement.innerHTML);
+  if (host) {
+    location.replace(host);
+    return;
+  }
+  const dl = document.querySelector<HTMLFormElement>('form[action*="dl_out.php"]');
+  if (!dl) return;
+  void resolveDlOut(dl).then((target) => {
+    if (target) openHostTarget(dl, target);
+  });
 }
 
 function run(): void {
   if (isInterstitialPage()) {
-    runInterstitial();
+    const href = unlockHref();
+    if (href) location.replace(href);
     return;
   }
   if (isMirrorsPage()) {

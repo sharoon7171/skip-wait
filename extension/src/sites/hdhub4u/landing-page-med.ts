@@ -1,7 +1,9 @@
 import { isAllowedHost } from '../../utils/domain-check';
+import { createOverlay } from './overlay';
 
 const LANDING_PAGE_HOSTS = [
   'hdhub4u.med',
+  'hdhub4u.bi',
   'hdhub4u.catering',
   'hdhub4u.ec',
   'hdhub4u.gd',
@@ -21,26 +23,36 @@ const HOST_LOOKUP_URLS = [
   'https://cdn.hub4u.cloud/host/',
 ] as const;
 
+const LOOKUP_TIMEOUT_MS = 5000;
+
+type HostLookup = { c?: unknown };
+
+const mount = createOverlay('skip-wait-hdhub4u-landing', 'skip-wait-hdhub4u-landing-boot', {
+  lead: 'Hang tight — opening the main site.',
+  detail: "You don't need to tap anything on the page.",
+});
+
+const lookupVersion = (d: Date): number =>
+  d.getFullYear() * 1e6 + (d.getMonth() + 1) * 1e4 + d.getDate() * 100 + d.getHours() + 1;
+
+async function fetchMirror(base: string, version: number): Promise<string> {
+  const res = await fetch(`${base}?v=${version}`, {
+    cache: 'no-store',
+    signal: AbortSignal.timeout(LOOKUP_TIMEOUT_MS),
+  });
+  if (!res.ok) throw new Error(`host lookup ${res.status}`);
+  const { c } = (await res.json()) as HostLookup;
+  if (typeof c !== 'string') throw new Error('host lookup payload missing mirror');
+  const mirror = atob(c);
+  const query = mirror.indexOf('?');
+  return query === -1 ? mirror : mirror.slice(0, query);
+}
+
 export function initHdhub4uLandingPageMed(): void {
   if (!isAllowedHost(LANDING_PAGE_HOSTS)) return;
-  const d = new Date();
-  const v = d.getFullYear() * 1e6 + (d.getMonth() + 1) * 1e4 + d.getDate() * 100 + d.getHours() + 1;
-  void Promise.any(
-    HOST_LOOKUP_URLS.map(async (base) => {
-      const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), 5000);
-      try {
-        const r = await fetch(`${base}?v=${v}`, { cache: 'no-store', signal: ctrl.signal });
-        if (!r.ok) throw new Error();
-        const data = (await r.json()) as { c?: string };
-        if (!data?.c) throw new Error();
-        const mirror = atob(data.c);
-        return mirror.includes('?') ? mirror.slice(0, mirror.indexOf('?')) : mirror;
-      } finally {
-        clearTimeout(timer);
-      }
-    }),
-  )
+  const overlay = mount('Opening the main site…');
+  const version = lookupVersion(new Date());
+  void Promise.any(HOST_LOOKUP_URLS.map((base) => fetchMirror(base, version)))
     .then((mirror) => location.replace(mirror))
-    .catch(() => {});
+    .catch(() => overlay.setError('Could not find the main site. Reload and try again.'));
 }
