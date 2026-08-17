@@ -7,7 +7,6 @@ const ALIAS_RE = /^[A-Za-z0-9_-]{3,}$/;
 const BACKUP_PATH_RE = /(?:^|\/)backup\/w\/?$/i;
 
 const chains = new Map<number, { alias: string; armed: boolean }>();
-let persistence = Promise.resolve();
 
 const aliasFromShortUrl = (url: URL): string | null => {
   if (!hostnameMatches(url.hostname, RINKU_MAIN_HOSTS)) return null;
@@ -25,7 +24,7 @@ const aliasFromBackupUrl = (url: URL): string | null => {
     : null;
 };
 
-const loaded = chrome.storage.session.get(STORAGE_KEY).then((stored) => {
+let queue = chrome.storage.session.get(STORAGE_KEY).then((stored) => {
   const raw: unknown = stored[STORAGE_KEY];
   if (!raw || typeof raw !== 'object') return;
   for (const [tabId, value] of Object.entries(raw)) {
@@ -43,27 +42,29 @@ const loaded = chrome.storage.session.get(STORAGE_KEY).then((stored) => {
   }
 });
 
-const persist = (): Promise<void> => {
-  persistence = persistence.then(() =>
-    chrome.storage.session.set({ [STORAGE_KEY]: Object.fromEntries(chains) }),
-  );
-  return persistence;
+const run = (fn: () => void | Promise<void>): Promise<void> => {
+  queue = queue.then(fn, fn);
+  return queue;
 };
+
+const persist = (): Promise<void> =>
+  chrome.storage.session.set({ [STORAGE_KEY]: Object.fromEntries(chains) });
 
 export const initRinkuChainWatch = (): void => {
   chrome.webNavigation.onBeforeNavigate.addListener(({ frameId, tabId, url }) => {
     if (frameId !== 0 || !url.startsWith('http')) return;
-    void loaded.then(() => {
+    void run(() => {
       const parsed = new URL(url);
-      const alias = aliasFromShortUrl(parsed);
-      if (alias) {
-        chains.set(tabId, { alias, armed: false });
+      const shortAlias = aliasFromShortUrl(parsed);
+      if (shortAlias) {
+        chains.set(tabId, { alias: shortAlias, armed: false });
         return persist();
       }
       const backupAlias = aliasFromBackupUrl(parsed);
+      if (!backupAlias) return;
       const chain = chains.get(tabId);
-      if (!chain || chain.armed || backupAlias !== chain.alias) return;
-      chain.armed = true;
+      if (chain && chain.alias !== backupAlias) return;
+      chains.set(tabId, { alias: backupAlias, armed: true });
       return persist();
     });
   });
@@ -72,11 +73,13 @@ export const initRinkuChainWatch = (): void => {
     const tabId = sender.tab?.id;
     if (tabId == null) return false;
     if (message.type === MSG_RINKU_CHAIN_ACTIVE) {
-      void loaded.then(() => reply(chains.get(tabId)?.armed === true));
+      void run(() => {
+        reply(chains.get(tabId)?.armed === true);
+      });
       return true;
     }
     if (message.type === MSG_RINKU_CHAIN_COMPLETE) {
-      void loaded.then(() => {
+      void run(() => {
         chains.delete(tabId);
         return persist().then(() => reply(true));
       });
@@ -86,7 +89,7 @@ export const initRinkuChainWatch = (): void => {
   });
 
   chrome.tabs.onRemoved.addListener((tabId) => {
-    void loaded.then(() => {
+    void run(() => {
       if (!chains.delete(tabId)) return;
       return persist();
     });
