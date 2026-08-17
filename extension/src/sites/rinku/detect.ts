@@ -19,8 +19,10 @@ const hasToken = (form: HTMLFormElement): boolean => {
 };
 
 export const rinkuForm = (): HTMLFormElement | null => {
-  const byId = document.getElementById('sf-frm2-t') ?? document.getElementById('sf-frm2');
-  return byId instanceof HTMLFormElement && hasToken(byId) ? byId : null;
+  for (const form of document.forms) {
+    if (hasToken(form)) return form;
+  }
+  return null;
 };
 
 export const rinkuCaptchaWidget = (): HTMLElement | null =>

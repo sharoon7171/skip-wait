@@ -1,2 +1,2 @@
-export { initRinkuChainWatch } from './chain-watch';
 export { initRinkuGate } from './gate';
+export { initRinkuMediatorWatch } from './mediator';
