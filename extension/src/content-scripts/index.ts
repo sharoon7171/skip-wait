@@ -128,7 +128,10 @@ import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/a
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
 import { initOceanofgamesDirectDownload } from '../sites/oceanofgames';
 import { initYasir252DirectLinks, initYasir252MediatorPage } from '../sites/yasir252';
-import { initVegamoviesLandingRedirect } from '../sites/vegamovies';
+import {
+  initVegamoviesEntryRedirect,
+  initVegamoviesLandingRedirect,
+} from '../sites/vegamovies';
 import { initCinefreakMediator } from '../sites/cinefreak';
 
 const INITS = [
@@ -230,6 +233,7 @@ const INITS = [
   initOlamoviesLandingRedirect,
   initOlamoviesLinkGenerate,
   initPrmoviesRedirect,
+  initVegamoviesEntryRedirect,
   initVegamoviesLandingRedirect,
   initCinefreakMediator,
   initRomsfunDownloadInstant,

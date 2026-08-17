@@ -14,6 +14,7 @@ const domains = [
   'crimejasoos.in',
   'darkguruji.com',
   'howdyrecipes.com',
+  'krishitalk.com',
   'shikshaads.in',
   'srtak.com',
   'techcornernews.com',
