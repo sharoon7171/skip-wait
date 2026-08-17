@@ -1,1 +1,2 @@
-export { initAnkergamesDirectDownload } from './direct-download';
+export { initAnkergamesMainWorldInject } from './main-world-inject';
+export { initAnkergamesMediator } from './mediator';

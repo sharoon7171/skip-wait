@@ -123,7 +123,7 @@ import { initTheuserCloudBypass } from '../sites/theuser-cloud';
 import { initOceanofdmgBypass } from '../sites/oceanofdmg';
 import { initPesktopBypass } from '../sites/pesktop';
 import { initGoostEntry, initGoostMediator } from '../sites/goost';
-import { initAnkergamesDirectDownload } from '../sites/ankergames';
+import { initAnkergamesMediator } from '../sites/ankergames';
 import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
 import { initOceanofgamesDirectDownload } from '../sites/oceanofgames';
@@ -187,7 +187,7 @@ const INITS = [
   initSflGate,
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
-  initAnkergamesDirectDownload,
+  initAnkergamesMediator,
   initApunkagamesVlink,
   initApunkagamesDownloadProcess,
   initGamesnostalgiaDirectDownload,

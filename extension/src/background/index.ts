@@ -1,6 +1,7 @@
 import { initCoomeetMainWorldInject } from './coomeet-main-world-inject';
 import { initDocumentVisibilitySpoof } from './document-visibility-spoof';
 import { initFclcAlertSuppress, initFclcLinksGo } from '../sites/fclc';
+import { initAnkergamesMainWorldInject } from '../sites/ankergames';
 import { initAnygameMainWorldInject } from '../sites/anygame';
 import { initApktealMainWorldInject } from '../sites/apkteal';
 import { initFilecrExtractLink } from '../sites/filecr';
@@ -31,6 +32,7 @@ initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
 initFclcAlertSuppress();
 initFclcLinksGo();
+initAnkergamesMainWorldInject();
 initAnygameMainWorldInject();
 initApktealMainWorldInject();
 initFilecrExtractLink();

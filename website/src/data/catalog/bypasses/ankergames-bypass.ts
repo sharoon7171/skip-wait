@@ -2,10 +2,10 @@ import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'AnkerGames';
 
-const bypassType = 'Direct Download';
+const bypassType = 'Skip Waiting Page';
 
 const description =
-  'AnkerGames bypass that skips the treasure box scroll in the download modal and opens the signed CDN file from each Direct button without the animation wait.';
+  'AnkerGames bypass that clears the Opening Treasure Box initializing countdown so download buttons unlock as soon as the quick check is solved—no timer babysitting.';
 
 const domains = ['ankergames.net'] as const;
 
@@ -17,61 +17,68 @@ const keywords = [
   'skip ankergames',
   'ankergames timer bypass',
   'ankergames treasure box skip',
-  'ankergames direct download',
+  'opening treasure box bypass',
+  'ankergames waiting page',
+  'ankergames download timer',
   'treasure box download bypass',
-  'cdn download bypass',
-  'direct download',
-  'direct download bypass',
+  'initializing download skip',
+  'skip waiting page',
+  'waiting page bypass',
+  'please wait bypass',
   'download timer skip',
-  'file host bypass',
   'skip countdown timer',
   'bypass countdown timer',
-  'skip waiting page',
+  'file host bypass',
   'skip wait extension',
 ] as const;
 
 const intro =
-  'An AnkerGames bypass search usually means the download modal still forces a treasure box scroll before the signed file link appears. Skip Wait is the free Chrome extension that opens that CDN path from each Direct button without the scroll delay theater.';
+  'AnkerGames free downloads open a treasure-box waiting page with an initializing countdown before the real download controls appear. Skip Wait is the free Chrome extension that clears that Opening Treasure Box delay so you are not stuck watching progress fill while the quick check finishes.';
 
-const body = `## Treasure box scrolls before the CDN file
+const body = `## Opening Treasure Box before the file
 
-AnkerGames download modals often sit a playful scroll or wait in front of the real signed CDN URL. You open Direct, watch the treasure box animation, then finally get the file. Across multi-part games that ritual adds up—hence ankergames treasure box skip, download timer skip, and direct download bypass queries on every release page.
+Clicking Download on an AnkerGames game page does not hand you the file right away. The site sends you to an Opening Treasure Box waiting page—progress chrome, pirate phrases, and an initializing download countdown—before the download buttons are ready. Multi-part games repeat that same ankergames download timer ritual for every chunk.
 
-### What the modal inserts
+The page is built to keep you on the waiting hop. You still need the site’s own quick check when it appears; the busywork is the countdown theater layered on top.
 
-- Treasure box scroll delays before the file
-- Generating-style waits after Direct clicks
-- Intermediary screens before the CDN link
-- Extra holds on mirror-style controls in the modal
+### What the waiting page inserts
 
-## Direct buttons that already know the signed URL
+- Initializing Download progress before controls unlock
+- Treasure-box countdown chrome and animated status lines
+- Holds that keep download buttons hidden until the timer finishes
+- Extra waits stacked on top of the human check
 
-Skip Wait’s AnkerGames support resolves the real CDN file URL in the background when you press Direct. Instead of waiting out the treasure box scroll, you move straight to the signed link the modal was going to reveal anyway. One AnkerGames bypass extension install covers those buttons—no paste tool and no manual URL decoding.
+## Clearing the timer inside Chrome
 
-You still choose the part or mirror you want; Skip Wait only removes the busywork wait between the click and the file path.
+Skip Wait runs on the AnkerGames waiting page you already opened from Download. It removes the initializing countdown so the page sits in its ready state without the progress theater. A short on-page note confirms the wait timer is gone. When the quick check is solved, the site’s own download buttons unlock—you press them yourself; the extension does not auto-start the file.
+
+That is an ankergames timer bypass and treasure box skip in one step: the official Download path stays intact, and only the waiting-page delay is stripped. No paste tool and no hunting a hidden CDN link behind the animation.
+
+## What still needs a real click
+
+The quick check on the treasure-box page is still the site’s gate. Skip Wait does not pretend that check away. It only clears the countdown delay so you are not babysitting initializing download progress after the check is already done—or while it is still running. Finish the check, use the unlocked buttons, and move on to the next part the same way.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
     question: 'What delay does an AnkerGames bypass remove?',
     answer:
-      'It skips the treasure box scroll delay in the download modal and opens the signed CDN file link from each Direct button.',
+      'It clears the Opening Treasure Box initializing countdown on the download waiting page so controls are not locked behind progress theater.',
   },
   {
-    question: 'How do files open from the modal?',
+    question: 'Do I still use the site’s Download button on the game page?',
     answer:
-      'When you click Direct, the extension resolves the real CDN URL in the background instead of making you finish the treasure box wait first.',
+      'Yes. Open Download as usual. AnkerGames takes you to the treasure-box waiting page; Skip Wait runs there and removes the timer hold.',
   },
   {
-    question: 'Does it clear generating waits after download clicks?',
+    question: 'Does Skip Wait start the file automatically?',
     answer:
-      'Yes on supported controls. Intermediary screens and extra modal holds are cleared so the file link opens from the button you already pressed.',
+      'No. When the quick check is solved, the page’s own download buttons unlock. You choose when to click—there is no forced auto-download.',
   },
   {
-    question: 'Do I need to decode the CDN URL myself?',
+    question: 'Do I still complete the quick check?',
     answer:
-      'No. Skip Wait reads the destination the page already prepared and opens it after your Direct click.',
+      'Yes when the waiting page shows it. Skip Wait removes the countdown delay; the check remains the site’s unlock step for the buttons.',
   },
   {
     question: 'Is the AnkerGames path free?',
