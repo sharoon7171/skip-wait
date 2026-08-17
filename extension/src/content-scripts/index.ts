@@ -103,7 +103,7 @@ import { initPlingDirectDownload } from '../sites/pling';
 import { initMuhammadniazCountdownBypass } from '../sites/muhammadniaz';
 import { initTipsguruRedirect } from '../sites/tipsguru';
 import { initWahmiCountdownBypass } from '../sites/wahmi';
-// import { initCutyGate } from '../sites/cuty';
+import { initCutyGate } from '../sites/cuty';
 import { initCutwinGate } from '../sites/cutwin';
 import { initExeioGate } from '../sites/exeio';
 import { initLksfyGate, initLksfyMediator } from '../sites/lksfy';
@@ -135,7 +135,7 @@ const INITS = [
   initStorylineCoursePlayBrand,
   initLinknextGate,
   initLinkvertiseAccessPage,
-  // initCutyGate,
+  initCutyGate,
   initCutwinGate,
   initExeioGate,
   initLksfyMediator,

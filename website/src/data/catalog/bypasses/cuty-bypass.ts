@@ -5,14 +5,17 @@ const name = 'Cuty';
 const bypassType = 'Skip Countdown';
 
 const description =
-  'Cuty bypass skips the continue button countdown timer on this link shortener and unlocks your destination after captcha when required, instantly.';
+  'Cuty bypass for cuttty.com and cuty.io short links: Skip Wait advances Continue and captcha, waits the real unlock timer, then opens the destination when the shortener allows it.';
 
-const domains = ['cuttty.com'] as const;
+const domains = ['cuttty.com', 'cuty.io'] as const;
 
 const keywords = [
   'cuty bypass',
   'Cuty bypass extension',
+  'cuttty bypass',
+  'cuty.io bypass',
   'cuty timer bypass',
+  'cuty short link bypass',
   'skip countdown',
   'skip countdown timer',
   'bypass countdown timer',
@@ -24,50 +27,59 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Cuty bypass search usually means a shared short URL left the Continue control grey until a countdown finished. Skip Wait is the free Chrome extension that advances that unlock timer after any required captcha so you are not watching the clock on every alias.';
+  'A Cuty bypass matters when a shared short link on cuttty.com or cuty.io leaves Continue grey, asks for a captcha, then holds another countdown before the destination opens. Skip Wait is the free Chrome extension that runs that unlock path on supported Cuty pages so you are not babysitting every step.';
 
-const body = `## Continue stays grey until the clock dies
+const body = `## Continue, captcha, then another clock
 
-Cuty monetizes shares with a continue or get-link control that only enables after a client countdown. Miss the unlock moment, close the tab early, or fight overlays for the button and you restart the same skip countdown ritual—exactly the loop behind cuty timer bypass and countdown timer bypass searches.
+Cuty monetizes shares with a multi-step free path: a first Continue gate, a human check when required, then a prepared-link countdown before the destination opens. Miss the unlock moment, close the tab early, or fight overlays for the button and you restart the same skip countdown ritual.
 
-That is a single-page unlock delay, not a blog tour. The shortener expects you to sit with the tab open until Continue is legal.
+That is a shortener unlock delay, not a mirror host list. On [Mirrored.to](/sites/mirrored-to-bypass), Skip Wait replaces short URL Download buttons with the real host link without opening Cuty at all. This Cuty page is the separate short-link path when another site still sends you through Cuty itself.
 
-### Captcha still sits between you and unlock
+### Stages on a free unlock
 
-Some shares insert a human check before the timer path finishes. Solving it does not remove the countdown chrome; it only proves a real browser is present. People who want a Cuty bypass extension usually want both steps handled without re-pasting the alias into another site.
+- First Continue gate after the short link opens
+- Captcha before the prepared-link screen when Cuty requires it
+- Countdown while the link is prepared
+- Final unlock that opens the destination
 
-## Letting Chrome finish the unlock page
+## Running the unlock path inside Chrome
 
-Skip Wait activates on supported Cuty unlock pages. It covers busy UI, advances the continue flow once the shortener allows it, and opens the destination when unlock is ready. Required captcha stays yours to complete once; client-only timer theater stops owning the tab.
+Skip Wait activates on supported Cuty unlock pages on both Cuty domains. It covers busy UI, advances each unlock step once the page is ready, and holds only for the real countdown the shortener still enforces—then opens the destination. Required captcha stays yours to complete once; fake timer chrome stops owning the tab.
 
-If the shortener still enforces a real hold, Skip Wait stays on that step until unlock is accepted—so skip timer unlock stays reliable instead of a fake zero-second cheat that errors out.
+When a share already includes the destination in a quick Cuty link, Skip Wait prefers that destination instead of walking the full unlock tour.
+
+If an adblocker is on for Cuty, the shortener often sends you back to the first gate after the timer. Pause your blocker for this site, reload, and the unlock path can finish.
 
 ## Why paste boxes miss the session after captcha
 
 Unshorten paste tools often fail when Cuty expects cookies and a live tab after the captcha. A skip wait extension install keeps the session on the page you already opened, which is the durable reading of link shortener bypass for this host.
 `;
 
-
 const faq: readonly BypassFaq[] = [
   {
     question: 'What does a Cuty bypass actually skip?',
     answer:
-      'The continue-button countdown busywork on supported unlock pages. Skip Wait advances unlock after any required captcha so you spend less time watching the timer.',
+      'The Continue and prepared-link busywork on supported unlock pages. Skip Wait advances unlock after any required captcha and opens the destination after the real countdown.',
+  },
+  {
+    question: 'Is this the same as the Mirrored.to bypass?',
+    answer:
+      'No. Mirrored.to replaces short URL Download buttons with host links on the mirror page. Cuty bypass runs when you land on Cuty itself.',
   },
   {
     question: 'Do I still solve captcha?',
     answer:
-      'When Cuty requires it, yes. After the token exists, Skip Wait finishes the countdown path and opens the destination.',
+      'When Cuty requires it, yes. After you finish the check, Skip Wait continues the countdown path and opens the destination.',
   },
   {
     question: 'Does every timer disappear instantly?',
     answer:
-      'Client-only delay theater goes away. If unlock still needs a real wait, Skip Wait stays on that step until it is allowed—stable skip timer unlock, not a broken cheat.',
+      'Fake delay chrome goes away. The prepared-link countdown is still honored when unlock needs that wait—stable skip timer unlock, not a broken early open.',
   },
   {
-    question: 'Do I click Continue myself?',
+    question: 'Why does Cuty send me back to the first step?',
     answer:
-      'On supported pages, no. Skip Wait advances the continue flow once unlock is allowed.',
+      'Cuty often blocks unlock when an adblocker is active and restarts the flow after the timer. Pause your blocker for Cuty, reload, and the destination can open.',
   },
   {
     question: 'Is this free?',

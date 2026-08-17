@@ -1,2 +1,3 @@
 export { initCutyGate } from './gate';
-export { initCutyAdblockInject } from './main-world-inject';
+export { initCutyGoUnlockInject } from './main-world-inject';
+export { initCutyQuickRedirect } from './quick-redirect';

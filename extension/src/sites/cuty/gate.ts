@@ -2,14 +2,8 @@ import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/f
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { overlayActiveClass, buildFullPageOverlayCss } from '../../injected-ui/overlay-styles';
 import { isAllowedHost } from '../../utils/domain-check';
-import { CUTY_HOSTS, MSG_CUTY_ADBLOCK } from './hosts';
-import {
-  countdownSecFromHtml,
-  csrfFromHtml,
-  cutyAliasFromPath,
-  goDataFromHtml,
-  isCutyGatePath,
-} from './unlock';
+import { CUTY_HOSTS, type CutyUnlockResult, MSG_CUTY_GO_UNLOCK } from './hosts';
+import { countdownSecFromHtml, cutyAliasFromPath, destinationFromQuickSearch, isCutyQuickPath } from './unlock';
 
 const OVERLAY_ID = 'skip-wait-cuty-overlay';
 const BOOT_STYLE_ID = 'skip-wait-cuty-boot';
@@ -31,6 +25,9 @@ const CAPTCHA_NOTE = {
   detail: 'Complete the Turnstile check below. We’ll continue automatically when it’s done.',
 } as const;
 
+const ADBLOCK_ERROR =
+  'cuty blocked this visit because it detected your adblocker. Pause it for this site, then reload.';
+
 type PinPhase = { stopPin: (() => void) | null };
 
 let ui: FullPageOverlay | null = null;
@@ -42,9 +39,17 @@ const requestVisibilitySpoof = (): void => {
   chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
 };
 
-const requestAdblockBypass = (): void => {
-  chrome.runtime.sendMessage({ type: MSG_CUTY_ADBLOCK }).catch(() => {});
-};
+const requestGoUnlock = (): Promise<CutyUnlockResult> =>
+  new Promise((resolve) => {
+    chrome.runtime.sendMessage({ type: MSG_CUTY_GO_UNLOCK }, (res) => {
+      if (chrome.runtime.lastError) {
+        resolve({ ok: false, err: chrome.runtime.lastError.message ?? 'runtime error' });
+        return;
+      }
+      const out = res as CutyUnlockResult | undefined;
+      resolve(out?.ok ? { ok: true } : { ok: false, err: out?.err ?? 'no response' });
+    });
+  });
 
 const bootOverlayLock = (): void => {
   const active = overlayActiveClass(OVERLAY_ID);
@@ -84,10 +89,10 @@ const waitFor = async <T>(
   const end = Date.now() + timeoutMs;
   while (Date.now() < end) {
     const v = pick();
-    if (v) return v as T;
+    if (v) return v;
     await sleep(everyMs);
   }
-  return (pick() as T) || null;
+  return pick() || null;
 };
 
 const freeForm = (): HTMLFormElement | null =>
@@ -98,69 +103,43 @@ const gateRef = (): string | null =>
 
 const goForm = (): HTMLFormElement | null => {
   const form = document.querySelector<HTMLFormElement>('#submit-form');
-  if (!form) return null;
-  const action = form.getAttribute('action') || form.action || '';
-  if (/\/go\//i.test(action) || form.querySelector('[name="data"]')) return form;
-  return null;
+  return form?.querySelector('[name="data"]') && form.querySelector('[name="_token"]') ? form : null;
 };
 
-const isLastStep = (): boolean =>
-  gateRef() === 'show' ||
-  !!goForm()?.querySelector('[name="data"]') ||
-  typeof (window as unknown as { countdownValue?: number }).countdownValue === 'number';
-
 const isCaptchaStep = (form: HTMLFormElement): boolean =>
-  gateRef() === 'captcha' ||
-  !!form.querySelector(`#${TURNSTILE_WIDGET_ID}, .cf-turnstile, ${TURNSTILE_RESPONSE}`) ||
-  form.querySelector<HTMLElement>('#submit-button')?.dataset?.['ref'] === 'captcha';
+  !!form.querySelector(
+    `[data-ref="captcha"], #${TURNSTILE_WIDGET_ID}, .cf-turnstile, ${TURNSTILE_RESPONSE}`,
+  );
+
+const isAdblockGate = (): boolean => !!document.querySelector('button.ab');
+
+const isGatePage = (): boolean => {
+  if (goForm() || isAdblockGate()) return true;
+  const form = freeForm();
+  return !!form && (gateRef() === 'first' || isCaptchaStep(form));
+};
 
 const turnstileToken = (root: ParentNode = document): string | null => {
   for (const sel of [
     TURNSTILE_RESPONSE,
-    'textarea[name="cf-turnstile-response"]',
     'input[id^="cf-chl-widget"][id$="_response"]',
   ]) {
-    for (const el of root.querySelectorAll(sel)) {
-      const v = (el as HTMLInputElement | HTMLTextAreaElement).value?.trim();
+    for (const el of root.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(sel)) {
+      const v = el.value.trim();
       if (v && v.length > 20) return v;
     }
   }
   return null;
 };
 
-const hasTurnstileFrame = (root: ParentNode = document): boolean =>
-  !!root.querySelector(
-    'iframe[src*="challenges.cloudflare.com"], iframe[src*="turnstile"]',
-  );
-
-const liveCountdownSec = (): number => {
-  const live = (window as unknown as { countdownValue?: number }).countdownValue;
-  if (typeof live === 'number' && live >= 0) return live;
-  return countdownSecFromHtml(document.documentElement.innerHTML);
-};
-
-const lastPayload = (): { form: HTMLFormElement; data: string; token: string; sec: number } | null => {
-  const form = goForm();
+const lastStep = (): { sec: number } | null => {
   const html = document.documentElement.innerHTML;
-  const data = form?.querySelector<HTMLInputElement>('[name="data"]')?.value || goDataFromHtml(html);
-  const token =
-    form?.querySelector<HTMLInputElement>('[name="_token"]')?.value || csrfFromHtml(html) || csrfLive();
-  if (!form || !data || !token) return null;
-  return { form, data, token, sec: liveCountdownSec() };
+  return goForm() && /countdownValue\s*=\s*\d+/.test(html)
+    ? { sec: countdownSecFromHtml(html) }
+    : null;
 };
 
-const lastPayloadReady = (hit: NonNullable<ReturnType<typeof lastPayload>>): boolean => {
-  const live = (window as unknown as { countdownValue?: number }).countdownValue;
-  if (typeof live === 'number') return true;
-  if (hit.sec > 0) return true;
-  return /countdownValue\s*=\s*\d+/.test(document.documentElement.innerHTML);
-};
-
-const waitLastPayload = async (): Promise<{ form: HTMLFormElement; data: string; token: string; sec: number } | null> =>
-  waitFor(() => {
-    const hit = lastPayload();
-    return hit && lastPayloadReady(hit) ? hit : null;
-  }, 30_000, 100);
+const waitLastStep = async (): Promise<{ sec: number } | null> => waitFor(lastStep, 30_000, 100);
 
 const putTokenOnForm = (form: HTMLFormElement, token: string): void => {
   let input = form.querySelector<HTMLInputElement>(TURNSTILE_RESPONSE);
@@ -186,23 +165,6 @@ const findTurnstileWidget = (form: HTMLFormElement): HTMLElement | null => {
   return parent ?? null;
 };
 
-const csrfLive = (): string | null => {
-  const fromForm =
-    freeForm()?.querySelector<HTMLInputElement>('[name="_token"]')?.value ||
-    goForm()?.querySelector<HTMLInputElement>('[name="_token"]')?.value;
-  return fromForm || csrfFromHtml(document.documentElement.innerHTML);
-};
-
-const snapCaptchaForm = (): void => {
-  const form = freeForm();
-  if (!form?.querySelector(`#${TURNSTILE_WIDGET_ID}, .cf-turnstile`)) return;
-  try {
-    const clone = form.cloneNode(true) as HTMLElement;
-    clone.querySelector(`#${TURNSTILE_WIDGET_ID}, .cf-turnstile`)?.replaceChildren();
-    sessionStorage.setItem('sw-cuty-form-snap', clone.outerHTML);
-  } catch {}
-};
-
 const releasePin = (phase: PinPhase): void => {
   phase.stopPin?.();
   phase.stopPin = null;
@@ -211,7 +173,6 @@ const releasePin = (phase: PinPhase): void => {
 async function waitPageTurnstile(overlay: FullPageOverlay): Promise<string | null> {
   overlay.setNote(CAPTCHA_NOTE);
   overlay.setStatus('Complete the captcha below.');
-  requestAdblockBypass();
 
   return new Promise((resolve) => {
     const phase: PinPhase = { stopPin: null };
@@ -230,12 +191,8 @@ async function waitPageTurnstile(overlay: FullPageOverlay): Promise<string | nul
 
     const pin = (): void => {
       if (done) return;
-      snapCaptchaForm();
       const live = freeForm();
-      if (!live) {
-        if (document.querySelector('button.ab')) requestAdblockBypass();
-        return;
-      }
+      if (!live) return;
       const widget = findTurnstileWidget(live);
       if (!widget) return;
       const widgetId = widget.id || TURNSTILE_WIDGET_ID;
@@ -256,9 +213,6 @@ async function waitPageTurnstile(overlay: FullPageOverlay): Promise<string | nul
       if (done || finishing) return;
       pin();
       const form = freeForm();
-      if (hasTurnstileFrame(form ?? document) || hasTurnstileFrame(document)) {
-        overlay.setStatus('Complete the captcha below.');
-      }
       const token = (form ? turnstileToken(form) : null) || turnstileToken(document);
       if (!token || !pinAt || Date.now() - pinAt < 400) return;
       finishing = true;
@@ -282,50 +236,36 @@ async function finishFromLast(overlay: FullPageOverlay): Promise<void> {
   overlay.setNote(NOTE);
   overlay.setStatus('Getting things ready…');
 
-  const payload = await waitLastPayload();
-  if (!payload) {
+  const step = await waitLastStep();
+  if (!step) {
     overlay.setError('Unlock payload missing. Reload and try again.');
     return;
   }
 
-  requestVisibilitySpoof();
-
-  let sec = payload.sec;
-  if (sec <= 0) {
-    sec =
-      (await waitFor(() => {
-        const next = liveCountdownSec();
-        return next > 0 ? next : null;
-      }, 15_000)) ?? 0;
-  }
-
-  if (sec > 0) {
+  if (step.sec > 0) {
     overlay.setStatus('Unlock timer');
-    const endAt = Date.now() + sec * 1000;
+    const endAt = Date.now() + step.sec * 1000;
     overlay.startCountdown(endAt);
     await sleep(Math.max(0, endAt - Date.now()));
     overlay.hideCountdown();
-  } else if ((window as unknown as { countdownValue?: number }).countdownValue !== 0) {
-    overlay.setError('Countdown not ready. Reload and try again.');
-    return;
   }
 
   overlay.setStatus('Opening destination…');
-  payload.form.submit();
+  const res = await requestGoUnlock();
+  if (!res.ok) overlay.setError(res.err ?? 'Unlock failed.');
 }
 
 async function runCaptchaThenGo(overlay: FullPageOverlay): Promise<void> {
-  snapCaptchaForm();
-  requestAdblockBypass();
   overlay.setNote(CAPTCHA_NOTE);
   overlay.setStatus('Complete the captcha below.');
 
-  const ready = await waitFor(() => {
-    snapCaptchaForm();
-    return freeForm()?.querySelector(`#${TURNSTILE_WIDGET_ID}, .cf-turnstile, ${TURNSTILE_RESPONSE}`);
-  }, 60_000, 250);
+  const ready = await waitFor(
+    () => freeForm()?.querySelector(`#${TURNSTILE_WIDGET_ID}, .cf-turnstile, ${TURNSTILE_RESPONSE}`),
+    60_000,
+    250,
+  );
   if (!ready) {
-    overlay.setError('Captcha was blocked. Reload with adblock paused for this site, then try again.');
+    overlay.setError(isAdblockGate() ? ADBLOCK_ERROR : 'Captcha never loaded. Reload and try again.');
     return;
   }
 
@@ -350,49 +290,26 @@ async function runCaptchaThenGo(overlay: FullPageOverlay): Promise<void> {
 async function runUnlock(): Promise<void> {
   const overlay = mountUi(NOTE, 'Getting things ready…');
   requestVisibilitySpoof();
-  requestAdblockBypass();
-  snapCaptchaForm();
-
-  if (!cutyAliasFromPath()) {
-    overlay.setError('cuty link alias not found.');
-    return;
-  }
-
-  const gate = await waitFor(
-    () =>
-      gateRef() ||
-      goForm() ||
-      freeForm() ||
-      document.querySelector('button.ab') ||
-      (isLastStep() ? true : null),
-    30_000,
-  );
-  if (!gate) {
-    overlay.setError('cuty gate not found on this page.');
-    return;
-  }
 
   const ref = gateRef();
-
-  if (ref === 'show' || isLastStep()) {
+  if (goForm()) {
     await finishFromLast(overlay);
     return;
   }
 
-  if (ref === 'captcha' || document.querySelector('button.ab')) {
-    await runCaptchaThenGo(overlay);
+  const free = freeForm();
+  if (isAdblockGate() && !free) {
+    overlay.setError(ADBLOCK_ERROR);
     return;
   }
 
-  const free = freeForm();
   if (free && isCaptchaStep(free)) {
     await runCaptchaThenGo(overlay);
     return;
   }
 
   if (free && (ref === 'first' || !ref)) {
-    const csrf = csrfLive();
-    if (!csrf) {
+    if (!free.querySelector('[name="_token"]')) {
       overlay.setError('CSRF token missing. Reload and try again.');
       return;
     }
@@ -406,16 +323,18 @@ async function runUnlock(): Promise<void> {
 
 export function initCutyGate(): void {
   if (!isAllowedHost(CUTY_HOSTS)) return;
-  if (!isCutyGatePath()) return;
 
-  bootOverlayLock();
-  mountUi(NOTE, 'Getting things ready…');
-  requestAdblockBypass();
-  snapCaptchaForm();
+  if (isCutyQuickPath()) {
+    const dest = destinationFromQuickSearch();
+    if (dest) {
+      location.replace(dest);
+      return;
+    }
+  }
+  if (!cutyAliasFromPath()) return;
 
   const tryStart = (): void => {
-    if (started) return;
-    if (!document.body && document.readyState === 'loading') return;
+    if (started || !isGatePage()) return;
     started = true;
     void runUnlock();
   };
@@ -428,5 +347,5 @@ export function initCutyGate(): void {
     if (started) mo.disconnect();
   });
   mo.observe(document.documentElement, { childList: true, subtree: true });
-  document.addEventListener('DOMContentLoaded', () => { tryStart(); mo.disconnect(); }, { once: true });
+  document.addEventListener('DOMContentLoaded', tryStart, { once: true });
 }
