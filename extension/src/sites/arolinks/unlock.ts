@@ -1,5 +1,5 @@
 import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { gtLinkDestination, isUnlockShell, jsRedirect } from './gate';
+import { gtLinkDestination, isUnlockPage, jsRedirect } from './gate';
 import {
   AROLINKS_DEST_WAIT_MS,
   AROLINKS_HOSTS,
@@ -25,7 +25,7 @@ const openDest = async (dest: string): Promise<void> => {
 const run = async (): Promise<void> => {
   if (done) return;
 
-  if (isUnlockShell()) {
+  if (isUnlockPage()) {
     const dest = gtLinkDestination();
     if (!dest) return;
     done = true;

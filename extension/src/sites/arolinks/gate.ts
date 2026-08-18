@@ -28,13 +28,20 @@ export const jsRedirect = (html: string, base: string): string | null => {
   }
 };
 
-export const isUnlockShell = (): boolean =>
-  document.querySelector('#gt-link') !== null &&
-  document.querySelector('#go-link') !== null &&
-  document.documentElement.innerHTML.includes('ad_form_data');
+export const isUnlockPage = (): boolean =>
+  document.getElementById('countdown') !== null ||
+  document.getElementById('get-link') !== null ||
+  document.getElementById('gt-link') !== null ||
+  document.getElementById('go-link') !== null;
 
 export const gtLinkDestination = (): string | null => {
   const a = document.querySelector<HTMLAnchorElement>('#gt-link');
-  const href = (a?.getAttribute('href') || a?.href || '').trim();
-  return /^https?:\/\//i.test(href) ? href : null;
+  const href = (a?.getAttribute('href') || '').trim();
+  if (/^https?:\/\//i.test(href)) return href;
+  const html = document.documentElement.innerHTML;
+  return (
+    html.match(/id=["']gt-link["'][^>]*href=["'](https?:[^"']+)/i)?.[1] ??
+    html.match(/href=["'](https?:[^"']+)["'][^>]*id=["']gt-link["']/i)?.[1] ??
+    null
+  );
 };
