@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['addons.videolan.org', 'opendesktop.org', 'store.kde.org'] as const;
 const HIJACKED = 'data-skipwait-hijacked';
 const NOTICE_ID = 'skipwait-pling-bypass';
 const PROJECT_RE = /\/p\/(\d+)/;
@@ -39,9 +39,13 @@ function run(): void {
 }
 
 export function initPlingDirectDownload(): void {
-  if (!isAllowedHost(HOSTS) || !PROJECT_RE.test(location.pathname)) return;
+  if (!PROJECT_RE.test(location.pathname)) return;
+  const allowed = isRemoteSite('pling');
   whenDomParsed(() => {
-    run();
-    new MutationObserver(run).observe(document.body, { childList: true, subtree: true });
+    void allowed.then((ok) => {
+      if (!ok) return;
+      run();
+      new MutationObserver(run).observe(document.body, { childList: true, subtree: true });
+    });
   });
 }

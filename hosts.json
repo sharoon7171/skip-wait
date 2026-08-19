@@ -272,5 +272,8 @@
   },
   "prmovies": {
     "hosts": ["prmovies.mba"]
+  },
+  "pling": {
+    "hosts": ["addons.videolan.org", "opendesktop.org", "store.kde.org"]
   }
 }
