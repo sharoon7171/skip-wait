@@ -1,3 +1,5 @@
+import { hostIsRemoteSite } from '../../hosts/check';
+
 const BASE = 'https://multiup.io/en/mirror/';
 const MIRROR = '/en/mirror/';
 const DOWNLOAD_RE = /\/(?:[a-z]{2}\/)?download\/([a-zA-Z0-9]+)/;
@@ -17,8 +19,15 @@ function mirrorId(url: string): string | null {
 export function initMultiup(): void {
   chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     if (details.frameId !== 0) return;
-    const id = mirrorId(details.url);
-    if (!id) return;
-    void chrome.tabs.update(details.tabId, { url: `${BASE}${id}` });
+    void (async () => {
+      try {
+        if (!(await hostIsRemoteSite(new URL(details.url).hostname, 'multiup'))) return;
+      } catch {
+        return;
+      }
+      const id = mirrorId(details.url);
+      if (!id) return;
+      void chrome.tabs.update(details.tabId, { url: `${BASE}${id}` });
+    })();
   });
 }
