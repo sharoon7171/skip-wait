@@ -1,5 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { LKSFY_ALIAS_RE, LKSFY_MEDIATOR_HOSTS, lksfyUnlockUrl } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
+import { LKSFY_ALIAS_RE, lksfyUnlockUrl } from './hosts';
 
 let started = false;
 
@@ -40,13 +41,14 @@ function jump(): void {
 
 export function initLksfyMediator(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(LKSFY_MEDIATOR_HOSTS)) return;
-
-  jump();
-  whenDomParsed(jump);
-  const mo = new MutationObserver(() => {
+  void isRemoteSite('lksfy-mediator').then((ok) => {
+    if (!ok) return;
     jump();
-    if (started) mo.disconnect();
+    whenDomParsed(jump);
+    const mo = new MutationObserver(() => {
+      jump();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 }

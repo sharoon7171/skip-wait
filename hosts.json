@@ -369,5 +369,11 @@
   },
   "ll-safelink-llac": {
     "hosts": ["linegee.net"]
+  },
+  "lksfy": {
+    "hosts": ["lksfy.com", "linkshortify.com"]
+  },
+  "lksfy-mediator": {
+    "hosts": ["recruitmentaim.in", "mahitiplus.com"]
   }
 }

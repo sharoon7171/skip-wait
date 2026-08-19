@@ -1,10 +1,10 @@
+import { hostIsRemoteSite } from '../../hosts/check';
 import { runLksfyAdblockBypass } from './adblock-bypass';
-import { LKSFY_UNLOCK_HOSTS, MSG_LKSFY_ADBLOCK } from './hosts';
+import { MSG_LKSFY_ADBLOCK } from './hosts';
 
-function isLksfyUrl(url: string): boolean {
+async function isLksfyUrl(url: string): Promise<boolean> {
   try {
-    const h = new URL(url).hostname.toLowerCase();
-    return LKSFY_UNLOCK_HOSTS.some((d) => h === d || h.endsWith('.' + d));
+    return hostIsRemoteSite(new URL(url).hostname, 'lksfy');
   } catch {
     return false;
   }
@@ -21,8 +21,11 @@ function inject(tabId: number, frameId?: number): void {
 
 export function initLksfyAdblockInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isLksfyUrl(details.url)) return;
-    inject(details.tabId, 0);
+    if (details.frameId !== 0) return;
+    void isLksfyUrl(details.url).then((ok) => {
+      if (!ok) return;
+      inject(details.tabId, 0);
+    });
   });
 
   chrome.runtime.onMessage.addListener((message, sender) => {

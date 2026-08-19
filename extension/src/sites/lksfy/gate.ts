@@ -1,8 +1,9 @@
+import { hostIsRemoteSite, isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { decryptLinkshortifyPayload, resolveLinkshortifyUrl } from './decrypt';
-import { LKSFY_ALIAS_RE, LKSFY_UNLOCK_HOSTS, MSG_LKSFY_ADBLOCK } from './hosts';
+import { LKSFY_ALIAS_RE, MSG_LKSFY_ADBLOCK } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-lksfy-overlay';
 const CAPTCHA_PIN_STYLE_ID = 'skip-wait-lksfy-captcha-pin';
@@ -64,10 +65,9 @@ const isUnlockShell = (): boolean =>
   !!document.querySelector('#timer, #get-link, #form-show, .cf-turnstile, #captchaLinksGo') ||
   BASE64_RE.test(document.documentElement.innerHTML);
 
-const isInternalUrl = (href: string): boolean => {
+const isInternalUrl = async (href: string): Promise<boolean> => {
   try {
-    const h = new URL(href).hostname.toLowerCase();
-    return LKSFY_UNLOCK_HOSTS.some((d) => h === d || h.endsWith('.' + d));
+    return hostIsRemoteSite(new URL(href).hostname, 'lksfy');
   } catch {
     return true;
   }
@@ -219,7 +219,7 @@ const runUnlock = async (): Promise<void> => {
   const readyHref = ready?.getAttribute('href')?.trim() ?? '';
   if (readyHref && !readyHref.startsWith('javascript:')) {
     const decoded = await resolveLinkshortifyUrl(readyHref, alias);
-    if (decoded && !isInternalUrl(decoded)) {
+    if (decoded && !(await isInternalUrl(decoded))) {
       overlay.setStatus('Opening your link…');
       location.replace(decoded);
       return;
@@ -254,7 +254,7 @@ const runUnlock = async (): Promise<void> => {
     }
   }
 
-  if (!url || isInternalUrl(url)) {
+  if (!url || (await isInternalUrl(url))) {
     overlay.setError('Couldn’t unlock this link. Reload and try again.');
     started = false;
     return;
@@ -266,26 +266,27 @@ const runUnlock = async (): Promise<void> => {
 
 export function initLksfyGate(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(LKSFY_UNLOCK_HOSTS)) return;
   if (!pathAlias()) return;
+  void isRemoteSite('lksfy').then((ok) => {
+    if (!ok) return;
+    requestAdblockBypass();
 
-  requestAdblockBypass();
+    const tryStart = (): void => {
+      if (started || !isUnlockShell()) return;
+      started = true;
+      mountUi(NOTE, 'Getting things ready…');
+      void runUnlock().catch(() => {
+        mountUi().setError('Unlock failed. Reload and try again.');
+        started = false;
+      });
+    };
 
-  const tryStart = (): void => {
-    if (started || !isUnlockShell()) return;
-    started = true;
-    mountUi(NOTE, 'Getting things ready…');
-    void runUnlock().catch(() => {
-      mountUi().setError('Unlock failed. Reload and try again.');
-      started = false;
-    });
-  };
-
-  tryStart();
-  whenDomParsed(tryStart);
-  const mo = new MutationObserver(() => {
     tryStart();
-    if (started) mo.disconnect();
+    whenDomParsed(tryStart);
+    const mo = new MutationObserver(() => {
+      tryStart();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 }
