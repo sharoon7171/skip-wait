@@ -1,13 +1,5 @@
-import { isAllowedHost } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
 
-const HOSTS = [
-  'onlinegiftools.com',
-  'onlinejpgtools.com',
-  'onlinepngtools.com',
-  'onlinestringtools.com',
-  'onlinetexttools.com',
-  'onlinetools.com',
-] as const;
 const NOTICE_ID = 'skipwait-onlinetools-bypass';
 const DATA_HIJACKED = 'data-skipwait-hijacked';
 const SELECTORS = {
@@ -143,20 +135,22 @@ function run(): void {
 }
 
 export function initOnlinetoolsDirectDownload(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  const check = (): void => {
-    const toolOutput = document.querySelector(SELECTORS.toolOutput);
-    if (!toolOutput) return;
-    run();
-    const cb = document.querySelector(SELECTORS.copyBtn);
-    const db = toolOutput.querySelector(SELECTORS.downloadBtn);
-    if (cb?.hasAttribute(DATA_HIJACKED) && (!db || db.hasAttribute(DATA_HIJACKED))) observer.disconnect();
-  };
-  const observer = new MutationObserver(check);
-  const start = (): void => {
-    check();
-    observer.observe(document.body, { childList: true, subtree: true });
-  };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
+  void isRemoteSite('onlinetools').then((ok) => {
+    if (!ok) return;
+    const check = (): void => {
+      const toolOutput = document.querySelector(SELECTORS.toolOutput);
+      if (!toolOutput) return;
+      run();
+      const cb = document.querySelector(SELECTORS.copyBtn);
+      const db = toolOutput.querySelector(SELECTORS.downloadBtn);
+      if (cb?.hasAttribute(DATA_HIJACKED) && (!db || db.hasAttribute(DATA_HIJACKED))) observer.disconnect();
+    };
+    const observer = new MutationObserver(check);
+    const start = (): void => {
+      check();
+      observer.observe(document.body, { childList: true, subtree: true });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+  });
 }

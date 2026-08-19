@@ -284,5 +284,15 @@
   },
   "ouo": {
     "hosts": ["ouo.press", "ouo.io"]
+  },
+  "onlinetools": {
+    "hosts": [
+      "onlinegiftools.com",
+      "onlinejpgtools.com",
+      "onlinepngtools.com",
+      "onlinestringtools.com",
+      "onlinetexttools.com",
+      "onlinetools.com"
+    ]
   }
 }
