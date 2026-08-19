@@ -93,5 +93,10 @@
     "hosts": [
       "tfly.link"
     ]
+  },
+  "tendrives": {
+    "hosts": [
+      "gamesmain.xyz"
+    ]
   }
 }

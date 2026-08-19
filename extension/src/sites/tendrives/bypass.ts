@@ -1,8 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
 
-const HOSTS = ['gamesmain.xyz'] as const;
 const OVERLAY_ID = 'skip-wait-10drives-overlay';
 const BOOT_STYLE_ID = 'skip-wait-10drives-boot';
 const DL_RE = /https:\/\/10drives\.com\/op\/dl\/[^"'\s<>]+/i;
@@ -91,20 +90,23 @@ const mintDl = async (): Promise<{ url: string; name: string; size: string }> =>
 };
 
 export const initTendrivesMediator = (): void => {
-  if (window !== window.top || !isAllowedHost(HOSTS) || started) return;
+  if (window !== window.top || started) return;
   if (!document.cookie.split('; ').some((c) => c.startsWith('fid='))) return;
-  started = true;
-  const first = fileFromHtml(document.documentElement.innerHTML);
-  const overlay = mount('Resolving direct CDN…', first.name, first.size);
-  void mintDl()
-    .then(({ url, name, size }) => {
-      overlay.setNote(fileNote(name, size));
-      overlay.setStatus('Ready — tap Direct Download when you want the file.');
-      overlay.setAction(url, ACTION);
-    })
-    .catch(() => {
-      started = false;
-      overlay.setAction(null);
-      overlay.setError('Could not unlock this file. Reload and try again.');
-    });
+  void isRemoteSite('tendrives').then((ok) => {
+    if (!ok || started) return;
+    started = true;
+    const first = fileFromHtml(document.documentElement.innerHTML);
+    const overlay = mount('Resolving direct CDN…', first.name, first.size);
+    void mintDl()
+      .then(({ url, name, size }) => {
+        overlay.setNote(fileNote(name, size));
+        overlay.setStatus('Ready — tap Direct Download when you want the file.');
+        overlay.setAction(url, ACTION);
+      })
+      .catch(() => {
+        started = false;
+        overlay.setAction(null);
+        overlay.setError('Could not unlock this file. Reload and try again.');
+      });
+  });
 };
