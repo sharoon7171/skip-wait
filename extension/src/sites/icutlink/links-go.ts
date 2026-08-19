@@ -1,8 +1,7 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { ICUTLINK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-icutlink-links-go';
 const BOOT_STYLE_ID = 'skip-wait-icutlink-links-go-boot';
@@ -116,25 +115,27 @@ const run = (): void => {
 };
 
 export function initIcutlinkLinksGo(): void {
-  if (!isAllowedHost(ICUTLINK_HOSTS)) return;
+  void isRemoteSite('icutlink').then((ok) => {
+    if (!ok) return;
 
-  const tryStart = (): void => {
-    if (isCaptchaGate()) return;
-    coverIfGo();
-    if (!isGoShell()) return;
-    run();
-  };
+    const tryStart = (): void => {
+      if (isCaptchaGate()) return;
+      coverIfGo();
+      if (!isGoShell()) return;
+      run();
+    };
 
-  tryStart();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
     tryStart();
-    if (started) mo.disconnect();
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (started) return;
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tryStart, true);
-  }
+    const mo = new MutationObserver(() => {
+      tryStart();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryStart, true);
+    }
+  });
 }

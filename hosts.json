@@ -423,5 +423,11 @@
   },
   "jobsheel-babylinks": {
     "hosts": ["go.babylinks.in"]
+  },
+  "icutlink": {
+    "hosts": ["icutlink.com"]
+  },
+  "icutlink-mediator": {
+    "hosts": ["toolskitpro.net"]
   }
 }

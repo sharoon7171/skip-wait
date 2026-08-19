@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { ICUTLINK_MEDIATOR_HOSTS } from './mediator-hosts';
 
 const OVERLAY_ID = 'skip-wait-icutlink-mediator';
 const BOOT_STYLE_ID = 'skip-wait-icutlink-mediator-boot';
@@ -170,24 +169,26 @@ const run = (): void => {
 };
 
 export function initIcutlinkMediatorPage(): void {
-  if (!isAllowedHost(ICUTLINK_MEDIATOR_HOSTS)) return;
   if (!/\/tools\/?$/i.test(location.pathname)) return;
+  void isRemoteSite('icutlink-mediator').then((ok) => {
+    if (!ok) return;
 
-  const tick = (): void => {
-    coverIfMediator();
-    run();
-  };
+    const tick = (): void => {
+      coverIfMediator();
+      run();
+    };
 
-  tick();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
     tick();
-    if (started) mo.disconnect();
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (started) return;
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
+    const mo = new MutationObserver(() => {
+      tick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+  });
 }
