@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['filespayouts.com'] as const;
 const IDLE = 'Free Download · Skip Wait — No Timer, No Mediator Pages';
 
 function download2(id: string): void {
@@ -27,26 +27,28 @@ function download2(id: string): void {
 }
 
 export function initFilespayoutsBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  whenDomParsed(() => {
-    const btn = document.querySelector<HTMLInputElement>('#method_free');
-    const form = btn?.form;
-    const id = form?.querySelector<HTMLInputElement>('input[name="id"]')?.value.trim();
-    if (!btn || !form || !id || !form.querySelector('input[name="op"][value="download1"]')) return;
+  void isRemoteSite('filespayouts').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      const btn = document.querySelector<HTMLInputElement>('#method_free');
+      const form = btn?.form;
+      const id = form?.querySelector<HTMLInputElement>('input[name="id"]')?.value.trim();
+      if (!btn || !form || !id || !form.querySelector('input[name="op"][value="download1"]')) return;
 
-    btn.classList.add('btn-success');
-    btn.value = IDLE;
+      btn.classList.add('btn-success');
+      btn.value = IDLE;
 
-    btn.addEventListener(
-      'click',
-      (e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        btn.value = 'Starting…';
-        download2(id);
-        btn.value = IDLE;
-      },
-      true,
-    );
+      btn.addEventListener(
+        'click',
+        (e) => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          btn.value = 'Starting…';
+          download2(id);
+          btn.value = IDLE;
+        },
+        true,
+      );
+    });
   });
 }

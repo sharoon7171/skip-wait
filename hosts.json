@@ -507,5 +507,8 @@
   },
   "finityrede": {
     "hosts": ["finityrede.com"]
+  },
+  "filespayouts": {
+    "hosts": ["filespayouts.com"]
   }
 }
