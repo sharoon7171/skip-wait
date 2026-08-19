@@ -531,5 +531,11 @@
   },
   "exeio": {
     "hosts": ["exe.io", "exeygo.com"]
+  },
+  "earnlinks": {
+    "hosts": ["earnlinks.in", "linksgo.in"]
+  },
+  "earnlinks-mediator": {
+    "hosts": ["itiexamshala.com", "nameefy.com", "jobustecher.letest25.co"]
   }
 }

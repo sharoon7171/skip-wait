@@ -1,10 +1,6 @@
 import { linksGoFormFromHtml, postLinksGo } from '../adlinkfly/unlock';
-import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
-import {
-  EARNLINKS_HOSTS,
-  EARNLINKS_MEDIATOR_HOSTS,
-  earnlinksAliasFromPath,
-} from './hosts';
+import { hostIsRemoteSite, isRemoteSite } from '../../hosts/check';
+import { earnlinksAliasFromPath } from './hosts';
 import { createOverlay, spoofVisibility } from './overlay';
 
 const mount = createOverlay('skip-wait-earnlinks-unlock', 'skip-wait-earnlinks-unlock-boot');
@@ -14,9 +10,9 @@ function hasForm(): boolean {
   return !!document.querySelector('#go-link input[name="ad_form_data"]');
 }
 
-function fromMediator(): boolean {
+async function fromMediator(): Promise<boolean> {
   try {
-    return hostnameMatches(new URL(document.referrer).hostname, EARNLINKS_MEDIATOR_HOSTS);
+    return hostIsRemoteSite(new URL(document.referrer).hostname, 'earnlinks-mediator');
   } catch {
     return false;
   }
@@ -53,30 +49,34 @@ function run(): void {
 
   if (document.readyState === 'loading') return;
 
-  if (fromMediator()) {
-    const overlay = mount('Unlocking…');
-    if (document.readyState === 'complete') {
-      done = true;
-      overlay.setError('Unlock form missing.');
+  void (async () => {
+    if (await fromMediator()) {
+      const overlay = mount('Unlocking…');
+      if (document.readyState === 'complete') {
+        done = true;
+        overlay.setError('Unlock form missing.');
+      }
+      return;
     }
-    return;
-  }
-
-  mount('Waiting for unlock…');
+    mount('Waiting for unlock…');
+  })();
 }
 
 export function initEarnlinksUnlock(): void {
-  if (window !== window.top || !isAllowedHost(EARNLINKS_HOSTS)) return;
+  if (window !== window.top) return;
   if (!earnlinksAliasFromPath(location.pathname)) return;
-  run();
-  if (done) return;
-  const observer = new MutationObserver(() => {
+  void isRemoteSite('earnlinks').then((ok) => {
+    if (!ok) return;
     run();
-    if (done) observer.disconnect();
+    if (done) return;
+    const observer = new MutationObserver(() => {
+      run();
+      if (done) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, true);
+      document.addEventListener('readystatechange', run, true);
+    }
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run, true);
-    document.addEventListener('readystatechange', run, true);
-  }
 }

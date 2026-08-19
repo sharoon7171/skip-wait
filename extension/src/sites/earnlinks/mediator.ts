@@ -1,5 +1,5 @@
-import { isAllowedHost } from '../../utils/domain-check';
-import { EARNLINKS_ALIAS_RE, EARNLINKS_MEDIATOR_HOSTS, earnlinksShortenerUrl } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { EARNLINKS_ALIAS_RE, earnlinksShortenerUrl } from './hosts';
 import { createOverlay } from './overlay';
 
 const mount = createOverlay('skip-wait-earnlinks-mediator', 'skip-wait-earnlinks-mediator-boot');
@@ -25,15 +25,18 @@ function run(): void {
 }
 
 export function initEarnlinksMediator(): void {
-  if (window !== window.top || !isAllowedHost(EARNLINKS_MEDIATOR_HOSTS)) return;
-  run();
-  if (done) return;
-  const observer = new MutationObserver(() => {
+  if (window !== window.top) return;
+  void isRemoteSite('earnlinks-mediator').then((ok) => {
+    if (!ok) return;
     run();
-    if (done) observer.disconnect();
+    if (done) return;
+    const observer = new MutationObserver(() => {
+      run();
+      if (done) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, true);
+    }
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run, true);
-  }
 }
