@@ -25,11 +25,13 @@ function unwrapKitokola(inner: string): string | null {
 }
 
 export function initTinurlzSoftinfoFragment(): void {
-  if (!isAllowedHost(HOSTS)) return;
   const raw = window.location.hash.slice(1);
   if (!raw) return;
-  const inner = decodeFragment(raw);
-  if (!inner || !/^https?:\/\//i.test(inner)) return;
-  const finalUrl = unwrapKitokola(inner) ?? inner;
-  window.location.replace(finalUrl);
+  void isRemoteSite('tinurlz-softinfo').then((ok) => {
+    if (!ok) return;
+    const inner = decodeFragment(raw);
+    if (!inner || !/^https?:\/\//i.test(inner)) return;
+    const finalUrl = unwrapKitokola(inner) ?? inner;
+    window.location.replace(finalUrl);
+  });
 }

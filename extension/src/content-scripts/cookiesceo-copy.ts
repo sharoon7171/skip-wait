@@ -68,10 +68,12 @@ async function run(): Promise<void> {
 }
 
 export function initCookiesceoCopy(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  const exec = (): void => {
-    run();
-  };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', exec);
-  else exec();
+  void isRemoteSite('cookiesceo').then((ok) => {
+    if (!ok) return;
+    const exec = (): void => {
+      run();
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', exec);
+    else exec();
+  });
 }
