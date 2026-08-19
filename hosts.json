@@ -549,5 +549,14 @@
   },
   "droplink": {
     "hosts": ["droplink.co"]
+  },
+  "devuploads-mediator": {
+    "hosts": [
+      "gujjukhabar.in",
+      "djxmaza.in",
+      "smartfeecalculator.com",
+      "pdfhindibook.com",
+      "rfiql.com"
+    ]
   }
 }

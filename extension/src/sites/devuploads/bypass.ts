@@ -1,15 +1,9 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { requestCdn } from './resolve';
 
-const MEDIATOR_HOSTS = [
-  'gujjukhabar.in',
-  'djxmaza.in',
-  'smartfeecalculator.com',
-  'pdfhindibook.com',
-  'rfiql.com',
-] as const;
 const OVERLAY_ID = 'skip-wait-devuploads-overlay';
 const BOOT_STYLE_ID = 'skip-wait-devuploads-boot';
 const SIZE_RE = /(\d+(?:\.\d+)?\s*[KMGT]?B)/i;
@@ -82,15 +76,18 @@ const unlock = async (id: string, name: string, size: string): Promise<void> => 
 };
 
 export const initDevuploadsMediator = (): void => {
-  if (window !== window.top || !isAllowedHost(MEDIATOR_HOSTS)) return;
-  whenDomParsed(() => {
-    const form = isDevuploadsCard();
-    const id = form?.querySelector<HTMLInputElement>('input[name="id"]')?.value.trim();
-    if (!form || !id || started) return;
-    started = true;
-    const { name, size } = fileMeta();
-    boot();
-    mount('Getting things ready…', name, size);
-    void unlock(id, name, size);
+  if (window !== window.top) return;
+  void isRemoteSite('devuploads-mediator').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      const form = isDevuploadsCard();
+      const id = form?.querySelector<HTMLInputElement>('input[name="id"]')?.value.trim();
+      if (!form || !id || started) return;
+      started = true;
+      const { name, size } = fileMeta();
+      boot();
+      mount('Getting things ready…', name, size);
+      void unlock(id, name, size);
+    });
   });
 };
