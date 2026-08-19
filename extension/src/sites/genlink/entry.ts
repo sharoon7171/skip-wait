@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { GENLINK_ENTRY_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-genlink-entry';
 const BOOT_STYLE_ID = 'skip-wait-genlink-entry-boot';
@@ -75,13 +74,14 @@ const tick = (): void => {
 
 export function initGenlinkEntry(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(GENLINK_ENTRY_HOSTS)) return;
   if (!isAliasPath()) return;
-
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
+  void isRemoteSite('genlink').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+  });
 }

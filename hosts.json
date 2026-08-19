@@ -483,5 +483,14 @@
   },
   "goost-mediator": {
     "hosts": ["kreditexperte.online"]
+  },
+  "genlink": {
+    "hosts": ["genlink.site", "rplinks.in"]
+  },
+  "genlink-mediator": {
+    "hosts": ["jazbaat.in"]
+  },
+  "genlink-unlock": {
+    "hosts": ["crazymindhub.xyz"]
   }
 }

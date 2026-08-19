@@ -1,12 +1,11 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { GENLINK_MEDIATOR_HOSTS, GENLINK_UNLOCK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-genlink-mediator';
 const BOOT_STYLE_ID = 'skip-wait-genlink-mediator-boot';
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
-const UNLOCK_ORIGIN = `https://${GENLINK_UNLOCK_HOSTS[0]}`;
+const UNLOCK_ORIGIN = 'https://crazymindhub.xyz';
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
@@ -84,13 +83,14 @@ const tick = (): void => {
 
 export function initGenlinkMediator(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(GENLINK_MEDIATOR_HOSTS)) return;
-
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
+  void isRemoteSite('genlink-mediator').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+    window.addEventListener('load', tick, true);
+  });
 }
