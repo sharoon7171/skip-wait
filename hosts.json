@@ -621,5 +621,8 @@
   },
   "bitcotasks": {
     "hosts": ["bitcotasks.com"]
+  },
+  "cookiesceo": {
+    "hosts": ["cookiesceo.com"]
   }
 }

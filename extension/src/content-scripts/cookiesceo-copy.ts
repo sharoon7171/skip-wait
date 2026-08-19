@@ -1,6 +1,4 @@
-import { isAllowedHost } from '../utils/domain-check';
-
-const HOSTS = ['cookiesceo.com'] as const;
+import { isRemoteSite } from '../hosts/check';
 const ACTIONS_ID = 'skipwait-cookiesceo-actions';
 const SESSION_PASTE_RE = /session_paste\s+([A-Za-z0-9+/=]+)/;
 const DOWNLOAD_RE = /["']([^"']*-download)\/?"?["']/;
