@@ -1,10 +1,3 @@
-export const FILEHIPPO_HOSTS = [
-  'filehippo.com',
-  'filehippo.de',
-  'filehippo.jp',
-  'filehippo.pl',
-] as const;
-
 export type FilehippoRouteId =
   | 'program'
   | 'programDownload'

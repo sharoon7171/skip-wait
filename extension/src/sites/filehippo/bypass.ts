@@ -1,5 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { FILEHIPPO_HOSTS, filehippoRouteId } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
+import { filehippoRouteId } from './hosts';
 import { resolveLaunchUrl } from './resolve';
 
 const BRAND_ID = 'skipwait-filehippo-brand';
@@ -105,6 +106,8 @@ function run(): void {
 }
 
 export function initFilehippoBypass(): void {
-  if (!isAllowedHost(FILEHIPPO_HOSTS)) return;
-  whenDomParsed(run);
+  void isRemoteSite('filehippo').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(run);
+  });
 }

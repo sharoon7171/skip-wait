@@ -513,5 +513,8 @@
   },
   "filepress": {
     "hosts": ["filepress.baby"]
+  },
+  "filehippo": {
+    "hosts": ["filehippo.com", "filehippo.de", "filehippo.jp", "filehippo.pl"]
   }
 }
