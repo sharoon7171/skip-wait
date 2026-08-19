@@ -1,22 +1,22 @@
-import { isCutyHost } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
 import { destinationFromQuickSearch, isCutyQuickPath } from './unlock';
 
-function quickDestination(url: string): string | null {
+function quickDestination(url: string): Promise<string | null> {
   try {
     const u = new URL(url);
-    return isCutyHost(u.hostname) && isCutyQuickPath(u.pathname)
-      ? destinationFromQuickSearch(u.search)
-      : null;
+    return hostIsRemoteSite(u.hostname, 'cuty').then(
+      (ok) => (ok && isCutyQuickPath(u.pathname) ? destinationFromQuickSearch(u.search) : null),
+    );
   } catch {
-    return null;
+    return Promise.resolve(null);
   }
 }
 
 export function initCutyQuickRedirect(): void {
   chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     if (details.frameId !== 0) return;
-    const dest = quickDestination(details.url);
-    if (!dest) return;
-    void chrome.tabs.update(details.tabId, { url: dest });
+    void quickDestination(details.url).then((dest) => {
+      if (dest) void chrome.tabs.update(details.tabId, { url: dest });
+    });
   });
 }

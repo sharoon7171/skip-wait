@@ -5,16 +5,21 @@ export function initCutyGoUnlockInject(): void {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const tabId = sender.tab?.id;
     if (message?.type !== MSG_CUTY_GO_UNLOCK || tabId === undefined) return false;
-    if (sender.tab?.url && !isCutyUrl(sender.tab.url)) return false;
 
-    void chrome.scripting
-      .executeScript({
-        target: { tabId, frameIds: [sender.frameId ?? 0] },
-        world: 'MAIN',
-        func: runCutyGoUnlock,
-      })
-      .then((r) => sendResponse((r[0]?.result as CutyUnlockResult | undefined) ?? { ok: false, err: 'no result' }))
-      .catch((e: unknown) => sendResponse({ ok: false, err: String(e) }));
+    void (async () => {
+      if (sender.tab?.url && !(await isCutyUrl(sender.tab.url))) return;
+
+      void chrome.scripting
+        .executeScript({
+          target: { tabId, frameIds: [sender.frameId ?? 0] },
+          world: 'MAIN',
+          func: runCutyGoUnlock,
+        })
+        .then((r) =>
+          sendResponse((r[0]?.result as CutyUnlockResult | undefined) ?? { ok: false, err: 'no result' }),
+        )
+        .catch((e: unknown) => sendResponse({ ok: false, err: String(e) }));
+    })();
     return true;
   });
 }

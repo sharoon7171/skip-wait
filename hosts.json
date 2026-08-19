@@ -558,5 +558,8 @@
       "pdfhindibook.com",
       "rfiql.com"
     ]
+  },
+  "cuty": {
+    "hosts": ["cuttty.com", "cuty.io"]
   }
 }

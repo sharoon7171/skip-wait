@@ -1,5 +1,3 @@
-import { isCutyHost } from './hosts';
-
 const ALIAS_PATH_RE = /^\/([A-Za-z0-9_-]{4,16})\/?$/;
 const GO_PATH_RE = /^\/go\/([A-Za-z0-9_-]+)\/?$/i;
 const QUICK_PATH_RE = /^\/quick\/?$/i;
@@ -14,13 +12,20 @@ export function isCutyQuickPath(pathname = location.pathname): boolean {
   return QUICK_PATH_RE.test(pathname);
 }
 
+const CUTY_DEST_HOSTS = ['cuttty.com', 'cuty.io'] as const;
+
+const isCutyDestination = (hostname: string): boolean => {
+  const host = hostname.toLowerCase();
+  return CUTY_DEST_HOSTS.some((d) => host === d || host.endsWith(`.${d}`));
+};
+
 export function destinationFromQuickSearch(search = location.search): string | null {
   const raw = new URLSearchParams(search).get('url');
   if (!raw) return null;
   try {
     const u = new URL(raw);
     if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
-    return isCutyHost(u.hostname) ? null : u.href;
+    return isCutyDestination(u.hostname) ? null : u.href;
   } catch {
     return null;
   }

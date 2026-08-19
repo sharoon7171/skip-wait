@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { overlayActiveClass, buildFullPageOverlayCss } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { CUTY_HOSTS, type CutyUnlockResult, MSG_CUTY_GO_UNLOCK } from './hosts';
+import { type CutyUnlockResult, MSG_CUTY_GO_UNLOCK } from './hosts';
 import { countdownSecFromHtml, cutyAliasFromPath, destinationFromQuickSearch, isCutyQuickPath } from './unlock';
 
 const OVERLAY_ID = 'skip-wait-cuty-overlay';
@@ -322,30 +322,32 @@ async function runUnlock(): Promise<void> {
 }
 
 export function initCutyGate(): void {
-  if (!isAllowedHost(CUTY_HOSTS)) return;
+  void isRemoteSite('cuty').then((ok) => {
+    if (!ok) return;
 
-  if (isCutyQuickPath()) {
-    const dest = destinationFromQuickSearch();
-    if (dest) {
-      location.replace(dest);
-      return;
+    if (isCutyQuickPath()) {
+      const dest = destinationFromQuickSearch();
+      if (dest) {
+        location.replace(dest);
+        return;
+      }
     }
-  }
-  if (!cutyAliasFromPath()) return;
+    if (!cutyAliasFromPath()) return;
 
-  const tryStart = (): void => {
-    if (started || !isGatePage()) return;
-    started = true;
-    void runUnlock();
-  };
+    const tryStart = (): void => {
+      if (started || !isGatePage()) return;
+      started = true;
+      void runUnlock();
+    };
 
-  tryStart();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
     tryStart();
-    if (started) mo.disconnect();
+    if (started) return;
+
+    const mo = new MutationObserver(() => {
+      tryStart();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', tryStart, { once: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  document.addEventListener('DOMContentLoaded', tryStart, { once: true });
 }
