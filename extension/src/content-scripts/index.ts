@@ -292,11 +292,10 @@ async function boot(): Promise<void> {
     return;
   }
   void ensureHosts();
-  if (await isOnCoomeetIframeHost()) {
-    initCoomeetIframeBootstrap();
+  if (window !== window.top) {
+    if (await isOnCoomeetIframeHost()) initCoomeetIframeBootstrap();
     return;
   }
-  if (window !== window.top) return;
   for (const init of INITS) {
     try {
       init();

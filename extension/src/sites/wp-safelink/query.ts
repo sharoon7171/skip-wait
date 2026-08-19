@@ -70,15 +70,12 @@ const open = (url: string): void => {
 export function runWpSafelinkQueryHop(site: string): void {
   if (!hrefHasSafelinkToken(location.href)) return;
   mountUi('Opening your link…');
-  void isRemoteSite(site).then((ok) => {
-    if (!ok) {
+  void Promise.all([isRemoteSite(site), destFromLocation()]).then(([ok, url]) => {
+    if (!ok || !url) {
       unboot();
       return;
     }
-    void destFromLocation().then((url) => {
-      if (url) open(url);
-      else unboot();
-    });
+    open(url);
   });
 }
 
