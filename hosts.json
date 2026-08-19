@@ -339,5 +339,8 @@
   },
   "mirrored": {
     "hosts": ["mirrored.to"]
+  },
+  "mega4upload": {
+    "hosts": ["mega4upload.net"]
   }
 }

@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['mega4upload.net'] as const;
 const TRACKER = 'https://mega4upload.net/cgi-bin/tracker.cgi';
 const FILE_PATH_RE = /^\/([a-z0-9]+)\/?$/i;
 const RESERVED = new Set([
@@ -89,9 +89,12 @@ function wire(direct: Promise<string | null>): void {
 }
 
 export function initMega4uploadBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
+  const allowed = isRemoteSite('mega4upload');
   whenDomParsed(() => {
-    const code = fileCode();
-    if (code) wire(resolveDirectUrl(code));
+    void allowed.then((ok) => {
+      if (!ok) return;
+      const code = fileCode();
+      if (code) wire(resolveDirectUrl(code));
+    });
   });
 }
