@@ -375,5 +375,11 @@
   },
   "lksfy-mediator": {
     "hosts": ["recruitmentaim.in", "mahitiplus.com"]
+  },
+  "liteshort": {
+    "hosts": ["liteshort.com"]
+  },
+  "liteshort-mediator": {
+    "hosts": ["gadinow.in", "jobsmbn.in", "strictstrategies.com"]
   }
 }

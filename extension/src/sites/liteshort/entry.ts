@@ -1,6 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { LITESHORT_ENTRY_HOST, LITESHORT_UNLOCK_ORIGIN } from './hosts';
+import { LITESHORT_UNLOCK_ORIGIN } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-liteshort-entry';
 const BOOT_STYLE_ID = 'skip-wait-liteshort-entry-boot';
@@ -49,11 +50,13 @@ const aliasFromPath = (): string | null => {
 
 export const initLiteshortEntry = (): void => {
   if (window !== window.top) return;
-  if (location.hostname.toLowerCase() !== LITESHORT_ENTRY_HOST) return;
   if (started) return;
   const alias = aliasFromPath();
   if (!alias) return;
-  started = true;
-  mountUi('Skipping redirect notice…');
-  location.replace(`${LITESHORT_UNLOCK_ORIGIN}/${encodeURIComponent(alias)}`);
+  void isRemoteSite('liteshort').then((ok) => {
+    if (!ok || started) return;
+    started = true;
+    mountUi('Skipping redirect notice…');
+    location.replace(`${LITESHORT_UNLOCK_ORIGIN}/${encodeURIComponent(alias)}`);
+  });
 };

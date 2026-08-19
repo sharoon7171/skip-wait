@@ -1,7 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { LITESHORT_MEDIATOR_HOSTS, LITESHORT_UNLOCK_ORIGIN } from './hosts';
+import { LITESHORT_UNLOCK_ORIGIN } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-liteshort-mediator';
 const BOOT_STYLE_ID = 'skip-wait-liteshort-mediator-boot';
@@ -58,16 +58,17 @@ const tick = (): void => {
 
 export const initLiteshortMediator = (): void => {
   if (window !== window.top) return;
-  if (!isAllowedHost(LITESHORT_MEDIATOR_HOSTS)) return;
-
-  tick();
-  if (started) return;
-  const mo = new MutationObserver(() => {
+  void isRemoteSite('liteshort-mediator').then((ok) => {
+    if (!ok) return;
     tick();
-    if (started) mo.disconnect();
+    if (started) return;
+    const mo = new MutationObserver(() => {
+      tick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 };
