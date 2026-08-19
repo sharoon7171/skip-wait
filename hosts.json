@@ -546,5 +546,8 @@
   },
   "dupload": {
     "hosts": ["dupload.net"]
+  },
+  "droplink": {
+    "hosts": ["droplink.co"]
   }
 }

@@ -1,8 +1,7 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { DROPLINK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-droplink-unlock';
 const BOOT_STYLE_ID = 'skip-wait-droplink-unlock-boot';
@@ -124,19 +123,20 @@ const tick = (): void => {
 
 export function initDroplinkUnlock(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(DROPLINK_HOSTS)) return;
   if (!isAliasPath()) return;
-
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, {
-    attributeFilter: ['href', 'value', 'disabled'],
-    attributes: true,
-    childList: true,
-    subtree: true,
+  void isRemoteSite('droplink').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, {
+      attributeFilter: ['href', 'value', 'disabled'],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+    window.addEventListener('load', tick, true);
   });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
 }
