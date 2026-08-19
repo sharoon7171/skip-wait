@@ -177,5 +177,11 @@
       "health.jkssbworld.in",
       "tech.examzculture.in"
     ]
+  },
+  "shycloud": {
+    "hosts": [
+      "inloadapi.com",
+      "srv.inload.net"
+    ]
   }
 }

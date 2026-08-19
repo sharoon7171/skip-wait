@@ -1,6 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { SHYCLOUD_HOSTS } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const ID = 'skip-wait-shycloud-overlay';
 const DATA_RE = /var\s+data\s*=\s*(\{[\s\S]*?\});/;
@@ -155,6 +155,8 @@ const run = (): void => {
 };
 
 export function initShycloudMediatorPage(): void {
-  if (window !== window.top || !isAllowedHost(SHYCLOUD_HOSTS)) return;
-  whenDomParsed(run);
+  if (window !== window.top) return;
+  void isRemoteSite('shycloud').then((ok) => {
+    if (ok) whenDomParsed(run);
+  });
 }
