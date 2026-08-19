@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { APUNKAGAMES_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 function destination(): string | null {
   const href = document.querySelector<HTMLAnchorElement>('#dlink')?.href.trim();
@@ -10,10 +10,12 @@ function destination(): string | null {
 }
 
 export function initApunkagamesDownloadProcess(): void {
-  if (!isAllowedHost(APUNKAGAMES_HOSTS)) return;
   if (!/download-process\.php/i.test(location.pathname)) return;
-  whenDomParsed(() => {
-    const url = destination();
-    if (url) location.replace(url);
+  void isRemoteSite('apunkagames').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      const url = destination();
+      if (url) location.replace(url);
+    });
   });
 }

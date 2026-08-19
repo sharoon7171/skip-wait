@@ -588,5 +588,8 @@
   },
   "boostylink": {
     "hosts": ["boostylink.com"]
+  },
+  "apunkagames": {
+    "hosts": ["akglinks.com", "apunkasoftware.net"]
   }
 }

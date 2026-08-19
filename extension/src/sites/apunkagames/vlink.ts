@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { APUNKAGAMES_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND = 'skipwait-apunkagames-brand';
 const FORM = 'form[action*="download-process.php"]';
@@ -41,7 +41,9 @@ function unlock(): void {
 }
 
 export function initApunkagamesVlink(): void {
-  if (!isAllowedHost(APUNKAGAMES_HOSTS)) return;
   if (!location.pathname.startsWith('/vlink/')) return;
-  whenDomParsed(unlock);
+  void isRemoteSite('apunkagames').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(unlock);
+  });
 }
