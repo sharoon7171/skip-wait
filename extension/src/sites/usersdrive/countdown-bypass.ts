@@ -1,6 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-
-const HOSTS = ['usersdrive.com'] as const;
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 const IDLE = 'Free Download · Skip Wait — Direct CDN, No Mediator';
 const BUSY = 'Skip Wait — Resolving CDN…';
 const FAIL = 'Skip Wait — Complete check & retry';
@@ -55,12 +54,8 @@ async function resolveCdn(form: HTMLFormElement): Promise<string> {
 }
 
 export function initUsersdriveAutomation(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  blockAds();
+  const allowed = isRemoteSite('usersdrive');
   whenDomParsed(() => {
-    document.querySelector('.countdown')?.remove();
-    document.getElementById('skipwait-usersdrive-bypass')?.remove();
-
     const ready = pageCdn();
     const form = document.querySelector<HTMLInputElement>('input[name="op"][value="download2"]')?.form;
     const btn =
@@ -68,66 +63,73 @@ export function initUsersdriveAutomation(): void {
       document.querySelector<HTMLElement>('#downloadbtn');
     if (!btn || (!ready && !form)) return;
 
-    let cached = ready ?? undefined;
-    let pending: Promise<string> | undefined;
-    const ensure = (): Promise<string> => {
-      if (cached) return Promise.resolve(cached);
-      if (!form) return Promise.reject(new Error('form'));
-      pending ??= resolveCdn(form)
-        .then((url) => {
-          cached = url;
-          return url;
-        })
-        .finally(() => {
-          pending = undefined;
-        });
-      return pending;
-    };
+    void allowed.then((ok) => {
+      if (!ok) return;
+      document.querySelector('.countdown')?.remove();
+      document.getElementById('skipwait-usersdrive-bypass')?.remove();
+      blockAds();
 
-    const label = (text: string): void => {
-      if (btn instanceof HTMLButtonElement) {
-        btn.disabled = false;
-        btn.classList.remove('disabled');
+      let cached = ready ?? undefined;
+      let pending: Promise<string> | undefined;
+      const ensure = (): Promise<string> => {
+        if (cached) return Promise.resolve(cached);
+        if (!form) return Promise.reject(new Error('form'));
+        pending ??= resolveCdn(form)
+          .then((url) => {
+            cached = url;
+            return url;
+          })
+          .finally(() => {
+            pending = undefined;
+          });
+        return pending;
+      };
+
+      const label = (text: string): void => {
+        if (btn instanceof HTMLButtonElement) {
+          btn.disabled = false;
+          btn.classList.remove('disabled');
+        }
+        btn.textContent = text;
+      };
+
+      if (ready && btn instanceof HTMLAnchorElement) {
+        btn.href = ready;
+        btn.removeAttribute('target');
       }
-      btn.textContent = text;
-    };
+      label(IDLE);
 
-    if (ready && btn instanceof HTMLAnchorElement) {
-      btn.href = ready;
-      btn.removeAttribute('target');
-    }
-    label(IDLE);
+      document.addEventListener(
+        'click',
+        (e) => {
+          if (!(e.target as Element).closest('#downloadbtn, a.btn.btn-download')) return;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          label(BUSY);
+          void ensure()
+            .then((url) => {
+              Object.assign(document.createElement('a'), { href: url }).click();
+              label(IDLE);
+            })
+            .catch(() => label(FAIL));
+        },
+        true,
+      );
+      form?.addEventListener(
+        'submit',
+        (e) => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+        },
+        true,
+      );
 
-    document.addEventListener(
-      'click',
-      (e) => {
-        if (!(e.target as Element).closest('#downloadbtn, a.btn.btn-download')) return;
-        e.preventDefault();
-        e.stopImmediatePropagation();
+      if (!cached && form) {
         label(BUSY);
         void ensure()
-          .then((url) => {
-            Object.assign(document.createElement('a'), { href: url }).click();
-            label(IDLE);
-          })
+          .then(() => label(IDLE))
           .catch(() => label(FAIL));
-      },
-      true,
-    );
-    form?.addEventListener(
-      'submit',
-      (e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-      },
-      true,
-    );
-
-    if (!cached && form) {
-      label(BUSY);
-      void ensure()
-        .then(() => label(IDLE))
-        .catch(() => label(FAIL));
-    }
+      }
+    });
   });
 }

@@ -49,5 +49,10 @@
     "hosts": [
       "vexfile.com"
     ]
+  },
+  "usersdrive": {
+    "hosts": [
+      "usersdrive.com"
+    ]
   }
 }
