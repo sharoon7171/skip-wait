@@ -83,5 +83,10 @@
       "rarestudy.in",
       "samfygros.com"
     ]
+  },
+  "theuser-cloud": {
+    "hosts": [
+      "theuser.cloud"
+    ]
   }
 }

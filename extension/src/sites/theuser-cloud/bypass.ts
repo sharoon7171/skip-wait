@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['theuser.cloud'] as const;
 const BRAND = 'skipwait-theuser-cloud';
 const BTN = '#downloadbtn';
 const DIRECT = /href=["'](https?:\/\/[^"']+\/d\/[^"']+)["']/i;
@@ -114,15 +114,19 @@ function wire(form: HTMLFormElement, btn: Element): void {
 }
 
 export function initTheuserCloudBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
+  const allowed = isRemoteSite('theuser-cloud');
   whenDomParsed(() => {
     const ready = document.querySelector<HTMLAnchorElement>('#direct_link a[href*="/d/"]')?.href;
-    if (ready) {
-      location.assign(ready);
-      return;
-    }
     const form = document.querySelector<HTMLInputElement>('input[name="op"][value="download2"]')?.form;
     const btn = document.querySelector(BTN);
-    if (form && btn) wire(form, btn);
+    if (!ready && !(form && btn)) return;
+    void allowed.then((ok) => {
+      if (!ok) return;
+      if (ready) {
+        location.assign(ready);
+        return;
+      }
+      if (form && btn) wire(form, btn);
+    });
   });
 }
