@@ -117,5 +117,10 @@
       "adrinolinks.in",
       "adrinolinks.com"
     ]
+  },
+  "sub2unlock": {
+    "hosts": [
+      "sub2unlock.com"
+    ]
   }
 }
