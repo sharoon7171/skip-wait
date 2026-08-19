@@ -303,5 +303,8 @@
   },
   "olamovies-link": {
     "hosts": ["links.olamovies.mov"]
+  },
+  "oceanofgames": {
+    "hosts": ["oceanofgames.com", "oceansofgamess.com", "oceantogames.com"]
   }
 }

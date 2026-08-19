@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { OCEANOFGAMES_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { requestOceanofgamesCdn } from './resolve';
 
 const IDLE = 'Free Download · Skip Wait — No Timer, No Please-Wait Pages';
@@ -63,16 +63,18 @@ function wire(form: HTMLFormElement): void {
 }
 
 export function initOceanofgamesDirectDownload(): void {
-  if (!isAllowedHost(OCEANOFGAMES_HOSTS)) return;
-  whenDomParsed(() => {
-    for (const form of document.querySelectorAll(
-      'form[action*="getsoft.php"], form[action*="Please-Wait.php"], form[action*="wait-for-resource"]',
-    )) {
-      if (!(form instanceof HTMLFormElement)) continue;
-      if (!form.querySelector('input[name="filename"]')) continue;
-      wire(form);
-    }
-    const delayed = document.getElementById('delayedText');
-    if (delayed) delayed.style.visibility = 'visible';
+  void isRemoteSite('oceanofgames').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      for (const form of document.querySelectorAll(
+        'form[action*="getsoft.php"], form[action*="Please-Wait.php"], form[action*="wait-for-resource"]',
+      )) {
+        if (!(form instanceof HTMLFormElement)) continue;
+        if (!form.querySelector('input[name="filename"]')) continue;
+        wire(form);
+      }
+      const delayed = document.getElementById('delayedText');
+      if (delayed) delayed.style.visibility = 'visible';
+    });
   });
 }

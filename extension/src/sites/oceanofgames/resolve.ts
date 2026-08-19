@@ -1,5 +1,6 @@
 import { cdnFromPleaseWaitHtml } from './decrypt';
-import { OCEANOFGAMES_PLEASE_WAIT } from './hosts';
+
+const PLEASE_WAIT = 'https://wickradio.com/Please-Wait.php';
 
 export const MSG_OCEANOFGAMES_RESOLVE = 'OCEANOFGAMES_RESOLVE_CDN' as const;
 
@@ -13,7 +14,7 @@ type ResolveReq = {
 type ResolveRes = { url: string | null };
 
 async function mintCdn(id: string, filename: string, filesize: string): Promise<string | null> {
-  const res = await fetch(OCEANOFGAMES_PLEASE_WAIT, {
+  const res = await fetch(PLEASE_WAIT, {
     method: 'POST',
     body: new URLSearchParams({ id, filename, filesize }),
     credentials: 'omit',
