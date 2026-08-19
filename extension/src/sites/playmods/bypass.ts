@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['playmods.net'] as const;
 const LABEL = 'Skip Wait';
 const LABEL_APK = 'Download · Skip Wait';
 const WAIT = '…';
@@ -151,21 +151,21 @@ function boot(): void {
 }
 
 export function initPlaymodsBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
-
-  const pathVid = versionIdInPath(location.pathname);
-  if (pathVid) {
-    location.replace(hop(pathVid));
-    return;
-  }
-  if (isMediator(location.pathname)) {
-    whenDomParsed(() => location.replace(hop(versionIdFromDoc(document))));
-    return;
-  }
-
-  boot();
-  whenDomParsed(() => {
-    apply();
-    new MutationObserver(apply).observe(document.documentElement, { childList: true, subtree: true });
+  void isRemoteSite('playmods').then((ok) => {
+    if (!ok) return;
+    const pathVid = versionIdInPath(location.pathname);
+    if (pathVid) {
+      location.replace(hop(pathVid));
+      return;
+    }
+    if (isMediator(location.pathname)) {
+      whenDomParsed(() => location.replace(hop(versionIdFromDoc(document))));
+      return;
+    }
+    boot();
+    whenDomParsed(() => {
+      apply();
+      new MutationObserver(apply).observe(document.documentElement, { childList: true, subtree: true });
+    });
   });
 }

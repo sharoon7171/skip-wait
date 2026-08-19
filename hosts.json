@@ -275,5 +275,8 @@
   },
   "pling": {
     "hosts": ["addons.videolan.org", "opendesktop.org", "store.kde.org"]
+  },
+  "playmods": {
+    "hosts": ["playmods.net"]
   }
 }
