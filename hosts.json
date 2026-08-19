@@ -624,5 +624,8 @@
   },
   "cookiesceo": {
     "hosts": ["cookiesceo.com"]
+  },
+  "fastdl": {
+    "hosts": ["fastdl.zip"]
   }
 }
