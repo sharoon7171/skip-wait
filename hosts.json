@@ -597,5 +597,8 @@
   },
   "anygame": {
     "hosts": ["anygame.net"]
+  },
+  "ankergames": {
+    "hosts": ["ankergames.net"]
   }
 }

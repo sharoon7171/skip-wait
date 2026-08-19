@@ -1,11 +1,11 @@
-import { hostnameMatches } from '../../utils/domain-check';
-import { ANKERGAMES_HOSTS, ANKERGAMES_MEDIATOR_PATH } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
+import { ANKERGAMES_MEDIATOR_PATH } from './hosts';
 import { runAnkergamesInstantReady } from './main-world-hook';
 
-function isMediatorUrl(url: string): boolean {
+async function isMediatorUrl(url: string): Promise<boolean> {
   try {
     const { hostname, pathname } = new URL(url);
-    return hostnameMatches(hostname, ANKERGAMES_HOSTS) && ANKERGAMES_MEDIATOR_PATH.test(pathname);
+    return (await hostIsRemoteSite(hostname, 'ankergames')) && ANKERGAMES_MEDIATOR_PATH.test(pathname);
   } catch {
     return false;
   }
@@ -13,12 +13,15 @@ function isMediatorUrl(url: string): boolean {
 
 export function initAnkergamesMainWorldInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isMediatorUrl(details.url)) return;
-    void chrome.scripting.executeScript({
-      target: { tabId: details.tabId, frameIds: [0] },
-      world: 'MAIN',
-      injectImmediately: true,
-      func: runAnkergamesInstantReady,
+    if (details.frameId !== 0) return;
+    void isMediatorUrl(details.url).then((ok) => {
+      if (!ok) return;
+      void chrome.scripting.executeScript({
+        target: { tabId: details.tabId, frameIds: [0] },
+        world: 'MAIN',
+        injectImmediately: true,
+        func: runAnkergamesInstantReady,
+      });
     });
   });
 }

@@ -1,5 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { ANKERGAMES_HOSTS, ANKERGAMES_MEDIATOR_PATH } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
+import { ANKERGAMES_MEDIATOR_PATH } from './hosts';
 
 const BANNER_ID = 'skipwait-ankergames-banner';
 const BANNER_HTML =
@@ -27,14 +28,17 @@ function mountBanner(): boolean {
 }
 
 export function initAnkergamesMediator(): void {
-  if (!isAllowedHost(ANKERGAMES_HOSTS) || !ANKERGAMES_MEDIATOR_PATH.test(location.pathname)) return;
-  if (mountBanner()) return;
-  const observer = new MutationObserver(() => {
-    if (mountBanner()) observer.disconnect();
-  });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  whenDomParsed(() => {
-    mountBanner();
-    observer.disconnect();
+  if (!ANKERGAMES_MEDIATOR_PATH.test(location.pathname)) return;
+  void isRemoteSite('ankergames').then((ok) => {
+    if (!ok) return;
+    if (mountBanner()) return;
+    const observer = new MutationObserver(() => {
+      if (mountBanner()) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    whenDomParsed(() => {
+      mountBanner();
+      observer.disconnect();
+    });
   });
 }
