@@ -591,5 +591,8 @@
   },
   "apunkagames": {
     "hosts": ["akglinks.com", "apunkasoftware.net"]
+  },
+  "apkteal": {
+    "hosts": ["apkteal.com"]
   }
 }

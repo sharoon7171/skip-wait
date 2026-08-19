@@ -1,10 +1,10 @@
-import { APKTEAL_HOSTS, MSG_APKTEAL_MAIN } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
+import { MSG_APKTEAL_MAIN } from './hosts';
 import { runApktealDirectDownload } from './main-world-hook';
 
-function isApktealUrl(url: string): boolean {
+async function isApktealUrl(url: string): Promise<boolean> {
   try {
-    const h = new URL(url).hostname.toLowerCase();
-    return APKTEAL_HOSTS.some((d) => h === d || h.endsWith('.' + d));
+    return hostIsRemoteSite(new URL(url).hostname, 'apkteal');
   } catch {
     return false;
   }
@@ -21,16 +21,21 @@ function inject(tabId: number, frameId?: number): void {
 
 export function initApktealMainWorldInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isApktealUrl(details.url)) return;
-    inject(details.tabId, 0);
+    if (details.frameId !== 0) return;
+    void isApktealUrl(details.url).then((ok) => {
+      if (!ok) return;
+      inject(details.tabId, 0);
+    });
   });
 
   chrome.runtime.onMessage.addListener((message, sender) => {
     if (message?.type !== MSG_APKTEAL_MAIN) return false;
     const tabId = sender.tab?.id;
     if (tabId === undefined) return false;
-    if (sender.tab?.url && !isApktealUrl(sender.tab.url)) return false;
-    inject(tabId, sender.frameId ?? 0);
+    void (async () => {
+      if (sender.tab?.url && !(await isApktealUrl(sender.tab.url))) return;
+      inject(tabId, sender.frameId ?? 0);
+    })();
     return false;
   });
 }
