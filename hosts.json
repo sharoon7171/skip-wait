@@ -600,5 +600,8 @@
   },
   "ankergames": {
     "hosts": ["ankergames.net"]
+  },
+  "alpharede": {
+    "hosts": ["forumdinheiro.com", "guis2.com", "horoscopeonday.com", "milbviral.com", "tarviral.com"]
   }
 }

@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { ALPHAREDE_HOSTS } from './hosts';
 
 const ID = 'skip-wait-alpharede-overlay';
 const BOOT = 'skip-wait-alpharede-boot';
@@ -62,17 +61,20 @@ const resolve = async (): Promise<string> => {
 };
 
 export const initAlpharedeBypass = (): void => {
-  if (window !== window.top || !isAllowedHost(ALPHAREDE_HOSTS) || started) return;
-  started = true;
-  const overlay = mount('Unlocking Alpharede…');
-  void (async () => {
-    try {
-      const url = await resolve();
-      overlay.setStatus('Redirecting now…');
-      location.replace(url);
-    } catch {
-      started = false;
-      overlay.setError('Could not unlock this link. Reload and try again.');
-    }
-  })();
+  if (window !== window.top || started) return;
+  void isRemoteSite('alpharede').then((ok) => {
+    if (!ok || started) return;
+    started = true;
+    const overlay = mount('Unlocking Alpharede…');
+    void (async () => {
+      try {
+        const url = await resolve();
+        overlay.setStatus('Redirecting now…');
+        location.replace(url);
+      } catch {
+        started = false;
+        overlay.setError('Could not unlock this link. Reload and try again.');
+      }
+    })();
+  });
 };
