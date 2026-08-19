@@ -294,5 +294,8 @@
       "onlinetexttools.com",
       "onlinetools.com"
     ]
+  },
+  "onhaxpk": {
+    "hosts": ["onhaxpk.net"]
   }
 }

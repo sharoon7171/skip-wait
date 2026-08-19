@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['onhaxpk.net'] as const;
 const ROOT_ID = 'skipwait-onhaxpk';
 const COOKIE_EDITOR_RE = /<xmp>\[\s*([\s\S]*?)<\/xmp>/;
 const SESSION_PASTE_RE = /session_paste\s+([A-Za-z0-9+/=]+)/;
@@ -142,9 +142,12 @@ function run(): void {
 }
 
 export function initOnhaxpkCopy(): void {
-  if (!isAllowedHost(HOSTS)) return;
+  const allowed = isRemoteSite('onhaxpk');
   whenDomParsed(() => {
-    run();
-    setTimeout(run, 0);
+    void allowed.then((ok) => {
+      if (!ok) return;
+      run();
+      setTimeout(run, 0);
+    });
   });
 }
