@@ -309,5 +309,11 @@
   },
   "oceanofdmg": {
     "hosts": ["oceanofdmg.com"]
+  },
+  "nitrolink": {
+    "hosts": ["nitro-link.com"]
+  },
+  "nitrolink-mediator": {
+    "hosts": ["almontsf.com"]
   }
 }

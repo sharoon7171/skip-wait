@@ -1,15 +1,15 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
 import {
   ensureNitrolinkChain,
   isNitrolinkShortenerHref,
   nitrolinkAliasFromPath,
   nitrolinkAliasFromSearch,
+  nitrolinkOrigin,
   readNitrolinkChain,
   shortenerUrl,
 } from './chain';
-import { NITROLINK_HOSTS, NITROLINK_MEDIATOR_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-nitrolink-mediator';
 const BOOT_STYLE_ID = 'skip-wait-nitrolink-mediator-boot';
@@ -126,22 +126,29 @@ const nextHref = (): string | null => nextFromDom() || nextFromHtml();
 const rememberAliasFromPage = (): void => {
   const fromQuery = nitrolinkAliasFromSearch(location.search);
   if (fromQuery) {
-    void ensureNitrolinkChain(fromQuery, `https://${NITROLINK_HOSTS[0]}`);
+    void nitrolinkOrigin().then((origin) => {
+      if (origin) void ensureNitrolinkChain(fromQuery, origin);
+    });
   }
 };
 
 const rememberAliasFromHref = (href: string): void => {
   rememberAliasFromPage();
-  try {
-    const u = new URL(href);
-    if (isNitrolinkShortenerHref(href)) {
-      const alias = nitrolinkAliasFromPath(u.pathname);
-      if (alias) void ensureNitrolinkChain(alias, u.origin);
-      return;
-    }
-    const alias = nitrolinkAliasFromSearch(u.search);
-    if (alias) void ensureNitrolinkChain(alias, `https://${NITROLINK_HOSTS[0]}`);
-  } catch {}
+  void (async () => {
+    try {
+      const u = new URL(href);
+      if (await isNitrolinkShortenerHref(href)) {
+        const alias = nitrolinkAliasFromPath(u.pathname);
+        if (alias) void ensureNitrolinkChain(alias, u.origin);
+        return;
+      }
+      const alias = nitrolinkAliasFromSearch(u.search);
+      if (alias) {
+        const origin = await nitrolinkOrigin();
+        if (origin) void ensureNitrolinkChain(alias, origin);
+      }
+    } catch {}
+  })();
 };
 
 const stripAdblockWall = (): void => {
@@ -151,7 +158,7 @@ const stripAdblockWall = (): void => {
   }
 };
 
-const goNext = (next: string, status: string): void => {
+const goNext = async (next: string, status: string): Promise<void> => {
   if (started) return;
   started = true;
   requestVisibilitySpoof();
@@ -159,7 +166,7 @@ const goNext = (next: string, status: string): void => {
   rememberAliasFromHref(next);
   const overlay = mountUi(status);
   overlay.setStatus(
-    isNitrolinkShortenerHref(next) ? 'Opening your link…' : 'Moving to the next page…',
+    (await isNitrolinkShortenerHref(next)) ? 'Opening your link…' : 'Moving to the next page…',
   );
   location.replace(next);
 };
@@ -180,7 +187,7 @@ const runGate = (): void => {
   const next = nextHref();
   if (!next) return;
   const stepInfo = parseStep();
-  goNext(
+  void goNext(
     next,
     stepInfo != null
       ? `Skipping step ${stepInfo.step} of ${stepInfo.total}…`
@@ -205,40 +212,43 @@ const resumeFromChain = async (): Promise<void> => {
 };
 
 export function initNitrolinkMediator(): void {
-  if (!isAllowedHost(NITROLINK_MEDIATOR_HOSTS)) return;
-  if (hostnameMatches(location.hostname, NITROLINK_HOSTS)) return;
+  void Promise.all([isRemoteSite('nitrolink-mediator'), isRemoteSite('nitrolink')]).then(
+    ([onMediator, onNitrolink]) => {
+      if (!onMediator || onNitrolink) return;
 
-  const tick = (): void => {
-    rememberAliasFromPage();
-    coverIfGate();
-    if (started) return;
-    runGate();
-    if (started) return;
-    void resumeFromChain();
-  };
+      const tick = (): void => {
+        rememberAliasFromPage();
+        coverIfGate();
+        if (started) return;
+        runGate();
+        if (started) return;
+        void resumeFromChain();
+      };
 
-  tick();
-  if (started) return;
+      tick();
+      if (started) return;
 
-  const mo = new MutationObserver(() => {
-    tick();
-    if (started) mo.disconnect();
-  });
-  mo.observe(document.documentElement, {
-    attributeFilter: ['href', 'class'],
-    attributes: true,
-    childList: true,
-    subtree: true,
-  });
+      const mo = new MutationObserver(() => {
+        tick();
+        if (started) mo.disconnect();
+      });
+      mo.observe(document.documentElement, {
+        attributeFilter: ['href', 'class'],
+        attributes: true,
+        childList: true,
+        subtree: true,
+      });
 
-  let polls = 0;
-  const poll = window.setInterval(() => {
-    tick();
-    if (started || ++polls >= 80) window.clearInterval(poll);
-  }, 250);
+      let polls = 0;
+      const poll = window.setInterval(() => {
+        tick();
+        if (started || ++polls >= 80) window.clearInterval(poll);
+      }, 250);
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tick, true);
+      }
+      window.addEventListener('load', tick, true);
+    },
+  );
 }

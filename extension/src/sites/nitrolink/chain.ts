@@ -1,4 +1,4 @@
-import { NITROLINK_HOSTS } from './hosts';
+import { hostIsRemoteSite, remoteSiteHosts } from '../../hosts/check';
 
 const CHAIN_KEY = 'sw-nitrolink-chain' as const;
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
@@ -68,16 +68,19 @@ export async function clearNitrolinkChain(): Promise<void> {
   } catch {}
 }
 
+export async function nitrolinkOrigin(): Promise<string> {
+  const hosts = await remoteSiteHosts('nitrolink');
+  return hosts[0] ? `https://${hosts[0]}` : '';
+}
+
 export function shortenerUrl(chain: NitrolinkChain): string {
   return `${chain.origin}/${chain.alias}`;
 }
 
-export function isNitrolinkShortenerHref(href: string): boolean {
+export async function isNitrolinkShortenerHref(href: string): Promise<boolean> {
   try {
     const u = new URL(href);
-    const host = u.hostname.toLowerCase();
-    if (!NITROLINK_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return false;
-    return nitrolinkAliasFromPath(u.pathname) !== null;
+    return (await hostIsRemoteSite(u.hostname, 'nitrolink')) && nitrolinkAliasFromPath(u.pathname) !== null;
   } catch {
     return false;
   }

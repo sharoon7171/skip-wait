@@ -1,13 +1,12 @@
+import { isRemoteSite } from '../../hosts/check';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
 import {
   clearNitrolinkChain,
   ensureNitrolinkChain,
   nitrolinkAliasFromPath,
 } from './chain';
-import { NITROLINK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-nitrolink-unlock';
 const BOOT_STYLE_ID = 'skip-wait-nitrolink-unlock-boot';
@@ -132,32 +131,34 @@ const runUnlock = async (): Promise<void> => {
 };
 
 export function initNitrolinkUnlock(): void {
-  if (!isAllowedHost(NITROLINK_HOSTS)) return;
-  if (!isAliasPath()) return;
-  if (isGateHandshake()) return;
-
-  const tick = (): void => {
-    if (started) return;
+  void isRemoteSite('nitrolink').then((ok) => {
+    if (!ok) return;
+    if (!isAliasPath()) return;
     if (isGateHandshake()) return;
-    if (!isUnlockShell()) return;
-    mountUi('Getting things ready…');
-    void runUnlock();
-  };
 
-  tick();
-  if (started) return;
+    const tick = (): void => {
+      if (started) return;
+      if (isGateHandshake()) return;
+      if (!isUnlockShell()) return;
+      mountUi('Getting things ready…');
+      void runUnlock();
+    };
 
-  const mo = new MutationObserver(() => {
     tick();
-    if (started) mo.disconnect();
+    if (started) return;
+
+    const mo = new MutationObserver(() => {
+      tick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, {
+      attributeFilter: ['href', 'value'],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
   });
-  mo.observe(document.documentElement, {
-    attributeFilter: ['href', 'value'],
-    attributes: true,
-    childList: true,
-    subtree: true,
-  });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 }
