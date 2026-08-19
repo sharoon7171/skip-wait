@@ -1,7 +1,6 @@
 const DELIM = 'wApbsCadfEeFlgiHnik';
 const HTTP_RE = /^https?:\/\//i;
 const TOKEN_KEYS = ['safelink_redirect', 'wpsafelink', 'safelink'] as const;
-const TOKEN_RE = /(?:safelink_redirect|wpsafelink)=([A-Za-z0-9+/_=-]+)/;
 
 type RedirectJson = { safelink?: string; second_safelink_url?: string };
 
@@ -93,7 +92,16 @@ const peelText = async (raw: string, depth: number): Promise<string | null> => {
   return null;
 };
 
-const destFromHref = async (href: string, depth = 0): Promise<string | null> => {
+export const hrefHasSafelinkToken = (href: string): boolean => {
+  try {
+    const url = new URL(href);
+    return TOKEN_KEYS.some((key) => Boolean(url.searchParams.get(key)));
+  } catch {
+    return false;
+  }
+};
+
+export const destFromHref = async (href: string, depth = 0): Promise<string | null> => {
   if (depth > 8) return null;
   let url: URL;
   try {
@@ -117,10 +125,3 @@ const destFromHref = async (href: string, depth = 0): Promise<string | null> => 
 };
 
 export const destFromLocation = (): Promise<string | null> => destFromHref(location.href);
-
-export const destFromDocument = (): Promise<string | null> => {
-  const html = document.documentElement.innerHTML;
-  const match = TOKEN_RE.exec(html)?.[1];
-  if (!match) return Promise.resolve(null);
-  return peelText(match, 0);
-};
