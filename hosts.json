@@ -519,5 +519,8 @@
   },
   "filecrypt": {
     "hosts": ["filecrypt.cc", "filecrypt.to", "filecrypt.co"]
+  },
+  "filecr": {
+    "hosts": ["filecr.com"]
   }
 }

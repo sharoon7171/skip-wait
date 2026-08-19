@@ -1,6 +1,7 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { go, resolveDownloadInfo, type FilecrDownloadInfo } from './api';
-import { FILECR_HOSTS, FILECR_DOWNLOAD_PATH, filecrPageKey } from './hosts';
+import { FILECR_DOWNLOAD_PATH, filecrPageKey } from './hosts';
 import { onFilecrRoute } from './route';
 
 let runningKey: string | null = null;
@@ -36,8 +37,10 @@ function run(): void {
 }
 
 export function initFilecrFileDownload(): void {
-  if (!isAllowedHost(FILECR_HOSTS)) return;
-  onFilecrRoute(() => {
-    whenDomParsed(run);
+  void isRemoteSite('filecr').then((ok) => {
+    if (!ok) return;
+    onFilecrRoute(() => {
+      whenDomParsed(run);
+    });
   });
 }

@@ -1,5 +1,3 @@
-export const FILECR_HOSTS = ['filecr.com'] as const;
-
 export const FILECR_PRODUCT_PATH = /^\/[^/]+\/[^/]+\/?$/i;
 export const FILECR_DOWNLOAD_PATH = /^\/file-download\/?$/i;
 

@@ -1,4 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import {
   clearFilecrPostCache,
   fetchDownloadLink,
@@ -12,7 +13,7 @@ import {
   type FilecrLink,
   type FilecrPost,
 } from './api';
-import { FILECR_HOSTS, FILECR_PRODUCT_PATH, filecrPageKey } from './hosts';
+import { FILECR_PRODUCT_PATH, filecrPageKey } from './hosts';
 import { onFilecrRoute } from './route';
 
 const BRAND_ID = 'skipwait-filecr-brand';
@@ -405,10 +406,12 @@ async function syncRoute(): Promise<void> {
 }
 
 export function initFilecrProductPage(): void {
-  if (!isAllowedHost(FILECR_HOSTS)) return;
-  onFilecrRoute(() => {
-    whenDomParsed(() => {
-      void syncRoute();
+  void isRemoteSite('filecr').then((ok) => {
+    if (!ok) return;
+    onFilecrRoute(() => {
+      whenDomParsed(() => {
+        void syncRoute();
+      });
     });
   });
 }

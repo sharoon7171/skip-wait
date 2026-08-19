@@ -1,5 +1,4 @@
-import { hostnameMatches } from '../../utils/domain-check';
-import { FILECR_HOSTS, MSG_FILECR_ROUTE } from './hosts';
+import { MSG_FILECR_ROUTE } from './hosts';
 
 type RouteListener = () => void;
 
@@ -45,17 +44,10 @@ function hookHistory(): void {
       if (message?.type !== MSG_FILECR_ROUTE) return;
       notifyIfKeyChanged();
     });
-  } catch {
-    /* extension messaging unavailable */
-  }
+  } catch {}
 }
 
 export function onFilecrRoute(listener: RouteListener): void {
-  try {
-    if (!hostnameMatches(location.hostname, FILECR_HOSTS)) return;
-  } catch {
-    return;
-  }
   listeners.add(listener);
   hookHistory();
   listener();
