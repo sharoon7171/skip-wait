@@ -1,10 +1,7 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { continueEndpoint, isArticleGate, jsRedirect, seedGateCookies } from './gate';
-import {
-  AROLINKS_MEDIATOR_HOSTS,
-  AROLINKS_UNLOCK_READY_MS,
-  isArolinksShortenerHref,
-} from './hosts';
+import { AROLINKS_UNLOCK_READY_MS, isArolinksShortenerHref } from './hosts';
 import { unlockHrefFor } from './origin';
 import { countdown, createOverlay, spoofVisibility } from './overlay';
 
@@ -13,8 +10,8 @@ let done = false;
 
 const goNext = async (href: string): Promise<void> => {
   const overlay = mount('Moving to the next page…');
-  const next = isArolinksShortenerHref(href) ? await unlockHrefFor(href) : href;
-  if (isArolinksShortenerHref(next)) {
+  const next = (await isArolinksShortenerHref(href)) ? await unlockHrefFor(href) : href;
+  if (await isArolinksShortenerHref(next)) {
     await countdown(overlay, AROLINKS_UNLOCK_READY_MS, 'Almost ready…');
     overlay.setStatus('Opening your link…');
   }
@@ -50,17 +47,20 @@ const run = async (): Promise<void> => {
 };
 
 export const initArolinksMediator = (): void => {
-  if (window !== window.top || !isAllowedHost(AROLINKS_MEDIATOR_HOSTS)) return;
-  mount('Moving to the next page…');
-  const tick = (): void => {
-    void run();
-  };
-  tick();
-  if (done) return;
-  const observer = new MutationObserver(() => {
+  if (window !== window.top) return;
+  void isRemoteSite('arolinks-mediator').then((ok) => {
+    if (!ok) return;
+    mount('Moving to the next page…');
+    const tick = (): void => {
+      void run();
+    };
     tick();
-    if (done) observer.disconnect();
+    if (done) return;
+    const observer = new MutationObserver(() => {
+      tick();
+      if (done) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    whenDomParsed(tick);
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  whenDomParsed(tick);
 };
