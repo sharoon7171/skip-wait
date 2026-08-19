@@ -579,5 +579,8 @@
   },
   "clipi": {
     "hosts": ["clipi.cc"]
+  },
+  "cinefreak": {
+    "hosts": ["cinefreak.ca", "cinefreak.ch", "cinefreak.net", "cinefreak.top", "cinefreak.tv"]
   }
 }

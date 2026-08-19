@@ -1,7 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { CINEFREAK_HOSTS, CINEFREAK_MEDIATOR_PATH } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
+import { CINEFREAK_MEDIATOR_PATH } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-cinefreak-mediator';
 const BOOT_STYLE_ID = 'skip-wait-cinefreak-mediator-boot';
@@ -87,13 +88,16 @@ function jump(): void {
 }
 
 export function initCinefreakMediator(): void {
-  if (window !== window.top || !isAllowedHost(CINEFREAK_HOSTS)) return;
-  if (CINEFREAK_MEDIATOR_PATH.test(location.pathname)) mountUi('Getting your download ready…');
-  jump();
-  whenDomParsed(jump);
-  const mo = new MutationObserver(() => {
+  if (window !== window.top) return;
+  void isRemoteSite('cinefreak').then((ok) => {
+    if (!ok) return;
+    if (CINEFREAK_MEDIATOR_PATH.test(location.pathname)) mountUi('Getting your download ready…');
     jump();
-    if (started) mo.disconnect();
+    whenDomParsed(jump);
+    const mo = new MutationObserver(() => {
+      jump();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 }
