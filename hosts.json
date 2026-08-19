@@ -88,5 +88,10 @@
     "hosts": [
       "theuser.cloud"
     ]
+  },
+  "tfly": {
+    "hosts": [
+      "tfly.link"
+    ]
   }
 }
