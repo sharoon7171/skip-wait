@@ -133,6 +133,8 @@ import {
   initVegamoviesLandingRedirect,
 } from '../sites/vegamovies';
 import { initCinefreakMediator } from '../sites/cinefreak';
+import { storageKeys } from '../license/storage';
+import { ensureHosts } from '../hosts/check';
 
 const INITS = [
   initStorylineCoursePlayBrand,
@@ -288,6 +290,7 @@ async function boot(): Promise<void> {
     runCoomeetMainWorldAccelerator();
     return;
   }
+  void ensureHosts();
   if (await isOnCoomeetIframeHost()) {
     initCoomeetIframeBootstrap();
     return;
@@ -301,3 +304,8 @@ async function boot(): Promise<void> {
 }
 
 void boot();
+
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== 'local' || window !== window.top) return;
+  if (storageKeys.licenseKey in changes) location.reload();
+});

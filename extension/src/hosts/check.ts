@@ -1,3 +1,5 @@
+import { verifyLicense } from '../license/gate';
+
 const STORAGE_KEY = 'skipWaitHosts';
 export const HOSTS_UPDATED_AT_KEY = 'skipWaitHostsUpdatedAt';
 const HOSTS_URL =
@@ -30,13 +32,38 @@ const hostMatches = (hostname: string, roots: readonly string[]): boolean => {
 export const parseHostsUpdatedAt = (value: unknown): number | null =>
   typeof value === 'number' && Number.isFinite(value) ? value : null;
 
+const storeHosts = async (parsed: HostsFile): Promise<void> => {
+  await chrome.storage.local.set({ [STORAGE_KEY]: parsed, [HOSTS_UPDATED_AT_KEY]: Date.now() });
+};
+
+const loadBundledHosts = async (): Promise<HostsFile | null> => {
+  try {
+    const res = await fetch(chrome.runtime.getURL('hosts.json'));
+    if (!res.ok) return null;
+    return parseHosts(await res.json());
+  } catch {
+    return null;
+  }
+};
+
 export const pullHosts = async (): Promise<boolean> => {
   const res = await fetch(`${HOSTS_URL}?t=${Date.now()}`, { cache: 'no-store', credentials: 'omit' });
   if (!res.ok) return false;
   const parsed = parseHosts(await res.json());
   if (!parsed) return false;
-  await chrome.storage.local.set({ [STORAGE_KEY]: parsed, [HOSTS_UPDATED_AT_KEY]: Date.now() });
+  await storeHosts(parsed);
   return true;
+};
+
+export const ensureHosts = async (): Promise<boolean> => {
+  const stored = await chrome.storage.local.get(STORAGE_KEY);
+  if (parseHosts(stored[STORAGE_KEY])) return true;
+  const bundled = await loadBundledHosts();
+  if (bundled) {
+    await storeHosts(bundled);
+    return true;
+  }
+  return pullHosts();
 };
 
 export const remoteSiteHosts = async (site: string): Promise<string[]> => {
@@ -49,7 +76,9 @@ export const remoteSiteHosts = async (site: string): Promise<string[]> => {
   }
 };
 
-export const hostIsRemoteSite = async (hostname: string, site: string): Promise<boolean> =>
-  hostMatches(hostname, await remoteSiteHosts(site));
+export const hostIsRemoteSite = async (hostname: string, site: string): Promise<boolean> => {
+  if (!hostMatches(hostname, await remoteSiteHosts(site))) return false;
+  return verifyLicense();
+};
 
 export const isRemoteSite = (site: string): Promise<boolean> => hostIsRemoteSite(location.hostname, site);

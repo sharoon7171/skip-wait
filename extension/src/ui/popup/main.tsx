@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HostsUpdateSection } from '../components/HostsUpdateSection';
+import { LicenseSection } from '../components/LicenseSection';
 import { IconArrowRight } from '../components/icons';
 import { CONTACT, SUPPORTED_SITES_URL, assetUrl, getRequestSupportUrl } from '../constants';
 import '../global.css';
@@ -49,6 +50,7 @@ function PopupPage(): React.ReactElement {
           </a>
 
           <div className="divide-y divide-neutral-200/80 overflow-hidden rounded-card bg-surface-canvas shadow-[0_8px_24px_-16px_oklch(0.2_0.015_264/0.5)] ring-1 ring-neutral-200">
+            <LicenseSection />
             <HostsUpdateSection />
 
             <section aria-labelledby="request-heading" className="bg-surface-muted/70 px-4 py-2.5">
