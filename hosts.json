@@ -69,5 +69,19 @@
     "hosts": [
       "cocoboxmod.com"
     ]
+  },
+  "tipsguru": {
+    "hosts": [
+      "tipsguru.in",
+      "vidyarays.com",
+      "mineverse360.com"
+    ]
+  },
+  "tipsguru-wait": {
+    "hosts": [
+      "stream.testuk.org",
+      "rarestudy.in",
+      "samfygros.com"
+    ]
   }
 }

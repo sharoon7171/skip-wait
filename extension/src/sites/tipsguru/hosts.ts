@@ -1,18 +1,6 @@
-import { hostnameMatches } from '../../utils/domain-check';
-
-export const TIPSGURU_HOSTS = [
-  'tipsguru.in',
-  'vidyarays.com',
-  'mineverse360.com',
-] as const;
+import { hostIsRemoteSite } from '../../hosts/check';
 
 export const TIPSGURU_WAIT_MS = 252_000;
-
-export const TIPSGURU_WAIT_HOSTS = [
-  'stream.testuk.org',
-  'rarestudy.in',
-  'samfygros.com',
-] as const;
 
 export function decodeProlinkDest(id: string): string | null {
   try {
@@ -25,9 +13,9 @@ export function decodeProlinkDest(id: string): string | null {
   }
 }
 
-export function isTimedDestUrl(href: string): boolean {
+export async function isTimedDestUrl(href: string): Promise<boolean> {
   try {
-    return hostnameMatches(new URL(href).hostname, TIPSGURU_WAIT_HOSTS);
+    return hostIsRemoteSite(new URL(href).hostname, 'tipsguru-wait');
   } catch {
     return false;
   }

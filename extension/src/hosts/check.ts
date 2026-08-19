@@ -35,13 +35,17 @@ export const pullHosts = async (): Promise<boolean> => {
   return true;
 };
 
-export const isRemoteSite = async (site: string): Promise<boolean> => {
+export const remoteSiteHosts = async (site: string): Promise<string[]> => {
   try {
     const stored = await chrome.storage.local.get(STORAGE_KEY);
     const file = parseHosts(stored[STORAGE_KEY]);
-    if (!file) return false;
-    return hostMatches(location.hostname, file[site]?.hosts ?? []);
+    return file?.[site]?.hosts ?? [];
   } catch {
-    return false;
+    return [];
   }
 };
+
+export const hostIsRemoteSite = async (hostname: string, site: string): Promise<boolean> =>
+  hostMatches(hostname, await remoteSiteHosts(site));
+
+export const isRemoteSite = (site: string): Promise<boolean> => hostIsRemoteSite(location.hostname, site);

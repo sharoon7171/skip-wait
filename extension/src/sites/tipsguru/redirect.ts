@@ -1,12 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { initTipsguruCookieDest, TIPSGURU_GET_DEST } from './cookie-dest';
-import {
-  decodeProlinkDest,
-  isTimedDestUrl,
-  TIPSGURU_HOSTS,
-  TIPSGURU_WAIT_MS,
-} from './hosts';
+import { decodeProlinkDest, isTimedDestUrl, TIPSGURU_WAIT_MS } from './hosts';
 
 export { initTipsguruCookieDest };
 
@@ -96,12 +92,12 @@ function isOffsiteDest(href: string): boolean {
   }
 }
 
-function readWait(): WaitState | null {
+async function readWait(): Promise<WaitState | null> {
   try {
     const raw = sessionStorage.getItem(WAIT_KEY);
     if (!raw) return null;
     const state = JSON.parse(raw) as WaitState;
-    if (!state?.dest || !isTimedDestUrl(state.dest) || typeof state.endAt !== 'number') {
+    if (!state?.dest || typeof state.endAt !== 'number' || !(await isTimedDestUrl(state.dest))) {
       sessionStorage.removeItem(WAIT_KEY);
       return null;
     }
@@ -167,7 +163,7 @@ async function redirect(): Promise<void> {
   if (started) return;
   const dest = await resolveDest();
   if (!dest || !isOffsiteDest(dest)) return;
-  if (isTimedDestUrl(dest)) {
+  if (await isTimedDestUrl(dest)) {
     startTimedWait(dest);
     return;
   }
@@ -186,17 +182,18 @@ async function redirect(): Promise<void> {
 }
 
 export function initTipsguruRedirect(): void {
-  if (!isAllowedHost(TIPSGURU_HOSTS)) return;
-
-  const pending = readWait();
-  if (pending && location.pathname === '/') {
-    started = true;
-    waitOnHome(pending);
-    return;
-  }
-
-  void redirect();
-  whenDomParsed(() => {
+  const allowed = isRemoteSite('tipsguru');
+  void allowed.then(async (ok) => {
+    if (!ok) return;
+    const pending = await readWait();
+    if (pending && location.pathname === '/') {
+      started = true;
+      waitOnHome(pending);
+      return;
+    }
     void redirect();
+    whenDomParsed(() => {
+      void redirect();
+    });
   });
 }
