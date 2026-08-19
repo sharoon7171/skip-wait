@@ -1,7 +1,7 @@
+import { isRemoteSite } from '../../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../../utils/domain-check';
-import { SUB4UNLOCK_COM_HOSTS } from './hosts';
+import { whenDomParsed } from '../../../utils/domain-check';
 import { sub4unlockComLinkId, sub4unlockComPage, type Sub4unlockComPage } from './match';
 
 const OVERLAY_ID = 'skip-wait-sub4unlock-com-overlay';
@@ -74,10 +74,11 @@ const unlock = (): void => {
 };
 
 export function initSub4unlockComUnlock(): void {
-  if (window !== window.top) return;
-  if (!isAllowedHost(SUB4UNLOCK_COM_HOSTS)) return;
-  if (!sub4unlockComPage()) return;
-  bootOverlayLock();
-  mountUi('Getting things ready…');
-  whenDomParsed(unlock);
+  if (window !== window.top || !sub4unlockComPage()) return;
+  void isRemoteSite('sub4unlock-com').then((ok) => {
+    if (!ok) return;
+    bootOverlayLock();
+    mountUi('Getting things ready…');
+    whenDomParsed(unlock);
+  });
 }

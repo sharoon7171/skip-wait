@@ -122,5 +122,23 @@
     "hosts": [
       "sub2unlock.com"
     ]
+  },
+  "sub4unlock-com": {
+    "hosts": [
+      "sub4unlock.com",
+      "sub4unlock.pro"
+    ]
+  },
+  "sub4unlock-io": {
+    "hosts": [
+      "sub4unlock.io",
+      "sub2unlock.io"
+    ]
+  },
+  "sub4unlock-me": {
+    "hosts": [
+      "sub4unlock.me",
+      "sub2unlock.me"
+    ]
   }
 }

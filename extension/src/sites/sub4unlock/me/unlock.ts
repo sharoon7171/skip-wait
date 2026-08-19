@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../../hosts/check';
 import { linksGoFormFromHtml, type LinksGoForm } from '../../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../../utils/domain-check';
-import { SUB4UNLOCK_ME_HOSTS } from './hosts';
+import { whenDomParsed } from '../../../utils/domain-check';
 
 const OVERLAY_ID = 'skip-wait-sub4unlock-me-overlay';
 const BOOT_STYLE_ID = 'skip-wait-sub4unlock-me-boot';
@@ -134,14 +134,17 @@ const unlock = async (): Promise<void> => {
 
 export function initSub4unlockMeUnlock(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(SUB4UNLOCK_ME_HOSTS)) return;
+  const allowed = isRemoteSite('sub4unlock-me');
   whenDomParsed(() => {
     if (!isUnlockPage()) return;
-    bootOverlayLock();
-    mountUi('Getting things ready…');
-    void unlock().catch(() => {
-      started = false;
-      mountUi().setError('Couldn’t unlock this link. Reload and try again.');
+    void allowed.then((ok) => {
+      if (!ok) return;
+      bootOverlayLock();
+      mountUi('Getting things ready…');
+      void unlock().catch(() => {
+        started = false;
+        mountUi().setError('Couldn’t unlock this link. Reload and try again.');
+      });
     });
   });
 }
