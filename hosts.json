@@ -236,5 +236,10 @@
     "hosts": [
       "app.khaddavi.net"
     ]
+  },
+  "romsfun": {
+    "hosts": [
+      "romsfun.com"
+    ]
   }
 }

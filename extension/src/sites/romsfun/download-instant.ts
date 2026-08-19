@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { ROMSFUN_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const NOTICE_ID = 'skipwait-romsfun-bypass';
 
@@ -72,9 +72,11 @@ async function resolveAndShow(): Promise<void> {
 }
 
 export function initRomsfunDownloadInstant(): void {
-  if (!isAllowedHost(ROMSFUN_HOSTS)) return;
+  const allowed = isRemoteSite('romsfun');
   whenDomParsed(() => {
     if (!isCountdownPage()) return;
-    void resolveAndShow();
+    void allowed.then((ok) => {
+      if (ok) void resolveAndShow();
+    });
   });
 }
