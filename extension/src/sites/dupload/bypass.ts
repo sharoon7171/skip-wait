@@ -1,7 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { DUPLOAD_HOSTS, DUPLOAD_ID_RE } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
+import { DUPLOAD_ID_RE } from './hosts';
 import { requestCdn } from './resolve';
 
 const OVERLAY_ID = 'skip-wait-dupload-overlay';
@@ -70,29 +71,32 @@ const fail = (overlay: FullPageOverlay, message: string): void => {
 };
 
 export const initDuploadBypass = (): void => {
-  if (window !== window.top || !isAllowedHost(DUPLOAD_HOSTS) || started) return;
+  if (window !== window.top || started) return;
   const id = fileId();
   if (!id) return;
-  started = true;
+  void isRemoteSite('dupload').then((ok) => {
+    if (!ok || started) return;
+    started = true;
 
-  const overlay = mount('Getting things ready…', '', '');
-  whenDomParsed(() => {
-    const { name, size } = fileMeta();
-    if (name || size) overlay.setNote(fileNote(name, size));
-    if (isMissingFile()) {
-      fail(overlay, ERR_MISSING);
-      return;
-    }
-    overlay.setStatus('Resolving direct CDN…');
-    void requestCdn(id)
-      .then((url) => {
-        const meta = fileMeta();
-        if (meta.name || meta.size) overlay.setNote(fileNote(meta.name, meta.size));
-        overlay.setStatus('Ready — tap Direct Download when you want the file.');
-        overlay.setAction(url, ACTION);
-      })
-      .catch((err: unknown) => {
-        fail(overlay, err instanceof Error && err.message === 'missing' ? ERR_MISSING : ERR_UNLOCK);
-      });
+    const overlay = mount('Getting things ready…', '', '');
+    whenDomParsed(() => {
+      const { name, size } = fileMeta();
+      if (name || size) overlay.setNote(fileNote(name, size));
+      if (isMissingFile()) {
+        fail(overlay, ERR_MISSING);
+        return;
+      }
+      overlay.setStatus('Resolving direct CDN…');
+      void requestCdn(id)
+        .then((url) => {
+          const meta = fileMeta();
+          if (meta.name || meta.size) overlay.setNote(fileNote(meta.name, meta.size));
+          overlay.setStatus('Ready — tap Direct Download when you want the file.');
+          overlay.setAction(url, ACTION);
+        })
+        .catch((err: unknown) => {
+          fail(overlay, err instanceof Error && err.message === 'missing' ? ERR_MISSING : ERR_UNLOCK);
+        });
+    });
   });
 };

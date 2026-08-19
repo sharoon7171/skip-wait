@@ -17,12 +17,15 @@ function runHold(): void {
 
 export const initDuploadHoldNav = (): void => {
   chrome.webNavigation.onCommitted.addListener(({ frameId, tabId, url }) => {
-    if (frameId !== 0 || !isDuploadFileUrl(url)) return;
-    void chrome.scripting.executeScript({
-      target: { tabId, frameIds: [0] },
-      world: 'MAIN',
-      injectImmediately: true,
-      func: runHold,
-    });
+    if (frameId !== 0) return;
+    void (async () => {
+      if (!(await isDuploadFileUrl(url))) return;
+      void chrome.scripting.executeScript({
+        target: { tabId, frameIds: [0] },
+        world: 'MAIN',
+        injectImmediately: true,
+        func: runHold,
+      });
+    })();
   });
 };

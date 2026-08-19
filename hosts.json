@@ -543,5 +543,8 @@
   },
   "earn4link-mediator": {
     "hosts": ["best-hosting.ffindia.in", "hosting.ffindia.in", "open2get.in"]
+  },
+  "dupload": {
+    "hosts": ["dupload.net"]
   }
 }
