@@ -594,5 +594,8 @@
   },
   "apkteal": {
     "hosts": ["apkteal.com"]
+  },
+  "anygame": {
+    "hosts": ["anygame.net"]
   }
 }

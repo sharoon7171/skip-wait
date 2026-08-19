@@ -1,10 +1,10 @@
-import { ANYGAME_HOSTS, MSG_ANYGAME_MAIN } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
+import { MSG_ANYGAME_MAIN } from './hosts';
 import { runAnygameDirectDownload } from './main-world-hook';
 
-function isAnygameUrl(url: string): boolean {
+async function isAnygameUrl(url: string): Promise<boolean> {
   try {
-    const h = new URL(url).hostname.toLowerCase();
-    return ANYGAME_HOSTS.some((d) => h === d || h.endsWith('.' + d));
+    return hostIsRemoteSite(new URL(url).hostname, 'anygame');
   } catch {
     return false;
   }
@@ -21,16 +21,21 @@ function inject(tabId: number, frameId?: number): void {
 
 export function initAnygameMainWorldInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isAnygameUrl(details.url)) return;
-    inject(details.tabId, 0);
+    if (details.frameId !== 0) return;
+    void isAnygameUrl(details.url).then((ok) => {
+      if (!ok) return;
+      inject(details.tabId, 0);
+    });
   });
 
   chrome.runtime.onMessage.addListener((message, sender) => {
     if (message?.type !== MSG_ANYGAME_MAIN) return false;
     const tabId = sender.tab?.id;
     if (tabId === undefined) return false;
-    if (sender.tab?.url && !isAnygameUrl(sender.tab.url)) return false;
-    inject(tabId, sender.frameId ?? 0);
+    void (async () => {
+      if (sender.tab?.url && !(await isAnygameUrl(sender.tab.url))) return;
+      inject(tabId, sender.frameId ?? 0);
+    })();
     return false;
   });
 }
