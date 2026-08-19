@@ -1,124 +1,113 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
 import { HostsUpdateSection } from '../components/HostsUpdateSection';
-import { ReviewPromptSection } from '../components/ReviewPromptSection';
-import { CONTACT, SUPPORTED_SITES_URL, getRequestSupportUrl } from '../constants';
+import { IconArrowRight } from '../components/icons';
+import { CONTACT, SUPPORTED_SITES_URL, assetUrl, getRequestSupportUrl } from '../constants';
 import '../global.css';
 
-const REQUEST_SUPPORT_URL = getRequestSupportUrl();
+const W = 'w-[440px]';
+const SHELL = `m-0 ${W} max-h-[600px] overflow-x-hidden overflow-y-auto bg-surface-canvas font-sans antialiased [scrollbar-width:none] [&::-webkit-scrollbar]:h-0 [&::-webkit-scrollbar]:w-0`;
+const GHOST =
+  'inline-flex h-11 items-center justify-center gap-2 rounded-full bg-surface-canvas text-[0.8125rem] font-semibold text-ink no-underline ring-1 ring-neutral-300 transition-colors hover:bg-primary-50 hover:text-primary-700 hover:ring-primary-300';
 
-function getExtensionIconUrl(): string {
-  if (typeof chrome !== 'undefined' && chrome.runtime?.getURL) {
-    return chrome.runtime.getURL('icon.png');
-  }
-  return '/icon.png';
+const contacts = [
+  { label: 'GitHub', icon: 'icons/github.png', href: getRequestSupportUrl() },
+  { label: 'Telegram', icon: 'icons/telegram.png', href: CONTACT.telegram },
+  { label: 'Email', icon: 'icons/email.png', href: `mailto:${CONTACT.email}` },
+] as const;
+
+function bindPopupWheel(): void {
+  const root = document.documentElement;
+  root.addEventListener(
+    'wheel',
+    (e) => {
+      const max = root.scrollHeight - root.clientHeight;
+      if (max <= 0 || e.deltaY === 0) return;
+      const next = Math.min(max, Math.max(0, root.scrollTop + e.deltaY));
+      if (next === root.scrollTop) return;
+      e.preventDefault();
+      root.scrollTop = next;
+    },
+    { passive: false },
+  );
 }
 
 function PopupPage(): React.ReactElement {
   return (
-    <div className="box-border flex w-[420px] flex-col bg-neutral-50 font-poppins">
-      <Header title="Skip Wait" iconUrl={getExtensionIconUrl()} />
-      <main className="flex flex-col px-3 py-2.5">
-        <article className="overflow-hidden rounded-xl border border-neutral-200/90 bg-white shadow-sm">
-          <div className="divide-y divide-neutral-100">
-            <section aria-labelledby="popup-summary-heading" className="px-4 py-2.5 text-left">
-              <h2
-                id="popup-summary-heading"
-                className="font-poppins text-sm font-extrabold tracking-tight text-primary-950"
-              >
-                How it works
-              </h2>
-              <p className="mt-1 font-poppins text-xs font-medium leading-snug text-neutral-800">
-                On supported link shorteners and file hosts, Skip Wait skips the countdown and opens
-                the destination.
-              </p>
-            </section>
+    <div className={`relative box-border ${W} overflow-hidden bg-surface-canvas font-sans antialiased`}>
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-72">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.96_0.025_250)_0%,oklch(1_0_0)_100%)]" />
+        <div
+          className="absolute inset-0 [mask-image:linear-gradient(180deg,black_0%,transparent_88%)]"
+          style={{
+            backgroundImage: 'radial-gradient(oklch(0.48 0.22 255 / 0.16) 1px, transparent 1.5px)',
+            backgroundSize: '1.5rem 1.5rem',
+          }}
+        />
+      </div>
 
-            <section aria-labelledby="sites-heading" className="px-4 py-2.5 text-left">
-              <h2
-                id="sites-heading"
-                className="font-poppins text-sm font-extrabold tracking-tight text-primary-950"
-              >
+      <div className="relative">
+        <Header />
+
+        <main className="space-y-3.5 px-5 pb-5">
+          <a
+            href={SUPPORTED_SITES_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 rounded-card bg-primary-600 px-5 py-4 no-underline shadow-[0_12px_28px_-14px_oklch(0.48_0.22_255/0.75)] transition-colors hover:bg-primary-700"
+          >
+            <span className="min-w-0 flex-1">
+              <span className="block text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-primary-200">
                 Supported sites
-              </h2>
-              <p className="mt-1 font-poppins text-xs font-medium leading-snug text-neutral-800">
-                See every domain and flow covered by the extension.
-              </p>
-              <a
-                href={SUPPORTED_SITES_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-radius-button bg-primary-600 px-3 py-1.5 font-poppins text-xs font-bold text-white shadow-sm hover:bg-primary-700"
-              >
-                View supported sites
-              </a>
-            </section>
+              </span>
+              <span className="mt-1 block truncate text-[1.0625rem] font-bold tracking-tight text-ink-inverse">
+                Every domain and bypass we cover
+              </span>
+            </span>
+            <IconArrowRight className="size-5 shrink-0 text-ink-inverse transition-transform group-hover:translate-x-0.5" />
+          </a>
 
+          <div className="divide-y divide-neutral-200/80 overflow-hidden rounded-card bg-surface-canvas shadow-[0_8px_24px_-16px_oklch(0.2_0.015_264/0.5)] ring-1 ring-neutral-200">
             <HostsUpdateSection />
 
-            <section aria-labelledby="support-heading" className="px-4 py-2.5 text-left">
+            <section aria-labelledby="request-heading" className="bg-surface-muted/70 px-5 py-4">
               <h2
-                id="support-heading"
-                className="font-poppins text-sm font-extrabold tracking-tight text-primary-950"
+                id="request-heading"
+                className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-ink-soft"
               >
-                Request a website
+                Missing a site?
               </h2>
-              <p className="mt-1 font-poppins text-xs font-medium leading-snug text-neutral-800">
-                If a wait page is missing, send the URL and we will add support.
-              </p>
-              <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
-                <a
-                  href={REQUEST_SUPPORT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-radius-button bg-primary-600 px-3 py-1.5 font-poppins text-xs font-bold text-white shadow-sm hover:bg-primary-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    className="h-3.5 w-3.5 shrink-0"
-                    fill="currentColor"
-                    aria-hidden
+              <div className="mt-3 grid grid-cols-3 gap-2.5">
+                {contacts.map((contact) => (
+                  <a
+                    key={contact.label}
+                    href={contact.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={GHOST}
                   >
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-                  </svg>
-                  Ask on GitHub
-                </a>
-                <span className="text-neutral-300" aria-hidden>
-                  ·
-                </span>
-                <a
-                  href={`mailto:${CONTACT.email}`}
-                  className="text-xs font-bold text-primary-700 hover:text-primary-800 hover:underline"
-                >
-                  Email
-                </a>
-                <a
-                  href={CONTACT.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-primary-700 hover:text-primary-800 hover:underline"
-                >
-                  Telegram
-                </a>
+                    <img src={assetUrl(contact.icon)} alt="" className="size-[1.125rem]" width={18} height={18} />
+                    {contact.label}
+                  </a>
+                ))}
               </div>
             </section>
-
-            <div className="p-2.5">
-              <ReviewPromptSection />
-            </div>
           </div>
-        </article>
-      </main>
-      <Footer />
+        </main>
+
+        <Footer />
+      </div>
     </div>
   );
 }
 
 const root = document.getElementById('root');
 if (root) {
+  document.documentElement.className = SHELL;
+  document.body.className = `m-0 ${W} bg-surface-canvas font-sans antialiased`;
+  bindPopupWheel();
   createRoot(root).render(
     <StrictMode>
       <PopupPage />

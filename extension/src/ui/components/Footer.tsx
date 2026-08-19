@@ -1,23 +1,37 @@
-import { typography } from '../typography';
+import { CHROME_WEB_STORE_LISTING_URL } from '../constants';
+import { IconStar } from './icons';
 
 const SQ_TECH_URL = 'https://www.sqtech.dev/';
 
 export function Footer(): React.ReactElement {
   return (
-    <footer className="shrink-0 border-t border-primary-200 px-3 py-1">
-      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-0.5">
-        <span className={typography.caption}>
-          Developed by{' '}
-          <a
-            href={SQ_TECH_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-primary-700 hover:text-primary-800 hover:underline"
-          >
-            SQ Tech
-          </a>
+    <footer className="flex items-center justify-between gap-3 border-t border-neutral-200/80 px-5 py-4">
+      <a
+        href={CHROME_WEB_STORE_LISTING_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 text-[0.8125rem] font-semibold text-ink no-underline transition-colors hover:text-primary-700"
+      >
+        <span className="flex gap-0.5 text-warning-500" aria-hidden>
+          <IconStar className="size-3.5" />
+          <IconStar className="size-3.5" />
+          <IconStar className="size-3.5" />
+          <IconStar className="size-3.5" />
+          <IconStar className="size-3.5" />
         </span>
-      </div>
+        Rate
+      </a>
+      <p className="text-[0.75rem] font-medium text-ink-soft">
+        Developed by{' '}
+        <a
+          href={SQ_TECH_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-ink no-underline transition-colors hover:text-primary-700"
+        >
+          SQ Tech
+        </a>
+      </p>
     </footer>
   );
 }

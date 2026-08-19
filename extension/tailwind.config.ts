@@ -1,37 +1,29 @@
 import type { Config } from 'tailwindcss';
 import type { PluginAPI } from 'tailwindcss/plugin';
-import { accent, neutral, primary, success, warning } from './tokens/colors';
+import { ink, neutral, primary, success, surface, warning } from './tokens/colors';
 import { radius } from './tokens/radius';
-import { spacingAliases } from './tokens/spacing';
 import { fontFamilies } from './tokens/typography';
 
-const poppinsStack = [...fontFamilies.poppins].join(', ');
+const sansStack = [...fontFamilies.sans].join(', ');
 
 export default {
   theme: {
     extend: {
       colors: {
         primary: { ...primary },
-        accent: { ...accent },
         neutral: { ...neutral },
         warning: { ...warning },
         success: { ...success },
+        surface: { ...surface },
+        ink: { ...ink },
       },
       borderRadius: { ...radius },
-      spacing: { ...spacingAliases },
-      fontFamily: {
-        poppins: [...fontFamilies.poppins],
-        sans: [...fontFamilies.sans],
-        mono: [...fontFamilies.mono],
-      },
+      fontFamily: { sans: [...fontFamilies.sans] },
     },
   },
   plugins: [
     ({ addBase }: PluginAPI) => {
-      addBase({
-        'html, :host': { fontFamily: poppinsStack },
-        'code, kbd, samp, pre': { fontFamily: poppinsStack },
-      });
+      addBase({ 'html, :host': { fontFamily: sansStack } });
     },
   ],
 } satisfies Config;

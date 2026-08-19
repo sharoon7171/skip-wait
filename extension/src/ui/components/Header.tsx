@@ -1,19 +1,12 @@
-type HeaderProps = {
-  title: string;
-  iconUrl?: string;
-};
+import { assetUrl } from '../constants';
 
-export function Header({ title, iconUrl }: HeaderProps): React.ReactElement {
+export function Header(): React.ReactElement {
   return (
-    <header className="shrink-0 border-b border-primary-200 bg-primary-50 px-3 py-2">
-      <div className="flex min-w-0 items-center gap-2">
-        {iconUrl ? (
-          <img src={iconUrl} alt="" className="h-7 w-7 shrink-0" width={28} height={28} />
-        ) : null}
-        <h1 className="truncate font-poppins text-base font-black tracking-tight text-primary-900">
-          {title}
-        </h1>
-      </div>
+    <header className="flex items-center gap-3.5 px-5 pb-5 pt-6">
+      <img src={assetUrl('icon.png')} alt="" className="size-11 shrink-0" width={44} height={44} />
+      <h1 className="truncate text-[1.375rem] font-extrabold tracking-tight text-ink">
+        Skip Wait
+      </h1>
     </header>
   );
 }
