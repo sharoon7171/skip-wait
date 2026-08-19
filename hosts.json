@@ -501,5 +501,8 @@
   },
   "gaea-operations-lockr": {
     "hosts": ["lockr.net", "lockr.so", "lockr.to"]
+  },
+  "flightsim": {
+    "hosts": ["flightsim.to"]
   }
 }

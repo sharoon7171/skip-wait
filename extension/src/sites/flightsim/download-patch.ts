@@ -1,6 +1,5 @@
-import { hostnameMatches } from '../../utils/domain-check';
+import { hostIsRemoteSite } from '../../hosts/check';
 
-const HOSTS = ['flightsim.to'] as const;
 const ADDON_PATH_RE = /^\/addon\/\d+(?:\/|$)/i;
 
 export function runFlightsimDownloadPatch(): void {
@@ -50,11 +49,11 @@ export function runFlightsimDownloadPatch(): void {
   }) as typeof setTimeout;
 }
 
-function isFlightsimAddonUrl(url: string | undefined): boolean {
+async function isFlightsimAddonUrl(url: string | undefined): Promise<boolean> {
   if (!url || !URL.canParse(url)) return false;
   const u = new URL(url);
   if (!ADDON_PATH_RE.test(u.pathname)) return false;
-  return hostnameMatches(u.hostname, HOSTS);
+  return hostIsRemoteSite(u.hostname, 'flightsim');
 }
 
 export function initFlightsimDownloadPatch(): void {
@@ -62,7 +61,7 @@ export function initFlightsimDownloadPatch(): void {
     if (changeInfo.status !== 'loading') return;
     const url = changeInfo.url ?? tab.url;
     void (async () => {
-      if (!isFlightsimAddonUrl(url)) return;
+      if (!(await isFlightsimAddonUrl(url))) return;
       try {
         await chrome.scripting.executeScript({
           target: { tabId, allFrames: false },
