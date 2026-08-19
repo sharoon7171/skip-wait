@@ -281,5 +281,8 @@
   },
   "pesktop": {
     "hosts": ["pesktop.com"]
+  },
+  "ouo": {
+    "hosts": ["ouo.press", "ouo.io"]
   }
 }

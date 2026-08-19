@@ -1,8 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
 import { isOuoGoGate, isOuoLandingGate, ouoGoForm, ouoLandingForm } from './detect';
-import { OUO_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-ouo-overlay';
 const BOOT_STYLE_ID = 'skip-wait-ouo-boot';
@@ -93,7 +92,6 @@ const runGoGate = (): void => {
 };
 
 const tick = (): void => {
-  if (!isAllowedHost(OUO_HOSTS)) return;
   if (isOuoGoGate()) {
     bootOverlayLock();
     runGoGate();
@@ -106,9 +104,11 @@ const tick = (): void => {
 };
 
 export function initOuoBypass(): void {
-  if (!isAllowedHost(OUO_HOSTS)) return;
-  requestVisibilitySpoof();
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
+  void isRemoteSite('ouo').then((ok) => {
+    if (!ok) return;
+    requestVisibilitySpoof();
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  });
 }
