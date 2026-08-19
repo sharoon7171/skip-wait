@@ -411,5 +411,8 @@
   },
   "latestmodapks": {
     "hosts": ["latestmodapks.com"]
+  },
+  "kotakanimeid": {
+    "hosts": ["kotakanimeid.link"]
   }
 }

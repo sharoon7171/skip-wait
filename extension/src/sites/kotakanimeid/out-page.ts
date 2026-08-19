@@ -1,6 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { KOTAKANIMEID_HOSTS } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const OVERLAY_ID = 'skip-wait-kotakanimeid-out';
 const BRAND_ID = 'skipwait-kotakanimeid-brand';
@@ -318,9 +318,11 @@ async function run(): Promise<void> {
 }
 
 export function initKotakanimeidOutPage(): void {
-  if (!isAllowedHost(KOTAKANIMEID_HOSTS)) return;
-  whenDomParsed(() => {
-    if (!isOutDownloadGate()) return;
-    void run();
+  void isRemoteSite('kotakanimeid').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      if (!isOutDownloadGate()) return;
+      void run();
+    });
   });
 }
