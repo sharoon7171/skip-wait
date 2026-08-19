@@ -384,5 +384,8 @@
   },
   "liteapks": {
     "hosts": ["liteapks.com"]
+  },
+  "linkvertise": {
+    "hosts": ["linkvertise.com"]
   }
 }

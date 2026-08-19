@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { LINKVERTISE_HOSTS } from './hosts';
 import {
   isYourTargetPath,
   parseAccessIdentifier,
@@ -141,34 +140,36 @@ const run = (): void => {
 };
 
 export function initLinkvertiseAccessPage(): void {
-  if (!isAllowedHost(LINKVERTISE_HOSTS)) return;
   if (!isAccessPath() && !isYourTargetPath()) return;
+  void isRemoteSite('linkvertise').then((ok) => {
+    if (!ok) return;
 
-  const tick = (): void => {
+    const tick = (): void => {
+      if (finished) return;
+      if (!started) {
+        mountUi(isYourTargetPath() ? 'Almost there…' : 'Getting ready…');
+      }
+      run();
+    };
+
+    tick();
     if (finished) return;
-    if (!started) {
-      mountUi(isYourTargetPath() ? 'Almost there…' : 'Getting ready…');
+
+    const mo = new MutationObserver(() => {
+      tick();
+      if (finished) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    let polls = 0;
+    const poll = window.setInterval(() => {
+      polls += 1;
+      tick();
+      if (finished || polls >= 80) window.clearInterval(poll);
+    }, 250);
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
     }
-    run();
-  };
-
-  tick();
-  if (finished) return;
-
-  const mo = new MutationObserver(() => {
-    tick();
-    if (finished) mo.disconnect();
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-
-  let polls = 0;
-  const poll = window.setInterval(() => {
-    polls += 1;
-    tick();
-    if (finished || polls >= 80) window.clearInterval(poll);
-  }, 250);
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 }
