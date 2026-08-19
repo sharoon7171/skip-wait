@@ -582,5 +582,8 @@
   },
   "cinefreak": {
     "hosts": ["cinefreak.ca", "cinefreak.ch", "cinefreak.net", "cinefreak.top", "cinefreak.tv"]
+  },
+  "bstshrt": {
+    "hosts": ["boostellar.com", "bstlar.com", "bstshrt.com"]
   }
 }

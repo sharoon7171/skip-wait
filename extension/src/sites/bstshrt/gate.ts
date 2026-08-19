@@ -1,3 +1,4 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import {
@@ -6,6 +7,7 @@ import {
   isBstshrtLockerPage,
   isCloudflareChallenge,
   parseBstshrtLockerConfig,
+  setBstshrtHostOk,
 } from './detect';
 import { unlockBstlarLegacyDestination, unlockBstshrtDestination } from './unlock';
 
@@ -95,23 +97,25 @@ const tick = (): void => {
 
 export function initBstshrtGate(): void {
   if (window !== window.top) return;
-  if (!isBstshrtHost()) return;
-
-  tick();
-  new MutationObserver(tick).observe(document.documentElement, {
-    attributeFilter: ['class', 'style', 'hidden', 'id', 'value'],
-    attributes: true,
-    childList: true,
-    subtree: true,
-  });
-  const titleEl = document.querySelector('title');
-  if (titleEl) {
-    new MutationObserver(tick).observe(titleEl, {
+  void isRemoteSite('bstshrt').then((ok) => {
+    if (!ok) return;
+    setBstshrtHostOk(true);
+    tick();
+    new MutationObserver(tick).observe(document.documentElement, {
+      attributeFilter: ['class', 'style', 'hidden', 'id', 'value'],
+      attributes: true,
       childList: true,
-      characterData: true,
       subtree: true,
     });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
-  window.addEventListener('load', tick, true);
+    const titleEl = document.querySelector('title');
+    if (titleEl) {
+      new MutationObserver(tick).observe(titleEl, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
+    window.addEventListener('load', tick, true);
+  });
 }

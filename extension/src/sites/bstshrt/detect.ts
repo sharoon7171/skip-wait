@@ -1,6 +1,4 @@
-import { isAllowedHost } from '../../utils/domain-check';
 import {
-  BSTSHRT_HOSTS,
   bstshrtLegacyPath,
   bstshrtLockerSlug,
 } from './hosts';
@@ -30,7 +28,13 @@ export const isCloudflareChallenge = (): boolean => {
   );
 };
 
-export const isBstshrtHost = (): boolean => isAllowedHost(BSTSHRT_HOSTS);
+let bstshrtHostOk = false;
+
+export const setBstshrtHostOk = (ok: boolean): void => {
+  bstshrtHostOk = ok;
+};
+
+export const isBstshrtHost = (): boolean => bstshrtHostOk;
 
 const scriptsText = (): string =>
   [...document.querySelectorAll('script')]

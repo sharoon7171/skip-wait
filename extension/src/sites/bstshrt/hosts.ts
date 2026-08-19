@@ -1,5 +1,3 @@
-export const BSTSHRT_HOSTS = ['bstshrt.com', 'bstlar.com', 'boostellar.com'] as const;
-
 export const BSTSHRT_LOCKER_PATH_RE = /^\/u\/([^/]+)\/?$/i;
 export const BSTSHRT_LEGACY_PATH_RE = /^\/([^/]+)\/([^/]+)\/?$/i;
 
