@@ -5,7 +5,7 @@ const name = 'WP Safelink';
 const bypassType = 'Skip Safelink Wait';
 
 const description =
-  'WP Safelink bypass that clears WordPress safelink countdowns and generate-link form steps, then resolves the decoded destination without a manual generate routine.';
+  'WP Safelink bypass for Themeson countdown pages: Skip Wait clears skip safelink wait, generate-link, and please-wait busywork so the destination opens on a real hop.';
 
 const domains = [
   'stbemuiptvcodes.com',
@@ -18,60 +18,68 @@ const keywords = [
   'wp safelink bypass',
   'wp safelink bypass extension',
   'wp safelink timer bypass',
+  'wp safelink countdown bypass',
   'wordpress safelink bypass',
+  'themeson safelink bypass',
   'safelink generate link',
   'skip safelink wait',
+  'safelink waiting page',
   'skip countdown timer',
   'bypass countdown timer',
   'skip waiting page',
+  'please wait bypass',
   'link shortener bypass',
   'skip wait extension',
   'safelink bypass',
 ] as const;
 
 const intro =
-  'A WP Safelink bypass or wordpress safelink bypass search usually means a Themeson-style safelink page forced a countdown and generate-link form before the decoded destination. Skip Wait is the free Chrome extension that runs skip safelink wait on those plugin pages so you are not submitting generate forms by hand.';
+  'A WP Safelink bypass matters when a wrapped download opens a countdown card, ads, and a generate-link sequence instead of the file. Skip Wait is the free Chrome extension that runs skip safelink wait on that hop so a wordpress safelink bypass is not fifteen seconds of please wait plus another generate click.';
 
-const body = `## Countdown, generate link, then decode
+const body = `## Countdown, generate link, then get link
 
-WordPress safelink plugin pages wrap the real URL in a countdown chain and a generate-link form. You wait, fill or click generate, wait again, and only then get the decoded destination. Leave mid-form and the same safelink bypass loop restarts.
+WP Safelink (Themeson) sits between the click and the file. The share looks like a normal post or a dedicated wait page. What you actually hit is a skip countdown timer, then safelink generate link, then a short please wait, then Get Link. Leave mid-timer and the same safelink waiting page starts over.
 
-That plugin flow—not a generic shortener—is why people search wp safelink timer bypass, safelink generate link, and skip countdown timer together.
+That plugin flow—not a random shortener—is the WP Safelink timer bypass problem: the destination is already tied to the hop; the ads and generate routine are the stall.
 
-### Form steps that stall unlock
+### What the wait page actually demands
 
-- Safelink countdown chains before generate
-- Generate-link form submits on each hop
-- Manual decoding after the form succeeds
-- Restarting when the token expires mid-wait
+- Skip countdown timer chrome before Generate Link enables
+- Safelink generate link, then another please-wait step
+- Get Link only after that chain, often under ads
+- A full blog layout on some skins that still hides the same wait at the bottom
 
-## Decoding the destination on the live form page
+## Opening the destination on a real hop
 
-Skip Wait runs on supported WP Safelink pages inside Chrome. It bypasses countdown and generate steps the plugin already expects, then resolves the decoded destination URL without a paste decoder.
+Skip Wait’s WP Safelink bypass extension runs in Chrome on the listed hosts. On a wrapped safelink URL, or on the actual countdown / generate page, it resolves the destination and leaves skip safelink wait behind. You stay in the tab you opened. No paste decoder, no hand-submitting generate.
 
-You open the shared safelink as usual. Client form theater goes away; unlock still finishes honestly.
+Client theater (countdown, generate, please wait) gets out of the way. Required checks still finish honestly. A normal article that only *lists* wrapped links is not that hop—Skip Wait does not yank you off the post you meant to read.
 
-## Plugin hosts that rotate between downloads
+## Skins change; the wait does not
 
-Hardcoded form selectors break when the next Themeson skin appears. A WP Safelink bypass extension keyed to countdown and generate behavior stays useful across the supported set without relearning each demo host.
+Demo templates and publisher themes rotate. A WP Safelink countdown bypass that keys off the wait page and the wrapped link stays useful across the supported set instead of a userscript per skin. New hosts are covered when they join that list—same as using Skip Wait on the live page rather than a third-party paste box.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'What generate-link steps does Skip Wait skip on WP Safelink?',
+    question: 'What does a WP Safelink bypass skip?',
     answer:
-      'Safelink countdown chains and generate-link form steps on supported WordPress safelink plugin pages. Skip Wait resolves the decoded destination without the manual generate routine.',
+      'Skip safelink wait on the real hop: skip countdown timer, safelink generate link, and please-wait busywork. Skip Wait then opens the destination already tied to that page or wrapped URL.',
   },
   {
-    question: 'Is this the same as every WordPress safelink theme?',
+    question: 'Will it leave a normal blog post on a WP Safelink site?',
     answer:
-      'No. This entry covers the WP Safelink / Themeson-style hosts listed here. Other safelink families may use different continue hops.',
+      'No. A wordpress safelink bypass here is the countdown / generate waiting page or a wrapped safelink URL—not every article that happens to mention downloads.',
   },
   {
-    question: 'Do I still fill the generate form myself?',
+    question: 'Do I still click Generate Link myself?',
     answer:
-      'On supported pages, no. Skip Wait completes the countdown and generate path the plugin already expects.',
+      'On supported hops, no. Skip Wait clears generate-link and please wait bypass steps so you are not running that routine by hand.',
+  },
+  {
+    question: 'Is this every WordPress safelink plugin?',
+    answer:
+      'No. This entry is WP Safelink / Themeson-style hosts listed here. Other safelink families use different continue hops.',
   },
   {
     question: 'Is the WP Safelink bypass free?',
