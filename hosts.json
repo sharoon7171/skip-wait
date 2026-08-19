@@ -618,5 +618,8 @@
   },
   "fourdownload": {
     "hosts": ["4download.net"]
+  },
+  "bitcotasks": {
+    "hosts": ["bitcotasks.com"]
   }
 }

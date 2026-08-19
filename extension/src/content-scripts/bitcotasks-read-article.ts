@@ -1,18 +1,8 @@
-import { hostnameMatches } from '../utils/domain-check';
+import { isRemoteSite } from '../hosts/check';
 
-const HOSTS = ['bitcotasks.com'] as const;
 const READ_ARTICLE = '/read-article/';
 const HREF_PATTERN = /location\.href\s*=\s*['"](https?:\/\/[^'"]+)['"]/gi;
 const BLOCKED_PATTERN = /bitcotasks\.com\/detected\.html/i;
-
-function isBitcotasksReadArticlePage(): boolean {
-  try {
-    const { hostname, pathname } = new URL(window.location.href);
-    return hostnameMatches(hostname, HOSTS) && pathname.includes(READ_ARTICLE);
-  } catch {
-    return false;
-  }
-}
 
 function decodeBase64UrlSafe(segment: string): string {
   const padding = segment.length % 4;
@@ -61,14 +51,17 @@ function buildDestinationUrl(): string | null {
 }
 
 export function initBitcotasksReadArticle(): void {
-  if (!isBitcotasksReadArticlePage()) return;
-  const performRedirect = () => {
-    const destination = buildDestinationUrl();
-    if (destination) location.replace(destination);
-  };
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', performRedirect, { once: true });
-  } else {
-    performRedirect();
-  }
+  if (!location.pathname.includes(READ_ARTICLE)) return;
+  void isRemoteSite('bitcotasks').then((ok) => {
+    if (!ok) return;
+    const performRedirect = () => {
+      const destination = buildDestinationUrl();
+      if (destination) location.replace(destination);
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', performRedirect, { once: true });
+    } else {
+      performRedirect();
+    }
+  });
 }
