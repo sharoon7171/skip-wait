@@ -492,5 +492,8 @@
   },
   "genlink-unlock": {
     "hosts": ["crazymindhub.xyz"]
+  },
+  "gapkmod": {
+    "hosts": ["gapkmod.net"]
   }
 }

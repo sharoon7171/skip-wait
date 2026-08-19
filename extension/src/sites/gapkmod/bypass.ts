@@ -1,6 +1,8 @@
-import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { GAPKMOD_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
 import { requestGapkmodFinal } from './resolve';
+
+const GAPKMOD_HOSTS = ['gapkmod.net'] as const;
 
 const WAIT = 'Unlocking · Skip Wait';
 const STYLE = 'skipwait-gapkmod';
@@ -138,17 +140,19 @@ function paintList(entries: Entry[]): void {
 }
 
 export function initGapkmodBypass(): void {
-  if (!isAllowedHost(GAPKMOD_HOSTS)) return;
-  boot();
-  whenDomParsed(() => {
-    reveal();
-    for (const a of document.querySelectorAll<HTMLAnchorElement>('a.downloadAPK')) freeze(a);
-    const pending = [...document.querySelectorAll<HTMLAnchorElement>(`a.downloadAPK[${PENDING}]`)];
-    if (!pending.length) return;
-    for (const a of pending) {
-      const token = a.getAttribute(TOKEN);
-      if (token) void resolveToken(token).then((url) => launch(a, url));
-    }
-    if (pending.some((a) => !a.hasAttribute(TOKEN))) void pageFinals().then(paintList);
+  void isRemoteSite('gapkmod').then((ok) => {
+    if (!ok) return;
+    boot();
+    whenDomParsed(() => {
+      reveal();
+      for (const a of document.querySelectorAll<HTMLAnchorElement>('a.downloadAPK')) freeze(a);
+      const pending = [...document.querySelectorAll<HTMLAnchorElement>(`a.downloadAPK[${PENDING}]`)];
+      if (!pending.length) return;
+      for (const a of pending) {
+        const token = a.getAttribute(TOKEN);
+        if (token) void resolveToken(token).then((url) => launch(a, url));
+      }
+      if (pending.some((a) => !a.hasAttribute(TOKEN))) void pageFinals().then(paintList);
+    });
   });
 }
