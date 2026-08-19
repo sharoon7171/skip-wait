@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['uploadrar.com'] as const;
 const CDN_RE = /href="(https:\/\/fs\d+\.uploadrar\.com(?::\d+)?\/d\/[^"]+)"/i;
 const IDLE = 'Free Download · Skip Wait — No Timer, No Mediator Pages';
 
@@ -25,41 +25,42 @@ async function cdn(id: string): Promise<string> {
 }
 
 export function initUploadrarBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
+  const allowed = isRemoteSite('uploadrar');
   whenDomParsed(() => {
     const btn = document.querySelector<HTMLButtonElement>('button[name="method_free"]');
     const form = btn?.form;
     const id = form?.querySelector<HTMLInputElement>('input[name="id"]')?.value.trim();
     if (!btn || !form || !id || !form.querySelector('input[name="op"][value="download1"]')) return;
-
-    btn.classList.replace('btn-outline-primary', 'btn-success');
-    btn.textContent = IDLE;
-
-    let busy = false;
-    btn.addEventListener(
-      'click',
-      (e) => {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        if (busy) return;
-        busy = true;
-        btn.disabled = true;
-        btn.textContent = 'Starting…';
-        void cdn(id)
-          .then((url) => {
-            Object.assign(document.createElement('a'), { href: url }).click();
-            btn.textContent = IDLE;
-          })
-          .catch(() => {
-            btn.classList.replace('btn-success', 'btn-danger');
-            btn.textContent = 'Failed';
-          })
-          .finally(() => {
-            btn.disabled = false;
-            busy = false;
-          });
-      },
-      true,
-    );
+    void allowed.then((ok) => {
+      if (!ok) return;
+      btn.classList.replace('btn-outline-primary', 'btn-success');
+      btn.textContent = IDLE;
+      let busy = false;
+      btn.addEventListener(
+        'click',
+        (e) => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          if (busy) return;
+          busy = true;
+          btn.disabled = true;
+          btn.textContent = 'Starting…';
+          void cdn(id)
+            .then((url) => {
+              Object.assign(document.createElement('a'), { href: url }).click();
+              btn.textContent = IDLE;
+            })
+            .catch(() => {
+              btn.classList.replace('btn-success', 'btn-danger');
+              btn.textContent = 'Failed';
+            })
+            .finally(() => {
+              btn.disabled = false;
+              busy = false;
+            });
+        },
+        true,
+      );
+    });
   });
 }

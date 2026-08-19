@@ -54,5 +54,10 @@
     "hosts": [
       "usersdrive.com"
     ]
+  },
+  "uploadrar": {
+    "hosts": [
+      "uploadrar.com"
+    ]
   }
 }
