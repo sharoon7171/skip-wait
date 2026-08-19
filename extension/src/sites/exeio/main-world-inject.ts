@@ -18,7 +18,11 @@ const injectMain = (tabId: number, frameId: number, func: () => void): void => {
 
 export function initExeioAdblockInject(): void {
   chrome.webNavigation.onCommitted.addListener(({ frameId, tabId, url }) => {
-    if (frameId === 0 && isExeioUrl(url)) injectMain(tabId, 0, runExeioAdblockBypass);
+    if (frameId !== 0) return;
+    void (async () => {
+      if (!(await isExeioUrl(url))) return;
+      injectMain(tabId, 0, runExeioAdblockBypass);
+    })();
   });
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

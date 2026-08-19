@@ -528,5 +528,8 @@
   },
   "fclc-mediator": {
     "hosts": ["jobzhub.store"]
+  },
+  "exeio": {
+    "hosts": ["exe.io", "exeygo.com"]
   }
 }

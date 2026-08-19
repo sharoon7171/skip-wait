@@ -1,7 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { isAllowedHost, whenDomReady } from '../../utils/domain-check';
-import { EXEIO_HOSTS, MSG_EXEIO_ADBLOCK, MSG_EXEIO_GO_UNLOCK, type ExeioUnlockResult } from './hosts';
+import { whenDomReady } from '../../utils/domain-check';
+import { MSG_EXEIO_ADBLOCK, MSG_EXEIO_GO_UNLOCK, type ExeioUnlockResult } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-exeio-overlay';
 const CAPTCHA_PIN_STYLE_ID = 'skip-wait-exeio-captcha-pin';
@@ -268,7 +269,10 @@ async function runPipeline(): Promise<void> {
 }
 
 export function initExeioGate(): void {
-  if (!isAllowedHost(EXEIO_HOSTS) || window !== window.top || started) return;
-  started = true;
-  void runPipeline();
+  if (window !== window.top || started) return;
+  void isRemoteSite('exeio').then((ok) => {
+    if (!ok || started) return;
+    started = true;
+    void runPipeline();
+  });
 }
