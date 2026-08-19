@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { GAEA_OPERATIONS_LOCKR_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-gaea-operations-lockr-overlay';
 const BOOT_STYLE_ID = 'skip-wait-gaea-operations-lockr-boot';
@@ -69,20 +68,23 @@ const resolve = async (id: string, overlay: FullPageOverlay): Promise<string> =>
 };
 
 export function initGaeaOperationsLockrGate(): void {
-  if (window !== window.top || !isAllowedHost(GAEA_OPERATIONS_LOCKR_HOSTS) || started) return;
+  if (window !== window.top || started) return;
   const id = location.pathname.replace(/^\/+|\/+$/g, '');
   if (!id || id.includes('/') || RESERVED.test(id)) return;
-  started = true;
-  const overlay = mount('Unlocking your link…');
-  void resolve(id, overlay)
-    .then((target) => {
-      overlay.setStatus('Opening your link…');
-      location.replace(target);
-    })
-    .catch((err: unknown) => {
-      started = false;
-      overlay.hideCountdown();
-      overlay.setStatus('Something went wrong.');
-      overlay.setError(err instanceof Error ? err.message : String(err));
-    });
+  void isRemoteSite('gaea-operations-lockr').then((ok) => {
+    if (!ok || started) return;
+    started = true;
+    const overlay = mount('Unlocking your link…');
+    void resolve(id, overlay)
+      .then((target) => {
+        overlay.setStatus('Opening your link…');
+        location.replace(target);
+      })
+      .catch((err: unknown) => {
+        started = false;
+        overlay.hideCountdown();
+        overlay.setStatus('Something went wrong.');
+        overlay.setError(err instanceof Error ? err.message : String(err));
+      });
+  });
 }

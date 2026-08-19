@@ -498,5 +498,8 @@
   },
   "gamesnostalgia": {
     "hosts": ["gamesnostalgia.com"]
+  },
+  "gaea-operations-lockr": {
+    "hosts": ["lockr.net", "lockr.so", "lockr.to"]
   }
 }
