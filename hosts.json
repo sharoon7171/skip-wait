@@ -333,5 +333,8 @@
   },
   "move2link-go": {
     "hosts": ["go.move2link.co"]
+  },
+  "mitly": {
+    "hosts": ["mitly.us"]
   }
 }
