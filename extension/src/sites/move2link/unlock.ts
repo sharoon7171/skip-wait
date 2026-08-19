@@ -1,4 +1,4 @@
-import { MOVE2LINK_API } from './hosts';
+const API = 'https://api.move2link.com/api/v1';
 
 const JWT_RE = /^eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/;
 
@@ -39,7 +39,7 @@ export function jwtProgress(token: string): JwtProgress | null {
 }
 
 const api = async (path: '/views/track' | '/views/finalize', method: 'PUT' | 'POST', token: string): Promise<ApiData> => {
-  const r = await fetch(`${MOVE2LINK_API}${path}`, {
+  const r = await fetch(`${API}${path}`, {
     method,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token, csrf_token: 'x', imps: [] }),

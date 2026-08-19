@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { MOVE2LINK_BLOG_HOSTS, MOVE2LINK_GO_HOSTS } from './hosts';
 import { decodeGoToParam, sessionToken, unlockDestination } from './unlock';
 
 const OVERLAY_ID = 'skip-wait-move2link-overlay';
@@ -64,35 +63,39 @@ const kickBlog = (): void => {
 };
 
 const initBlogGate = (): void => {
-  if (!isAllowedHost(MOVE2LINK_BLOG_HOSTS)) return;
+  void isRemoteSite('move2link-blog').then((ok) => {
+    if (!ok) return;
 
-  const tick = (): void => {
-    if (!sessionToken()) return;
-    bootOverlayLock();
-    mountUi();
-    kickBlog();
-  };
+    const tick = (): void => {
+      if (!sessionToken()) return;
+      bootOverlayLock();
+      mountUi();
+      kickBlog();
+    };
 
-  tick();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
     tick();
-    if (started) mo.disconnect();
+    if (started) return;
+
+    const mo = new MutationObserver(() => {
+      tick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 };
 
 const initGoGate = (): void => {
-  if (!isAllowedHost(MOVE2LINK_GO_HOSTS)) return;
-  try {
-    const to = new URL(location.href).searchParams.get('to');
-    const dest = to ? decodeGoToParam(to) : null;
-    if (dest) location.replace(dest);
-  } catch {}
+  void isRemoteSite('move2link-go').then((ok) => {
+    if (!ok) return;
+    try {
+      const to = new URL(location.href).searchParams.get('to');
+      const dest = to ? decodeGoToParam(to) : null;
+      if (dest) location.replace(dest);
+    } catch {}
+  });
 };
 
 export function initMove2linkGate(): void {
