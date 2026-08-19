@@ -1,11 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from './unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { ADLINKFLY_LINKS_GO_HOSTS } from './hosts';
-
-const HOSTS = ADLINKFLY_LINKS_GO_HOSTS;
 const OVERLAY_ID = 'skip-wait-adlinkfly-overlay';
 const BOOT_STYLE_ID = 'skip-wait-adlinkfly-boot';
 const CAPTCHA_PIN_STYLE_ID = 'skip-wait-adlinkfly-captcha-pin';
@@ -584,21 +581,20 @@ const tick = (): void => {
 
 export function initAdlinkflyLinksGo(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(HOSTS)) return;
-
-  if (hasLinksGoHint() || isAliasPath()) requestVisibilitySpoof();
-
-  tick();
-
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, {
-    attributeFilter: ['href', 'value', 'disabled'],
-    attributes: true,
-    childList: true,
-    subtree: true,
+  void isRemoteSite('adlinkfly-links-go').then((ok) => {
+    if (!ok) return;
+    if (hasLinksGoHint() || isAliasPath()) requestVisibilitySpoof();
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, {
+      attributeFilter: ['href', 'value', 'disabled'],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+    window.addEventListener('load', tick, true);
   });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
 }

@@ -1,9 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { ADLINKFLY_TOKEN_PAYLOAD_HOSTS } from './hosts';
-
-const HOSTS = ADLINKFLY_TOKEN_PAYLOAD_HOSTS;
+import { whenDomParsed } from '../../utils/domain-check';
 const OVERLAY_ID = 'skip-wait-adlinkfly-token-overlay';
 const BOOT_STYLE_ID = 'skip-wait-adlinkfly-token-boot';
 const TOKEN_INPUT_SELECTOR = 'input[name="token"]';
@@ -105,15 +103,17 @@ const redirectFromToken = async (): Promise<void> => {
 };
 
 export function initAdlinkflyTokenPayload(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  if (isTokenPayloadPage()) {
-    bootOverlayLock();
-    mountUi('Unlocking destination…');
-  }
-  void redirectFromToken();
-  whenDomParsed(() => {
-    if (!isTokenPayloadPage()) return;
-    mountUi('Unlocking destination…');
+  void isRemoteSite('adlinkfly-token-payload').then((ok) => {
+    if (!ok) return;
+    if (isTokenPayloadPage()) {
+      bootOverlayLock();
+      mountUi('Unlocking destination…');
+    }
     void redirectFromToken();
+    whenDomParsed(() => {
+      if (!isTokenPayloadPage()) return;
+      mountUi('Unlocking destination…');
+      void redirectFromToken();
+    });
   });
 }

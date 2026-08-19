@@ -603,5 +603,11 @@
   },
   "alpharede": {
     "hosts": ["forumdinheiro.com", "guis2.com", "horoscopeonday.com", "milbviral.com", "tarviral.com"]
+  },
+  "adlinkfly-links-go": {
+    "hosts": ["go.zovo.ink", "link.liteshort.com", "linkjust.com", "pahe.plus", "shortnest.com"]
+  },
+  "adlinkfly-token-payload": {
+    "hosts": ["aii.sh", "lnbz.la", "oii.la", "shrink.pe", "tpi.li"]
   }
 }
