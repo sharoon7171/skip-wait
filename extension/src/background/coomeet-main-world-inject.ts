@@ -1,4 +1,14 @@
+import { hostIsRemoteSite } from '../hosts/check';
+
 const injected = new Set<string>();
+
+async function isCoomeetUrl(url: string): Promise<boolean> {
+  try {
+    return hostIsRemoteSite(new URL(url).hostname, 'coomeet-iframe');
+  } catch {
+    return false;
+  }
+}
 
 function forgetTab(tabId: number): void {
   for (const k of injected) {
@@ -16,24 +26,28 @@ export function initCoomeetMainWorldInject(): void {
       sendResponse({ ok: false });
       return false;
     }
-    const key = `${tabId}:${frameId}`;
-    if (injected.has(key)) {
-      sendResponse({ ok: true, skipped: true });
-      return false;
-    }
-    chrome.scripting
-      .executeScript({
-        target: { tabId, frameIds: [frameId] },
-        world: 'MAIN',
-        files: ['content.js'],
-      })
-      .then(() => {
+    void (async () => {
+      if (sender.tab?.url && !(await isCoomeetUrl(sender.tab.url))) {
+        sendResponse({ ok: false });
+        return;
+      }
+      const key = `${tabId}:${frameId}`;
+      if (injected.has(key)) {
+        sendResponse({ ok: true, skipped: true });
+        return;
+      }
+      try {
+        await chrome.scripting.executeScript({
+          target: { tabId, frameIds: [frameId] },
+          world: 'MAIN',
+          files: ['content.js'],
+        });
         injected.add(key);
         sendResponse({ ok: true });
-      })
-      .catch(() => {
+      } catch {
         sendResponse({ ok: false });
-      });
+      }
+    })();
     return true;
   });
 }

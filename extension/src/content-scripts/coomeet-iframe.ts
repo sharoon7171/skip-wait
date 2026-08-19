@@ -1,4 +1,5 @@
-const HOST = 'iframe.coomeet.com';
+import { isRemoteSite } from '../hosts/check';
+
 const MIN_MS = 400;
 const MAX_MS = 600_000;
 const FACTOR = 30;
@@ -28,19 +29,15 @@ export function runCoomeetMainWorldAccelerator(): void {
   installAcceleratedTimers();
 }
 
-export function isOnCoomeetIframeHost(): boolean {
-  try {
-    return new URL(window.location.href).hostname === HOST;
-  } catch {
-    return false;
-  }
-}
+export const isOnCoomeetIframeHost = (): Promise<boolean> => isRemoteSite('coomeet-iframe');
 
 export function initCoomeetIframeBootstrap(): void {
-  if (!isOnCoomeetIframeHost()) return;
-  if (typeof chrome !== 'undefined' && chrome.runtime?.id) {
-    chrome.runtime.sendMessage({ type: 'SKIP_WAIT_COOMEET_MAIN' }).catch(() => {});
-    return;
-  }
-  runCoomeetMainWorldAccelerator();
+  void isOnCoomeetIframeHost().then((ok) => {
+    if (!ok) return;
+    if (typeof chrome !== 'undefined' && chrome.runtime?.id) {
+      chrome.runtime.sendMessage({ type: 'SKIP_WAIT_COOMEET_MAIN' }).catch(() => {});
+      return;
+    }
+    runCoomeetMainWorldAccelerator();
+  });
 }

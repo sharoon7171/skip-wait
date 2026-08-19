@@ -633,5 +633,8 @@
   },
   "tinurlz-softinfo": {
     "hosts": ["softinfo.blog", "tinurlz.com"]
+  },
+  "coomeet-iframe": {
+    "hosts": ["iframe.coomeet.com"]
   }
 }

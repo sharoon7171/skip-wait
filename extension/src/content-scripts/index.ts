@@ -284,12 +284,12 @@ const INITS = [
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;
 
-function boot(): void {
+async function boot(): Promise<void> {
   if (!isExtensionContext) {
     runCoomeetMainWorldAccelerator();
     return;
   }
-  if (isOnCoomeetIframeHost()) {
+  if (await isOnCoomeetIframeHost()) {
     initCoomeetIframeBootstrap();
     return;
   }
@@ -301,4 +301,4 @@ function boot(): void {
   }
 }
 
-boot();
+void boot();
