@@ -324,5 +324,8 @@
   },
   "mp4upload": {
     "hosts": ["mp4upload.com"]
+  },
+  "movies-mod": {
+    "hosts": ["episodes.modpro.blog", "links.modpro.blog", "leechpro.blog"]
   }
 }

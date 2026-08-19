@@ -1,10 +1,5 @@
-import { isAllowedHost } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
 
-const HOSTS = [
-  'episodes.modpro.blog',
-  'links.modpro.blog',
-  'leechpro.blog',
-] as const;
 const STYLE_ID = 'skipwait-movies-mod-timed-content';
 
 function injectBypassStyle(): void {
@@ -17,6 +12,8 @@ function injectBypassStyle(): void {
 }
 
 export function initMoviesModContentScript(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  injectBypassStyle();
+  void isRemoteSite('movies-mod').then((ok) => {
+    if (!ok) return;
+    injectBypassStyle();
+  });
 }
