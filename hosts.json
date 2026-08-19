@@ -336,5 +336,8 @@
   },
   "mitly": {
     "hosts": ["mitly.us"]
+  },
+  "mirrored": {
+    "hosts": ["mirrored.to"]
   }
 }

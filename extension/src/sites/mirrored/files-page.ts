@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { MIRRORED_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND_ID = 'skipwait-mirrored-brand';
 const FILE_PATH_RE = /^\/files\/([A-Za-z0-9]+)\/?$/i;
@@ -265,7 +265,12 @@ function run(): void {
 }
 
 export function initMirroredFilesPage(): void {
-  if (!isAllowedHost(MIRRORED_HOSTS)) return;
   if (!FILE_PATH_RE.test(location.pathname) && !GETLINK_PATH_RE.test(location.pathname)) return;
-  whenDomParsed(run);
+  const allowed = isRemoteSite('mirrored');
+  whenDomParsed(() => {
+    void allowed.then((ok) => {
+      if (!ok) return;
+      run();
+    });
+  });
 }
