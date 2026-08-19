@@ -170,5 +170,12 @@
     "hosts": [
       "softpedia.com"
     ]
+  },
+  "sid-mediator": {
+    "hosts": [
+      "cloud.unblockedgames.world",
+      "health.jkssbworld.in",
+      "tech.examzculture.in"
+    ]
   }
 }
