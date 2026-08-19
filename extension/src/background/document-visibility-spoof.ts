@@ -1,3 +1,5 @@
+import { hostIsRemoteSite } from '../hosts/check';
+
 export const MSG_INJECT_VISIBILITY_SPOOF = 'INJECT_VISIBILITY_SPOOF' as const;
 
 export function runDocumentVisibilitySpoof(): void {
@@ -25,12 +27,16 @@ export function initDocumentVisibilitySpoof(): void {
     if (info.status !== 'loading') return;
     const raw = tab.url || tab.pendingUrl;
     if (!raw || !URL.canParse(raw)) return;
-    if (!XDM_INTERSTITIAL.test(new URL(raw).pathname)) return;
-    void chrome.scripting.executeScript({
-      target: { tabId },
-      world: 'MAIN',
-      injectImmediately: true,
-      func: runDocumentVisibilitySpoof,
+    const { hostname, pathname } = new URL(raw);
+    if (!XDM_INTERSTITIAL.test(pathname)) return;
+    void hostIsRemoteSite(hostname, 'xdmovies').then((ok) => {
+      if (!ok) return;
+      void chrome.scripting.executeScript({
+        target: { tabId },
+        world: 'MAIN',
+        injectImmediately: true,
+        func: runDocumentVisibilitySpoof,
+      });
     });
   });
 
