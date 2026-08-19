@@ -1,7 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { FINITYREDE_HOSTS, FINITYREDE_SLUG_RE } from './hosts';
+import { FINITYREDE_SLUG_RE } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-finityrede-overlay';
 const BOOT_STYLE_ID = 'skip-wait-finityrede-boot';
@@ -93,18 +93,21 @@ const resolve = async (dest: string): Promise<string> => {
 };
 
 export const initFinityredeBypass = (): void => {
-  if (window !== window.top || !isAllowedHost(FINITYREDE_HOSTS) || started) return;
+  if (window !== window.top || started) return;
   const dest = slug();
   if (!dest) return;
-  started = true;
-  const overlay = mount('Unlocking destination…');
-  void resolve(dest)
-    .then((url) => {
-      overlay.setStatus('Redirecting now…');
-      location.replace(url);
-    })
-    .catch(() => {
-      started = false;
-      overlay.setError('Could not unlock this link. Reload and try again.');
-    });
+  void isRemoteSite('finityrede').then((ok) => {
+    if (!ok || started) return;
+    started = true;
+    const overlay = mount('Unlocking destination…');
+    void resolve(dest)
+      .then((url) => {
+        overlay.setStatus('Redirecting now…');
+        location.replace(url);
+      })
+      .catch(() => {
+        started = false;
+        overlay.setError('Could not unlock this link. Reload and try again.');
+      });
+  });
 };

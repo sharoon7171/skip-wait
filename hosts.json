@@ -504,5 +504,8 @@
   },
   "flightsim": {
     "hosts": ["flightsim.to"]
+  },
+  "finityrede": {
+    "hosts": ["finityrede.com"]
   }
 }
