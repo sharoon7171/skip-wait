@@ -1,16 +1,9 @@
 import { AROLINKS_GATE_COOKIE_NAMES, AROLINKS_GATE_VALUE } from './hosts';
 
-const isBtn7 = (): boolean => document.getElementById('btn7') !== null;
-
-export const isArticleGate = (): boolean =>
-  isBtn7() ||
-  (document.getElementById('tp-snp2') !== null &&
-    document.querySelector('a[href*="learn_more.php"]') !== null);
-
-export const continueEndpoint = (): string | null => {
-  if (isBtn7()) return new URL('/readmore/', location.origin).href;
-  return document.querySelector<HTMLAnchorElement>('a[href*="learn_more.php"]')?.href ?? null;
-};
+export const readmoreHrefs = (): string[] => [
+  new URL('/readmore/', location.origin).href,
+  new URL('/readmore', location.origin).href,
+];
 
 export const seedGateCookies = (): void => {
   for (const name of AROLINKS_GATE_COOKIE_NAMES) {
