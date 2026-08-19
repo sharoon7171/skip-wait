@@ -5,7 +5,7 @@ const SQ_TECH_URL = 'https://www.sqtech.dev/';
 
 export function Footer(): React.ReactElement {
   return (
-    <footer className="flex items-center justify-between gap-3 border-t border-neutral-200/80 px-5 py-4">
+    <footer className="flex items-center justify-between gap-4 border-t border-neutral-200/80 px-5 py-3">
       <a
         href={CHROME_WEB_STORE_LISTING_URL}
         target="_blank"
@@ -19,7 +19,7 @@ export function Footer(): React.ReactElement {
           <IconStar className="size-3.5" />
           <IconStar className="size-3.5" />
         </span>
-        Rate
+        Leave a review
       </a>
       <p className="text-[0.75rem] font-medium text-ink-soft">
         Developed by{' '}

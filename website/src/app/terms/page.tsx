@@ -8,7 +8,7 @@ import { routes } from '@/lib/routes';
 
 const title = 'Terms of Use';
 const description = `Terms of use for the free ${SITE.name} Chrome extension: license, supported sites, acceptable use, disclaimers, and contact for Skip Wait.`;
-const updated = '2026-07-28';
+const updated = '2026-08-19';
 const path = routes.terms;
 const url = `${SITE.url}${path}`;
 
@@ -82,6 +82,10 @@ export default function TermsPage(): React.ReactElement {
           <p>
             Supported domains and unlock flows change over time as sites are added or break. The
             Extension only modifies pages that match its supported-host checks.
+          </p>
+          <p>
+            Supported domains live in a remote list. Tap Refresh in the extension popup to download
+            the latest sites without reinstalling from the Chrome Web Store.
           </p>
         </LegalSection>
 

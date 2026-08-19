@@ -24,33 +24,44 @@ export function HostsUpdateSection(): React.ReactElement {
     return () => chrome.storage.onChanged.removeListener(onChanged);
   }, []);
 
-  const subtitle: ReactNode = (() => {
-    if (busy) return 'Fetching the latest domains…';
-    if (status === 'err') return <span className="font-semibold text-warning-700">Could not fetch — try again</span>;
-    if (updatedAt !== null) return `Updated ${formatUpdatedAt(updatedAt)}`;
-    return 'Refresh after we add domains';
+  const statusLine: ReactNode = (() => {
+    if (busy) return 'Looking for new website names…';
+    if (status === 'err') return <span className="font-semibold text-warning-700">Could not refresh — try again</span>;
+    if (updatedAt !== null) return `Last refreshed ${formatUpdatedAt(updatedAt)}`;
+    return 'Tap Refresh when we add a new website';
   })();
 
   return (
-    <section className="flex items-center gap-3 px-5 py-4">
-      <span className="min-w-0 flex-1">
-        <h2 className="truncate text-[0.9375rem] font-bold tracking-tight text-ink">Host list</h2>
-        <p className="mt-1 truncate text-[0.8125rem] font-medium text-ink-soft">{subtitle}</p>
-      </span>
-      <button
-        type="button"
-        disabled={busy}
-        onClick={() => {
-          setStatus('loading');
-          void pullHosts()
-            .then((ok) => setStatus(ok ? 'idle' : 'err'))
-            .catch(() => setStatus('err'));
-        }}
-        className="inline-flex h-10 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-success-600 pl-4 pr-5 text-[0.8125rem] font-semibold text-white transition-colors hover:bg-success-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success-700 disabled:opacity-60"
-      >
-        <IconRefresh className={`size-[1.125rem] ${busy ? 'animate-spin' : ''}`} />
-        {busy ? 'Updating…' : 'Update'}
-      </button>
+    <section className="px-5 py-4">
+      <div className="flex items-start gap-3">
+        <div className="min-w-0 flex-1">
+          <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">New sites</p>
+          <h2 className="mt-0.5 text-[0.9375rem] font-bold tracking-tight text-ink">Get new websites without updating</h2>
+        </div>
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => {
+            setStatus('loading');
+            void pullHosts()
+              .then((ok) => setStatus(ok ? 'idle' : 'err'))
+              .catch(() => setStatus('err'));
+          }}
+          className="inline-flex h-10 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-success-600 pl-4 pr-4 text-[0.8125rem] font-semibold text-white transition-colors hover:bg-success-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success-700 disabled:opacity-60"
+        >
+          <IconRefresh className={`size-4 ${busy ? 'animate-spin' : ''}`} />
+          {busy ? 'Refreshing…' : 'Refresh'}
+        </button>
+      </div>
+      <p className="mt-2 text-[0.8125rem] font-medium leading-snug text-ink-soft">
+        Skip Wait already has the skip tricks built in. When we add another link site or file host, Refresh downloads
+        that website name for you.
+      </p>
+      <p className="mt-1.5 text-[0.8125rem] font-medium leading-snug text-ink-soft">
+        Refresh does not update bypass code — only new names. Chrome Web Store updates take time, so use Refresh to get
+        new websites right away.
+      </p>
+      <p className="mt-1.5 text-[0.75rem] font-medium text-ink-soft">{statusLine}</p>
     </section>
   );
 }

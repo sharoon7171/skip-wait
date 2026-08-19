@@ -72,7 +72,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'What if a new mediator host appears?',
     answer:
-      'Add it to the Unlock To Earn mediator host list in the extension. The gate pattern stays the same; the listed host must match.',
+      'New mediator domains ship in the remote site list. Tap Refresh in the extension popup to pull the latest hosts, or request the domain on GitHub if it is still missing after refresh.',
   },
   {
     question: 'Is this free?',

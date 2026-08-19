@@ -38,6 +38,10 @@ Browse the full [supported sites](https://skip-wait-website.vercel.app/sites) li
 2. Browse as usual. When you land on a supported waiting page, countdown page, or short-link page, Skip Wait runs automatically.
 3. You’re either redirected to the final URL or the extension automates the wait/click so you reach your destination faster. No configuration needed for supported sites.
 
+## Keep the site list current
+
+New sites and domains are added over time. Open the extension popup and tap **Refresh** under Site list to download the latest supported domains from GitHub—no Chrome Web Store update or reinstall required.
+
 ## Request support for a site
 
 We add support for new sites over time. If you use a site with a countdown timer, waiting page, or link shortener you’d like to skip or automate, [open an issue](https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns/issues/new?template=request_support.yml) and we’ll add a bypass or automation where possible. Check [supported sites](https://skip-wait-website.vercel.app/sites) first to see what’s already covered.

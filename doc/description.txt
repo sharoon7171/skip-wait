@@ -37,6 +37,7 @@ FEATURES
 • Automatic detection when you land on a matching short link, safelink, or file host
 • Popup focused on help—not a settings panel
 • “View supported sites” opens the current coverage list
+• “Refresh” in the popup downloads the latest supported domains—no reinstall
 • Request a missing website via GitHub, email, or Telegram from the popup
 • No global on/off switch; real work stays limited to matched supported flows
 • Does not collect personal data for ads, inject advertisements, or add unrelated tools
@@ -99,7 +100,9 @@ HOW SUPPORT WORKS OVER TIME
 Supported hosts and mediators change. New shorteners appear; old domains move. Because of that:
 
 • Handlers are added and updated as flows are verified
-• The live domain list lives on the supported-sites page linked from the popup
+• Supported domains live in a remote list on GitHub (hosts.json)
+• Tap Refresh in the popup to download new domains without reinstalling
+• The live domain list also appears on the supported-sites page linked from the popup
 • You keep the same install and the same automatic behavior—no reconfiguration when coverage expands
 • Requests from users help prioritize the next unlock paths
 
@@ -112,8 +115,9 @@ PRIVACY AND DATA
 
 • No account and no sign-in
 • No ads injected by the product
-• Device-local storage only for short-lived progress on multi-step shortener chains
+• Device-local storage for short-lived progress on multi-step shortener chains and for the cached supported-site list
 • Cookie reads only on certain supported pages where the destination lives in an HttpOnly cookie, and only to finish that jump locally
+• A single fetch to the public hosts.json list on GitHub when the extension starts and when you tap Refresh in the popup
 • Permissions exist to complete supported unlock flows—not for analytics, advertising, or selling browsing history
 
 See the store listing permission justifications and the privacy policy for the exact permission reasons.

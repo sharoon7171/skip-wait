@@ -28,7 +28,7 @@ export const faqs: readonly FaqItem[] = [
   },
   {
     question: 'What sites are supported?',
-    answer: `Skip Wait works on ${totalBypasses()} bypasses across ${totalDomains()} websites—link shorteners like Linkvertise, GPLinks, and Ouo, plus safelinks, file hosts, and download countdown pages. Open Supported Sites and search by name or website address.`,
+    answer: `Skip Wait works on ${totalBypasses()} bypasses across ${totalDomains()} websites—link shorteners like Linkvertise, GPLinks, and Ouo, plus safelinks, file hosts, and download countdown pages. Open Supported Sites and search by name or website address. Tap Refresh in the extension popup to pull the latest domain list without reinstalling.`,
   },
   {
     question: 'Can it handle “please wait” and “click to continue” pages?',
@@ -36,8 +36,13 @@ export const faqs: readonly FaqItem[] = [
       'On supported sites, yes. The extension detects waiting pages, countdowns, and continue gates, then completes the unlock path—instant redirect when possible, or automated waits and clicks when the site still requires a timed step.',
   },
   {
+    question: 'How do I get newly added sites?',
+    answer:
+      'Open the extension popup and tap Refresh under Site list. That downloads the latest supported domains from GitHub—no Chrome Web Store update or reinstall required.',
+  },
+  {
     question: 'How do I request a new site?',
     answer:
-      'Open a support request on GitHub, Telegram, or email with the page URL and how the wait or unlock flow works. We’ll add a bypass or automation when it’s possible.',
+      'Open a support request on GitHub, Telegram, or email with the page URL and how the wait or unlock flow works. After we add it, tap Refresh in the popup to pick up new domains.',
   },
 ] as const;

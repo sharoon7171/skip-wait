@@ -8,7 +8,7 @@ import { routes } from '@/lib/routes';
 
 const title = 'Privacy Policy';
 const description = `Privacy policy for the ${SITE.name} Chrome extension: what data the extension accesses, what it stores, and how Skip Wait handles information on supported sites.`;
-const updated = '2026-08-01';
+const updated = '2026-08-19';
 const path = routes.privacy;
 const url = `${SITE.url}${path}`;
 
@@ -131,14 +131,23 @@ export default function PrivacyPage(): React.ReactElement {
 
           <LegalSubheading>Storage</LegalSubheading>
           <p>
-            Uses <code>chrome.storage.local</code> on your device for short-lived progress during
-            multi-step shortener chains, including:
+            Uses <code>chrome.storage.local</code> on your device for:
           </p>
           <ul>
-            <li>Arolinks</li>
-            <li>Cut4Money</li>
-            <li>Nitrolink</li>
-            <li>ShortXLinks-style flows</li>
+            <li>
+              short-lived progress during multi-step shortener chains, including:
+              <ul>
+                <li>Arolinks</li>
+                <li>Cut4Money</li>
+                <li>Nitrolink</li>
+                <li>ShortXLinks-style flows</li>
+              </ul>
+            </li>
+            <li>
+              the cached supported-site list downloaded from the public{' '}
+              <code>hosts.json</code> file in the extension repository, plus the last refresh
+              time
+            </li>
           </ul>
           <p>
             That data stays on your device and is not sent to us. There is no global on/off preference
@@ -167,8 +176,9 @@ export default function PrivacyPage(): React.ReactElement {
           <LegalSubheading>Host Access</LegalSubheading>
           <p>
             Declares <code>&lt;all_urls&gt;</code> because supported wait pages and mediators span
-            many domains. Content scripts can load broadly; bypass logic still gates on host checks
-            and only runs on supported flows. Unrelated sites are not modified for that purpose.
+            many domains. Content scripts can load broadly; bypass logic still gates on a remote
+            supported-site list and only runs on matching flows. Unrelated sites are not modified for
+            that purpose.
           </p>
         </LegalSection>
 
@@ -214,6 +224,13 @@ export default function PrivacyPage(): React.ReactElement {
             <li>
               helper endpoints required by a supported site’s unlock logic (for example an IP lookup
               used by the LinkNext mediator via <code>ipv4.icanhazip.com</code>)
+            </li>
+            <li>
+              the public supported-site list at{' '}
+              <code>
+                raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/main/hosts.json
+              </code>{' '}
+              when the extension starts and when you tap Refresh in the popup
             </li>
           </ul>
           <p>Those requests are not used by the Extension for advertising or analytics.</p>

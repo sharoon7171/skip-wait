@@ -7,7 +7,7 @@ export const bypassHowToSteps: readonly BypassStep[] = [
   },
   {
     title: 'Leave it enabled',
-    body: 'Keep Skip Wait on in Chrome. There is nothing to configure per link.',
+    body: 'Keep Skip Wait on in Chrome. Tap Refresh in the popup when we add new sites—no reinstall.',
   },
   {
     title: 'Open the link as usual',

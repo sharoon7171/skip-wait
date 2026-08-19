@@ -6,7 +6,7 @@ const steps: readonly { number: string; title: string; body: string; tone: strin
   {
     number: '01',
     title: 'Install Once',
-    body: 'Add Skip Wait from the Chrome Web Store. No account, no settings, nothing to configure.',
+    body: 'Add Skip Wait from the Chrome Web Store. Tap Refresh in the popup when we add new sites—no reinstall.',
     tone: 'bg-primary-100 text-primary-700',
   },
   {
