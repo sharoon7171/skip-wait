@@ -537,5 +537,11 @@
   },
   "earnlinks-mediator": {
     "hosts": ["itiexamshala.com", "nameefy.com", "jobustecher.letest25.co"]
+  },
+  "earn4link": {
+    "hosts": ["earn4link.in", "m.earn4link.in"]
+  },
+  "earn4link-mediator": {
+    "hosts": ["best-hosting.ffindia.in", "hosting.ffindia.in", "open2get.in"]
   }
 }

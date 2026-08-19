@@ -1,8 +1,7 @@
 import { linksGoFormFromHtml, postLinksGo } from '../adlinkfly/unlock';
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { EARN4LINK_UNLOCK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-earn4link-overlay';
 const BOOT_STYLE_ID = 'skip-wait-earn4link-boot';
@@ -129,9 +128,12 @@ const tick = (): void => {
 };
 
 export function initEarn4linkUnlock(): void {
-  if (window !== window.top || !isAllowedHost(EARN4LINK_UNLOCK_HOSTS) || !isAlias()) return;
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
+  if (window !== window.top || !isAlias()) return;
+  void isRemoteSite('earn4link').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
+  });
 }

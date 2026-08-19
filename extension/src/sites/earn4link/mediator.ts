@@ -1,7 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { EARN4LINK_MEDIATOR_HOSTS, EARN4LINK_MYPHP, EARN4LINK_UNLOCK_ORIGIN } from './hosts';
+import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
+import { EARN4LINK_MYPHP, EARN4LINK_UNLOCK_ORIGIN } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-earn4link-med';
 const BOOT_STYLE_ID = 'skip-wait-earn4link-med-boot';
@@ -64,10 +65,13 @@ const run = (): void => {
 };
 
 export function initEarn4linkMediator(): void {
-  if (window !== window.top || !isAllowedHost(EARN4LINK_MEDIATOR_HOSTS)) return;
-  if (alias() || cookie('site') === 'e4l' || document.querySelector('#wpsafelink-landing')) {
-    void run();
-    return;
-  }
-  whenDomParsed(() => void run());
+  if (window !== window.top) return;
+  void isRemoteSite('earn4link-mediator').then((ok) => {
+    if (!ok) return;
+    if (alias() || cookie('site') === 'e4l' || document.querySelector('#wpsafelink-landing')) {
+      void run();
+      return;
+    }
+    whenDomParsed(() => void run());
+  });
 }
