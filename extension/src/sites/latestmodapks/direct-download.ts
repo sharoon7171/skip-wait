@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['latestmodapks.com'] as const;
 const LABEL = 'Direct Instant · Skip Wait';
 const DOWNLOAD = /^\/download\/?$/i;
 const STYLE = 'skipwait-latestmodapks';
@@ -51,32 +51,34 @@ const wire = (btn: HTMLAnchorElement, hop: Promise<string>, labelEl: Element | n
 };
 
 export function initLatestmodapksDirectDownload(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  bootStyle();
+  void isRemoteSite('latestmodapks').then((ok) => {
+    if (!ok) return;
+    bootStyle();
 
-  let done = false;
-  const arm = (): boolean => {
-    if (done) return true;
-    if (DOWNLOAD.test(location.pathname)) {
-      const btn = document.querySelector<HTMLAnchorElement>('a.download-page-download-btn');
-      if (!btn?.href) return false;
+    let done = false;
+    const arm = (): boolean => {
+      if (done) return true;
+      if (DOWNLOAD.test(location.pathname)) {
+        const btn = document.querySelector<HTMLAnchorElement>('a.download-page-download-btn');
+        if (!btn?.href) return false;
+        done = true;
+        wire(btn, Promise.resolve(btn.href), btn.querySelector('span'));
+        return true;
+      }
+      const btn = document.querySelector<HTMLAnchorElement>('a.download-btn-main[href]');
+      if (!btn || !URL.canParse(btn.href) || !DOWNLOAD.test(new URL(btn.href).pathname)) return false;
       done = true;
-      wire(btn, Promise.resolve(btn.href), btn.querySelector('span'));
+      wire(btn, hopFromDownload(btn.href), btn.querySelector('.dld-btn-text p:last-child'));
       return true;
-    }
-    const btn = document.querySelector<HTMLAnchorElement>('a.download-btn-main[href]');
-    if (!btn || !URL.canParse(btn.href) || !DOWNLOAD.test(new URL(btn.href).pathname)) return false;
-    done = true;
-    wire(btn, hopFromDownload(btn.href), btn.querySelector('.dld-btn-text p:last-child'));
-    return true;
-  };
+    };
 
-  if (arm()) return;
-  const mo = new MutationObserver(() => {
-    if (arm()) mo.disconnect();
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  whenDomParsed(() => {
-    if (arm()) mo.disconnect();
+    if (arm()) return;
+    const mo = new MutationObserver(() => {
+      if (arm()) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    whenDomParsed(() => {
+      if (arm()) mo.disconnect();
+    });
   });
 }

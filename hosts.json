@@ -408,5 +408,8 @@
   },
   "linclik": {
     "hosts": ["linclik.com"]
+  },
+  "latestmodapks": {
+    "hosts": ["latestmodapks.com"]
   }
 }
