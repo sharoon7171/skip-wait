@@ -145,5 +145,10 @@
     "hosts": [
       "swiftuploads.com"
     ]
+  },
+  "streamerviewerbot": {
+    "hosts": [
+      "streamerviewerbot.com"
+    ]
   }
 }
