@@ -1,7 +1,5 @@
-import { isAllowedHost } from '../../utils/domain-check';
 import {
   isLinkunlockerVerifyPath,
-  LINKUNLOCKER_HOSTS,
   linkunlockerLockerSlug,
 } from './hosts';
 
@@ -22,8 +20,6 @@ export const isCloudflareChallenge = (): boolean => {
     ),
   );
 };
-
-export const isLinkunlockerHost = (): boolean => isAllowedHost(LINKUNLOCKER_HOSTS);
 
 const scriptsText = (): string =>
   [...document.querySelectorAll('script')]
@@ -77,7 +73,7 @@ const hasLockerUi = (): boolean => {
 };
 
 export const isLinkunlockerLockerPage = (): boolean => {
-  if (!isLinkunlockerHost() || isCloudflareChallenge()) return false;
+  if (isCloudflareChallenge()) return false;
   if (!hasLockerUi() && !parseLinkunlockerLockerConfig()) return false;
   return Boolean(linkunlockerLockerSlug());
 };
@@ -106,6 +102,4 @@ export function parseLinkunlockerVerifyParams(
 }
 
 export const isLinkunlockerVerifyPage = (): boolean =>
-  isLinkunlockerHost() &&
-  !isCloudflareChallenge() &&
-  Boolean(parseLinkunlockerVerifyParams());
+  !isCloudflareChallenge() && Boolean(parseLinkunlockerVerifyParams());

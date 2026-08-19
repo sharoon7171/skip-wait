@@ -387,5 +387,8 @@
   },
   "linkvertise": {
     "hosts": ["linkvertise.com"]
+  },
+  "linkunlocker": {
+    "hosts": ["linkunlocker.com"]
   }
 }

@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import {
   isCloudflareChallenge,
-  isLinkunlockerHost,
   isLinkunlockerLockerPage,
   isLinkunlockerVerifyPage,
   parseLinkunlockerLockerConfig,
@@ -101,7 +101,7 @@ const runVerify = async (): Promise<void> => {
 };
 
 const tick = (): void => {
-  if (!isLinkunlockerHost() || isCloudflareChallenge() || started) return;
+  if (isCloudflareChallenge() || started) return;
   if (isLinkunlockerLockerPage()) {
     void runLocker();
     return;
@@ -111,27 +111,28 @@ const tick = (): void => {
 
 export function initLinkunlockerGate(): void {
   if (window !== window.top) return;
-  if (!isLinkunlockerHost()) return;
-
-  tick();
-  new MutationObserver(tick).observe(document.documentElement, {
-    attributeFilter: ['class', 'style', 'hidden', 'id'],
-    attributes: true,
-    childList: true,
-    subtree: true,
-    characterData: true,
-  });
-  const titleEl = document.querySelector('title');
-  if (titleEl) {
-    new MutationObserver(tick).observe(titleEl, {
+  void isRemoteSite('linkunlocker').then((ok) => {
+    if (!ok) return;
+    tick();
+    new MutationObserver(tick).observe(document.documentElement, {
+      attributeFilter: ['class', 'style', 'hidden', 'id'],
+      attributes: true,
       childList: true,
-      characterData: true,
       subtree: true,
+      characterData: true,
     });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
-  window.addEventListener('load', tick, true);
-  window.setInterval(() => {
-    if (!started) tick();
-  }, 400);
+    const titleEl = document.querySelector('title');
+    if (titleEl) {
+      new MutationObserver(tick).observe(titleEl, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
+    window.addEventListener('load', tick, true);
+    window.setInterval(() => {
+      if (!started) tick();
+    }, 400);
+  });
 }
