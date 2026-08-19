@@ -16,7 +16,7 @@ export default defineConfig({
       compress: { drop_console: true, drop_debugger: true },
       mangle: true,
     },
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         content: resolve(__dirname, 'src/content-scripts/index.ts'),
       },

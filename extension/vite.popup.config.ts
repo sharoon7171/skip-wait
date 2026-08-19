@@ -19,12 +19,12 @@ export default defineConfig({
       compress: { drop_console: true, drop_debugger: true },
       mangle: true,
     },
-    rollupOptions: {
+    rolldownOptions: {
       input: { popup: resolve(__dirname, 'src/ui/popup/main.tsx') },
       output: {
         entryFileNames: 'popup.js',
         assetFileNames: '[name].[ext]',
-        inlineDynamicImports: true,
+        codeSplitting: false,
       },
     },
   },

@@ -16,10 +16,14 @@
   },
   "wp-safelink": {
     "hosts": [
-      "stbemuiptvcodes.com",
-      "techedubyte.com",
       "demo-safelink.themeson.com",
       "dev-safelink.themeson.com"
+    ]
+  },
+  "wp-safelink-query": {
+    "hosts": [
+      "stbemuiptvcodes.com",
+      "techedubyte.com"
     ]
   },
   "wahmi": {

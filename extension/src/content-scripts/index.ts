@@ -74,7 +74,7 @@ import { initRomsfunDownloadInstant } from '../sites/romsfun';
 import { initShortxlinksSafelinkChain } from '../sites/shortxlinks';
 import { initShrtflyEntry, initShrtflyMediator } from '../sites/shrtfly';
 import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../sites/shrinkme';
-import { initWpSafelinkRedirect } from '../sites/wp-safelink';
+import { initWpSafelinkQueryRedirect, initWpSafelinkRedirect } from '../sites/wp-safelink';
 import { initSub2getRedirect } from '../sites/sub2get';
 import { initSub2unlockUnlock } from '../sites/sub2unlock';
 import {
@@ -274,6 +274,7 @@ const INITS = [
   initTipsguruRedirect,
   initPlingDirectDownload,
   initWahmiCountdownBypass,
+  initWpSafelinkQueryRedirect,
   initWpSafelinkRedirect,
   initSwiftuploadsDirectDownload,
   initUploadrarBypass,

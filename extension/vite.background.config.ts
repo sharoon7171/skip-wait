@@ -16,11 +16,11 @@ export default defineConfig({
       compress: { drop_console: true, drop_debugger: true },
       mangle: true,
     },
-    rollupOptions: {
+    rolldownOptions: {
       input: { background: resolve(__dirname, 'src/background/index.ts') },
       output: {
         entryFileNames: 'background.js',
-        inlineDynamicImports: true,
+        codeSplitting: false,
       },
     },
   },
