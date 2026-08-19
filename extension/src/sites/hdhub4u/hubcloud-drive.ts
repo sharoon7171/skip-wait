@@ -1,6 +1,6 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
+import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
 
 const HUBCLOUD_DRIVE_HOSTS = [
   'hubcloud.cx',
@@ -25,6 +25,16 @@ const NOTE = {
 
 let ui: FullPageOverlay | null = null;
 let started = false;
+
+const isCloudflareInterstitial = (): boolean => {
+  const title = document.title.toLowerCase();
+  if (title.includes('just a moment') || title.includes('attention required')) return true;
+  return (
+    document.querySelector(
+      '#challenge-form, #challenge-running, #cf-challenge-running, #challenge-stage, .cf-browser-verification',
+    ) != null
+  );
+};
 
 const isVcloud = (): boolean => hostnameMatches(location.hostname, VCLOUD_HOSTS);
 
@@ -82,19 +92,20 @@ export function initHubcloudDrive(): void {
   if (window !== window.top || !isAllowedHost(HUBCLOUD_DRIVE_HOSTS) || !isSharePath() || started) {
     return;
   }
-  started = true;
-  mount();
-
-  const url = resolveTarget();
-  if (url && /^https?:\/\//i.test(url)) {
-    location.replace(url);
-    return;
-  }
-
-  const id = window.setInterval(() => {
-    const next = resolveTarget();
-    if (!next || !/^https?:\/\//i.test(next)) return;
-    clearInterval(id);
-    location.replace(next);
-  }, 50);
+  whenDomParsed(() => {
+    if (started || isCloudflareInterstitial()) return;
+    started = true;
+    mount();
+    const url = resolveTarget();
+    if (url && /^https?:\/\//i.test(url)) {
+      location.replace(url);
+      return;
+    }
+    const id = window.setInterval(() => {
+      const next = resolveTarget();
+      if (!next || !/^https?:\/\//i.test(next)) return;
+      clearInterval(id);
+      location.replace(next);
+    }, 50);
+  });
 }

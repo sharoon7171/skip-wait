@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { decodeYasir252Link, encodedAttr } from './decode';
-import { YASIR252_HOSTS } from './hosts';
 
 function markReady(): void {
   for (const el of document.querySelectorAll('.download div, .download p')) {
@@ -33,10 +33,14 @@ function unlock(): void {
 }
 
 export function initYasir252MediatorPage(): void {
-  if (!isAllowedHost(YASIR252_HOSTS)) return;
   if (!location.pathname.startsWith('/go')) return;
+  const allowed = isRemoteSite('yasir252');
   whenDomParsed(() => {
-    unlock();
-    setTimeout(unlock, 1000);
+    if (!document.querySelector('[data-elink], [data-og-url]')) return;
+    void allowed.then((ok) => {
+      if (!ok) return;
+      unlock();
+      setTimeout(unlock, 1000);
+    });
   });
 }

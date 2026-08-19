@@ -1,0 +1,31 @@
+{
+  "yasir252": {
+    "hosts": ["yasir252.com"]
+  },
+  "xdmovies": {
+    "hosts": ["xdmovies.com"]
+  },
+  "xdmovies-mediator": {
+    "hosts": ["latestnewsonline.sbs"]
+  },
+  "wp-safelink": {
+    "hosts": [
+      "stbemuiptvcodes.com",
+      "techedubyte.com",
+      "demo-safelink.themeson.com",
+      "dev-safelink.themeson.com"
+    ]
+  },
+  "wp-safelink-landing": {
+    "hosts": ["stbemuiptvcodes.com", "techedubyte.com"]
+  },
+  "wahmi": {
+    "hosts": ["wahmi.org"]
+  },
+  "vegamovies": {
+    "hosts": ["1vegamovies.cc", "1vegamovies.tw"]
+  },
+  "vegamovies-landing": {
+    "hosts": ["vglist.top", "vglist.nl"]
+  }
+}

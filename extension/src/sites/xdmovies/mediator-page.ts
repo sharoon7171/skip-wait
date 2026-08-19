@@ -1,9 +1,9 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { isAllowedHost, whenDomReady } from '../../utils/domain-check';
+import { whenDomReady } from '../../utils/domain-check';
 
 const XDMOVIES_MAIN_WORLD_RUN = 'XDMOVIES_MAIN_WORLD_RUN' as const;
-const MEDIATOR_PAGE_HOSTS = ['latestnewsonline.sbs'] as const;
 const MSG_SOURCE = 'skip-wait-xdmovies';
 const MSG_VISIBILITY = 'INJECT_VISIBILITY_SPOOF';
 const OVERLAY_ID = 'skip-wait-xdmovies-overlay';
@@ -126,19 +126,20 @@ async function runMediatorPageFlow(code: string, fingerprint: string): Promise<v
 }
 
 export function initXdmoviesMediatorPage(): void {
-  if (window !== window.top || !isAllowedHost(MEDIATOR_PAGE_HOSTS)) return;
+  if (window !== window.top) return;
   const code = location.pathname.match(PATH)?.[1];
   if (!code) return;
+  const allowed = isRemoteSite('xdmovies-mediator');
   void (async () => {
-    const fingerprint = xdmoviesFingerprint();
     await whenDomReady(
       () =>
         !isCloudflareInterstitial() &&
         document.getElementById('card') !== null &&
         document.getElementById(TURNSTILE_CONTAINER_ID) !== null,
     );
+    if (!(await allowed)) return;
     chrome.runtime.sendMessage({ type: MSG_VISIBILITY });
-    await runMediatorPageFlow(code, await fingerprint);
+    await runMediatorPageFlow(code, await xdmoviesFingerprint());
   })();
 }
 

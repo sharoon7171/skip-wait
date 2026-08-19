@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['wahmi.org'] as const;
 const FILE_PATH_RE = /^\/([^/]+)\/file\/?$/i;
 const NOTICE_ID = 'skipwait-wahmi-bypass';
 
@@ -42,6 +42,12 @@ async function run(): Promise<void> {
 }
 
 export function initWahmiCountdownBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  whenDomParsed(() => void run());
+  if (!FILE_PATH_RE.test(location.pathname)) return;
+  const allowed = isRemoteSite('wahmi');
+  whenDomParsed(() => {
+    if (!document.querySelector('.filebox-download') || !document.querySelector('.download-counter')) return;
+    void allowed.then((ok) => {
+      if (ok) void run();
+    });
+  });
 }

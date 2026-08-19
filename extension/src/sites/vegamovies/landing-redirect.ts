@@ -1,6 +1,6 @@
-import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const LANDING_HOSTS = ['vglist.top', 'vglist.nl'] as const;
 const BRAND_ID = 'skipwait-vegamovies-brand';
 
 const REFRESH =
@@ -16,7 +16,8 @@ function destinationFromHtml(html: string): string | null {
 function reHref(href: string): string | null {
   try {
     const u = new URL(href, location.href);
-    if (!hostnameMatches(u.hostname, LANDING_HOSTS) || !u.searchParams.has('re')) return null;
+    if (!u.searchParams.has('re')) return null;
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
     return u.href;
   } catch {
     return null;
@@ -31,11 +32,6 @@ async function resolve(reUrl: string): Promise<string | null> {
   const dest = destinationFromHtml(await r.text());
   if (dest) cache.set(reUrl, dest);
   return dest;
-}
-
-function unlockHere(): void {
-  const dest = destinationFromHtml(document.documentElement.innerHTML);
-  if (dest) location.replace(dest);
 }
 
 function go(dest: string, blank: boolean): void {
@@ -86,13 +82,7 @@ function prefetchLinks(): void {
   }
 }
 
-export function initVegamoviesLandingRedirect(): void {
-  if (!isAllowedHost(LANDING_HOSTS)) return;
-  unlockHere();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', unlockHere, { once: true });
-  }
-
+function bindClicks(): void {
   document.addEventListener(
     'click',
     (e) => {
@@ -117,9 +107,22 @@ export function initVegamoviesLandingRedirect(): void {
     },
     true,
   );
+}
 
+export function initVegamoviesLandingRedirect(): void {
+  const allowed = isRemoteSite('vegamovies-landing');
   whenDomParsed(() => {
-    mountBrand();
-    prefetchLinks();
+    const waitDest = destinationFromHtml(document.documentElement.innerHTML);
+    if (!waitDest && !document.querySelector('nav.link-grid')) return;
+    void allowed.then((ok) => {
+      if (!ok) return;
+      if (waitDest) {
+        location.replace(waitDest);
+        return;
+      }
+      bindClicks();
+      mountBrand();
+      prefetchLinks();
+    });
   });
 }

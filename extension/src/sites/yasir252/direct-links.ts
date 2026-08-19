@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { decodeYasir252Link, encodedAttr } from './decode';
-import { YASIR252_HOSTS } from './hosts';
 
 const LINK_SEL = '#downloadForm [data-og-url], #downloadForm [data-elink]';
 const BRAND_ID = 'skipwait-yasir252-brand';
@@ -79,9 +79,11 @@ function run(): void {
 }
 
 export function initYasir252DirectLinks(): void {
-  if (!isAllowedHost(YASIR252_HOSTS)) return;
+  const allowed = isRemoteSite('yasir252');
   whenDomParsed(() => {
     if (!document.querySelector(LINK_SEL)) return;
-    run();
+    void allowed.then((ok) => {
+      if (ok) run();
+    });
   });
 }

@@ -1,5 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 export const WP_SAFELINK_OVERLAY_ID = 'skip-wait-wp-safelink-overlay';
 
@@ -8,12 +9,6 @@ const NOTE = {
   detail: "You don't need to tap anything on the page.",
 } as const;
 
-const HOSTS = [
-  'demo-safelink.themeson.com',
-  'dev-safelink.themeson.com',
-  'stbemuiptvcodes.com',
-  'techedubyte.com',
-] as const;
 const SAFELINK_RE = /https?:\/\/[^"'\s]+safelink_redirect=[A-Za-z0-9+/=]+/;
 const WAIT_MARKERS = '#wpsafe-wait1, #wpsafelink-countdown, #wpsafe-generate, #wpsafe-link, a[href*="safelink_redirect="]';
 
@@ -80,48 +75,45 @@ const redirectSafelink = (url: string): void => {
 };
 
 export function initWpSafelinkRedirect(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  requestVisibilitySpoof();
-  if (/[?&]go=/.test(location.search)) showWpSafelinkRedirectOverlay();
-
-  let done = false;
-  let pollId = 0;
-
-  const finish = (url: string): void => {
-    if (done) return;
-    done = true;
-    mo.disconnect();
-    if (pollId) clearInterval(pollId);
-    redirectSafelink(url);
-  };
-
-  const tryFind = (): void => {
-    const url = findSafelinkUrl();
-    if (url) finish(url);
-  };
-
-  const mo = new MutationObserver((muts) => {
-    for (const { addedNodes } of muts) {
-      for (const node of addedNodes) {
-        const url = safelinkFromNode(node);
-        if (url) {
-          finish(url);
-          return;
-        }
-      }
-    }
-    tryFind();
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-
+  const allowed = isRemoteSite('wp-safelink');
   whenDomParsed(() => {
-    if (isWaitPage()) showWpSafelinkRedirectOverlay();
-    tryFind();
+    if (!isWaitPage()) return;
+    void allowed.then((ok) => {
+      if (!ok) return;
+      requestVisibilitySpoof();
+      showWpSafelinkRedirectOverlay();
+      let done = false;
+      let pollId = 0;
+      const finish = (url: string): void => {
+        if (done) return;
+        done = true;
+        mo.disconnect();
+        if (pollId) clearInterval(pollId);
+        redirectSafelink(url);
+      };
+      const tryFind = (): void => {
+        const url = findSafelinkUrl();
+        if (url) finish(url);
+      };
+      const mo = new MutationObserver((muts) => {
+        for (const { addedNodes } of muts) {
+          for (const node of addedNodes) {
+            const url = safelinkFromNode(node);
+            if (url) {
+              finish(url);
+              return;
+            }
+          }
+        }
+        tryFind();
+      });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
+      tryFind();
+      pollId = window.setInterval(() => {
+        if (done) return;
+        requestVisibilitySpoof();
+        tryFind();
+      }, 500);
+    });
   });
-
-  pollId = window.setInterval(() => {
-    if (done) return;
-    requestVisibilitySpoof();
-    tryFind();
-  }, 500);
 }

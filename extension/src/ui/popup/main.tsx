@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { HostsUpdateSection } from '../components/HostsUpdateSection';
 import { ReviewPromptSection } from '../components/ReviewPromptSection';
 import { CONTACT, SUPPORTED_SITES_URL, getRequestSupportUrl } from '../constants';
 import '../global.css';
@@ -54,6 +55,8 @@ function PopupPage(): React.ReactElement {
                 View supported sites
               </a>
             </section>
+
+            <HostsUpdateSection />
 
             <section aria-labelledby="support-heading" className="px-4 py-2.5 text-left">
               <h2

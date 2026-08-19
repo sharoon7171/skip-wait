@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['1vegamovies.cc', '1vegamovies.tw'] as const;
 const OVERLAY_ID = 'skip-wait-vegamovies-entry-overlay';
 const BOOT_STYLE_ID = 'skip-wait-vegamovies-entry-boot';
 const GATE_ROUTE = /\bhref\s*=\s*["'](\/\?re=[^"']+)["']/;
@@ -46,17 +46,15 @@ function destination(): string | null {
 }
 
 export function initVegamoviesEntryRedirect(): void {
-  if (window !== window.top || !isAllowedHost(HOSTS)) return;
-  mountOverlay('Resolving the live catalog…');
+  if (window !== window.top) return;
+  const allowed = isRemoteSite('vegamovies');
   whenDomParsed(() => {
     const href = destination();
-    if (!href) {
-      mountOverlay('Could not resolve the live catalog.').setError(
-        'VegaMovies did not expose its catalog route on this page.',
-      );
-      return;
-    }
-    mountOverlay('Opening the live catalog…');
-    location.replace(href);
+    if (!href) return;
+    void allowed.then((ok) => {
+      if (!ok) return;
+      mountOverlay('Opening the live catalog…');
+      location.replace(href);
+    });
   });
 }

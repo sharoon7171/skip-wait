@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const LANDING_PAGE_HOSTS = ['xdmovies.com'] as const;
 const OVERLAY_ID = 'skip-wait-xdmovies-landing-overlay';
 const BOOT_STYLE_ID = 'skip-wait-xdmovies-landing-boot';
 const CTA_HREF =
@@ -67,7 +67,13 @@ function openMainSite(): void {
 }
 
 export function initXdmoviesLandingPageMed(): void {
-  if (!isAllowedHost(LANDING_PAGE_HOSTS)) return;
-  bootOverlayLock();
-  whenDomParsed(openMainSite);
+  const allowed = isRemoteSite('xdmovies');
+  whenDomParsed(() => {
+    if (!destinationFromCta()) return;
+    void allowed.then((ok) => {
+      if (!ok) return;
+      bootOverlayLock();
+      openMainSite();
+    });
+  });
 }
