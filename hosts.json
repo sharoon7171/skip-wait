@@ -363,5 +363,11 @@
       "direct-links.org",
       "ultra-links.net"
     ]
+  },
+  "ll-safelink": {
+    "hosts": ["teknoasian.com"]
+  },
+  "ll-safelink-llac": {
+    "hosts": ["linegee.net"]
   }
 }

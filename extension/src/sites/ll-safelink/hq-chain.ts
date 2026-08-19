@@ -1,6 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { LL_SAFELINK_HOSTS, xxc } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
+import { xxc } from './parse';
 
 const ll = (h: string) => /var LLPayload = '([^']+)'/.exec(h)?.[1] ?? null;
 const hq = (h: string) =>
@@ -56,28 +57,30 @@ async function unlock(): Promise<string | null> {
 }
 
 export function initLlSafelinkHqChain(): void {
-  if (!isAllowedHost(LL_SAFELINK_HOSTS)) return;
-  const ht = new URLSearchParams(location.search).has('ht');
-  const release = ht ? holdHqSubmit() : null;
-  const go = () => {
-    const ui = createFullPageOverlay({
-      id: 'skip-wait-ll-safelink-overlay',
-      brand: 'Skip Wait',
-      note: { lead: 'Unlocking your link.', detail: "You don't need to tap anything on the page." },
-      status: 'Getting things ready…',
-    });
-    void unlock()
-      .then((dest) => {
-        if (dest) {
-          ui.setStatus('Redirecting now…');
-          location.replace(dest);
-          return;
-        }
-        ui.remove();
-      })
-      .catch(() => ui.remove())
-      .finally(() => release?.());
-  };
-  if (ht) go();
-  else whenDomParsed(go);
+  void isRemoteSite('ll-safelink').then((ok) => {
+    if (!ok) return;
+    const ht = new URLSearchParams(location.search).has('ht');
+    const release = ht ? holdHqSubmit() : null;
+    const go = () => {
+      const ui = createFullPageOverlay({
+        id: 'skip-wait-ll-safelink-overlay',
+        brand: 'Skip Wait',
+        note: { lead: 'Unlocking your link.', detail: "You don't need to tap anything on the page." },
+        status: 'Getting things ready…',
+      });
+      void unlock()
+        .then((dest) => {
+          if (dest) {
+            ui.setStatus('Redirecting now…');
+            location.replace(dest);
+            return;
+          }
+          ui.remove();
+        })
+        .catch(() => ui.remove())
+        .finally(() => release?.());
+    };
+    if (ht) go();
+    else whenDomParsed(go);
+  });
 }

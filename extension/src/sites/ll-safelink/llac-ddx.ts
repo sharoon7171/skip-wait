@@ -1,6 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { LLAC_HOSTS, xxc } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
+import { xxc } from './parse';
 
 function ddxQuery(): string | null {
   for (const s of document.scripts) {
@@ -24,22 +25,23 @@ async function resolveDdx(url: string): Promise<string> {
 
 export function initLlacDdx(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(LLAC_HOSTS)) return;
-
-  whenDomParsed(() => {
-    const qs = ddxQuery();
-    if (!qs) return;
-    const ui = createFullPageOverlay({
-      id: 'skip-wait-llac-ddx-overlay',
-      brand: 'Skip Wait',
-      note: { lead: 'Unlocking your link.', detail: "You don't need to tap anything on the page." },
-      status: 'Decoding destination…',
+  void isRemoteSite('ll-safelink-llac').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      const qs = ddxQuery();
+      if (!qs) return;
+      const ui = createFullPageOverlay({
+        id: 'skip-wait-llac-ddx-overlay',
+        brand: 'Skip Wait',
+        note: { lead: 'Unlocking your link.', detail: "You don't need to tap anything on the page." },
+        status: 'Decoding destination…',
+      });
+      void resolveDdx(`${location.pathname}${qs}`)
+        .then((dest) => {
+          ui.setStatus('Redirecting now…');
+          location.replace(dest);
+        })
+        .catch(() => ui.remove());
     });
-    void resolveDdx(`${location.pathname}${qs}`)
-      .then((dest) => {
-        ui.setStatus('Redirecting now…');
-        location.replace(dest);
-      })
-      .catch(() => ui.remove());
   });
 }
