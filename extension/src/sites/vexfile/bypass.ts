@@ -1,13 +1,9 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import {
-  MSG_VEXFILE_VERIFY_HOOK,
-  VEXFILE_CODE_RE,
-  VEXFILE_HOSTS,
-  VEXFILE_VERIFIED_ATTR,
-} from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
+import { MSG_VEXFILE_VERIFY_HOOK, VEXFILE_CODE_RE, VEXFILE_VERIFIED_ATTR } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-vexfile-overlay';
 const BOOT_STYLE_ID = 'skip-wait-vexfile-boot';
@@ -165,11 +161,16 @@ const unlock = async (): Promise<void> => {
 };
 
 export const initVexfileBypass = (): void => {
-  if (window !== window.top || !isAllowedHost(VEXFILE_HOSTS) || started) return;
+  if (window !== window.top || started) return;
   if (!VEXFILE_CODE_RE.test(location.pathname)) return;
-  started = true;
-  chrome.runtime.sendMessage({ type: MSG_VEXFILE_VERIFY_HOOK });
+  const allowed = isRemoteSite('vexfile');
   whenDomParsed(() => {
-    void unlock();
+    if (!document.querySelector('.download-block, a.generate-link, #captcha-form, .cf-turnstile')) return;
+    void allowed.then((ok) => {
+      if (!ok || started) return;
+      started = true;
+      chrome.runtime.sendMessage({ type: MSG_VEXFILE_VERIFY_HOOK });
+      void unlock();
+    });
   });
 };

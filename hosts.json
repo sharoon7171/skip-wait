@@ -1,12 +1,18 @@
 {
   "yasir252": {
-    "hosts": ["yasir252.com"]
+    "hosts": [
+      "yasir252.com"
+    ]
   },
   "xdmovies": {
-    "hosts": ["xdmovies.com"]
+    "hosts": [
+      "xdmovies.com"
+    ]
   },
   "xdmovies-mediator": {
-    "hosts": ["latestnewsonline.sbs"]
+    "hosts": [
+      "latestnewsonline.sbs"
+    ]
   },
   "wp-safelink": {
     "hosts": [
@@ -17,15 +23,31 @@
     ]
   },
   "wp-safelink-landing": {
-    "hosts": ["stbemuiptvcodes.com", "techedubyte.com"]
+    "hosts": [
+      "stbemuiptvcodes.com",
+      "techedubyte.com"
+    ]
   },
   "wahmi": {
-    "hosts": ["wahmi.org"]
+    "hosts": [
+      "wahmi.org"
+    ]
   },
   "vegamovies": {
-    "hosts": ["1vegamovies.cc", "1vegamovies.tw"]
+    "hosts": [
+      "1vegamovies.cc",
+      "1vegamovies.tw"
+    ]
   },
   "vegamovies-landing": {
-    "hosts": ["vglist.top", "vglist.nl"]
+    "hosts": [
+      "vglist.top",
+      "vglist.nl"
+    ]
+  },
+  "vexfile": {
+    "hosts": [
+      "vexfile.com"
+    ]
   }
 }

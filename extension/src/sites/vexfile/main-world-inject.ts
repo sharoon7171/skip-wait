@@ -1,5 +1,16 @@
-import { isVexfileDownloadUrl, MSG_VEXFILE_VERIFY_HOOK } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
+import { MSG_VEXFILE_VERIFY_HOOK, VEXFILE_CODE_RE } from './hosts';
 import { runVexfileVerifyHook } from './main-world-hook';
+
+const isVexfileDownloadNav = async (url: string): Promise<boolean> => {
+  try {
+    const u = new URL(url);
+    if (!VEXFILE_CODE_RE.test(u.pathname)) return false;
+    return hostIsRemoteSite(u.hostname, 'vexfile');
+  } catch {
+    return false;
+  }
+};
 
 function inject(tabId: number, frameId?: number): void {
   void chrome.scripting.executeScript({
@@ -12,16 +23,20 @@ function inject(tabId: number, frameId?: number): void {
 
 export function initVexfileMainWorldInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isVexfileDownloadUrl(details.url)) return;
-    inject(details.tabId, 0);
+    if (details.frameId !== 0) return;
+    void isVexfileDownloadNav(details.url).then((ok) => {
+      if (ok) inject(details.tabId, 0);
+    });
   });
 
   chrome.runtime.onMessage.addListener((message, sender) => {
     if (message?.type !== MSG_VEXFILE_VERIFY_HOOK) return false;
     const tabId = sender.tab?.id;
-    if (tabId === undefined) return false;
-    if (sender.tab?.url && !isVexfileDownloadUrl(sender.tab.url)) return false;
-    inject(tabId, sender.frameId ?? 0);
+    const href = sender.tab?.url;
+    if (tabId === undefined || !href) return false;
+    void isVexfileDownloadNav(href).then((ok) => {
+      if (ok) inject(tabId, sender.frameId ?? 0);
+    });
     return false;
   });
 }
