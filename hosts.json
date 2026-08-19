@@ -570,5 +570,11 @@
   },
   "cut4money-mediator": {
     "hosts": ["bigcarinsurance.com", "bitcotrade.net", "healthy4pepole.com"]
+  },
+  "cpmlink": {
+    "hosts": ["cpm.link", "cpmlink.pro"]
+  },
+  "cpmlink-hop": {
+    "hosts": ["bildirim.online"]
   }
 }

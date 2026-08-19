@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { CPMLINK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-cpmlink-overlay';
 const BOOT_STYLE_ID = 'skip-wait-cpmlink-boot';
@@ -159,14 +158,15 @@ const tick = (): void => {
 
 export function initCpmlinkUnlock(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(CPMLINK_HOSTS)) return;
   if (!isAliasPath()) return;
-
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
+  void isRemoteSite('cpmlink').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+    window.addEventListener('load', tick, true);
+  });
 }
