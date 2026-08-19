@@ -1,0 +1,25 @@
+{
+  "name": "skip-wait-license",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "setup": "node scripts/setup-remote.mjs",
+    "issue": "node scripts/menu.mjs issue",
+    "menu": "node scripts/menu.mjs",
+    "unbind:device": "node scripts/menu.mjs unbind",
+    "revoke:license": "node scripts/menu.mjs revoke",
+    "delete:license": "node scripts/menu.mjs delete",
+    "issue:trial": "node scripts/admin.mjs issue trial10m",
+    "issue:monthly": "node scripts/admin.mjs issue monthly30d",
+    "revoke": "node scripts/admin.mjs revoke",
+    "unbind": "node scripts/admin.mjs unbind",
+    "delete": "node scripts/admin.mjs delete",
+    "check": "node scripts/admin.mjs check"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260819.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.124.0"
+  }
+}
