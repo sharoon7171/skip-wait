@@ -8,5 +8,4 @@ tsconfig.tsbuildinfo
 .env
 .env.local
 license-worker/.env
-extension/public/hosts.json
 .wrangler/
