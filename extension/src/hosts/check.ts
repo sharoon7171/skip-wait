@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'skipWaitHosts';
+export const HOSTS_UPDATED_AT_KEY = 'skipWaitHostsUpdatedAt';
 const HOSTS_URL =
   'https://raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/main/hosts.json';
 const HOST_RE = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$/;
@@ -26,12 +27,15 @@ const hostMatches = (hostname: string, roots: readonly string[]): boolean => {
   return roots.some((d) => h === d || h.endsWith(`.${d}`));
 };
 
+export const parseHostsUpdatedAt = (value: unknown): number | null =>
+  typeof value === 'number' && Number.isFinite(value) ? value : null;
+
 export const pullHosts = async (): Promise<boolean> => {
   const res = await fetch(`${HOSTS_URL}?t=${Date.now()}`, { cache: 'no-store', credentials: 'omit' });
   if (!res.ok) return false;
   const parsed = parseHosts(await res.json());
   if (!parsed) return false;
-  await chrome.storage.local.set({ [STORAGE_KEY]: parsed });
+  await chrome.storage.local.set({ [STORAGE_KEY]: parsed, [HOSTS_UPDATED_AT_KEY]: Date.now() });
   return true;
 };
 

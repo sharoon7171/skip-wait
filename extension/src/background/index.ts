@@ -1,3 +1,4 @@
+import { pullHosts } from '../hosts/check';
 import { initCoomeetMainWorldInject } from './coomeet-main-world-inject';
 import { initDocumentVisibilitySpoof } from './document-visibility-spoof';
 import { initFclcAlertSuppress, initFclcLinksGo } from '../sites/fclc';
@@ -60,3 +61,7 @@ initDevuploadsResolve();
 initDuploadHoldNav();
 initDuploadResolve();
 initVexfileMainWorldInject();
+
+chrome.runtime.onStartup.addListener(() => {
+  void pullHosts();
+});
