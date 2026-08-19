@@ -165,5 +165,10 @@
     "hosts": [
       "vocationaltraininghub.com"
     ]
+  },
+  "softpedia": {
+    "hosts": [
+      "softpedia.com"
+    ]
   }
 }

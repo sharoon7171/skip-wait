@@ -1,11 +1,25 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { SOFTPEDIA_HOSTS, isDynPostdownloadUrl, isSoftpediaWaitPath } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { destinationFromWaitDocument, resolveWaitDestination } from './resolve';
 
 const HIJACKED = 'data-skipwait-softpedia';
 const NOTICE_ID = 'skipwait-softpedia-bypass';
+const WAIT_PATH_RE = /\/dyn-postdownload\.php(?:\/|$)/i;
 const pending = new Map<string, Promise<string>>();
 const resolved = new Map<string, string>();
+
+function isWaitPath(pathname = location.pathname): boolean {
+  return WAIT_PATH_RE.test(pathname);
+}
+
+function isWaitUrl(href: string): boolean {
+  try {
+    const u = new URL(href, location.href);
+    return u.hostname.toLowerCase() === location.hostname.toLowerCase() && isWaitPath(u.pathname);
+  } catch {
+    return false;
+  }
+}
 
 function absoluteWaitUrl(href: string): string {
   return new URL(href, location.href).href;
@@ -80,7 +94,7 @@ function wireMirror(el: Element, waitUrl: string): void {
 function scanMirrors(): void {
   const links = document.querySelectorAll<HTMLAnchorElement>('a[href*="dyn-postdownload.php"]');
   for (const a of links) {
-    if (!isDynPostdownloadUrl(a.href)) continue;
+    if (!isWaitUrl(a.href)) continue;
     wireMirror(a, absoluteWaitUrl(a.href));
   }
 
@@ -112,12 +126,15 @@ function runProgramPage(): void {
 }
 
 export function initSoftpediaBypass(): void {
-  if (!isAllowedHost(SOFTPEDIA_HOSTS)) return;
+  const allowed = isRemoteSite('softpedia');
   whenDomParsed(() => {
-    if (isSoftpediaWaitPath()) {
-      runWaitPage();
-      return;
-    }
-    runProgramPage();
+    void allowed.then((ok) => {
+      if (!ok) return;
+      if (isWaitPath()) {
+        runWaitPage();
+        return;
+      }
+      runProgramPage();
+    });
   });
 }
