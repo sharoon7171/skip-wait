@@ -1,6 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../utils/domain-check';
-
-const HOSTS = ['4download.net'] as const;
+import { isRemoteSite } from '../hosts/check';
+import { whenDomParsed } from '../utils/domain-check';
 const PROVIDER_IDS = [
   'gdrive',
   'mediafire',
@@ -116,9 +115,11 @@ function runArticleView(): void {
 }
 
 export function initFourDownloadDirectLinks(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  whenDomParsed(() => {
-    if (hasDownloadView()) runDownloadView();
-    if (document.getElementById(OKE_LINK_ID)) runArticleView();
+  void isRemoteSite('fourdownload').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      if (hasDownloadView()) runDownloadView();
+      if (document.getElementById(OKE_LINK_ID)) runArticleView();
+    });
   });
 }

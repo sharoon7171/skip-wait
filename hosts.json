@@ -615,5 +615,8 @@
   },
   "oneshortlink": {
     "hosts": ["1shortlink.com"]
+  },
+  "fourdownload": {
+    "hosts": ["4download.net"]
   }
 }
