@@ -1,12 +1,11 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { SHRINKME_MEDIATOR_HOSTS, SHRINKME_UNLOCK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-shrinkme-mediator';
 const BOOT_STYLE_ID = 'skip-wait-shrinkme-mediator-boot';
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
-const UNLOCK_ORIGIN = `https://${SHRINKME_UNLOCK_HOSTS[0]}`;
+const UNLOCK_ORIGIN = 'https://en.mrproblogger.com';
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
@@ -83,13 +82,14 @@ const tick = (): void => {
 
 export function initShrinkmeMediator(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(SHRINKME_MEDIATOR_HOSTS)) return;
-
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
+  void isRemoteSite('shrinkme-mediator').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+    window.addEventListener('load', tick, true);
+  });
 }

@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { SHRINKME_ENTRY_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-shrinkme-entry';
 const BOOT_STYLE_ID = 'skip-wait-shrinkme-entry-boot';
@@ -51,12 +50,13 @@ const aliasFromPath = (): string | null => {
 };
 
 export function initShrinkmeEntry(): void {
-  if (window !== window.top) return;
-  if (!isAllowedHost(SHRINKME_ENTRY_HOSTS)) return;
-  if (started) return;
+  if (window !== window.top || started) return;
   const alias = aliasFromPath();
   if (!alias) return;
-  started = true;
-  mountUi('Skipping captcha gate…');
-  location.replace(THEMEZON_LINK + encodeURIComponent(alias));
+  void isRemoteSite('shrinkme').then((ok) => {
+    if (!ok) return;
+    started = true;
+    mountUi('Skipping captcha gate…');
+    location.replace(THEMEZON_LINK + encodeURIComponent(alias));
+  });
 }

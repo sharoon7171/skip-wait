@@ -196,5 +196,22 @@
       "dailyjobposting.xyz",
       "financefernly.com"
     ]
+  },
+  "shrinkme": {
+    "hosts": [
+      "shrinkme.click",
+      "shrinke.me",
+      "shrinkme.io"
+    ]
+  },
+  "shrinkme-mediator": {
+    "hosts": [
+      "themezon.net"
+    ]
+  },
+  "shrinkme-unlock": {
+    "hosts": [
+      "en.mrproblogger.com"
+    ]
   }
 }
