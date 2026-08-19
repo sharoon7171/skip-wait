@@ -57,7 +57,7 @@ export const CONTACT = {
   github: 'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns',
 } as const;
 
-export const ORGANIZATION = {
-  name: 'SQ Tech',
-  url: 'https://www.sqtech.dev',
+export const DEVELOPER = {
+  name: 'Sharoon',
+  url: 'https://github.com/sharoon7171',
 } as const;

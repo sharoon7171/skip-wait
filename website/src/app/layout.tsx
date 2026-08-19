@@ -4,7 +4,7 @@ import { SiteHeader } from '@/components/nav/SiteHeader';
 import { HashScroll } from '@/components/nav/HashScroll';
 import { DeferredGoogleAnalytics } from '@/components/seo/DeferredGoogleAnalytics';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { CONTACT, ORGANIZATION, SITE } from '@/data/constants';
+import { DEVELOPER, SITE } from '@/data/constants';
 import {
   indexRobots,
   organizationJsonLd,
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
-  authors: [{ name: 'Sharoon', url: CONTACT.github }],
-  creator: 'Sharoon',
-  publisher: ORGANIZATION.name,
+  authors: [{ name: DEVELOPER.name, url: DEVELOPER.url }],
+  creator: DEVELOPER.name,
+  publisher: DEVELOPER.name,
   category: 'technology',
   icons: {
     icon: [{ url: '/icon.png', type: 'image/png', sizes: '128x128' }],

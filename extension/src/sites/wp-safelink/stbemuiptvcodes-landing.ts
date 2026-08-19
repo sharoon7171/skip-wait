@@ -1,6 +1,5 @@
 import { isRemoteSite } from '../../hosts/check';
 import { whenDomParsed } from '../../utils/domain-check';
-import { showWpSafelinkRedirectOverlay } from './redirect';
 
 const GO_RE = /var\s+go\s*=\s*"([A-Za-z0-9+/=]+)"/;
 const TOKEN_RE = /var\s+token\s*=\s*"([^"]*)"/;
@@ -44,7 +43,6 @@ export function initStbemuiptvcodesWpsafelink(): void {
     if (!payload) return;
     void allowed.then((ok) => {
       if (!ok) return;
-      showWpSafelinkRedirectOverlay();
       setCookies(payload);
       location.href = destFromGo(payload.go);
     });

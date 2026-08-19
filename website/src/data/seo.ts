@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CHROME_WEB_STORE_URL, CONTACT, ORGANIZATION, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, SITE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { homeSections } from '@/lib/routes';
 
@@ -25,12 +25,7 @@ export function organizationJsonLd(): Record<string, unknown> {
       '@type': 'ImageObject',
       url: `${SITE.url}/icon.png`,
     },
-    sameAs: [CONTACT.github, CHROME_WEB_STORE_URL],
-    parentOrganization: {
-      '@type': 'Organization',
-      name: ORGANIZATION.name,
-      url: ORGANIZATION.url,
-    },
+    sameAs: [DEVELOPER.url, CONTACT.github, CHROME_WEB_STORE_URL],
     contactPoint: {
       '@type': 'ContactPoint',
       email: CONTACT.email,
@@ -64,14 +59,14 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
     },
     author: {
       '@type': 'Person',
-      name: 'Sharoon',
+      name: DEVELOPER.name,
       email: CONTACT.email,
-      url: CONTACT.github,
+      url: DEVELOPER.url,
     },
     publisher: {
-      '@type': 'Organization',
-      name: ORGANIZATION.name,
-      url: ORGANIZATION.url,
+      '@type': 'Person',
+      name: DEVELOPER.name,
+      url: DEVELOPER.url,
     },
     featureList: [
       'Bypass countdown timers on supported download and link pages',

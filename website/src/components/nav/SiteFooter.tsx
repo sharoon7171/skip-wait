@@ -1,4 +1,4 @@
-import { CHROME_WEB_STORE_URL, CONTACT, REQUEST_SUPPORT_URL, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, REQUEST_SUPPORT_URL, SITE } from '@/data/constants';
 import { homeSections, routes } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
 import { BrandIcon } from '@/components/ui/icons';
@@ -134,9 +134,21 @@ export function SiteFooter(): React.ReactElement {
       </Shell>
 
       <div className="border-t border-white/10">
-        <Shell className="py-5 text-caption text-ink-inverse-soft">
+        <Shell className="flex flex-col gap-2 py-5 text-caption text-ink-inverse-soft sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {SITE.name}
+          </p>
+          <p>
+            Developed by{' '}
+            <TrackedAnchor
+              href={DEVELOPER.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-ink-inverse-body no-underline transition-colors hover:text-white"
+              cta="github"
+            >
+              {DEVELOPER.name}
+            </TrackedAnchor>
           </p>
         </Shell>
       </div>

@@ -10,6 +10,7 @@ export const SUPPORTED_SITES_URL = `${WEBSITE_URL}/sites`;
 export const CONTACT = {
   email: 'sharoon7171@gmail.com',
   telegram: 'https://t.me/sharoon1998',
+  github: 'https://github.com/sharoon7171',
 } as const;
 
 export function assetUrl(file: string): string {

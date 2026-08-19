@@ -1,7 +1,5 @@
-import { CHROME_WEB_STORE_LISTING_URL } from '../constants';
+import { CHROME_WEB_STORE_LISTING_URL, CONTACT } from '../constants';
 import { IconStar } from './icons';
-
-const SQ_TECH_URL = 'https://www.sqtech.dev/';
 
 export function Footer(): React.ReactElement {
   return (
@@ -24,12 +22,12 @@ export function Footer(): React.ReactElement {
       <p className="text-[0.75rem] font-medium text-ink-soft">
         Developed by{' '}
         <a
-          href={SQ_TECH_URL}
+          href={CONTACT.github}
           target="_blank"
           rel="noopener noreferrer"
           className="font-semibold text-ink no-underline transition-colors hover:text-primary-700"
         >
-          SQ Tech
+          Sharoon
         </a>
       </p>
     </footer>
