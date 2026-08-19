@@ -585,5 +585,8 @@
   },
   "bstshrt": {
     "hosts": ["boostellar.com", "bstlar.com", "bstshrt.com"]
+  },
+  "boostylink": {
+    "hosts": ["boostylink.com"]
   }
 }

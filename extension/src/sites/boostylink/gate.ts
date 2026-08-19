@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { BOOSTYLINK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-boostylink-overlay';
 const BOOT_STYLE_ID = 'skip-wait-boostylink-boot';
@@ -123,12 +122,15 @@ const run = async (): Promise<void> => {
 };
 
 export function initBoostylinkGate(): void {
-  if (window !== window.top || !isAllowedHost(BOOSTYLINK_HOSTS)) return;
-  const tick = (): void => {
-    if (isLockerPage()) void run();
-  };
-  tick();
-  new MutationObserver(tick).observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
-  window.addEventListener('load', tick, true);
+  if (window !== window.top) return;
+  void isRemoteSite('boostylink').then((ok) => {
+    if (!ok) return;
+    const tick = (): void => {
+      if (isLockerPage()) void run();
+    };
+    tick();
+    new MutationObserver(tick).observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick, true);
+    window.addEventListener('load', tick, true);
+  });
 }
