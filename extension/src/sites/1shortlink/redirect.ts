@@ -1,7 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { ONESHORTLINK_HOSTS } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
 import { csrfFromPage, oneShortlinkJob, postGetLinkDownload } from './unlock';
 
 const OVERLAY_ID = 'skip-wait-1shortlink-overlay';
@@ -78,16 +78,16 @@ const kick = (): void => {
 
 export function init1shortlinkRedirect(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(ONESHORTLINK_HOSTS)) return;
   if (!oneShortlinkJob()) return;
-
-  bootOverlayLock();
-  mountUi('Getting things ready…');
-
-  whenDomParsed(kick);
-  const mo = new MutationObserver(() => {
-    kick();
-    if (started) mo.disconnect();
+  void isRemoteSite('oneshortlink').then((ok) => {
+    if (!ok) return;
+    bootOverlayLock();
+    mountUi('Getting things ready…');
+    whenDomParsed(kick);
+    const mo = new MutationObserver(() => {
+      kick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 }

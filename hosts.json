@@ -612,5 +612,8 @@
   },
   "adfocus": {
     "hosts": ["adfoc.us"]
+  },
+  "oneshortlink": {
+    "hosts": ["1shortlink.com"]
   }
 }
