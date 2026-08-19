@@ -627,5 +627,8 @@
   },
   "fastdl": {
     "hosts": ["fastdl.zip"]
+  },
+  "kitokola": {
+    "hosts": ["kitokola.id"]
   }
 }

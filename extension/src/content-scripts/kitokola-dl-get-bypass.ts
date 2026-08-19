@@ -1,6 +1,4 @@
-import { isAllowedHost } from '../utils/domain-check';
-
-const HOSTS = ['kitokola.id'] as const;
+import { isRemoteSite } from '../hosts/check';
 const STORAGE_KEYS = ['mi-active', 'mi-dl', 'mi-start', 'mi-total'];
 
 function clearTimerState(): void {
