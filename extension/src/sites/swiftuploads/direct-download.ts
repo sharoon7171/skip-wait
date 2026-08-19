@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['swiftuploads.com'] as const;
 const FILE_PATH_RE = /^\/([^/]+)\/file\/?$/i;
 const CUSTOM_UI =
   '.custom-download-button, .custom-download-section, #customDownloadBtn, #customDownloadBtn2, .custom-download-btn';
@@ -209,10 +209,12 @@ function wire(id: string): void {
 }
 
 export function initSwiftuploadsDirectDownload(): void {
-  if (!isAllowedHost(HOSTS)) return;
+  const allowed = isRemoteSite('swiftuploads');
   whenDomParsed(() => {
     const id = fileId();
     if (!id || !document.querySelector('.download-section')) return;
-    wire(id);
+    void allowed.then((ok) => {
+      if (ok) wire(id);
+    });
   });
 }

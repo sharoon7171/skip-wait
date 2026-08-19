@@ -140,5 +140,10 @@
       "sub4unlock.me",
       "sub2unlock.me"
     ]
+  },
+  "swiftuploads": {
+    "hosts": [
+      "swiftuploads.com"
+    ]
   }
 }
