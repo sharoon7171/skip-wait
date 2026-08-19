@@ -1,15 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { createOverlay } from './overlay';
-
-const MEDIATOR_PAGE_HOSTS = [
-  'cryptoinsights.site',
-  'cryptonewz.one',
-  'gadgetsweb.xyz',
-  'greenmountmotors.com',
-  'inventoryidea.com',
-  'taazabull24.com',
-  'techmirror.click',
-] as const;
 
 const MEDIATOR_PATH = /^\/homelander\/?$/i;
 const STORAGE_KEY = 'o';
@@ -48,19 +39,23 @@ function resolveDestination(): string | null {
 }
 
 export function initHdhub4uMediatorPage(): void {
-  if (window !== window.top || !isAllowedHost(MEDIATOR_PAGE_HOSTS)) return;
+  if (window !== window.top) return;
   const isEntry = new URLSearchParams(location.search).has('id');
   if (!isEntry && !MEDIATOR_PATH.test(location.pathname)) return;
 
-  const overlay = mount('Opening the next page…');
-  const open = (): boolean => {
-    const destination = resolveDestination();
-    if (destination) location.replace(destination);
-    return destination !== null;
-  };
+  void isRemoteSite('hdhub4u-mediator').then((ok) => {
+    if (!ok) return;
 
-  if (!isEntry && open()) return;
-  whenDomParsed(() => {
-    if (!open()) overlay.setError('Could not open the next page. Reload and try again.');
+    const overlay = mount('Opening the next page…');
+    const open = (): boolean => {
+      const destination = resolveDestination();
+      if (destination) location.replace(destination);
+      return destination !== null;
+    };
+
+    if (!isEntry && open()) return;
+    whenDomParsed(() => {
+      if (!open()) overlay.setError('Could not open the next page. Reload and try again.');
+    });
   });
 }

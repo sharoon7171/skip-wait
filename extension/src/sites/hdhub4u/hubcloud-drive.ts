@@ -1,15 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-
-const HUBCLOUD_DRIVE_HOSTS = [
-  'hubcloud.cx',
-  'hubcloud.foo',
-  'hubcloud.club',
-  'hubcloud.fans',
-  'vcloud.zip',
-  'vcloud.fit',
-] as const;
+import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
 
 const VCLOUD_HOSTS = ['vcloud.zip', 'vcloud.fit'] as const;
 const HUBCLOUD_PHP_RE = /https?:\/\/[^'"\s]+\/hubcloud\.php\?[^'"\s]+/i;
@@ -89,23 +81,24 @@ const mount = (): FullPageOverlay => {
 };
 
 export function initHubcloudDrive(): void {
-  if (window !== window.top || !isAllowedHost(HUBCLOUD_DRIVE_HOSTS) || !isSharePath() || started) {
-    return;
-  }
-  whenDomParsed(() => {
-    if (started || isCloudflareInterstitial()) return;
-    started = true;
-    mount();
-    const url = resolveTarget();
-    if (url && /^https?:\/\//i.test(url)) {
-      location.replace(url);
-      return;
-    }
-    const id = window.setInterval(() => {
-      const next = resolveTarget();
-      if (!next || !/^https?:\/\//i.test(next)) return;
-      clearInterval(id);
-      location.replace(next);
-    }, 50);
+  if (window !== window.top || !isSharePath() || started) return;
+  void isRemoteSite('hdhub4u-hubcloud').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      if (started || isCloudflareInterstitial()) return;
+      started = true;
+      mount();
+      const url = resolveTarget();
+      if (url && /^https?:\/\//i.test(url)) {
+        location.replace(url);
+        return;
+      }
+      const id = window.setInterval(() => {
+        const next = resolveTarget();
+        if (!next || !/^https?:\/\//i.test(next)) return;
+        clearInterval(id);
+        location.replace(next);
+      }, 50);
+    });
   });
 }

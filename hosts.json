@@ -429,5 +429,44 @@
   },
   "icutlink-mediator": {
     "hosts": ["toolskitpro.net"]
+  },
+  "hdhub4u": {
+    "hosts": [
+      "hdhub4u.med",
+      "hdhub4u.bi",
+      "hdhub4u.catering",
+      "hdhub4u.ec",
+      "hdhub4u.gd",
+      "hdhub4u.gives",
+      "hdhub4u.glass",
+      "hdhub4u.gs",
+      "hdhub4u.hn",
+      "hdhub4u.ht",
+      "hdhub4u.insure"
+    ]
+  },
+  "hdhub4u-mediator": {
+    "hosts": [
+      "cryptoinsights.site",
+      "cryptonewz.one",
+      "gadgetsweb.xyz",
+      "greenmountmotors.com",
+      "inventoryidea.com",
+      "taazabull24.com",
+      "techmirror.click"
+    ]
+  },
+  "hdhub4u-hubcloud": {
+    "hosts": [
+      "hubcloud.cx",
+      "hubcloud.foo",
+      "hubcloud.club",
+      "hubcloud.fans",
+      "vcloud.zip",
+      "vcloud.fit"
+    ]
+  },
+  "hdhub4u-hubcdn": {
+    "hosts": ["hubcdn.sbs", "hubcdn.fans"]
   }
 }
