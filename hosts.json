@@ -414,5 +414,8 @@
   },
   "kotakanimeid": {
     "hosts": ["kotakanimeid.link"]
+  },
+  "keyforge": {
+    "hosts": ["keyforge.win"]
   }
 }

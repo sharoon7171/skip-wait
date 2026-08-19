@@ -1,5 +1,4 @@
-import { isAllowedHost } from '../../utils/domain-check';
-import { KEYFORGE_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
 
 const GATE_RE = /^\/a\/([^/]+)\/?$/i;
 const TIP_ID = 'skipwait-keyforge-tip';
@@ -53,7 +52,7 @@ const pickBoostylink = (): void => {
 };
 
 const tick = (): void => {
-  if (!isAllowedHost(KEYFORGE_HOSTS) || !gateId()) return;
+  if (!gateId()) return;
   mountTip();
   pickBoostylink();
 };
@@ -67,9 +66,12 @@ const safeTick = (): void => {
 };
 
 export function initKeyforgeGate(): void {
-  if (window !== window.top || !isAllowedHost(KEYFORGE_HOSTS) || !gateId()) return;
-  new MutationObserver(safeTick).observe(document.documentElement, { childList: true, subtree: true });
-  safeTick();
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', safeTick, true);
-  window.addEventListener('load', safeTick, true);
+  if (window !== window.top || !gateId()) return;
+  void isRemoteSite('keyforge').then((ok) => {
+    if (!ok) return;
+    new MutationObserver(safeTick).observe(document.documentElement, { childList: true, subtree: true });
+    safeTick();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', safeTick, true);
+    window.addEventListener('load', safeTick, true);
+  });
 }
