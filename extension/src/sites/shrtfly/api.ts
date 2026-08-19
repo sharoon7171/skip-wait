@@ -1,5 +1,3 @@
-import { FORM_SEL } from './hosts';
-
 export type UnlockData = {
   final?: string;
   next_page?: string;
@@ -12,7 +10,7 @@ export type UnlockResponse = {
 };
 
 export const unlockForm = (): HTMLFormElement | null =>
-  document.querySelector<HTMLFormElement>(FORM_SEL);
+  document.querySelector<HTMLFormElement>('form[action*="api-endpoint/verify"]');
 
 export const formAction = (form: HTMLFormElement): string =>
   form.querySelector<HTMLInputElement>('input[name="action"]')?.value?.trim() ?? '';

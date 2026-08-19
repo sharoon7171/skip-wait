@@ -1,9 +1,9 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
+import { whenDomParsed } from '../../utils/domain-check';
 import { finishUnlock, formAction, postUnlock, unlockForm } from './api';
-import { SHRTFLY_MEDIATOR_ACTIONS, SHRTFLY_MEDIATOR_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-shrtfly-mediator-overlay';
 const BOOT_STYLE_ID = 'skip-wait-shrtfly-mediator-boot';
@@ -13,6 +13,8 @@ const TURNSTILE_IFRAMES = [
   'iframe[src*="challenges.cloudflare.com"]',
   'iframe[src*="turnstile"]',
 ] as const;
+
+const MEDIATOR_ACTIONS = new Set(['captcha', 'progressbar', 'countdown']);
 
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
@@ -57,14 +59,11 @@ const mountUi = (
   return ui;
 };
 
-const isMediatorPage = (): boolean => {
+const isMediatorPage = (hostOk: boolean): boolean => {
   const form = unlockForm();
-  if (!form || !SHRTFLY_MEDIATOR_ACTIONS.has(formAction(form))) return false;
+  if (!form || !MEDIATOR_ACTIONS.has(formAction(form))) return false;
   if (!form.querySelector('input[name="payload"]')) return false;
-  return (
-    isAllowedHost(SHRTFLY_MEDIATOR_HOSTS) ||
-    !!document.querySelector('a[href*="shrtfly.com/account/premium-access"]')
-  );
+  return hostOk || !!document.querySelector('a[href*="shrtfly.com/account/premium-access"]');
 };
 
 const revealGate = (): void => {
@@ -163,7 +162,7 @@ const unlock = async (): Promise<void> => {
   const form = unlockForm();
   if (!form) throw new Error('missing form');
   const action = formAction(form);
-  if (!SHRTFLY_MEDIATOR_ACTIONS.has(action)) throw new Error('not mediator');
+  if (!MEDIATOR_ACTIONS.has(action)) throw new Error('not mediator');
 
   const overlay = mountUi(NOTE, 'Unlocking your link…');
   revealGate();
@@ -183,25 +182,24 @@ const unlock = async (): Promise<void> => {
 
 export function initShrtflyMediator(): void {
   if (window !== window.top) return;
-
-  const mo = new MutationObserver(() => tick());
-  const stop = (): void => {
-    mo.disconnect();
-    window.removeEventListener('load', tick, true);
-  };
-
-  const tick = (): void => {
-    if (started || !isMediatorPage()) return;
-    started = true;
-    stop();
-    void unlock().catch((err: unknown) => {
-      const overlay = mountUi();
-      overlay.setStatus('Something went wrong.');
-      overlay.setError(err instanceof Error ? err.message : String(err));
-    });
-  };
-
-  whenDomParsed(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  window.addEventListener('load', tick, true);
+  void isRemoteSite('shrtfly-mediator').then((hostOk) => {
+    const mo = new MutationObserver(() => tick());
+    const stop = (): void => {
+      mo.disconnect();
+      window.removeEventListener('load', tick, true);
+    };
+    const tick = (): void => {
+      if (started || !isMediatorPage(hostOk)) return;
+      started = true;
+      stop();
+      void unlock().catch((err: unknown) => {
+        const overlay = mountUi();
+        overlay.setStatus('Something went wrong.');
+        overlay.setError(err instanceof Error ? err.message : String(err));
+      });
+    };
+    whenDomParsed(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    window.addEventListener('load', tick, true);
+  });
 }

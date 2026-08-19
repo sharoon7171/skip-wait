@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { finishUnlock, formAction, postUnlock, unlockForm } from './api';
-import { SHRTFLY_ENTRY_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-shrtfly-overlay';
 const BOOT_STYLE_ID = 'skip-wait-shrtfly-boot';
@@ -41,10 +41,8 @@ const mountUi = (status = 'Getting things ready…'): FullPageOverlay => {
   return ui;
 };
 
-const isEntry = (): boolean => {
-  if (!isAllowedHost(SHRTFLY_ENTRY_HOSTS)) return false;
-  return location.pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean).length === 1;
-};
+const isEntry = (): boolean =>
+  location.pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean).length === 1;
 
 const unlock = async (): Promise<void> => {
   const form = unlockForm();
@@ -59,31 +57,31 @@ const unlock = async (): Promise<void> => {
 
 export function initShrtflyEntry(): void {
   if (window !== window.top || !isEntry()) return;
-
-  const mo = new MutationObserver(() => tick());
-  const stop = (): void => {
-    mo.disconnect();
-    window.removeEventListener('load', tick, true);
-  };
-
-  const tick = (): void => {
-    if (started) return;
-    if (!booted) {
-      booted = true;
-      mountUi();
-    }
-    const form = unlockForm();
-    if (!form || formAction(form) !== ENTRY_ACTION) return;
-    started = true;
-    stop();
-    void unlock().catch((err: unknown) => {
-      const overlay = mountUi();
-      overlay.setStatus('Something went wrong.');
-      overlay.setError(err instanceof Error ? err.message : String(err));
-    });
-  };
-
-  whenDomParsed(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  window.addEventListener('load', tick, true);
+  void isRemoteSite('shrtfly').then((ok) => {
+    if (!ok) return;
+    const mo = new MutationObserver(() => tick());
+    const stop = (): void => {
+      mo.disconnect();
+      window.removeEventListener('load', tick, true);
+    };
+    const tick = (): void => {
+      if (started) return;
+      if (!booted) {
+        booted = true;
+        mountUi();
+      }
+      const form = unlockForm();
+      if (!form || formAction(form) !== ENTRY_ACTION) return;
+      started = true;
+      stop();
+      void unlock().catch((err: unknown) => {
+        const overlay = mountUi();
+        overlay.setStatus('Something went wrong.');
+        overlay.setError(err instanceof Error ? err.message : String(err));
+      });
+    };
+    whenDomParsed(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    window.addEventListener('load', tick, true);
+  });
 }

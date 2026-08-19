@@ -183,5 +183,18 @@
       "inloadapi.com",
       "srv.inload.net"
     ]
+  },
+  "shrtfly": {
+    "hosts": [
+      "shrtslug.biz"
+    ]
+  },
+  "shrtfly-mediator": {
+    "hosts": [
+      "technons.com",
+      "tournguide.com",
+      "dailyjobposting.xyz",
+      "financefernly.com"
+    ]
   }
 }
