@@ -7,7 +7,10 @@ export function initCutyGoUnlockInject(): void {
     if (message?.type !== MSG_CUTY_GO_UNLOCK || tabId === undefined) return false;
 
     void (async () => {
-      if (sender.tab?.url && !(await isCutyUrl(sender.tab.url))) return;
+      if (sender.tab?.url && !(await isCutyUrl(sender.tab.url))) {
+        sendResponse({ ok: false, err: 'not cuty' });
+        return;
+      }
 
       void chrome.scripting
         .executeScript({
