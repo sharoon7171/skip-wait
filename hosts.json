@@ -390,5 +390,8 @@
   },
   "linkunlocker": {
     "hosts": ["linkunlocker.com"]
+  },
+  "linksterr": {
+    "hosts": ["linksterr.com"]
   }
 }

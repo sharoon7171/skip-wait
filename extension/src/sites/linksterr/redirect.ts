@@ -1,6 +1,5 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost } from '../../utils/domain-check';
-import { LINKSTERR_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-linksterr-gateway';
 const PATH_RE = /^\/r\/[^/]+\/?$/i;
@@ -41,52 +40,55 @@ function go(url: string): void {
 }
 
 export function initLinksterrGateway(): void {
-  if (!isAllowedHost(LINKSTERR_HOSTS) || !PATH_RE.test(location.pathname)) return;
+  if (!PATH_RE.test(location.pathname)) return;
+  void isRemoteSite('linksterr').then((ok) => {
+    if (!ok) return;
 
-  let done = false;
-  let busy = false;
-  const mo = new MutationObserver(tick);
-  const poll = window.setInterval(tick, 500);
+    let done = false;
+    let busy = false;
+    const mo = new MutationObserver(tick);
+    const poll = window.setInterval(tick, 500);
 
-  function stopWatching(): void {
-    mo.disconnect();
-    window.clearInterval(poll);
-  }
+    function stopWatching(): void {
+      mo.disconnect();
+      window.clearInterval(poll);
+    }
 
-  function finish(url: string): void {
-    if (done) return;
-    done = true;
-    stopWatching();
-    go(url);
-  }
+    function finish(url: string): void {
+      if (done) return;
+      done = true;
+      stopWatching();
+      go(url);
+    }
 
-  function tick(): void {
-    if (done || isCfChallenge()) return;
-    const dom = destFromDom();
-    if (dom) return finish(dom);
-    if (busy) return;
-    busy = true;
-    void fetch(location.href, { credentials: 'include', cache: 'no-store' })
-      .then((r) => (r.ok ? r.text() : Promise.reject()))
-      .then((html) => {
-        const url = destFromHtml(html);
-        if (url) finish(url);
-      })
-      .catch(() => {})
-      .finally(() => {
-        busy = false;
+    function tick(): void {
+      if (done || isCfChallenge()) return;
+      const dom = destFromDom();
+      if (dom) return finish(dom);
+      if (busy) return;
+      busy = true;
+      void fetch(location.href, { credentials: 'include', cache: 'no-store' })
+        .then((r) => (r.ok ? r.text() : Promise.reject()))
+        .then((html) => {
+          const url = destFromHtml(html);
+          if (url) finish(url);
+        })
+        .catch(() => {})
+        .finally(() => {
+          busy = false;
+        });
+    }
+
+    document.documentElement &&
+      mo.observe(document.documentElement, {
+        attributeFilter: ['data-destination'],
+        attributes: true,
+        childList: true,
+        subtree: true,
       });
-  }
-
-  document.documentElement &&
-    mo.observe(document.documentElement, {
-      attributeFilter: ['data-destination'],
-      attributes: true,
-      childList: true,
-      subtree: true,
-    });
-  tick();
-  window.setTimeout(stopWatching, 60_000);
-  document.addEventListener('DOMContentLoaded', tick, { once: true });
-  window.addEventListener('load', tick, { once: true });
+    tick();
+    window.setTimeout(stopWatching, 60_000);
+    document.addEventListener('DOMContentLoaded', tick, { once: true });
+    window.addEventListener('load', tick, { once: true });
+  });
 }
