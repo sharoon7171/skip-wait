@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['muhammadniaz.link'] as const;
 const NOTICE_ID = 'skipwait-muhammadniaz-countdown';
 
 function run(): void {
@@ -20,7 +20,12 @@ function run(): void {
 }
 
 export function initMuhammadniazCountdownBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  whenDomParsed(run);
+  const allowed = isRemoteSite('muhammadniaz');
+  whenDomParsed(() => {
+    void allowed.then((ok) => {
+      if (!ok) return;
+      run();
+    });
+  });
 }
 
