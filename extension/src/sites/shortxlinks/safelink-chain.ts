@@ -8,6 +8,7 @@ import {
   type ShortxFetchResult,
 } from './chain';
 import {
+  bindShortxRemote,
   isShortxHost,
   isShortxMediatorHost,
   isShortxMediatorPage,
@@ -113,11 +114,11 @@ function persistStartFromLocation(): void {
   } catch {}
 }
 
-function readStoredResult(): StoredResult | null {
+async function readStoredResult(): Promise<StoredResult | null> {
   try {
     const tokenUrl = sessionStorage.getItem(SESSION_TOKEN);
     const adTime = Number(sessionStorage.getItem(SESSION_AD_TIME));
-    if (tokenUrl && isShortxTokenUrl(tokenUrl) && adTime > 0) {
+    if (tokenUrl && (await isShortxTokenUrl(tokenUrl)) && adTime > 0) {
       if (Date.now() <= adTime + SHORTX_AD_WAIT_MS + 60_000) return { tokenUrl, adTime };
       sessionStorage.removeItem(SESSION_TOKEN);
       sessionStorage.removeItem(SESSION_AD_TIME);
@@ -165,10 +166,10 @@ function shouldRunEager(): boolean {
   return location.search.length > 1 || document.title.includes('Too Early');
 }
 
-function shouldRun(): boolean {
+async function shouldRun(): Promise<boolean> {
   if (window !== window.top) return false;
   if (isShortxFinalTimerPage()) return true;
-  if (isTooEarlyShortx() && readStoredResult()) return true;
+  if (isTooEarlyShortx() && (await readStoredResult())) return true;
   if (isShortxMediatorPage()) return true;
   if (hasSession() && isShortxPipelinePage()) return true;
   return false;
@@ -202,7 +203,7 @@ async function requestFetchChain(startUrl: string): Promise<ShortxFetchResult> {
 }
 
 async function fetchVerification(startUrl: string): Promise<StoredResult | { ok: false; error: string }> {
-  const stored = readStoredResult();
+  const stored = await readStoredResult();
   if (stored) return stored;
   const result = await requestFetchChain(startUrl);
   if (!result.ok) return result;
@@ -291,14 +292,14 @@ async function waitForUnlock(overlay: FullPageOverlay, tokenUrl: string, adTime:
 }
 
 async function runFlow(): Promise<void> {
-  if (flowRunning || flowStarted || !shouldRun()) return;
+  if (flowRunning || flowStarted || !(await shouldRun())) return;
   flowRunning = true;
   flowStarted = true;
   requestVisibilitySpoof();
   const overlay = mountUi();
   try {
     persistStartFromLocation();
-    const stored = readStoredResult();
+    const stored = await readStoredResult();
     if (
       isShortxFinalTimerPage() ||
       (stored && normalizePageUrl(location.href) === normalizePageUrl(stored.tokenUrl))
@@ -334,24 +335,21 @@ async function runFlow(): Promise<void> {
 
 export function initShortxlinksSafelinkChain(): void {
   if (window !== window.top) return;
-  if (
-    !isShortxHost() &&
-    !isShortxMediatorHost() &&
-    !shortxAliasFromAdlinkfly(location.search) &&
-    !hasSession()
-  )
-    return;
-
-  persistStartFromLocation();
-  if (shouldRunEager()) {
-    bootOverlayLock();
-    requestVisibilitySpoof();
-  }
-  const start = (): void => {
-    if (!shouldRun()) return;
-    requestVisibilitySpoof();
-    void runFlow();
-  };
-  if (shouldRunEager()) start();
-  whenDomParsed(start);
+  void bindShortxRemote().then((ok) => {
+    if (!ok && !shortxAliasFromAdlinkfly(location.search) && !hasSession()) return;
+    persistStartFromLocation();
+    if (shouldRunEager()) {
+      bootOverlayLock();
+      requestVisibilitySpoof();
+    }
+    const start = (): void => {
+      void shouldRun().then((run) => {
+        if (!run) return;
+        requestVisibilitySpoof();
+        void runFlow();
+      });
+    };
+    if (shouldRunEager()) start();
+    whenDomParsed(start);
+  });
 }

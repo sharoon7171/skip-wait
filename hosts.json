@@ -213,5 +213,18 @@
     "hosts": [
       "en.mrproblogger.com"
     ]
+  },
+  "shortxlinks": {
+    "hosts": [
+      "shortxlinks.com"
+    ]
+  },
+  "shortxlinks-mediator": {
+    "hosts": [
+      "flexthecar.com",
+      "nkrmusic.in.net",
+      "raisingcanesmenux.com",
+      "pcfileszone.com"
+    ]
   }
 }

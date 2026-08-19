@@ -49,7 +49,7 @@ async function fetchAdToken(adUrl: string): Promise<string | null> {
     headers: { Accept: 'text/html,*/*', 'User-Agent': SHORTX_USER_AGENT },
   });
   const tokenUrl = resp.url.split('#')[0] ?? '';
-  return isShortxTokenUrl(tokenUrl) ? tokenUrl : null;
+  return (await isShortxTokenUrl(tokenUrl)) ? tokenUrl : null;
 }
 
 export async function runShortxFetchChain(startUrl: string): Promise<ShortxFetchResult> {
