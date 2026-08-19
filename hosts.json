@@ -306,5 +306,8 @@
   },
   "oceanofgames": {
     "hosts": ["oceanofgames.com", "oceansofgamess.com", "oceantogames.com"]
+  },
+  "oceanofdmg": {
+    "hosts": ["oceanofdmg.com"]
   }
 }

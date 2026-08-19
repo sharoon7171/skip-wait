@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['oceanofdmg.com'] as const;
 const BRAND = 'skipwait-oceanofdmg';
 const REFRESH =
   /http-equiv=["']Refresh["'][^>]*content=["']\d+\s*;\s*url=([^"']+)["']/i;
@@ -57,12 +57,15 @@ function wire(form: HTMLFormElement): void {
 }
 
 export function initOceanofdmgBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
+  const allowed = isRemoteSite('oceanofdmg');
   whenDomParsed(() => {
-    if (/^\/download\/?$/i.test(location.pathname)) {
-      location.replace(cdnFromHtml(document.documentElement.innerHTML));
-      return;
-    }
-    document.querySelectorAll<HTMLFormElement>('form[action*="/download/"]').forEach(wire);
+    void allowed.then((ok) => {
+      if (!ok) return;
+      if (/^\/download\/?$/i.test(location.pathname)) {
+        location.replace(cdnFromHtml(document.documentElement.innerHTML));
+        return;
+      }
+      document.querySelectorAll<HTMLFormElement>('form[action*="/download/"]').forEach(wire);
+    });
   });
 }
