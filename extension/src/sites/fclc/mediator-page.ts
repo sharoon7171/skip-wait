@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { requestFclcLinksGo } from './links-go';
-import { FCLC_MEDIATOR_HOSTS } from './mediator-hosts';
 
 const OVERLAY_ID = 'skip-wait-fclc-mediator-overlay';
 const STEP1_FORM = 'form.text-center';
@@ -238,7 +238,7 @@ const runStep2 = (overlay: FullPageOverlay): void => {
 };
 
 const start = (): void => {
-  if (started || !isAllowedHost(FCLC_MEDIATOR_HOSTS)) return;
+  if (started) return;
   captureStep2FromDom();
   if (!isStep1Mediator() && !isStep2Mediator()) return;
   started = true;
@@ -254,25 +254,27 @@ const start = (): void => {
 };
 
 export function initFclcMediatorPage(): void {
-  if (!isAllowedHost(FCLC_MEDIATOR_HOSTS)) return;
+  void isRemoteSite('fclc-mediator').then((ok) => {
+    if (!ok) return;
 
-  document.addEventListener(
-    'DOMContentLoaded',
-    () => {
-      captureStep2FromDom();
-    },
-    true,
-  );
+    document.addEventListener(
+      'DOMContentLoaded',
+      () => {
+        captureStep2FromDom();
+      },
+      true,
+    );
 
-  whenDomParsed(() => {
-    start();
-    if (isStep1Mediator() || isStep2Mediator() || step2Fields) return;
-    const mo = new MutationObserver(() => {
-      captureStep2FromDom();
-      if (!isStep1Mediator() && !isStep2Mediator() && !step2Fields) return;
-      mo.disconnect();
+    whenDomParsed(() => {
       start();
+      if (isStep1Mediator() || isStep2Mediator() || step2Fields) return;
+      const mo = new MutationObserver(() => {
+        captureStep2FromDom();
+        if (!isStep1Mediator() && !isStep2Mediator() && !step2Fields) return;
+        mo.disconnect();
+        start();
+      });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
     });
-    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
 }

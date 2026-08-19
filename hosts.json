@@ -522,5 +522,11 @@
   },
   "filecr": {
     "hosts": ["filecr.com"]
+  },
+  "fclc": {
+    "hosts": ["fc-lc.xyz", "fc.lc", "oii.io"]
+  },
+  "fclc-mediator": {
+    "hosts": ["jobzhub.store"]
   }
 }

@@ -1,8 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { isAllowedHost } from '../../utils/domain-check';
 import { MSG_FCLC_ALERT_SUPPRESS } from './alert-suppress';
-import { FCLC_HOSTS } from './hosts';
 
 const CAPTCHA_IN_FORM = '[name="h-captcha-response"], [name="g-recaptcha-response"]';
 const HCAPTCHA_IFRAMES = [
@@ -223,54 +222,56 @@ function runHcaptchaPart(form: HTMLFormElement): void {
 }
 
 export function initFclcShortlinkPage(): void {
-  if (!isAllowedHost(FCLC_HOSTS)) return;
+  void isRemoteSite('fclc').then((ok) => {
+    if (!ok) return;
 
-  let started = false;
-  let mo: MutationObserver | null = null;
+    let started = false;
+    let mo: MutationObserver | null = null;
 
-  const stop = (): void => {
-    mo?.disconnect();
-    mo = null;
-  };
+    const stop = (): void => {
+      mo?.disconnect();
+      mo = null;
+    };
 
-  const tryStart = (): void => {
-    if (started) return;
+    const tryStart = (): void => {
+      if (started) return;
 
-    const linkView = document.querySelector<HTMLFormElement>(LINK_VIEW);
-    if (linkView) {
+      const linkView = document.querySelector<HTMLFormElement>(LINK_VIEW);
+      if (linkView) {
+        started = true;
+        stop();
+        chrome.runtime.sendMessage({ type: MSG_FCLC_ALERT_SUPPRESS }).catch(() => {});
+        mountUi(READY_NOTE, 'Getting things ready…');
+        runHcaptchaPart(linkView);
+        return;
+      }
+
+      const verificationForm = getVerificationForm();
+      if (!verificationForm) return;
       started = true;
       stop();
       chrome.runtime.sendMessage({ type: MSG_FCLC_ALERT_SUPPRESS }).catch(() => {});
       mountUi(READY_NOTE, 'Getting things ready…');
-      runHcaptchaPart(linkView);
-      return;
+      runCloudflarePart(verificationForm);
+    };
+
+    tryStart();
+    if (started) return;
+
+    const root = document.documentElement;
+    mo = new MutationObserver(tryStart);
+    mo.observe(root, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener(
+        'DOMContentLoaded',
+        () => {
+          tryStart();
+          if (!started) stop();
+        },
+        { once: true },
+      );
+    } else if (document.readyState === 'complete') {
+      stop();
     }
-
-    const verificationForm = getVerificationForm();
-    if (!verificationForm) return;
-    started = true;
-    stop();
-    chrome.runtime.sendMessage({ type: MSG_FCLC_ALERT_SUPPRESS }).catch(() => {});
-    mountUi(READY_NOTE, 'Getting things ready…');
-    runCloudflarePart(verificationForm);
-  };
-
-  tryStart();
-  if (started) return;
-
-  const root = document.documentElement;
-  mo = new MutationObserver(tryStart);
-  mo.observe(root, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener(
-      'DOMContentLoaded',
-      () => {
-        tryStart();
-        if (!started) stop();
-      },
-      { once: true },
-    );
-  } else if (document.readyState === 'complete') {
-    stop();
-  }
+  });
 }
