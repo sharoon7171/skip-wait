@@ -1,6 +1,6 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { overlayActiveClass, buildFullPageOverlayCss } from '../../injected-ui/overlay-styles';
-import { isLinknextPipelinePage, linknextPhase } from './match';
+import { linknextPhase } from './match';
 import {
   BLOG_STEP_MS,
   BLOG_STEPS,
@@ -148,10 +148,10 @@ async function runTkGate(overlay: FullPageOverlay): Promise<void> {
   location.replace(await postLinksGo(form, location.href));
 }
 
-async function runUnlock(): Promise<void> {
+async function runUnlock(phase: NonNullable<Awaited<ReturnType<typeof linknextPhase>>>): Promise<void> {
   const overlay = mountUi();
   try {
-    switch (linknextPhase()) {
+    switch (phase) {
       case 'alias':
         await runAlias(overlay);
         return;
@@ -172,63 +172,63 @@ async function runUnlock(): Promise<void> {
   }
 }
 
-const kickUnlock = (): void => {
-  if (started || !isLinknextPipelinePage()) return;
+const kickUnlock = (phase: NonNullable<Awaited<ReturnType<typeof linknextPhase>>>): void => {
+  if (started) return;
   started = true;
-  void runUnlock();
+  void runUnlock(phase);
 };
 
 export function initLinknextGate(): void {
-  if (!isLinknextPipelinePage()) return;
+  void linknextPhase().then((phase) => {
+    if (!phase) return;
 
-  const phase = linknextPhase();
+    const start = (): void => {
+      bootOverlayLock();
+      mountUi();
+      kickUnlock(phase);
+    };
 
-  const start = (): void => {
-    bootOverlayLock();
-    mountUi();
-    kickUnlock();
-  };
+    if (phase === 'alias' || phase === 'mediator') {
+      start();
+      return;
+    }
 
-  if (phase === 'alias' || phase === 'mediator') {
-    start();
-    return;
-  }
+    if (phase === 'blog') {
+      const tryBlog = (): void => {
+        if (started) return;
+        if (!document.body && document.readyState === 'loading') return;
+        if (!blogSsid()) return;
+        start();
+      };
 
-  if (phase === 'blog') {
-    const tryBlog = (): void => {
+      tryBlog();
       if (started) return;
+
+      const mo = new MutationObserver(() => {
+        tryBlog();
+        if (started) mo.disconnect();
+      });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
+      document.addEventListener('DOMContentLoaded', () => { tryBlog(); mo.disconnect(); }, { once: true });
+      return;
+    }
+
+    const tryBody = (): void => {
       if (!document.body && document.readyState === 'loading') return;
-      if (!blogSsid()) return;
       start();
     };
 
-    tryBlog();
+    bootOverlayLock();
+    mountUi();
+
+    tryBody();
     if (started) return;
 
     const mo = new MutationObserver(() => {
-      tryBlog();
+      tryBody();
       if (started) mo.disconnect();
     });
     mo.observe(document.documentElement, { childList: true, subtree: true });
-    document.addEventListener('DOMContentLoaded', () => { tryBlog(); mo.disconnect(); }, { once: true });
-    return;
-  }
-
-  const tryBody = (): void => {
-    if (!document.body && document.readyState === 'loading') return;
-    start();
-  };
-
-  bootOverlayLock();
-  mountUi();
-
-  tryBody();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
-    tryBody();
-    if (started) mo.disconnect();
+    document.addEventListener('DOMContentLoaded', () => { tryBody(); mo.disconnect(); }, { once: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  document.addEventListener('DOMContentLoaded', () => { tryBody(); mo.disconnect(); }, { once: true });
 }

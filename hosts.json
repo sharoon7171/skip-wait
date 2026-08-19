@@ -393,5 +393,14 @@
   },
   "linksterr": {
     "hosts": ["linksterr.com"]
+  },
+  "linknext": {
+    "hosts": ["linknext.io", "shorte.io"]
+  },
+  "linknext-mediator": {
+    "hosts": ["starkroboticsfrc.com"]
+  },
+  "linknext-blog": {
+    "hosts": ["randevuayir.com"]
   }
 }

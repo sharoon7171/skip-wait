@@ -1,9 +1,4 @@
-import { hostnameMatches } from '../../utils/domain-check';
-import {
-  LINKNEXT_HOSTS,
-  LINKNEXT_MEDIATOR_HOSTS,
-  PROFITSFLY_BLOG_SUFFIXES,
-} from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
 
 export type LinknextPhase = 'alias' | 'mediator' | 'blog' | 'tk';
 
@@ -24,40 +19,40 @@ const parseUrl = (href: string): URL | null => {
 const isLinknextAliasPath = (pathname: string): boolean =>
   !LINKNEXT_STATIC_PATH.test(pathname) && LINKNEXT_ALIAS_PATH.test(pathname);
 
-export function isLinknextHost(href = location.href): boolean {
+export async function isLinknextHost(href = location.href): Promise<boolean> {
   const u = parseUrl(href);
-  return u ? hostnameMatches(u.hostname, LINKNEXT_HOSTS) : false;
+  return u ? hostIsRemoteSite(u.hostname, 'linknext') : false;
 }
 
-export function isLinknextMediatorPage(href = location.href): boolean {
+export async function isLinknextMediatorPage(href = location.href): Promise<boolean> {
   const u = parseUrl(href);
-  if (!u || !hostnameMatches(u.hostname, LINKNEXT_MEDIATOR_HOSTS)) return false;
+  if (!u || !(await hostIsRemoteSite(u.hostname, 'linknext-mediator'))) return false;
   const ssid = u.searchParams.get('ssid');
   return !!ssid && SSID_RE.test(ssid);
 }
 
-export function isProfitsflyBlogPage(href = location.href): boolean {
+export async function isProfitsflyBlogPage(href = location.href): Promise<boolean> {
   const u = parseUrl(href);
-  if (!u || !hostnameMatches(u.hostname, PROFITSFLY_BLOG_SUFFIXES)) return false;
+  if (!u || !(await hostIsRemoteSite(u.hostname, 'linknext-blog'))) return false;
   const h = u.hostname.toLowerCase();
   if (h.startsWith('www.')) return false;
   if (!h.split('.').slice(0, -2).join('.')) return false;
   return !BLOG_STATIC_PATH.test(u.pathname);
 }
 
-export function linknextPhase(href = location.href): LinknextPhase | null {
+export async function linknextPhase(href = location.href): Promise<LinknextPhase | null> {
   const u = parseUrl(href);
   if (!u) return null;
-  if (hostnameMatches(u.hostname, LINKNEXT_HOSTS)) {
+  if (await hostIsRemoteSite(u.hostname, 'linknext')) {
     if (u.searchParams.has('tk')) return 'tk';
     if (isLinknextAliasPath(u.pathname)) return 'alias';
     return null;
   }
-  if (isProfitsflyBlogPage(href)) return 'blog';
-  if (isLinknextMediatorPage(href)) return 'mediator';
+  if (await isProfitsflyBlogPage(href)) return 'blog';
+  if (await isLinknextMediatorPage(href)) return 'mediator';
   return null;
 }
 
-export function isLinknextPipelinePage(): boolean {
-  return linknextPhase() !== null;
+export async function isLinknextPipelinePage(): Promise<boolean> {
+  return (await linknextPhase()) !== null;
 }

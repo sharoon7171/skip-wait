@@ -1,5 +1,4 @@
-import { hostnameMatches } from '../../utils/domain-check';
-import { LINKNEXT_HOSTS } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
 
 export const BLOG_STEPS = 3;
 export const BLOG_STEP_MS = 10_000;
@@ -151,7 +150,7 @@ export async function postLinksGo(form: LinksGoForm, referer: string): Promise<s
   const url = ((JSON.parse(await r.text()) as { url?: string }).url ?? '').trim();
   if (!url || !isExternalUrl(url)) throw new Error('links/go url missing');
   try {
-    if (hostnameMatches(new URL(url).hostname, LINKNEXT_HOSTS)) throw new Error('links/go url missing');
+    if (await hostIsRemoteSite(new URL(url).hostname, 'linknext')) throw new Error('links/go url missing');
   } catch {
     throw new Error('links/go url missing');
   }
