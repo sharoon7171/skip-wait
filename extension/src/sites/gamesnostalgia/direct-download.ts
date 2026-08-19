@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { GAMESNOSTALGIA_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const API = '/download_post_call.php';
 const QUERY_RE = /\?g=(\d+)&f=(\d+)&gpath=([^&"']+)&lang=([^&"']+)/;
@@ -69,12 +69,14 @@ function wire(btn: HTMLButtonElement, g: string, f: string, gpath: string, lang:
 }
 
 export function initGamesnostalgiaDirectDownload(): void {
-  if (!isAllowedHost(GAMESNOSTALGIA_HOSTS)) return;
   if (!/\/download\//i.test(location.pathname)) return;
-  whenDomParsed(() => {
-    const btn = document.getElementById('download-button');
-    const q = document.documentElement.innerHTML.match(QUERY_RE);
-    if (!(btn instanceof HTMLButtonElement) || !q?.[1] || !q[2] || !q[3] || !q[4]) return;
-    wire(btn, q[1], q[2], q[3], q[4]);
+  void isRemoteSite('gamesnostalgia').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      const btn = document.getElementById('download-button');
+      const q = document.documentElement.innerHTML.match(QUERY_RE);
+      if (!(btn instanceof HTMLButtonElement) || !q?.[1] || !q[2] || !q[3] || !q[4]) return;
+      wire(btn, q[1], q[2], q[3], q[4]);
+    });
   });
 }

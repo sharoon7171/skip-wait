@@ -495,5 +495,8 @@
   },
   "gapkmod": {
     "hosts": ["gapkmod.net"]
+  },
+  "gamesnostalgia": {
+    "hosts": ["gamesnostalgia.com"]
   }
 }
