@@ -226,5 +226,15 @@
       "raisingcanesmenux.com",
       "pcfileszone.com"
     ]
+  },
+  "sfl": {
+    "hosts": [
+      "sfl.gl"
+    ]
+  },
+  "sfl-blog": {
+    "hosts": [
+      "app.khaddavi.net"
+    ]
   }
 }

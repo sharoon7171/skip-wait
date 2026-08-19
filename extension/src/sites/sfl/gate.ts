@@ -1,12 +1,7 @@
+import { hostIsRemoteSite, isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { SFL_BLOG_HOSTS, SFL_HOSTS } from './hosts';
-import {
-  destFromReadyPage,
-  landingRedirectUrl,
-  unlockFromBlog,
-} from './unlock';
+import { destFromReadyPage, landingRedirectUrl, unlockFromBlog } from './unlock';
 
 const OVERLAY_ID = 'skip-wait-sfl-overlay';
 const BOOT_STYLE_ID = 'skip-wait-sfl-boot';
@@ -58,28 +53,29 @@ const isAliasPath = (): boolean => {
 
 const isReadyPath = (): boolean => /^\/ready\/go\/?$/i.test(location.pathname);
 
-const isExternalDest = (href: string): boolean => {
+const isExternalDest = async (href: string): Promise<boolean> => {
   try {
-    const h = new URL(href).hostname.toLowerCase();
-    return !SFL_HOSTS.some((d) => h === d || h.endsWith('.' + d)) &&
-      !SFL_BLOG_HOSTS.some((d) => h === d || h.endsWith('.' + d));
+    const h = new URL(href).hostname;
+    const [a, b] = await Promise.all([hostIsRemoteSite(h, 'sfl'), hostIsRemoteSite(h, 'sfl-blog')]);
+    return !a && !b;
   } catch {
     return false;
   }
 };
 
 const initReady = (): void => {
-  if (!isAllowedHost(SFL_HOSTS) || !isReadyPath()) return;
-
+  if (!isReadyPath()) return;
   const tick = (): void => {
     if (started) return;
     const dest = destFromReadyPage();
-    if (!dest || !isExternalDest(dest)) return;
-    started = true;
-    mountUi('Opening your link…');
-    location.replace(dest);
+    if (!dest) return;
+    void isExternalDest(dest).then((ext) => {
+      if (!ext || started) return;
+      started = true;
+      mountUi('Opening your link…');
+      location.replace(dest);
+    });
   };
-
   tick();
   const mo = new MutationObserver(tick);
   mo.observe(document.documentElement, { childList: true, subtree: true });
@@ -90,8 +86,7 @@ const initReady = (): void => {
 };
 
 const initLanding = (): void => {
-  if (!isAllowedHost(SFL_HOSTS) || !isAliasPath()) return;
-
+  if (!isAliasPath()) return;
   const tick = (): void => {
     if (started) return;
     const url = landingRedirectUrl();
@@ -101,7 +96,6 @@ const initLanding = (): void => {
     mountUi('Skipping continue…');
     location.replace(url);
   };
-
   tick();
   const mo = new MutationObserver(tick);
   mo.observe(document.documentElement, { childList: true, subtree: true });
@@ -111,9 +105,7 @@ const initLanding = (): void => {
 };
 
 const initBlog = (): void => {
-  if (!isAllowedHost(SFL_BLOG_HOSTS)) return;
   if (!document.cookie.includes('__session=') && !document.cookie.includes('tt=')) return;
-
   const run = async (): Promise<void> => {
     if (started) return;
     started = true;
@@ -121,7 +113,7 @@ const initBlog = (): void => {
     const overlay = mountUi('Unlocking your link…');
     try {
       const dest = await unlockFromBlog();
-      if (!isExternalDest(dest)) {
+      if (!(await isExternalDest(dest))) {
         overlay.setStatus('Opening next step…');
         location.replace(dest);
         return;
@@ -134,13 +126,17 @@ const initBlog = (): void => {
       started = false;
     }
   };
-
   void run();
 };
 
 export function initSflGate(): void {
   if (window !== window.top) return;
-  initReady();
-  initLanding();
-  initBlog();
+  void isRemoteSite('sfl').then((ok) => {
+    if (!ok) return;
+    initReady();
+    initLanding();
+  });
+  void isRemoteSite('sfl-blog').then((ok) => {
+    if (ok) initBlog();
+  });
 }
