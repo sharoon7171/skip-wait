@@ -1,6 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-
-const HOSTS = ['sub2get.com'] as const;
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 function redirect(): void {
   const u = document.querySelector<HTMLAnchorElement>('#butunlock a')?.href;
@@ -8,6 +7,8 @@ function redirect(): void {
 }
 
 export function initSub2getRedirect(): void {
-  if (!isAllowedHost(HOSTS) || !/[?&]l=/.test(location.search)) return;
-  whenDomParsed(redirect);
+  if (!/[?&]l=/.test(location.search)) return;
+  void isRemoteSite('sub2get').then((ok) => {
+    if (ok) whenDomParsed(redirect);
+  });
 }

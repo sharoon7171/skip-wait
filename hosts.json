@@ -150,5 +150,10 @@
     "hosts": [
       "streamerviewerbot.com"
     ]
+  },
+  "sub2get": {
+    "hosts": [
+      "sub2get.com"
+    ]
   }
 }
