@@ -321,5 +321,8 @@
   },
   "muhammadniaz": {
     "hosts": ["muhammadniaz.link"]
+  },
+  "mp4upload": {
+    "hosts": ["mp4upload.com"]
   }
 }

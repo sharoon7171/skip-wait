@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['mp4upload.com'] as const;
 const BRAND_ID = 'skipwait-mp4upload-brand';
 
 function isTimerPage(): boolean {
@@ -66,6 +66,11 @@ function run(): void {
 }
 
 export function initMp4uploadCountdownBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  whenDomParsed(run);
+  const allowed = isRemoteSite('mp4upload');
+  whenDomParsed(() => {
+    void allowed.then((ok) => {
+      if (!ok) return;
+      run();
+    });
+  });
 }
