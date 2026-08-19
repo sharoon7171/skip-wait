@@ -1,8 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { LINCLIK_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-linclik-overlay';
 const BOOT_STYLE_ID = 'skip-wait-linclik-boot';
@@ -160,20 +159,20 @@ const tick = (): void => {
 
 export function initLinclikGate(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(LINCLIK_HOSTS)) return;
   if (!isAliasPath()) return;
-
-  tick();
-
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, {
-    attributeFilter: ['href', 'value', 'disabled'],
-    attributes: true,
-    childList: true,
-    subtree: true,
+  void isRemoteSite('linclik').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, {
+      attributeFilter: ['href', 'value', 'disabled'],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+    window.addEventListener('load', tick, true);
   });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
 }
