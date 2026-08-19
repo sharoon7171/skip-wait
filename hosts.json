@@ -402,5 +402,8 @@
   },
   "linknext-blog": {
     "hosts": ["randevuayir.com"]
+  },
+  "linkjust": {
+    "hosts": ["linkjust.com"]
   }
 }

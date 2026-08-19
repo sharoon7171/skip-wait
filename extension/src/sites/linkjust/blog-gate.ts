@@ -1,5 +1,6 @@
-import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
-import { LINKJUST_ALIAS_RE, LINKJUST_HOSTS, LINKJUST_ORIGIN } from './hosts';
+import { hostIsRemoteSite, isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
+import { LINKJUST_ALIAS_RE, LINKJUST_ORIGIN } from './hosts';
 
 const FINAL_LINK_SEL =
   'a[id$="-final-link-wrapper"][href*="linkjust.com"], a#next-link-wrapper[href*="linkjust.com"]';
@@ -16,10 +17,10 @@ const aliasFromSearch = (): string | null => {
   return LINKJUST_ALIAS_RE.test(raw) ? raw : null;
 };
 
-const aliasFromHref = (href: string): string | null => {
+const aliasFromHref = async (href: string): Promise<string | null> => {
   try {
     const u = new URL(href);
-    if (!hostnameMatches(u.hostname, LINKJUST_HOSTS)) return null;
+    if (!(await hostIsRemoteSite(u.hostname, 'linkjust'))) return null;
     const alias = u.pathname.replace(/^\/+|\/+$/g, '');
     return LINKJUST_ALIAS_RE.test(alias) ? alias : null;
   } catch {
@@ -27,9 +28,9 @@ const aliasFromHref = (href: string): string | null => {
   }
 };
 
-const aliasFromDom = (): string | null => {
+const aliasFromDom = async (): Promise<string | null> => {
   for (const a of document.querySelectorAll<HTMLAnchorElement>(FINAL_LINK_SEL)) {
-    const alias = aliasFromHref(a.href);
+    const alias = await aliasFromHref(a.href);
     if (alias) return alias;
   }
   const html = document.documentElement?.innerHTML ?? '';
@@ -47,16 +48,16 @@ const looksLikeGate = (): boolean => {
   return !!document.querySelector(FINAL_LINK_SEL);
 };
 
-const resolveShortUrl = (): string | null => {
+const resolveShortUrl = async (): Promise<string | null> => {
   const fromSearch = aliasFromSearch();
   if (fromSearch) return shortUrlForAlias(fromSearch);
-  const fromDom = aliasFromDom();
+  const fromDom = await aliasFromDom();
   return fromDom ? shortUrlForAlias(fromDom) : null;
 };
 
-const leaveGate = (): boolean => {
+const leaveGate = async (): Promise<boolean> => {
   if (done) return true;
-  const url = resolveShortUrl();
+  const url = await resolveShortUrl();
   if (!url) return false;
   done = true;
   location.replace(url);
@@ -64,25 +65,27 @@ const leaveGate = (): boolean => {
 };
 
 export function initLinkjustBlogGate(): void {
-  if (hostnameMatches(location.hostname, LINKJUST_HOSTS)) return;
+  void isRemoteSite('linkjust').then(async (onLinkjust) => {
+    if (onLinkjust) return;
 
-  const fromSearch = aliasFromSearch();
-  if (fromSearch) {
-    leaveGate();
-    return;
-  }
+    const fromSearch = aliasFromSearch();
+    if (fromSearch) {
+      await leaveGate();
+      return;
+    }
 
-  const tryLeave = (): void => {
-    if (!looksLikeGate()) return;
-    leaveGate();
-  };
+    const tryLeave = (): void => {
+      if (!looksLikeGate()) return;
+      void leaveGate();
+    };
 
-  whenDomParsed(tryLeave);
-  if (done) return;
+    whenDomParsed(tryLeave);
+    if (done) return;
 
-  const mo = new MutationObserver(() => {
-    tryLeave();
-    if (done) mo.disconnect();
+    const mo = new MutationObserver(() => {
+      tryLeave();
+      if (done) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 }
