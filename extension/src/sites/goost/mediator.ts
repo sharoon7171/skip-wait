@@ -1,8 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { GOOST_ALIAS_RE, GOOST_MEDIATOR_HOSTS } from './hosts';
+import { GOOST_ALIAS_RE } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-goost-mediator';
 const BOOT_STYLE_ID = 'skip-wait-goost-mediator-boot';
@@ -172,8 +172,11 @@ const tick = (): void => {
 };
 
 export function initGoostMediator(): void {
-  if (window !== window.top || !isAllowedHost(GOOST_MEDIATOR_HOSTS)) return;
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
+  if (window !== window.top) return;
+  void isRemoteSite('goost-mediator').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  });
 }

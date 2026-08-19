@@ -1,7 +1,3 @@
-export const GOOST_HOSTS = ['goo.st'] as const;
-
-export const GOOST_MEDIATOR_HOSTS = ['kreditexperte.online'] as const;
-
 export const GOOST_ALIAS_RE = /^[A-Za-z0-9]{4,}$/;
 
 export function goostAliasFromPath(pathname = location.pathname): string | null {

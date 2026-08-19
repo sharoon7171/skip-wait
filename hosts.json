@@ -477,5 +477,11 @@
   },
   "gplinks-mediator": {
     "hosts": ["rajcet.com"]
+  },
+  "goost": {
+    "hosts": ["goo.st"]
+  },
+  "goost-mediator": {
+    "hosts": ["kreditexperte.online"]
   }
 }

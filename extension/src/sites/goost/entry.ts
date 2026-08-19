@@ -1,7 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { goostAliasFromPath, GOOST_HOSTS } from './hosts';
+import { goostAliasFromPath } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-goost-overlay';
 const BOOT_STYLE_ID = 'skip-wait-goost-boot';
@@ -55,11 +55,14 @@ const runContinue = (): boolean => {
 };
 
 export function initGoostEntry(): void {
-  if (window !== window.top || !isAllowedHost(GOOST_HOSTS) || !goostAliasFromPath()) return;
-  mountUi();
-  runContinue();
-  const mo = new MutationObserver(() => {
-    if (runContinue()) mo.disconnect();
+  if (window !== window.top || !goostAliasFromPath()) return;
+  void isRemoteSite('goost').then((ok) => {
+    if (!ok) return;
+    mountUi();
+    runContinue();
+    const mo = new MutationObserver(() => {
+      if (runContinue()) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 }
