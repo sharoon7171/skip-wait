@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { OLAMOVIES_LANDING_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-olamovies-landing-overlay';
 const BOOT_STYLE_ID = 'skip-wait-olamovies-landing-boot';
@@ -62,12 +61,14 @@ async function openMainSite(): Promise<void> {
 }
 
 export function initOlamoviesLandingRedirect(): void {
-  if (!isAllowedHost(OLAMOVIES_LANDING_HOSTS)) return;
-  bootOverlayLock();
-  mountUi('Getting things ready…');
-  void openMainSite().catch(() => {
-    mountUi('Resolving main site…').setError(
-      'Could not resolve the OlaMovies main site. Reload and try again.',
-    );
+  void isRemoteSite('olamovies-landing').then((ok) => {
+    if (!ok) return;
+    bootOverlayLock();
+    mountUi('Getting things ready…');
+    void openMainSite().catch(() => {
+      mountUi('Resolving main site…').setError(
+        'Could not resolve the OlaMovies main site. Reload and try again.',
+      );
+    });
   });
 }

@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { OLAMOVIES_LINK_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const ID = 'skip-wait-olamovies-link-banner';
 const LOCK = 'sw-om-link-lock';
@@ -286,12 +286,14 @@ async function unlock(set: SetBanner): Promise<void> {
 }
 
 export function initOlamoviesLinkGenerate(): void {
-  if (!isAllowedHost(OLAMOVIES_LINK_HOSTS)) return;
-  whenDomParsed(() => {
-    const set = banner();
-    set('Working on your link…', 'Skip Wait is bypassing the wait on this page.', 'busy', 8);
-    void unlock(set).catch(() =>
-      set('Something went wrong', 'Sign in if needed, then refresh and try again.', 'err', 100),
-    );
+  void isRemoteSite('olamovies-link').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      const set = banner();
+      set('Working on your link…', 'Skip Wait is bypassing the wait on this page.', 'busy', 8);
+      void unlock(set).catch(() =>
+        set('Something went wrong', 'Sign in if needed, then refresh and try again.', 'err', 100),
+      );
+    });
   });
 }

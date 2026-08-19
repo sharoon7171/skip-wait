@@ -297,5 +297,11 @@
   },
   "onhaxpk": {
     "hosts": ["onhaxpk.net"]
+  },
+  "olamovies-landing": {
+    "hosts": ["olamovies.dad", "olamovies.top"]
+  },
+  "olamovies-link": {
+    "hosts": ["links.olamovies.mov"]
   }
 }
