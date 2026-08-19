@@ -10,7 +10,6 @@ import {
 import {
   bindShortxRemote,
   isShortxHost,
-  isShortxMediatorHost,
   isShortxMediatorPage,
   isShortxPipelinePage,
   isShortxTimerPage,
