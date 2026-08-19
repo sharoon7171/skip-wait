@@ -1,6 +1,5 @@
-import { isAllowedHost } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
 
-const FILEPRESS_HOSTS = ['filepress.baby'] as const;
 const FILEPRESS_API = '/api/file';
 const FILEPRESS_FILE_RE = /^\/file\/([^/]+)\/?$/i;
 const DOTFLIX_CODE_RE = /btoa\('([A-F0-9]+)'\)/;
@@ -53,31 +52,34 @@ const prefetchFilePressUrls = (fileId: string, options: Record<string, boolean>)
 };
 
 export function initFilePressDirectDownload(): void {
-  if (!isAllowedHost(FILEPRESS_HOSTS)) return;
   const fileId = location.pathname.match(FILEPRESS_FILE_RE)?.[1];
   if (!fileId) return;
 
-  let ready = new Map<string, Promise<string | null>>();
-  void fetch(`${FILEPRESS_API}/get/${fileId}`, { credentials: 'include' })
-    .then((r) => r.json())
-    .then((j) => j.data?.downloadOptions as Record<string, boolean> | undefined)
-    .then((options) => {
-      if (options) ready = prefetchFilePressUrls(fileId, options);
-    });
+  void isRemoteSite('filepress').then((ok) => {
+    if (!ok) return;
 
-  document.addEventListener(
-    'click',
-    (e) => {
-      const label = (e.target as Element).closest('button')?.textContent?.replace(/\s+/g, ' ').trim();
-      if (!label || !(label in FILEPRESS_LABEL_METHOD)) return;
-      const pending = ready.get(label);
-      if (!pending) return;
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      void pending.then((url) => {
-        if (url) location.replace(url);
+    let ready = new Map<string, Promise<string | null>>();
+    void fetch(`${FILEPRESS_API}/get/${fileId}`, { credentials: 'include' })
+      .then((r) => r.json())
+      .then((j) => j.data?.downloadOptions as Record<string, boolean> | undefined)
+      .then((options) => {
+        if (options) ready = prefetchFilePressUrls(fileId, options);
       });
-    },
-    true,
-  );
+
+    document.addEventListener(
+      'click',
+      (e) => {
+        const label = (e.target as Element).closest('button')?.textContent?.replace(/\s+/g, ' ').trim();
+        if (!label || !(label in FILEPRESS_LABEL_METHOD)) return;
+        const pending = ready.get(label);
+        if (!pending) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        void pending.then((url) => {
+          if (url) location.replace(url);
+        });
+      },
+      true,
+    );
+  });
 }

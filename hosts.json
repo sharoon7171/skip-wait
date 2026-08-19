@@ -510,5 +510,8 @@
   },
   "filespayouts": {
     "hosts": ["filespayouts.com"]
+  },
+  "filepress": {
+    "hosts": ["filepress.baby"]
   }
 }
