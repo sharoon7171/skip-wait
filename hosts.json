@@ -155,5 +155,15 @@
     "hosts": [
       "sub2get.com"
     ]
+  },
+  "storyline-scorm": {
+    "hosts": [
+      "mrtzn.com"
+    ]
+  },
+  "storyline-lms": {
+    "hosts": [
+      "vocationaltraininghub.com"
+    ]
   }
 }

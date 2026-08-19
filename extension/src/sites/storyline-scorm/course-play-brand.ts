@@ -1,6 +1,5 @@
-import { isAllowedHost, whenDomParsed, whenDomReady } from '../../utils/domain-check';
-
-export const STORYLINE_LMS_HOSTS = ['vocationaltraininghub.com'] as const;
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed, whenDomReady } from '../../utils/domain-check';
 
 const BRAND_ID = 'skipwait-storyline-brand';
 
@@ -43,6 +42,7 @@ async function run(): Promise<void> {
 }
 
 export function initStorylineCoursePlayBrand(): void {
-  if (!isAllowedHost(STORYLINE_LMS_HOSTS)) return;
-  whenDomParsed(() => void run());
+  void isRemoteSite('storyline-lms').then((ok) => {
+    if (ok) whenDomParsed(() => void run());
+  });
 }
