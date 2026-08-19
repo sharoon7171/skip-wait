@@ -60,9 +60,7 @@ const tick = (): void => {
 const safeTick = (): void => {
   try {
     tick();
-  } catch {
-    /* document_start / SPA race */
-  }
+  } catch {}
 };
 
 export function initKeyforgeGate(): void {
