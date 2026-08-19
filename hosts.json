@@ -381,5 +381,8 @@
   },
   "liteshort-mediator": {
     "hosts": ["gadinow.in", "jobsmbn.in", "strictstrategies.com"]
+  },
+  "liteapks": {
+    "hosts": ["liteapks.com"]
   }
 }
