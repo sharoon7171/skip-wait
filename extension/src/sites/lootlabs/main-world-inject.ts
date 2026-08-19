@@ -13,8 +13,11 @@ const inject = (tabId: number, frameId: number, earlyOnly: boolean) => {
 
 export function initLootlabsMainWorldInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isLootLockerUrl(details.url)) return;
-    inject(details.tabId, 0, true);
+    if (details.frameId !== 0) return;
+    void isLootLockerUrl(details.url).then((ok) => {
+      if (!ok) return;
+      inject(details.tabId, 0, true);
+    });
   });
 
   chrome.runtime.onMessage.addListener((message, sender) => {

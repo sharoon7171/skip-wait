@@ -342,5 +342,26 @@
   },
   "mega4upload": {
     "hosts": ["mega4upload.net"]
+  },
+  "lootlabs": {
+    "hosts": [
+      "lootlabs.gg",
+      "loot-link.com",
+      "lootlinks.com",
+      "lootlinks.co",
+      "lootdest.org",
+      "lootdest.com",
+      "lootdest.net",
+      "speedy-links.com",
+      "best-links.org",
+      "free-leaks.com",
+      "fast-links.org",
+      "free-content.pro",
+      "rapid-links.com",
+      "rapid-links.net",
+      "direct-links.net",
+      "direct-links.org",
+      "ultra-links.net"
+    ]
   }
 }
