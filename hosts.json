@@ -609,5 +609,8 @@
   },
   "adlinkfly-token-payload": {
     "hosts": ["aii.sh", "lnbz.la", "oii.la", "shrink.pe", "tpi.li"]
+  },
+  "adfocus": {
+    "hosts": ["adfoc.us"]
   }
 }

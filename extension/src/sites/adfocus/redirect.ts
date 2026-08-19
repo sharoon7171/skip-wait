@@ -1,7 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { hostnameMatches, isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { adfocusAliasFromPath, ADFOCUS_HOSTS } from './hosts';
+import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
+import { adfocusAliasFromPath } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-adfocus-overlay';
 const BOOT_STYLE_ID = 'skip-wait-adfocus-boot';
@@ -38,7 +39,7 @@ function destinationFromPage(): string | null {
   if (!/^https?:\/\//i.test(href)) return null;
   try {
     const dest = new URL(href);
-    if (hostnameMatches(dest.hostname, ADFOCUS_HOSTS)) return null;
+    if (hostnameMatches(dest.hostname, ['adfoc.us'])) return null;
     return dest.href;
   } catch {
     return null;
@@ -90,12 +91,14 @@ function kick(): void {
 }
 
 export function initAdfocusRedirect(): void {
-  if (window !== window.top || !isAllowedHost(ADFOCUS_HOSTS) || !adfocusAliasFromPath()) return;
-
-  whenDomParsed(kick);
-  const mo = new MutationObserver(() => {
-    kick();
-    if (started) mo.disconnect();
+  if (window !== window.top || !adfocusAliasFromPath()) return;
+  void isRemoteSite('adfocus').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(kick);
+    const mo = new MutationObserver(() => {
+      kick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 }

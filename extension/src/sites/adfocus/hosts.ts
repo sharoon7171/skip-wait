@@ -1,5 +1,3 @@
-export const ADFOCUS_HOSTS = ['adfoc.us'] as const;
-
 export const ADFOCUS_ALIAS_RE = /^[A-Za-z0-9]+$/;
 
 export function adfocusAliasFromPath(pathname = location.pathname): string | null {
