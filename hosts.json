@@ -266,5 +266,8 @@
     "hosts": [
       "studyspark.study"
     ]
+  },
+  "rinku": {
+    "hosts": ["rinku.me", "rinku.pro", "7mb.io"]
   }
 }

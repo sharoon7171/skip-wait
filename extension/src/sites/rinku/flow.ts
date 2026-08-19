@@ -1,26 +1,29 @@
-import { hostnameMatches } from '../../utils/domain-check';
-import { RINKU_MAIN_HOSTS } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
 
 const STORAGE_KEY = 'rinku-flow-tabs';
 const MESSAGE = 'RINKU_FLOW_TAB' as const;
 const ALIAS_RE = /^[A-Za-z0-9_-]{3,}$/;
 const BACKUP_PATH_RE = /(?:^|\/)backup\/w\/?$/i;
 
-const startsRinkuFlow = (raw: string): boolean => {
-  const url = new URL(raw);
-  if (BACKUP_PATH_RE.test(url.pathname)) {
-    const alias = url.searchParams.get('get');
-    const short = url.searchParams.get('short');
-    return (
-      alias !== null &&
-      short !== null &&
-      ALIAS_RE.test(alias) &&
-      hostnameMatches(short, RINKU_MAIN_HOSTS)
-    );
+const startsRinkuFlow = async (raw: string): Promise<boolean> => {
+  try {
+    const url = new URL(raw);
+    if (BACKUP_PATH_RE.test(url.pathname)) {
+      const alias = url.searchParams.get('get');
+      const short = url.searchParams.get('short');
+      return (
+        alias !== null &&
+        short !== null &&
+        ALIAS_RE.test(alias) &&
+        (await hostIsRemoteSite(short, 'rinku'))
+      );
+    }
+    if (!(await hostIsRemoteSite(url.hostname, 'rinku'))) return false;
+    const [alias, ...rest] = url.pathname.split('/').filter(Boolean);
+    return alias !== undefined && rest.length === 0 && ALIAS_RE.test(alias);
+  } catch {
+    return false;
   }
-  if (!hostnameMatches(url.hostname, RINKU_MAIN_HOSTS)) return false;
-  const [alias, ...rest] = url.pathname.split('/').filter(Boolean);
-  return alias !== undefined && rest.length === 0 && ALIAS_RE.test(alias);
 };
 
 export const initRinkuFlowWatch = (): void => {
@@ -40,11 +43,14 @@ export const initRinkuFlowWatch = (): void => {
     chrome.storage.session.set({ [STORAGE_KEY]: [...tabs] });
 
   chrome.webNavigation.onBeforeNavigate.addListener(({ frameId, tabId, url }) => {
-    if (frameId !== 0 || !url.startsWith('http') || !startsRinkuFlow(url)) return;
-    run(() => {
-      if (tabs.has(tabId)) return;
-      tabs.add(tabId);
-      return persist();
+    if (frameId !== 0 || !url.startsWith('http')) return;
+    void startsRinkuFlow(url).then((ok) => {
+      if (!ok) return;
+      run(() => {
+        if (tabs.has(tabId)) return;
+        tabs.add(tabId);
+        return persist();
+      });
     });
   });
 
