@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { CUTWIN_BLOG_HOSTS } from './hosts';
 import { cutwinFlowFromPage, isCutwinBlogPage, postCutwinGetLink } from './unlock';
 
 const OVERLAY_ID = 'skip-wait-cutwin-overlay';
@@ -62,24 +61,26 @@ const kick = (): void => {
 
 export function initCutwinGate(): void {
   if (window !== window.top) return;
-  if (!isAllowedHost(CUTWIN_BLOG_HOSTS)) return;
+  void isRemoteSite('cutwin').then((ok) => {
+    if (!ok) return;
 
-  const tick = (): void => {
-    if (!isCutwinBlogPage()) return;
-    bootOverlayLock();
-    mountUi();
-    kick();
-  };
+    const tick = (): void => {
+      if (!isCutwinBlogPage()) return;
+      bootOverlayLock();
+      mountUi();
+      kick();
+    };
 
-  tick();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
     tick();
-    if (started) mo.disconnect();
+    if (started) return;
+
+    const mo = new MutationObserver(() => {
+      tick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 }

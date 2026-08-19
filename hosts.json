@@ -561,5 +561,8 @@
   },
   "cuty": {
     "hosts": ["cuttty.com", "cuty.io"]
+  },
+  "cutwin": {
+    "hosts": ["masrawytrend.com"]
   }
 }
