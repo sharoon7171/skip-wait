@@ -34,11 +34,13 @@ function decodeTarget(raw: string): string | null {
 }
 
 export function initKitokolaDlGetBypass(): void {
-  if (!isAllowedHost(HOSTS)) return;
-  const candidate = readUrlDownload() ?? readStoredDownload();
-  if (!candidate) return;
-  const target = decodeTarget(candidate);
-  if (!target) return;
-  clearTimerState();
-  window.location.replace(target);
+  void isRemoteSite('kitokola').then((ok) => {
+    if (!ok) return;
+    const candidate = readUrlDownload() ?? readStoredDownload();
+    if (!candidate) return;
+    const target = decodeTarget(candidate);
+    if (!target) return;
+    clearTimerState();
+    window.location.replace(target);
+  });
 }
