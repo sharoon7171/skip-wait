@@ -468,5 +468,8 @@
   },
   "hdhub4u-hubcdn": {
     "hosts": ["hubcdn.sbs", "hubcdn.fans"]
+  },
+  "haxpc": {
+    "hosts": ["haxpc.net"]
   }
 }

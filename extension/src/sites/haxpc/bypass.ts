@@ -1,6 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
-const HOSTS = ['haxpc.net'] as const;
 const GO = /^\/go\/?$/i;
 const DEST = /decodeURIComponent\s*\(\s*atob\s*\(\s*['"]([A-Za-z0-9+/=]+)['"]\s*\)\s*\)/;
 const BRAND = 'skipwait-haxpc-brand';
@@ -25,19 +25,25 @@ function unlockListing(): void {
 }
 
 export function initHaxpcListing(): void {
-  if (!isAllowedHost(HOSTS) || GO.test(location.pathname)) return;
-  whenDomParsed(() => {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(unlockListing), { once: true });
+  if (GO.test(location.pathname)) return;
+  void isRemoteSite('haxpc').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(() => {
+      document.addEventListener('DOMContentLoaded', () => setTimeout(unlockListing), { once: true });
+    });
   });
 }
 
 export function initHaxpcGoPage(): void {
-  if (!isAllowedHost(HOSTS) || !GO.test(location.pathname)) return;
-  const open = (): void => {
-    const hash = DEST.exec(document.documentElement.innerHTML)?.[1];
-    if (!hash) return;
-    location.replace(decodeURIComponent(atob(hash)));
-  };
-  open();
-  whenDomParsed(open);
+  if (!GO.test(location.pathname)) return;
+  void isRemoteSite('haxpc').then((ok) => {
+    if (!ok) return;
+    const open = (): void => {
+      const hash = DEST.exec(document.documentElement.innerHTML)?.[1];
+      if (!hash) return;
+      location.replace(decodeURIComponent(atob(hash)));
+    };
+    open();
+    whenDomParsed(open);
+  });
 }
