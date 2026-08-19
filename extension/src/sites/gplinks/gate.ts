@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { GPLINKS_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const isPremiumGate = (): boolean => {
   if (/[?&](?:pid|vid|skip_sub)=/.test(location.search)) return false;
@@ -23,6 +23,8 @@ const skipPremium = (): void => {
 };
 
 export function initGplinksGate(): void {
-  if (!isAllowedHost(GPLINKS_HOSTS)) return;
-  whenDomParsed(skipPremium);
+  void isRemoteSite('gplinks').then((ok) => {
+    if (!ok) return;
+    whenDomParsed(skipPremium);
+  });
 }

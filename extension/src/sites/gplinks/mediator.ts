@@ -1,6 +1,5 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
-import { GPLINKS_HOSTS, GPLINKS_MEDIATOR_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-gplinks-mediator';
 const RUN_KEY = 'skip-wait-gplinks-mediator-run';
@@ -304,53 +303,56 @@ const runGpf = async (overlay: FullPageOverlay): Promise<void> => {
 };
 
 export function initGplinksMediator(): void {
-  if (!isAllowedHost(GPLINKS_MEDIATOR_HOSTS)) return;
-  if (hostnameMatches(location.hostname, GPLINKS_HOSTS)) return;
+  void Promise.all([isRemoteSite('gplinks-mediator'), isRemoteSite('gplinks')]).then(
+    ([mediator, main]) => {
+      if (!mediator || main) return;
 
-  let started = false;
-  let covered = false;
+      let started = false;
+      let covered = false;
 
-  const coverIfMediator = (): void => {
-    if (covered || !isGpfPage()) return;
-    if (sessionStorage.getItem(RUN_KEY) === location.href) return;
-    covered = true;
-    const { step, steps } = stepMeta(readConfigFromDom());
-    mountUi(step, steps);
-  };
+      const coverIfMediator = (): void => {
+        if (covered || !isGpfPage()) return;
+        if (sessionStorage.getItem(RUN_KEY) === location.href) return;
+        covered = true;
+        const { step, steps } = stepMeta(readConfigFromDom());
+        mountUi(step, steps);
+      };
 
-  const tryStart = (): void => {
-    if (sessionStorage.getItem(RUN_KEY) === location.href) return;
-    coverIfMediator();
-    if (started || !isGpfPage()) return;
-    started = true;
-    sessionStorage.setItem(RUN_KEY, location.href);
-    const { step, steps } = stepMeta(readConfigFromDom());
-    const overlay = mountUi(step, steps);
-    void runGpf(overlay).catch((err: unknown) => {
-      sessionStorage.removeItem(RUN_KEY);
-      const msg =
-        err instanceof Error && err.message === 'gpf inactive'
-          ? 'No active session. Open the short link again.'
-          : 'Something went wrong. Reload and try again.';
-      overlay.setStatus(msg);
-    });
-  };
+      const tryStart = (): void => {
+        if (sessionStorage.getItem(RUN_KEY) === location.href) return;
+        coverIfMediator();
+        if (started || !isGpfPage()) return;
+        started = true;
+        sessionStorage.setItem(RUN_KEY, location.href);
+        const { step, steps } = stepMeta(readConfigFromDom());
+        const overlay = mountUi(step, steps);
+        void runGpf(overlay).catch((err: unknown) => {
+          sessionStorage.removeItem(RUN_KEY);
+          const msg =
+            err instanceof Error && err.message === 'gpf inactive'
+              ? 'No active session. Open the short link again.'
+              : 'Something went wrong. Reload and try again.';
+          overlay.setStatus(msg);
+        });
+      };
 
-  tryStart();
-  if (started) return;
+      tryStart();
+      if (started) return;
 
-  const mo = new MutationObserver(() => {
-    tryStart();
-    if (started) mo.disconnect();
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
+      const mo = new MutationObserver(() => {
+        tryStart();
+        if (started) mo.disconnect();
+      });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
 
-  const onReady = (): void => {
-    tryStart();
-    if (started || document.readyState === 'complete') {
-      document.removeEventListener('readystatechange', onReady);
-      if (started) mo.disconnect();
-    }
-  };
-  document.addEventListener('readystatechange', onReady);
+      const onReady = (): void => {
+        tryStart();
+        if (started || document.readyState === 'complete') {
+          document.removeEventListener('readystatechange', onReady);
+          if (started) mo.disconnect();
+        }
+      };
+      document.addEventListener('readystatechange', onReady);
+    },
+  );
 }

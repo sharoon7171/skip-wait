@@ -1,8 +1,7 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
-import { isAllowedHost } from '../../utils/domain-check';
-import { GPLINKS_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-gplinks-links-go';
 const TURNSTILE_PIN_STYLE_ID = 'skip-wait-gplinks-turnstile-pin';
@@ -274,39 +273,41 @@ const startGplinksLinksGo = (): void => {
 };
 
 export function initGplinksLinksGo(): void {
-  if (!isAllowedHost(GPLINKS_HOSTS)) return;
-  if (hasLinksGoHint()) requestVisibilitySpoof();
-  let engaged = false;
-  const tryStart = (): void => {
-    if (engaged || !isLinksGoShell()) return;
-    engaged = true;
-    startGplinksLinksGo();
-  };
-  tryStart();
-  if (engaged) return;
-  if (document.readyState === 'complete') return;
-  if (document.readyState === 'interactive' && !hasLinksGoHint()) return;
-  const root = document.documentElement;
-  if (!root) return void runWhenNotLoading(tryStart);
+  void isRemoteSite('gplinks').then((ok) => {
+    if (!ok) return;
+    if (hasLinksGoHint()) requestVisibilitySpoof();
+    let engaged = false;
+    const tryStart = (): void => {
+      if (engaged || !isLinksGoShell()) return;
+      engaged = true;
+      startGplinksLinksGo();
+    };
+    tryStart();
+    if (engaged) return;
+    if (document.readyState === 'complete') return;
+    if (document.readyState === 'interactive' && !hasLinksGoHint()) return;
+    const root = document.documentElement;
+    if (!root) return void runWhenNotLoading(tryStart);
 
-  let mo: MutationObserver | null = null;
-  const onReadyState = (): void => {
-    if (document.readyState === 'loading') return;
-    tryStart();
-    if (engaged) return stop();
-    if (document.readyState === 'interactive' && !hasLinksGoHint()) stop();
-    else if (document.readyState === 'complete') stop();
-  };
-  const stop = (): void => {
-    mo?.disconnect();
-    mo = null;
-    document.removeEventListener('readystatechange', onReadyState);
-  };
-  mo = new MutationObserver(() => {
-    tryStart();
-    if (engaged) stop();
+    let mo: MutationObserver | null = null;
+    const onReadyState = (): void => {
+      if (document.readyState === 'loading') return;
+      tryStart();
+      if (engaged) return stop();
+      if (document.readyState === 'interactive' && !hasLinksGoHint()) stop();
+      else if (document.readyState === 'complete') stop();
+    };
+    const stop = (): void => {
+      mo?.disconnect();
+      mo = null;
+      document.removeEventListener('readystatechange', onReadyState);
+    };
+    mo = new MutationObserver(() => {
+      tryStart();
+      if (engaged) stop();
+    });
+    mo.observe(root, { childList: true, subtree: true });
+    document.addEventListener('readystatechange', onReadyState);
+    onReadyState();
   });
-  mo.observe(root, { childList: true, subtree: true });
-  document.addEventListener('readystatechange', onReadyState);
-  onReadyState();
 }
