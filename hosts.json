@@ -98,5 +98,24 @@
     "hosts": [
       "gamesmain.xyz"
     ]
+  },
+  "tech8s": {
+    "hosts": [
+      "ez4short.com",
+      "game5s.com",
+      "tech8s.net",
+      "carrnissan.com"
+    ]
+  },
+  "tech8s-open-php": {
+    "hosts": [
+      "carrnissan.com"
+    ]
+  },
+  "tech8s-adrinolinks": {
+    "hosts": [
+      "adrinolinks.in",
+      "adrinolinks.com"
+    ]
   }
 }

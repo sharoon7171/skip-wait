@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { TECH8S_ADRINOLINKS_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-tech8s-adrinolinks';
 const BOOT_STYLE_ID = 'skip-wait-tech8s-adrinolinks-boot';
@@ -57,12 +56,13 @@ const tick = (): void => {
 
 export const initTech8sAdrinolinks = (): void => {
   if (window !== window.top) return;
-  if (!isAllowedHost(TECH8S_ADRINOLINKS_HOSTS)) return;
-
-  tick();
-  const mo = new MutationObserver(tick);
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
+  void isRemoteSite('tech8s-adrinolinks').then((ok) => {
+    if (!ok) return;
+    tick();
+    const mo = new MutationObserver(tick);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
+  });
 };

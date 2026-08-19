@@ -1,7 +1,6 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
-import { TECH8S_HOSTS, TECH8S_OPEN_PHP_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-tech8s-gate';
 const BOOT_STYLE_ID = 'skip-wait-tech8s-gate-boot';
@@ -19,9 +18,7 @@ type TpPost = { action: string; fields: Record<string, string> };
 
 let ui: FullPageOverlay | null = null;
 let started = false;
-
-const isOpenPhpHost = (): boolean =>
-  hostnameMatches(location.hostname.toLowerCase(), TECH8S_OPEN_PHP_HOSTS);
+let openPhp = false;
 
 const bootOverlayLock = (): void => {
   const active = overlayActiveClass(OVERLAY_ID);
@@ -62,7 +59,7 @@ const absHref = (href: string, base: string): string => {
 };
 
 const terminalFrom = (root: ParentNode, base: string): string | null => {
-  if (isOpenPhpHost()) {
+  if (openPhp) {
     const open = root.querySelector<HTMLAnchorElement>('a[href*="/includes/open.php?"]');
     const href = open?.getAttribute('href');
     return href ? absHref(href, base) : null;
@@ -132,25 +129,25 @@ const kick = (): void => {
 
 export const initTech8sGate = (): void => {
   if (window !== window.top) return;
-  if (!isAllowedHost(TECH8S_HOSTS)) return;
   if (SAFE_PHP_RE.test(location.pathname) || ST_RE.test(location.pathname)) return;
-
-  const tick = (): void => {
-    if (!isGatePage()) return;
-    bootOverlayLock();
-    mountUi();
-    kick();
-  };
-
-  tick();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
+  void Promise.all([isRemoteSite('tech8s'), isRemoteSite('tech8s-open-php')]).then(([ok, isOpen]) => {
+    if (!ok) return;
+    openPhp = isOpen;
+    const tick = (): void => {
+      if (!isGatePage()) return;
+      bootOverlayLock();
+      mountUi();
+      kick();
+    };
     tick();
-    if (started) mo.disconnect();
+    if (started) return;
+    const mo = new MutationObserver(() => {
+      tick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 };
