@@ -214,15 +214,18 @@
   },
   "shortxlinks": {
     "hosts": [
-      "shortxlinks.com"
+      "shortxlinks.com",
+      "shortxlinks.in"
     ]
   },
   "shortxlinks-mediator": {
     "hosts": [
+      "currentlynewspost.com",
       "flexthecar.com",
+      "ikiwiv.xyz",
       "nkrmusic.in.net",
-      "raisingcanesmenux.com",
-      "pcfileszone.com"
+      "pcfileszone.com",
+      "raisingcanesmenux.com"
     ]
   },
   "sfl": {
