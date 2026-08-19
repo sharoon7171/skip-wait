@@ -15,7 +15,7 @@ const contacts = [
 
 function PopupPage(): React.ReactElement {
   return (
-    <div className="relative box-border w-[400px] bg-surface-canvas font-sans antialiased">
+    <div className="relative box-border w-[480px] bg-surface-canvas font-sans antialiased">
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.96_0.025_250)_0%,oklch(1_0_0)_100%)]" />
         <div
@@ -86,9 +86,9 @@ function PopupPage(): React.ReactElement {
 
 const root = document.getElementById('root');
 if (root) {
-  document.documentElement.className = 'm-0 w-[400px] bg-surface-canvas font-sans antialiased';
-  document.body.className = 'm-0 w-[400px] bg-surface-canvas font-sans antialiased';
-  root.className = 'm-0 w-[400px]';
+  document.documentElement.className = 'm-0 w-[480px] bg-surface-canvas font-sans antialiased';
+  document.body.className = 'm-0 w-[480px] bg-surface-canvas font-sans antialiased';
+  root.className = 'm-0 w-[480px]';
   createRoot(root).render(
     <StrictMode>
       <PopupPage />

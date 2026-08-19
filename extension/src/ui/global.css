@@ -39,4 +39,43 @@
 
 :root {
   --font-sans: Poppins, system-ui, sans-serif;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: oklch(0.865 0.006 264);
+  --scrollbar-thumb-hover: oklch(0.78 0.12 250);
+  --scrollbar-thumb-active: oklch(0.48 0.22 255 / 0.88);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 1.5px solid transparent;
+  border-radius: 9999px;
+  background: var(--scrollbar-thumb);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
