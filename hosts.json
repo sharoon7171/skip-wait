@@ -630,5 +630,8 @@
   },
   "kitokola": {
     "hosts": ["kitokola.id"]
+  },
+  "tinurlz-softinfo": {
+    "hosts": ["softinfo.blog", "tinurlz.com"]
   }
 }

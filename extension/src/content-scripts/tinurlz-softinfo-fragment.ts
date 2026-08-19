@@ -1,9 +1,5 @@
-import { isAllowedHost } from '../utils/domain-check';
+import { isRemoteSite } from '../hosts/check';
 
-const HOSTS = [
-  'tinurlz.com',
-  'softinfo.blog',
-] as const;
 const KITOKOLA_HOST = 'kitokola.id';
 
 function decodeFragment(raw: string): string | null {
