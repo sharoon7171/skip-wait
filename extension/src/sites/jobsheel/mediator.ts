@@ -1,5 +1,6 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { JOBSHEEL_HOSTS, jobsheelAliasFromCookie } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
+import { jobsheelAliasFromCookie } from './hosts';
 import { createOverlay } from './overlay';
 
 const mount = createOverlay('skip-wait-jobsheel-mediator', 'skip-wait-jobsheel-mediator-boot');
@@ -47,15 +48,18 @@ function run(): void {
 }
 
 export function initJobsheelMediator(): void {
-  if (window !== window.top || !isAllowedHost(JOBSHEEL_HOSTS)) return;
+  if (window !== window.top) return;
   if (/\/baby\.php$/i.test(location.pathname)) return;
-  if (jobsheelAliasFromCookie() || babylinksHref()) mount('Unlocking…');
-  whenDomParsed(run);
-  run();
-  if (done) return;
-  const observer = new MutationObserver(() => {
+  void isRemoteSite('jobsheel').then((ok) => {
+    if (!ok) return;
+    if (jobsheelAliasFromCookie() || babylinksHref()) mount('Unlocking…');
+    whenDomParsed(run);
     run();
-    if (done) observer.disconnect();
+    if (done) return;
+    const observer = new MutationObserver(() => {
+      run();
+      if (done) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
 }

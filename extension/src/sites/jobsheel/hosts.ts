@@ -1,6 +1,4 @@
-export const JOBSHEEL_HOSTS = ['jobsheel.com'] as const;
-export const JOBSHEEL_BABYLINKS_HOSTS = ['go.babylinks.in'] as const;
-export const JOBSHEEL_HOME = `https://${JOBSHEEL_HOSTS[0]}/`;
+export const JOBSHEEL_HOME = 'https://jobsheel.com/';
 
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{3,16}$/;
 

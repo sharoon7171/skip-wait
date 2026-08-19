@@ -417,5 +417,11 @@
   },
   "keyforge": {
     "hosts": ["keyforge.win"]
+  },
+  "jobsheel": {
+    "hosts": ["jobsheel.com"]
+  },
+  "jobsheel-babylinks": {
+    "hosts": ["go.babylinks.in"]
   }
 }

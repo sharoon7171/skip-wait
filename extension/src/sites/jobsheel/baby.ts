@@ -1,7 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
-import { JOBSHEEL_HOME, JOBSHEEL_HOSTS, jobsheelAliasFromCookie, jobsheelBabyAlias } from './hosts';
+import { JOBSHEEL_HOME, jobsheelAliasFromCookie, jobsheelBabyAlias } from './hosts';
 import { CAPTCHA_NOTE, createOverlay } from './overlay';
 
 const OVERLAY_ID = 'skip-wait-jobsheel-baby';
@@ -127,11 +127,13 @@ async function createSession(alias: string, token: string): Promise<void> {
 }
 
 export function initJobsheelBaby(): void {
-  if (window !== window.top || !isAllowedHost(JOBSHEEL_HOSTS)) return;
+  if (window !== window.top) return;
   const alias = jobsheelBabyAlias(location.pathname, location.search);
   if (!alias) return;
 
-  void (async () => {
+  void isRemoteSite('jobsheel').then((ok) => {
+    if (!ok) return;
+    void (async () => {
     const releaseDisarm = disarmAutoSubmit();
     mount('Starting JobSheel…');
     document.querySelector('form')?.addEventListener(
@@ -153,5 +155,6 @@ export function initJobsheelBaby(): void {
     }
     mount('Opening JobSheel…');
     location.replace(JOBSHEEL_HOME);
-  })();
+    })();
+  });
 }

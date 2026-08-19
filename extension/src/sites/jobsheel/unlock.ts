@@ -1,6 +1,6 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
-import { isAllowedHost } from '../../utils/domain-check';
-import { JOBSHEEL_BABYLINKS_HOSTS, babylinksAliasFromPath } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { babylinksAliasFromPath } from './hosts';
 import { createOverlay, spoofVisibility } from './overlay';
 
 const mount = createOverlay('skip-wait-jobsheel-babylinks', 'skip-wait-jobsheel-babylinks-boot');
@@ -127,17 +127,20 @@ function run(): void {
 }
 
 export function initJobsheelBabylinksUnlock(): void {
-  if (window !== window.top || !isAllowedHost(JOBSHEEL_BABYLINKS_HOSTS)) return;
+  if (window !== window.top) return;
   if (!babylinksAliasFromPath(location.pathname)) return;
-  mount('Unlocking…');
-  run();
-  if (done) return;
-  const observer = new MutationObserver(() => {
+  void isRemoteSite('jobsheel-babylinks').then((ok) => {
+    if (!ok) return;
+    mount('Unlocking…');
     run();
-    if (done) observer.disconnect();
+    if (done) return;
+    const observer = new MutationObserver(() => {
+      run();
+      if (done) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, true);
+    }
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run, true);
-  }
 }
