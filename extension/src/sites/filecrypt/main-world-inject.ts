@@ -1,10 +1,10 @@
-import { FILECRYPT_HOSTS, MSG_FILECRYPT_POW } from './hosts';
+import { hostIsRemoteSite } from '../../hosts/check';
+import { MSG_FILECRYPT_POW } from './hosts';
 import { runFilecryptPowBypass } from './pow-hook';
 
-function isFilecryptUrl(url: string): boolean {
+async function isFilecryptUrl(url: string): Promise<boolean> {
   try {
-    const h = new URL(url).hostname.toLowerCase();
-    return FILECRYPT_HOSTS.some((d) => h === d || h.endsWith('.' + d));
+    return hostIsRemoteSite(new URL(url).hostname, 'filecrypt');
   } catch {
     return false;
   }
@@ -21,9 +21,11 @@ function inject(tabId: number, frameId?: number): void {
 
 export function initFilecryptPowInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isFilecryptUrl(details.url)) return;
-    if (!/\/Container\//i.test(details.url)) return;
-    inject(details.tabId, 0);
+    if (details.frameId !== 0 || !/\/Container\//i.test(details.url)) return;
+    void (async () => {
+      if (!(await isFilecryptUrl(details.url))) return;
+      inject(details.tabId, 0);
+    })();
   });
 
   chrome.runtime.onMessage.addListener((message, sender) => {

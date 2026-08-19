@@ -516,5 +516,8 @@
   },
   "filehippo": {
     "hosts": ["filehippo.com", "filehippo.de", "filehippo.jp", "filehippo.pl"]
+  },
+  "filecrypt": {
+    "hosts": ["filecrypt.cc", "filecrypt.to", "filecrypt.co"]
   }
 }

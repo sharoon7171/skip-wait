@@ -1,6 +1,7 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { FILECRYPT_HOSTS, MSG_FILECRYPT_POW } from './hosts';
+import { whenDomParsed } from '../../utils/domain-check';
+import { MSG_FILECRYPT_POW } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-filecrypt-overlay';
 const MSG_SOURCE = 'skip-wait-filecrypt';
@@ -40,32 +41,34 @@ const isUnlockedContainer = (): boolean =>
 
 export function initFilecryptGate(): void {
   if (started) return;
-  if (!isAllowedHost(FILECRYPT_HOSTS)) return;
   if (!/\/Container\//i.test(location.pathname)) return;
-  started = true;
+  void isRemoteSite('filecrypt').then((ok) => {
+    if (!ok || started) return;
+    started = true;
 
-  mountUi('Unlocking downloads…');
-  chrome.runtime.sendMessage({ type: MSG_FILECRYPT_POW }).catch(() => {});
+    mountUi('Unlocking downloads…');
+    chrome.runtime.sendMessage({ type: MSG_FILECRYPT_POW }).catch(() => {});
 
-  window.addEventListener('message', (ev) => {
-    if (ev.origin !== location.origin) return;
-    const data = ev.data as { source?: string; type?: string; text?: string } | null;
-    if (!data || data.source !== MSG_SOURCE) return;
-    if (data.type === 'done') {
-      clearUi();
-      return;
-    }
-    if (data.type === 'status' && data.text) {
-      if (ui) ui.setStatus(data.text);
-      return;
-    }
-    if (data.type === 'err') {
-      mountUi('Couldn’t unlock this page.');
-      ui?.setError('Try refreshing the page.');
-    }
-  });
+    window.addEventListener('message', (ev) => {
+      if (ev.origin !== location.origin) return;
+      const data = ev.data as { source?: string; type?: string; text?: string } | null;
+      if (!data || data.source !== MSG_SOURCE) return;
+      if (data.type === 'done') {
+        clearUi();
+        return;
+      }
+      if (data.type === 'status' && data.text) {
+        if (ui) ui.setStatus(data.text);
+        return;
+      }
+      if (data.type === 'err') {
+        mountUi('Couldn’t unlock this page.');
+        ui?.setError('Try refreshing the page.');
+      }
+    });
 
-  whenDomParsed(() => {
-    if (isUnlockedContainer()) clearUi();
+    whenDomParsed(() => {
+      if (isUnlockedContainer()) clearUi();
+    });
   });
 }
