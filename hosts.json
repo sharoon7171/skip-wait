@@ -564,5 +564,11 @@
   },
   "cutwin": {
     "hosts": ["masrawytrend.com"]
+  },
+  "cut4money": {
+    "hosts": ["adurl.io", "cut4money.com", "shr2.link"]
+  },
+  "cut4money-mediator": {
+    "hosts": ["bigcarinsurance.com", "bitcotrade.net", "healthy4pepole.com"]
   }
 }

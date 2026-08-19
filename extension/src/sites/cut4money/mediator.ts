@@ -1,7 +1,8 @@
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { hostnameMatches, isAllowedHost } from '../../utils/domain-check';
 import {
+  CUT4MONEY_DEFAULT_ORIGIN,
   cut4moneyAliasFromCookie,
   cut4moneyAliasFromHref,
   cut4moneyOriginFromHref,
@@ -10,7 +11,6 @@ import {
   readCut4moneyChain,
   shortenerUrl,
 } from './chain';
-import { CUT4MONEY_HOSTS, CUT4MONEY_MEDIATOR_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-cut4money-mediator';
 const BOOT_STYLE_ID = 'skip-wait-cut4money-mediator-boot';
@@ -157,7 +157,7 @@ const rememberAlias = (href?: string): void => {
   const alias = cut4moneyAliasFromCookie();
   if (!alias || rememberedAlias === alias) return;
   rememberedAlias = alias;
-  void ensureCut4moneyChain(alias, `https://${CUT4MONEY_HOSTS[0]}`);
+  void ensureCut4moneyChain(alias, CUT4MONEY_DEFAULT_ORIGIN);
 };
 
 const goNext = (next: string): void => {
@@ -214,32 +214,35 @@ const queueTick = (): void => {
 };
 
 export function initCut4moneyMediator(): void {
-  if (!isAllowedHost(CUT4MONEY_MEDIATOR_HOSTS)) return;
-  if (hostnameMatches(location.hostname, CUT4MONEY_HOSTS)) return;
+  void Promise.all([isRemoteSite('cut4money-mediator'), isRemoteSite('cut4money')]).then(
+    ([mediator, main]) => {
+      if (!mediator || main) return;
 
-  tick();
-  if (started) return;
+      tick();
+      if (started) return;
 
-  const mo = new MutationObserver(() => {
-    queueTick();
-    if (started) mo.disconnect();
-  });
-  mo.observe(document.documentElement, {
-    attributeFilter: ['href'],
-    attributes: true,
-    childList: true,
-    subtree: true,
-  });
+      const mo = new MutationObserver(() => {
+        queueTick();
+        if (started) mo.disconnect();
+      });
+      mo.observe(document.documentElement, {
+        attributeFilter: ['href'],
+        attributes: true,
+        childList: true,
+        subtree: true,
+      });
 
-  let polls = 0;
-  const poll = window.setInterval(() => {
-    if (polls >= 10) resumeArmed = true;
-    tick();
-    if (started || ++polls >= 120) window.clearInterval(poll);
-  }, 200);
+      let polls = 0;
+      const poll = window.setInterval(() => {
+        if (polls >= 10) resumeArmed = true;
+        tick();
+        if (started || ++polls >= 120) window.clearInterval(poll);
+      }, 200);
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
-  window.addEventListener('load', tick, true);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tick, true);
+      }
+      window.addEventListener('load', tick, true);
+    },
+  );
 }

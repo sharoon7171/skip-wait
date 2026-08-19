@@ -1,13 +1,12 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
+import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
-import { isAllowedHost } from '../../utils/domain-check';
 import {
   clearCut4moneyChain,
   cut4moneyAliasFromPath,
   ensureCut4moneyChain,
 } from './chain';
-import { CUT4MONEY_HOSTS } from './hosts';
 
 const OVERLAY_ID = 'skip-wait-cut4money-unlock';
 const BOOT_STYLE_ID = 'skip-wait-cut4money-unlock-boot';
@@ -143,35 +142,37 @@ const runUnlock = async (): Promise<void> => {
 };
 
 export function initCut4moneyUnlock(): void {
-  if (!isAllowedHost(CUT4MONEY_HOSTS)) return;
   if (!isAliasPath()) return;
+  void isRemoteSite('cut4money').then((ok) => {
+    if (!ok) return;
 
-  const tick = (): void => {
-    if (started) return;
-    if (!isUnlockShell()) return;
-    if (!counterReady() && document.readyState === 'loading') {
-      bootOverlayLock();
+    const tick = (): void => {
+      if (started) return;
+      if (!isUnlockShell()) return;
+      if (!counterReady() && document.readyState === 'loading') {
+        bootOverlayLock();
+        mountUi('Getting things ready…');
+        return;
+      }
       mountUi('Getting things ready…');
-      return;
-    }
-    mountUi('Getting things ready…');
-    void runUnlock();
-  };
+      void runUnlock();
+    };
 
-  tick();
-  if (started) return;
-
-  const mo = new MutationObserver(() => {
     tick();
-    if (started) mo.disconnect();
+    if (started) return;
+
+    const mo = new MutationObserver(() => {
+      tick();
+      if (started) mo.disconnect();
+    });
+    mo.observe(document.documentElement, {
+      attributeFilter: ['href', 'value'],
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tick, true);
+    }
   });
-  mo.observe(document.documentElement, {
-    attributeFilter: ['href', 'value'],
-    attributes: true,
-    childList: true,
-    subtree: true,
-  });
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tick, true);
-  }
 }

@@ -1,4 +1,5 @@
-import { CUT4MONEY_HOSTS } from './hosts';
+const CUT4MONEY_SHORTENER_HOSTS = ['adurl.io', 'cut4money.com', 'shr2.link'] as const;
+export const CUT4MONEY_DEFAULT_ORIGIN = 'https://adurl.io';
 
 const CHAIN_KEY = 'sw-cut4money-chain' as const;
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
@@ -28,7 +29,7 @@ export function cut4moneyAliasFromHref(href: string): string | null {
   try {
     const u = new URL(href);
     const host = u.hostname.toLowerCase();
-    if (!CUT4MONEY_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return null;
+    if (!CUT4MONEY_SHORTENER_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return null;
     return cut4moneyAliasFromPath(u.pathname);
   } catch {
     return null;
@@ -39,7 +40,7 @@ export function cut4moneyOriginFromHref(href: string): string | null {
   try {
     const u = new URL(href);
     const host = u.hostname.toLowerCase();
-    if (!CUT4MONEY_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return null;
+    if (!CUT4MONEY_SHORTENER_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return null;
     return u.origin;
   } catch {
     return null;
