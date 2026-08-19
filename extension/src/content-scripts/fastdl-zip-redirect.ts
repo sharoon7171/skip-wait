@@ -1,6 +1,4 @@
-import { isAllowedHost } from '../utils/domain-check';
-
-const HOSTS = ['fastdl.zip'] as const;
+import { isRemoteSite } from '../hosts/check';
 
 export function initFastdlZipRedirect(): void {
   if (!isAllowedHost(HOSTS)) return;
