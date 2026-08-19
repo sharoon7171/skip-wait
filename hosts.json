@@ -59,5 +59,15 @@
     "hosts": [
       "uploadrar.com"
     ]
+  },
+  "unlocktoearn": {
+    "hosts": [
+      "unlocktoearn.com"
+    ]
+  },
+  "unlocktoearn-mediator": {
+    "hosts": [
+      "cocoboxmod.com"
+    ]
   }
 }

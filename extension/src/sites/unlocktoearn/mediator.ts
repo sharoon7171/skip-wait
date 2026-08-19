@@ -1,5 +1,5 @@
-import { isAllowedHost, whenDomParsed } from '../../utils/domain-check';
-import { UNLOCKTOEARN_MEDIATOR_HOSTS } from './hosts';
+import { isRemoteSite } from '../../hosts/check';
+import { whenDomParsed } from '../../utils/domain-check';
 import { createOverlay } from './overlay';
 
 const mount = createOverlay(
@@ -26,14 +26,17 @@ function run(): void {
 }
 
 export function initUnlocktoearnMediator(): void {
-  if (window !== window.top || !isAllowedHost(UNLOCKTOEARN_MEDIATOR_HOSTS)) return;
-  mount('Unlocking…');
-  whenDomParsed(run);
-  run();
-  if (done) return;
-  const observer = new MutationObserver(() => {
+  if (window !== window.top) return;
+  void isRemoteSite('unlocktoearn-mediator').then((ok) => {
+    if (!ok) return;
+    mount('Unlocking…');
+    whenDomParsed(run);
     run();
-    if (done) observer.disconnect();
+    if (done) return;
+    const observer = new MutationObserver(() => {
+      run();
+      if (done) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
 }
