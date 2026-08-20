@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A shared DUpload link should mean getting the file—not surviving a partner blog and Create download link wait. Skip Wait is a free Chrome extension that keeps you on the file page, prepares the direct URL, and shows one Direct Download · Skip Wait control when it is ready.';
+  'A shared DUpload link should mean getting the file—not surviving a partner blog and Create download link wait. Skip Wait is a $1/month Chrome extension that keeps you on the file page, prepares the direct URL, and shows one Direct Download · Skip Wait control when it is ready.';
 
 const body = `## Auto hops that yank you off the file card
 
@@ -75,9 +75,9 @@ const faq: readonly BypassFaq[] = [
       'No. Skip Wait holds the auto posts that send you there and unlocks from the file page itself.',
   },
   {
-    question: 'Is the DUpload bypass free?',
+    question: 'How much does the DUpload bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account required for DUpload.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

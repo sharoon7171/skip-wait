@@ -38,7 +38,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'PlayMods bypass clears the middle download waiting page on single-build Download APK, History Versions rows, the all-versions list, and all-download variant picks. Skip Wait is the free Chrome extension that turns those PlayMods controls into branded direct downloads—or opens the variant list when more than one APK family exists—without playmods please wait busywork.';
+  'PlayMods bypass clears the middle download waiting page on single-build Download APK, History Versions rows, the all-versions list, and all-download variant picks. Skip Wait is the $1/month Chrome extension that turns those PlayMods controls into branded direct downloads—or opens the variant list when more than one APK family exists—without playmods please wait busywork.';
 
 const body = `## Download APK that still opens a waiting page
 
@@ -116,9 +116,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the post, history list, all-versions, all-download, or download waiting page and let the PlayMods bypass extension run on that tab.',
   },
   {
-    question: 'Is the PlayMods path free?',
+    question: 'How much does the PlayMods path cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store. The PlayMods bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The PlayMods bypass runs on supported pages.',
   },
 ];
 

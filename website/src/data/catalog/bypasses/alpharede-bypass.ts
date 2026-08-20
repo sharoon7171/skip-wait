@@ -42,7 +42,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Alpharede bypass matters when a shared short link dumps you into Alpha Rede blog stages with touch-ad waits, click-ad wait 10 seconds copy, and an ad blocker detected wall before the real file. Skip Wait is a free Chrome extension that clears those hops on supported Alpha Rede articles and opens the destination.';
+  'An Alpharede bypass matters when a shared short link dumps you into Alpha Rede blog stages with touch-ad waits, click-ad wait 10 seconds copy, and an ad blocker detected wall before the real file. Skip Wait is a $1/month Chrome extension that clears those hops on supported Alpha Rede articles and opens the destination.';
 
 const body = `## Blog stages built to burn clicks
 
@@ -96,9 +96,9 @@ const faq: readonly BypassFaq[] = [
       'Yes. Stay on the tab. After Earnlinks, Skip Wait continues on Alpharede article hosts with the matching rule.',
   },
   {
-    question: 'Is the Alpharede bypass free?',
+    question: 'How much does the Alpharede bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account required for Alpharede.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

@@ -51,7 +51,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Earnlinks bypass matters when a shared short URL turns into Click Banner Wait & Back articles and a Your link is almost ready Get Link screen. Skip Wait is a free Chrome extension that clears those Continue hops and finishes unlock—including a LinksGo second hop or an Alpharede article chain when the shortener hands off there.';
+  'An Earnlinks bypass matters when a shared short URL turns into Click Banner Wait & Back articles and a Your link is almost ready Get Link screen. Skip Wait is a $1/month Chrome extension that clears those Continue hops and finishes unlock—including a LinksGo second hop or an Alpharede article chain when the shortener hands off there.';
 
 const body = `## News blogs that demand dual-tap Continue
 
@@ -96,9 +96,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the tab. Skip Wait continues on LinksGo Continue chains or Alpharede article hosts with the same extension.',
   },
   {
-    question: 'Is the Earnlinks bypass free?',
+    question: 'How much does the Earnlinks bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account and no paid tier for Earnlinks, LinksGo, Alpharede handoffs, or the listed intermediate blogs.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, PRICE, SITE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { homeSections } from '@/lib/routes';
 
@@ -53,9 +53,10 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
     installUrl: CHROME_WEB_STORE_URL,
     offers: {
       '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
+      price: PRICE.amount,
+      priceCurrency: PRICE.currency,
       availability: 'https://schema.org/InStock',
+      description: PRICE.label,
     },
     author: {
       '@type': 'Person',
@@ -73,7 +74,7 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
       'Skip waiting pages and link shortener redirects',
       'Automate waits and continue clicks when a full bypass is not possible',
       'Instant redirect to the destination when the site allows it',
-      'Free Chrome extension with no account required',
+      `${PRICE.label} Chrome extension. Activate a license in the popup`,
     ],
     keywords: SITE.keywords.join(', '),
   };

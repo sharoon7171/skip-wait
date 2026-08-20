@@ -45,7 +45,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People hunting a 10Drives bypass, how to download from 10Drives, or a Create link skip usually opened a shared file short link and landed on a partner blog card—ads, Continue hops, Link is Ready waits, Get Now. Skip Wait is the free Chrome extension that covers that card and exposes one Direct Download · Skip Wait control with the real CDN URL.';
+  'People hunting a 10Drives bypass, how to download from 10Drives, or a Create link skip usually opened a shared file short link and landed on a partner blog card—ads, Continue hops, Link is Ready waits, Get Now. Skip Wait is the $1/month Chrome extension that covers that card and exposes one Direct Download · Skip Wait control with the real CDN URL.';
 
 const body = `## Filename on a blog card, not a clean save dialog
 
@@ -94,9 +94,9 @@ const faq: readonly BypassFaq[] = [
       'No. Skip Wait only shows a ready Direct Download button. You choose when to click.',
   },
   {
-    question: 'Is the 10Drives bypass free?',
+    question: 'How much does the 10Drives bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account and no paid tier for these download cards.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

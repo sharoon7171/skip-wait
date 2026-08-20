@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, PRICE, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Privacy Policy';
 const description = `Privacy policy for the ${SITE.name} Chrome extension: what data the extension accesses, what it stores, and how Skip Wait handles information on supported sites.`;
-const updated = '2026-08-19';
+const updated = '2026-08-20';
 const path = routes.privacy;
 const url = `${SITE.url}${path}`;
 
@@ -71,7 +71,8 @@ export default function PrivacyPage(): React.ReactElement {
             {SITE.name} is a Chrome extension that, on supported link shorteners and file hosts,
             bypasses countdown timers and waiting pages or automates waits and continue clicks. It is
             available from the{' '}
-            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. No account is required.
+            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. Bypass requires a {PRICE.label}
+            license. No separate website account is required.
           </p>
           <p>
             The Website is the marketing site at{' '}

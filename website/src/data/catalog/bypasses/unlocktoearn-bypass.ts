@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Unlock To Earn bypass search usually means a short link that bounces into mediator article gates and a final unlock wait before anything useful opens. Skip Wait is the free Chrome extension that starts on that short URL, walks the cocoboxmod hops, and opens the next destination.';
+  'An Unlock To Earn bypass search usually means a short link that bounces into mediator article gates and a final unlock wait before anything useful opens. Skip Wait is the $1/month Chrome extension that starts on that short URL, walks the cocoboxmod hops, and opens the next destination.';
 
 const body = `## Short link, then rotating article gates
 
@@ -75,9 +75,9 @@ const faq: readonly BypassFaq[] = [
       'New mediator domains ship in the remote site list. Tap Refresh in the extension popup to pull the latest hosts, or request the domain on GitHub if it is still missing after refresh.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store. The Unlock To Earn path runs on supported short links with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Unlock To Earn path runs on supported short links.',
   },
 ];
 

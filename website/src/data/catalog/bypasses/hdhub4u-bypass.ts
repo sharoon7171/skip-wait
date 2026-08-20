@@ -40,7 +40,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for an HDHub4u bypass or HDHub4u landing bypass usually means the entry URL parked you on a mirror wait before the catalog. Skip Wait is the free Chrome extension that clears that landing delay and continues into the working mirror so movies and downloads load without the connection screen.';
+  'Looking for an HDHub4u bypass or HDHub4u landing bypass usually means the entry URL parked you on a mirror wait before the catalog. Skip Wait is the $1/month Chrome extension that clears that landing delay and continues into the working mirror so movies and downloads load without the connection screen.';
 
 const body = `## Entry URLs that stall before the catalog
 
@@ -89,9 +89,9 @@ const faq: readonly BypassFaq[] = [
       'Those mediator gates are a separate flow. Use the HDHub4u Mediator guide when a download hop parks you on a please-wait blog.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. The HDHub4u landing path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The HDHub4u landing path runs on supported pages.',
   },
 ];
 

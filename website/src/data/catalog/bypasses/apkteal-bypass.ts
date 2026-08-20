@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An ApkTeal bypass search usually means Premium APK or MOD download still sits behind a waiting page after you already chose the build. Skip Wait is the free Chrome extension that opens the direct file link for MOD and latest release versions without parking you on that generating screen.';
+  'An ApkTeal bypass search usually means Premium APK or MOD download still sits behind a waiting page after you already chose the build. Skip Wait is the $1/month Chrome extension that opens the direct file link for MOD and latest release versions without parking you on that generating screen.';
 
 const body = `## Premium walls on MOD and latest APKs
 
@@ -46,7 +46,7 @@ ApkTeal often parks a download wait or intermediary screen in front of the real 
 
 ## Opening the file the waiting page was hiding
 
-Skip Wait resolves the real file URL in the background when you use the same download controls already on the page. Instead of babysitting the Premium APK wait, you move to the destination as soon as the host allows it. One ApkTeal bypass extension install covers MOD and latest release flows—no paste tool and no account.
+Skip Wait resolves the real file URL in the background when you use the same download controls already on the page. Instead of babysitting the Premium APK wait, you move to the destination as soon as the host allows it. One ApkTeal bypass extension install covers MOD and latest release flows—no paste tool. Bypass is $1 per month.
 
 You still choose which build you want; Skip Wait only removes the busywork layer between the click and the APK.
 `;
@@ -74,9 +74,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the ApkTeal page, click download, and let Skip Wait run on that tab.',
   },
   {
-    question: 'Is the ApkTeal path free?',
+    question: 'How much does the ApkTeal path cost?',
     answer:
-      'Yes. Skip Wait is free. The ApkTeal bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The ApkTeal bypass runs on supported pages.',
   },
 ];
 

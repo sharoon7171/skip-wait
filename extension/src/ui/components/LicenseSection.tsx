@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { activateLicense, refreshLicense } from '../../license/gate';
 import { clearLicenseSession, getStoredLicenseKey } from '../../license/storage';
 import type { LicensePlan } from '../../license/types';
+import { PRICE_LABEL } from '../constants';
 import { IconRefresh } from './icons';
 
 type Status = 'idle' | 'busy' | 'active' | 'missing' | 'err';
@@ -14,7 +15,7 @@ const formatWhen = (ms: number): string =>
     minute: '2-digit',
   }).format(new Date(ms));
 
-const planLabel = (plan: LicensePlan): string => (plan === 'trial10m' ? '10-minute trial' : '30-day license');
+const planLabel = (plan: LicensePlan): string => (plan === 'trial10m' ? '10-minute trial' : PRICE_LABEL);
 
 const errorMessage = (code: string | undefined): string => {
   switch (code) {
@@ -120,7 +121,7 @@ export function LicenseSection(): React.ReactElement {
     if (status === 'err' && error) {
       return <span className="font-semibold text-warning-700">{error}</span>;
     }
-    if (status === 'missing') return 'Bypass requires an active license.';
+    if (status === 'missing') return `Bypass requires an active ${PRICE_LABEL} license.`;
     return null;
   })();
 
@@ -140,7 +141,9 @@ export function LicenseSection(): React.ReactElement {
           </button>
         ) : null}
       </div>
-      <h2 className="mt-0.5 text-[0.875rem] font-bold tracking-tight text-ink">Activate Skip Wait</h2>
+      <h2 className="mt-0.5 text-[0.875rem] font-bold tracking-tight text-ink">
+        Activate Skip Wait · {PRICE_LABEL}
+      </h2>
       {statusLine !== null ? (
         <p className="mt-1 text-[0.6875rem] font-medium text-ink-soft">{statusLine}</p>
       ) : null}
@@ -178,7 +181,7 @@ export function LicenseSection(): React.ReactElement {
             {busy ? 'Checking with server…' : 'Activate license'}
           </button>
           <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            One device per key. License is checked live with the server before each bypass.
+            {PRICE_LABEL}. One device per key. License is checked live with the server before each bypass.
           </p>
         </div>
       )}

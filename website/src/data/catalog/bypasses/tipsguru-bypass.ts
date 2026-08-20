@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A TipsGuru bypass or skip prolink wait search usually starts after a study or stream share dumps you into prolink access waits and unlock timers across rotating network hosts. Skip Wait is the free Chrome extension that runs those gates so unlock timer bypass does not mean watching every clock yourself.';
+  'A TipsGuru bypass or skip prolink wait search usually starts after a study or stream share dumps you into prolink access waits and unlock timers across rotating network hosts. Skip Wait is the $1/month Chrome extension that runs those gates so unlock timer bypass does not mean watching every clock yourself.';
 
 const body = `## Prolink waits across a rotating network
 
@@ -78,9 +78,9 @@ const faq: readonly BypassFaq[] = [
       'Yes for hosts in this TipsGuru entry. Matching pages wake the scripts automatically—no per-site toggle.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

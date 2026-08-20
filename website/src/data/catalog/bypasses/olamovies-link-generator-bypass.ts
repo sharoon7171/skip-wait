@@ -33,7 +33,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'After you pick a file on OlaMovies, the catalog often sends you to the OlaMovies Link Generator (OM Links) where a press-and-hold or slide human check and Verify to generate link sit between you and the temporary download path. Skip Wait is the free Chrome extension that skips that human verification busywork when you are already signed in with your own account, then shows the destination in a clear banner.';
+  'After you pick a file on OlaMovies, the catalog often sends you to the OlaMovies Link Generator (OM Links) where a press-and-hold or slide human check and Verify to generate link sit between you and the temporary download path. Skip Wait is the $1/month Chrome extension that skips that human verification busywork when you are already signed in with your own account, then shows the destination in a clear banner.';
 
 const body = `## Human checks before temporary shorteners
 
@@ -76,9 +76,9 @@ const faq: readonly BypassFaq[] = [
       'No. When ready, it shows an href you open yourself so navigation stays intentional.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. You only need your own optional OlaMovies login on the site—no paid plan for the extension.',
+      'Skip Wait is $1 per month. Activate a license in the popup. You only need your own optional OlaMovies login on the site.',
   },
 ];
 

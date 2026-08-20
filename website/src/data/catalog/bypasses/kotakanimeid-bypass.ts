@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a KotakAnimeID bypass or kotakanimeid out page skip usually means an episode share parked you on a countdown before any 1080p or 720p link appears. Skip Wait is the free Chrome extension that clears that waiting gate so resolution links show without babysitting Continue.';
+  'Looking for a KotakAnimeID bypass or kotakanimeid out page skip usually means an episode share parked you on a countdown before any 1080p or 720p link appears. Skip Wait is the $1/month Chrome extension that clears that waiting gate so resolution links show without babysitting Continue.';
 
 const body = `## Out pages that hide episode mirrors behind a clock
 
@@ -77,9 +77,9 @@ const faq: readonly BypassFaq[] = [
       'Filler wait chrome goes away when the links are present. Required holds still finish before mirrors unlock if the page enforces them.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. The KotakAnimeID path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The KotakAnimeID path runs on supported pages.',
   },
 ];
 

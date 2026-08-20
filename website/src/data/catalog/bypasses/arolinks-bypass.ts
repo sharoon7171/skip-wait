@@ -33,7 +33,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Arolinks bypass matters when a shared short link opens a Please Wait screen and tries to dump you onto slow blog pages before any unlock countdown. Skip Wait is the free Chrome extension that keeps you on the short link, finishes the real hold, and opens the destination without a multi-step blog tour.';
+  'An Arolinks bypass matters when a shared short link opens a Please Wait screen and tries to dump you onto slow blog pages before any unlock countdown. Skip Wait is the $1/month Chrome extension that keeps you on the short link, finishes the real hold, and opens the destination without a multi-step blog tour.';
 
 const body = `## Please Wait that wants a blog tour
 
@@ -81,9 +81,9 @@ const faq: readonly BypassFaq[] = [
       'That is separate from the countdown. Complete or clear the check in the tab, then reload the short link so Skip Wait can run the Arolinks unlock bypass again.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store. The Arolinks path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Arolinks path runs on supported pages.',
   },
 ];
 

@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A PRMovies bypass search usually means a shared entry link parked you on a landing wait instead of the streaming catalog. Skip Wait is the free Chrome extension that clears that gate so a skip waiting page path opens the main site without click-to-continue busywork.';
+  'A PRMovies bypass search usually means a shared entry link parked you on a landing wait instead of the streaming catalog. Skip Wait is the $1/month Chrome extension that clears that gate so a skip waiting page path opens the main site without click-to-continue busywork.';
 
 const body = `## Entry hops that stall before the catalog
 
@@ -71,9 +71,9 @@ const faq: readonly BypassFaq[] = [
       'No. The extension runs on the page you opened. That is a waiting page bypass in Chrome, not a third-party paste site.',
   },
   {
-    question: 'Is the PRMovies bypass free?',
+    question: 'How much does the PRMovies bypass cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store. The PRMovies path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The PRMovies path runs on supported pages.',
   },
 ];
 

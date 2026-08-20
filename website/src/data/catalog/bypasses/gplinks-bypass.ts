@@ -41,7 +41,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People search GPLinks bypass, gplinks get link, or skip gplinks premium after a movie or software share dumps them on Protected link ads instead of the file. Skip Wait is the free Chrome extension that runs Continue with ads, the blog steps, and the Get Link screen so you are not the one pressing Verify on every intermediate page.';
+  'People search GPLinks bypass, gplinks get link, or skip gplinks premium after a movie or software share dumps them on Protected link ads instead of the file. Skip Wait is the $1/month Chrome extension that runs Continue with ads, the blog steps, and the Get Link screen so you are not the one pressing Verify on every intermediate page.';
 
 const body = `## Premium banners, then blog steps, then Get Link
 
@@ -90,9 +90,9 @@ const faq: readonly BypassFaq[] = [
       'Aggressive blockers can trigger AdBlocker detected modals on mediators. Allow the shortener and blog for that session if progress stalls, then reload.',
   },
   {
-    question: 'Is the GPLinks bypass free?',
+    question: 'How much does the GPLinks bypass cost?',
     answer:
-      'Yes. Skip Wait is free. No account or paid unlimited bypass plan is required on supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup. This path runs on supported pages.',
   },
 ];
 

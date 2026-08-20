@@ -22,7 +22,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching ouo bypass, skip ouo, or ouo get link bypass usually landed on a get-link countdown instead of the file. Skip Wait is the free Chrome extension that clears those continue waits on matching Ouo shortener pages.';
+  'People searching ouo bypass, skip ouo, or ouo get link bypass usually landed on a get-link countdown instead of the file. Skip Wait is the $1/month Chrome extension that clears those continue waits on matching Ouo shortener pages.';
 
 const body = `## Ad shorteners that monetize the unlock clock
 
@@ -60,9 +60,9 @@ const faq: readonly BypassFaq[] = [
       'Client busywork goes away. Required holds still finish—so the ouo timer bypass stays reliable.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free with no paid plan for supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

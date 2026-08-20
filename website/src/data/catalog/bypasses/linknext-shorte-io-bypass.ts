@@ -35,7 +35,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People hunting a LinkNext bypass or Shorte.io timer bypass usually hit an ad short link that stacks gate waits, blog mediators, and a countdown before any destination appears. Skip Wait is the free Chrome extension that walks that monetized path inside the browser so you are not pressing Continue on every hop.';
+  'People hunting a LinkNext bypass or Shorte.io timer bypass usually hit an ad short link that stacks gate waits, blog mediators, and a countdown before any destination appears. Skip Wait is the $1/month Chrome extension that walks that monetized path inside the browser so you are not pressing Continue on every hop.';
 
 const body = `## Ad shorteners that sell the journey, not the hop
 
@@ -84,9 +84,9 @@ const faq: readonly BypassFaq[] = [
       'On supported mediators, no. Skip Wait advances the continue flow so ads do not hide the control.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. LinkNext and Shorte.io support runs on matching pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. LinkNext and Shorte.io support runs on matching pages.',
   },
 ];
 

@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An MP4Upload bypass search usually means free download parked you on a countdown before create download link. Skip Wait is the free Chrome extension that clears that unlock delay on the video host page you already opened.';
+  'An MP4Upload bypass search usually means free download parked you on a countdown before create download link. Skip Wait is the $1/month Chrome extension that clears that unlock delay on the video host page you already opened.';
 
 const body = `## Free download clocks before create link
 
@@ -61,9 +61,9 @@ const faq: readonly BypassFaq[] = [
       'Client-only delays go away. If the host still needs a brief hold, Skip Wait finishes it, then continues—so the mp4upload timer bypass stays reliable.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store with no paid plan for supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

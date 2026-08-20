@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Tinurlz bypass or Softinfo waiting page search usually means a short URL parked you on please-wait chrome, then nested download redirects, instead of the file. Skip Wait is the free Chrome extension that clears those gates and follows the nested hops so skip click to continue is not a manual chore.';
+  'A Tinurlz bypass or Softinfo waiting page search usually means a short URL parked you on please-wait chrome, then nested download redirects, instead of the file. Skip Wait is the $1/month Chrome extension that clears those gates and follows the nested hops so skip click to continue is not a manual chore.';
 
 const body = `## Short wait, then another redirect
 
@@ -72,9 +72,9 @@ const faq: readonly BypassFaq[] = [
       'On supported gates, no. Skip Wait completes the continue path the page already expects.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { CHROME_WEB_STORE_URL, CONTACT, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, PRICE, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Terms of Use';
-const description = `Terms of use for the free ${SITE.name} Chrome extension: license, supported sites, acceptable use, disclaimers, and contact for Skip Wait.`;
-const updated = '2026-08-19';
+const description = `Terms of use for the ${SITE.name} Chrome extension (${PRICE.label}): license, supported sites, acceptable use, disclaimers, and contact for Skip Wait.`;
+const updated = '2026-08-20';
 const path = routes.terms;
 const url = `${SITE.url}${path}`;
 
@@ -68,7 +68,7 @@ export default function TermsPage(): React.ReactElement {
       >
         <LegalSection title="1. The Extension">
           <p>
-            {SITE.name} is a free Chrome extension distributed on the{' '}
+            {SITE.name} is a {PRICE.label} Chrome extension distributed on the{' '}
             <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. On supported pages it either:
           </p>
           <ul>
@@ -76,8 +76,9 @@ export default function TermsPage(): React.ReactElement {
             <li>automates waits and continue clicks when a full skip is not possible</li>
           </ul>
           <p>
-            No account or paid subscription is required. The Extension runs automatically on
-            supported flows. There is no settings panel to turn bypasses off.
+            Bypass requires an active {PRICE.label} license. Activate the key in the extension popup.
+            The Extension then runs automatically on supported flows. There is no settings panel to
+            turn bypasses off.
           </p>
           <p>
             Supported domains and unlock flows change over time as sites are added or break. The
@@ -169,8 +170,7 @@ export default function TermsPage(): React.ReactElement {
           </p>
           <p>
             Where liability cannot be excluded, it is limited to the amount you paid for the Extension
-            in the three months before the claim. The Extension is currently free, so that amount is
-            zero, to the extent such a limit is enforceable.
+            in the three months before the claim.
           </p>
         </LegalSection>
 

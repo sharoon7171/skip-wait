@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Sub4Unlock bypass or sub4unlock password bypass search usually means a share with up to ten creator task slots—subscribe, follow, join, like, comment, custom links—then a countdown and an optional password screen. Skip Wait is the free Chrome extension that reads the destination on supported unlock pages so skip waiting page busywork is not a full checklist.';
+  'A Sub4Unlock bypass or sub4unlock password bypass search usually means a share with up to ten creator task slots—subscribe, follow, join, like, comment, custom links—then a countdown and an optional password screen. Skip Wait is the $1/month Chrome extension that reads the destination on supported unlock pages so skip waiting page busywork is not a full checklist.';
 
 const body = `## Ten task slots, then Get Link, then a password
 
@@ -76,9 +76,9 @@ const faq: readonly BypassFaq[] = [
       'This entry targets multi-slot checklists and password gates. Sub2Unlock focuses on YouTube-first social blocks on its own host.',
   },
   {
-    question: 'Is the Sub4Unlock bypass free?',
+    question: 'How much does the Sub4Unlock bypass cost?',
     answer:
-      'Yes. Skip Wait is free. The Sub4Unlock path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Sub4Unlock path runs on supported pages.',
   },
 ];
 

@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An UploadRAR bypass or download timer skip search usually means Free Download shoved you onto a countdown or mediator page instead of the archive. Skip Wait is the free Chrome extension that resolves the real file URL behind Free Download so a direct download bypass does not require sitting through Create Download Link theater.';
+  'An UploadRAR bypass or download timer skip search usually means Free Download shoved you onto a countdown or mediator page instead of the archive. Skip Wait is the $1/month Chrome extension that resolves the real file URL behind Free Download so a direct download bypass does not require sitting through Create Download Link theater.';
 
 const body = `## Free Download that is not free of waits
 
@@ -71,9 +71,9 @@ const faq: readonly BypassFaq[] = [
       'Yes. Click the same control; Skip Wait handles the wait and intermediary screen behind it.',
   },
   {
-    question: 'Is the UploadRAR bypass free?',
+    question: 'How much does the UploadRAR bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account or paid plan on supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

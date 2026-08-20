@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An SID Mediator bypass search usually means a short link parked you on a session waiting page that only continues after an access cookie is set. Skip Wait is the free Chrome extension that clears that please wait bypass and skip click to continue loop so the destination opens without babysitting the mediator.';
+  'An SID Mediator bypass search usually means a short link parked you on a session waiting page that only continues after an access cookie is set. Skip Wait is the $1/month Chrome extension that clears that please wait bypass and skip click to continue loop so the destination opens without babysitting the mediator.';
 
 const body = `## Session cookies hidden behind please-wait
 
@@ -73,9 +73,9 @@ const faq: readonly BypassFaq[] = [
       'On supported hops, no. Skip Wait completes the continue flow so ads do not hide the control.',
   },
   {
-    question: 'Is the SID bypass free?',
+    question: 'How much does the SID bypass cost?',
     answer:
-      'Yes. Skip Wait is free. The SID path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The SID path runs on supported pages.',
   },
 ];
 

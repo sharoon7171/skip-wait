@@ -1,4 +1,5 @@
 import { totalBypasses, totalDomains } from '@/data/catalog';
+import { PRICE } from '@/data/constants';
 
 export type FaqItem = {
   question: string;
@@ -9,7 +10,7 @@ export const faqs: readonly FaqItem[] = [
   {
     question: 'How do I use Skip Wait?',
     answer:
-      'Install Skip Wait from the Chrome Web Store, then open supported links as usual. On matching pages the extension either bypasses the countdown and redirects, or automates the wait and continue steps so you reach the file or destination faster.',
+      `Install Skip Wait from the Chrome Web Store, activate a ${PRICE.label} license in the popup, then open supported links as usual. On matching pages the extension either bypasses the countdown and redirects, or automates the wait and continue steps so you reach the file or destination faster.`,
   },
   {
     question: 'Can I use Skip Wait on Android?',
@@ -22,9 +23,9 @@ export const faqs: readonly FaqItem[] = [
       'Both. When a site allows an instant skip, Skip Wait bypasses the timer and waiting page. When a full bypass isn’t possible, it automates waiting, unlocking, and clicking continue so you still save time without babysitting the page.',
   },
   {
-    question: 'Is Skip Wait free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free, with no account, subscription, or paywall. It only runs on supported short-link and delay pages and leaves the rest of your browsing alone.',
+      `Skip Wait is ${PRICE.label}. Activate a license key in the extension popup. Bypass runs on supported short-link and delay pages and leaves the rest of your browsing alone.`,
   },
   {
     question: 'What sites are supported?',

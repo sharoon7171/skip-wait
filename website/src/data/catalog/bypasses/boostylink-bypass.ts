@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A BoostyLink bypass search usually means a content locker still wants a stack of actions plus a server unlock timer before Continue works. Skip Wait is the free Chrome extension that runs those locker steps for you and opens the destination when unlock completes.';
+  'A BoostyLink bypass search usually means a content locker still wants a stack of actions plus a server unlock timer before Continue works. Skip Wait is the $1/month Chrome extension that runs those locker steps for you and opens the destination when unlock completes.';
 
 const body = `## Locker actions stacked before unlock
 
@@ -76,9 +76,9 @@ const faq: readonly BypassFaq[] = [
       'No. BoostyLink often stacks locker actions with the timer. Skip Wait automates both the taps and the wait choreography.',
   },
   {
-    question: 'Is the BoostyLink path free?',
+    question: 'How much does the BoostyLink path cost?',
     answer:
-      'Yes. Skip Wait is free. The BoostyLink bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The BoostyLink bypass runs on supported pages.',
   },
 ];
 

@@ -37,7 +37,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Cut4Money bypass search usually means a short alias turned into a tour of blog mediators and unlock waits before the file. Skip Wait is the free Chrome extension that follows that redirect chain so skip multi step waits does not mean clicking Continue on every filler page.';
+  'A Cut4Money bypass search usually means a short alias turned into a tour of blog mediators and unlock waits before the file. Skip Wait is the $1/month Chrome extension that follows that redirect chain so skip multi step waits does not mean clicking Continue on every filler page.';
 
 const body = `## Blog mediators stacked into a shortener tour
 
@@ -84,9 +84,9 @@ const faq: readonly BypassFaq[] = [
       'If the unlock pattern is the same, the extension follows behavior on the live page. You do not paste the URL into a third-party tool when a mediator rotates.',
   },
   {
-    question: 'Is the Cut4Money path free?',
+    question: 'How much does the Cut4Money path cost?',
     answer:
-      'Yes. Skip Wait is free. The Cut4Money bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Cut4Money bypass runs on supported pages.',
   },
 ];
 

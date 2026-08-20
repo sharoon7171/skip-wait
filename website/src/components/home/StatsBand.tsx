@@ -1,10 +1,11 @@
 import { totalBypasses, totalDomains } from '@/data/catalog';
+import { PRICE } from '@/data/constants';
 import { Shell } from '@/components/ui/Shell';
 
 const stats = [
   { value: String(totalBypasses()), label: 'Bypasses' },
   { value: String(totalDomains()), label: 'Websites Covered' },
-  { value: 'Free', label: 'Chrome Extension, No Account' },
+  { value: `$${PRICE.amount}`, label: 'Per Month' },
 ] as const;
 
 export function StatsBand(): React.ReactElement {

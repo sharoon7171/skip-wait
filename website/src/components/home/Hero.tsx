@@ -1,5 +1,5 @@
 import { totalBypasses, totalDomains } from '@/data/catalog';
-import { CHROME_WEB_STORE_URL, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, PRICE, SITE } from '@/data/constants';
 import { routes } from '@/lib/routes';
 import { ButtonLink } from '@/components/ui/Button';
 import { ChromeIcon, IconArrowDown, IconArrowRight } from '@/components/ui/icons';
@@ -71,7 +71,7 @@ export function Hero(): React.ReactElement {
           </h1>
 
           <p className="mx-auto mt-5 max-w-[42ch] text-body text-ink-body sm:mt-6 sm:max-w-[46ch] sm:text-lead lg:mx-0">
-            Free Chrome extension that skips countdown timers and link shortener redirects—or
+            {PRICE.label} Chrome extension that skips countdown timers and link shortener redirects—or
             finishes waiting pages for you when a full skip isn’t possible. Works on{' '}
             {totalBypasses()} bypasses across {totalDomains()} websites, including popular short links
             and file hosts.

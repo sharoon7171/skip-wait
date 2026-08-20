@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A LinkUnlocker bypass search usually means a content locker parked you on a countdown before the unlocked URL or result text appears. Skip Wait is the free Chrome extension that clears that timer busywork and finishes unlock—redirect or clipboard—when the page is ready.';
+  'A LinkUnlocker bypass search usually means a content locker parked you on a countdown before the unlocked URL or result text appears. Skip Wait is the $1/month Chrome extension that clears that timer busywork and finishes unlock—redirect or clipboard—when the page is ready.';
 
 const body = `## Lockers that sell a countdown before the payload
 
@@ -77,9 +77,9 @@ const faq: readonly BypassFaq[] = [
       'On supported flows, Skip Wait advances past get-link delay screens so you are not babysitting the disabled button.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. The LinkUnlocker path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The LinkUnlocker path runs on supported pages.',
   },
 ];
 

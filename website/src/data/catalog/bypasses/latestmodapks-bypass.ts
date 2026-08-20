@@ -35,7 +35,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'LatestModAPKs bypass clears the please-wait Download screen and the short hop after it. Skip Wait is the free Chrome extension that turns that latestmodapks download waiting page into a direct download—no progress stall, no second download button tour.';
+  'LatestModAPKs bypass clears the please-wait Download screen and the short hop after it. Skip Wait is the $1/month Chrome extension that turns that latestmodapks download waiting page into a direct download—no progress stall, no second download button tour.';
 
 const body = `## Download that still forces a waiting page
 
@@ -91,9 +91,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the download page, click Download, and let the LatestModAPKs bypass extension run on that tab.',
   },
   {
-    question: 'Is the LatestModAPKs path free?',
+    question: 'How much does the LatestModAPKs path cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store. The LatestModAPKs bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The LatestModAPKs bypass runs on supported pages.',
   },
 ];
 

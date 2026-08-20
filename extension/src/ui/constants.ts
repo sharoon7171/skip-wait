@@ -7,6 +7,8 @@ const WEBSITE_URL = 'https://skip-wait-website.vercel.app';
 
 export const SUPPORTED_SITES_URL = `${WEBSITE_URL}/sites`;
 
+export const PRICE_LABEL = '$1 per month';
+
 export const CONTACT = {
   email: 'sharoon7171@gmail.com',
   telegram: 'https://t.me/sharoon1998',

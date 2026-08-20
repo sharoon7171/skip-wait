@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Droplink bypass search usually means an AdLinkFly-style short link hid the file behind a download countdown. Skip Wait is the free Chrome extension that clears that unlock timer and reveals the destination without watching Get Link die on the clock.';
+  'A Droplink bypass search usually means an AdLinkFly-style short link hid the file behind a download countdown. Skip Wait is the $1/month Chrome extension that clears that unlock timer and reveals the destination without watching Get Link die on the clock.';
 
 const body = `## Get Link that only unlocks after the clock
 
@@ -70,9 +70,9 @@ const faq: readonly BypassFaq[] = [
       'Usually not. Unlock often needs a live browser session. Skip Wait runs on the real page.',
   },
   {
-    question: 'Is it free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. The Droplink path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Droplink path runs on supported pages.',
   },
 ];
 

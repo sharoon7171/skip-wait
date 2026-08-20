@@ -1,11 +1,17 @@
+export const PRICE = {
+  amount: '1',
+  currency: 'USD',
+  period: 'month',
+  label: '$1 per month',
+} as const;
+
 export const SITE = {
   name: 'Skip Wait',
   url: 'https://skip-wait-website.vercel.app',
   tagline:
     'Bypass countdown timers and link shorteners or automate waits and clicks when a full skip isn’t possible.',
   title: 'Skip Wait — Bypass Countdown Timers & Link Shorteners (Chrome)',
-  description:
-    'Free Chrome extension to bypass countdown timers, waiting pages, and link shorteners, or automate the wait when a full skip is not possible.',
+  description: `${PRICE.label} Chrome extension to bypass countdown timers, waiting pages, and link shorteners, or automate the wait when a full skip is not possible.`,
   keywords: [
     'skip wait',
     'skip wait extension',
@@ -36,7 +42,7 @@ export const SITE = {
     'automate waiting page',
     'timer skip extension',
     'bypass short link',
-    'free countdown bypass',
+    'countdown bypass',
   ],
 } as const;
 

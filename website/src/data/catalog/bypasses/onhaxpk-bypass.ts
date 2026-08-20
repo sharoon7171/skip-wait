@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An OnhaxPK bypass or skip copy step search usually means a software page made you wait, then copy session share data by hand before downloads unlocked. Skip Wait is the free Chrome extension that skips that countdown and copies the string for you.';
+  'An OnhaxPK bypass or skip copy step search usually means a software page made you wait, then copy session share data by hand before downloads unlocked. Skip Wait is the $1/month Chrome extension that skips that countdown and copies the string for you.';
 
 const body = `## Unlock pages that demand a timed copy
 
@@ -57,9 +57,9 @@ const faq: readonly BypassFaq[] = [
       'A Copy control remains available so you can re-copy without restarting the whole page flow.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free with no paid plan for supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

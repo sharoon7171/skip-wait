@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Mega4Upload bypass search usually starts after free download leaves you on a generating countdown or captcha-style gate instead of the torrent. Skip Wait is the free Chrome extension that resolves that direct download path on the page you already opened.';
+  'A Mega4Upload bypass search usually starts after free download leaves you on a generating countdown or captcha-style gate instead of the torrent. Skip Wait is the $1/month Chrome extension that resolves that direct download path on the page you already opened.';
 
 const body = `## Free download that stalls on generating
 
@@ -46,7 +46,7 @@ Skip Wait’s Mega4Upload support watches the download click you already make. W
 
 Server-side holds still finish honestly. What disappears is babysitting a please-wait strip that only existed to slow free users. That is the practical reading of direct download bypass and file host bypass on this host: one Chrome install, the live file page, less time restarting generating screens.
 
-Compare helpers under mega4upload bypass extension or skip wait extension if you are choosing tools—the same listing covers this path with no account.
+Compare helpers under mega4upload bypass extension or skip wait extension if you are choosing tools—the same listing covers this path for $1 per month.
 `;
 
 
@@ -72,9 +72,9 @@ const faq: readonly BypassFaq[] = [
       'If you reload mid-gate you may restart the free path. Stay on the tab while the extension finishes the supported unlock.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store. The Mega4Upload path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Mega4Upload path runs on supported pages.',
   },
 ];
 

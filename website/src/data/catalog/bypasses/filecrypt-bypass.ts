@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People search Filecrypt bypass or skip security check after a shared container blocks the mirror list behind an I am human gate. Skip Wait is the free Chrome extension that clears that verification lock so you can pick a host and download without staring at the security check.';
+  'People search Filecrypt bypass or skip security check after a shared container blocks the mirror list behind an I am human gate. Skip Wait is the $1/month Chrome extension that clears that verification lock so you can pick a host and download without staring at the security check.';
 
 const body = `## Mirror lists locked behind I am human
 
@@ -61,9 +61,9 @@ const faq: readonly BypassFaq[] = [
       'Complete it once. After the token exists, Skip Wait continues so the mirror list becomes usable.',
   },
   {
-    question: 'Is the Filecrypt bypass free?',
+    question: 'How much does the Filecrypt bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account or paid plan required.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

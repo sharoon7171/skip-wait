@@ -41,7 +41,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'LiteShort is a three-act short link: a Continue to Destination disclaimer, a rotating short mediator that pushes search-style first results and blog continues, then a Get Link countdown on unlock. Skip Wait is the free Chrome extension that clears that choreography so a LiteShort countdown bypass feels like forward motion, not scavenger hunting.';
+  'LiteShort is a three-act short link: a Continue to Destination disclaimer, a rotating short mediator that pushes search-style first results and blog continues, then a Get Link countdown on unlock. Skip Wait is the $1/month Chrome extension that clears that choreography so a LiteShort countdown bypass feels like forward motion, not scavenger hunting.';
 
 const body = `## Disclaimer, fake search hop, then Get Link
 
@@ -89,9 +89,9 @@ const faq: readonly BypassFaq[] = [
       'No. Skip Wait clears that notice and moves the chain forward for you.',
   },
   {
-    question: 'Is LiteShort support free?',
+    question: 'How much does LiteShort support cost?',
     answer:
-      'Yes. Skip Wait is free Chrome extension software with no account and no paid LiteShort tier.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

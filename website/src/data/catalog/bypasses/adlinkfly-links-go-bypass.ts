@@ -34,11 +34,11 @@ const keywords = [
   'link shortener bypass',
   'skip wait chrome extension',
   'skip wait extension',
-  'free chrome extension skip wait',
+  'skip wait chrome extension',
 ] as const;
 
 const intro =
-  'Install Skip Wait once and AdLinkFly Links Go waiting pages stop owning the session. The free Chrome extension covers please-wait seconds, Continue and Proceed gates, and Get Link delay on supported Links Go shorteners so a shared short URL becomes a short overlay moment instead of a chore.';
+  'Install Skip Wait once and AdLinkFly Links Go waiting pages stop owning the session. The $1/month Chrome extension covers please-wait seconds, Continue and Proceed gates, and Get Link delay on supported Links Go shorteners so a shared short URL becomes a short overlay moment instead of a chore.';
 
 const body = `## Get Link screens that keep re-arming
 
@@ -87,9 +87,9 @@ const faq: readonly BypassFaq[] = [
       'No. Captcha only when the page shows one—Skip Wait pins it on the overlay. Supported Links Go pages do not need a separate userscript.',
   },
   {
-    question: 'Is the AdLinkFly Links Go path free?',
+    question: 'How much does the AdLinkFly Links Go path cost?',
     answer:
-      'Yes. Skip Wait is free, with no account and no paid tier for Links Go support.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Clipi bypass search usually means a compact short URL still parks you on a waiting page before the long destination. Skip Wait is the free Chrome extension that clears that gate and redirects when unlock is ready—without continue hunting.';
+  'A Clipi bypass search usually means a compact short URL still parks you on a waiting page before the long destination. Skip Wait is the $1/month Chrome extension that clears that gate and redirects when unlock is ready—without continue hunting.';
 
 const body = `## Compact short URLs with a stall screen
 
@@ -73,9 +73,9 @@ const faq: readonly BypassFaq[] = [
       'Client busywork is skipped. When a real hold is still required, Skip Wait waits that step, then continues—a stable clipi timer bypass.',
   },
   {
-    question: 'Is the Clipi path free?',
+    question: 'How much does the Clipi path cost?',
     answer:
-      'Yes. Skip Wait is free. The Clipi bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Clipi bypass runs on supported pages.',
   },
 ];
 

@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A FlightSim.to bypass search usually means a free addon download opened a countdown dialog before the transfer started. Skip Wait is the free Chrome extension that clears that timer dialog so flight simulator mods begin downloading without sitting through Unlocks in chrome.';
+  'A FlightSim.to bypass search usually means a free addon download opened a countdown dialog before the transfer started. Skip Wait is the $1/month Chrome extension that clears that timer dialog so flight simulator mods begin downloading without sitting through Unlocks in chrome.';
 
 const body = `## Free addon downloads stuck on a countdown dialog
 
@@ -61,9 +61,9 @@ const faq: readonly BypassFaq[] = [
       'Yes. Trigger download the normal way. Skip Wait handles the timed dialog behind that click.',
   },
   {
-    question: 'Is the FlightSim.to bypass free?',
+    question: 'How much does the FlightSim.to bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account or paid plan required.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

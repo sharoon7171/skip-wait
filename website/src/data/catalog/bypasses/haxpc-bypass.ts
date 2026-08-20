@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A HaxPC bypass search usually means you clicked a software download and got a generating wait instead of the file host. Skip Wait is the free Chrome extension that resolves the real link in the background so the same download button opens the host without that delay page.';
+  'A HaxPC bypass search usually means you clicked a software download and got a generating wait instead of the file host. Skip Wait is the $1/month Chrome extension that resolves the real link in the background so the same download button opens the host without that delay page.';
 
 const body = `## Download clicks that stall on a generating screen
 
@@ -78,9 +78,9 @@ const faq: readonly BypassFaq[] = [
       'No. Use the same UI. Skip Wait resolves the real URL behind the click.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. The HaxPC path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The HaxPC path runs on supported pages.',
   },
 ];
 

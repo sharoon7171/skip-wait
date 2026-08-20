@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Searching for a Sub4Unlock.io bypass or Sub2Unlock.io bypass usually means Unlock Link stayed disabled until YouTube subscribe variants, Instagram/Facebook/Twitter follow, and Telegram or Discord joins finished—plus a client timer on each lock. Skip Wait is the free Chrome extension that reads the destination href on Unlock Link so skip waiting page busywork is not a chat-join marathon.';
+  'Searching for a Sub4Unlock.io bypass or Sub2Unlock.io bypass usually means Unlock Link stayed disabled until YouTube subscribe variants, Instagram/Facebook/Twitter follow, and Telegram or Discord joins finished—plus a client timer on each lock. Skip Wait is the $1/month Chrome extension that reads the destination href on Unlock Link so skip waiting page busywork is not a chat-join marathon.';
 
 const body = `## Unlock Link locked behind chat joins and video actions
 
@@ -79,9 +79,9 @@ const faq: readonly BypassFaq[] = [
       'No. This flow is Unlock Link plus chat joins and video actions. Multi-slot password checklists live on separate product hosts.',
   },
   {
-    question: 'Is the Sub4Unlock.io bypass free?',
+    question: 'How much does the Sub4Unlock.io bypass cost?',
     answer:
-      'Yes. Skip Wait is free. The .io unlock path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The.io unlock path runs on supported pages.',
   },
 ];
 

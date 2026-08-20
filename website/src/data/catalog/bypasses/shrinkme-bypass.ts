@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A ShrinkMe bypass search usually starts after a monetized short URL hits an entry captcha, a blog mediator, and another countdown before the file. Skip Wait is the free Chrome extension that walks that short link bypass path in place so ad-link gates stop eating the whole session.';
+  'A ShrinkMe bypass search usually starts after a monetized short URL hits an entry captcha, a blog mediator, and another countdown before the file. Skip Wait is the $1/month Chrome extension that walks that short link bypass path in place so ad-link gates stop eating the whole session.';
 
 const body = `## Captcha first, then blogs, then another clock
 
@@ -76,9 +76,9 @@ const faq: readonly BypassFaq[] = [
       'No. Client-only delays and button hunting go away. When unlock still needs a real wait, Skip Wait stays on that step, then continues.',
   },
   {
-    question: 'Is the ShrinkMe bypass free?',
+    question: 'How much does the ShrinkMe bypass cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store with no paid plan for supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

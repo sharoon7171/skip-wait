@@ -46,7 +46,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Lockr share rarely ends at the file or channel you were promised. You land on Unlock content, grind Complete the 5 steps after a popup, browser-install offers, and Quick Step clicks, then sit on Unlocks in while Premium begs you to pay. Skip Wait is the free Chrome extension built for that locker card—cover the noise, finish the unlock path, open the real destination.';
+  'A Lockr share rarely ends at the file or channel you were promised. You land on Unlock content, grind Complete the 5 steps after a popup, browser-install offers, and Quick Step clicks, then sit on Unlocks in while Premium begs you to pay. Skip Wait is the $1/month Chrome extension built for that locker card—cover the noise, finish the unlock path, open the real destination.';
 
 const body = `## Unlock content cards that never feel finished
 
@@ -89,7 +89,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Do I need Lockr Premium?',
     answer:
-      'No. Premium is Lockr’s paid skip. Skip Wait is free and does not ask for a trial or card.',
+      'No. Premium is Lockr’s paid skip. Skip Wait is $1 per month and does not ask for a trial or card.',
   },
   {
     question: 'Why do some Lockr links feel endless after tasks?',
@@ -97,9 +97,9 @@ const faq: readonly BypassFaq[] = [
       'Long waitlists, nested lockers, or VPN/ad-blocker soft-blocks. That is why skip lockr waitlist and lockr unlock bypass searches cluster around stuck Unlock content cards.',
   },
   {
-    question: 'Is the Lockr bypass free?',
+    question: 'How much does the Lockr bypass cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store with no subscription for the bypass itself.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

@@ -41,7 +41,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A HubCloud bypass, vcloud bypass, or HubCDN download timer skip usually starts after a cloud-drive page shows a generating wait instead of the file. Skip Wait is the free Chrome extension that covers that page with an overlay and opens the next download-links page without the forced delay.';
+  'A HubCloud bypass, vcloud bypass, or HubCDN download timer skip usually starts after a cloud-drive page shows a generating wait instead of the file. Skip Wait is the $1/month Chrome extension that covers that page with an overlay and opens the next download-links page without the forced delay.';
 
 const body = `## Cloud drives that invent a generating pause
 
@@ -90,9 +90,9 @@ const faq: readonly BypassFaq[] = [
       'Waiting-page busywork goes away. When the host still gates release on a later page, that path still applies there.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. HubCloud, vcloud, and HubCDN support runs on matching pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. HubCloud, vcloud, and HubCDN support runs on matching pages.',
   },
 ];
 

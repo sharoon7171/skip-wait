@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Nitrolink bypass search usually starts after a short URL turns into a multi-page waiting chain and blog mediator tour. Skip Wait is the free Chrome extension that walks that redirect chain so skip multi step waits does not mean babysitting every hop.';
+  'A Nitrolink bypass search usually starts after a short URL turns into a multi-page waiting chain and blog mediator tour. Skip Wait is the $1/month Chrome extension that walks that redirect chain so skip multi step waits does not mean babysitting every hop.';
 
 const body = `## Short links that become a blog tour
 
@@ -67,9 +67,9 @@ const faq: readonly BypassFaq[] = [
       'If the unlock pattern is the same, the extension follows live behavior. You do not re-paste into a third-party tool for every rotation.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free with no paid plan for supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An SFL bypass search usually means a short link dumped you into gate timers and blog unlock waits. Skip Wait is the free Chrome extension that runs an sfl timer bypass and skip countdown path so the destination opens without manual delay steps.';
+  'An SFL bypass search usually means a short link dumped you into gate timers and blog unlock waits. Skip Wait is the $1/month Chrome extension that runs an sfl timer bypass and skip countdown path so the destination opens without manual delay steps.';
 
 const body = `## Gate clocks stacked with blog continues
 
@@ -71,9 +71,9 @@ const faq: readonly BypassFaq[] = [
       'Yes for the supported unlock pattern. Skip Wait follows live page behavior, so a new intermediate host in the same flow does not require a paste tool.',
   },
   {
-    question: 'Is the SFL bypass free?',
+    question: 'How much does the SFL bypass cost?',
     answer:
-      'Yes. Skip Wait is free. The SFL path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The SFL path runs on supported pages.',
   },
 ];
 

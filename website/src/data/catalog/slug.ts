@@ -1,4 +1,5 @@
 import type { SupportedBypass } from '@/types/catalog';
+import { PRICE } from '@/data/constants';
 
 function slugFromBypassName(name: string): string {
   const base = name
@@ -15,5 +16,5 @@ export function bypassSlug(entry: SupportedBypass): string {
 }
 
 export function bypassPageTitle(entry: SupportedBypass): string {
-  return `${entry.name} Bypass — Free Chrome Extension`;
+  return `${entry.name} Bypass — ${PRICE.label} Chrome Extension`;
 }

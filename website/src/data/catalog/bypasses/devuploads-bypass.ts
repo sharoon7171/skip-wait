@@ -48,7 +48,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Searching how to download from DevUploads or for a DevUploads bypass usually means a shared file URL bounced you into a long article with Scroll Down, Generate Download Link, and Link Generated waits. Skip Wait is a free Chrome extension that locks the mediator file card, prepares the CDN link, and shows one Direct Download · Skip Wait control.';
+  'Searching how to download from DevUploads or for a DevUploads bypass usually means a shared file URL bounced you into a long article with Scroll Down, Generate Download Link, and Link Generated waits. Skip Wait is a $1/month Chrome extension that locks the mediator file card, prepares the CDN link, and shows one Direct Download · Skip Wait control.';
 
 const body = `## Partner articles that bury Download Now
 
@@ -99,9 +99,9 @@ const faq: readonly BypassFaq[] = [
       'No. Skip Wait only shows a ready Direct Download button. You choose when to click.',
   },
   {
-    question: 'Is the DevUploads bypass free?',
+    question: 'How much does the DevUploads bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account and no paid tier for DevUploads or the listed partner cards.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

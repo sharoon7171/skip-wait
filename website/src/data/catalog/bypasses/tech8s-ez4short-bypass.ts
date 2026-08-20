@@ -42,7 +42,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Ez4Short bypass or Tech8s bypass search usually starts after a game or APK share opens a safe redirect, then a PLEASE WAIT blog, then another continue hop. Skip Wait is the free Chrome extension that walks that ad-link chain so a skip short link path does not mean tapping every gate yourself.';
+  'An Ez4Short bypass or Tech8s bypass search usually starts after a game or APK share opens a safe redirect, then a PLEASE WAIT blog, then another continue hop. Skip Wait is the $1/month Chrome extension that walks that ad-link chain so a skip short link path does not mean tapping every gate yourself.';
 
 const body = `## Safe redirects stacked with blog continues
 
@@ -91,9 +91,9 @@ const faq: readonly BypassFaq[] = [
       'If the unlock pattern is the same, Skip Wait follows behavior on the live page. You do not re-paste the URL into a third-party tool when mediators rotate.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store. The Tech8s / Ez4Short path runs with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Tech8s / Ez4Short path runs.',
   },
 ];
 

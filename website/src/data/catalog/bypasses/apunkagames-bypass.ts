@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An ApunKaGames bypass search usually means a multi-part game pack still forces a download process timer on every vlink before the part opens. Skip Wait is the free Chrome extension that clears those waiting pages on ApunKaSoftware and AKG Links flows so each part destination unlocks without restarting the please-wait loop.';
+  'An ApunKaGames bypass search usually means a multi-part game pack still forces a download process timer on every vlink before the part opens. Skip Wait is the $1/month Chrome extension that clears those waiting pages on ApunKaSoftware and AKG Links flows so each part destination unlocks without restarting the please-wait loop.';
 
 const body = `## Multi-part game packs and process timers
 
@@ -75,9 +75,9 @@ const faq: readonly BypassFaq[] = [
       'On supported gates, no. Skip Wait completes the continue flow so you are not hunting buttons through overlays.',
   },
   {
-    question: 'Is the ApunKaGames path free?',
+    question: 'How much does the ApunKaGames path cost?',
     answer:
-      'Yes. Skip Wait is free. The ApunKaGames bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The ApunKaGames bypass runs on supported pages.',
   },
 ];
 

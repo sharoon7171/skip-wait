@@ -33,7 +33,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'AnkerGames free downloads open a treasure-box waiting page with an initializing countdown before the real download controls appear. Skip Wait is the free Chrome extension that clears that Opening Treasure Box delay so you are not stuck watching progress fill while the quick check finishes.';
+  'AnkerGames free downloads open a treasure-box waiting page with an initializing countdown before the real download controls appear. Skip Wait is the $1/month Chrome extension that clears that Opening Treasure Box delay so you are not stuck watching progress fill while the quick check finishes.';
 
 const body = `## Opening Treasure Box before the file
 
@@ -81,9 +81,9 @@ const faq: readonly BypassFaq[] = [
       'Yes when the waiting page shows it. Skip Wait removes the countdown delay; the check remains the site’s unlock step for the buttons.',
   },
   {
-    question: 'Is the AnkerGames path free?',
+    question: 'How much does the AnkerGames path cost?',
     answer:
-      'Yes. Skip Wait is free. The AnkerGames bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The AnkerGames bypass runs on supported pages.',
   },
 ];
 

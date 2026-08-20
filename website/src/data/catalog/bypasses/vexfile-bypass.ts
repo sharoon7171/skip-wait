@@ -51,7 +51,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Shared VexFile links look simple—open the download card, verify you are human, tap Generate link—yet most people never land on the file. After Cloudflare Turnstile they hit Step 2 pages, fake green buttons, and Complete an offer to unlock while Checking completion spins. Skip Wait is the free Chrome extension that covers that card, keeps Turnstile visible in its overlay, then shows Direct Download · Skip Wait with filename, size, and the real file URL.';
+  'Shared VexFile links look simple—open the download card, verify you are human, tap Generate link—yet most people never land on the file. After Cloudflare Turnstile they hit Step 2 pages, fake green buttons, and Complete an offer to unlock while Checking completion spins. Skip Wait is the $1/month Chrome extension that covers that card, keeps Turnstile visible in its overlay, then shows Direct Download · Skip Wait with filename, size, and the real file URL.';
 
 const body = `## Generate link that opens an offer wall
 
@@ -98,9 +98,9 @@ const faq: readonly BypassFaq[] = [
       'No. The extension prepares the link and waits. You choose when to press Direct Download.',
   },
   {
-    question: 'Is this VexFile bypass free?',
+    question: 'How much does this VexFile bypass cost?',
     answer:
-      'Yes. Skip Wait is free on the Chrome Web Store—no subscription and no sign-in for the overlay.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

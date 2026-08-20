@@ -1,5 +1,5 @@
 import { bypassHowToSteps } from '@/data/catalog';
-import { CHROME_WEB_STORE_URL } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, PRICE } from '@/data/constants';
 import { routes } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
 import { ButtonLink } from '@/components/ui/Button';
@@ -13,7 +13,7 @@ function stepBody(index: number, fallback: string): React.ReactNode {
   if (index === 0) {
     return (
       <>
-        Add the free extension from the{' '}
+        Add Skip Wait from the{' '}
         <a
           href={CHROME_WEB_STORE_URL}
           target="_blank"
@@ -21,8 +21,8 @@ function stepBody(index: number, fallback: string): React.ReactNode {
           className={linkClassName}
         >
           Chrome Web Store
-        </a>
-        . Matching pages unlock automatically—no account.
+        </a>{' '}
+        and activate a {PRICE.label} license in the popup. Matching pages then unlock automatically.
       </>
     );
   }

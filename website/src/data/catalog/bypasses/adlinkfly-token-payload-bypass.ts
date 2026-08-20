@@ -40,7 +40,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People look for an AdLinkFly bypass, ShrinkPe bypass, LoanBuzz bypass, or a free short link skip when a download or movie share opens a captcha page instead of the file. Skip Wait is the free Chrome extension that runs on the supported captcha shortlink page: after you clear the check, it unlocks ordinary destinations without walking the blog chain by hand.';
+  'People look for an AdLinkFly bypass, ShrinkPe bypass, LoanBuzz bypass, or a free short link skip when a download or movie share opens a captcha page instead of the file. Skip Wait is the $1/month Chrome extension that runs on the supported captcha shortlink page: after you clear the check, it unlocks ordinary destinations without walking the blog chain by hand.';
 
 const body = `## Turnstile first, then Step One blogs
 
@@ -98,9 +98,9 @@ const faq: readonly BypassFaq[] = [
       'Aggressive blockers can lock the shortener or blog with an adblock warning. If progress stalls, allow ads or pause the blocker for that tab, reload, finish the captcha again, and let Skip Wait continue.',
   },
   {
-    question: 'Is the AdLinkFly Token Payload bypass free?',
+    question: 'How much does the AdLinkFly Token Payload bypass cost?',
     answer:
-      'Yes. Skip Wait is free. This short link bypass runs on supported pages with no account, paid plan, or unlimited bypass subscription.',
+      'Skip Wait is $1 per month. Activate a license in the popup. This short link bypass runs on supported pages.',
   },
 ];
 

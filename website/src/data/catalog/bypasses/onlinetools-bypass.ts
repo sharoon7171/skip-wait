@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An OnlineTools bypass or download timer skip search usually means you already generated a PNG, text, or CSV result and still hit an export wait. Skip Wait is the free Chrome extension that clears that post-generate timer so copy and download start immediately.';
+  'An OnlineTools bypass or download timer skip search usually means you already generated a PNG, text, or CSV result and still hit an export wait. Skip Wait is the $1/month Chrome extension that clears that post-generate timer so copy and download start immediately.';
 
 const body = `## Utility results stuck behind export waits
 
@@ -63,9 +63,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported pages. After generate finishes, the extension clears the wait so export controls are usable right away.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free with no paid plan for supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

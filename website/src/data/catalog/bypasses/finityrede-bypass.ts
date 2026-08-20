@@ -35,7 +35,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Finity Rede short link rarely means one click. You hit a Download File screen with a matching-shape (or math, emoji, color, slider) captcha, get told Brave, Opera GX, Thorium, and Tor are unsupported, then walk Encurtafy article steps packed with ads. Skip Wait is a free Chrome extension that clears that path—overlay on, destination next—without solving puzzles or babysitting every hop.';
+  'A Finity Rede short link rarely means one click. You hit a Download File screen with a matching-shape (or math, emoji, color, slider) captcha, get told Brave, Opera GX, Thorium, and Tor are unsupported, then walk Encurtafy article steps packed with ads. Skip Wait is a $1/month Chrome extension that clears that path—overlay on, destination next—without solving puzzles or babysitting every hop.';
 
 const body = `## Download File puzzles and browser scare panels
 
@@ -81,9 +81,9 @@ const faq: readonly BypassFaq[] = [
       'No. Different products, different mazes. Publishers sometimes chain them—after Finity Rede you may land on another shortener—but each hop has its own Skip Wait handling.',
   },
   {
-    question: 'Is the Finity Rede bypass free?',
+    question: 'How much does the Finity Rede bypass cost?',
     answer:
-      'Yes. Skip Wait is free with no account required for Finity Rede.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 

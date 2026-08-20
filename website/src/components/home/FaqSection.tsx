@@ -3,10 +3,11 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { FaqAccordion, type FaqAccordionItem } from '@/components/ui/FaqAccordion';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
+import { totalBypasses, totalDomains } from '@/data/catalog';
+import { PRICE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { faqPageJsonLd } from '@/data/seo';
 import { homeHash, routes } from '@/lib/routes';
-import { totalBypasses, totalDomains } from '@/data/catalog';
 
 function homeFaqItems(): readonly FaqAccordionItem[] {
   return faqs.map((item) => {
@@ -50,7 +51,7 @@ export function FaqSection(): React.ReactElement {
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
           <SectionHeader
             title="Questions Before You Install"
-            description="How Skip Wait bypasses countdowns, when it automates waits, Android with Quetta, what’s free, and how to request a site."
+            description={`How Skip Wait bypasses countdowns, when it automates waits, Android with Quetta, ${PRICE.label} pricing, and how to request a site.`}
           />
 
           <FaqAccordion items={homeFaqItems()} />

@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Storyline SCORM bypass or skip course wait search usually means a training slide locked Next behind a play countdown. Skip Wait is the free Chrome extension that clears that scorm timer bypass path so course slide bypass busywork is not the lesson itself.';
+  'A Storyline SCORM bypass or skip course wait search usually means a training slide locked Next behind a play countdown. Skip Wait is the $1/month Chrome extension that clears that scorm timer bypass path so course slide bypass busywork is not the lesson itself.';
 
 const body = `## Play countdowns on SCORM training slides
 
@@ -72,9 +72,9 @@ const faq: readonly BypassFaq[] = [
       'Client play-countdown theater goes away. If the package still requires a real completion check, that step still finishes before advance.',
   },
   {
-    question: 'Is the Storyline SCORM bypass free?',
+    question: 'How much does the Storyline SCORM bypass cost?',
     answer:
-      'Yes. Skip Wait is free. The Storyline SCORM path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Storyline SCORM path runs on supported pages.',
   },
 ];
 

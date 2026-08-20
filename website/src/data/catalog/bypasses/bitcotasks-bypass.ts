@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Bitcotasks bypass search usually means an earn-to-click shortener still forces a read article timer before the unlock. Skip Wait is the free Chrome extension that clears that article gate so the destination is available without scrolling filler for the clock.';
+  'A Bitcotasks bypass search usually means an earn-to-click shortener still forces a read article timer before the unlock. Skip Wait is the $1/month Chrome extension that clears that article gate so the destination is available without scrolling filler for the clock.';
 
 const body = `## Earn-to-click pages that force a read timer
 
@@ -73,9 +73,9 @@ const faq: readonly BypassFaq[] = [
       'On supported flows, no. The extension automates the wait pattern so you are not performing the dwell ritual by hand.',
   },
   {
-    question: 'Is the Bitcotasks path free?',
+    question: 'How much does the Bitcotasks path cost?',
     answer:
-      'Yes. Skip Wait is free. The Bitcotasks bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Bitcotasks bypass runs on supported pages.',
   },
 ];
 

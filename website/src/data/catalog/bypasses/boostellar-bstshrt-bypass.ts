@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Boostellar bypass or Bstshrt bypass search usually starts when a monetized short link freezes behind a content locker countdown. Skip Wait is the free Chrome extension that clears that locker gate so the destination opens without watching the unlock clock by hand.';
+  'A Boostellar bypass or Bstshrt bypass search usually starts when a monetized short link freezes behind a content locker countdown. Skip Wait is the $1/month Chrome extension that clears that locker gate so the destination opens without watching the unlock clock by hand.';
 
 const body = `## Content lockers that freeze Get Link
 
@@ -75,9 +75,9 @@ const faq: readonly BypassFaq[] = [
       'Related locker family, different action loop. Boostellar / Bstshrt focuses on countdown gates; BoostyLink also automates stacked locker actions.',
   },
   {
-    question: 'Is the Boostellar path free?',
+    question: 'How much does the Boostellar path cost?',
     answer:
-      'Yes. Skip Wait is free. The Boostellar / Bstshrt bypass runs on supported pages with no account or paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Boostellar / Bstshrt bypass runs on supported pages.',
   },
 ];
 

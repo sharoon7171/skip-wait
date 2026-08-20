@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching a Linkvertise bypass or linkvertise access bypass usually hit stacked ad tasks and access steps before any download URL or copied payload appears. Skip Wait is the free Chrome extension that works through those access screens and finishes with a redirect or clipboard result when the page releases it.';
+  'People searching a Linkvertise bypass or linkvertise access bypass usually hit stacked ad tasks and access steps before any download URL or copied payload appears. Skip Wait is the $1/month Chrome extension that works through those access screens and finishes with a redirect or clipboard result when the page releases it.';
 
 const body = `## Access steps that feel like a checklist, not a redirect
 
@@ -78,9 +78,9 @@ const faq: readonly BypassFaq[] = [
       'Client-only delay chrome goes away. Steps the locker still enforces finish before the payload releases.',
   },
   {
-    question: 'Is this free?',
+    question: 'How much does Skip Wait cost?',
     answer:
-      'Yes. Skip Wait is free. The Linkvertise path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The Linkvertise path runs on supported pages.',
   },
 ];
 

@@ -1,6 +1,6 @@
-Skip Wait is a free Chrome extension that helps you bypass countdown timers and clear delay pages on supported link shorteners, safelinks, and file hosts. On matching pages it either opens the destination right away or finishes the on-page unlock steps so you reach the final URL or file sooner.
+Skip Wait is a $1 per month Chrome extension that helps you bypass countdown timers and clear delay pages on supported link shorteners, safelinks, and file hosts. On matching pages it either opens the destination right away or finishes the on-page unlock steps so you reach the final URL or file sooner.
 
-No account, subscription, or paid plan is required. There is nothing to configure for supported sites. Pages outside supported short-link and delay flows are left alone.
+Bypass requires a $1 per month license. Activate the key in the popup. There is nothing else to configure for supported sites. Pages outside supported short-link and delay flows are left alone.
 
 
 --------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ WHAT IT DOES
 FEATURES
 --------------------------------------------------------------------------------
 
-• Free to use—no sign-up, subscription, or paywall
+• $1 per month—activate a license key in the popup
 • Automatic detection when you land on a matching short link, safelink, or file host
 • Popup focused on help—not a settings panel
 • “View supported sites” opens the current coverage list
@@ -48,9 +48,9 @@ HOW TO USE
 --------------------------------------------------------------------------------
 
 1. Install from the Chrome Web Store.
-2. Browse as usual. Open any supported short link, delay page, or file interstitial.
-3. The product detects the page and either opens the destination or completes the unlock flow.
-4. No configuration or account is required for supported sites.
+2. Activate a $1 per month license in the popup.
+3. Browse as usual. Open any supported short link, delay page, or file interstitial.
+4. The product detects the page and either opens the destination or completes the unlock flow.
 
 That is the full workflow. You do not turn sites on one by one, and you do not paste URLs into a separate tool—the handler runs on the page when it matches a supported flow.
 
@@ -77,7 +77,7 @@ WHO IT IS FOR
 • Anyone who opens short links and wants less time on interstitial screens
 • People who get files from hosts with mandatory pauses before the link appears
 • Users who hit continue gates or multi-step unlock pages on supported sites
-• Anyone looking for a free Chrome tool that clears supported short-link and file-host delays without an account
+• Anyone looking for a $1 per month Chrome tool that clears supported short-link and file-host delays
 
 
 --------------------------------------------------------------------------------
@@ -113,7 +113,6 @@ This keeps the listing accurate without freezing a brand roster that would go st
 PRIVACY AND DATA
 --------------------------------------------------------------------------------
 
-• No account and no sign-in
 • No ads injected by the product
 • Device-local storage for short-lived progress on multi-step shortener chains and for the cached supported-site list
 • Cookie reads only on certain supported pages where the destination lives in an HttpOnly cookie, and only to finish that jump locally
@@ -142,4 +141,4 @@ Detailed justifications for each permission are provided in the Chrome Web Store
 SUMMARY
 --------------------------------------------------------------------------------
 
-Install once, open a supported short link or delay page, and let the product handle the interstitial, gate, or unlock chain. Free, automatic on supported sites—so you get to the final URL or file with less friction.
+Install once, activate a $1 per month license, open a supported short link or delay page, and let the product handle the interstitial, gate, or unlock chain. Automatic on supported sites—so you get to the final URL or file with less friction.

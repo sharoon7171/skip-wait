@@ -1,9 +1,10 @@
 import type { BypassStep } from '@/types/catalog';
+import { PRICE } from '@/data/constants';
 
 export const bypassHowToSteps: readonly BypassStep[] = [
   {
     title: 'Install Skip Wait',
-    body: 'Add the free extension from the Chrome Web Store. Matching pages unlock automatically—no account.',
+    body: `Add Skip Wait from the Chrome Web Store and activate a ${PRICE.label} license in the popup. Matching pages then unlock automatically.`,
   },
   {
     title: 'Leave it enabled',

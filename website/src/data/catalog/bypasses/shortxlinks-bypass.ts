@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A ShortXLinks bypass search usually means a safelink countdown and generate-link chain stood between you and the file. Skip Wait is the free Chrome extension that runs a skip safelink wait and wordpress safelink bypass path across the network without paste tools.';
+  'A ShortXLinks bypass search usually means a safelink countdown and generate-link chain stood between you and the file. Skip Wait is the $1/month Chrome extension that runs a skip safelink wait and wordpress safelink bypass path across the network without paste tools.';
 
 const body = `## WordPress safelink forms before the decoded URL
 
@@ -77,9 +77,9 @@ const faq: readonly BypassFaq[] = [
       'No. Open the shared link normally. That is a safelink bypass in Chrome, not a third-party paste decoder.',
   },
   {
-    question: 'Is the ShortXLinks bypass free?',
+    question: 'How much does the ShortXLinks bypass cost?',
     answer:
-      'Yes. Skip Wait is free. The ShortXLinks path runs on supported pages with no paid plan.',
+      'Skip Wait is $1 per month. Activate a license in the popup. The ShortXLinks path runs on supported pages.',
   },
 ];
 

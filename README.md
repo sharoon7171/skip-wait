@@ -1,6 +1,6 @@
 # Skip Wait - Bypass Timers & Countdowns
 
-Bypass countdown timers and waiting pages on link shorteners and file hosts—or automate waits and continue clicks when a full skip isn’t possible.
+Bypass countdown timers and waiting pages on link shorteners and file hosts—or automate waits and continue clicks when a full skip isn’t possible. **$1 per month.**
 
 ![Skip Wait icon](extension/public/icon.png)
 
@@ -35,8 +35,9 @@ Browse the full [supported sites](https://skip-wait-website.vercel.app/sites) li
 ## How it works
 
 1. Install Skip Wait from the Chrome Web Store (use the link above).
-2. Browse as usual. When you land on a supported waiting page, countdown page, or short-link page, Skip Wait runs automatically.
-3. You’re either redirected to the final URL or the extension automates the wait/click so you reach your destination faster. No configuration needed for supported sites.
+2. Activate a $1 per month license in the popup.
+3. Browse as usual. When you land on a supported waiting page, countdown page, or short-link page, Skip Wait runs automatically.
+4. You’re either redirected to the final URL or the extension automates the wait/click so you reach your destination faster. No configuration needed for supported sites.
 
 ## Keep the site list current
 
