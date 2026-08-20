@@ -7,7 +7,11 @@ const WEBSITE_URL = 'https://skip-wait-website.vercel.app';
 
 export const SUPPORTED_SITES_URL = `${WEBSITE_URL}/sites`;
 
-export const PRICE_LABEL = '$1 per month';
+export const GUMROAD_URL = 'https://gumroad.com/l/vhjfx';
+
+export const PRICE_CARD = '$2';
+export const PRICE_CRYPTO = '$1';
+export const PRICE_LABEL = `${PRICE_CARD} / month`;
 
 export const CONTACT = {
   email: 'sharoon7171@gmail.com',

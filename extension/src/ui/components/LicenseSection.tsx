@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { activateLicense, refreshLicense } from '../../license/gate';
 import { clearLicenseSession, getStoredLicenseKey } from '../../license/storage';
 import type { LicensePlan } from '../../license/types';
-import { PRICE_LABEL } from '../constants';
+import { PRICE_CRYPTO, PRICE_LABEL } from '../constants';
+import { PricingModal } from './PricingModal';
 import { IconRefresh } from './icons';
 
 type Status = 'idle' | 'busy' | 'active' | 'missing' | 'err';
@@ -44,6 +45,7 @@ export function LicenseSection(): React.ReactElement {
   const [plan, setPlan] = useState<LicensePlan | null>(null);
   const [verifiedAt, setVerifiedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [pricingOpen, setPricingOpen] = useState(false);
   const busy = status === 'busy';
 
   const loadStatus = useCallback(async (): Promise<void> => {
@@ -127,6 +129,8 @@ export function LicenseSection(): React.ReactElement {
 
   return (
     <section className="px-4 py-2.5">
+      <PricingModal open={pricingOpen} onClose={() => setPricingOpen(false)} />
+
       <div className="flex items-center justify-between gap-3">
         <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">License</p>
         {activeKey ? (
@@ -139,7 +143,15 @@ export function LicenseSection(): React.ReactElement {
             <IconRefresh className={`size-4 ${busy ? 'animate-spin' : ''}`} />
             {busy ? 'Checking…' : 'Refresh'}
           </button>
-        ) : null}
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPricingOpen(true)}
+            className="inline-flex h-9 shrink-0 items-center whitespace-nowrap rounded-full bg-primary-600 px-3.5 text-[0.75rem] font-semibold text-white transition-colors hover:bg-primary-700"
+          >
+            Buy license
+          </button>
+        )}
       </div>
       <h2 className="mt-0.5 text-[0.875rem] font-bold tracking-tight text-ink">
         Activate Skip Wait · {PRICE_LABEL}
@@ -181,7 +193,15 @@ export function LicenseSection(): React.ReactElement {
             {busy ? 'Checking with server…' : 'Activate license'}
           </button>
           <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            {PRICE_LABEL}. One device per key. License is checked live with the server before each bypass.
+            {PRICE_LABEL} · {PRICE_CRYPTO} via direct crypto.{' '}
+            <button
+              type="button"
+              onClick={() => setPricingOpen(true)}
+              className="font-semibold text-primary-700 underline decoration-primary-200 underline-offset-2 hover:decoration-primary-500"
+            >
+              See pricing & buy
+            </button>
+            . One device per key.
           </p>
         </div>
       )}

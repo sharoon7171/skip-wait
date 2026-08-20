@@ -35,3 +35,12 @@ export function IconStar({ className = '' }: IconProps): React.ReactElement {
     </svg>
   );
 }
+
+export function IconClose({ className = '' }: IconProps): React.ReactElement {
+  return (
+    <svg {...stroke} className={className} aria-hidden>
+      <path d="M6 6l12 12" />
+      <path d="M18 6 6 18" />
+    </svg>
+  );
+}
