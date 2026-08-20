@@ -91,7 +91,7 @@ const redirectFromToken = async (): Promise<void> => {
   const url = destinationUrlFromAdlinkflyTokenPayload(token);
   if (!url) return;
   done = true;
-  const overlay = mountUi();
+  const overlay = ui ?? mountUi('Unlocking destination…');
   if (isOlaDriveDest(url)) {
     overlay.setStatus('Opening soon…');
     overlay.startCountdown(Date.now() + OLA_DRIVE_HOLD_MS);
@@ -105,15 +105,12 @@ const redirectFromToken = async (): Promise<void> => {
 export function initAdlinkflyTokenPayload(): void {
   void isRemoteSite('adlinkfly-token-payload').then((ok) => {
     if (!ok) return;
-    if (isTokenPayloadPage()) {
-      bootOverlayLock();
-      mountUi('Unlocking destination…');
-    }
-    void redirectFromToken();
-    whenDomParsed(() => {
-      if (!isTokenPayloadPage()) return;
+    const kick = (): void => {
+      if (!isTokenPayloadPage() || done) return;
       mountUi('Unlocking destination…');
       void redirectFromToken();
-    });
+    };
+    kick();
+    whenDomParsed(kick);
   });
 }
