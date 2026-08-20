@@ -1,11 +1,10 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { remoteSiteHosts } from '../../hosts/check';
 
 export const AROLINKS_UNLOCK_READY_MS = 25_000;
 export const AROLINKS_DEST_WAIT_MS = 60_000;
-export const AROLINKS_GATE_VALUE = 'insurance,online_colleges,study_abroad,finance,loan';
-export const AROLINKS_GATE_COOKIE_NAMES = ['adcadg', 'eonstudb', 'eonudb', 'uopusi'] as const;
 
 const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
+const AROLINKS_HOSTS = ['arolinks.com', 'vplink.in'] as const;
 
 export const arolinksAliasFromPath = (pathname: string): string | null => {
   const [seg, ...rest] = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
@@ -13,10 +12,15 @@ export const arolinksAliasFromPath = (pathname: string): string | null => {
   return seg;
 };
 
-export const isArolinksShortenerHref = async (href: string): Promise<boolean> => {
+const hostMatches = (hostname: string, roots: readonly string[]): boolean => {
+  const h = hostname.toLowerCase();
+  return roots.some((d) => h === d || h.endsWith(`.${d}`));
+};
+
+export const isArolinksAliasNav = (url: string): boolean => {
   try {
-    const { hostname, pathname } = new URL(href);
-    return (await hostIsRemoteSite(hostname, 'arolinks')) && !!arolinksAliasFromPath(pathname);
+    const u = new URL(url);
+    return hostMatches(u.hostname, AROLINKS_HOSTS) && !!arolinksAliasFromPath(u.pathname);
   } catch {
     return false;
   }
@@ -24,7 +28,7 @@ export const isArolinksShortenerHref = async (href: string): Promise<boolean> =>
 
 export const isTimedDestUrl = async (href: string): Promise<boolean> => {
   try {
-    return hostIsRemoteSite(new URL(href).hostname, 'arolinks-wait');
+    return hostMatches(new URL(href).hostname, await remoteSiteHosts('arolinks-wait'));
   } catch {
     return false;
   }

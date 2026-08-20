@@ -1,3 +1,2 @@
 export { initArolinksUnlock } from './unlock';
-export { initArolinksMediator } from './mediator';
-export { initArolinksOrigin } from './origin';
+export { initArolinksBackground } from './background';

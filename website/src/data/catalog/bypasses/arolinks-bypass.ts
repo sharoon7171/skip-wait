@@ -2,25 +2,12 @@ import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'Arolinks';
 
-const bypassType = 'Skip multi step Waits';
+const bypassType = 'Skip Short Link';
 
 const description =
-  'Arolinks bypass for stacked blog hops and unlock countdowns: Skip Wait advances continue gates and opens the destination without restarting the chain by hand.';
+  'Arolinks bypass for Please Wait redirects and unlock countdowns: Skip Wait stays on the short link, finishes the required hold, then opens the destination without sending you through blog hops.';
 
-const domains = [
-  'arolinks.com',
-  'vplink.in',
-  'apnahirework.com',
-  'crimejasoos.in',
-  'darkguruji.com',
-  'howdyrecipes.com',
-  'krishitalk.com',
-  'shikshaads.in',
-  'srtak.com',
-  'techcornernews.com',
-  'theimmigrationworld.com',
-  'studyspark.study',
-] as const;
+const domains = ['arolinks.com', 'vplink.in', 'studyspark.study'] as const;
 
 const keywords = [
   'arolinks bypass',
@@ -31,67 +18,67 @@ const keywords = [
   'arolinks timer bypass',
   'arolinks countdown bypass',
   'arolinks waiting page',
+  'arolinks please wait',
+  'arolinks unlock bypass',
   'vplink bypass',
-  'skip multi step waits',
-  'multi step link bypass',
+  'vplink.in bypass',
+  'please wait bypass',
+  'skip waiting page',
   'skip countdown timer',
   'bypass countdown timer',
-  'skip waiting page',
-  'please wait bypass',
   'link shortener bypass',
   'skip wait extension',
   'arolinks chrome extension',
-  'redirect chain bypass',
+  'short link bypass',
 ] as const;
 
 const intro =
-  'An Arolinks bypass matters when a shared short link turns into three blog hops and another unlock timer. Skip Wait is the free Chrome extension that walks that redirect chain for you so a multi step link bypass does not mean clicking Continue on every page.';
+  'An Arolinks bypass matters when a shared short link opens a Please Wait screen and tries to dump you onto slow blog pages before any unlock countdown. Skip Wait is the free Chrome extension that keeps you on the short link, finishes the real hold, and opens the destination without a multi-step blog tour.';
 
-const body = `## Short links that refuse to end in one hop
+const body = `## Please Wait that wants a blog tour
 
-Monetized Arolinks shares are built as a tour, not a redirect. You leave the shortener, land on a rotating article with a please-wait strip, tap Continue under ads, then bounce to another blog before the unlock screen even appears. Close one tab early and the whole Arolinks waiting page loop starts again.
+A typical Arolinks share does not open your file in one click. The short URL shows a Please Wait / Opening Link page, then tries to send you onto rotating article hosts with continue gates and ads. Only after that tour does the unlock screen appear—and another timer can still sit between you and the destination.
 
-That is different from a single interstitial. The product is the stack: hop count, session cookies, and a final countdown that only runs after the blogs cooperate.
+Slow or unreachable blog pages make the old path feel broken: the tab hangs, Cloudflare challenges appear, and the Arolinks waiting page loop restarts if you leave early. That is the pain an Arolinks timer bypass and Arolinks countdown bypass are meant to clear.
 
-### Stages people actually complain about
+### Stages people actually hit
 
-- Blog continue pages that rotate hosts between shares
-- Please-wait strips that re-enable Continue only after the client timer
-- Unlock countdowns that appear only after the hop list finishes
-- Lost progress when a hop opens in the wrong tab
+- Please Wait / Opening Link on the short URL before anything useful loads
+- Forced jumps toward rotating blog hosts that stall or challenge
+- Unlock countdown UI after the session is ready
+- Timed destination holds on some final links after Get Link
 
-## Running the live chain inside Chrome
+## Stay on the short link, then unlock
 
-Skip Wait treats Arolinks as a multi-step wait, not a paste-box riddle. On the short URL it starts the chain and covers the busy UI. On each article hop it completes the same continue action the page already expects, then follows the next location without you hunting buttons through overlays.
+Skip Wait treats Arolinks as a short-link unlock, not a blog crawl. On the short URL it blocks the forced hop away, covers the busy Please Wait UI, and holds only as long as the unlock step still requires. When the unlock page is ready, it opens the destination already present there—including through Vplink short links on the same path.
 
-When the unlock page finally loads, the extension holds only as long as that step still requires, then opens the destination already present on the page. Client chrome gets out of the way; server-side waits still finish honestly—so an Arolinks countdown bypass stays reliable instead of inventing a zero-second cheat that errors out.
+You do not hunt Continue under ads on article pages for this flow. Client chrome gets out of the way; the required unlock hold still finishes honestly so an Arolinks please wait bypass stays stable instead of inventing a zero-second cheat that errors out.
 
-## Supported blog hops, then unlock
+## When the destination still waits
 
-Skip Wait runs the continue flow on the listed Arolinks blog hosts, then returns you to the short URL for the unlock countdown. A new blog host is not covered until it is added to that supported list—same as staying in the live tab instead of pasting the URL into a third-party tool.
+Some destinations need an extra access window after unlock. Skip Wait keeps that hold when it applies, then opens the link. Paste tools often fail when the shortener expects a live browser session—arolinks chrome extension and skip wait extension installs keep that session on the tab instead.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
     question: 'What does an Arolinks bypass actually skip?',
     answer:
-      'It skips the busywork of multi-step waits: hunting Continue on blog hops and sitting through unlock UI after the chain is ready. Required holds still complete before the destination opens.',
+      'It skips the blog-hop busywork after Please Wait and the unlock UI hunting. The real unlock hold still completes, then the destination opens.',
+  },
+  {
+    question: 'Do I still visit the article / blog pages?',
+    answer:
+      'No. On supported Arolinks and Vplink short links, Skip Wait stays on the short URL and finishes unlock there instead of walking every blog hop.',
   },
   {
     question: 'Is every timer removed instantly?',
     answer:
-      'No. Client-only delays and button hunting go away. When unlock still needs a real wait, Skip Wait stays on that step, then continues—so the Arolinks timer bypass stays stable.',
+      'No. Forced redirects and button hunting go away. When unlock still needs a real wait, Skip Wait stays on that step, then continues—so the Arolinks timer bypass stays stable.',
   },
   {
-    question: 'Do I still click Continue on article pages?',
+    question: 'What if I see a VPN or security check?',
     answer:
-      'On supported hops, no. Skip Wait completes the continue flow so ads do not hide the control you were meant to press.',
-  },
-  {
-    question: 'What if tomorrow’s share uses a new blog host?',
-    answer:
-      'Skip Wait covers the listed Arolinks blog hops. A newly rotated host is not in that list until it is added. Stay on the tab for supported pages instead of pasting the URL into a third-party tool.',
+      'That is separate from the countdown. Complete or clear the check in the tab, then reload the short link so Skip Wait can run the Arolinks unlock bypass again.',
   },
   {
     question: 'Is this free?',

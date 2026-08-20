@@ -16,7 +16,7 @@
     },
     "default_popup": "popup.html"
   },
-  "permissions": ["cookies", "scripting", "storage", "webNavigation"],
+  "permissions": ["cookies", "declarativeNetRequestWithHostAccess", "scripting", "storage", "webNavigation"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js",
