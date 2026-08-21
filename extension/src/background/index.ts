@@ -29,6 +29,7 @@ import { initDuploadHoldNav, initDuploadResolve } from '../sites/dupload';
 import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot';
 import { initWorkinkMainWorldInject } from '../sites/workink';
 import { initVexfileMainWorldInject } from '../sites/vexfile';
+import { initDlsurfMainWorldInject } from '../sites/dlsurf';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -62,5 +63,6 @@ initDevuploadsResolve();
 initDuploadHoldNav();
 initDuploadResolve();
 initVexfileMainWorldInject();
+initDlsurfMainWorldInject();
 void pullHosts();
 initLicenseSync();

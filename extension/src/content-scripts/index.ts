@@ -83,6 +83,7 @@ import {
   initSub4unlockMeUnlock,
 } from '../sites/sub4unlock';
 import { initDroplinkUnlock } from '../sites/droplink';
+import { initDlsurfUnlock } from '../sites/dlsurf';
 import { initDevuploadsMediator } from '../sites/devuploads';
 import { initDuploadBypass } from '../sites/dupload';
 import { initEarn4linkMediator, initEarn4linkUnlock } from '../sites/earn4link';
@@ -249,6 +250,7 @@ const INITS = [
   initSub4unlockIoUnlock,
   initSub4unlockMeUnlock,
   initDroplinkUnlock,
+  initDlsurfUnlock,
   initDevuploadsMediator,
   initDuploadBypass,
   initEarn4linkMediator,
