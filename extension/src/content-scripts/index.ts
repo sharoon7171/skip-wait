@@ -133,7 +133,7 @@ import {
   initVegamoviesLandingRedirect,
 } from '../sites/vegamovies';
 import { initCinefreakMediator } from '../sites/cinefreak';
-import { storageKeys } from '../license/storage';
+import { clearLicenseSession, getLicenseSession, licenseIsLive, storageKeys } from '../license/storage';
 import { ensureHosts } from '../hosts/check';
 
 const INITS = [
@@ -283,6 +283,25 @@ const INITS = [
   initPesktopBypass,
 ];
 
+const MAX_TIMER_MS = 2_147_483_647;
+
+const armLicenseExpiryTimer = async (): Promise<boolean> => {
+  const session = await getLicenseSession();
+  if (!session) return false;
+  const delay = session.exp - Date.now();
+  if (delay <= 0) {
+    await clearLicenseSession();
+    return true;
+  }
+  if (delay > MAX_TIMER_MS) return false;
+  window.setTimeout(() => {
+    void getLicenseSession().then((current) => {
+      if (current && !licenseIsLive(current.exp)) void clearLicenseSession();
+    });
+  }, delay);
+  return false;
+};
+
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;
 
 async function boot(): Promise<void> {
@@ -295,6 +314,7 @@ async function boot(): Promise<void> {
     if (await isOnCoomeetIframeHost()) initCoomeetIframeBootstrap();
     return;
   }
+  if (await armLicenseExpiryTimer()) return;
   for (const init of INITS) {
     try {
       init();
@@ -306,5 +326,6 @@ void boot();
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local' || window !== window.top) return;
-  if (storageKeys.licenseKey in changes) location.reload();
+  const keyChange = changes[storageKeys.licenseKey];
+  if (keyChange && keyChange.oldValue !== keyChange.newValue) location.reload();
 });

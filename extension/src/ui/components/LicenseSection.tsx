@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { activateLicense, refreshLicense } from '../../license/gate';
-import { clearLicenseSession, getStoredLicenseKey } from '../../license/storage';
+import { clearLicenseSession, getLicenseSession, getStoredLicenseKey, licenseIsLive } from '../../license/storage';
 import type { LicensePlan } from '../../license/types';
 import { PANEL_CARD, PRICE_CRYPTO, PRICE_LABEL } from '../constants';
 import { PricingModal } from './PricingModal';
@@ -63,6 +63,13 @@ export function LicenseSection(): React.ReactElement {
     setActiveKey(stored);
     const state = await refreshLicense();
     if (!state.ok) {
+      const session = await getLicenseSession();
+      if (state.error === 'NETWORK' && session && licenseIsLive(session.exp)) {
+        setExp(session.exp);
+        setPlan(session.plan);
+        setStatus('active');
+        return;
+      }
       setActiveKey(await getStoredLicenseKey());
       setExp(null);
       setPlan(null);

@@ -1,5 +1,5 @@
 import { pullHosts } from '../hosts/check';
-import { storageKeys } from '../license/storage';
+import { initLicenseSync } from '../license/sync';
 import { initCoomeetMainWorldInject } from './coomeet-main-world-inject';
 import { initDocumentVisibilitySpoof } from './document-visibility-spoof';
 import { initFclcAlertSuppress, initFclcLinksGo } from '../sites/fclc';
@@ -63,7 +63,4 @@ initDuploadHoldNav();
 initDuploadResolve();
 initVexfileMainWorldInject();
 void pullHosts();
-
-chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && storageKeys.licenseKey in changes) chrome.runtime.reload();
-});
+initLicenseSync();

@@ -2,13 +2,16 @@ import { LICENSE_API_URL } from './config';
 import {
   clearLicenseSession,
   getDeviceId,
+  getLicenseSession,
   getStoredLicenseKey,
-  saveLicenseKey,
+  licenseIsLive,
+  saveLicenseSession,
 } from './storage';
-import type { ActivateResponse, LicenseState } from './types';
-import { LICENSE_KEY_RE } from './types';
+import { isLicenseExp, isLicensePlan, LICENSE_KEY_RE, type ActivateResponse, type LicenseState } from './types';
 
 const HARD_FAIL = new Set(['LICENSE_NOT_FOUND', 'LICENSE_EXPIRED', 'DEVICE_MISMATCH']);
+
+let hydrate: Promise<boolean> | null = null;
 
 const post = async (path: string, body: Record<string, string>): Promise<ActivateResponse> => {
   try {
@@ -29,9 +32,22 @@ const normalizeKey = (raw: string): string | null => {
   return LICENSE_KEY_RE.test(key) ? key : null;
 };
 
+const persistLive = async (plan: unknown, exp: unknown): Promise<LicenseState | null> => {
+  if (!isLicensePlan(plan) || !isLicenseExp(exp) || !licenseIsLive(exp)) return null;
+  const key = await getStoredLicenseKey();
+  if (!key) return { ok: false, error: 'NO_KEY' };
+  await saveLicenseSession({ key, plan, exp });
+  return { ok: true, plan, exp };
+};
+
 const applyValidateResponse = async (res: ActivateResponse): Promise<LicenseState> => {
-  if (res.ok && res.plan && typeof res.exp === 'number') {
-    return { ok: true, plan: res.plan, exp: res.exp };
+  if (res.ok) {
+    const live = await persistLive(res.plan, res.exp);
+    if (live) return live;
+  }
+  if (res.ok && isLicenseExp(res.exp) && !licenseIsLive(res.exp)) {
+    await clearLicenseSession();
+    return { ok: false, error: 'LICENSE_EXPIRED' };
   }
   if (res.error && HARD_FAIL.has(res.error)) await clearLicenseSession();
   return { ok: false, error: res.error ?? 'VALIDATE_FAILED' };
@@ -49,14 +65,30 @@ export const activateLicense = async (rawKey: string): Promise<LicenseState> => 
   if (!key) return { ok: false, error: 'INVALID_KEY' };
   const deviceId = await getDeviceId();
   const res = await post('/v1/activate', { key, deviceId });
-  if (!res.ok || !res.plan || typeof res.exp !== 'number') {
+  if (!res.ok) return { ok: false, error: res.error ?? 'ACTIVATE_FAILED' };
+  if (!isLicensePlan(res.plan) || !isLicenseExp(res.exp) || !licenseIsLive(res.exp)) {
     return { ok: false, error: res.error ?? 'ACTIVATE_FAILED' };
   }
-  await saveLicenseKey(key);
+  await saveLicenseSession({ key, plan: res.plan, exp: res.exp });
   return { ok: true, plan: res.plan, exp: res.exp };
 };
 
 export const refreshLicense = (): Promise<LicenseState> => validateWithServer();
 
-export const verifyLicense = (): Promise<boolean> =>
-  validateWithServer().then((state) => state.ok);
+export const verifyLicense = async (): Promise<boolean> => {
+  const session = await getLicenseSession();
+  if (session) {
+    if (licenseIsLive(session.exp)) return true;
+    await clearLicenseSession();
+    return false;
+  }
+  if (!(await getStoredLicenseKey())) return false;
+  if (!hydrate) {
+    hydrate = validateWithServer()
+      .then((state) => state.ok)
+      .finally(() => {
+        hydrate = null;
+      });
+  }
+  return hydrate;
+};
