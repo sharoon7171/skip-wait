@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { HOSTS_UPDATED_AT_KEY, parseHostsUpdatedAt, pullHosts } from '../../hosts/check';
+import { PANEL_CARD } from '../constants';
 import { IconRefresh } from './icons';
 
 type Status = 'idle' | 'loading' | 'err';
@@ -34,7 +35,7 @@ export function HostsUpdateSection(): React.ReactElement {
   })();
 
   return (
-    <section className="px-4 py-2.5">
+    <section className={PANEL_CARD}>
       <div className="flex items-center justify-between gap-3">
         <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">New domains</p>
         <button

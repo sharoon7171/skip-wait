@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { activateLicense, refreshLicense } from '../../license/gate';
 import { clearLicenseSession, getStoredLicenseKey } from '../../license/storage';
 import type { LicensePlan } from '../../license/types';
-import { PRICE_CRYPTO, PRICE_LABEL } from '../constants';
+import { PANEL_CARD, PRICE_CRYPTO, PRICE_LABEL } from '../constants';
 import { PricingModal } from './PricingModal';
 import { IconRefresh } from './icons';
 
@@ -128,7 +128,7 @@ export function LicenseSection(): React.ReactElement {
   })();
 
   return (
-    <section className="px-4 py-2.5">
+    <section className={PANEL_CARD}>
       <PricingModal open={pricingOpen} onClose={() => setPricingOpen(false)} />
 
       <div className="flex items-center justify-between gap-3">

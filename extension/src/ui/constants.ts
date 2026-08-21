@@ -13,6 +13,9 @@ export const PRICE_CARD = '$2';
 export const PRICE_CRYPTO = '$1';
 export const PRICE_LABEL = `${PRICE_CARD} / month`;
 
+export const PANEL_CARD =
+  'overflow-hidden rounded-card bg-surface-canvas px-4 py-3 shadow-[0_10px_28px_-12px_oklch(0.2_0.015_264/0.45)] ring-1 ring-neutral-200';
+
 export const CONTACT = {
   email: 'sharoon7171@gmail.com',
   telegram: 'https://t.me/sharoon1998',
