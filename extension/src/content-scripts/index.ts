@@ -71,7 +71,7 @@ import {
 import { initPrmoviesRedirect } from '../sites/prmovies';
 import { initSidMediatorBypass } from '../sites/sid-mediator';
 import { initRomsfunDownloadInstant } from '../sites/romsfun';
-import { initShortxlinksSafelinkChain } from '../sites/shortxlinks';
+import { initShortxlinksUnlock } from '../sites/shortxlinks';
 import { initShrtflyEntry, initShrtflyMediator } from '../sites/shrtfly';
 import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../sites/shrinkme';
 import { initWpSafelinkQueryRedirect, initWpSafelinkRedirect } from '../sites/wp-safelink';
@@ -159,7 +159,7 @@ const INITS = [
   initLiteshortEntry,
   initLiteshortMediator,
   initLinksterrGateway,
-  initShortxlinksSafelinkChain,
+  initShortxlinksUnlock,
   init1shortlinkRedirect,
   initAdfocusRedirect,
   initGplinksGate,
