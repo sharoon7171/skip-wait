@@ -2,7 +2,6 @@ import { LICENSE_API_URL } from './config';
 import {
   clearLicenseSession,
   getDeviceId,
-  getLicenseSession,
   getStoredLicenseKey,
   licenseIsLive,
   saveLicenseSession,
@@ -10,8 +9,6 @@ import {
 import { isLicenseExp, isLicensePlan, LICENSE_KEY_RE, type ActivateResponse, type LicenseState } from './types';
 
 const HARD_FAIL = new Set(['LICENSE_NOT_FOUND', 'LICENSE_EXPIRED', 'DEVICE_MISMATCH']);
-
-let hydrate: Promise<boolean> | null = null;
 
 const post = async (path: string, body: Record<string, string>): Promise<ActivateResponse> => {
   try {
@@ -74,21 +71,3 @@ export const activateLicense = async (rawKey: string): Promise<LicenseState> => 
 };
 
 export const refreshLicense = (): Promise<LicenseState> => validateWithServer();
-
-export const verifyLicense = async (): Promise<boolean> => {
-  const session = await getLicenseSession();
-  if (session) {
-    if (licenseIsLive(session.exp)) return true;
-    await clearLicenseSession();
-    return false;
-  }
-  if (!(await getStoredLicenseKey())) return false;
-  if (!hydrate) {
-    hydrate = validateWithServer()
-      .then((state) => state.ok)
-      .finally(() => {
-        hydrate = null;
-      });
-  }
-  return hydrate;
-};

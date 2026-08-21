@@ -1,4 +1,4 @@
-import { verifyLicense } from '../license/gate';
+import { clearLicenseSession, getLicenseSession, licenseIsLive } from '../license/storage';
 
 const STORAGE_KEY = 'skipWaitHosts';
 export const HOSTS_UPDATED_AT_KEY = 'skipWaitHostsUpdatedAt';
@@ -78,7 +78,13 @@ export const remoteSiteHosts = async (site: string): Promise<string[]> => {
 
 export const hostIsRemoteSite = async (hostname: string, site: string): Promise<boolean> => {
   if (!hostMatches(hostname, await remoteSiteHosts(site))) return false;
-  return verifyLicense();
+  const session = await getLicenseSession();
+  if (!session) return false;
+  if (!licenseIsLive(session.exp)) {
+    await clearLicenseSession();
+    return false;
+  }
+  return true;
 };
 
 export const isRemoteSite = (site: string): Promise<boolean> => hostIsRemoteSite(location.hostname, site);
