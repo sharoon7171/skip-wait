@@ -524,6 +524,9 @@
   "dupload": {
     "hosts": ["dupload.net"]
   },
+  "dlsurf": {
+    "hosts": ["dlsurf.com", "dl.surf"]
+  },
   "droplink": {
     "hosts": ["droplink.co"]
   },
