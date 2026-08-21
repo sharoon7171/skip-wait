@@ -2,79 +2,84 @@ import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
 const name = 'ShortXLinks';
 
-const bypassType = 'Skip Safelink Wait';
+const bypassType = 'Skip Short Link';
 
 const description =
-  'ShortXLinks bypass skips the safelink waiting chain and multi-page ad waits across this shortener network so the final URL unlocks faster.';
+  'ShortXLinks bypass skips the ad-hop detour and Too Early hold, then finishes Get Link unlock so the shared short URL opens the destination without babysitting every interstitial.';
 
-const domains = [
-  'shortxlinks.com',
-  'flexthecar.com',
-  'nkrmusic.in.net',
-  'raisingcanesmenux.com',
-  'pcfileszone.com',
-] as const;
+const domains = ['shortxlinks.com', 'shortxlinks.in'] as const;
 
 const keywords = [
   'shortxlinks bypass',
-  'ShortXLinks bypass extension',
+  'shortxlinks.in bypass',
+  'shortxlinks.com bypass',
+  'bypass shortxlinks',
+  'skip shortxlinks',
   'shortxlinks timer bypass',
-  'skip safelink wait',
+  'shortxlinks countdown bypass',
+  'shortxlinks too early',
+  'shortxlinks get link',
+  'shortxlinks waiting page',
+  'shortxlinks please wait',
+  'shortxlinks unlock bypass',
+  'shortxlinks chrome extension',
+  'shortxlinks bypass chrome',
   'skip countdown timer',
   'bypass countdown timer',
   'skip waiting page',
   'link shortener bypass',
   'skip wait extension',
-  'safelink bypass',
-  'wordpress safelink bypass',
+  'get link shortener bypass',
+  'short link bypass',
 ] as const;
 
 const intro =
-  'A ShortXLinks bypass search usually means a safelink countdown and generate-link chain stood between you and the file. Skip Wait is the $1/month Chrome extension that runs a skip safelink wait and wordpress safelink bypass path across the network without paste tools.';
+  'A ShortXLinks bypass matters when a shared short URL bounces you through ad interstitials and a Too Early lock before Get Link ever appears. Skip Wait is the $1/month Chrome extension that keeps you on the short-link unlock path, finishes the real hold, and opens the destination without walking every hop by hand.';
 
-const body = `## WordPress safelink forms before the decoded URL
+const body = `## Too Early before Get Link
 
-ShortXLinks-style wraps often force a safelink wait, a generate-link form, then more ad hops before the decoded destination. Each page has its own timer or button hunt, and leaving early usually resets progress—why people hunt for a shortxlinks timer bypass, safelink bypass, skip countdown timer, and link shortener bypass instead of submitting every form by hand.
+A ShortXLinks share rarely opens the file in one click. The short URL first tries to dump you onto rotating ad pages. Come back too soon and the unlock screen says Too Early; wait long enough and Get Link finally shows. Leave mid-flow and the ShortXLinks waiting page can reset, which is the pain a shortxlinks timer bypass and shortxlinks countdown bypass are meant to clear.
 
-The destination is already encoded in the chain. The product is the multi-page wait that makes you prove you stayed.
+Cosmetic Continue buttons and ad tours are not the destination. The real gate is the shortener’s unlock session: stay long enough for Too Early to clear, then Get Link can open the file.
 
-### Chain pieces that feel endless
+### Stages people actually hit
 
-- Safelink countdown pages with generate forms
-- Multi-page ad waits before unlock
-- Manual form submits on each hop
-- Lost progress when a tab closes mid-chain
+- Short URL bounce toward ad interstitials instead of the file
+- Too Early lock if unlock is opened before the session is ready
+- Get Link / unlock countdown UI after the hold
+- Manual reloads when a tab closes mid-wait
 
-## Resolving the destination on live pages
+## Stay on the short-link unlock
 
-Skip Wait runs on matching safelink pages inside Chrome. It bypasses supported countdown and generate steps, then resolves the decoded destination the pages already carry.
+Skip Wait treats ShortXLinks as a short-link unlock, not an ad crawl. It keeps the session on the shortener unlock path, covers the busy waiting UI, and holds only as long as Too Early still requires. When unlock is ready, it finishes Get Link and opens the destination already present there—including through ShortXLinks.in short links on the same path.
 
-You keep opening the shared link as usual. There is no separate decoder site—just a ShortXLinks bypass extension that treats the safelink chain as one automated path.
+You do not babysit every interstitial Continue for this flow. The required unlock hold still finishes honestly so a shortxlinks please wait bypass stays stable instead of inventing a zero-second cheat that errors out.
 
-Rotating blog and form hosts break bookmark workarounds. The extension follows the live safelink pattern across the supported network, so a skip wait extension install keeps working when intermediate pages reshuffle—as long as the unlock behavior stays the same.
+## Live session vs a paste decoder
+
+Unlock needs a live shortener session, not a frozen string from last week. Skip Wait runs inside Chrome on the short link, so rotating ad hosts do not force you to re-copy the alias into a third-party resolver. A shortxlinks chrome extension or skip wait extension install keeps that session on the tab until Get Link succeeds.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'What is a ShortXLinks bypass?',
+    question: 'What does a ShortXLinks bypass actually skip?',
     answer:
-      'It is a way to skip safelink waiting chains and multi-page ad waits on the ShortXLinks network. Skip Wait unlocks the destination in Chrome without manual form busywork.',
+      'It skips the ad-hop busywork and unlock UI hunting. The real Too Early hold still completes, then Get Link opens the destination.',
   },
   {
-    question: 'Does Skip Wait handle generate-link forms?',
+    question: 'Do I still visit the ad interstitial pages?',
     answer:
-      'Yes on supported hops. Generate-link steps and safelink countdowns are automated so you are not submitting every form by hand.',
+      'No. On supported ShortXLinks short links, Skip Wait stays on the unlock path and finishes there instead of walking every interstitial.',
   },
   {
-    question: 'Is this a WordPress safelink bypass?',
+    question: 'What does Too Early mean?',
     answer:
-      'For supported ShortXLinks-style safelink pages, yes. The extension targets that countdown and generate pattern rather than inventing a destination offline.',
+      'The unlock screen is not ready yet. Skip Wait waits that required hold, then continues—so the shortxlinks too early / shortxlinks timer bypass stays stable.',
   },
   {
-    question: 'Do I need to paste the URL somewhere?',
+    question: 'Is every timer removed instantly?',
     answer:
-      'No. Open the shared link normally. That is a safelink bypass in Chrome, not a third-party paste decoder.',
+      'No. Forced ad hops and button hunting go away. When unlock still needs a real wait, Skip Wait stays on that step, then opens the link.',
   },
   {
     question: 'How much does the ShortXLinks bypass cost?',
