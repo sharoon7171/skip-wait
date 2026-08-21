@@ -1,0 +1,1 @@
+Uses the "alarms" permission to schedule license checks when Chrome starts and once per hour, and to clear an expired license at the stored expiry time. Bypass itself only reads the local license session and does not call the license server on every page. Alarms are not used for ads, tracking, notifications, or unrelated background work.
