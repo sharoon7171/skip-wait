@@ -22,6 +22,7 @@ import { bypass as cutwinBypass } from './bypasses/cutwin-bypass';
 import { bypass as cutyBypass } from './bypasses/cuty-bypass';
 import { bypass as devuploadsBypass } from './bypasses/devuploads-bypass';
 import { bypass as droplinkBypass } from './bypasses/droplink-bypass';
+import { bypass as dlsurfBypass } from './bypasses/dlsurf-bypass';
 import { bypass as duploadBypass } from './bypasses/dupload-bypass';
 import { bypass as earn4linkBypass } from './bypasses/earn4link-bypass';
 import { bypass as earnlinksBypass } from './bypasses/earnlinks-bypass';
@@ -141,6 +142,7 @@ export const bypasses: readonly SupportedBypass[] = [
   cutyBypass,
   devuploadsBypass,
   droplinkBypass,
+  dlsurfBypass,
   duploadBypass,
   earn4linkBypass,
   earnlinksBypass,
