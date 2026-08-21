@@ -5,7 +5,7 @@ import { Header } from '../components/Header';
 import { HostsUpdateSection } from '../components/HostsUpdateSection';
 import { LicenseSection } from '../components/LicenseSection';
 import { IconArrowRight } from '../components/icons';
-import { CONTACT, SUPPORTED_SITES_URL, assetUrl, getRequestSupportUrl } from '../constants';
+import { CONTACT, PANEL_CARD, SUPPORTED_SITES_URL, assetUrl, getRequestSupportUrl } from '../constants';
 import '../global.css';
 
 const contacts = [
@@ -16,9 +16,9 @@ const contacts = [
 
 function PopupPage(): React.ReactElement {
   return (
-    <div className="relative box-border w-[480px] bg-surface-canvas font-sans antialiased">
+    <div className="relative box-border w-[480px] bg-surface-muted font-sans antialiased">
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.96_0.025_250)_0%,oklch(1_0_0)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.96_0.025_250)_0%,oklch(0.985_0_0)_100%)]" />
         <div
           className="absolute inset-0 [mask-image:linear-gradient(180deg,black_0%,transparent_88%)]"
           style={{
@@ -31,7 +31,7 @@ function PopupPage(): React.ReactElement {
       <div className="relative flex flex-col">
         <Header />
 
-        <main className="space-y-2 px-4 pb-2">
+        <main className="flex flex-col gap-3 px-4 pb-3">
           <a
             href={SUPPORTED_SITES_URL}
             target="_blank"
@@ -49,35 +49,33 @@ function PopupPage(): React.ReactElement {
             <IconArrowRight className="size-5 shrink-0 text-ink-inverse transition-transform group-hover:translate-x-0.5" />
           </a>
 
-          <div className="divide-y divide-neutral-200/80 overflow-hidden rounded-card bg-surface-canvas shadow-[0_8px_24px_-16px_oklch(0.2_0.015_264/0.5)] ring-1 ring-neutral-200">
-            <LicenseSection />
-            <HostsUpdateSection />
+          <LicenseSection />
+          <HostsUpdateSection />
 
-            <section aria-labelledby="request-heading" className="bg-surface-muted/70 px-4 py-2.5">
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Report a site</p>
-              <h2 id="request-heading" className="mt-0.5 text-[0.875rem] font-bold tracking-tight text-ink">
-                Bypass not working, or a new domain?
-              </h2>
-              <p className="mt-1 text-[0.8125rem] font-medium leading-snug text-ink-soft">
-                Message us on GitHub, Telegram, or Email with the page URL. If we already support that bypass, we add the
-                domain and you tap Refresh. If it is a new site, we add support as soon as we can.
-              </p>
-              <div className="mt-2 grid grid-cols-3 gap-1.5">
-                {contacts.map((contact) => (
-                  <a
-                    key={contact.label}
-                    href={contact.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-surface-canvas text-[0.75rem] font-semibold text-ink no-underline ring-1 ring-neutral-300 transition-colors hover:bg-primary-50 hover:text-primary-700 hover:ring-primary-300"
-                  >
-                    <img src={assetUrl(contact.icon)} alt="" className="size-4" width={16} height={16} />
-                    {contact.label}
-                  </a>
-                ))}
-              </div>
-            </section>
-          </div>
+          <section aria-labelledby="request-heading" className={PANEL_CARD}>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Report a site</p>
+            <h2 id="request-heading" className="mt-0.5 text-[0.875rem] font-bold tracking-tight text-ink">
+              Bypass not working, or a new domain?
+            </h2>
+            <p className="mt-1 text-[0.8125rem] font-medium leading-snug text-ink-soft">
+              Message us on GitHub, Telegram, or Email with the page URL. If we already support that bypass, we add the
+              domain and you tap Refresh. If it is a new site, we add support as soon as we can.
+            </p>
+            <div className="mt-2 grid grid-cols-3 gap-1.5">
+              {contacts.map((contact) => (
+                <a
+                  key={contact.label}
+                  href={contact.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-surface-canvas text-[0.75rem] font-semibold text-ink no-underline ring-1 ring-neutral-300 transition-colors hover:bg-primary-50 hover:text-primary-700 hover:ring-primary-300"
+                >
+                  <img src={assetUrl(contact.icon)} alt="" className="size-4" width={16} height={16} />
+                  {contact.label}
+                </a>
+              ))}
+            </div>
+          </section>
         </main>
 
         <Footer />
@@ -88,8 +86,8 @@ function PopupPage(): React.ReactElement {
 
 const root = document.getElementById('root');
 if (root) {
-  document.documentElement.className = 'm-0 w-[480px] bg-surface-canvas font-sans antialiased';
-  document.body.className = 'm-0 w-[480px] bg-surface-canvas font-sans antialiased';
+  document.documentElement.className = 'm-0 w-[480px] bg-surface-muted font-sans antialiased';
+  document.body.className = 'm-0 w-[480px] bg-surface-muted font-sans antialiased';
   root.className = 'm-0 w-[480px]';
   createRoot(root).render(
     <StrictMode>
