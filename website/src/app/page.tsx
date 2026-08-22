@@ -7,6 +7,7 @@ import { FlowSection } from '@/components/home/FlowSection';
 import { AndroidGuideSection } from '@/components/home/AndroidGuideSection';
 import { ShowcaseSection } from '@/components/home/ShowcaseSection';
 import { FaqSection } from '@/components/home/FaqSection';
+import { PricingSection } from '@/components/home/PricingSection';
 import { SupportCta } from '@/components/layout/SupportCta';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { SITE } from '@/data/constants';
@@ -62,6 +63,7 @@ export default function HomePage(): React.ReactElement {
       <FlowSection />
       <AndroidGuideSection />
       <ShowcaseSection />
+      <PricingSection />
       <FaqSection />
       <SupportCta />
     </>
