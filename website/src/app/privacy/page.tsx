@@ -71,7 +71,7 @@ export default function PrivacyPage(): React.ReactElement {
             {SITE.name} is a Chrome extension that, on supported link shorteners and file hosts,
             bypasses countdown timers and waiting pages or automates waits and continue clicks. It is
             available from the{' '}
-            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. Bypass requires a {PRICE.label}
+            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. Bypass requires a {PRICE.summary}
             license. No separate website account is required.
           </p>
           <p>

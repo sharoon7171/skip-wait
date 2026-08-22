@@ -16,5 +16,5 @@ export function bypassSlug(entry: SupportedBypass): string {
 }
 
 export function bypassPageTitle(entry: SupportedBypass): string {
-  return `${entry.name} Bypass — ${PRICE.label} Chrome Extension`;
+  return `${entry.name} Bypass — ${PRICE.summary} Chrome Extension`;
 }

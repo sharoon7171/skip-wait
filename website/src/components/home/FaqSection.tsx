@@ -7,7 +7,7 @@ import { totalBypasses, totalDomains } from '@/data/catalog';
 import { PRICE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { faqPageJsonLd } from '@/data/seo';
-import { homeHash, routes } from '@/lib/routes';
+import { homeHash, homeSections, routes } from '@/lib/routes';
 
 function homeFaqItems(): readonly FaqAccordionItem[] {
   return faqs.map((item) => {
@@ -21,6 +21,20 @@ function homeFaqItems(): readonly FaqAccordionItem[] {
             <AppLink href={routes.guidesAndroid}>Install on Android</AppLink> guide for Quetta’s
             official install steps. Quetta’s iOS app does not document Chrome extension support, so
             Skip Wait is not offered there.
+          </>
+        ),
+      };
+    }
+    if (item.question === 'How much does Skip Wait cost?') {
+      return {
+        question: item.question,
+        answer: (
+          <>
+            Skip Wait is {PRICE.cardLabel} with card on Gumroad, or {PRICE.cryptoLabel} with crypto.
+            Gumroad sends your license key to your purchase email. For crypto, message us on
+            Telegram or by email for payment details. See{' '}
+            <AppLink href={homeSections.pricing}>Pricing</AppLink> for buy links. Activate the key
+            in the extension popup. One device per key.
           </>
         ),
       };
@@ -51,7 +65,7 @@ export function FaqSection(): React.ReactElement {
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
           <SectionHeader
             title="Questions Before You Install"
-            description={`How Skip Wait bypasses countdowns, when it automates waits, Android with Quetta, ${PRICE.label} pricing, and how to request a site.`}
+            description={`How Skip Wait bypasses countdowns, when it automates waits, Android with Quetta, ${PRICE.summary} pricing, and how to request a site.`}
           />
 
           <FaqAccordion items={homeFaqItems()} />

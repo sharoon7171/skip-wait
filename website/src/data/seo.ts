@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, PRICE, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, GUMROAD_URL, PRICE, SITE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { homeSections } from '@/lib/routes';
 
@@ -52,11 +52,28 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
     downloadUrl: CHROME_WEB_STORE_URL,
     installUrl: CHROME_WEB_STORE_URL,
     offers: {
-      '@type': 'Offer',
-      price: PRICE.amount,
+      '@type': 'AggregateOffer',
+      lowPrice: PRICE.crypto,
+      highPrice: PRICE.card,
       priceCurrency: PRICE.currency,
       availability: 'https://schema.org/InStock',
-      description: PRICE.label,
+      description: `${PRICE.cardLabel} on Gumroad or ${PRICE.cryptoLabel} via crypto`,
+      offerCount: 2,
+      offers: [
+        {
+          '@type': 'Offer',
+          price: PRICE.card,
+          priceCurrency: PRICE.currency,
+          url: GUMROAD_URL,
+          description: `${PRICE.cardLabel} with card on Gumroad`,
+        },
+        {
+          '@type': 'Offer',
+          price: PRICE.crypto,
+          priceCurrency: PRICE.currency,
+          description: `${PRICE.cryptoLabel} via direct crypto`,
+        },
+      ],
     },
     author: {
       '@type': 'Person',
@@ -74,7 +91,7 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
       'Skip waiting pages and link shortener redirects',
       'Automate waits and continue clicks when a full bypass is not possible',
       'Instant redirect to the destination when the site allows it',
-      `${PRICE.label} Chrome extension. Activate a license in the popup`,
+      `${PRICE.summary} Chrome extension. Activate a license in the popup`,
     ],
     keywords: SITE.keywords.join(', '),
   };

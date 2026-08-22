@@ -22,7 +22,7 @@ function stepBody(index: number, fallback: string): React.ReactNode {
         >
           Chrome Web Store
         </a>{' '}
-        and activate a {PRICE.label} license in the popup. Matching pages then unlock automatically.
+        and activate a {PRICE.summary} license in the popup. Matching pages then unlock automatically.
       </>
     );
   }
