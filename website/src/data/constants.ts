@@ -1,8 +1,15 @@
+export const GUMROAD_URL = 'https://gumroad.com/l/vhjfx';
+
 export const PRICE = {
-  amount: '1',
+  card: '2',
+  crypto: '1',
   currency: 'USD',
   period: 'month',
-  label: '$1 per month',
+  range: '$1–$2',
+  summary: '$1–$2 per month',
+  cardLabel: '$2 per month',
+  cryptoLabel: '$1 per month',
+  amount: '1',
 } as const;
 
 export const SITE = {
@@ -11,7 +18,7 @@ export const SITE = {
   tagline:
     'Bypass countdown timers and link shorteners or automate waits and clicks when a full skip isn’t possible.',
   title: 'Skip Wait — Bypass Countdown Timers & Link Shorteners (Chrome)',
-  description: `${PRICE.label} Chrome extension to bypass countdown timers, waiting pages, and link shorteners, or automate the wait when a full skip is not possible.`,
+  description: `A ${PRICE.summary} Chrome extension to bypass countdown timers, waiting pages, and link shorteners, or automate the wait when a full skip is not possible.`,
   keywords: [
     'skip wait',
     'skip wait extension',
