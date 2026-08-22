@@ -59,6 +59,11 @@ export function SiteFooter(): React.ReactElement {
                   </AppLink>
                 </li>
                 <li>
+                  <AppLink href={homeSections.pricing} className={footerLink}>
+                    Pricing
+                  </AppLink>
+                </li>
+                <li>
                   <AppLink href={homeSections.faq} className={footerLink}>
                     FAQ
                   </AppLink>

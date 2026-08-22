@@ -68,6 +68,9 @@ export function SiteHeader(): React.ReactElement {
             <AppLink href={homeSections.howItWorks} className={navLink}>
               How It Works
             </AppLink>
+            <AppLink href={homeSections.pricing} className={navLink}>
+              Pricing
+            </AppLink>
             <AppLink href={homeSections.faq} className={navLink}>
               FAQ
             </AppLink>
@@ -123,6 +126,13 @@ export function SiteHeader(): React.ReactElement {
                 onClick={closeMenu}
               >
                 How It Works
+              </AppLink>
+              <AppLink
+                href={homeSections.pricing}
+                className={mobileNavLink}
+                onClick={closeMenu}
+              >
+                Pricing
               </AppLink>
               <AppLink
                 href={homeSections.faq}
