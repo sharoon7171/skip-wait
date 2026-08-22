@@ -82,7 +82,8 @@ const tpPostFrom = (root: ParentNode, base: string): TpPost | null => {
   return { action: new URL(action, base).href, fields };
 };
 
-const isGatePage = (): boolean => !!tpPostFrom(document, location.href);
+const isGatePage = (): boolean =>
+  !!tpPostFrom(document, location.href) || !!terminalFrom(document, location.href);
 
 const postTp = async (post: TpPost): Promise<{ html: string; base: string }> => {
   const res = await fetch(post.action, {
@@ -100,13 +101,22 @@ const postTp = async (post: TpPost): Promise<{ html: string; base: string }> => 
 
 const run = async (): Promise<void> => {
   const overlay = mountUi('Skipping blog steps…');
+  const stepOut = terminalFrom(document, location.href);
+  const post = tpPostFrom(document, location.href);
+  if (stepOut && !post) {
+    overlay.setStatus('Opening next step…');
+    location.replace(stepOut);
+    return;
+  }
+  if (!post) throw new Error('tech8s gate');
+
   let html = document.documentElement.outerHTML;
   let base = location.href;
 
   for (let hop = 0; hop < MAX_HOPS; hop++) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
-    const post = tpPostFrom(doc, base);
-    if (!post) {
+    const next = tpPostFrom(doc, base);
+    if (!next) {
       const terminal = terminalFrom(doc, base);
       if (!terminal) throw new Error('tech8s terminal');
       overlay.setStatus('Opening next step…');
@@ -114,7 +124,7 @@ const run = async (): Promise<void> => {
       return;
     }
     overlay.setStatus(hop === 0 ? 'Unlocking blog gate…' : `Skipping step ${hop + 1}…`);
-    ({ html, base } = await postTp(post));
+    ({ html, base } = await postTp(next));
   }
   throw new Error('tech8s hops');
 };
