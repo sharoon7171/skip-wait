@@ -66,6 +66,7 @@ export const initTech8sRedirect = (): void => {
     bootOverlay('Skipping safe redirect…');
 
     let done = false;
+    let mo: MutationObserver;
     const go = (): void => {
       if (done) return;
       const url = urlFromScripts();
@@ -75,8 +76,8 @@ export const initTech8sRedirect = (): void => {
       location.replace(url);
     };
 
+    mo = new MutationObserver(go);
     whenDomParsed(go);
-    const mo = new MutationObserver(go);
     mo.observe(document.documentElement, { childList: true, subtree: true });
     window.setTimeout(() => {
       if (done) return;
