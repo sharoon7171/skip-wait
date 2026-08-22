@@ -12,14 +12,14 @@ export function ShowcaseSection(): React.ReactElement {
   const sample = sampleBypasses(SAMPLE_SIZE);
 
   return (
-    <section className="bg-surface-muted py-12 lg:py-16">
+    <section className="bg-surface-canvas py-12 lg:py-16">
       <Shell>
         <SectionHeader
           title="Link Shortener Bypasses and Wait Automations"
           description={`${totalBypasses()} bypasses across ${totalDomains()} websites—Linkvertise, GPLinks, Ouo, file hosts, and more. Bypass the timer when possible, or finish the wait for you. Full list on Supported Sites.`}
         />
 
-        <div className="mt-8 overflow-hidden rounded-panel bg-surface-canvas shadow-sm ring-1 ring-neutral-200">
+        <div className="mt-8 overflow-hidden rounded-panel bg-surface-muted shadow-sm ring-1 ring-neutral-200">
           <ul className="m-0 list-none divide-y divide-neutral-200 p-0">
             {sample.map((entry) => (
               <li key={entry.name}>
