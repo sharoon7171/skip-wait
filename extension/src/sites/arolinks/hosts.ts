@@ -3,12 +3,13 @@ import { remoteSiteHosts } from '../../hosts/check';
 export const AROLINKS_UNLOCK_READY_MS = 25_000;
 export const AROLINKS_DEST_WAIT_MS = 60_000;
 
-const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
+const AROLINKS_ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
+const VPLINK_KEY_RE = /^key-[A-Za-z0-9]+$/;
 const AROLINKS_HOSTS = ['arolinks.com', 'vplink.in'] as const;
 
 export const arolinksAliasFromPath = (pathname: string): string | null => {
   const [seg, ...rest] = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
-  if (!seg || rest.length > 0 || !ALIAS_RE.test(seg)) return null;
+  if (!seg || rest.length > 0 || !(VPLINK_KEY_RE.test(seg) || AROLINKS_ALIAS_RE.test(seg))) return null;
   return seg;
 };
 
