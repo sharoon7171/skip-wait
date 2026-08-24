@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { activateLicense, refreshLicense } from '../../license/gate';
 import { clearLicenseSession, getLicenseSession, getStoredLicenseKey, licenseIsLive } from '../../license/storage';
 import type { LicensePlan } from '../../license/types';
-import { PANEL_CARD, PRICE_CRYPTO, PRICE_LABEL } from '../constants';
+import { CONTACT, PANEL_CARD, PRICE_CRYPTO, PRICE_LABEL } from '../constants';
 import { PricingModal } from './PricingModal';
 import { IconRefresh } from './icons';
 
@@ -209,6 +209,25 @@ export function LicenseSection(): React.ReactElement {
               See pricing & buy
             </button>
             . One device per key.
+          </p>
+          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
+            Trial available — ask for a trial key by{' '}
+            <a
+              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent('Skip Wait trial key')}`}
+              className="font-semibold text-primary-700 underline decoration-primary-200 underline-offset-2 hover:decoration-primary-500"
+            >
+              email
+            </a>{' '}
+            or{' '}
+            <a
+              href={CONTACT.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary-700 underline decoration-primary-200 underline-offset-2 hover:decoration-primary-500"
+            >
+              Telegram
+            </a>
+            .
           </p>
         </div>
       )}
