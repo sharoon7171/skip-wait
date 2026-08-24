@@ -60,8 +60,8 @@ export function HostsUpdateSection(): React.ReactElement {
         ) : null}
       </div>
       <p className="mt-1 text-[0.8125rem] font-medium leading-snug text-ink-soft">
-        If a site changed domain but the shortener or timer is the same, tell us — or we add it when we see it. New
-        domains download when Chrome starts, or tap Refresh. No Chrome Web Store review for domain-only updates.
+        Packaged domains always work. Refresh downloads newer domains on top — anything in either list is active. No
+        Chrome Web Store review for domain-only updates.
       </p>
     </section>
   );

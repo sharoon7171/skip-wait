@@ -29,6 +29,19 @@ const hostMatches = (hostname: string, roots: readonly string[]): boolean => {
   return roots.some((d) => h === d || h.endsWith(`.${d}`));
 };
 
+const mergeHosts = (...files: Array<HostsFile | null | undefined>): HostsFile => {
+  const out: HostsFile = {};
+  for (const file of files) {
+    if (!file) continue;
+    for (const [site, { hosts }] of Object.entries(file)) {
+      const set = new Set(out[site]?.hosts ?? []);
+      for (const host of hosts) set.add(host);
+      out[site] = { hosts: [...set] };
+    }
+  }
+  return out;
+};
+
 export const parseHostsUpdatedAt = (value: unknown): number | null =>
   typeof value === 'number' && Number.isFinite(value) ? value : null;
 
@@ -51,6 +64,9 @@ const readStoredHosts = async (): Promise<HostsFile | null> => {
   return parseHosts(stored[STORAGE_KEY]);
 };
 
+const activeHosts = async (): Promise<HostsFile> =>
+  mergeHosts(await loadBundledHosts(), await readStoredHosts());
+
 export const pullHosts = async (): Promise<boolean> => {
   const res = await fetch(`${HOSTS_URL}?t=${Date.now()}`, { cache: 'no-store', credentials: 'omit' });
   if (!res.ok) return false;
@@ -60,18 +76,11 @@ export const pullHosts = async (): Promise<boolean> => {
   return true;
 };
 
-export const ensureHosts = async (): Promise<boolean> => {
-  if (await readStoredHosts()) return true;
-  const bundled = await loadBundledHosts();
-  if (!bundled) return false;
-  await storeHosts(bundled);
-  return true;
-};
+export const ensureHosts = async (): Promise<boolean> => Object.keys(await activeHosts()).length > 0;
 
 export const remoteSiteHosts = async (site: string): Promise<string[]> => {
   try {
-    const file = (await readStoredHosts()) ?? (await loadBundledHosts());
-    return file?.[site]?.hosts ?? [];
+    return (await activeHosts())[site]?.hosts ?? [];
   } catch {
     return [];
   }
