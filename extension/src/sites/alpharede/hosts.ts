@@ -1,0 +1,25 @@
+export const SITE = 'alpharede' as const;
+
+export const MSG_RESOLVE = 'ALPHAREDE_RESOLVE' as const;
+export const MSG_PROGRESS = 'ALPHAREDE_PROGRESS' as const;
+
+export const ALIAS_DNR =
+  '([A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*|[A-Za-z0-9]*[0-9][A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*)';
+
+const ALIAS_RE = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,}$/;
+
+export const isWorkingPage = (): boolean =>
+  location.href.startsWith(chrome.runtime.getURL('working.html'));
+
+export const isHttpUrl = (href: string): boolean => /^https?:\/\//i.test(href);
+
+export const isShortUrl = (href: string): boolean => {
+  try {
+    const u = new URL(href);
+    if (!isHttpUrl(u.href)) return false;
+    const [seg, ...rest] = u.pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+    return !!seg && rest.length === 0 && ALIAS_RE.test(seg);
+  } catch {
+    return false;
+  }
+};

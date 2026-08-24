@@ -30,6 +30,7 @@ import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot
 import { initWorkinkMainWorldInject } from '../sites/workink';
 import { initVexfileMainWorldInject } from '../sites/vexfile';
 import { initDlsurfMainWorldInject } from '../sites/dlsurf';
+import { initAlpharedeBackground } from '../sites/alpharede';
 import { initEarnlinksBackground } from '../sites/earnlinks';
 
 initCoomeetMainWorldInject();
@@ -65,6 +66,7 @@ initDuploadHoldNav();
 initDuploadResolve();
 initVexfileMainWorldInject();
 initDlsurfMainWorldInject();
+initAlpharedeBackground();
 initEarnlinksBackground();
 void pullHosts();
 initLicenseSync();
