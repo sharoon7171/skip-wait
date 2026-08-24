@@ -1,226 +1,71 @@
 import { isRemoteSite } from '../../hosts/check';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
+import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
 const OVERLAY_ID = 'skip-wait-gplinks-mediator';
+const BOOT_STYLE_ID = 'skip-wait-gplinks-mediator-boot';
 const RUN_KEY = 'skip-wait-gplinks-mediator-run';
+const WAITED_COOKIE = 'sw_waited';
+const ADS_FORM_SEL = '#adsForm, form[name="ads-track-data"]';
+const STEP_WRITTEN_MS = 15_000;
+const REAL_TIME_FACTOR = 2;
 const TICK_MS = 250;
+const SEED_POLL_MS = 2_000;
+const COOKIE_MAX_AGE_SEC = 600;
 
-type GpfBoot = { rest: string; cookie?: string };
-type GpfTiming = { total_ms?: number };
-type GpfConfig = {
-  rest: string;
-  nonce: string;
-  step?: string;
-  steps?: string;
-  timing?: GpfTiming;
+type Seed = {
+  lid: string;
+  pid: string;
+  vid: string;
+  pages: number;
+  step: number;
 };
-type GpfState = {
-  active?: boolean;
-  step?: number;
-  steps?: number;
-  waited_ms?: number;
-  timing?: GpfTiming;
-};
-type GpfAdvance = {
-  status?: string;
-  url?: string;
-  seconds?: number;
-  message?: string;
-  step?: number;
-  steps?: number;
-};
-type GpfRender = {
-  active?: boolean;
-  token?: string;
-  config?: GpfConfig;
-};
+
+const NOTE = {
+  lead: 'Unlocking your link',
+  detail: 'Skip Wait is completing the required wait, then opening your unlock page.',
+} as const;
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
-const parseJsonAssign = (src: string, name: string): unknown | null => {
-  const m = src.match(new RegExp(`(?:var|let|const)\\s+${name}\\s*=\\s*`));
-  if (!m || m.index === undefined) return null;
-  const start = m.index + m[0].length;
-  if (src[start] !== '{') return null;
-  let depth = 0;
-  let quote: '"' | "'" | null = null;
-  let esc = false;
-  for (let i = start; i < src.length; i++) {
-    const c = src[i]!;
-    if (quote) {
-      if (esc) {
-        esc = false;
-        continue;
-      }
-      if (c === '\\') {
-        esc = true;
-        continue;
-      }
-      if (c === quote) quote = null;
-      continue;
-    }
-    if (c === '"' || c === "'") {
-      quote = c;
-      continue;
-    }
-    if (c === '{') depth++;
-    else if (c === '}') {
-      depth--;
-      if (depth === 0) {
-        try {
-          return JSON.parse(src.slice(start, i + 1)) as unknown;
-        } catch {
-          return null;
-        }
-      }
-    }
+const cookie = (name: string): string | null => {
+  const m = document.cookie.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
+  return m?.[1] ? decodeURIComponent(m[1]) : null;
+};
+
+const setCookie = (name: string, value: string): void => {
+  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; Max-Age=${COOKIE_MAX_AGE_SEC}; Secure`;
+};
+
+const readSeed = (): Seed | null => {
+  const lid = cookie('lid');
+  const pid = cookie('pid');
+  const vid = cookie('vid');
+  const pages = Number(cookie('pages') || 0);
+  const step = Number(cookie('step_count') || 0);
+  if (!lid || !pid || !vid || !Number.isFinite(pages) || pages < 1) return null;
+  return { lid, pid, vid, pages, step: Number.isFinite(step) && step > 0 ? step : 0 };
+};
+
+const isAdsMediator = (): boolean =>
+  !!document.querySelector(ADS_FORM_SEL) || !!(cookie('lid') && cookie('pid') && cookie('vid'));
+
+const unlockUrl = (seed: Seed): string =>
+  `https://gplinks.co/${encodeURIComponent(seed.lid)}?pid=${encodeURIComponent(seed.pid)}&vid=${encodeURIComponent(seed.vid)}`;
+
+const writtenStepMs = (): number => {
+  const n = parseInt(document.getElementById('myTimer')?.textContent?.trim() ?? '', 10);
+  return Number.isFinite(n) && n > 0 ? n * 1000 : STEP_WRITTEN_MS;
+};
+
+const waitSeed = async (): Promise<Seed | null> => {
+  const end = Date.now() + SEED_POLL_MS;
+  for (;;) {
+    const seed = readSeed();
+    if (seed) return seed;
+    if (Date.now() >= end) return null;
+    await sleep(200);
   }
-  return null;
-};
-
-const scriptBlobs = (): string[] => {
-  const out: string[] = [];
-  const extra = document.getElementById('gpf-flow-js-extra');
-  if (extra?.textContent) out.push(extra.textContent);
-  for (const s of document.scripts) {
-    const t = s.textContent;
-    if (t && (t.includes('gpfConfig') || t.includes('gpfBoot'))) out.push(t);
-  }
-  return out;
-};
-
-const readBoot = (): GpfBoot | null => {
-  for (const blob of scriptBlobs()) {
-    const raw = parseJsonAssign(blob, 'gpfBoot');
-    if (!raw || typeof raw !== 'object') continue;
-    const rest = (raw as { rest?: unknown }).rest;
-    if (typeof rest === 'string' && rest) {
-      const cookie = (raw as { cookie?: string }).cookie;
-      return cookie ? { rest, cookie } : { rest };
-    }
-  }
-  return null;
-};
-
-const readConfigFromDom = (): GpfConfig | null => {
-  for (const blob of scriptBlobs()) {
-    const raw = parseJsonAssign(blob, 'gpfConfig');
-    if (!raw || typeof raw !== 'object') continue;
-    const cfg = raw as Partial<GpfConfig>;
-    if (typeof cfg.rest === 'string' && typeof cfg.nonce === 'string' && cfg.rest && cfg.nonce) {
-      return cfg as GpfConfig;
-    }
-  }
-  return null;
-};
-
-const isGpfPage = (): boolean => {
-  if (readBoot() || readConfigFromDom()) return true;
-  return !!document.querySelector('[data-gpf-mount], #gpf-flow-js, #gpf-flow-js-extra, .gpf-flow');
-};
-
-const postId = (): string | null => {
-  const m = document.body?.className.match(/postid-(\d+)/);
-  return m?.[1] ?? null;
-};
-
-const fetchRender = async (boot: GpfBoot): Promise<GpfConfig | null> => {
-  let url = `${boot.rest}render`;
-  const id = postId();
-  if (id) url += `?post=${encodeURIComponent(id)}`;
-  const r = await fetch(url, {
-    credentials: 'same-origin',
-    headers: { 'X-Requested-With': 'gpf' },
-  });
-  if (!r.ok) return null;
-  const data = (await r.json()) as GpfRender;
-  if (!data.active || !data.config?.rest || !data.config.nonce) return null;
-  return data.config;
-};
-
-const resolveConfig = async (): Promise<GpfConfig | null> => {
-  const fromDom = readConfigFromDom();
-  if (fromDom) return fromDom;
-  const boot = readBoot();
-  if (!boot) return null;
-  return fetchRender(boot);
-};
-
-const waitConfig = async (timeoutMs = 20_000): Promise<GpfConfig | null> => {
-  const end = Date.now() + timeoutMs;
-  while (Date.now() < end) {
-    const cfg = await resolveConfig();
-    if (cfg) return cfg;
-    await sleep(250);
-  }
-  return resolveConfig();
-};
-
-const getState = async (cfg: GpfConfig): Promise<GpfState> => {
-  const r = await fetch(`${cfg.rest}state`, {
-    credentials: 'same-origin',
-    headers: { 'X-WP-Nonce': cfg.nonce },
-  });
-  if (!r.ok) throw new Error(`gpf state ${r.status}`);
-  return (await r.json()) as GpfState;
-};
-
-const postAdvance = async (cfg: GpfConfig, imps = 0): Promise<GpfAdvance> => {
-  const r = await fetch(`${cfg.rest}advance`, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-WP-Nonce': cfg.nonce,
-    },
-    body: JSON.stringify({ imps }),
-  });
-  if (!r.ok) throw new Error(`gpf advance ${r.status}`);
-  return (await r.json()) as GpfAdvance;
-};
-
-const stripAdblockUi = (): void => {
-  for (const el of document.querySelectorAll('[role="dialog"]')) {
-    const t = el.textContent || '';
-    if (/adblocker|ad blocker/i.test(t)) el.remove();
-  }
-  document.body?.style.removeProperty('overflow');
-};
-
-const stepMeta = (cfg: GpfConfig | null): { step: number; steps: number } => {
-  const flow = document.querySelector('.gpf-flow');
-  const step = Number(cfg?.step || flow?.getAttribute('data-step') || 1);
-  const steps = Number(cfg?.steps || flow?.getAttribute('data-steps') || step);
-  return { step, steps };
-};
-
-let ui: FullPageOverlay | null = null;
-
-const stepNote = (step: number, steps: number) => ({
-  lead: 'Unlocking your link',
-  detail: `Step ${step} of ${steps}`,
-});
-
-const mountUi = (step: number, steps: number): FullPageOverlay => {
-  const note = stepNote(step, steps);
-  if (ui) {
-    ui.setNote(note);
-    ui.setStatus('Getting ready…');
-    return ui;
-  }
-  ui = createFullPageOverlay({
-    id: OVERLAY_ID,
-    brand: 'Skip Wait',
-    note,
-    status: 'Getting ready…',
-    countdownLabel: 'Ready in',
-  });
-  return ui;
-};
-
-const remainingMs = (st: GpfState, cfg: GpfConfig): number => {
-  const need = st.timing?.total_ms ?? cfg.timing?.total_ms ?? 30_000;
-  return Math.max(0, need - (st.waited_ms ?? 0));
 };
 
 const waitUntil = async (endTs: number): Promise<void> => {
@@ -231,75 +76,89 @@ const waitUntil = async (endTs: number): Promise<void> => {
   }
 };
 
-const waitServerReady = async (cfg: GpfConfig, overlay: FullPageOverlay): Promise<GpfState> => {
-  for (;;) {
-    const st = await getState(cfg);
-    if (st.active === false) throw new Error('gpf inactive');
-    const left = remainingMs(st, cfg);
-    if (left <= 0) {
-      overlay.hideCountdown();
-      return st;
-    }
-    const endTs = Date.now() + left;
-    overlay.setStatus('Completing this step…');
-    overlay.startCountdown(endTs);
-    await waitUntil(endTs);
-  }
+const postStep = async (seed: Seed, stepId: number, nextTarget: string): Promise<void> => {
+  setCookie('step_count', String(stepId));
+  setCookie('imps', '1');
+  await fetch(location.href, {
+    method: 'POST',
+    credentials: 'include',
+    redirect: 'manual',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      form_name: 'ads-track-data',
+      step_id: String(stepId),
+      ad_impressions: '1',
+      visitor_id: seed.vid,
+      next_target: nextTarget,
+    }),
+  });
 };
 
-const runGpf = async (overlay: FullPageOverlay): Promise<void> => {
-  stripAdblockUi();
-  const cfg = await waitConfig();
-  if (!cfg) {
+let ui: FullPageOverlay | null = null;
+
+const bootOverlayLock = (): void => {
+  const active = overlayActiveClass(OVERLAY_ID);
+  document.documentElement.classList.add(active);
+  if (document.getElementById(BOOT_STYLE_ID)) return;
+  const style = document.createElement('style');
+  style.id = BOOT_STYLE_ID;
+  style.textContent = buildFullPageOverlayCss(OVERLAY_ID, active);
+  (document.head || document.documentElement).appendChild(style);
+};
+
+const mountUi = (status = 'Getting ready…'): FullPageOverlay => {
+  bootOverlayLock();
+  if (ui) {
+    ui.setNote(NOTE);
+    ui.setStatus(status);
+    return ui;
+  }
+  ui = createFullPageOverlay({
+    id: OVERLAY_ID,
+    brand: 'Skip Wait',
+    note: NOTE,
+    status,
+    countdownLabel: 'Ready in',
+  });
+  return ui;
+};
+
+const runMediator = async (overlay: FullPageOverlay): Promise<void> => {
+  overlay.setStatus('Starting session…');
+  const seed = await waitSeed();
+  if (!seed) {
     sessionStorage.removeItem(RUN_KEY);
-    overlay.setStatus('Could not load this page. Reload and try again.');
+    overlay.setStatus('No active session. Open the short link again.');
     return;
   }
 
-  const { step, steps } = stepMeta(cfg);
-  overlay.setNote(stepNote(step, steps));
+  const remaining = Math.max(0, seed.pages - seed.step);
+  overlay.setNote({
+    lead: NOTE.lead,
+    detail: `${seed.pages} step${seed.pages === 1 ? '' : 's'} after the server wait.`,
+  });
 
-  for (let attempt = 0; attempt < 8; attempt++) {
-    const live = (await resolveConfig()) ?? cfg;
-    await waitServerReady(live, overlay);
-    overlay.setStatus('Continuing…');
-    const data = await postAdvance(live, 0);
-
-    if (data.status === 'next' || data.status === 'complete') {
-      if (!data.url) {
-        sessionStorage.removeItem(RUN_KEY);
-        overlay.setStatus(data.message || 'Could not continue. Reload and try again.');
-        return;
-      }
-      overlay.setStatus(data.status === 'complete' ? 'Opening your link…' : 'Opening the next page…');
-      location.assign(data.url);
-      return;
-    }
-
-    if (data.status === 'wait' || data.status === 'retry') {
-      const sec = Math.max(0, data.seconds ?? 0);
-      if (sec > 0) {
-        const endTs = Date.now() + sec * 1000;
-        overlay.setStatus('Almost ready…');
-        overlay.startCountdown(endTs);
-        await waitUntil(endTs);
-        overlay.hideCountdown();
-      }
-      continue;
-    }
-
-    sessionStorage.removeItem(RUN_KEY);
-    if (data.status === 'expired' || data.status === 'no_session') {
-      overlay.setStatus(data.message || 'This link expired. Open the short link again.');
-      return;
-    }
-
-    overlay.setStatus(data.message || 'Something went wrong. Reload and try again.');
-    return;
+  const waitMs = remaining * writtenStepMs() * REAL_TIME_FACTOR;
+  if (waitMs > 0 && cookie(WAITED_COOKIE) !== seed.vid) {
+    const endTs = Date.now() + waitMs;
+    overlay.setStatus('Server wait required…');
+    overlay.startCountdown(endTs);
+    await waitUntil(endTs);
+    overlay.hideCountdown();
+    setCookie(WAITED_COOKIE, seed.vid);
   }
 
+  const unlock = unlockUrl(seed);
+  for (let step = seed.step; step < seed.pages; ) {
+    const nextStep = step + 1;
+    overlay.setStatus(`Completing step ${nextStep} of ${seed.pages}…`);
+    await postStep(seed, nextStep, nextStep >= seed.pages ? unlock : location.href);
+    step = nextStep;
+  }
+
+  overlay.setStatus('Opening unlock page…');
   sessionStorage.removeItem(RUN_KEY);
-  overlay.setStatus('Still waiting on the page. Reload and try again.');
+  location.assign(unlock);
 };
 
 export function initGplinksMediator(): void {
@@ -310,29 +169,23 @@ export function initGplinksMediator(): void {
       let started = false;
       let covered = false;
 
-      const coverIfMediator = (): void => {
-        if (covered || !isGpfPage()) return;
+      const cover = (): void => {
+        if (covered || !isAdsMediator()) return;
         if (sessionStorage.getItem(RUN_KEY) === location.href) return;
         covered = true;
-        const { step, steps } = stepMeta(readConfigFromDom());
-        mountUi(step, steps);
+        mountUi();
       };
 
       const tryStart = (): void => {
         if (sessionStorage.getItem(RUN_KEY) === location.href) return;
-        coverIfMediator();
-        if (started || !isGpfPage()) return;
+        cover();
+        if (started || !isAdsMediator()) return;
         started = true;
         sessionStorage.setItem(RUN_KEY, location.href);
-        const { step, steps } = stepMeta(readConfigFromDom());
-        const overlay = mountUi(step, steps);
-        void runGpf(overlay).catch((err: unknown) => {
+        const overlay = mountUi();
+        void runMediator(overlay).catch(() => {
           sessionStorage.removeItem(RUN_KEY);
-          const msg =
-            err instanceof Error && err.message === 'gpf inactive'
-              ? 'No active session. Open the short link again.'
-              : 'Something went wrong. Reload and try again.';
-          overlay.setStatus(msg);
+          overlay.setStatus('Something went wrong. Reload and try again.');
         });
       };
 
