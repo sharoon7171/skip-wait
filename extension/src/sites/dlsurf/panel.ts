@@ -3,6 +3,7 @@ import {
   DLSURF_PANEL_ID,
   DLSURF_TURNSTILE_MOUNT_ID,
   MSG_DLSURF_TURNSTILE,
+  MSG_DLSURF_TURNSTILE_REMOVE,
 } from './hosts';
 
 const STYLE_ID = 'skip-wait-dlsurf-panel-css';
@@ -18,6 +19,7 @@ export type DlsurfPanel = {
   setStatus: (text: string) => void;
   showDownload: (href: string) => void;
   showLogin: (href: string) => void;
+  showRetry: (label: string, onClick: () => void) => void;
 };
 
 const ensureCss = (): void => {
@@ -38,6 +40,21 @@ const ensureCss = (): void => {
     `@media(prefers-color-scheme:dark){#${DLSURF_PANEL_ID} .sw-btn{background:#fafafa;color:#111}}` +
     `#${DLSURF_PANEL_ID} .sw-btn[hidden],#${DLSURF_PANEL_ID} .sw-turnstile[hidden]{display:none!important}`;
   (document.head || document.documentElement).appendChild(style);
+};
+
+const releaseTurnstile = (widgetId: string): void => {
+  if (!widgetId) return;
+  void chrome.runtime
+    .sendMessage({ type: MSG_DLSURF_TURNSTILE_REMOVE, widgetId })
+    .catch(() => undefined);
+};
+
+export const removeDlsurfPanel = (): void => {
+  const panel = document.getElementById(DLSURF_PANEL_ID);
+  if (!panel) return;
+  const widgetId = panel.querySelector(`#${DLSURF_TURNSTILE_MOUNT_ID}`)?.getAttribute('data-sw-ts-id') ?? '';
+  panel.remove();
+  releaseTurnstile(widgetId);
 };
 
 export const findActionRow = (): DlsurfActionRow | null => {
@@ -64,7 +81,7 @@ export const findActionRow = (): DlsurfActionRow | null => {
 
 export const createDlsurfPanel = (anchor: HTMLElement): DlsurfPanel => {
   ensureCss();
-  document.getElementById(DLSURF_PANEL_ID)?.remove();
+  removeDlsurfPanel();
   const root = document.createElement('div');
   root.id = DLSURF_PANEL_ID;
   root.innerHTML =
@@ -83,6 +100,38 @@ export const createDlsurfPanel = (anchor: HTMLElement): DlsurfPanel => {
   const btn = root.querySelector('.sw-btn') as HTMLAnchorElement;
   let stopListen: (() => void) | null = null;
 
+  const clearBtnAction = (): void => {
+    btn.onclick = null;
+  };
+
+  const hideTurnstile = (): void => {
+    const widgetId = turnstileEl.getAttribute('data-sw-ts-id') ?? '';
+    turnstileEl.hidden = true;
+    turnstileEl.removeAttribute('data-sw-ts-id');
+    turnstileEl.replaceChildren();
+    releaseTurnstile(widgetId);
+  };
+
+  const showBtn = (label: string, href?: string, onClick?: () => void): void => {
+    stopListen?.();
+    stopListen = null;
+    clearBtnAction();
+    hideTurnstile();
+    btn.hidden = false;
+    btn.textContent = label;
+    if (href) {
+      btn.href = href;
+      return;
+    }
+    btn.removeAttribute('href');
+    if (onClick) {
+      btn.onclick = (e) => {
+        e.preventDefault();
+        onClick();
+      };
+    }
+  };
+
   return {
     setStatus(text) {
       statusEl.textContent = text;
@@ -91,23 +140,21 @@ export const createDlsurfPanel = (anchor: HTMLElement): DlsurfPanel => {
       errEl.textContent = text ?? '';
     },
     showLogin(href) {
-      turnstileEl.hidden = true;
-      btn.hidden = false;
-      btn.href = href;
-      btn.textContent = 'Sign In · dl.surf';
+      showBtn('Sign In · dl.surf', href);
     },
     showDownload(href) {
-      turnstileEl.hidden = true;
-      btn.hidden = false;
-      btn.href = href;
-      btn.textContent = 'Download File · Skip Wait';
+      showBtn('Download File · Skip Wait', href);
+    },
+    showRetry(label, onClick) {
+      showBtn(label, undefined, onClick);
     },
     mountTurnstile(onToken) {
       stopListen?.();
       stopListen = null;
+      clearBtnAction();
       btn.hidden = true;
+      btn.removeAttribute('href');
       turnstileEl.hidden = false;
-      turnstileEl.replaceChildren();
 
       return new Promise<void>((resolve, reject) => {
         const fail = (err: unknown): void => {
