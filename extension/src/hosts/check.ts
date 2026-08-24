@@ -46,6 +46,11 @@ const loadBundledHosts = async (): Promise<HostsFile | null> => {
   }
 };
 
+const readStoredHosts = async (): Promise<HostsFile | null> => {
+  const stored = await chrome.storage.local.get(STORAGE_KEY);
+  return parseHosts(stored[STORAGE_KEY]);
+};
+
 export const pullHosts = async (): Promise<boolean> => {
   const res = await fetch(`${HOSTS_URL}?t=${Date.now()}`, { cache: 'no-store', credentials: 'omit' });
   if (!res.ok) return false;
@@ -56,20 +61,16 @@ export const pullHosts = async (): Promise<boolean> => {
 };
 
 export const ensureHosts = async (): Promise<boolean> => {
-  const stored = await chrome.storage.local.get(STORAGE_KEY);
-  if (parseHosts(stored[STORAGE_KEY])) return true;
+  if (await readStoredHosts()) return true;
   const bundled = await loadBundledHosts();
-  if (bundled) {
-    await storeHosts(bundled);
-    return true;
-  }
-  return pullHosts();
+  if (!bundled) return false;
+  await storeHosts(bundled);
+  return true;
 };
 
 export const remoteSiteHosts = async (site: string): Promise<string[]> => {
   try {
-    const stored = await chrome.storage.local.get(STORAGE_KEY);
-    const file = parseHosts(stored[STORAGE_KEY]);
+    const file = (await readStoredHosts()) ?? (await loadBundledHosts());
     return file?.[site]?.hosts ?? [];
   } catch {
     return [];

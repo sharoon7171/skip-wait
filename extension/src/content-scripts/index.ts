@@ -311,7 +311,7 @@ async function boot(): Promise<void> {
     runCoomeetMainWorldAccelerator();
     return;
   }
-  void ensureHosts();
+  await ensureHosts();
   if (window !== window.top) {
     if (await isOnCoomeetIframeHost()) initCoomeetIframeBootstrap();
     return;
