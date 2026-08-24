@@ -30,6 +30,8 @@ const keywords = [
   'dlsurf captcha',
   'dlsurf turnstile',
   'dlsurf human check',
+  'dlsurf signed in download',
+  'dlsurf login required download',
   'dlsurf chrome extension',
   'skip wait dlsurf',
   'file host ads bypass',
@@ -55,16 +57,19 @@ Signing in does not remove the ads wall for free users. The account is required 
 - Banner and video countdowns before the file link
 - Human check after the timers
 - Reloading the file page when the modal is closed mid-wait
+- Looking signed in in the header while the download unlock still asks for a fresh sign-in
 
 ## Skip Wait on the file page
 
-On a supported dl.surf file page, Skip Wait places a Skip ads & timers panel above Continue to Download. If you are signed in, it runs the quick human check there and unlocks the real download link. If you are not signed in, it asks you to sign in on dl.surf first — Skip Wait does not invent an account; it uses yours.
+On a supported dl.surf file page, Skip Wait places a Skip Ads & Timers panel above Continue to Download. When your dl.surf session is live, it runs the quick human check in that panel and unlocks the real download link. When the session is missing or expired, it asks you to sign in on dl.surf first — Skip Wait does not invent an account; it uses yours.
 
-You still prove you are human when the host requires it. You do not sit through the ads timers or hunt for the buried download control under the modal.
+You still prove you are human when the host requires it. You do not sit through the ads timers or hunt for the buried download control under the modal. If unlock fails after the check, use Try again on the panel instead of restarting the whole ads path.
 
 ## Your account, not a paste tool
 
-dl.surf unlocks downloads for signed-in users. Skip Wait keeps that model: open the file while logged in, complete the check in the Skip Wait panel, then tap Download file · Skip Wait. No third-party paste site and no cookie tricks — just the account session already on the tab.
+dl.surf unlocks downloads for signed-in users. Skip Wait keeps that model: open the file while logged in, complete the check in the Skip Wait panel, then tap Download File · Skip Wait. No third-party paste site and no cookie tricks — just the account session already on the tab.
+
+A profile name in the header is not always enough. If Skip Wait still shows Sign In required, sign in again on dl.surf, reopen the file, and let the panel finish the human check once the session is live.
 `;
 
 const faq: readonly BypassFaq[] = [
@@ -79,9 +84,19 @@ const faq: readonly BypassFaq[] = [
       'Yes. Skip Wait uses the account you sign in with on dl.surf. Sign in on the site first, then open the file page.',
   },
   {
+    question: 'I look signed in but Skip Wait still asks me to sign in. Why?',
+    answer:
+      'The header can still show your name after the live download session expires. Sign in again on dl.surf, reopen the file, and wait for Skip Wait to confirm the account before the human check.',
+  },
+  {
     question: 'Do I still complete a human check?',
     answer:
       'Yes when the host requires it. The check appears in the Skip Wait panel instead of after long ad timers.',
+  },
+  {
+    question: 'What if unlock fails after the check?',
+    answer:
+      'Use Try again on the Skip Wait panel. That starts a fresh check without sending you back through the ads modal.',
   },
   {
     question: 'How much does the dl.surf bypass cost?',
