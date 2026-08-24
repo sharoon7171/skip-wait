@@ -5,7 +5,7 @@ const name = 'SID Mediator';
 const bypassType = 'Skip Waiting Page';
 
 const description =
-  'SID bypass skips the session waiting page on mediator sites and continues to your destination link after setting the required access cookie.';
+  'SID Mediator bypass skips Please verify that you are human, Start Verification, and generate-link waits so Skip Wait opens the destination.';
 
 const domains = [
   'cloud.unblockedgames.world',
@@ -17,65 +17,76 @@ const keywords = [
   'sid mediator bypass',
   'SID Mediator bypass extension',
   'sid mediator timer bypass',
+  'sid waiting page bypass',
+  'encrypted sid link bypass',
+  'human verification timer skip',
+  'start verification bypass',
+  'please verify that you are human bypass',
   'skip waiting page',
   'skip countdown timer',
   'bypass countdown timer',
-  'link shortener bypass',
-  'skip wait extension',
   'please wait bypass',
   'waiting page bypass',
   'skip click to continue',
+  'link shortener bypass',
+  'skip wait extension',
+  'safelink sid bypass',
 ] as const;
 
 const intro =
-  'An SID Mediator bypass search usually means a short link parked you on a session waiting page that only continues after an access cookie is set. Skip Wait is the $1/month Chrome extension that clears that please wait bypass and skip click to continue loop so the destination opens without babysitting the mediator.';
+  'Please verify that you are human, a ticking human verification timer, Start Verification, then Checking Request / Generating Links before Go to download—that is the SID waiting page. Skip Wait is the $1/month Chrome extension for a sid mediator bypass that opens the destination instead of making you finish every beat.';
 
-const body = `## Session cookies hidden behind please-wait
+const body = `## Please verify that you are human is the whole product
 
-SID-style mediators place a waiting page between the short URL and the real destination. The page looks like a generic please-wait or continue screen, but progress depends on a session cookie the mediator expects before it will redirect. Sit through the strip, miss Continue under ads, or reload too early and you loop—why sid mediator timer bypass and waiting page bypass searches show up next to skip waiting page help.
+An SID share does not look like a plain short-link card. You land on a waiting page that opens with Please verify that you are human, holds a skip countdown timer until Start Verification appears, then fills the article with Checking Request, Sending Response, and Generating Links before Go to download. That is a please wait bypass and waiting page bypass problem in one screen—not a long brand ladder across other shorteners.
 
-This is not a multi-blog shortener tour. It is one gate whose job is cookie-plus-delay before the target URL.
+Miss Start Verification, leave during the generate-link act, or reload too soon and the same sid waiting page bypass loop returns: timer first, then skip click to continue hunting again. The real URL was already tied to the share; the page’s job is delay.
 
-### What the mediator gate actually does
+### Beats on the waiting page
 
-- Shows a session waiting page before redirect
-- Expects an access cookie before continuing
-- Hides Continue behind ads or a timer
-- Restarts if you leave before the cookie sticks
+1. Please verify that you are human with a human verification timer skip clock  
+2. Start Verification only after that timer finishes  
+3. Checking Request / Sending Response / Generating Links theater  
+4. Go to download after the skip click to continue ritual  
 
-## Setting the cookie, then leaving the gate
+## Start Verification bypass without the theater
 
-When the waiting page loads, Skip Wait runs in the background, sets the access cookie the mediator expects, skips the delay layer, and sends you to the target URL supported for that SID Mediator hop.
+A start verification bypass with Skip Wait means you do not sit through that clock or the fake generate steps. On a supported SID Mediator link, the SID Mediator bypass extension opens the destination the share already pointed to—no Start Verification tap, no ten-second human check, no generate-link performance.
 
-No paste decoder—just a SID Mediator bypass extension that treats the session wait as automation. Client busywork disappears; any hold the mediator still enforces finishes honestly.
+That is an sid mediator timer bypass and please verify that you are human bypass in practice: skip waiting page and skip countdown timer relief on the tab you already opened. You are not pasting the URL into another tool for a safelink sid bypass, and you are not walking partner blogs for this hop.
+
+## Encrypted SID link, one waiting page
+
+An encrypted sid link bypass here is a single waiting-page family. When the destination is a file host or drive page, that host has its own rules. For this catalog entry, success means leaving the SID please wait bypass behind—skip wait extension install, unlock the share, open the real URL—without replaying human verification or Start Verification on every retry.
+
+A link shortener bypass mindset still applies: bypass countdown timer noise on this gate so the destination can load. The difference is SID stays one ritual, not a multi-hop shortener chain.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'What does an SID Mediator bypass skip?',
+    question: 'What does the SID Mediator bypass remove?',
     answer:
-      'It skips the session waiting page and continue busywork on supported mediators, after the access cookie the gate expects is in place.',
+      'Please verify that you are human, the human verification timer, Start Verification, and the generate-link / Go to download theater before the destination opens.',
   },
   {
-    question: 'Does Skip Wait set the access cookie?',
+    question: 'Do I still wait for Start Verification to appear?',
     answer:
-      'Yes. The extension sets the cookie the mediator expects, then bypasses the delay layer and redirects to your target URL.',
+      'On supported SID links, no. Skip Wait is a start verification bypass that opens the destination without that clock.',
   },
   {
-    question: 'Is this the same as a multi-hop shortener bypass?',
+    question: 'Is SID the same as a multi-hop shortener tour?',
     answer:
-      'No. SID Mediator support targets a single session waiting page pattern, not a long blog-hop chain.',
+      'No. SID waiting page bypass targets one encrypted share gate, not a chain of blog hops across other brands.',
   },
   {
-    question: 'Do I still click Continue by hand?',
+    question: 'Do I need a separate paste tool for the SID URL?',
     answer:
-      'On supported hops, no. Skip Wait completes the continue flow so ads do not hide the control.',
+      'No. The SID Mediator bypass extension runs on the page you already opened and unlocks the destination there.',
   },
   {
-    question: 'How much does the SID bypass cost?',
+    question: 'What does Skip Wait cost for SID?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The SID path runs on supported pages.',
+      'Skip Wait is $1 per month. Activate a license in the popup.',
   },
 ];
 
