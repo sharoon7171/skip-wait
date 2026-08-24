@@ -453,7 +453,7 @@
     "hosts": ["gplinks.co", "gplinks.com"]
   },
   "gplinks-mediator": {
-    "hosts": ["rajcet.com"]
+    "hosts": ["rajcet.com", "skrresults.com"]
   },
   "goost": {
     "hosts": ["goo.st"]
