@@ -30,6 +30,7 @@ import { initStreamerviewerbotMainWorldInject } from '../sites/streamerviewerbot
 import { initWorkinkMainWorldInject } from '../sites/workink';
 import { initVexfileMainWorldInject } from '../sites/vexfile';
 import { initDlsurfMainWorldInject } from '../sites/dlsurf';
+import { initEarnlinksBackground } from '../sites/earnlinks';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -64,5 +65,6 @@ initDuploadHoldNav();
 initDuploadResolve();
 initVexfileMainWorldInject();
 initDlsurfMainWorldInject();
+initEarnlinksBackground();
 void pullHosts();
 initLicenseSync();

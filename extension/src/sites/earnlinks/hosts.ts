@@ -1,12 +1,24 @@
-export const EARNLINKS_UNLOCK_ORIGIN = 'https://earnlinks.in';
-export const EARNLINKS_ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
+export const SITE = 'earnlinks' as const;
 
-export function earnlinksAliasFromPath(pathname: string): string | null {
-  const [seg, ...rest] = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
-  if (!seg || rest.length > 0 || !EARNLINKS_ALIAS_RE.test(seg)) return null;
-  return seg;
-}
+export const MSG_RESOLVE = 'EARNLINKS_RESOLVE' as const;
 
-export function earnlinksShortenerUrl(alias: string): string {
-  return `${EARNLINKS_UNLOCK_ORIGIN}/${alias}`;
-}
+export const ALIAS_DNR =
+  '([A-Za-z0-9]*[a-z][A-Za-z0-9]*[A-Z][A-Za-z0-9]*|[A-Za-z0-9]*[A-Z][A-Za-z0-9]*[a-z][A-Za-z0-9]*)';
+
+const ALIAS_RE = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9]{4,}$/;
+
+export const isWorkingPage = (): boolean =>
+  location.href.startsWith(chrome.runtime.getURL('working.html'));
+
+export const isHttpUrl = (href: string): boolean => /^https?:\/\//i.test(href);
+
+export const isShortUrl = (href: string): boolean => {
+  try {
+    const u = new URL(href);
+    if (!isHttpUrl(u.href)) return false;
+    const [seg, ...rest] = u.pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+    return !!seg && rest.length === 0 && ALIAS_RE.test(seg);
+  } catch {
+    return false;
+  }
+};

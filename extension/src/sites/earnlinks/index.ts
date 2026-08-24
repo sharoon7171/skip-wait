@@ -1,2 +1,2 @@
-export { initEarnlinksMediator } from './mediator';
+export { initEarnlinksBackground } from './background';
 export { initEarnlinksUnlock } from './unlock';

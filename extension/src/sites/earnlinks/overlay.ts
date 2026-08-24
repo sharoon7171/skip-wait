@@ -1,32 +1,24 @@
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
-import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
+import { overlayActiveClass } from '../../injected-ui/overlay-styles';
 
+const ID = 'skip-wait-earnlinks';
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
-  detail: "You don't need to tap anything on the page.",
+  detail: "Skip Wait is working. You don't need to tap anything.",
 } as const;
 
-export function spoofVisibility(): void {
-  chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
-}
-
-export function createOverlay(id: string, bootStyleId: string) {
+export const createOverlay = () => {
   let ui: FullPageOverlay | null = null;
-  return (status: string): FullPageOverlay => {
-    const active = overlayActiveClass(id);
-    document.documentElement.classList.add(active);
-    if (!document.getElementById(bootStyleId)) {
-      const style = document.createElement('style');
-      style.id = bootStyleId;
-      style.textContent = buildFullPageOverlayCss(id, active);
-      (document.head ?? document.documentElement).appendChild(style);
-    }
+
+  const paint = (status: string): FullPageOverlay => {
+    document.documentElement.classList.add(overlayActiveClass(ID));
     if (ui) {
+      ui.setNote(NOTE);
       ui.setStatus(status);
       return ui;
     }
     ui = createFullPageOverlay({
-      id,
+      id: ID,
       brand: 'Skip Wait',
       note: NOTE,
       status,
@@ -34,4 +26,13 @@ export function createOverlay(id: string, bootStyleId: string) {
     });
     return ui;
   };
-}
+
+  return {
+    setStatus: (status: string) => paint(status),
+    setError: (status: string) => {
+      const overlay = paint(status);
+      overlay.setError(status);
+      return overlay;
+    },
+  };
+};

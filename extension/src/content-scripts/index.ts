@@ -88,7 +88,7 @@ import { initDlsurfUnlock } from '../sites/dlsurf';
 import { initDevuploadsMediator } from '../sites/devuploads';
 import { initDuploadBypass } from '../sites/dupload';
 import { initEarn4linkMediator, initEarn4linkUnlock } from '../sites/earn4link';
-import { initEarnlinksMediator, initEarnlinksUnlock } from '../sites/earnlinks';
+import { initEarnlinksUnlock } from '../sites/earnlinks';
 import { initAlpharedeBypass } from '../sites/alpharede';
 import { initFinityredeBypass } from '../sites/finityrede';
 import { initTendrivesMediator } from '../sites/tendrives';
@@ -257,7 +257,6 @@ const INITS = [
   initDuploadBypass,
   initEarn4linkMediator,
   initEarn4linkUnlock,
-  initEarnlinksMediator,
   initEarnlinksUnlock,
   initAlpharedeBypass,
   initFinityredeBypass,
@@ -318,7 +317,8 @@ async function boot(): Promise<void> {
     if (await isOnCoomeetIframeHost()) initCoomeetIframeBootstrap();
     return;
   }
-  if (await armLicenseExpiryTimer()) return;
+  const onWorkingPage = location.href.startsWith(chrome.runtime.getURL('working.html'));
+  if (!onWorkingPage && (await armLicenseExpiryTimer())) return;
   for (const init of INITS) {
     try {
       init();
