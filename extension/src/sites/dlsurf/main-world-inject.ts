@@ -3,8 +3,10 @@ import {
   DLSURF_API,
   DLSURF_MSG_SOURCE,
   DLSURF_SITEKEY,
+  MSG_DLSURF_AUTH,
   MSG_DLSURF_PREFETCH,
   MSG_DLSURF_TURNSTILE,
+  MSG_DLSURF_TURNSTILE_REMOVE,
   MSG_DLSURF_UNLOCK,
   type DlsurfUnlockResult,
 } from './hosts';
@@ -14,7 +16,24 @@ type TurnstileApi = {
     el: HTMLElement,
     opts: { sitekey: string; callback: (token: string) => void; theme?: string },
   ) => string;
+  remove?: (widgetId: string) => void;
 };
+
+type ApiJson = {
+  status?: string;
+  message?: string;
+  data?: { token?: string; download_url?: string };
+  errors?: { detail?: string };
+};
+
+function runDlsurfTurnstileRemove(widgetId: string): void {
+  if (!widgetId) return;
+  const api = (window as unknown as { turnstile?: TurnstileApi }).turnstile;
+  if (!api?.remove) return;
+  try {
+    api.remove(widgetId);
+  } catch {}
+}
 
 function runDlsurfTurnstile(mountId: string, sitekey: string, msgSource: string): void {
   const el = document.getElementById(mountId);
@@ -25,14 +44,26 @@ function runDlsurfTurnstile(mountId: string, sitekey: string, msgSource: string)
   const post = (payload: Record<string, string>): void => {
     window.postMessage({ source: msgSource, ...payload }, location.origin);
   };
-  const render = (api: TurnstileApi): void => {
+  const wipe = (): void => {
+    const id = el.getAttribute('data-sw-ts-id');
+    const api = (window as unknown as { turnstile?: TurnstileApi }).turnstile;
+    if (id && api?.remove) {
+      try {
+        api.remove(id);
+      } catch {}
+    }
+    el.removeAttribute('data-sw-ts-id');
     el.replaceChildren();
+  };
+  const render = (api: TurnstileApi): void => {
+    wipe();
     try {
-      api.render(el, {
+      const widgetId = api.render(el, {
         sitekey,
         theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
         callback: (token) => post({ type: 'token', token }),
       });
+      if (widgetId) el.setAttribute('data-sw-ts-id', widgetId);
       post({ type: 'ready' });
     } catch {
       post({ type: 'err', err: 'render' });
@@ -67,13 +98,44 @@ function runDlsurfTurnstile(mountId: string, sitekey: string, msgSource: string)
   document.documentElement.appendChild(script);
 }
 
-async function runDlsurfPrefetchToken(api: string, slug: string): Promise<string> {
-  const json = (await (
-    await fetch(`${api}/api/file/request-download/file/${slug}`, {
+async function runDlsurfCheckAuth(api: string): Promise<boolean> {
+  const call = async (retried: boolean): Promise<Response> => {
+    const r = await fetch(`${api}/api/account/check-auth/`, { credentials: 'include', cache: 'no-store' });
+    if (r.status !== 401 || retried) return r;
+    const refresh = await fetch(`${api}/api/account/token/refresh/`, {
+      method: 'POST',
       credentials: 'include',
       cache: 'no-store',
-    })
-  ).json()) as { data?: { token?: string } };
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}',
+    });
+    return refresh.ok ? call(true) : r;
+  };
+  return (await call(false)).ok;
+}
+
+async function runDlsurfPrefetchToken(api: string, slug: string): Promise<string> {
+  const call = async (retried: boolean): Promise<Response> => {
+    const r = await fetch(`${api}/api/file/request-download/file/${slug}`, {
+      credentials: 'include',
+      cache: 'no-store',
+    });
+    if (r.status !== 401 || retried) return r;
+    const refresh = await fetch(`${api}/api/account/token/refresh/`, {
+      method: 'POST',
+      credentials: 'include',
+      cache: 'no-store',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}',
+    });
+    return refresh.ok ? call(true) : r;
+  };
+  const r = await call(false);
+  let json: ApiJson = {};
+  try {
+    json = (await r.json()) as ApiJson;
+  } catch {}
+  if (!r.ok || json.status !== 'success') return '';
   return typeof json.data?.token === 'string' ? json.data.token : '';
 }
 
@@ -83,20 +145,53 @@ async function runDlsurfUnlock(
   captchaToken: string,
   jwt: string,
 ): Promise<DlsurfUnlockResult> {
-  const token = jwt || (await runDlsurfPrefetchToken(api, slug));
-  if (!token) return { ok: false, err: 'token' };
-  const json = (await (
-    await fetch(`${api}/api/file/new-download-file/`, {
+  const call = async (path: string, init: RequestInit | undefined, retried: boolean): Promise<Response> => {
+    const r = await fetch(`${api}${path}`, { credentials: 'include', cache: 'no-store', ...init });
+    if (r.status !== 401 || retried) return r;
+    const refresh = await fetch(`${api}/api/account/token/refresh/`, {
       method: 'POST',
       credentials: 'include',
       cache: 'no-store',
       headers: { 'Content-Type': 'application/json' },
+      body: '{}',
+    });
+    return refresh.ok ? call(path, init, true) : r;
+  };
+  const read = async (r: Response): Promise<ApiJson> => {
+    try {
+      return (await r.json()) as ApiJson;
+    } catch {
+      return {};
+    }
+  };
+  const errOf = (json: ApiJson, fallback: string): string =>
+    (typeof json.errors?.detail === 'string' && json.errors.detail) ||
+    (typeof json.message === 'string' && json.message) ||
+    fallback;
+
+  let token = jwt;
+  if (!token) {
+    const pre = await call(`/api/file/request-download/file/${slug}`, undefined, false);
+    const preJson = await read(pre);
+    if (!pre.ok || preJson.status !== 'success' || typeof preJson.data?.token !== 'string') {
+      return { ok: false, err: errOf(preJson, pre.ok ? 'token' : `auth ${pre.status}`) };
+    }
+    token = preJson.data.token;
+  }
+
+  const post = await call(
+    '/api/file/new-download-file/',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, captcha_token: captchaToken }),
-    })
-  ).json()) as { message?: string; data?: { download_url?: string } };
-  const url = json.data?.download_url;
-  if (typeof url !== 'string' || !url) return { ok: false, err: json.message || 'download' };
-  return { ok: true, url };
+    },
+    false,
+  );
+  const postJson = await read(post);
+  const url = postJson.data?.download_url;
+  if (typeof url === 'string' && url) return { ok: true, url };
+  return { ok: false, err: errOf(postJson, post.ok ? 'download' : `unlock ${post.status}`) };
 }
 
 const isDlsurfTab = async (url: string | undefined): Promise<boolean> => {
@@ -114,24 +209,82 @@ export function initDlsurfMainWorldInject(): void {
     if (tabId === undefined || !message?.type) return false;
     const target = { tabId, frameIds: [sender.frameId ?? 0] };
 
+    const run = <T>(
+      ok: boolean,
+      work: () => Promise<chrome.scripting.InjectionResult[]>,
+      map: (results: chrome.scripting.InjectionResult[]) => T,
+      fail: T,
+    ): void => {
+      if (!ok) {
+        sendResponse(fail);
+        return;
+      }
+      void work()
+        .then((r) => sendResponse(map(r)))
+        .catch(() => sendResponse(fail));
+    };
+
     if (message.type === MSG_DLSURF_TURNSTILE) {
       const mountId = typeof message.mountId === 'string' ? message.mountId : '';
       if (!mountId) {
         sendResponse({ ok: false });
         return false;
       }
-      void isDlsurfTab(sender.tab?.url).then((ok) => {
-        if (!ok) return sendResponse({ ok: false });
-        void chrome.scripting
-          .executeScript({
-            target,
-            world: 'MAIN',
-            func: runDlsurfTurnstile,
-            args: [mountId, DLSURF_SITEKEY, DLSURF_MSG_SOURCE],
-          })
-          .then(() => sendResponse({ ok: true }))
-          .catch(() => sendResponse({ ok: false }));
-      });
+      void isDlsurfTab(sender.tab?.url).then((ok) =>
+        run(
+          ok,
+          () =>
+            chrome.scripting.executeScript({
+              target,
+              world: 'MAIN',
+              func: runDlsurfTurnstile,
+              args: [mountId, DLSURF_SITEKEY, DLSURF_MSG_SOURCE],
+            }),
+          () => ({ ok: true }),
+          { ok: false },
+        ),
+      );
+      return true;
+    }
+
+    if (message.type === MSG_DLSURF_TURNSTILE_REMOVE) {
+      const widgetId = typeof message.widgetId === 'string' ? message.widgetId : '';
+      if (!widgetId) {
+        sendResponse({ ok: false });
+        return false;
+      }
+      void isDlsurfTab(sender.tab?.url).then((ok) =>
+        run(
+          ok,
+          () =>
+            chrome.scripting.executeScript({
+              target,
+              world: 'MAIN',
+              func: runDlsurfTurnstileRemove,
+              args: [widgetId],
+            }),
+          () => ({ ok: true }),
+          { ok: false },
+        ),
+      );
+      return true;
+    }
+
+    if (message.type === MSG_DLSURF_AUTH) {
+      void isDlsurfTab(sender.tab?.url).then((ok) =>
+        run(
+          ok,
+          () =>
+            chrome.scripting.executeScript({
+              target,
+              world: 'MAIN',
+              func: runDlsurfCheckAuth,
+              args: [DLSURF_API],
+            }),
+          (r) => ({ ok: r[0]?.result === true }),
+          { ok: false },
+        ),
+      );
       return true;
     }
 
@@ -141,18 +294,20 @@ export function initDlsurfMainWorldInject(): void {
         sendResponse({ token: '' });
         return false;
       }
-      void isDlsurfTab(sender.tab?.url).then((ok) => {
-        if (!ok) return sendResponse({ token: '' });
-        void chrome.scripting
-          .executeScript({
-            target,
-            world: 'MAIN',
-            func: runDlsurfPrefetchToken,
-            args: [DLSURF_API, slug],
-          })
-          .then((r) => sendResponse({ token: (r[0]?.result as string | undefined) ?? '' }))
-          .catch(() => sendResponse({ token: '' }));
-      });
+      void isDlsurfTab(sender.tab?.url).then((ok) =>
+        run(
+          ok,
+          () =>
+            chrome.scripting.executeScript({
+              target,
+              world: 'MAIN',
+              func: runDlsurfPrefetchToken,
+              args: [DLSURF_API, slug],
+            }),
+          (r) => ({ token: (r[0]?.result as string | undefined) ?? '' }),
+          { token: '' },
+        ),
+      );
       return true;
     }
 
@@ -164,20 +319,21 @@ export function initDlsurfMainWorldInject(): void {
         sendResponse({ ok: false, err: 'args' } satisfies DlsurfUnlockResult);
         return false;
       }
-      void isDlsurfTab(sender.tab?.url).then((ok) => {
-        if (!ok) return sendResponse({ ok: false, err: 'host' } satisfies DlsurfUnlockResult);
-        void chrome.scripting
-          .executeScript({
-            target,
-            world: 'MAIN',
-            func: runDlsurfUnlock,
-            args: [DLSURF_API, slug, captchaToken, jwt],
-          })
-          .then((r) =>
-            sendResponse((r[0]?.result as DlsurfUnlockResult | undefined) ?? { ok: false, err: 'empty' }),
-          )
-          .catch(() => sendResponse({ ok: false, err: 'inject' } satisfies DlsurfUnlockResult));
-      });
+      void isDlsurfTab(sender.tab?.url).then((ok) =>
+        run(
+          ok,
+          () =>
+            chrome.scripting.executeScript({
+              target,
+              world: 'MAIN',
+              func: runDlsurfUnlock,
+              args: [DLSURF_API, slug, captchaToken, jwt],
+            }),
+          (r) =>
+            (r[0]?.result as DlsurfUnlockResult | undefined) ?? ({ ok: false, err: 'empty' } satisfies DlsurfUnlockResult),
+          { ok: false, err: ok ? 'inject' : 'host' } satisfies DlsurfUnlockResult,
+        ),
+      );
       return true;
     }
 
