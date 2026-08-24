@@ -5,9 +5,9 @@ const name = 'GPLinks';
 const bypassType = 'Skip Short Link';
 
 const description =
-  'GPLinks bypass that takes Continue with ads, advances mediator blogs, and finishes Get Link with Turnstile so Premium is not the only way through.';
+  'GPLinks bypass for Continue with ads, the intermediate waiting steps, and Get Link with Turnstile—so Premium is not the only way through.';
 
-const domains = ['gplinks.co', 'gplinks.com', 'rajcet.com'] as const;
+const domains = ['gplinks.co', 'gplinks.com', 'rajcet.com', 'skrresults.com'] as const;
 
 const keywords = [
   'gplinks bypass',
@@ -41,43 +41,47 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People search GPLinks bypass, gplinks get link, or skip gplinks premium after a movie or software share dumps them on Protected link ads instead of the file. Skip Wait is the $1/month Chrome extension that runs Continue with ads, the blog steps, and the Get Link screen so you are not the one pressing Verify on every intermediate page.';
+  'A GPLinks bypass matters when a shared short link opens Premium upsells, then intermediate please-wait pages, then a Get Link countdown with Cloudflare Turnstile. Skip Wait is the $1/month Chrome extension that takes Continue with ads, finishes the required intermediate hold, and clears Get Link busywork so you are not babysitting every VERIFY and CONTINUE.';
 
-const body = `## Premium banners, then blog steps, then Get Link
+const body = `## Premium first, then intermediate waits, then Get Link
 
-A typical GP Links short URL is three products stacked together. First the shortener pushes Ad Free Experience or GPLinks Premium with Continue with ads as the escape hatch. Choosing ads drops you through a redirect into mediator blogs: please wait, VERIFY, CONTINUE, sometimes Step X of Y. Only after that tour do you return for a Get Link countdown and, often, a Cloudflare Turnstile pin.
+A typical GP Links short URL stacks three walls. First the shortener pushes Ad Free Experience or GPLinks Premium, with Continue with ads as the free escape. Choosing ads drops you onto intermediate pages: please wait, VERIFY, CONTINUE, often Step X of Y. Only after that tour do you return for a Get Link countdown and, often, a Cloudflare Turnstile pin.
 
-That is why gplinks waiting page and gplinks verify continue queries spike next to generic indian shortlink bypass searches—the pain is the sequence, not one timer.
+That sequence is why a gplinks waiting page or gplinks verify continue stall feels longer than a single timer—the pain is the chain, not one button.
 
-### The free path most visitors actually take
+### Stages people actually hit
 
 1. Decline Premium and choose Continue with ads
-2. Survive each blog hop’s please-wait and VERIFY/CONTINUE UI
-3. Land back on Get Link with countdown and Turnstile
-4. Hope nothing reset the session mid-chain
+2. Intermediate please-wait / VERIFY / CONTINUE steps before unlock is allowed
+3. Get Link countdown back on the shortener
+4. Cloudflare Turnstile on the go page when a human check is required
 
-## Continue with ads, blogs, then Get Link
+## Continue with ads, then Get Link—without babysitting
 
-On shortener hosts, Skip Wait takes the free Continue with ads route so skip gplinks premium does not mean opening Razorpay. On supported mediator blogs it advances the same flow the page would after VERIFY, without you hunting buttons through ads. On the go page it covers Get Link countdown busywork and keeps Turnstile visible when a human check is required—matching what people want from a gplinks turnstile bypass without a captcha farm.
+On shortener hosts, Skip Wait takes the free Continue with ads route so skip gplinks premium does not mean opening a payment wall. On supported intermediate pages it advances the same flow after the required hold—without you hunting VERIFY under ads or walking every article hop by hand. On the go page it covers Get Link countdown busywork and keeps Turnstile visible when a human check is required—the practical gplinks turnstile bypass inside Chrome.
 
-Timers the shortener still enforces server-side are waited honestly. What disappears is the babysitting: Premium upsell clicks you did not want, CONTINUE hunting, and disabled Get Link chrome.
+Timers the shortener still enforces server-side are waited honestly. What disappears is the babysitting: Premium upsell clicks you did not want, CONTINUE hunting, and disabled Get Link chrome. A gplinks timer bypass here means clearing busywork, not inventing a zero-second cheat that errors out.
 
-## Paste APIs vs staying on the live pages
+## Session hold vs starting over
 
-Third-party gplink bypasser paste boxes and Tampermonkey auto-click scripts often die when GPLinks moves blog hosts or changes the flow API. A gplinks chrome extension that runs on the gate, mediators, and go page does not need you to re-copy the URL into another website each week. That is the durable reading of gplinks shortener bypass and gplinks bypass chrome for people who just want the destination.
+Once the intermediate wait has finished for a live session, reopening the same short link soon after usually does not force the full hold again. After the session ages out—about ten minutes on this path—you start fresh and the required wait returns. Paste-box “gplink bypasser” tools and fragile Tampermonkey auto-click scripts often break when intermediate hosts rotate; a gplinks chrome extension that stays on the gate, intermediates, and go page keeps the live browser session instead of asking you to re-copy the URL every week.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
     question: 'Does Skip Wait buy GPLinks Premium?',
     answer:
-      'No. It automates the free Continue with ads path, then the blogs and Get Link screen. If you already pay for Premium you may never see that free chain.',
+      'No. It automates the free Continue with ads path, then the intermediate steps and Get Link screen. If you already pay for Premium you may never see that free chain.',
   },
   {
-    question: 'Why is there still a please-wait on a blog hop?',
+    question: 'Why is there still a please-wait on an intermediate page?',
     answer:
-      'Mediators often track waited time server-side before advance is allowed. Skip Wait polls and advances when ready—a gplinks timer bypass for busywork, not a fake zero-second cheat.',
+      'Those pages often track waited time server-side before advance is allowed. Skip Wait finishes that hold, then continues—a gplinks timer bypass for busywork, not a fake zero-second cheat.',
+  },
+  {
+    question: 'Do I still need to click VERIFY and CONTINUE myself?',
+    answer:
+      'On supported pages, no. Skip Wait advances those steps after the required wait so a gplinks verify continue loop is not something you babysit by hand.',
   },
   {
     question: 'Can it handle Cloudflare Turnstile on Get Link?',
@@ -87,7 +91,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Will an ad blocker break the chain?',
     answer:
-      'Aggressive blockers can trigger AdBlocker detected modals on mediators. Allow the shortener and blog for that session if progress stalls, then reload.',
+      'Aggressive blockers can trigger AdBlocker detected modals on intermediate pages. Allow the shortener and that page for the session if progress stalls, then reload.',
   },
   {
     question: 'How much does the GPLinks bypass cost?',
