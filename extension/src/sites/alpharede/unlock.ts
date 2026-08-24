@@ -14,23 +14,6 @@ const requestDestination = (unlockUrl: string): Promise<string> =>
   });
 
 const run = async (unlockUrl: string): Promise<void> => {
-  ui.progress({
-    lead: 'Hang tight — unlocking your link.',
-    detail: "Skip Wait is working. You don't need to tap anything.",
-    status: 'Opening your short link',
-  });
-  let host: string;
-  try {
-    host = new URL(unlockUrl).hostname;
-  } catch {
-    ui.setError('Invalid unlock link.');
-    return;
-  }
-  if (!(await hostIsRemoteSite(host, SITE))) {
-    ui.setError('Alpharede is not available.');
-    return;
-  }
-
   const onProgress = (msg: { type?: string } & Partial<ResolveProgress>): void => {
     if (msg.type !== MSG_PROGRESS || !msg.status || !msg.lead || !msg.detail) return;
     ui.progress({ lead: msg.lead, detail: msg.detail, status: msg.status });
@@ -38,13 +21,25 @@ const run = async (unlockUrl: string): Promise<void> => {
   chrome.runtime.onMessage.addListener(onProgress);
 
   try {
-    const dest = await requestDestination(unlockUrl);
     ui.progress({
-      lead: 'Almost there.',
-      detail: 'Opening your destination now.',
-      status: 'Opening your link',
+      lead: 'Hang tight — unlocking your link.',
+      detail: "Skip Wait is working. You don't need to tap anything.",
+      status: 'Opening your short link',
     });
-    location.replace(dest);
+
+    let host: string;
+    try {
+      host = new URL(unlockUrl).hostname;
+    } catch {
+      ui.setError('Invalid unlock link.');
+      return;
+    }
+    if (!(await hostIsRemoteSite(host, SITE))) {
+      ui.setError('Alpharede is not available.');
+      return;
+    }
+
+    location.replace(await requestDestination(unlockUrl));
   } catch {
     ui.setError('Could not unlock.');
   } finally {
