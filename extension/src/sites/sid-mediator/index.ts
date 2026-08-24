@@ -1,1 +1,1 @@
-export { initSidMediatorBypass } from './sid-bypass';
+export { initSidMediatorBypass } from './gate';
