@@ -1,11 +1,13 @@
 export const SITE = 'earnlinks' as const;
 
 export const MSG_RESOLVE = 'EARNLINKS_RESOLVE' as const;
+export const MSG_PROGRESS = 'EARNLINKS_PROGRESS' as const;
 
-export const ALIAS_DNR =
-  '([A-Za-z0-9]*[a-z][A-Za-z0-9]*[A-Z][A-Za-z0-9]*|[A-Za-z0-9]*[A-Z][A-Za-z0-9]*[a-z][A-Za-z0-9]*)';
+export type EarnlinksProgress = { lead: string; detail: string; status: string };
 
-const ALIAS_RE = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9]{4,}$/;
+export const ALIAS_DNR = '([A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*)';
+
+const ALIAS_RE = /^(?=.*[A-Za-z])[A-Za-z0-9]{4,}$/;
 
 export const isWorkingPage = (): boolean =>
   location.href.startsWith(chrome.runtime.getURL('working.html'));
