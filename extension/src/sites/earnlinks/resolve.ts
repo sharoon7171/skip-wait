@@ -1,7 +1,12 @@
 import { isHttpUrl } from './hosts';
+import type { EarnlinksProgress } from './hosts';
 
 const REFERER_RULE = 918498;
 const ACCEPT = 'text/html,application/xhtml+xml;q=0.9,*/*;q=0.8';
+
+const say = (onProgress: ((p: EarnlinksProgress) => void) | undefined, p: EarnlinksProgress): void => {
+  onProgress?.(p);
+};
 
 const field = (html: string, name: string): string | null => {
   const esc = name.replace(/[[\]]/g, '\\$&');
@@ -97,5 +102,35 @@ const postGo = async (unlockUrl: string, html: string): Promise<string> => {
   });
 };
 
-export const resolveDestination = async (unlockUrl: string): Promise<string> =>
-  postGo(unlockUrl, await fetchUnlockHtml(unlockUrl, await gateReferer(unlockUrl)));
+export const resolveDestination = async (
+  unlockUrl: string,
+  onProgress?: (p: EarnlinksProgress) => void,
+): Promise<string> => {
+  say(onProgress, {
+    lead: 'Hang tight — unlocking your link.',
+    detail: "Skip Wait is working. You don't need to tap anything.",
+    status: 'Opening your short link',
+  });
+  const referer = await gateReferer(unlockUrl);
+
+  say(onProgress, {
+    lead: 'Skipping the wait pages.',
+    detail: 'Those Click Banner Wait & Back hops stay in the background — nothing to click.',
+    status: 'Starting unlock',
+  });
+  const html = await fetchUnlockHtml(unlockUrl, referer);
+
+  say(onProgress, {
+    lead: 'Unlocking your link.',
+    detail: "Skip Wait is finishing the Get Link step for you. You don't need to tap anything.",
+    status: 'Getting your link',
+  });
+  const dest = await postGo(unlockUrl, html);
+
+  say(onProgress, {
+    lead: 'Almost there.',
+    detail: 'Opening your destination now.',
+    status: 'Opening your link',
+  });
+  return dest;
+};

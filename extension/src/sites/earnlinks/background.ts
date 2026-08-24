@@ -1,5 +1,5 @@
 import { remoteSiteHosts } from '../../hosts/check';
-import { ALIAS_DNR, MSG_RESOLVE, SITE, isShortUrl } from './hosts';
+import { ALIAS_DNR, MSG_PROGRESS, MSG_RESOLVE, SITE, isShortUrl, type EarnlinksProgress } from './hosts';
 import { resolveDestination } from './resolve';
 
 const RULE_BASE = 918500;
@@ -43,7 +43,10 @@ export const initEarnlinksBackground = (): void => {
       reply({ ok: false });
       return false;
     }
-    void resolveDestination(unlockUrl)
+    const push = (p: EarnlinksProgress): void => {
+      void chrome.runtime.sendMessage({ type: MSG_PROGRESS, ...p }).catch(() => {});
+    };
+    void resolveDestination(unlockUrl, push)
       .then((dest) => reply({ ok: true, dest }))
       .catch(() => reply({ ok: false }));
     return true;

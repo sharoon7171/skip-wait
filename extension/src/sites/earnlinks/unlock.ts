@@ -1,5 +1,5 @@
 import { hostIsRemoteSite } from '../../hosts/check';
-import { MSG_RESOLVE, SITE, isShortUrl, isWorkingPage } from './hosts';
+import { MSG_PROGRESS, MSG_RESOLVE, SITE, isShortUrl, isWorkingPage, type EarnlinksProgress } from './hosts';
 import { createOverlay } from './overlay';
 
 const ui = createOverlay();
@@ -13,25 +13,36 @@ const requestDestination = (unlockUrl: string): Promise<string> =>
   });
 
 const run = async (unlockUrl: string): Promise<void> => {
-  ui.setStatus('Getting things ready');
-  let host: string;
+  const onProgress = (msg: { type?: string } & Partial<EarnlinksProgress>): void => {
+    if (msg.type !== MSG_PROGRESS || !msg.status || !msg.lead || !msg.detail) return;
+    ui.progress({ lead: msg.lead, detail: msg.detail, status: msg.status });
+  };
+  chrome.runtime.onMessage.addListener(onProgress);
+
   try {
-    host = new URL(unlockUrl).hostname;
-  } catch {
-    ui.setError('Invalid unlock link.');
-    return;
-  }
-  if (!(await hostIsRemoteSite(host, SITE))) {
-    ui.setError('Earnlinks is not available.');
-    return;
-  }
-  ui.setStatus('Unlocking your link');
-  try {
-    const dest = await requestDestination(unlockUrl);
-    ui.setStatus('Opening your link');
-    location.replace(dest);
+    ui.progress({
+      lead: 'Hang tight — unlocking your link.',
+      detail: "Skip Wait is working. You don't need to tap anything.",
+      status: 'Opening your short link',
+    });
+
+    let host: string;
+    try {
+      host = new URL(unlockUrl).hostname;
+    } catch {
+      ui.setError('Invalid unlock link.');
+      return;
+    }
+    if (!(await hostIsRemoteSite(host, SITE))) {
+      ui.setError('Earnlinks is not available.');
+      return;
+    }
+
+    location.replace(await requestDestination(unlockUrl));
   } catch {
     ui.setError('Could not unlock.');
+  } finally {
+    chrome.runtime.onMessage.removeListener(onProgress);
   }
 };
 
