@@ -4,8 +4,10 @@ export const DLSURF_FILE_RE = /^\/f\/([A-Za-z0-9]+)\/?$/i;
 export const DLSURF_PANEL_ID = 'skip-wait-dlsurf-panel';
 export const DLSURF_TURNSTILE_MOUNT_ID = 'skip-wait-dlsurf-turnstile';
 export const DLSURF_MSG_SOURCE = 'skip-wait-dlsurf';
+export const MSG_DLSURF_AUTH = 'skip-wait-dlsurf-auth';
 export const MSG_DLSURF_PREFETCH = 'skip-wait-dlsurf-prefetch';
 export const MSG_DLSURF_TURNSTILE = 'skip-wait-dlsurf-turnstile';
+export const MSG_DLSURF_TURNSTILE_REMOVE = 'skip-wait-dlsurf-turnstile-remove';
 export const MSG_DLSURF_UNLOCK = 'skip-wait-dlsurf-unlock';
 
 export type DlsurfUnlockResult = { ok: true; url: string } | { ok: false; err: string };
