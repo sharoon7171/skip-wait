@@ -35,6 +35,7 @@ import { initFclcMediatorPage, initFclcShortlinkPage } from '../sites/fclc';
 import { initIcutlinkLinksGo, initIcutlinkMediatorPage } from '../sites/icutlink';
 import { initAnygameProductPage } from '../sites/anygame';
 import { initApktealProductPage } from '../sites/apkteal';
+import { initAn1Bypass } from '../sites/an1';
 import { initGapkmodBypass } from '../sites/gapkmod';
 import { initPlaymodsBypass } from '../sites/playmods';
 import { initLiteapksDirectDownload } from '../sites/liteapks';
@@ -207,6 +208,7 @@ const INITS = [
   initFastdlZipRedirect,
   initAnygameProductPage,
   initApktealProductPage,
+  initAn1Bypass,
   initGapkmodBypass,
   initPlaymodsBypass,
   initLiteapksDirectDownload,
