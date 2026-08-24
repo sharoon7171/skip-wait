@@ -74,6 +74,10 @@ export function PricingModal({ open, onClose }: Props): React.ReactElement | nul
               <span className="font-semibold text-ink">Crypto ({PRICE_CRYPTO}/mo):</span> direct crypto only — not on
               Gumroad. Message Telegram or email for payment details, then we send the key.
             </p>
+            <p>
+              <span className="font-semibold text-ink">Trial:</span> available on request — email or Telegram for a
+              trial key.
+            </p>
             <p>One device per key.</p>
           </div>
 
@@ -94,14 +98,14 @@ export function PricingModal({ open, onClose }: Props): React.ReactElement | nul
               className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-surface-canvas text-[0.75rem] font-semibold text-ink no-underline ring-1 ring-neutral-300 transition-colors hover:bg-primary-50 hover:text-primary-700 hover:ring-primary-300"
             >
               <img src={assetUrl('icons/telegram.png')} alt="" className="size-4" width={16} height={16} />
-              Crypto · Telegram
+              Telegram
             </a>
             <a
-              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent('Skip Wait crypto payment')}`}
+              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent('Skip Wait license / trial')}`}
               className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-surface-canvas text-[0.75rem] font-semibold text-ink no-underline ring-1 ring-neutral-300 transition-colors hover:bg-primary-50 hover:text-primary-700 hover:ring-primary-300"
             >
               <img src={assetUrl('icons/email.png')} alt="" className="size-4" width={16} height={16} />
-              Crypto · Email
+              Email
             </a>
           </div>
         </div>
