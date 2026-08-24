@@ -5,16 +5,9 @@ const name = 'Alpharede';
 const bypassType = 'Skip Short Link';
 
 const description =
-  'Alpharede bypass skips touch-ad waits, multi-stage blog hops, and ad-blocker walls on rotating Alpha Rede articles so the destination opens without tapping every interstitial.';
+  'Alpharede bypass for touch-ad waits and multi-stage blog hops: Skip Wait stays on the short link, advances every stage, and opens the destination without tapping each interstitial.';
 
-const domains = [
-  'alpharede.com',
-  'horoscopeonday.com',
-  'forumdinheiro.com',
-  'guis2.com',
-  'milbviral.com',
-  'tarviral.com',
-] as const;
+const domains = ['alpharede.com'] as const;
 
 const keywords = [
   'alpharede bypass',
@@ -42,31 +35,31 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Alpharede bypass matters when a shared short link dumps you into Alpha Rede blog stages with touch-ad waits, click-ad wait 10 seconds copy, and an ad blocker detected wall before the real file. Skip Wait is a $1/month Chrome extension that clears those hops on supported Alpha Rede articles and opens the destination.';
+  'An Alpharede bypass matters when a shared short link dumps you into Alpha Rede blog stages with touch-ad waits, click-ad wait 10 seconds copy, and an ad blocker detected wall before the real file. Skip Wait is a $1/month Chrome extension that keeps you on the short link, clears those stages, and opens the destination.';
 
-const body = `## Blog stages built to burn clicks
+const body = `## Short links that want a multi-stage blog tour
 
-Alpharede (Alpha Rede) monetizes traffic with a tour of rotating blog articles, not a single redirect. Each stage asks you to touch an ad, wait about ten seconds, and return before the next hop unlocks. Leave the tab, trip an ad-blocker wall, or miss the continue control and the alpharede timer bypass loop starts over on another article host.
+Alpharede (Alpha Rede) monetizes traffic with several blog stages, not a single redirect. Each stage asks you to touch an ad, wait about ten seconds, and return before the next hop unlocks. Leave the tab, trip an ad-blocker wall, or miss the continue control and the alpharede timer bypass loop starts over on another article host.
 
-The brand on the footer may say Alpha Rede while the hostname keeps changing between shares. That rotating blog shortener pattern is why a paste tool that only knows yesterday’s host fails on today’s link.
+The brand may say Alpha Rede while the article hostname keeps changing between shares. That rotating blog shortener pattern is why tools that only know yesterday’s host fail on today’s link.
 
-### Stages on a typical Alpharede path
+### Stages people actually hit
 
-- Touch-ad / click-ad wait instructions on a fake news or lifestyle article
+- Forced jump from the Alpharede short URL toward partner articles
+- Touch-ad / click-ad wait instructions on fake news or lifestyle pages
 - Ten-second (or similar) holds that restart if you leave the page
-- Progress markers across several blog stages before the final destination
+- Progress across several stages before the final destination
 - Ad blocker detected overlays that freeze unlock until ads load
-- A clean destination URL only after every stage is accepted
 
-## What Skip Wait clears on Alpha Rede articles
+## Stay on the short link, then unlock
 
-On supported Alpharede blog hosts, Skip Wait covers the busy page and finishes the live multi-stage unlock the site already uses after those ad waits—then opens the destination. You do not babysit every touch-ad strip or hunt obfuscated continue labels through banners.
+Skip Wait treats Alpharede as a short-link unlock, not a blog crawl. On supported Alpharede short URLs it covers the busy UI, advances the live multi-stage unlock the site already uses after those ad waits, and opens the destination—without tapping every touch-ad strip or hunting continue labels through banners.
 
-Client chrome and interstitial busywork get out of the way. The alpharede countdown bypass stays tied to the real session on the page, so the destination is the one the publisher set for that share.
+Client chrome and interstitial busywork get out of the way. The alpharede countdown bypass stays tied to a real browser session, so the destination is the one the publisher set for that share.
 
 ## When another shortener hands you into Alpharede
 
-Publishers often unlock a first shortener into an Alpharede article chain. If that first hop was [Earnlinks](/sites/earnlinks-bypass), stay on the same tab—Skip Wait continues with the Alpharede rule once an Alpha Rede blog loads. An alpharede chrome extension install covers the blog stages themselves; the prior shortener has its own catalog page when you need that hop alone.
+Publishers often unlock a first shortener into an Alpharede chain. If that first hop was [Earnlinks](/sites/earnlinks-bypass), stay on the same tab—Skip Wait continues with the Alpharede rule once the Alpharede short link opens. An alpharede chrome extension install covers the Alpharede hop; the prior shortener has its own catalog page when you need that stage alone.
 `;
 
 const faq: readonly BypassFaq[] = [
@@ -76,24 +69,24 @@ const faq: readonly BypassFaq[] = [
       'It skips Alpha Rede touch-ad waits and multi-stage blog hops so a monetized short link reaches the destination without completing every interstitial by hand.',
   },
   {
-    question: 'Why do the blog site names keep changing?',
+    question: 'Do I still visit the article / blog pages?',
     answer:
-      'Alpharede rotates article hosts between stages and shares. Skip Wait covers the supported Alpha Rede blogs listed for this bypass so you are not stuck relearning each hostname.',
+      'No. On supported Alpharede short links, Skip Wait stays on the short URL and finishes every stage there instead of walking the blog tour.',
   },
   {
     question: 'Do I still have to click the ad and wait ten seconds?',
     answer:
-      'On supported pages, no. Skip Wait completes the unlock path those waits gate, then opens the destination.',
+      'On supported short links, no. Skip Wait advances the unlock path those waits gate, then opens the destination.',
   },
   {
     question: 'What if I see Ad blocker detected?',
     answer:
-      'That wall is part of the monetized tour. Skip Wait does not depend on you disabling blockers or loading every banner by hand on supported Alpharede articles.',
+      'That wall is part of the monetized tour. Skip Wait does not depend on you disabling blockers or loading every banner by hand on supported Alpharede short links.',
   },
   {
-    question: 'I came from Earnlinks into an Alpharede blog—same extension?',
+    question: 'I came from Earnlinks into Alpharede—same extension?',
     answer:
-      'Yes. Stay on the tab. After Earnlinks, Skip Wait continues on Alpharede article hosts with the matching rule.',
+      'Yes. Stay on the tab. After Earnlinks, Skip Wait continues on the Alpharede short link with the matching rule.',
   },
   {
     question: 'How much does the Alpharede bypass cost?',
