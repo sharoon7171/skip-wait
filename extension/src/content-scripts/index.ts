@@ -26,7 +26,7 @@ import { initMitlyGate } from '../sites/mitly';
 import { initLinclikGate } from '../sites/linclik';
 import { initCpmlinkHop, initCpmlinkUnlock } from '../sites/cpmlink';
 import { initGenlinkEntry, initGenlinkMediator, initGenlinkUnlock } from '../sites/genlink';
-import { initSflGate } from '../sites/sfl';
+import { initSflUnlock } from '../sites/sfl';
 import { initBitcotasksReadArticle } from './bitcotasks-read-article';
 import { initClipiRedirect } from '../sites/clipi';
 import { initCookiesceoCopy } from './cookiesceo-copy';
@@ -187,7 +187,7 @@ const INITS = [
   initGenlinkUnlock,
   initGoostEntry,
   initGoostMediator,
-  initSflGate,
+  initSflUnlock,
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
   initAnkergamesMediator,

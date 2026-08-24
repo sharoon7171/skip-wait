@@ -32,6 +32,7 @@ import { initVexfileMainWorldInject } from '../sites/vexfile';
 import { initDlsurfMainWorldInject } from '../sites/dlsurf';
 import { initAlpharedeBackground } from '../sites/alpharede';
 import { initEarnlinksBackground } from '../sites/earnlinks';
+import { initSflBackground } from '../sites/sfl';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -68,5 +69,6 @@ initVexfileMainWorldInject();
 initDlsurfMainWorldInject();
 initAlpharedeBackground();
 initEarnlinksBackground();
+initSflBackground();
 void pullHosts();
 initLicenseSync();
