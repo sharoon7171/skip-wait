@@ -16,8 +16,14 @@ let lastPath = '';
 let historyHooked = false;
 let busy = false;
 let queued = false;
+let hiddenRow: HTMLElement | null = null;
 
 const slugFromPath = (): string | null => DLSURF_FILE_RE.exec(location.pathname)?.[1] ?? null;
+
+const revealActionRow = (): void => {
+  if (hiddenRow?.isConnected) hiddenRow.hidden = false;
+  hiddenRow = null;
+};
 
 const isAuthed = (): Promise<boolean> =>
   chrome.runtime
@@ -59,6 +65,7 @@ const teardown = (): void => {
   runGen += 1;
   activeSlug = null;
   removeDlsurfPanel();
+  revealActionRow();
 };
 
 const stillCurrent = (gen: number, slug: string): boolean =>
@@ -87,28 +94,29 @@ const run = async (): Promise<void> => {
   }
   if (activeSlug === slug && panelEl()) return;
 
-  const action = findActionRow();
-  if (!action) return;
+  const row = findActionRow();
+  if (!row) return;
 
   busy = true;
   const gen = ++runGen;
-  const primary = action.primary;
-  primary.hidden = true;
+  revealActionRow();
+  hiddenRow = row;
+  row.hidden = true;
 
   const abort = (): void => {
     removeDlsurfPanel();
-    if (primary.isConnected) primary.hidden = false;
+    revealActionRow();
     if (activeSlug === slug) activeSlug = null;
   };
 
   try {
     removeDlsurfPanel();
-    if (!stillCurrent(gen, slug) || !action.row.isConnected) {
+    if (!stillCurrent(gen, slug) || !row.isConnected) {
       abort();
       return;
     }
 
-    const panel = createDlsurfPanel(action.row);
+    const panel = createDlsurfPanel(row);
     if (!stillCurrent(gen, slug) || !panelEl()) {
       abort();
       return;

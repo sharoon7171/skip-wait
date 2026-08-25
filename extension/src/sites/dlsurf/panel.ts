@@ -8,12 +8,7 @@ import {
 
 const STYLE_ID = 'skip-wait-dlsurf-panel-css';
 
-export type DlsurfActionRow = {
-  primary: HTMLButtonElement;
-  row: HTMLElement;
-};
-
-export type DlsurfPanel = {
+type DlsurfPanel = {
   mountTurnstile: (onToken: (token: string) => void) => Promise<void>;
   setError: (text: string | null) => void;
   setStatus: (text: string) => void;
@@ -57,24 +52,21 @@ export const removeDlsurfPanel = (): void => {
   releaseTurnstile(widgetId);
 };
 
-export const findActionRow = (): DlsurfActionRow | null => {
+export const findActionRow = (): HTMLElement | null => {
   for (const row of document.querySelectorAll<HTMLElement>('div.mt-4.flex.flex-col.gap-4.md\\:flex-row')) {
-    const buttons = [...row.children].filter(
-      (el): el is HTMLButtonElement =>
-        el instanceof HTMLButtonElement && el.getAttribute('data-slot') === 'button',
-    );
+    const buttons = [...row.querySelectorAll<HTMLButtonElement>(':scope > button[data-slot="button"]')];
     if (buttons.length !== 2) continue;
     const primary = buttons[0]!;
-    const premium = buttons[1]!;
-    if (!primary.classList.contains('md:flex-1') || !premium.classList.contains('md:flex-1')) continue;
-    if (![...premium.classList].some((c) => c.includes('amber'))) continue;
+    const secondary = buttons[1]!;
+    if (!primary.classList.contains('md:flex-1') || !secondary.classList.contains('md:flex-1')) continue;
+    if (![...secondary.classList].some((c) => c.includes('amber'))) continue;
     if (
       !primary.classList.contains('bg-primary') &&
       ![...primary.classList].some((c) => c.includes('success') || c.includes('green'))
     ) {
       continue;
     }
-    return { primary, row };
+    return row;
   }
   return null;
 };
