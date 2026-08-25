@@ -616,5 +616,11 @@
   },
   "coomeet-iframe": {
     "hosts": ["iframe.coomeet.com"]
+  },
+  "workink": {
+    "hosts": ["work.ink"]
+  },
+  "link4m": {
+    "hosts": ["link4m.co"]
   }
 }
