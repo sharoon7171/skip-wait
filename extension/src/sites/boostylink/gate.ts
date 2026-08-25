@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -123,7 +123,7 @@ const run = async (): Promise<void> => {
 
 export function initBoostylinkGate(): void {
   if (window !== window.top) return;
-  void isRemoteSite('boostylink').then((ok) => {
+  void canBypass('boostylink').then((ok) => {
     if (!ok) return;
     const tick = (): void => {
       if (isLockerPage()) void run();

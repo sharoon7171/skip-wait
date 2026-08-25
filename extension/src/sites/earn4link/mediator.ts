@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
@@ -66,7 +66,7 @@ const run = (): void => {
 
 export function initEarn4linkMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('earn4link-mediator').then((ok) => {
+  void canBypass('earn4link-mediator').then((ok) => {
     if (!ok) return;
     if (alias() || cookie('site') === 'e4l' || document.querySelector('#wpsafelink-landing')) {
       void run();

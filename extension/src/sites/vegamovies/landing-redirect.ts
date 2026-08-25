@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND_ID = 'skipwait-vegamovies-brand';
@@ -110,7 +110,7 @@ function bindClicks(): void {
 }
 
 export function initVegamoviesLandingRedirect(): void {
-  const allowed = isRemoteSite('vegamovies-landing');
+  const allowed = canBypass('vegamovies-landing');
   whenDomParsed(() => {
     const waitDest = destinationFromHtml(document.documentElement.innerHTML);
     if (!waitDest && !document.querySelector('nav.link-grid')) return;

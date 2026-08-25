@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 function redirect(): void {
@@ -8,7 +8,7 @@ function redirect(): void {
 
 export function initSub2getRedirect(): void {
   if (!/[?&]l=/.test(location.search)) return;
-  void isRemoteSite('sub2get').then((ok) => {
+  void canBypass('sub2get').then((ok) => {
     if (ok) whenDomParsed(redirect);
   });
 }

@@ -1,10 +1,10 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 
 const HUBCDN_DL_PATH_RE = /^\/dl\/?$/i;
 
 export function initHubcdnDl(): void {
   if (!HUBCDN_DL_PATH_RE.test(location.pathname)) return;
-  void isRemoteSite('hdhub4u-hubcdn').then((ok) => {
+  void canBypass('hdhub4u-hubcdn').then((ok) => {
     if (!ok) return;
     let target: string;
     try {

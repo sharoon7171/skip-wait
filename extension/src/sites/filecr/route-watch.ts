@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { MSG_FILECR_ROUTE } from './hosts';
 
 export function initFilecrRouteWatch(): void {
@@ -11,7 +11,7 @@ export function initFilecrRouteWatch(): void {
       } catch {
         return;
       }
-      if (!(await hostIsRemoteSite(host, 'filecr'))) return;
+      if (!(await canBypassHost(host, 'filecr'))) return;
       void chrome.tabs.sendMessage(details.tabId, { type: MSG_FILECR_ROUTE }).catch(() => {});
     })();
   });

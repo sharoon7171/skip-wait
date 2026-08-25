@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { whenDomReady } from '../../utils/domain-check';
@@ -129,7 +129,7 @@ export function initXdmoviesMediatorPage(): void {
   if (window !== window.top) return;
   const code = location.pathname.match(PATH)?.[1];
   if (!code) return;
-  const allowed = isRemoteSite('xdmovies-mediator');
+  const allowed = canBypass('xdmovies-mediator');
   void (async () => {
     await whenDomReady(
       () =>

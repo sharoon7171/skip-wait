@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -56,7 +56,7 @@ const tick = (): void => {
 
 export const initTech8sAdrinolinks = (): void => {
   if (window !== window.top) return;
-  void isRemoteSite('tech8s-adrinolinks').then((ok) => {
+  void canBypass('tech8s-adrinolinks').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

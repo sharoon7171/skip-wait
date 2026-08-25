@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
 import { xxc } from './parse';
@@ -25,7 +25,7 @@ async function resolveDdx(url: string): Promise<string> {
 
 export function initLlacDdx(): void {
   if (window !== window.top) return;
-  void isRemoteSite('ll-safelink-llac').then((ok) => {
+  void canBypass('ll-safelink-llac').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       const qs = ddxQuery();

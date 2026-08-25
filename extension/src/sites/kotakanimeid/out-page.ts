@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -318,7 +318,7 @@ async function run(): Promise<void> {
 }
 
 export function initKotakanimeidOutPage(): void {
-  void isRemoteSite('kotakanimeid').then((ok) => {
+  void canBypass('kotakanimeid').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       if (!isOutDownloadGate()) return;

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const GO = /^\/go\/?$/i;
@@ -26,7 +26,7 @@ function unlockListing(): void {
 
 export function initHaxpcListing(): void {
   if (GO.test(location.pathname)) return;
-  void isRemoteSite('haxpc').then((ok) => {
+  void canBypass('haxpc').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       document.addEventListener('DOMContentLoaded', () => setTimeout(unlockListing), { once: true });
@@ -36,7 +36,7 @@ export function initHaxpcListing(): void {
 
 export function initHaxpcGoPage(): void {
   if (!GO.test(location.pathname)) return;
-  void isRemoteSite('haxpc').then((ok) => {
+  void canBypass('haxpc').then((ok) => {
     if (!ok) return;
     const open = (): void => {
       const hash = DEST.exec(document.documentElement.innerHTML)?.[1];

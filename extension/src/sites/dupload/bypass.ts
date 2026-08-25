@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { DUPLOAD_ID_RE } from './hosts';
 import { createOverlay } from './overlay';
@@ -31,7 +31,7 @@ export const initDuploadBypass = (): void => {
   if (window !== window.top || started) return;
   const id = fileId();
   if (!id) return;
-  void isRemoteSite('dupload').then((ok) => {
+  void canBypass('dupload').then((ok) => {
     if (!ok || started) return;
     started = true;
     ui = createOverlay();

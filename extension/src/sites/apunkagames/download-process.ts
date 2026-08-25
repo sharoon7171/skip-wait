@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 function destination(): string | null {
@@ -11,7 +11,7 @@ function destination(): string | null {
 
 export function initApunkagamesDownloadProcess(): void {
   if (!/download-process\.php/i.test(location.pathname)) return;
-  void isRemoteSite('apunkagames').then((ok) => {
+  void canBypass('apunkagames').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       const url = destination();

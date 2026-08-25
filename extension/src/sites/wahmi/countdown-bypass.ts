@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const FILE_PATH_RE = /^\/([^/]+)\/file\/?$/i;
@@ -43,7 +43,7 @@ async function run(): Promise<void> {
 
 export function initWahmiCountdownBypass(): void {
   if (!FILE_PATH_RE.test(location.pathname)) return;
-  const allowed = isRemoteSite('wahmi');
+  const allowed = canBypass('wahmi');
   whenDomParsed(() => {
     if (!document.querySelector('.filebox-download') || !document.querySelector('.download-counter')) return;
     void allowed.then((ok) => {

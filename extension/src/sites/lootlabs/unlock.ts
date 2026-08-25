@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
 import { isLootLockerPath } from './locker';
@@ -13,7 +13,7 @@ type LootMessage =
 
 export function initLootlabsUnlock(): void {
   if (window !== window.top) return;
-  void isRemoteSite('lootlabs').then((ok) => {
+  void canBypass('lootlabs').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       if (!isLootLockerPath(location.pathname, location.search)) return;

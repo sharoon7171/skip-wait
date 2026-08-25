@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -182,7 +182,7 @@ const unlock = async (): Promise<void> => {
 
 export function initShrtflyMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('shrtfly-mediator').then((hostOk) => {
+  void canBypass('shrtfly-mediator').then((hostOk) => {
     const mo = new MutationObserver(() => tick());
     const stop = (): void => {
       mo.disconnect();

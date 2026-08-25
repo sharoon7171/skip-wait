@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -159,7 +159,7 @@ const tick = (): void => {
 export function initCpmlinkUnlock(): void {
   if (window !== window.top) return;
   if (!isAliasPath()) return;
-  void isRemoteSite('cpmlink').then((ok) => {
+  void canBypass('cpmlink').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

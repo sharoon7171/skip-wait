@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { MSG_PROGRESS, MSG_RESOLVE, SITE, isShortUrl, isWorkingPage, type SflProgress } from './hosts';
 import { createOverlay } from './overlay';
 
@@ -26,7 +26,7 @@ const run = async (unlockUrl: string): Promise<void> => {
     ui.setError('Invalid unlock link.');
     return;
   }
-  if (!(await hostIsRemoteSite(host, SITE))) {
+  if (!(await canBypassHost(host, SITE))) {
     ui.setError('SFL is not available.');
     return;
   }

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { MSG_FCLC_ALERT_SUPPRESS } from './alert-suppress';
@@ -222,7 +222,7 @@ function runHcaptchaPart(form: HTMLFormElement): void {
 }
 
 export function initFclcShortlinkPage(): void {
-  void isRemoteSite('fclc').then((ok) => {
+  void canBypass('fclc').then((ok) => {
     if (!ok) return;
 
     let started = false;

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -50,7 +50,7 @@ const urlFromScripts = (): string | null => {
 };
 
 export const initTech8sRedirect = (): void => {
-  void isRemoteSite('tech8s').then((ok) => {
+  void canBypass('tech8s').then((ok) => {
     if (!ok) return;
 
     if (ST_RE.test(location.pathname)) {

@@ -1,9 +1,9 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 export async function isStreamerviewerbotTrialUrl(url: string): Promise<boolean> {
   try {
     const u = new URL(url);
-    return (await hostIsRemoteSite(u.hostname, 'streamerviewerbot')) && u.pathname.includes('/trial/trial.php');
+    return (await canBypassHost(u.hostname, 'streamerviewerbot')) && u.pathname.includes('/trial/trial.php');
   } catch {
     return false;
   }

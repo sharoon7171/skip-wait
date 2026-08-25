@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -89,7 +89,7 @@ function jump(): void {
 
 export function initCinefreakMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('cinefreak').then((ok) => {
+  void canBypass('cinefreak').then((ok) => {
     if (!ok) return;
     if (CINEFREAK_MEDIATOR_PATH.test(location.pathname)) mountUi('Getting your download ready…');
     jump();

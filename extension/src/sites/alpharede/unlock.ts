@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { MSG_PROGRESS, MSG_RESOLVE, SITE, isShortUrl, isWorkingPage } from './hosts';
 import { createOverlay } from './overlay';
 import type { ResolveProgress } from './resolve';
@@ -34,7 +34,7 @@ const run = async (unlockUrl: string): Promise<void> => {
       ui.setError('Invalid unlock link.');
       return;
     }
-    if (!(await hostIsRemoteSite(host, SITE))) {
+    if (!(await canBypassHost(host, SITE))) {
       ui.setError('Alpharede is not available.');
       return;
     }

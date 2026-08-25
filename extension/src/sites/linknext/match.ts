@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 export type LinknextPhase = 'alias' | 'mediator' | 'blog' | 'tk';
 
@@ -21,19 +21,19 @@ const isLinknextAliasPath = (pathname: string): boolean =>
 
 export async function isLinknextHost(href = location.href): Promise<boolean> {
   const u = parseUrl(href);
-  return u ? hostIsRemoteSite(u.hostname, 'linknext') : false;
+  return u ? canBypassHost(u.hostname, 'linknext') : false;
 }
 
 export async function isLinknextMediatorPage(href = location.href): Promise<boolean> {
   const u = parseUrl(href);
-  if (!u || !(await hostIsRemoteSite(u.hostname, 'linknext-mediator'))) return false;
+  if (!u || !(await canBypassHost(u.hostname, 'linknext-mediator'))) return false;
   const ssid = u.searchParams.get('ssid');
   return !!ssid && SSID_RE.test(ssid);
 }
 
 export async function isProfitsflyBlogPage(href = location.href): Promise<boolean> {
   const u = parseUrl(href);
-  if (!u || !(await hostIsRemoteSite(u.hostname, 'linknext-blog'))) return false;
+  if (!u || !(await canBypassHost(u.hostname, 'linknext-blog'))) return false;
   const h = u.hostname.toLowerCase();
   if (h.startsWith('www.')) return false;
   if (!h.split('.').slice(0, -2).join('.')) return false;
@@ -43,7 +43,7 @@ export async function isProfitsflyBlogPage(href = location.href): Promise<boolea
 export async function linknextPhase(href = location.href): Promise<LinknextPhase | null> {
   const u = parseUrl(href);
   if (!u) return null;
-  if (await hostIsRemoteSite(u.hostname, 'linknext')) {
+  if (await canBypassHost(u.hostname, 'linknext')) {
     if (u.searchParams.has('tk')) return 'tk';
     if (isLinknextAliasPath(u.pathname)) return 'alias';
     return null;

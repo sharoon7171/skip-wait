@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const LABEL = 'Skip Wait';
@@ -151,7 +151,7 @@ function boot(): void {
 }
 
 export function initPlaymodsBypass(): void {
-  void isRemoteSite('playmods').then((ok) => {
+  void canBypass('playmods').then((ok) => {
     if (!ok) return;
     const pathVid = versionIdInPath(location.pathname);
     if (pathVid) {

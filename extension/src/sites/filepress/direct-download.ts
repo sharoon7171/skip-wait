@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 
 const FILEPRESS_API = '/api/file';
 const FILEPRESS_FILE_RE = /^\/file\/([^/]+)\/?$/i;
@@ -55,7 +55,7 @@ export function initFilePressDirectDownload(): void {
   const fileId = location.pathname.match(FILEPRESS_FILE_RE)?.[1];
   if (!fileId) return;
 
-  void isRemoteSite('filepress').then((ok) => {
+  void canBypass('filepress').then((ok) => {
     if (!ok) return;
 
     let ready = new Map<string, Promise<string | null>>();

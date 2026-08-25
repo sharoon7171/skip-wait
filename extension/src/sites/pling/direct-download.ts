@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const HIJACKED = 'data-skipwait-hijacked';
@@ -40,7 +40,7 @@ function run(): void {
 
 export function initPlingDirectDownload(): void {
   if (!PROJECT_RE.test(location.pathname)) return;
-  const allowed = isRemoteSite('pling');
+  const allowed = canBypass('pling');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

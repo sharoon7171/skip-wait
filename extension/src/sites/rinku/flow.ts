@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 const STORAGE_KEY = 'rinku-flow-tabs';
 const MESSAGE = 'RINKU_FLOW_TAB' as const;
@@ -15,10 +15,10 @@ const startsRinkuFlow = async (raw: string): Promise<boolean> => {
         alias !== null &&
         short !== null &&
         ALIAS_RE.test(alias) &&
-        (await hostIsRemoteSite(short, 'rinku'))
+        (await canBypassHost(short, 'rinku'))
       );
     }
-    if (!(await hostIsRemoteSite(url.hostname, 'rinku'))) return false;
+    if (!(await canBypassHost(url.hostname, 'rinku'))) return false;
     const [alias, ...rest] = url.pathname.split('/').filter(Boolean);
     return alias !== undefined && rest.length === 0 && ALIAS_RE.test(alias);
   } catch {

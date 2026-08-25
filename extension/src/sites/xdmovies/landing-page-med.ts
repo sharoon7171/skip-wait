@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -67,7 +67,7 @@ function openMainSite(): void {
 }
 
 export function initXdmoviesLandingPageMed(): void {
-  const allowed = isRemoteSite('xdmovies');
+  const allowed = canBypass('xdmovies');
   whenDomParsed(() => {
     if (!destinationFromCta()) return;
     void allowed.then((ok) => {

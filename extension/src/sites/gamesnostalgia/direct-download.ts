@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const API = '/download_post_call.php';
@@ -70,7 +70,7 @@ function wire(btn: HTMLButtonElement, g: string, f: string, gpath: string, lang:
 
 export function initGamesnostalgiaDirectDownload(): void {
   if (!/\/download\//i.test(location.pathname)) return;
-  void isRemoteSite('gamesnostalgia').then((ok) => {
+  void canBypass('gamesnostalgia').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       const btn = document.getElementById('download-button');

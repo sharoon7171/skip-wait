@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND = 'skipwait-apunkagames-brand';
@@ -42,7 +42,7 @@ function unlock(): void {
 
 export function initApunkagamesVlink(): void {
   if (!location.pathname.startsWith('/vlink/')) return;
-  void isRemoteSite('apunkagames').then((ok) => {
+  void canBypass('apunkagames').then((ok) => {
     if (!ok) return;
     whenDomParsed(unlock);
   });

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
@@ -92,7 +92,7 @@ function kick(): void {
 
 export function initAdfocusRedirect(): void {
   if (window !== window.top || !adfocusAliasFromPath()) return;
-  void isRemoteSite('adfocus').then((ok) => {
+  void canBypass('adfocus').then((ok) => {
     if (!ok) return;
     whenDomParsed(kick);
     const mo = new MutationObserver(() => {

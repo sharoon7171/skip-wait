@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 export const TIPSGURU_WAIT_MS = 252_000;
 
@@ -15,7 +15,7 @@ export function decodeProlinkDest(id: string): string | null {
 
 export async function isTimedDestUrl(href: string): Promise<boolean> {
   try {
-    return hostIsRemoteSite(new URL(href).hostname, 'tipsguru-wait');
+    return canBypassHost(new URL(href).hostname, 'tipsguru-wait');
   } catch {
     return false;
   }

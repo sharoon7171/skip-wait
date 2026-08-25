@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const NOTICE_ID = 'skipwait-muhammadniaz-countdown';
@@ -20,7 +20,7 @@ function run(): void {
 }
 
 export function initMuhammadniazCountdownBypass(): void {
-  const allowed = isRemoteSite('muhammadniaz');
+  const allowed = canBypass('muhammadniaz');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

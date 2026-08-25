@@ -1,8 +1,8 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { MSG_ANYGAME_MAIN } from './hosts';
 
 export function initAnygameProductPage(): void {
-  void isRemoteSite('anygame').then((ok) => {
+  void canBypass('anygame').then((ok) => {
     if (!ok) return;
     chrome.runtime.sendMessage({ type: MSG_ANYGAME_MAIN }).catch(() => {});
   });

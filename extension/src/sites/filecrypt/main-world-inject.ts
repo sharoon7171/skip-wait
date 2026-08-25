@@ -1,10 +1,10 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { MSG_FILECRYPT_POW } from './hosts';
 import { runFilecryptPowBypass } from './pow-hook';
 
 async function isFilecryptUrl(url: string): Promise<boolean> {
   try {
-    return hostIsRemoteSite(new URL(url).hostname, 'filecrypt');
+    return canBypassHost(new URL(url).hostname, 'filecrypt');
   } catch {
     return false;
   }

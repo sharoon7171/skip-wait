@@ -1,10 +1,10 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { runLksfyAdblockBypass } from './adblock-bypass';
 import { MSG_LKSFY_ADBLOCK } from './hosts';
 
 async function isLksfyUrl(url: string): Promise<boolean> {
   try {
-    return hostIsRemoteSite(new URL(url).hostname, 'lksfy');
+    return canBypassHost(new URL(url).hostname, 'lksfy');
   } catch {
     return false;
   }

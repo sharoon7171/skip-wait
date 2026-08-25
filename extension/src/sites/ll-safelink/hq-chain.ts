@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
 import { xxc } from './parse';
@@ -57,7 +57,7 @@ async function unlock(): Promise<string | null> {
 }
 
 export function initLlSafelinkHqChain(): void {
-  void isRemoteSite('ll-safelink').then((ok) => {
+  void canBypass('ll-safelink').then((ok) => {
     if (!ok) return;
     const ht = new URLSearchParams(location.search).has('ht');
     const release = ht ? holdHqSubmit() : null;

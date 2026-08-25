@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from './unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -581,7 +581,7 @@ const tick = (): void => {
 
 export function initAdlinkflyLinksGo(): void {
   if (window !== window.top) return;
-  void isRemoteSite('adlinkfly-links-go').then((ok) => {
+  void canBypass('adlinkfly-links-go').then((ok) => {
     if (!ok) return;
     if (hasLinksGoHint() || isAliasPath()) requestVisibilitySpoof();
     tick();

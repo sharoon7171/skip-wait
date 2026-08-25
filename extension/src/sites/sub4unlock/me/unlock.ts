@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../../hosts/check';
+import { canBypass } from '../../../gate';
 import { linksGoFormFromHtml, type LinksGoForm } from '../../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../../injected-ui/overlay-styles';
@@ -134,7 +134,7 @@ const unlock = async (): Promise<void> => {
 
 export function initSub4unlockMeUnlock(): void {
   if (window !== window.top) return;
-  const allowed = isRemoteSite('sub4unlock-me');
+  const allowed = canBypass('sub4unlock-me');
   whenDomParsed(() => {
     if (!isUnlockPage()) return;
     void allowed.then((ok) => {

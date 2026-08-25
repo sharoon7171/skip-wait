@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 
 const OVERLAY_ID = 'skip-wait-linksterr-gateway';
@@ -41,7 +41,7 @@ function go(url: string): void {
 
 export function initLinksterrGateway(): void {
   if (!PATH_RE.test(location.pathname)) return;
-  void isRemoteSite('linksterr').then((ok) => {
+  void canBypass('linksterr').then((ok) => {
     if (!ok) return;
 
     let done = false;

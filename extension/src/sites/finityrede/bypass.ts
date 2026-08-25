@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { FINITYREDE_SLUG_RE } from './hosts';
@@ -96,7 +96,7 @@ export const initFinityredeBypass = (): void => {
   if (window !== window.top || started) return;
   const dest = slug();
   if (!dest) return;
-  void isRemoteSite('finityrede').then((ok) => {
+  void canBypass('finityrede').then((ok) => {
     if (!ok || started) return;
     started = true;
     const overlay = mount('Unlocking destination…');

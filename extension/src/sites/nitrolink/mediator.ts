@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import {
@@ -212,7 +212,7 @@ const resumeFromChain = async (): Promise<void> => {
 };
 
 export function initNitrolinkMediator(): void {
-  void Promise.all([isRemoteSite('nitrolink-mediator'), isRemoteSite('nitrolink')]).then(
+  void Promise.all([canBypass('nitrolink-mediator'), canBypass('nitrolink')]).then(
     ([onMediator, onNitrolink]) => {
       if (!onMediator || onNitrolink) return;
 

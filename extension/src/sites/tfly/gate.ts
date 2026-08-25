@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -266,7 +266,7 @@ const tick = (): void => {
 
 export function initTflyGate(): void {
   if (window !== window.top || !isAliasPath()) return;
-  void isRemoteSite('tfly').then((ok) => {
+  void canBypass('tfly').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

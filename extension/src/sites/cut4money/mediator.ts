@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import {
@@ -214,7 +214,7 @@ const queueTick = (): void => {
 };
 
 export function initCut4moneyMediator(): void {
-  void Promise.all([isRemoteSite('cut4money-mediator'), isRemoteSite('cut4money')]).then(
+  void Promise.all([canBypass('cut4money-mediator'), canBypass('cut4money')]).then(
     ([mediator, main]) => {
       if (!mediator || main) return;
 

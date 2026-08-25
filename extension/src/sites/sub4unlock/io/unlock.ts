@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../../hosts/check';
+import { canBypass } from '../../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../../utils/domain-check';
@@ -56,7 +56,7 @@ const unlock = (): void => {
 
 export function initSub4unlockIoUnlock(): void {
   if (window !== window.top) return;
-  const allowed = isRemoteSite('sub4unlock-io');
+  const allowed = canBypass('sub4unlock-io');
   whenDomParsed(() => {
     if (!destination()) return;
     void allowed.then((ok) => {

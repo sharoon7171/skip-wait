@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { filehippoRouteId } from './hosts';
 import { resolveLaunchUrl } from './resolve';
@@ -106,7 +106,7 @@ function run(): void {
 }
 
 export function initFilehippoBypass(): void {
-  void isRemoteSite('filehippo').then((ok) => {
+  void canBypass('filehippo').then((ok) => {
     if (!ok) return;
     whenDomParsed(run);
   });

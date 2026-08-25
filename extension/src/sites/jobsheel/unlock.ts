@@ -1,5 +1,5 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { babylinksAliasFromPath } from './hosts';
 import { createOverlay, spoofVisibility } from './overlay';
 
@@ -129,7 +129,7 @@ function run(): void {
 export function initJobsheelBabylinksUnlock(): void {
   if (window !== window.top) return;
   if (!babylinksAliasFromPath(location.pathname)) return;
-  void isRemoteSite('jobsheel-babylinks').then((ok) => {
+  void canBypass('jobsheel-babylinks').then((ok) => {
     if (!ok) return;
     mount('Unlocking…');
     run();

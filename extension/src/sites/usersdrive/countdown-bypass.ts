@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 const IDLE = 'Free Download · Skip Wait — Direct CDN, No Mediator';
 const BUSY = 'Skip Wait — Resolving CDN…';
@@ -54,7 +54,7 @@ async function resolveCdn(form: HTMLFormElement): Promise<string> {
 }
 
 export function initUsersdriveAutomation(): void {
-  const allowed = isRemoteSite('usersdrive');
+  const allowed = canBypass('usersdrive');
   whenDomParsed(() => {
     const ready = pageCdn();
     const form = document.querySelector<HTMLInputElement>('input[name="op"][value="download2"]')?.form;

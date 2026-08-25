@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND = 'skipwait-oceanofdmg';
@@ -57,7 +57,7 @@ function wire(form: HTMLFormElement): void {
 }
 
 export function initOceanofdmgBypass(): void {
-  const allowed = isRemoteSite('oceanofdmg');
+  const allowed = canBypass('oceanofdmg');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { LITESHORT_UNLOCK_ORIGIN } from './hosts';
@@ -53,7 +53,7 @@ export const initLiteshortEntry = (): void => {
   if (started) return;
   const alias = aliasFromPath();
   if (!alias) return;
-  void isRemoteSite('liteshort').then((ok) => {
+  void canBypass('liteshort').then((ok) => {
     if (!ok || started) return;
     started = true;
     mountUi('Skipping redirect notice…');

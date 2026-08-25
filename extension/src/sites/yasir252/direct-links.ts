@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { decodeYasir252Link, encodedAttr } from './decode';
 
@@ -79,7 +79,7 @@ function run(): void {
 }
 
 export function initYasir252DirectLinks(): void {
-  const allowed = isRemoteSite('yasir252');
+  const allowed = canBypass('yasir252');
   whenDomParsed(() => {
     if (!document.querySelector(LINK_SEL)) return;
     void allowed.then((ok) => {

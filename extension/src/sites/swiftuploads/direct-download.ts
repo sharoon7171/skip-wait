@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const FILE_PATH_RE = /^\/([^/]+)\/file\/?$/i;
@@ -209,7 +209,7 @@ function wire(id: string): void {
 }
 
 export function initSwiftuploadsDirectDownload(): void {
-  const allowed = isRemoteSite('swiftuploads');
+  const allowed = canBypass('swiftuploads');
   whenDomParsed(() => {
     const id = fileId();
     if (!id || !document.querySelector('.download-section')) return;

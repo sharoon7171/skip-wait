@@ -1,10 +1,10 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { MSG_APKTEAL_MAIN } from './hosts';
 import { runApktealDirectDownload } from './main-world-hook';
 
 async function isApktealUrl(url: string): Promise<boolean> {
   try {
-    return hostIsRemoteSite(new URL(url).hostname, 'apkteal');
+    return canBypassHost(new URL(url).hostname, 'apkteal');
   } catch {
     return false;
   }

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -140,7 +140,7 @@ const kick = (): void => {
 export const initTech8sGate = (): void => {
   if (window !== window.top) return;
   if (SAFE_PHP_RE.test(location.pathname) || ST_RE.test(location.pathname)) return;
-  void Promise.all([isRemoteSite('tech8s'), isRemoteSite('tech8s-open-php')]).then(([ok, isOpen]) => {
+  void Promise.all([canBypass('tech8s'), canBypass('tech8s-open-php')]).then(([ok, isOpen]) => {
     if (!ok) return;
     openPhp = isOpen;
     const tick = (): void => {

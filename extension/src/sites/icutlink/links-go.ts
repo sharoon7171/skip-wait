@@ -1,5 +1,5 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -115,7 +115,7 @@ const run = (): void => {
 };
 
 export function initIcutlinkLinksGo(): void {
-  void isRemoteSite('icutlink').then((ok) => {
+  void canBypass('icutlink').then((ok) => {
     if (!ok) return;
 
     const tryStart = (): void => {

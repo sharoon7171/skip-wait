@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { createOverlay } from './overlay';
 
@@ -27,7 +27,7 @@ function run(): void {
 
 export function initUnlocktoearnMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('unlocktoearn-mediator').then((ok) => {
+  void canBypass('unlocktoearn-mediator').then((ok) => {
     if (!ok) return;
     mount('Unlocking…');
     whenDomParsed(run);

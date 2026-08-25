@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -83,7 +83,7 @@ const tick = (): void => {
 
 export function initGenlinkMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('genlink-mediator').then((ok) => {
+  void canBypass('genlink-mediator').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

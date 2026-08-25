@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -156,7 +156,7 @@ const run = (): void => {
 
 export function initShycloudMediatorPage(): void {
   if (window !== window.top) return;
-  void isRemoteSite('shycloud').then((ok) => {
+  void canBypass('shycloud').then((ok) => {
     if (ok) whenDomParsed(run);
   });
 }

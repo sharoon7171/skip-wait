@@ -1,4 +1,4 @@
-import { hostIsRemoteSite, isRemoteSite } from '../../hosts/check';
+import { canBypassHost, canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { LINKJUST_ALIAS_RE, LINKJUST_ORIGIN } from './hosts';
 
@@ -20,7 +20,7 @@ const aliasFromSearch = (): string | null => {
 const aliasFromHref = async (href: string): Promise<string | null> => {
   try {
     const u = new URL(href);
-    if (!(await hostIsRemoteSite(u.hostname, 'linkjust'))) return null;
+    if (!(await canBypassHost(u.hostname, 'linkjust'))) return null;
     const alias = u.pathname.replace(/^\/+|\/+$/g, '');
     return LINKJUST_ALIAS_RE.test(alias) ? alias : null;
   } catch {
@@ -65,7 +65,7 @@ const leaveGate = async (): Promise<boolean> => {
 };
 
 export function initLinkjustBlogGate(): void {
-  void isRemoteSite('linkjust').then(async (onLinkjust) => {
+  void canBypass('linkjust').then(async (onLinkjust) => {
     if (onLinkjust) return;
 
     const fromSearch = aliasFromSearch();

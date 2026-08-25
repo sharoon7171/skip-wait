@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { decodeGoToParam, sessionToken, unlockDestination } from './unlock';
@@ -63,7 +63,7 @@ const kickBlog = (): void => {
 };
 
 const initBlogGate = (): void => {
-  void isRemoteSite('move2link-blog').then((ok) => {
+  void canBypass('move2link-blog').then((ok) => {
     if (!ok) return;
 
     const tick = (): void => {
@@ -88,7 +88,7 @@ const initBlogGate = (): void => {
 };
 
 const initGoGate = (): void => {
-  void isRemoteSite('move2link-go').then((ok) => {
+  void canBypass('move2link-go').then((ok) => {
     if (!ok) return;
     try {
       const to = new URL(location.href).searchParams.get('to');

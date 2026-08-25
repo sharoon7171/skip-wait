@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { ANKERGAMES_MEDIATOR_PATH } from './hosts';
 
@@ -29,7 +29,7 @@ function mountBanner(): boolean {
 
 export function initAnkergamesMediator(): void {
   if (!ANKERGAMES_MEDIATOR_PATH.test(location.pathname)) return;
-  void isRemoteSite('ankergames').then((ok) => {
+  void canBypass('ankergames').then((ok) => {
     if (!ok) return;
     if (mountBanner()) return;
     const observer = new MutationObserver(() => {

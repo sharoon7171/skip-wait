@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND = 'skipwait-theuser-cloud';
@@ -114,7 +114,7 @@ function wire(form: HTMLFormElement, btn: Element): void {
 }
 
 export function initTheuserCloudBypass(): void {
-  const allowed = isRemoteSite('theuser-cloud');
+  const allowed = canBypass('theuser-cloud');
   whenDomParsed(() => {
     const ready = document.querySelector<HTMLAnchorElement>('#direct_link a[href*="/d/"]')?.href;
     const form = document.querySelector<HTMLInputElement>('input[name="op"][value="download2"]')?.form;

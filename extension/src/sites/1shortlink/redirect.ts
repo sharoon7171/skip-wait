@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -79,7 +79,7 @@ const kick = (): void => {
 export function init1shortlinkRedirect(): void {
   if (window !== window.top) return;
   if (!oneShortlinkJob()) return;
-  void isRemoteSite('oneshortlink').then((ok) => {
+  void canBypass('oneshortlink').then((ok) => {
     if (!ok) return;
     bootOverlayLock();
     mountUi('Getting things ready…');

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const CDN_RE = /href="(https:\/\/fs\d+\.uploadrar\.com(?::\d+)?\/d\/[^"]+)"/i;
@@ -25,7 +25,7 @@ async function cdn(id: string): Promise<string> {
 }
 
 export function initUploadrarBypass(): void {
-  const allowed = isRemoteSite('uploadrar');
+  const allowed = canBypass('uploadrar');
   whenDomParsed(() => {
     const btn = document.querySelector<HTMLButtonElement>('button[name="method_free"]');
     const form = btn?.form;

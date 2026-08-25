@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -254,7 +254,7 @@ const start = (): void => {
 };
 
 export function initFclcMediatorPage(): void {
-  void isRemoteSite('fclc-mediator').then((ok) => {
+  void canBypass('fclc-mediator').then((ok) => {
     if (!ok) return;
 
     document.addEventListener(

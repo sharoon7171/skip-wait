@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 const lootPath = (pathname: string, search: string) =>
   pathname === '/s' && search.length > 1;
@@ -10,7 +10,7 @@ export function isLootLockerPath(pathname: string, search: string): boolean {
 export async function isLootLockerUrl(url: string): Promise<boolean> {
   try {
     const u = new URL(url);
-    return (await hostIsRemoteSite(u.hostname, 'lootlabs')) && lootPath(u.pathname, u.search);
+    return (await canBypassHost(u.hostname, 'lootlabs')) && lootPath(u.pathname, u.search);
   } catch {
     return false;
   }

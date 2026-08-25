@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -57,7 +57,7 @@ const unlock = async (): Promise<void> => {
 
 export function initShrtflyEntry(): void {
   if (window !== window.top || !isEntry()) return;
-  void isRemoteSite('shrtfly').then((ok) => {
+  void canBypass('shrtfly').then((ok) => {
     if (!ok) return;
     const mo = new MutationObserver(() => tick());
     const stop = (): void => {

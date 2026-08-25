@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -82,7 +82,7 @@ const tick = (): void => {
 
 export function initShrinkmeMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('shrinkme-mediator').then((ok) => {
+  void canBypass('shrinkme-mediator').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

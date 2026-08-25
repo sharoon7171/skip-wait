@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import {
   clearFilecrPostCache,
@@ -406,7 +406,7 @@ async function syncRoute(): Promise<void> {
 }
 
 export function initFilecrProductPage(): void {
-  void isRemoteSite('filecr').then((ok) => {
+  void canBypass('filecr').then((ok) => {
     if (!ok) return;
     onFilecrRoute(() => {
       whenDomParsed(() => {

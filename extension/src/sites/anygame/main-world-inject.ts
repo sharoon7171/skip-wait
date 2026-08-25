@@ -1,10 +1,10 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { MSG_ANYGAME_MAIN } from './hosts';
 import { runAnygameDirectDownload } from './main-world-hook';
 
 async function isAnygameUrl(url: string): Promise<boolean> {
   try {
-    return hostIsRemoteSite(new URL(url).hostname, 'anygame');
+    return canBypassHost(new URL(url).hostname, 'anygame');
   } catch {
     return false;
   }

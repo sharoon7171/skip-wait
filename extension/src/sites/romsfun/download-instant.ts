@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const NOTICE_ID = 'skipwait-romsfun-bypass';
@@ -72,7 +72,7 @@ async function resolveAndShow(): Promise<void> {
 }
 
 export function initRomsfunDownloadInstant(): void {
-  const allowed = isRemoteSite('romsfun');
+  const allowed = canBypass('romsfun');
   whenDomParsed(() => {
     if (!isCountdownPage()) return;
     void allowed.then((ok) => {

@@ -1,4 +1,4 @@
-import { hostIsRemoteSite, isRemoteSite } from '../../hosts/check';
+import { canBypassHost, canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -67,7 +67,7 @@ const isUnlockShell = (): boolean =>
 
 const isInternalUrl = async (href: string): Promise<boolean> => {
   try {
-    return hostIsRemoteSite(new URL(href).hostname, 'lksfy');
+    return canBypassHost(new URL(href).hostname, 'lksfy');
   } catch {
     return true;
   }
@@ -267,7 +267,7 @@ const runUnlock = async (): Promise<void> => {
 export function initLksfyGate(): void {
   if (window !== window.top) return;
   if (!pathAlias()) return;
-  void isRemoteSite('lksfy').then((ok) => {
+  void canBypass('lksfy').then((ok) => {
     if (!ok) return;
     requestAdblockBypass();
 

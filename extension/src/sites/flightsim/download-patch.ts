@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 const ADDON_PATH_RE = /^\/addon\/\d+(?:\/|$)/i;
 
@@ -53,7 +53,7 @@ async function isFlightsimAddonUrl(url: string | undefined): Promise<boolean> {
   if (!url || !URL.canParse(url)) return false;
   const u = new URL(url);
   if (!ADDON_PATH_RE.test(u.pathname)) return false;
-  return hostIsRemoteSite(u.hostname, 'flightsim');
+  return canBypassHost(u.hostname, 'flightsim');
 }
 
 export function initFlightsimDownloadPatch(): void {

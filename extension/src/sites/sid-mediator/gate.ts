@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { decryptSidDestination } from './decode';
 import { mountOverlay, NOTE, NOTE_OPEN } from './overlay';
 
@@ -26,7 +26,7 @@ export function initSidMediatorBypass(): void {
   if (window !== window.top) return;
   const sid = new URLSearchParams(location.search).get('sid')?.trim();
   if (!sid) return;
-  void isRemoteSite('sid-mediator').then((ok) => {
+  void canBypass('sid-mediator').then((ok) => {
     if (!ok) return;
     void run(sid);
   });

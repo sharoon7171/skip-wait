@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { decodeYasir252Link, encodedAttr } from './decode';
 
@@ -34,7 +34,7 @@ function unlock(): void {
 
 export function initYasir252MediatorPage(): void {
   if (!location.pathname.startsWith('/go')) return;
-  const allowed = isRemoteSite('yasir252');
+  const allowed = canBypass('yasir252');
   whenDomParsed(() => {
     if (!document.querySelector('[data-elink], [data-og-url]')) return;
     void allowed.then((ok) => {

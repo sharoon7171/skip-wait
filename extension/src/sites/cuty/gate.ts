@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { overlayActiveClass, buildFullPageOverlayCss } from '../../injected-ui/overlay-styles';
@@ -322,7 +322,7 @@ async function runUnlock(): Promise<void> {
 }
 
 export function initCutyGate(): void {
-  void isRemoteSite('cuty').then((ok) => {
+  void canBypass('cuty').then((ok) => {
     if (!ok) return;
 
     if (isCutyQuickPath()) {

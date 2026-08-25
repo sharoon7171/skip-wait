@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { go, resolveDownloadInfo, type FilecrDownloadInfo } from './api';
 import { FILECR_DOWNLOAD_PATH, filecrPageKey } from './hosts';
@@ -37,7 +37,7 @@ function run(): void {
 }
 
 export function initFilecrFileDownload(): void {
-  void isRemoteSite('filecr').then((ok) => {
+  void canBypass('filecr').then((ok) => {
     if (!ok) return;
     onFilecrRoute(() => {
       whenDomParsed(run);

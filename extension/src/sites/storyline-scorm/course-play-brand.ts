@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed, whenDomReady } from '../../utils/domain-check';
 
 const BRAND_ID = 'skipwait-storyline-brand';
@@ -42,7 +42,7 @@ async function run(): Promise<void> {
 }
 
 export function initStorylineCoursePlayBrand(): void {
-  void isRemoteSite('storyline-lms').then((ok) => {
+  void canBypass('storyline-lms').then((ok) => {
     if (ok) whenDomParsed(() => void run());
   });
 }

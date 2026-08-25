@@ -1,9 +1,9 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 export async function isStorylineScormUrl(url: string): Promise<boolean> {
   try {
     const u = new URL(url);
-    if (!(await hostIsRemoteSite(u.hostname, 'storyline-scorm'))) return false;
+    if (!(await canBypassHost(u.hostname, 'storyline-scorm'))) return false;
     return u.pathname.includes('index_lms.html') || u.pathname.includes('package_uploads');
   } catch {
     return false;

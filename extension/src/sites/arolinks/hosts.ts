@@ -1,4 +1,4 @@
-import { remoteSiteHosts } from '../../hosts/check';
+import { hostMatchesSite } from '../../hosts/check';
 
 export const AROLINKS_UNLOCK_READY_MS = 25_000;
 export const AROLINKS_DEST_WAIT_MS = 60_000;
@@ -29,7 +29,7 @@ export const isArolinksAliasNav = (url: string): boolean => {
 
 export const isTimedDestUrl = async (href: string): Promise<boolean> => {
   try {
-    return hostMatches(new URL(href).hostname, await remoteSiteHosts('arolinks-wait'));
+    return hostMatchesSite(new URL(href).hostname, 'arolinks-wait');
   } catch {
     return false;
   }

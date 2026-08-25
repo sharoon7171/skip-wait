@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { armUnlockReferer, openDestinationTab } from './background';
 import { isVpnPage, pleaseWaitTarget, unlockDestination } from './gate';
@@ -56,7 +56,7 @@ export const initArolinksUnlock = (): void => {
   const alias = arolinksAliasFromPath(location.pathname);
   if (!alias) return;
 
-  void isRemoteSite('arolinks').then((ok) => {
+  void canBypass('arolinks').then((ok) => {
     if (!ok) return;
     const tick = (): void => {
       void run(alias);

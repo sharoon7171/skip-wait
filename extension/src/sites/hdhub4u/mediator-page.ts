@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { createOverlay } from './overlay';
 
@@ -43,7 +43,7 @@ export function initHdhub4uMediatorPage(): void {
   const isEntry = new URLSearchParams(location.search).has('id');
   if (!isEntry && !MEDIATOR_PATH.test(location.pathname)) return;
 
-  void isRemoteSite('hdhub4u-mediator').then((ok) => {
+  void canBypass('hdhub4u-mediator').then((ok) => {
     if (!ok) return;
 
     const overlay = mount('Opening the next page…');

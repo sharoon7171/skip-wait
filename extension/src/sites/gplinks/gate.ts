@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const isPremiumGate = (): boolean => {
@@ -23,7 +23,7 @@ const skipPremium = (): void => {
 };
 
 export function initGplinksGate(): void {
-  void isRemoteSite('gplinks').then((ok) => {
+  void canBypass('gplinks').then((ok) => {
     if (!ok) return;
     whenDomParsed(skipPremium);
   });

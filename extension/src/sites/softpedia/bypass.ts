@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { destinationFromWaitDocument, resolveWaitDestination } from './resolve';
 
@@ -126,7 +126,7 @@ function runProgramPage(): void {
 }
 
 export function initSoftpediaBypass(): void {
-  const allowed = isRemoteSite('softpedia');
+  const allowed = canBypass('softpedia');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

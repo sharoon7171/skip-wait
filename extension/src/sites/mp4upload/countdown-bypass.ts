@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND_ID = 'skipwait-mp4upload-brand';
@@ -66,7 +66,7 @@ function run(): void {
 }
 
 export function initMp4uploadCountdownBypass(): void {
-  const allowed = isRemoteSite('mp4upload');
+  const allowed = canBypass('mp4upload');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

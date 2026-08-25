@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -173,7 +173,7 @@ const tick = (): void => {
 
 export function initGoostMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('goost-mediator').then((ok) => {
+  void canBypass('goost-mediator').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

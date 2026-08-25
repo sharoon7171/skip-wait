@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { requestOceanofgamesCdn } from './resolve';
 
@@ -63,7 +63,7 @@ function wire(form: HTMLFormElement): void {
 }
 
 export function initOceanofgamesDirectDownload(): void {
-  void isRemoteSite('oceanofgames').then((ok) => {
+  void canBypass('oceanofgames').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       for (const form of document.querySelectorAll(

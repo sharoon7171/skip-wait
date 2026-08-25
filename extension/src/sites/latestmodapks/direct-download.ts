@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const LABEL = 'Direct Instant · Skip Wait';
@@ -51,7 +51,7 @@ const wire = (btn: HTMLAnchorElement, hop: Promise<string>, labelEl: Element | n
 };
 
 export function initLatestmodapksDirectDownload(): void {
-  void isRemoteSite('latestmodapks').then((ok) => {
+  void canBypass('latestmodapks').then((ok) => {
     if (!ok) return;
     bootStyle();
 

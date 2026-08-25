@@ -1,11 +1,11 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { ANKERGAMES_MEDIATOR_PATH } from './hosts';
 import { runAnkergamesInstantReady } from './main-world-hook';
 
 async function isMediatorUrl(url: string): Promise<boolean> {
   try {
     const { hostname, pathname } = new URL(url);
-    return (await hostIsRemoteSite(hostname, 'ankergames')) && ANKERGAMES_MEDIATOR_PATH.test(pathname);
+    return (await canBypassHost(hostname, 'ankergames')) && ANKERGAMES_MEDIATOR_PATH.test(pathname);
   } catch {
     return false;
   }

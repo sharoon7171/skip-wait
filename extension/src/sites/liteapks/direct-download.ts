@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const LABEL = 'Download · Skip Wait';
@@ -29,7 +29,7 @@ const mediatorUrl = (a: HTMLAnchorElement): string | null => {
 };
 
 export function initLiteapksDirectDownload(): void {
-  void isRemoteSite('liteapks').then((ok) => {
+  void canBypass('liteapks').then((ok) => {
     if (!ok) return;
 
     if (MEDIATOR.test(location.pathname)) {

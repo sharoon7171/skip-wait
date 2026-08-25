@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import {
@@ -97,7 +97,7 @@ const tick = (): void => {
 
 export function initBstshrtGate(): void {
   if (window !== window.top) return;
-  void isRemoteSite('bstshrt').then((ok) => {
+  void canBypass('bstshrt').then((ok) => {
     if (!ok) return;
     setBstshrtHostOk(true);
     tick();

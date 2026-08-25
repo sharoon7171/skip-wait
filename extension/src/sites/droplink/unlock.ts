@@ -1,5 +1,5 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -124,7 +124,7 @@ const tick = (): void => {
 export function initDroplinkUnlock(): void {
   if (window !== window.top) return;
   if (!isAliasPath()) return;
-  void isRemoteSite('droplink').then((ok) => {
+  void canBypass('droplink').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

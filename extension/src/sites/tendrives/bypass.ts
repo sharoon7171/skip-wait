@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -92,7 +92,7 @@ const mintDl = async (): Promise<{ url: string; name: string; size: string }> =>
 export const initTendrivesMediator = (): void => {
   if (window !== window.top || started) return;
   if (!document.cookie.split('; ').some((c) => c.startsWith('fid='))) return;
-  void isRemoteSite('tendrives').then((ok) => {
+  void canBypass('tendrives').then((ok) => {
     if (!ok || started) return;
     started = true;
     const first = fileFromHtml(document.documentElement.innerHTML);

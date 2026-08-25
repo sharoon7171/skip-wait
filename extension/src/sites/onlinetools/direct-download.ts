@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 
 const NOTICE_ID = 'skipwait-onlinetools-bypass';
 const DATA_HIJACKED = 'data-skipwait-hijacked';
@@ -135,7 +135,7 @@ function run(): void {
 }
 
 export function initOnlinetoolsDirectDownload(): void {
-  void isRemoteSite('onlinetools').then((ok) => {
+  void canBypass('onlinetools').then((ok) => {
     if (!ok) return;
     const check = (): void => {
       const toolOutput = document.querySelector(SELECTORS.toolOutput);

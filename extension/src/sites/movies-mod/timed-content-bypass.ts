@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 
 const STYLE_ID = 'skipwait-movies-mod-timed-content';
 
@@ -12,7 +12,7 @@ function injectBypassStyle(): void {
 }
 
 export function initMoviesModContentScript(): void {
-  void isRemoteSite('movies-mod').then((ok) => {
+  void canBypass('movies-mod').then((ok) => {
     if (!ok) return;
     injectBypassStyle();
   });

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const TRACKER = 'https://mega4upload.net/cgi-bin/tracker.cgi';
@@ -89,7 +89,7 @@ function wire(direct: Promise<string | null>): void {
 }
 
 export function initMega4uploadBypass(): void {
-  const allowed = isRemoteSite('mega4upload');
+  const allowed = canBypass('mega4upload');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

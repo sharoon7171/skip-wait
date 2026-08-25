@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { LITESHORT_UNLOCK_ORIGIN } from './hosts';
@@ -58,7 +58,7 @@ const tick = (): void => {
 
 export const initLiteshortMediator = (): void => {
   if (window !== window.top) return;
-  void isRemoteSite('liteshort-mediator').then((ok) => {
+  void canBypass('liteshort-mediator').then((ok) => {
     if (!ok) return;
     tick();
     if (started) return;

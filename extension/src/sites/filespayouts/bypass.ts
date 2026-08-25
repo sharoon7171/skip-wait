@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const IDLE = 'Free Download · Skip Wait — No Timer, No Mediator Pages';
@@ -27,7 +27,7 @@ function download2(id: string): void {
 }
 
 export function initFilespayoutsBypass(): void {
-  void isRemoteSite('filespayouts').then((ok) => {
+  void canBypass('filespayouts').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       const btn = document.querySelector<HTMLInputElement>('#method_free');

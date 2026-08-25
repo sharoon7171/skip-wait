@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { goostAliasFromPath } from './hosts';
@@ -56,7 +56,7 @@ const runContinue = (): boolean => {
 
 export function initGoostEntry(): void {
   if (window !== window.top || !goostAliasFromPath()) return;
-  void isRemoteSite('goost').then((ok) => {
+  void canBypass('goost').then((ok) => {
     if (!ok) return;
     mountUi();
     runContinue();

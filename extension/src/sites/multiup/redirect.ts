@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 
 const BASE = 'https://multiup.io/en/mirror/';
 const MIRROR = '/en/mirror/';
@@ -21,7 +21,7 @@ export function initMultiup(): void {
     if (details.frameId !== 0) return;
     void (async () => {
       try {
-        if (!(await hostIsRemoteSite(new URL(details.url).hostname, 'multiup'))) return;
+        if (!(await canBypassHost(new URL(details.url).hostname, 'multiup'))) return;
       } catch {
         return;
       }

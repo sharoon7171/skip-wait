@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
@@ -82,7 +82,7 @@ const mount = (): FullPageOverlay => {
 
 export function initHubcloudDrive(): void {
   if (window !== window.top || !isSharePath() || started) return;
-  void isRemoteSite('hdhub4u-hubcloud').then((ok) => {
+  void canBypass('hdhub4u-hubcloud').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       if (started || isCloudflareInterstitial()) return;

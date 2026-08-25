@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { MSG_VEXFILE_VERIFY_HOOK, VEXFILE_CODE_RE } from './hosts';
 import { runVexfileVerifyHook } from './main-world-hook';
 
@@ -6,7 +6,7 @@ const isVexfileDownloadNav = async (url: string): Promise<boolean> => {
   try {
     const u = new URL(url);
     if (!VEXFILE_CODE_RE.test(u.pathname)) return false;
-    return hostIsRemoteSite(u.hostname, 'vexfile');
+    return canBypassHost(u.hostname, 'vexfile');
   } catch {
     return false;
   }

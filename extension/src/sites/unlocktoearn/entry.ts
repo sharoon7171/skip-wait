@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { unlocktoearnAliasFromPath } from './hosts';
 import { createOverlay } from './overlay';
 
@@ -6,7 +6,7 @@ const mount = createOverlay('skip-wait-unlocktoearn-entry', 'skip-wait-unlocktoe
 
 export function initUnlocktoearnEntry(): void {
   if (window !== window.top || !unlocktoearnAliasFromPath(location.pathname)) return;
-  void isRemoteSite('unlocktoearn').then((ok) => {
+  void canBypass('unlocktoearn').then((ok) => {
     if (ok) mount('Opening…');
   });
 }

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -47,7 +47,7 @@ function destination(): string | null {
 
 export function initVegamoviesEntryRedirect(): void {
   if (window !== window.top) return;
-  const allowed = isRemoteSite('vegamovies');
+  const allowed = canBypass('vegamovies');
   whenDomParsed(() => {
     const href = destination();
     if (!href) return;

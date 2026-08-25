@@ -1,10 +1,10 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { destinationFromQuickSearch, isCutyQuickPath } from './unlock';
 
 function quickDestination(url: string): Promise<string | null> {
   try {
     const u = new URL(url);
-    return hostIsRemoteSite(u.hostname, 'cuty').then(
+    return canBypassHost(u.hostname, 'cuty').then(
       (ok) => (ok && isCutyQuickPath(u.pathname) ? destinationFromQuickSearch(u.search) : null),
     );
   } catch {

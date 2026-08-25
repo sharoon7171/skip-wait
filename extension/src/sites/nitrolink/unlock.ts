@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -131,7 +131,7 @@ const runUnlock = async (): Promise<void> => {
 };
 
 export function initNitrolinkUnlock(): void {
-  void isRemoteSite('nitrolink').then((ok) => {
+  void canBypass('nitrolink').then((ok) => {
     if (!ok) return;
     if (!isAliasPath()) return;
     if (isGateHandshake()) return;

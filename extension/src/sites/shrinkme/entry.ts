@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -53,7 +53,7 @@ export function initShrinkmeEntry(): void {
   if (window !== window.top || started) return;
   const alias = aliasFromPath();
   if (!alias) return;
-  void isRemoteSite('shrinkme').then((ok) => {
+  void canBypass('shrinkme').then((ok) => {
     if (!ok) return;
     started = true;
     mountUi('Skipping captcha gate…');

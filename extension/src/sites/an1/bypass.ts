@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND = 'skipwait-an1';
@@ -32,7 +32,7 @@ function reveal(): boolean {
 }
 
 export function initAn1Bypass(): void {
-  void isRemoteSite('an1').then((ok) => {
+  void canBypass('an1').then((ok) => {
     if (!ok) return;
     paint();
     const go = (): void => {

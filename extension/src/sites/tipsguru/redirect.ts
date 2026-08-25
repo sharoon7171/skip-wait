@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
 import { initTipsguruCookieDest, TIPSGURU_GET_DEST } from './cookie-dest';
@@ -182,7 +182,7 @@ async function redirect(): Promise<void> {
 }
 
 export function initTipsguruRedirect(): void {
-  const allowed = isRemoteSite('tipsguru');
+  const allowed = canBypass('tipsguru');
   void allowed.then(async (ok) => {
     if (!ok) return;
     const pending = await readWait();

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { whenDomReady } from '../../utils/domain-check';
@@ -270,7 +270,7 @@ async function runPipeline(): Promise<void> {
 
 export function initExeioGate(): void {
   if (window !== window.top || started) return;
-  void isRemoteSite('exeio').then((ok) => {
+  void canBypass('exeio').then((ok) => {
     if (!ok || started) return;
     started = true;
     void runPipeline();

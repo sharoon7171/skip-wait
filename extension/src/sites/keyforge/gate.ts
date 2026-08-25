@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 
 const GATE_RE = /^\/a\/([^/]+)\/?$/i;
 const TIP_ID = 'skipwait-keyforge-tip';
@@ -65,7 +65,7 @@ const safeTick = (): void => {
 
 export function initKeyforgeGate(): void {
   if (window !== window.top || !gateId()) return;
-  void isRemoteSite('keyforge').then((ok) => {
+  void canBypass('keyforge').then((ok) => {
     if (!ok) return;
     new MutationObserver(safeTick).observe(document.documentElement, { childList: true, subtree: true });
     safeTick();

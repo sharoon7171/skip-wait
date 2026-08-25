@@ -1,5 +1,5 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -136,7 +136,7 @@ const tick = (): void => {
 export function initGenlinkUnlock(): void {
   if (window !== window.top) return;
   if (!isAliasPath()) return;
-  void isRemoteSite('genlink-unlock').then((ok) => {
+  void canBypass('genlink-unlock').then((ok) => {
     if (!ok) return;
     tick();
     const mo = new MutationObserver(tick);

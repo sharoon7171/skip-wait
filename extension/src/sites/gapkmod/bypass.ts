@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
 import { requestGapkmodFinal } from './resolve';
 
@@ -140,7 +140,7 @@ function paintList(entries: Entry[]): void {
 }
 
 export function initGapkmodBypass(): void {
-  void isRemoteSite('gapkmod').then((ok) => {
+  void canBypass('gapkmod').then((ok) => {
     if (!ok) return;
     boot();
     whenDomParsed(() => {

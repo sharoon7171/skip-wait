@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import {
@@ -141,7 +141,7 @@ const run = (): void => {
 
 export function initLinkvertiseAccessPage(): void {
   if (!isAccessPath() && !isYourTargetPath()) return;
-  void isRemoteSite('linkvertise').then((ok) => {
+  void canBypass('linkvertise').then((ok) => {
     if (!ok) return;
 
     const tick = (): void => {

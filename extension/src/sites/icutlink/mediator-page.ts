@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -170,7 +170,7 @@ const run = (): void => {
 
 export function initIcutlinkMediatorPage(): void {
   if (!/\/tools\/?$/i.test(location.pathname)) return;
-  void isRemoteSite('icutlink-mediator').then((ok) => {
+  void canBypass('icutlink-mediator').then((ok) => {
     if (!ok) return;
 
     const tick = (): void => {

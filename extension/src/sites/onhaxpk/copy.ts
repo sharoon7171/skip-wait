@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const ROOT_ID = 'skipwait-onhaxpk';
@@ -142,7 +142,7 @@ function run(): void {
 }
 
 export function initOnhaxpkCopy(): void {
-  const allowed = isRemoteSite('onhaxpk');
+  const allowed = canBypass('onhaxpk');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

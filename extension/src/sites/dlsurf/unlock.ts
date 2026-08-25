@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import {
   DLSURF_FILE_RE,
@@ -202,7 +202,7 @@ const hookHistory = (): void => {
 
 export function initDlsurfUnlock(): void {
   if (window !== window.top) return;
-  void isRemoteSite('dlsurf').then((ok) => {
+  void canBypass('dlsurf').then((ok) => {
     if (!ok) return;
     hookHistory();
     whenDomParsed(schedule);

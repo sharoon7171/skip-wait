@@ -1,7 +1,7 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 
 export function initPrmoviesRedirect(): void {
-  void isRemoteSite('prmovies').then((ok) => {
+  void canBypass('prmovies').then((ok) => {
     if (!ok) return;
     void fetch(`https://rep.prmovies3.online/api/get?v=${Date.now()}`, { cache: 'no-store' })
       .then((r) => r.json())

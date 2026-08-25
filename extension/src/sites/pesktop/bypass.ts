@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const CDN = /window\.location\.href\s*=\s*["'](https?:\/\/[^"']+)["']/;
@@ -15,7 +15,7 @@ function resolve(form: HTMLFormElement): Promise<string> {
 }
 
 export function initPesktopBypass(): void {
-  const allowed = isRemoteSite('pesktop');
+  const allowed = canBypass('pesktop');
   whenDomParsed(() => {
     const form = document.querySelector<HTMLFormElement>('form[name="myForm"][action*="/downloads"]');
     if (!form) return;

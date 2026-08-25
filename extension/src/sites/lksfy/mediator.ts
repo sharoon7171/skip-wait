@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { LKSFY_ALIAS_RE, lksfyUnlockUrl } from './hosts';
 
@@ -41,7 +41,7 @@ function jump(): void {
 
 export function initLksfyMediator(): void {
   if (window !== window.top) return;
-  void isRemoteSite('lksfy-mediator').then((ok) => {
+  void canBypass('lksfy-mediator').then((ok) => {
     if (!ok) return;
     jump();
     whenDomParsed(jump);

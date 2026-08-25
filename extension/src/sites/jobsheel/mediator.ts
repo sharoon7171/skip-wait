@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { jobsheelAliasFromCookie } from './hosts';
 import { createOverlay } from './overlay';
@@ -50,7 +50,7 @@ function run(): void {
 export function initJobsheelMediator(): void {
   if (window !== window.top) return;
   if (/\/baby\.php$/i.test(location.pathname)) return;
-  void isRemoteSite('jobsheel').then((ok) => {
+  void canBypass('jobsheel').then((ok) => {
     if (!ok) return;
     if (jobsheelAliasFromCookie() || babylinksHref()) mount('Unlocking…');
     whenDomParsed(run);

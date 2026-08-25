@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createOverlay } from './overlay';
 
 const HOST_LOOKUP_URLS = [
@@ -35,7 +35,7 @@ async function fetchMirror(base: string, version: number): Promise<string> {
 }
 
 export function initHdhub4uLandingPageMed(): void {
-  void isRemoteSite('hdhub4u').then((ok) => {
+  void canBypass('hdhub4u').then((ok) => {
     if (!ok) return;
     const overlay = mount('Opening the main site…');
     const version = lookupVersion(new Date());

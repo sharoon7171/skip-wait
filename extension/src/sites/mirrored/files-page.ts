@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const BRAND_ID = 'skipwait-mirrored-brand';
@@ -266,7 +266,7 @@ function run(): void {
 
 export function initMirroredFilesPage(): void {
   if (!FILE_PATH_RE.test(location.pathname) && !GETLINK_PATH_RE.test(location.pathname)) return;
-  const allowed = isRemoteSite('mirrored');
+  const allowed = canBypass('mirrored');
   whenDomParsed(() => {
     void allowed.then((ok) => {
       if (!ok) return;

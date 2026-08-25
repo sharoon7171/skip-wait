@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { destFromLocation, hrefHasSafelinkToken } from './decrypt';
@@ -70,7 +70,7 @@ const open = (url: string): void => {
 export function runWpSafelinkQueryHop(site: string): void {
   if (!hrefHasSafelinkToken(location.href)) return;
   mountUi('Opening your link…');
-  void Promise.all([isRemoteSite(site), destFromLocation()]).then(([ok, url]) => {
+  void Promise.all([canBypass(site), destFromLocation()]).then(([ok, url]) => {
     if (!ok || !url) {
       unboot();
       return;

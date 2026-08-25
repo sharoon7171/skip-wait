@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { JOBSHEEL_HOME, jobsheelAliasFromCookie, jobsheelBabyAlias } from './hosts';
@@ -131,7 +131,7 @@ export function initJobsheelBaby(): void {
   const alias = jobsheelBabyAlias(location.pathname, location.search);
   if (!alias) return;
 
-  void isRemoteSite('jobsheel').then((ok) => {
+  void canBypass('jobsheel').then((ok) => {
     if (!ok) return;
     void (async () => {
     const releaseDisarm = disarmAutoSubmit();

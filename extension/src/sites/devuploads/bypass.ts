@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -77,7 +77,7 @@ const unlock = async (id: string, name: string, size: string): Promise<void> => 
 
 export const initDevuploadsMediator = (): void => {
   if (window !== window.top) return;
-  void isRemoteSite('devuploads-mediator').then((ok) => {
+  void canBypass('devuploads-mediator').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       const form = isDevuploadsCard();

@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 const RE = /var\s+longUrl\s*=\s*["']([^"']+)["']/;
 
@@ -10,7 +10,7 @@ function redirect(): void {
 }
 
 export function initClipiRedirect(): void {
-  void isRemoteSite('clipi').then((ok) => {
+  void canBypass('clipi').then((ok) => {
     if (!ok) return;
     whenDomParsed(redirect);
   });

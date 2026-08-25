@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import {
   DLSURF_API,
   DLSURF_MSG_SOURCE,
@@ -197,7 +197,7 @@ async function runDlsurfUnlock(
 const isDlsurfTab = async (url: string | undefined): Promise<boolean> => {
   if (!url) return false;
   try {
-    return hostIsRemoteSite(new URL(url).hostname, 'dlsurf');
+    return canBypassHost(new URL(url).hostname, 'dlsurf');
   } catch {
     return false;
   }

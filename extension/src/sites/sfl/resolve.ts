@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../../hosts/check';
+import { canBypassHost } from '../../gate';
 import { BLOG_SITE, isHttpUrl, type SflProgress } from './hosts';
 
 type SessionData = { step?: number; captcha?: string | null };
@@ -68,7 +68,7 @@ const parseLanding = async (unlockUrl: string): Promise<{ bindUrl: string; origi
   const bind = new URL(action);
   bind.searchParams.set('ray_id', rayId);
   bind.searchParams.set('alias', alias);
-  if (!(await hostIsRemoteSite(bind.hostname, BLOG_SITE))) throw new Error('bind host');
+  if (!(await canBypassHost(bind.hostname, BLOG_SITE))) throw new Error('bind host');
   return { bindUrl: bind.href, origin: bind.origin };
 };
 

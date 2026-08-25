@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
 import { MSG_FILECRYPT_POW } from './hosts';
@@ -42,7 +42,7 @@ const isUnlockedContainer = (): boolean =>
 export function initFilecryptGate(): void {
   if (started) return;
   if (!/\/Container\//i.test(location.pathname)) return;
-  void isRemoteSite('filecrypt').then((ok) => {
+  void canBypass('filecrypt').then((ok) => {
     if (!ok || started) return;
     started = true;
 

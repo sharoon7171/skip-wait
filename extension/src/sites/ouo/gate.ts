@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 import { isOuoGoGate, isOuoLandingGate, ouoGoForm, ouoLandingForm } from './detect';
@@ -104,7 +104,7 @@ const tick = (): void => {
 };
 
 export function initOuoBypass(): void {
-  void isRemoteSite('ouo').then((ok) => {
+  void canBypass('ouo').then((ok) => {
     if (!ok) return;
     requestVisibilitySpoof();
     tick();

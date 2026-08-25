@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const ID = 'skip-wait-olamovies-link-banner';
@@ -286,7 +286,7 @@ async function unlock(set: SetBanner): Promise<void> {
 }
 
 export function initOlamoviesLinkGenerate(): void {
-  void isRemoteSite('olamovies-link').then((ok) => {
+  void canBypass('olamovies-link').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       const set = banner();

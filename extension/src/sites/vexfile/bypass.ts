@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -163,7 +163,7 @@ const unlock = async (): Promise<void> => {
 export const initVexfileBypass = (): void => {
   if (window !== window.top || started) return;
   if (!VEXFILE_CODE_RE.test(location.pathname)) return;
-  const allowed = isRemoteSite('vexfile');
+  const allowed = canBypass('vexfile');
   whenDomParsed(() => {
     if (!document.querySelector('.download-block, a.generate-link, #captcha-form, .cf-turnstile')) return;
     void allowed.then((ok) => {

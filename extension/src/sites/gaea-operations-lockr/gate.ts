@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../../hosts/check';
+import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
 
@@ -71,7 +71,7 @@ export function initGaeaOperationsLockrGate(): void {
   if (window !== window.top || started) return;
   const id = location.pathname.replace(/^\/+|\/+$/g, '');
   if (!id || id.includes('/') || RESERVED.test(id)) return;
-  void isRemoteSite('gaea-operations-lockr').then((ok) => {
+  void canBypass('gaea-operations-lockr').then((ok) => {
     if (!ok || started) return;
     started = true;
     const overlay = mount('Unlocking your link…');
