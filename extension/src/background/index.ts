@@ -1,4 +1,4 @@
-import { pullHosts } from '../hosts/check';
+import { initHostsSync } from '../hosts/check';
 import { initLicenseSync } from '../license/sync';
 import { initCoomeetMainWorldInject } from './coomeet-main-world-inject';
 import { initDocumentVisibilitySpoof } from './document-visibility-spoof';
@@ -70,5 +70,5 @@ initDlsurfMainWorldInject();
 initAlpharedeBackground();
 initEarnlinksBackground();
 initSflBackground();
-void pullHosts();
+initHostsSync();
 initLicenseSync();
