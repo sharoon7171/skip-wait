@@ -1,4 +1,4 @@
-import { remoteSiteHosts } from '../../hosts/check';
+import { canBypassHost, licensedHosts, onBypassAccessChange } from '../../gate';
 import { ALIAS_DNR, MSG_PROGRESS, MSG_RESOLVE, SITE, isShortUrl } from './hosts';
 import { resolveDestination, type ResolveProgress } from './resolve';
 
@@ -8,8 +8,11 @@ const RULE_SLOTS = 8;
 const ruleIds = (): number[] => Array.from({ length: RULE_SLOTS }, (_, i) => RULE_BASE + i);
 
 const syncRedirects = async (): Promise<void> => {
-  const hosts = await remoteSiteHosts(SITE);
-  if (!hosts.length) return;
+  const hosts = await licensedHosts(SITE);
+  if (!hosts.length) {
+    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: ruleIds(), addRules: [] });
+    return;
+  }
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: ruleIds(),
     addRules: hosts.slice(0, RULE_SLOTS).map((host, i) => ({
@@ -31,10 +34,8 @@ const syncRedirects = async (): Promise<void> => {
 
 export const initAlpharedeBackground = (): void => {
   void syncRedirects();
-  chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === 'local' && ('skipWaitHosts' in changes || 'skipWaitHostsUpdatedAt' in changes)) {
-      void syncRedirects();
-    }
+  onBypassAccessChange(() => {
+    void syncRedirects();
   });
   chrome.runtime.onMessage.addListener((msg: { type?: string; unlockUrl?: string }, _sender, reply) => {
     if (msg.type !== MSG_RESOLVE) return false;
@@ -46,9 +47,17 @@ export const initAlpharedeBackground = (): void => {
     const push = (p: ResolveProgress): void => {
       void chrome.runtime.sendMessage({ type: MSG_PROGRESS, ...p }).catch(() => {});
     };
-    void resolveDestination(unlockUrl, push)
-      .then((dest) => reply({ ok: true, dest }))
-      .catch(() => reply({ ok: false }));
+    void (async () => {
+      try {
+        if (!(await canBypassHost(new URL(unlockUrl).hostname, SITE))) {
+          reply({ ok: false });
+          return;
+        }
+        reply({ ok: true, dest: await resolveDestination(unlockUrl, push) });
+      } catch {
+        reply({ ok: false });
+      }
+    })();
     return true;
   });
 };

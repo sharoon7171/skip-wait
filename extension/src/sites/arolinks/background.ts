@@ -1,3 +1,5 @@
+import { canBypassHost, licensedHosts, onBypassAccessChange } from '../../gate';
+
 const MSG_ARM = 'AROLINKS_ARM_REFERER' as const;
 const MSG_OPEN = 'AROLINKS_OPEN_DEST' as const;
 const RULE_BASE = 917301;
@@ -10,8 +12,13 @@ const isHttp = (v: string): boolean => /^https?:\/\//i.test(v);
 
 const ruleIdForTab = (tabId: number): number => RULE_BASE + tabId;
 
-const armCsp = (): void => {
-  void chrome.declarativeNetRequest.updateSessionRules({
+const armCsp = async (): Promise<void> => {
+  const hosts = await licensedHosts('arolinks');
+  if (!hosts.length) {
+    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [CSP_RULE], addRules: [] });
+    return;
+  }
+  await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: [CSP_RULE],
     addRules: [
       {
@@ -24,7 +31,7 @@ const armCsp = (): void => {
           ],
         },
         condition: {
-          requestDomains: ['arolinks.com', 'vplink.in'],
+          requestDomains: hosts,
           resourceTypes: ['main_frame'],
         },
       },
@@ -65,7 +72,10 @@ const clearReferer = (tabId: number): Promise<void> =>
     .catch(() => {});
 
 export const initArolinksBackground = (): void => {
-  armCsp();
+  void armCsp();
+  onBypassAccessChange(() => {
+    void armCsp();
+  });
   chrome.tabs.onRemoved.addListener((tabId) => {
     void clearReferer(tabId);
   });
@@ -77,10 +87,20 @@ export const initArolinksBackground = (): void => {
         reply(false);
         return false;
       }
-      void clearReferer(tabId)
-        .then(() => chrome.tabs.update(tabId, { url }))
-        .then(() => reply(true))
-        .catch(() => reply(false));
+      void (async () => {
+        try {
+          const tabHost = sender.tab?.url ? new URL(sender.tab.url).hostname : '';
+          if (!tabHost || !(await canBypassHost(tabHost, 'arolinks'))) {
+            reply(false);
+            return;
+          }
+          await clearReferer(tabId);
+          await chrome.tabs.update(tabId, { url });
+          reply(true);
+        } catch {
+          reply(false);
+        }
+      })();
       return true;
     }
     if (msg.type !== MSG_ARM) return false;
@@ -90,7 +110,17 @@ export const initArolinksBackground = (): void => {
       reply(false);
       return false;
     }
-    void armReferer(tabId, url, referer).then(reply);
+    void (async () => {
+      try {
+        if (!(await canBypassHost(new URL(url).hostname, 'arolinks'))) {
+          reply(false);
+          return;
+        }
+        reply(await armReferer(tabId, url, referer));
+      } catch {
+        reply(false);
+      }
+    })();
     return true;
   });
 };
