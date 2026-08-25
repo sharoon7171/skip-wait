@@ -6,10 +6,8 @@ const LICENSE_EXP_KEY = 'skipWaitLicenseExp';
 const LICENSE_PLAN_KEY = 'skipWaitLicensePlan';
 
 export const storageKeys = {
-  deviceId: DEVICE_ID_KEY,
   licenseKey: LICENSE_KEY,
   licenseExp: LICENSE_EXP_KEY,
-  licensePlan: LICENSE_PLAN_KEY,
 } as const;
 
 export const licenseIsLive = (exp: number): boolean => Date.now() < exp;
@@ -50,13 +48,7 @@ export const saveLicenseSession = async (session: LicenseSession): Promise<void>
 };
 
 export const clearLicenseSession = async (): Promise<void> => {
-  await chrome.storage.local.remove([
-    LICENSE_KEY,
-    LICENSE_EXP_KEY,
-    LICENSE_PLAN_KEY,
-    'skipWaitLicenseTicket',
-    'skipWaitLicenseRev',
-  ]);
+  await chrome.storage.local.remove([LICENSE_KEY, LICENSE_EXP_KEY, LICENSE_PLAN_KEY]);
   if (chrome.tabs?.query) {
     const tabs = await chrome.tabs.query({});
     for (const tab of tabs) {

@@ -1,5 +1,6 @@
 import { refreshLicense } from './gate';
-import { clearLicenseSession, getLicenseSession, licenseIsLive, storageKeys } from './storage';
+import { getLicenseSession, storageKeys } from './storage';
+import { verifyLicense } from './verify';
 
 const HOURLY_ALARM = 'skipWaitLicenseHourly';
 const EXPIRY_ALARM = 'skipWaitLicenseExpiry';
@@ -11,31 +12,26 @@ const ensureHourlyAlarm = async (): Promise<void> => {
 
 const scheduleExpiryAlarm = async (): Promise<void> => {
   await chrome.alarms.clear(EXPIRY_ALARM);
+  if (!(await verifyLicense())) return;
   const session = await getLicenseSession();
   if (!session) return;
-  if (!licenseIsLive(session.exp)) {
-    await clearLicenseSession();
-    return;
-  }
   await chrome.alarms.create(EXPIRY_ALARM, { when: session.exp });
 };
 
-const expireIfDue = async (): Promise<void> => {
-  const session = await getLicenseSession();
-  if (session && !licenseIsLive(session.exp)) await clearLicenseSession();
+const syncLicense = (): void => {
+  void verifyLicense();
+  void refreshLicense();
 };
 
 export const initLicenseSync = (): void => {
-  chrome.runtime.onStartup.addListener(() => {
-    void refreshLicense();
-  });
+  chrome.runtime.onStartup.addListener(syncLicense);
   chrome.runtime.onInstalled.addListener(() => {
     void ensureHourlyAlarm();
-    void refreshLicense();
+    syncLicense();
   });
   chrome.alarms.onAlarm.addListener((alarm) => {
-    if (alarm.name === HOURLY_ALARM) void refreshLicense();
-    if (alarm.name === EXPIRY_ALARM) void expireIfDue();
+    if (alarm.name === HOURLY_ALARM) syncLicense();
+    if (alarm.name === EXPIRY_ALARM) void verifyLicense();
   });
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area !== 'local') return;
@@ -45,4 +41,5 @@ export const initLicenseSync = (): void => {
   });
   void ensureHourlyAlarm();
   void scheduleExpiryAlarm();
+  syncLicense();
 };
