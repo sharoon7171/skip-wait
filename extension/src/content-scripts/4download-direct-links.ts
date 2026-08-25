@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../hosts/check';
+import { canBypass } from '../gate';
 import { whenDomParsed } from '../utils/domain-check';
 const PROVIDER_IDS = [
   'gdrive',
@@ -115,7 +115,7 @@ function runArticleView(): void {
 }
 
 export function initFourDownloadDirectLinks(): void {
-  void isRemoteSite('fourdownload').then((ok) => {
+  void canBypass('fourdownload').then((ok) => {
     if (!ok) return;
     whenDomParsed(() => {
       if (hasDownloadView()) runDownloadView();

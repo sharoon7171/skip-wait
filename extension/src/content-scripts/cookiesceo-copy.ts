@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../hosts/check';
+import { canBypass } from '../gate';
 const ACTIONS_ID = 'skipwait-cookiesceo-actions';
 const SESSION_PASTE_RE = /session_paste\s+([A-Za-z0-9+/=]+)/;
 const DOWNLOAD_RE = /["']([^"']*-download)\/?"?["']/;
@@ -68,7 +68,7 @@ async function run(): Promise<void> {
 }
 
 export function initCookiesceoCopy(): void {
-  void isRemoteSite('cookiesceo').then((ok) => {
+  void canBypass('cookiesceo').then((ok) => {
     if (!ok) return;
     const exec = (): void => {
       run();

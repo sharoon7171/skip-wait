@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../hosts/check';
+import { canBypass } from '../gate';
 
 const KITOKOLA_HOST = 'kitokola.id';
 
@@ -27,7 +27,7 @@ function unwrapKitokola(inner: string): string | null {
 export function initTinurlzSoftinfoFragment(): void {
   const raw = window.location.hash.slice(1);
   if (!raw) return;
-  void isRemoteSite('tinurlz-softinfo').then((ok) => {
+  void canBypass('tinurlz-softinfo').then((ok) => {
     if (!ok) return;
     const inner = decodeFragment(raw);
     if (!inner || !/^https?:\/\//i.test(inner)) return;

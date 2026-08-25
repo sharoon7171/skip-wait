@@ -1,7 +1,7 @@
-import { isRemoteSite } from '../hosts/check';
+import { canBypass } from '../gate';
 
 export function initFastdlZipRedirect(): void {
-  void isRemoteSite('fastdl').then((ok) => {
+  void canBypass('fastdl').then((ok) => {
     if (!ok) return;
     const path = window.location.pathname.toLowerCase();
     if (!path.endsWith('/dl.php')) return;

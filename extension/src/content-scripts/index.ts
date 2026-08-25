@@ -135,8 +135,8 @@ import {
   initVegamoviesLandingRedirect,
 } from '../sites/vegamovies';
 import { initCinefreakMediator } from '../sites/cinefreak';
-import { clearLicenseSession, getLicenseSession, licenseIsLive, storageKeys } from '../license/storage';
-import { ensureHosts } from '../hosts/check';
+import { getLicenseSession, storageKeys } from '../license/storage';
+import { verifyLicense } from '../license/verify';
 
 const INITS = [
   initStorylineCoursePlayBrand,
@@ -288,21 +288,14 @@ const INITS = [
 
 const MAX_TIMER_MS = 2_147_483_647;
 
-const armLicenseExpiryTimer = async (): Promise<boolean> => {
+const armLicenseExpiryTimer = async (): Promise<void> => {
   const session = await getLicenseSession();
-  if (!session) return false;
+  if (!session) return;
   const delay = session.exp - Date.now();
-  if (delay <= 0) {
-    await clearLicenseSession();
-    return true;
-  }
-  if (delay > MAX_TIMER_MS) return false;
+  if (delay <= 0 || delay > MAX_TIMER_MS) return;
   window.setTimeout(() => {
-    void getLicenseSession().then((current) => {
-      if (current && !licenseIsLive(current.exp)) void clearLicenseSession();
-    });
+    void verifyLicense();
   }, delay);
-  return false;
 };
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;
@@ -312,13 +305,12 @@ async function boot(): Promise<void> {
     runCoomeetMainWorldAccelerator();
     return;
   }
-  await ensureHosts();
   if (window !== window.top) {
     if (await isOnCoomeetIframeHost()) initCoomeetIframeBootstrap();
     return;
   }
   const onWorkingPage = location.href.startsWith(chrome.runtime.getURL('working.html'));
-  if (!onWorkingPage && (await armLicenseExpiryTimer())) return;
+  if (!onWorkingPage) await armLicenseExpiryTimer();
   for (const init of INITS) {
     try {
       init();

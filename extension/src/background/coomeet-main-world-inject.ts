@@ -1,10 +1,10 @@
-import { hostIsRemoteSite } from '../hosts/check';
+import { canBypassHost } from '../gate';
 
 const injected = new Set<string>();
 
 async function isCoomeetUrl(url: string): Promise<boolean> {
   try {
-    return hostIsRemoteSite(new URL(url).hostname, 'coomeet-iframe');
+    return canBypassHost(new URL(url).hostname, 'coomeet-iframe');
   } catch {
     return false;
   }

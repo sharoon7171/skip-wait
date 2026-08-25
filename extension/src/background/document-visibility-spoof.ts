@@ -1,4 +1,4 @@
-import { hostIsRemoteSite } from '../hosts/check';
+import { canBypassHost } from '../gate';
 
 export const MSG_INJECT_VISIBILITY_SPOOF = 'INJECT_VISIBILITY_SPOOF' as const;
 
@@ -29,7 +29,7 @@ export function initDocumentVisibilitySpoof(): void {
     if (!raw || !URL.canParse(raw)) return;
     const { hostname, pathname } = new URL(raw);
     if (!XDM_INTERSTITIAL.test(pathname)) return;
-    void hostIsRemoteSite(hostname, 'xdmovies').then((ok) => {
+    void canBypassHost(hostname, 'xdmovies').then((ok) => {
       if (!ok) return;
       void chrome.scripting.executeScript({
         target: { tabId },

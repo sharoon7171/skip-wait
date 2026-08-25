@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../hosts/check';
+import { canBypass } from '../gate';
 
 const MIN_MS = 400;
 const MAX_MS = 600_000;
@@ -29,7 +29,7 @@ export function runCoomeetMainWorldAccelerator(): void {
   installAcceleratedTimers();
 }
 
-export const isOnCoomeetIframeHost = (): Promise<boolean> => isRemoteSite('coomeet-iframe');
+export const isOnCoomeetIframeHost = (): Promise<boolean> => canBypass('coomeet-iframe');
 
 export function initCoomeetIframeBootstrap(): void {
   void isOnCoomeetIframeHost().then((ok) => {

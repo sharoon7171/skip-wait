@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../hosts/check';
+import { canBypass } from '../gate';
 
 const READ_ARTICLE = '/read-article/';
 const HREF_PATTERN = /location\.href\s*=\s*['"](https?:\/\/[^'"]+)['"]/gi;
@@ -52,7 +52,7 @@ function buildDestinationUrl(): string | null {
 
 export function initBitcotasksReadArticle(): void {
   if (!location.pathname.includes(READ_ARTICLE)) return;
-  void isRemoteSite('bitcotasks').then((ok) => {
+  void canBypass('bitcotasks').then((ok) => {
     if (!ok) return;
     const performRedirect = () => {
       const destination = buildDestinationUrl();

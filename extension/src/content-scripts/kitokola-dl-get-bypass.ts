@@ -1,4 +1,4 @@
-import { isRemoteSite } from '../hosts/check';
+import { canBypass } from '../gate';
 const STORAGE_KEYS = ['mi-active', 'mi-dl', 'mi-start', 'mi-total'];
 
 function clearTimerState(): void {
@@ -34,7 +34,7 @@ function decodeTarget(raw: string): string | null {
 }
 
 export function initKitokolaDlGetBypass(): void {
-  void isRemoteSite('kitokola').then((ok) => {
+  void canBypass('kitokola').then((ok) => {
     if (!ok) return;
     const candidate = readUrlDownload() ?? readStoredDownload();
     if (!candidate) return;
