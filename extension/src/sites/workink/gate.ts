@@ -137,41 +137,44 @@ const syncPin = (): void => {
 };
 
 export function initWorkinkGate(): void {
-  if (window !== window.top || !isWorkinkGateUrl(location.href)) return;
+  if (window !== window.top) return;
+  void isWorkinkGateUrl(location.href).then((ok) => {
+    if (!ok) return;
 
-  requestHooks();
-  startPulse();
-  syncPin();
-
-  window.addEventListener('message', (ev) => {
-    if (ev.origin !== location.origin || ev.data?.source !== WORKINK_MSG_SOURCE || unlocked) return;
-    switch (ev.data?.type) {
-      case 'gate-start':
-        syncPin();
-        break;
-      case 'gate-done':
-        if (ev.data.gate !== 's_hcok') break;
-        passed = true;
-        stopPulse();
-        mount('Captcha verified…');
-        break;
-      case 'forged':
-        mount('Unlocking your link…');
-        break;
-      case 'unlock':
-        if (typeof ev.data.url !== 'string') break;
-        unlocked = true;
-        stopPulse();
-        stopPin?.();
-        stopPin = null;
-        mount('Opening your link…');
-        location.replace(ev.data.url);
-        break;
-    }
-  });
-
-  new MutationObserver(() => {
-    if (unlocked || passed) return;
+    requestHooks();
+    startPulse();
     syncPin();
-  }).observe(document.documentElement, { childList: true, subtree: true });
+
+    window.addEventListener('message', (ev) => {
+      if (ev.origin !== location.origin || ev.data?.source !== WORKINK_MSG_SOURCE || unlocked) return;
+      switch (ev.data?.type) {
+        case 'gate-start':
+          syncPin();
+          break;
+        case 'gate-done':
+          if (ev.data.gate !== 's_hcok') break;
+          passed = true;
+          stopPulse();
+          mount('Captcha verified…');
+          break;
+        case 'forged':
+          mount('Unlocking your link…');
+          break;
+        case 'unlock':
+          if (typeof ev.data.url !== 'string') break;
+          unlocked = true;
+          stopPulse();
+          stopPin?.();
+          stopPin = null;
+          mount('Opening your link…');
+          location.replace(ev.data.url);
+          break;
+      }
+    });
+
+    new MutationObserver(() => {
+      if (unlocked || passed) return;
+      syncPin();
+    }).observe(document.documentElement, { childList: true, subtree: true });
+  });
 }

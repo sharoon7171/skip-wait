@@ -13,16 +13,21 @@ const inject = async (tabId: number, frameId = 0): Promise<void> => {
 
 export function initWorkinkMainWorldInject(): void {
   chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.frameId !== 0 || !isWorkinkGateUrl(details.url)) return;
-    void inject(details.tabId, 0);
+    if (details.frameId !== 0) return;
+    void isWorkinkGateUrl(details.url).then((ok) => {
+      if (!ok) return;
+      void inject(details.tabId, 0);
+    });
   });
 
   chrome.runtime.onMessage.addListener((message, sender) => {
     if (message?.type !== MSG_WORKINK_HOOKS) return false;
     const tabId = sender.tab?.id;
     if (tabId === undefined) return false;
-    if (sender.tab?.url && !isWorkinkGateUrl(sender.tab.url)) return false;
-    void inject(tabId, sender.frameId ?? 0);
+    void (async () => {
+      if (sender.tab?.url && !(await isWorkinkGateUrl(sender.tab.url))) return;
+      await inject(tabId, sender.frameId ?? 0);
+    })();
     return false;
   });
 }
