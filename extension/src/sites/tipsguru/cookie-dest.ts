@@ -1,3 +1,4 @@
+import { canBypassHost } from '../../gate';
 import { decodeProlinkDest } from './hosts';
 
 export const TIPSGURU_GET_DEST = 'TIPSGURU_GET_DEST';
@@ -55,7 +56,18 @@ export function initTipsguruCookieDest(): void {
       sendResponse({ url: null });
       return false;
     }
-    void readDest(href).then((url) => sendResponse({ url }));
+    void (async () => {
+      try {
+        if (!(await canBypassHost(new URL(href).hostname, 'tipsguru'))) {
+          sendResponse({ url: null });
+          return;
+        }
+      } catch {
+        sendResponse({ url: null });
+        return;
+      }
+      sendResponse({ url: await readDest(href) });
+    })();
     return true;
   });
 }

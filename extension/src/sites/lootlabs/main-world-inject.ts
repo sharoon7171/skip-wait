@@ -24,7 +24,10 @@ export function initLootlabsMainWorldInject(): void {
     if (message?.type !== MSG_INJECT_LOOT) return false;
     const tabId = sender.tab?.id;
     if (tabId === undefined) return false;
-    inject(tabId, sender.frameId ?? 0, false);
+    void isLootLockerUrl(sender.tab?.url ?? '').then((ok) => {
+      if (!ok) return;
+      inject(tabId, sender.frameId ?? 0, false);
+    });
     return false;
   });
 }

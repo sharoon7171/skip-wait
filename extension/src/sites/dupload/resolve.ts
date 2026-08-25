@@ -1,6 +1,9 @@
+import { canBypassHost } from '../../gate';
+
 const MSG = 'DUPLOAD_DOWNLOAD2' as const;
 const CDN_RE = /^https:\/\/fs\d+\.dupload\.xyz\/files\/\S+/i;
 const MISSING_RE = /File Not Found|could not be found/i;
+const SITE = 'dupload';
 
 type Req = { type: typeof MSG; id: string };
 type Res = { url: string | null; missing?: boolean };
@@ -37,16 +40,25 @@ const mintCdn = async (id: string): Promise<Res> => {
 };
 
 export const initDuploadResolve = (): void => {
-  chrome.runtime.onMessage.addListener((msg: Partial<Req>, _s, reply) => {
+  chrome.runtime.onMessage.addListener((msg: Partial<Req>, sender, reply) => {
     if (msg.type !== MSG) return false;
     const id = typeof msg.id === 'string' ? msg.id.trim() : '';
     if (!id) {
       reply({ url: null } satisfies Res);
       return false;
     }
-    void mintCdn(id)
-      .then((res) => reply(res))
-      .catch(() => reply({ url: null } satisfies Res));
+    void (async () => {
+      try {
+        const host = sender.tab?.url ? new URL(sender.tab.url).hostname : '';
+        if (!host || !(await canBypassHost(host, SITE))) {
+          reply({ url: null } satisfies Res);
+          return;
+        }
+        reply(await mintCdn(id));
+      } catch {
+        reply({ url: null } satisfies Res);
+      }
+    })();
     return true;
   });
 };

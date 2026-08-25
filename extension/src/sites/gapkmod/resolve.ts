@@ -1,4 +1,7 @@
+import { canBypassHost } from '../../gate';
+
 export const MSG_GAPKMOD_RESOLVE = 'GAPKMOD_RESOLVE_DOWNLOAD_LINK' as const;
+const SITE = 'gapkmod';
 
 type Req = { type: typeof MSG_GAPKMOD_RESOLVE; href: string };
 type Res = { url: string | null };
@@ -18,11 +21,21 @@ async function finalUrl(href: string): Promise<string> {
 }
 
 export function initGapkmodResolve(): void {
-  chrome.runtime.onMessage.addListener((msg: Partial<Req>, _s, reply) => {
+  chrome.runtime.onMessage.addListener((msg: Partial<Req>, sender, reply) => {
     if (msg.type !== MSG_GAPKMOD_RESOLVE || typeof msg.href !== 'string' || !msg.href) return false;
-    void finalUrl(msg.href)
-      .then((url) => reply({ url } satisfies Res))
-      .catch(() => reply({ url: null } satisfies Res));
+    const href = msg.href;
+    void (async () => {
+      try {
+        const host = sender.tab?.url ? new URL(sender.tab.url).hostname : '';
+        if (!host || !(await canBypassHost(host, SITE))) {
+          reply({ url: null } satisfies Res);
+          return;
+        }
+        reply({ url: await finalUrl(href) } satisfies Res);
+      } catch {
+        reply({ url: null } satisfies Res);
+      }
+    })();
     return true;
   });
 }

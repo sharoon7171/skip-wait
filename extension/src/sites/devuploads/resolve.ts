@@ -1,5 +1,8 @@
+import { canBypassHost } from '../../gate';
+
 const MSG = 'DEVUPLOADS_DOWNLOAD2' as const;
 const CDN_RE = /https?:\/\/du\d+\.devuploads\.com\/d\/[A-Za-z0-9._~/-]+/i;
+const SITE = 'devuploads-mediator';
 
 type Req = { type: typeof MSG; id: string };
 type Res = { url: string | null };
@@ -31,16 +34,25 @@ const mintCdn = async (id: string): Promise<string | null> => {
 };
 
 export const initDevuploadsResolve = (): void => {
-  chrome.runtime.onMessage.addListener((msg: Partial<Req>, _s, reply) => {
+  chrome.runtime.onMessage.addListener((msg: Partial<Req>, sender, reply) => {
     if (msg.type !== MSG) return false;
     const id = typeof msg.id === 'string' ? msg.id.trim() : '';
     if (!id) {
       reply({ url: null } satisfies Res);
       return false;
     }
-    void mintCdn(id)
-      .then((url) => reply({ url } satisfies Res))
-      .catch(() => reply({ url: null } satisfies Res));
+    void (async () => {
+      try {
+        const host = sender.tab?.url ? new URL(sender.tab.url).hostname : '';
+        if (!host || !(await canBypassHost(host, SITE))) {
+          reply({ url: null } satisfies Res);
+          return;
+        }
+        reply({ url: await mintCdn(id) } satisfies Res);
+      } catch {
+        reply({ url: null } satisfies Res);
+      }
+    })();
     return true;
   });
 };

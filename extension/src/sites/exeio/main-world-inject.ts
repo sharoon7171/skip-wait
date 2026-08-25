@@ -29,14 +29,24 @@ export function initExeioAdblockInject(): void {
     const tabId = sender.tab?.id;
     const frameId = sender.frameId ?? 0;
     if (message?.type === MSG_EXEIO_ADBLOCK) {
-      if (tabId !== undefined) injectMain(tabId, frameId, runExeioAdblockBypass);
+      void (async () => {
+        if (tabId === undefined) return;
+        if (sender.tab?.url && !(await isExeioUrl(sender.tab.url))) return;
+        injectMain(tabId, frameId, runExeioAdblockBypass);
+      })();
       return false;
     }
     if (message?.type !== MSG_EXEIO_GO_UNLOCK || tabId === undefined) return false;
-    void chrome.scripting
-      .executeScript({ target: { tabId, frameIds: [frameId] }, world: 'MAIN', func: runExeioGoUnlock })
-      .then((r) => sendResponse((r[0]?.result as ExeioUnlockResult | undefined) ?? { ok: false, err: 'no result' }))
-      .catch((e: unknown) => sendResponse({ ok: false, err: String(e) }));
+    void (async () => {
+      if (sender.tab?.url && !(await isExeioUrl(sender.tab.url))) {
+        sendResponse({ ok: false, err: 'not exeio' });
+        return;
+      }
+      void chrome.scripting
+        .executeScript({ target: { tabId, frameIds: [frameId] }, world: 'MAIN', func: runExeioGoUnlock })
+        .then((r) => sendResponse((r[0]?.result as ExeioUnlockResult | undefined) ?? { ok: false, err: 'no result' }))
+        .catch((e: unknown) => sendResponse({ ok: false, err: String(e) }));
+    })();
     return true;
   });
 }

@@ -1,6 +1,8 @@
+import { canBypassHost } from '../../gate';
 import { cdnFromPleaseWaitHtml } from './decrypt';
 
 const PLEASE_WAIT = 'https://wickradio.com/Please-Wait.php';
+const SITE = 'oceanofgames';
 
 export const MSG_OCEANOFGAMES_RESOLVE = 'OCEANOFGAMES_RESOLVE_CDN' as const;
 
@@ -28,7 +30,7 @@ async function mintCdn(id: string, filename: string, filesize: string): Promise<
 }
 
 export function initOceanofgamesResolve(): void {
-  chrome.runtime.onMessage.addListener((msg: Partial<ResolveReq>, _s, reply) => {
+  chrome.runtime.onMessage.addListener((msg: Partial<ResolveReq>, sender, reply) => {
     if (msg?.type !== MSG_OCEANOFGAMES_RESOLVE) return false;
     const id = typeof msg.id === 'string' ? msg.id : '';
     const filename = typeof msg.filename === 'string' ? msg.filename : '';
@@ -37,9 +39,18 @@ export function initOceanofgamesResolve(): void {
       reply({ url: null } satisfies ResolveRes);
       return false;
     }
-    void mintCdn(id, filename, filesize)
-      .then((url) => reply({ url } satisfies ResolveRes))
-      .catch(() => reply({ url: null } satisfies ResolveRes));
+    void (async () => {
+      try {
+        const host = sender.tab?.url ? new URL(sender.tab.url).hostname : '';
+        if (!host || !(await canBypassHost(host, SITE))) {
+          reply({ url: null } satisfies ResolveRes);
+          return;
+        }
+        reply({ url: await mintCdn(id, filename, filesize) } satisfies ResolveRes);
+      } catch {
+        reply({ url: null } satisfies ResolveRes);
+      }
+    })();
     return true;
   });
 }
