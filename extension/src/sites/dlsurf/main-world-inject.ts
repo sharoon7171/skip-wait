@@ -69,14 +69,9 @@ function runDlsurfTurnstile(mountId: string, sitekey: string, msgSource: string)
       post({ type: 'err', err: 'render' });
     }
   };
-  const existing = (window as unknown as { turnstile?: TurnstileApi }).turnstile;
-  if (existing) {
-    render(existing);
-    return;
-  }
   const wait = (deadline: number): void => {
     const api = (window as unknown as { turnstile?: TurnstileApi }).turnstile;
-    if (api) {
+    if (api?.render) {
       render(api);
       return;
     }
@@ -86,16 +81,7 @@ function runDlsurfTurnstile(mountId: string, sitekey: string, msgSource: string)
     }
     setTimeout(() => wait(deadline), 50);
   };
-  if (document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]')) {
-    wait(Date.now() + 15_000);
-    return;
-  }
-  const script = document.createElement('script');
-  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-  script.async = true;
-  script.onload = () => wait(Date.now() + 5_000);
-  script.onerror = () => post({ type: 'err', err: 'script' });
-  document.documentElement.appendChild(script);
+  wait(Date.now() + 15_000);
 }
 
 async function runDlsurfCheckAuth(api: string): Promise<boolean> {
