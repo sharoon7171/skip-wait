@@ -33,6 +33,7 @@ import { initDlsurfMainWorldInject } from '../sites/dlsurf';
 import { initAlpharedeBackground } from '../sites/alpharede';
 import { initEarnlinksBackground } from '../sites/earnlinks';
 import { initSflBackground } from '../sites/sfl';
+import { initLiteshortBackground } from '../sites/liteshort';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -70,5 +71,6 @@ initDlsurfMainWorldInject();
 initAlpharedeBackground();
 initEarnlinksBackground();
 initSflBackground();
+initLiteshortBackground();
 initHostsSync();
 initLicenseSync();
