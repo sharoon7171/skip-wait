@@ -468,6 +468,9 @@
   "gamesnostalgia": {
     "hosts": ["gamesnostalgia.com"]
   },
+  "getmodsapk": {
+    "hosts": ["getmodsapk.com"]
+  },
   "gaea-operations-lockr": {
     "hosts": ["lockr.net", "lockr.so", "lockr.to"]
   },
