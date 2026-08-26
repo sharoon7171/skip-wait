@@ -8,6 +8,7 @@ import { bypass as an1Bypass } from './bypasses/an1-bypass';
 import { bypass as ankergamesBypass } from './bypasses/ankergames-bypass';
 import { bypass as anygameBypass } from './bypasses/anygame-bypass';
 import { bypass as apktealBypass } from './bypasses/apkteal-bypass';
+import { bypass as apkvisionBypass } from './bypasses/apkvision-bypass';
 import { bypass as apunkagamesBypass } from './bypasses/apunkagames-bypass';
 import { bypass as arolinksBypass } from './bypasses/arolinks-bypass';
 import { bypass as bitcotasksBypass } from './bypasses/bitcotasks-bypass';
@@ -130,6 +131,7 @@ export const bypasses: readonly SupportedBypass[] = [
   ankergamesBypass,
   anygameBypass,
   apktealBypass,
+  apkvisionBypass,
   apunkagamesBypass,
   arolinksBypass,
   bitcotasksBypass,
