@@ -41,6 +41,7 @@ import { bypass as gaeaOperationsLockrBypass } from './bypasses/gaea-operations-
 import { bypass as gamesnostalgiaBypass } from './bypasses/gamesnostalgia-bypass';
 import { bypass as gapkmodBypass } from './bypasses/gapkmod-bypass';
 import { bypass as genlinkBypass } from './bypasses/genlink-bypass';
+import { bypass as getmodsapkBypass } from './bypasses/getmodsapk-bypass';
 import { bypass as goostBypass } from './bypasses/goost-bypass';
 import { bypass as gplinksBypass } from './bypasses/gplinks-bypass';
 import { bypass as haxpcBypass } from './bypasses/haxpc-bypass';
@@ -162,6 +163,7 @@ export const bypasses: readonly SupportedBypass[] = [
   gamesnostalgiaBypass,
   gapkmodBypass,
   genlinkBypass,
+  getmodsapkBypass,
   goostBypass,
   gplinksBypass,
   haxpcBypass,
