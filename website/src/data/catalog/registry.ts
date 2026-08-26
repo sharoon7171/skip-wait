@@ -7,6 +7,7 @@ import { bypass as alpharedeBypass } from './bypasses/alpharede-bypass';
 import { bypass as an1Bypass } from './bypasses/an1-bypass';
 import { bypass as ankergamesBypass } from './bypasses/ankergames-bypass';
 import { bypass as anygameBypass } from './bypasses/anygame-bypass';
+import { bypass as apkawardBypass } from './bypasses/apkaward-bypass';
 import { bypass as apktealBypass } from './bypasses/apkteal-bypass';
 import { bypass as apkvisionBypass } from './bypasses/apkvision-bypass';
 import { bypass as apunkagamesBypass } from './bypasses/apunkagames-bypass';
@@ -130,6 +131,7 @@ export const bypasses: readonly SupportedBypass[] = [
   an1Bypass,
   ankergamesBypass,
   anygameBypass,
+  apkawardBypass,
   apktealBypass,
   apkvisionBypass,
   apunkagamesBypass,
