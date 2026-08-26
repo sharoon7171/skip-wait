@@ -36,8 +36,7 @@ const saveLicense = (env: Env, record: LicenseRecord): Promise<void> =>
 
 const reject = (code: string, status: number): Response => json({ ok: false, error: code }, status);
 
-const okLicense = (record: LicenseRecord): Response =>
-  json({ ok: true, plan: record.plan, exp: record.exp });
+const okLicense = (plan: LicensePlan, exp: number): Response => json({ ok: true, plan, exp });
 
 const assertClient = (body: ClientBody | null): { key: string; deviceId: string } | Response => {
   if (!body?.key || !body.deviceId) return reject('INVALID_BODY', 400);
@@ -49,7 +48,7 @@ const assertClient = (body: ClientBody | null): { key: string; deviceId: string 
 
 const checkLicense = (record: LicenseRecord | null): Response | LicenseRecord => {
   if (!record || record.status === 'revoked') return reject('LICENSE_NOT_FOUND', 404);
-  if (record.exp <= now()) return reject('LICENSE_EXPIRED', 403);
+  if (record.exp !== null && record.exp <= now()) return reject('LICENSE_EXPIRED', 403);
   return record;
 };
 
@@ -59,11 +58,19 @@ export const activateLicense = async (env: Env, body: ClientBody | null): Promis
   const record = checkLicense(await loadLicense(env, parsed.key));
   if (record instanceof Response) return record;
   if (record.deviceId && record.deviceId !== parsed.deviceId) return reject('DEVICE_MISMATCH', 403);
+  let dirty = false;
   if (!record.deviceId) {
     record.deviceId = parsed.deviceId;
-    await saveLicense(env, record);
+    dirty = true;
   }
-  return okLicense(record);
+  let exp = record.exp;
+  if (exp === null) {
+    exp = now() + planDurationMs(record.plan);
+    record.exp = exp;
+    dirty = true;
+  }
+  if (dirty) await saveLicense(env, record);
+  return okLicense(record.plan, exp);
 };
 
 export const validateLicense = async (env: Env, body: ClientBody | null): Promise<Response> => {
@@ -72,7 +79,8 @@ export const validateLicense = async (env: Env, body: ClientBody | null): Promis
   const record = checkLicense(await loadLicense(env, parsed.key));
   if (record instanceof Response) return record;
   if (record.deviceId !== parsed.deviceId) return reject('DEVICE_MISMATCH', 403);
-  return okLicense(record);
+  if (record.exp === null) return reject('LICENSE_NOT_ACTIVATED', 403);
+  return okLicense(record.plan, record.exp);
 };
 
 export const issueLicense = async (env: Env, plan: LicensePlan): Promise<Response> => {
@@ -81,7 +89,7 @@ export const issueLicense = async (env: Env, plan: LicensePlan): Promise<Respons
     key: generateLicenseKey(),
     plan,
     status: 'active',
-    exp: issuedAt + planDurationMs(plan),
+    exp: null,
     deviceId: null,
     issuedAt,
     rev: 0,

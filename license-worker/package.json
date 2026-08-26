@@ -10,7 +10,7 @@
     "unbind:device": "node scripts/menu.mjs unbind",
     "revoke:license": "node scripts/menu.mjs revoke",
     "delete:license": "node scripts/menu.mjs delete",
-    "issue:trial": "node scripts/admin.mjs issue trial10m",
+    "issue:trial": "node scripts/admin.mjs issue trial30m",
     "issue:monthly": "node scripts/admin.mjs issue monthly30d",
     "revoke": "node scripts/admin.mjs revoke",
     "unbind": "node scripts/admin.mjs unbind",

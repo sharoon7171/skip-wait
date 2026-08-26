@@ -16,7 +16,7 @@ const formatWhen = (ms: number): string =>
     minute: '2-digit',
   }).format(new Date(ms));
 
-const planLabel = (plan: LicensePlan): string => (plan === 'trial10m' ? '10-minute trial' : PRICE_LABEL);
+const planLabel = (plan: LicensePlan): string => (plan === 'trial30m' ? '30-minute trial' : PRICE_LABEL);
 
 const errorMessage = (code: string | undefined): string => {
   switch (code) {

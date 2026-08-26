@@ -4,7 +4,7 @@ const [command, arg1] = process.argv.slice(2);
 
 try {
   if (command === 'issue') {
-    const plan = arg1 === 'monthly30d' ? 'monthly30d' : 'trial10m';
+    const plan = arg1 === 'monthly30d' ? 'monthly30d' : 'trial30m';
     console.log(JSON.stringify(await adminPost('/admin/issue', { plan }), null, 2));
   } else if (command === 'revoke') {
     const key = normalizeKey(arg1 ?? '');
@@ -26,7 +26,7 @@ try {
     if (!key) throw new Error('Usage: node scripts/admin.mjs check SW-XXXX-XXXX-XXXX-XXXX');
     console.log(JSON.stringify(await clientValidate(key), null, 2));
   } else {
-    throw new Error('Usage: issue trial10m|monthly30d | revoke KEY | delete KEY | unbind KEY | check KEY');
+    throw new Error('Usage: issue trial30m|monthly30d | revoke KEY | delete KEY | unbind KEY | check KEY');
   }
 } catch (err) {
   console.error(err.data ?? err.message);

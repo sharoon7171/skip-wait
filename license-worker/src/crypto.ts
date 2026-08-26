@@ -10,8 +10,8 @@ export const timingSafeEqual = (left: string, right: string): boolean => {
   return diff === 0;
 };
 
-export const planDurationMs = (plan: 'trial10m' | 'monthly30d'): number =>
-  plan === 'trial10m' ? 10 * 60 * 1000 : 30 * 24 * 60 * 60 * 1000;
+export const planDurationMs = (plan: 'trial30m' | 'monthly30d'): number =>
+  plan === 'trial30m' ? 30 * 60 * 1000 : 30 * 24 * 60 * 60 * 1000;
 
 export const generateLicenseKey = (): string => {
   const bytes = crypto.getRandomValues(new Uint8Array(8));

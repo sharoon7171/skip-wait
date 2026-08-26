@@ -1,4 +1,4 @@
-export type LicensePlan = 'trial10m' | 'monthly30d';
+export type LicensePlan = 'trial30m' | 'monthly30d';
 
 export type LicenseStatus = 'active' | 'revoked';
 
@@ -6,7 +6,7 @@ export type LicenseRecord = {
   key: string;
   plan: LicensePlan;
   status: LicenseStatus;
-  exp: number;
+  exp: number | null;
   deviceId: string | null;
   issuedAt: number;
   rev: number;

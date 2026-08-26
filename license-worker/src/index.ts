@@ -44,7 +44,7 @@ export default {
 
     if (url.pathname === '/admin/issue') {
       const body = await readJson<AdminIssueBody>(request);
-      if (body?.plan !== 'trial10m' && body?.plan !== 'monthly30d') {
+      if (body?.plan !== 'trial30m' && body?.plan !== 'monthly30d') {
         return json({ ok: false, error: 'INVALID_PLAN' }, 400);
       }
       return issueLicense(env, body.plan);
