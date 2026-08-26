@@ -5,88 +5,77 @@ const name = 'LiteShort';
 const bypassType = 'Skip Short Link';
 
 const description =
-  'LiteShort bypass that clears Continue to Destination notices, rotating short mediators, and Get Link countdown chrome so you reach the next URL without scavenger-hunt hops.';
+  'LiteShort bypass for Continue to Destination disclaimers and Get Link countdowns on liteshort.com and link.liteshort.com—Skip Wait stays on those hosts and opens the next URL when unlock is allowed.';
 
-const domains = [
-  'liteshort.com',
-  'link.liteshort.com',
-  'gadinow.in',
-  'jobsmbn.in',
-  'strictstrategies.com',
-  'adrinolinks.in',
-  'adrinolinks.com',
-  'carrnissan.com',
-] as const;
+const domains = ['liteshort.com', 'link.liteshort.com'] as const;
 
 const keywords = [
   'liteshort bypass',
   'bypass liteshort',
   'skip liteshort',
-  'liteshort timer bypass',
-  'liteshort countdown bypass',
+  'liteshort.com bypass',
+  'link.liteshort.com bypass',
   'liteshort get link',
-  'get link bypass',
   'liteshort continue to destination',
   'continue to destination bypass',
-  'liteshort mediator bypass',
-  'short mediator bypass',
+  'liteshort timer bypass',
+  'liteshort countdown bypass',
+  'get link bypass liteshort',
+  'liteshort chrome extension',
   'organic redirect google bypass',
-  'skip waiting page',
   'skip waiting page liteshort',
-  'link shortener bypass',
   'skip countdown timer',
   'bypass countdown timer',
-  'monetized short link bypass',
+  'link shortener bypass',
   'skip wait chrome extension',
 ] as const;
 
 const intro =
-  'LiteShort is a three-act short link: a Continue to Destination disclaimer, a rotating short mediator that pushes search-style first results and blog continues, then a Get Link countdown on unlock. Skip Wait is the $1/month Chrome extension that clears that choreography so a LiteShort countdown bypass feels like forward motion, not scavenger hunting.';
+  'A LiteShort share usually opens Continue to Destination on liteshort.com, then a Get Link countdown on link.liteshort.com. Skip Wait is the $1/month Chrome extension that keeps you on those two hosts, skips the off-site hop the disclaimer wants, and finishes Get Link when the shortener actually allows it.';
 
-const body = `## Disclaimer, fake search hop, then Get Link
+const body = `## Continue to Destination is not the destination
 
-Publishers rotate the middle hop on purpose. One day the mediator looks like a news post, the next like a search page, but the goal is the same: prove you came from an allowed referrer before Get Link appears. Click the wrong result, miss a continue, or refresh mid-chain and LiteShort sends you back to Continue to Destination.
+[LiteShort](https://liteshort.com/) aliases start with a disclaimer titled Continue to Destination. That button does not open what you came for. It tries to send the tab through a rotating off-site hop first, then unlock only works on link.liteshort.com after that hop is treated as the referrer.
 
-That short-mediator maze is the product. The destination is only the prize after the tour—exactly why people search liteshort continue to destination, organic redirect google bypass, and liteshort get link.
+Miss the hop, pick the wrong result, or reload mid-run and you land back on the disclaimer. That loop is why people search liteshort continue to destination and liteshort get link—not because the last URL is hard to understand.
 
-### The three screens most shares force
+### What you actually see
 
-1. Continue to Destination disclaimer taps
-2. Rotating short mediators with search / blog continue filler
-3. Get Link countdown chrome on the unlock waiting page
+- Continue to Destination on liteshort.com/{alias}
+- Get Link countdown chrome on link.liteshort.com/{alias}
+- A server-side wait (often a few seconds) before /links/go returns the next URL
 
-## Cutting the tour down to what still matters
+## Stay on LiteShort hosts
 
-From the entry screen Skip Wait bypasses Continue to Destination and aims you at unlock. If a rotating mediator loads instead, it skips the search and article filler and returns you to the unlock waiting page with the visit context that page expects.
+Skip Wait runs only on liteshort.com and link.liteshort.com. It covers Continue to Destination, forges the visit context unlock expects, and never opens those rotating off-site hops as tabs.
 
-There, the Get Link flow runs under Skip Wait: early unlock when allowed, a single enforced wait when the server demands it, then a redirect to the next URL—without fake countdown UI or relearning the path every time mediators change.
+On Get Link, cosmetic countdown chrome is ignored. If the server still rejects an early unlock, Skip Wait holds for that real counter once, then posts Get Link and opens whatever URL comes back—another shortener or a direct page. This LiteShort page ends there.
 
-## Mediators rotate; paste tools do not keep up
+## Get Link is a gate, not a file promise
 
-Hardcoded mediator lists die overnight. A LiteShort bypass that recognizes live short mediators inside Chrome keeps skip waiting page useful without pasting the URL into another website each week.
+Get Link is LiteShort’s unlock control. It does not mean a download. The next URL is whatever the alias points to today. Paste sites that list yesterday’s hop hosts go stale; a liteshort chrome extension path keys off the two LiteShort domains and the live alias instead.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'What does a LiteShort bypass skip?',
+    question: 'Which LiteShort URLs start Skip Wait?',
     answer:
-      'The disclaimer, rotating short mediators, and Get Link busywork—so you are not stuck on intermediate pages. Skip Wait covers supported entry, mediator, and unlock screens.',
+      'Alias links on liteshort.com and link.liteshort.com. Home, login, and other site pages do not start it.',
   },
   {
-    question: 'Why do I keep landing on random blogs or search pages?',
+    question: 'Do I still tap Continue to Destination?',
     answer:
-      'Unlock only works after a visit that looks like it came from an allowed short mediator. Those mediators rotate; Skip Wait knows the live ones and skips their search and article steps.',
+      'No. Skip Wait clears that disclaimer on the LiteShort host and does not send the tab through the off-site hop it advertises.',
   },
   {
-    question: 'Does Get Link still make me wait?',
+    question: 'Does Get Link still wait?',
     answer:
-      'Only if the server enforces a real timer. Skip Wait tries unlock immediately and ignores cosmetic countdown UI.',
+      'Only when the server enforces a real counter. Fake countdown UI is ignored; Skip Wait waits that enforced delay once, then finishes Get Link.',
   },
   {
-    question: 'Do I tap Continue to Destination myself?',
+    question: 'What opens after LiteShort?',
     answer:
-      'No. Skip Wait clears that notice and moves the chain forward for you.',
+      'Whatever URL Get Link returns for that alias. Skip Wait’s LiteShort path stops when that URL opens.',
   },
   {
     question: 'How much does LiteShort support cost?',
