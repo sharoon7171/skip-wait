@@ -58,7 +58,7 @@ import { initLinkjust } from '../sites/linkjust';
 import { initLinknextGate } from '../sites/linknext';
 import { initLinksterrGateway } from '../sites/linksterr';
 import { initLinkvertiseAccessPage } from '../sites/linkvertise';
-import { initLiteshortEntry, initLiteshortMediator } from '../sites/liteshort';
+import { initLiteshortEntry } from '../sites/liteshort';
 import { initLlSafelinkHqChain, initLlacDdx } from '../sites/ll-safelink';
 import { initLootlabsUnlock } from '../sites/lootlabs';
 import { initMoviesModContentScript } from '../sites/movies-mod';
@@ -159,7 +159,6 @@ const INITS = [
   initLlacDdx,
   initLinkjust,
   initLiteshortEntry,
-  initLiteshortMediator,
   initLinksterrGateway,
   initShortxlinksUnlock,
   init1shortlinkRedirect,
