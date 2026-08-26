@@ -1,1 +1,1 @@
-export { initUnlocktoearnEntry } from './entry';
+export {};
