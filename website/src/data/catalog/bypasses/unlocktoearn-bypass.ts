@@ -5,79 +5,78 @@ const name = 'Unlock To Earn';
 const bypassType = 'Skip multi step Waits';
 
 const description =
-  'Unlock To Earn bypass starts on the short URL, clears cocoboxmod article Continue gates and the final unlock form, then opens the next hop—often JobSheel—without babysitting every wait screen.';
+  'Unlock To Earn bypass for Please Complete Task lists and Click Here to Open Link on unlocktoearn.com aliases—Skip Wait stays on that host, finishes unlock, and opens the next URL.';
 
-const domains = ['unlocktoearn.com', 'cocoboxmod.com'] as const;
+const domains = ['unlocktoearn.com'] as const;
 
 const keywords = [
   'unlock to earn bypass',
   'unlocktoearn bypass',
   'unlocktoearn.com bypass',
   'unlock to earn chrome extension',
+  'click here to open link bypass',
+  'please complete task to unlock link',
+  'unlock to earn subscribe youtube',
+  'unlock to earn telegram task',
+  'social unlock bypass',
   'unlock to earn timer bypass',
   'unlock to earn countdown bypass',
-  'cocoboxmod bypass',
-  'cocoboxmod.com continue',
-  'skip multi step waits',
-  'social unlock bypass',
+  'please wait bypass',
   'skip countdown timer',
   'bypass countdown timer',
-  'please wait bypass',
   'link shortener bypass',
   'skip wait extension',
-  'redirect chain bypass',
 ] as const;
 
 const intro =
-  'An Unlock To Earn bypass search usually means a short link that bounces into mediator article gates and a final unlock wait before anything useful opens. Skip Wait is the $1/month Chrome extension that starts on that short URL, walks the cocoboxmod hops, and opens the next destination.';
+  'Unlock To Earn aliases often keep you on unlocktoearn.com with a Please Complete Task to Unlock Link card—Subscribe, Join, then Click Here to Open Link. Skip Wait is the $1/month Chrome extension that covers that card on the short URL, skips the off-site bounce those shares still send, and opens the next URL when Click Here would have.';
 
-const body = `## Short link, then rotating article gates
+const body = `## The task card is the waiting page
 
-[Unlock To Earn](https://unlocktoearn.com/) shares rarely open your file in one step. The short URL redirects into a mediator host such as cocoboxmod.com, then stacked article Continue forms and a final unlock control stand between you and the next hop. Close a tab mid-chain and the same tour restarts—exactly why people look for unlock to earn timer bypass and redirect chain bypass help.
+[Unlock To Earn](https://unlocktoearn.com/) short aliases do not need a second domain in your address bar. The useful screen is already on unlocktoearn.com/{alias}: a lock-style list (SUBSCRIBE on YouTube, LIKE & COMMENT, Join on Telegram, Join on WhatsApp) and a disabled Click Here to Open Link control that only enables after each row’s delay.
 
-### Where the wait usually sticks
+Those rows are on-page theater. They do not contain the next URL. Click Here to Open Link posts a hidden referdomain field on the same alias; that post is what returns the next location. Home, login, and register never start this.
 
-- Short alias URL that only starts the tour after you open it
-- Mediator safe.php and article Continue forms under ads
-- Client unlock countdown before the last submit
-- A handoff hop such as [JobSheel](/sites/jobsheel-bypass) after unlock
+A raw open without Skip Wait can still 302 the tab away. Skip Wait keeps the alias in the tab, shows an overlay over the task card, and completes that same Click Here post in the background.
 
-## Walking the gates in Chrome
+### What this page is not
 
-Skip Wait treats Unlock To Earn as a multi-step wait. It starts on a real short-alias URL—home, login, and register stay alone—shows an overlay, and submits the same gate forms the page already expects so article timers and fake unlock clocks do not block the path.
+It is not a promise of a file host. The post can open a cloud folder, another shortener, or any other http(s) URL the publisher stored. Unlock To Earn support ends when that URL loads.
 
-When Unlock To Earn finishes, the next hop opens in the same tab. Many shares land on JobSheel next; stay on the tab and Skip Wait continues there when that page is supported.
+If LiteSpeed shows Bot verification / reCAPTCHA on the alias, finish the check on the overlay; Skip Wait continues after it.
 
-## Shortener plus listed mediator hosts
+## Click Here without the subscribe tour
 
-Mediator blogs rotate. Paste tools break when the next article domain appears. An Unlock To Earn bypass chrome install keys off the shortener and the listed mediator hosts—add a new host to the extension when the chain rotates—so unlock to earn countdown bypass stays tied to the live share instead of a one-off paste.
+Skip Wait does not click every social row. It does not open YouTube, Telegram, or WhatsApp for this flow. It posts Click Here to Open Link the way the page already does, then navigates to the Location that post returns.
+
+Cosmetic disable-link delays and spinner ticks are ignored. You stay on unlocktoearn.com until the next URL is ready. If a share stops resolving, reload the alias or report it—there is no extra host list to refresh for this brand.
 `;
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'Which Unlock To Earn pages does Skip Wait handle?',
+    question: 'When does Unlock To Earn bypass start?',
     answer:
-      'Short-alias URLs on unlocktoearn.com and the cocoboxmod.com gate chain after the redirect. Home, login, and register pages do not start it.',
+      'On a short-alias URL on unlocktoearn.com. Home, login, and register do not start it.',
   },
   {
-    question: 'Do I still click Continue on every article?',
+    question: 'Do I still Subscribe / Join every row?',
     answer:
-      'On supported hops, no. Skip Wait submits the gate forms and moves to the next screen. Stay on the tab until the next hop opens.',
+      'No. Those rows only delay Click Here to Open Link in the page UI. Skip Wait completes the Click Here post without the social tour.',
   },
   {
-    question: 'Does Unlock To Earn always open the final file?',
+    question: 'Will the tab leave unlocktoearn.com for article hosts?',
     answer:
-      'Not always. Many shares open another shortener such as JobSheel next. Skip Wait continues on that hop when it is supported.',
+      'No. Skip Wait keeps the alias on unlocktoearn.com until the next URL is ready, then opens that URL in the same tab.',
   },
   {
-    question: 'What if a new mediator host appears?',
+    question: 'Is the next URL always a download?',
     answer:
-      'New mediator domains ship in the remote site list. Tap Refresh in the extension popup to pull the latest hosts, or request the domain on GitHub if it is still missing after refresh.',
+      'No. Click Here returns whatever the publisher stored—another page, another shortener, or a file host. This bypass stops when that URL opens.',
   },
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The Unlock To Earn path runs on supported short links.',
+      'Skip Wait is $1 per month. Activate a license in the popup. Unlock To Earn runs on supported alias links.',
   },
 ];
 
