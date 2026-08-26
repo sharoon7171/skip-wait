@@ -567,6 +567,9 @@
   "apkteal": {
     "hosts": ["apkteal.com"]
   },
+  "apkvision": {
+    "hosts": ["apkvision.org"]
+  },
   "anygame": {
     "hosts": ["anygame.net"]
   },
