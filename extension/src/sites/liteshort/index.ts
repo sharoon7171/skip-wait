@@ -1,1 +1,1 @@
-export { initLiteshortEntry } from './entry';
+export {};
