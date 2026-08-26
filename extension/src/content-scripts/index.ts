@@ -7,10 +7,7 @@ import {
 } from './coomeet-iframe';
 import { init1shortlinkRedirect } from '../sites/1shortlink';
 import { initAdfocusRedirect } from '../sites/adfocus';
-import {
-  initAdlinkflyLinksGo,
-  initAdlinkflyTokenPayload,
-} from '../sites/adlinkfly';
+import { initAdlinkflyLinksGo } from '../sites/adlinkfly';
 import { initArolinksUnlock } from '../sites/arolinks';
 import {
   initJobsheelBaby,
@@ -73,6 +70,7 @@ import { initPrmoviesRedirect } from '../sites/prmovies';
 import { initSidMediatorBypass } from '../sites/sid-mediator';
 import { initRomsfunDownloadInstant } from '../sites/romsfun';
 import { initShortxlinksUnlock } from '../sites/shortxlinks';
+import { initShrinkpePage } from '../sites/shrinkpe';
 import { initShrtflyEntry, initShrtflyMediator } from '../sites/shrtfly';
 import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../sites/shrinkme';
 import { initWpSafelinkQueryRedirect, initWpSafelinkRedirect } from '../sites/wp-safelink';
@@ -199,7 +197,6 @@ const INITS = [
   initXdmoviesMediatorPage,
   initMoviesModContentScript,
   initSidMediatorBypass,
-  initAdlinkflyTokenPayload,
   initBitcotasksReadArticle,
   initClipiRedirect,
   initCookiesceoCopy,
@@ -239,6 +236,7 @@ const INITS = [
   initVegamoviesLandingRedirect,
   initCinefreakMediator,
   initRomsfunDownloadInstant,
+  initShrinkpePage,
   initShrtflyEntry,
   initShrtflyMediator,
   initShrinkmeEntry,

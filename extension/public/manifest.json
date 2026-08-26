@@ -18,6 +18,13 @@
   },
   "permissions": ["alarms", "cookies", "declarativeNetRequestWithHostAccess", "scripting", "storage", "webNavigation"],
   "host_permissions": ["<all_urls>"],
+  "web_accessible_resources": [
+    {
+      "resources": ["hosts.json"],
+      "matches": ["<all_urls>"],
+      "use_dynamic_url": true
+    }
+  ],
   "background": {
     "service_worker": "background.js",
     "type": "module"

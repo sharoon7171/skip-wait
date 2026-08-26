@@ -38,6 +38,7 @@ import { initEarnlinksBackground } from '../sites/earnlinks';
 import { initSflBackground } from '../sites/sfl';
 import { initLiteshortBackground } from '../sites/liteshort';
 import { initUnlocktoearnBackground } from '../sites/unlocktoearn';
+import { initShrinkpeBackground } from '../sites/shrinkpe';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -80,5 +81,6 @@ initEarnlinksBackground();
 initSflBackground();
 initLiteshortBackground();
 initUnlocktoearnBackground();
+initShrinkpeBackground();
 initHostsSync();
 initLicenseSync();
