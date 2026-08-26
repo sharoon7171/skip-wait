@@ -2,7 +2,6 @@ import { bypass as b1shortlinkBypass } from './bypasses/1shortlink-bypass';
 import { bypass as b4downloadBypass } from './bypasses/4download-bypass';
 import { bypass as adfocusBypass } from './bypasses/adfocus-bypass';
 import { bypass as adlinkflyLinksGoBypass } from './bypasses/adlinkfly-links-go-bypass';
-import { bypass as adlinkflyTokenPayloadBypass } from './bypasses/adlinkfly-token-payload-bypass';
 import { bypass as alpharedeBypass } from './bypasses/alpharede-bypass';
 import { bypass as an1Bypass } from './bypasses/an1-bypass';
 import { bypass as ankergamesBypass } from './bypasses/ankergames-bypass';
@@ -90,6 +89,7 @@ import { bypass as sflBypass } from './bypasses/sfl-bypass';
 import { bypass as shortxlinksBypass } from './bypasses/shortxlinks-bypass';
 import { bypass as shrtflyBypass } from './bypasses/shrtfly-bypass';
 import { bypass as shrinkmeBypass } from './bypasses/shrinkme-bypass';
+import { bypass as shrinkpeBypass } from './bypasses/shrinkpe-bypass';
 import { bypass as shycloudBypass } from './bypasses/shycloud-bypass';
 import { bypass as sidMediatorBypass } from './bypasses/sid-mediator-bypass';import { bypass as softpediaBypass } from './bypasses/softpedia-bypass';
 import { bypass as storylineScormBypass } from './bypasses/storyline-scorm-bypass';
@@ -126,7 +126,6 @@ export const bypasses: readonly SupportedBypass[] = [
   b4downloadBypass,
   adfocusBypass,
   adlinkflyLinksGoBypass,
-  adlinkflyTokenPayloadBypass,
   alpharedeBypass,
   an1Bypass,
   ankergamesBypass,
@@ -215,6 +214,7 @@ export const bypasses: readonly SupportedBypass[] = [
   shortxlinksBypass,
   shrtflyBypass,
   shrinkmeBypass,
+  shrinkpeBypass,
   shycloudBypass,
   sidMediatorBypass,
   softpediaBypass,
