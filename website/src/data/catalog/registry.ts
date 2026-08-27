@@ -18,6 +18,7 @@ import { bypass as cinefreakMediatorBypass } from './bypasses/cinefreak-mediator
 import { bypass as cookiesceoBypass } from './bypasses/cookiesceo-bypass';
 import { bypass as coomeetIframeBypass } from './bypasses/coomeet-iframe-bypass';
 import { bypass as cpmlinkBypass } from './bypasses/cpmlink-bypass';
+import { bypass as cpmlinkNetBypass } from './bypasses/cpmlink-net-bypass';
 import { bypass as cut4moneyBypass } from './bypasses/cut4money-bypass';
 import { bypass as cutwinBypass } from './bypasses/cutwin-bypass';
 import { bypass as cutyBypass } from './bypasses/cuty-bypass';
@@ -144,6 +145,7 @@ export const bypasses: readonly SupportedBypass[] = [
   cookiesceoBypass,
   coomeetIframeBypass,
   cpmlinkBypass,
+  cpmlinkNetBypass,
   cut4moneyBypass,
   cutwinBypass,
   cutyBypass,
