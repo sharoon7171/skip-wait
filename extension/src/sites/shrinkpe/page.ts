@@ -17,7 +17,7 @@ const CAPTCHA_PIN_STYLE_ID = 'skip-wait-shrinkpe-captcha-pin';
 const TURNSTILE_RESPONSE = 'textarea[name="cf-turnstile-response"], input[name="cf-turnstile-response"]';
 const TURNSTILE_IFRAMES = ['iframe[src*="challenges.cloudflare.com"]'] as const;
 const OLA_DRIVE_HOST = 'drive.olamovies.download';
-const OLA_DRIVE_HOLD_MS = 155_000;
+const OLA_DRIVE_HOLD_MS = 100_000;
 
 const ui = createOverlay();
 let started = false;
