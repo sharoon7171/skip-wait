@@ -486,6 +486,9 @@
   "flightsim": {
     "hosts": ["flightsim.to"]
   },
+  "fuzyapk": {
+    "hosts": ["fuzyapk.com"]
+  },
   "finityrede": {
     "hosts": ["finityrede.com"]
   },
