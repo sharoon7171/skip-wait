@@ -558,6 +558,9 @@
   "cpmlink-hop": {
     "hosts": ["bildirim.online"]
   },
+  "cpmlink-net": {
+    "hosts": ["cpmlink.net"]
+  },
   "clipi": {
     "hosts": ["clipi.cc"]
   },
