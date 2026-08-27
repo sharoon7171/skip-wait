@@ -318,6 +318,9 @@
   "modded-1": {
     "hosts": ["modded-1.com"]
   },
+  "modsmaniac": {
+    "hosts": ["modsmaniac.com"]
+  },
   "mega4upload": {
     "hosts": ["mega4upload.net"]
   },
