@@ -312,6 +312,9 @@
   "mirrored": {
     "hosts": ["mirrored.to"]
   },
+  "moddroid": {
+    "hosts": ["moddroid.com"]
+  },
   "mega4upload": {
     "hosts": ["mega4upload.net"]
   },
