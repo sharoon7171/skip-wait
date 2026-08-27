@@ -24,7 +24,6 @@ import { initLinclikGate } from '../sites/linclik';
 import { initCpmlinkHop, initCpmlinkUnlock } from '../sites/cpmlink';
 import { initGenlinkEntry, initGenlinkMediator, initGenlinkUnlock } from '../sites/genlink';
 import { initSflUnlock } from '../sites/sfl';
-import { initBitcotasksReadArticle } from './bitcotasks-read-article';
 import { initClipiRedirect } from '../sites/clipi';
 import { initCookiesceoCopy } from './cookiesceo-copy';
 import { initFastdlZipRedirect } from './fastdl-zip-redirect';
@@ -197,7 +196,6 @@ const INITS = [
   initXdmoviesMediatorPage,
   initMoviesModContentScript,
   initSidMediatorBypass,
-  initBitcotasksReadArticle,
   initClipiRedirect,
   initCookiesceoCopy,
   initFastdlZipRedirect,

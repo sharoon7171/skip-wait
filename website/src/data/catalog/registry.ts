@@ -11,7 +11,6 @@ import { bypass as apktealBypass } from './bypasses/apkteal-bypass';
 import { bypass as apkvisionBypass } from './bypasses/apkvision-bypass';
 import { bypass as apunkagamesBypass } from './bypasses/apunkagames-bypass';
 import { bypass as arolinksBypass } from './bypasses/arolinks-bypass';
-import { bypass as bitcotasksBypass } from './bypasses/bitcotasks-bypass';
 import { bypass as boostellarBstshrtBypass } from './bypasses/boostellar-bstshrt-bypass';
 import { bypass as boostylinkBypass } from './bypasses/boostylink-bypass';
 import { bypass as clipiBypass } from './bypasses/clipi-bypass';
@@ -138,7 +137,6 @@ export const bypasses: readonly SupportedBypass[] = [
   apkvisionBypass,
   apunkagamesBypass,
   arolinksBypass,
-  bitcotasksBypass,
   boostellarBstshrtBypass,
   boostylinkBypass,
   clipiBypass,
