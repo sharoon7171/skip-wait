@@ -66,6 +66,7 @@ import { bypass as lootlabsBypass } from './bypasses/lootlabs-bypass';
 import { bypass as mega4uploadBypass } from './bypasses/mega4upload-bypass';
 import { bypass as mirroredToBypass } from './bypasses/mirrored-to-bypass';
 import { bypass as mitlyBypass } from './bypasses/mitly-bypass';
+import { bypass as moddroidBypass } from './bypasses/moddroid-bypass';
 import { bypass as move2linkBypass } from './bypasses/move2link-bypass';
 import { bypass as moviesmodBypass } from './bypasses/moviesmod-bypass';
 import { bypass as mp4uploadBypass } from './bypasses/mp4upload-bypass';
@@ -191,6 +192,7 @@ export const bypasses: readonly SupportedBypass[] = [
   mega4uploadBypass,
   mirroredToBypass,
   mitlyBypass,
+  moddroidBypass,
   move2linkBypass,
   moviesmodBypass,
   mp4uploadBypass,
