@@ -42,6 +42,7 @@ import { initSflBackground } from '../sites/sfl';
 import { initLiteshortBackground } from '../sites/liteshort';
 import { initUnlocktoearnBackground } from '../sites/unlocktoearn';
 import { initShrinkpeBackground } from '../sites/shrinkpe';
+import { initCpmlinkNetAdblockInject } from '../sites/cpmlink-net';
 
 initCoomeetMainWorldInject();
 initDocumentVisibilitySpoof();
@@ -88,5 +89,6 @@ initSflBackground();
 initLiteshortBackground();
 initUnlocktoearnBackground();
 initShrinkpeBackground();
+initCpmlinkNetAdblockInject();
 initHostsSync();
 initLicenseSync();

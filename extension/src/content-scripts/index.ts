@@ -22,6 +22,7 @@ import { initTflyGate } from '../sites/tfly';
 import { initMitlyGate } from '../sites/mitly';
 import { initLinclikGate } from '../sites/linclik';
 import { initCpmlinkHop, initCpmlinkUnlock } from '../sites/cpmlink';
+import { initCpmlinkNetGate } from '../sites/cpmlink-net';
 import { initGenlinkEntry, initGenlinkMediator, initGenlinkUnlock } from '../sites/genlink';
 import { initSflUnlock } from '../sites/sfl';
 import { initClipiRedirect } from '../sites/clipi';
@@ -177,6 +178,7 @@ const INITS = [
   initLinclikGate,
   initCpmlinkUnlock,
   initCpmlinkHop,
+  initCpmlinkNetGate,
   initGenlinkEntry,
   initGenlinkMediator,
   initGenlinkUnlock,
