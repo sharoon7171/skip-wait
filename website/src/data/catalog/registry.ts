@@ -68,6 +68,7 @@ import { bypass as mirroredToBypass } from './bypasses/mirrored-to-bypass';
 import { bypass as mitlyBypass } from './bypasses/mitly-bypass';
 import { bypass as modded1Bypass } from './bypasses/modded-1-bypass';
 import { bypass as moddroidBypass } from './bypasses/moddroid-bypass';
+import { bypass as modsmaniacBypass } from './bypasses/modsmaniac-bypass';
 import { bypass as move2linkBypass } from './bypasses/move2link-bypass';
 import { bypass as moviesmodBypass } from './bypasses/moviesmod-bypass';
 import { bypass as mp4uploadBypass } from './bypasses/mp4upload-bypass';
@@ -195,6 +196,7 @@ export const bypasses: readonly SupportedBypass[] = [
   mitlyBypass,
   modded1Bypass,
   moddroidBypass,
+  modsmaniacBypass,
   move2linkBypass,
   moviesmodBypass,
   mp4uploadBypass,
