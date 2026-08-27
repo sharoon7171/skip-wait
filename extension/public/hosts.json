@@ -315,6 +315,9 @@
   "moddroid": {
     "hosts": ["moddroid.com"]
   },
+  "modded-1": {
+    "hosts": ["modded-1.com"]
+  },
   "mega4upload": {
     "hosts": ["mega4upload.net"]
   },
