@@ -38,6 +38,7 @@ import { bypass as filepressBypass } from './bypasses/filepress-bypass';
 import { bypass as filespayoutsBypass } from './bypasses/filespayouts-bypass';
 import { bypass as finityredeBypass } from './bypasses/finityrede-bypass';
 import { bypass as flightsimToBypass } from './bypasses/flightsim-to-bypass';
+import { bypass as fuzyapkBypass } from './bypasses/fuzyapk-bypass';
 import { bypass as gaeaOperationsLockrBypass } from './bypasses/gaea-operations-lockr-bypass';
 import { bypass as gamesnostalgiaBypass } from './bypasses/gamesnostalgia-bypass';
 import { bypass as gapkmodBypass } from './bypasses/gapkmod-bypass';
@@ -165,6 +166,7 @@ export const bypasses: readonly SupportedBypass[] = [
   filespayoutsBypass,
   finityredeBypass,
   flightsimToBypass,
+  fuzyapkBypass,
   gaeaOperationsLockrBypass,
   gamesnostalgiaBypass,
   gapkmodBypass,
