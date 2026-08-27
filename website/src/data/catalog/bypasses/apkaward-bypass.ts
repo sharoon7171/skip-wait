@@ -31,11 +31,11 @@ const keywords = [
 ] as const;
 
 const intro =
-  'APKAward bypass is for the download page that shows Preparing your download link… with a green countdown before Download (size). Skip Wait is the $1/month Chrome extension that skips that apkaward download waiting page so the size-labeled button is already on screen.';
+  'APKAward bypass is for the download page that shows Preparing your download link… with a green countdown before Download appears. Skip Wait is the $1/month Chrome extension that skips that apkaward download waiting page so the Download button is already on screen.';
 
 const body = `## Preparing a link that is already there
 
-[APKAward](https://apkaward.com/) opens a version download URL after you pick a build. The page shows **Preparing your download link…** and a green timer circle while **Download** with the file size stays hidden behind that countdown.
+[APKAward](https://apkaward.com/) opens a version download URL after you pick a build. The page shows **Preparing your download link…** and a green timer circle while **Download** stays hidden behind that countdown.
 
 That apkaward countdown is the choke point. The APK URL is already on the Download control; the stall is only the five-second client timer. A please wait bypass and download timer skip matter here because nothing is still being fetched—the prepare copy is theater.
 
@@ -43,7 +43,7 @@ That apkaward countdown is the choke point. The APK URL is already on the Downlo
 
 - Preparing your download link… with a green timer
 - About five seconds before the countdown ends
-- Download (file size) once the timer clears
+- Download once the timer clears
 - A pink note about closing an ad and clicking Download again
 
 ## Skip Wait on the APKAward download page
@@ -54,7 +54,7 @@ You stay on APKAward. Open the version download URL, and use Download without an
 
 ## Why the prepare screen feels mandatory
 
-Leave mid-count, miss Download when it appears, or reopen the version URL and you watch Preparing your download link… again. An APKAward bypass extension only removes that countdown. You still open the build you want; Download keeps the site size label—bypass apkaward delay without a paste tool.
+Leave mid-count, miss Download when it appears, or reopen the version URL and you watch Preparing your download link… again. An APKAward bypass extension only removes that countdown. You still open the build you want and use Download on that page—bypass apkaward delay without a paste tool.
 `;
 
 const faq: readonly BypassFaq[] = [
@@ -76,7 +76,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Does Skip Wait change the Download label?',
     answer:
-      'No. The button keeps the site size label. A Skip Wait note sits above the button group in the site’s note style.',
+      'No. The button keeps the site’s own label. A Skip Wait note sits above the button group in the site’s note style.',
   },
   {
     question: 'Do I paste the APKAward link into another website?',
