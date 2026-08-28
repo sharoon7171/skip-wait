@@ -85,6 +85,7 @@ import { initDroplinkUnlock } from '../sites/droplink';
 import { initDlsurfUnlock } from '../sites/dlsurf';
 import { initDevuploadsMediator } from '../sites/devuploads';
 import { initDuploadBypass } from '../sites/dupload';
+import { initFreedlinkGate } from '../sites/freedlink';
 import { initEarn4linkMediator, initEarn4linkUnlock } from '../sites/earn4link';
 import { initEarnlinksUnlock } from '../sites/earnlinks';
 import { initAlpharedeUnlock } from '../sites/alpharede';
@@ -251,6 +252,7 @@ const INITS = [
   initDlsurfUnlock,
   initDevuploadsMediator,
   initDuploadBypass,
+  initFreedlinkGate,
   initEarn4linkMediator,
   initEarn4linkUnlock,
   initEarnlinksUnlock,
