@@ -1,0 +1,1 @@
+export { initFreedlinkGate } from './gate';
