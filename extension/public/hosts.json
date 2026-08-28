@@ -528,6 +528,9 @@
   "dupload": {
     "hosts": ["dupload.net"]
   },
+  "freedlink": {
+    "hosts": ["frdl.by", "frdl.my", "frdl.is"]
+  },
   "dlsurf": {
     "hosts": ["dlsurf.com", "dl.surf"]
   },
