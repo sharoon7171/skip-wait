@@ -184,11 +184,13 @@ export function createFullPageOverlay(options: FullPageOverlayOptions): FullPage
         actionEl.removeAttribute('href');
         actionEl.classList.add(cl.hidden);
         actionEl.textContent = '';
+        turnstileMount.classList.remove(cl.hidden);
         return;
       }
       actionEl.href = href;
       actionEl.textContent = label;
       actionEl.classList.remove(cl.hidden);
+      turnstileMount.classList.add(cl.hidden);
     },
     startCountdown(endTs) {
       setCountdownVisible(true);
