@@ -30,11 +30,10 @@ function homeFaqItems(): readonly FaqAccordionItem[] {
         question: item.question,
         answer: (
           <>
-            Skip Wait is {PRICE.cardLabel} with card on Gumroad, or {PRICE.cryptoLabel} with crypto.
-            Gumroad sends your license key to your purchase email. For crypto, message us on
-            Telegram or by email for payment details. See{' '}
-            <AppLink href={homeSections.pricing}>Pricing</AppLink> for buy links. Activate the key
-            in the extension popup. One device per key.
+            Skip Wait is {PRICE.summary}. Buy on EAS Store — your license key is delivered
+            automatically after checkout. See{' '}
+            <AppLink href={homeSections.pricing}>Pricing</AppLink> for the buy link. Activate the
+            key in the extension popup. One device per key.
           </>
         ),
       };

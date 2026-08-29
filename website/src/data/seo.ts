@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, GUMROAD_URL, PRICE, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, EAS_STORE_URL, PRICE, SITE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { homeSections } from '@/lib/routes';
 
@@ -52,28 +52,12 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
     downloadUrl: CHROME_WEB_STORE_URL,
     installUrl: CHROME_WEB_STORE_URL,
     offers: {
-      '@type': 'AggregateOffer',
-      lowPrice: PRICE.crypto,
-      highPrice: PRICE.card,
+      '@type': 'Offer',
+      price: PRICE.amount,
       priceCurrency: PRICE.currency,
       availability: 'https://schema.org/InStock',
-      description: `${PRICE.cardLabel} on Gumroad or ${PRICE.cryptoLabel} via crypto`,
-      offerCount: 2,
-      offers: [
-        {
-          '@type': 'Offer',
-          price: PRICE.card,
-          priceCurrency: PRICE.currency,
-          url: GUMROAD_URL,
-          description: `${PRICE.cardLabel} with card on Gumroad`,
-        },
-        {
-          '@type': 'Offer',
-          price: PRICE.crypto,
-          priceCurrency: PRICE.currency,
-          description: `${PRICE.cryptoLabel} via direct crypto`,
-        },
-      ],
+      url: EAS_STORE_URL,
+      description: `${PRICE.summary} on EAS Store`,
     },
     author: {
       '@type': 'Person',

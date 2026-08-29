@@ -1,15 +1,12 @@
-export const GUMROAD_URL = 'https://gumroad.com/l/vhjfx';
+export const EAS_STORE_URL =
+  'https://eas-x.com/products/skip-wait-bypass-timers-countdowns-chrome-extension-license';
 
 export const PRICE = {
-  card: '2',
-  crypto: '1',
+  amount: '1.50',
   currency: 'USD',
   period: 'month',
-  range: '$1–$2',
-  summary: '$1–$2 per month',
-  cardLabel: '$2 per month',
-  cryptoLabel: '$1 per month',
-  amount: '1',
+  display: '$1.50',
+  summary: '$1.50 per month',
 } as const;
 
 export const SITE = {

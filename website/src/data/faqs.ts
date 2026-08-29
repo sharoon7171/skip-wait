@@ -10,7 +10,7 @@ export const faqs: readonly FaqItem[] = [
   {
     question: 'How do I use Skip Wait?',
     answer:
-      `Install Skip Wait from the Chrome Web Store, buy a license on Gumroad (${PRICE.cardLabel}) or pay with crypto (${PRICE.cryptoLabel}), activate the key in the popup, then open supported links as usual. On matching pages the extension either bypasses the countdown and redirects, or automates the wait and continue steps so you reach the file or destination faster.`,
+      `Install Skip Wait from the Chrome Web Store, buy a ${PRICE.summary} license on EAS Store, activate the key in the popup, then open supported links as usual. On matching pages the extension either bypasses the countdown and redirects, or automates the wait and continue steps so you reach the file or destination faster.`,
   },
   {
     question: 'Can I use Skip Wait on Android?',
@@ -25,7 +25,7 @@ export const faqs: readonly FaqItem[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      `Skip Wait is ${PRICE.cardLabel} with card on Gumroad, or ${PRICE.cryptoLabel} with crypto. Gumroad sends your license key to your purchase email. For crypto, message us on Telegram or by email for payment details. Activate the key in the extension popup. One device per key.`,
+      `Skip Wait is ${PRICE.summary}. Buy on EAS Store — your license key is delivered automatically after checkout. Activate the key in the extension popup. One device per key.`,
   },
   {
     question: 'What sites are supported?',
