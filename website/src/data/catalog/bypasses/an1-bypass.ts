@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'AN1 bypass clears the green circle countdown on the APK download waiting page so the file button appears at once. Skip Wait is the $1/month Chrome extension that turns that an1 please wait screen into an instant Download · Skip Wait control.';
+  'AN1 bypass clears the green circle countdown on the APK download waiting page so the file button appears at once. Skip Wait is the $1.50/month Chrome extension that turns that an1 please wait screen into an instant Download · Skip Wait control.';
 
 const body = `## Download waiting page that still forces a countdown
 
@@ -86,7 +86,7 @@ const faq: readonly BypassFaq[] = [
   },
   {
     question: 'How much does Skip Wait cost?',
-    answer: 'Skip Wait is $1 per month. Activate a license in the popup.',
+    answer: 'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

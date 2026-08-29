@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People hunt a 4Download bypass or direct download bypass after every mirror still dumps them on a generating spinner before the host. Skip Wait is the $1/month Chrome extension that resolves those buttons in the background so cloud, file-host, and torrent picks move you to the file instead of another timer page.';
+  'People hunt a 4Download bypass or direct download bypass after every mirror still dumps them on a generating spinner before the host. Skip Wait is the $1.50/month Chrome extension that resolves those buttons in the background so cloud, file-host, and torrent picks move you to the file instead of another timer page.';
 
 const body = `## Software mirrors stuck on generating
 
@@ -79,7 +79,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the 4Download path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. This path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. This path runs on supported pages.',
   },
 ];
 

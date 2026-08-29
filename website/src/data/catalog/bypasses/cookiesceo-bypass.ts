@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A CookiesCEO bypass search usually means a premium cookie page still forces a wait plus line-by-line copy instructions before the session string is usable. Skip Wait is the $1/month Chrome extension that fetches the cookie, puts it on your clipboard, and shows a Copy cookie control if you need it again.';
+  'A CookiesCEO bypass search usually means a premium cookie page still forces a wait plus line-by-line copy instructions before the session string is usable. Skip Wait is the $1.50/month Chrome extension that fetches the cookie, puts it on your clipboard, and shows a Copy cookie control if you need it again.';
 
 const body = `## Premium cookie pages and copy choreography
 
@@ -73,7 +73,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the CookiesCEO path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The CookiesCEO bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The CookiesCEO bypass runs on supported pages.',
   },
 ];
 

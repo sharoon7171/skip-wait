@@ -37,7 +37,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'ShrinkPe shares often open on Verify Your Are Human with Continue locked behind Turnstile, then push Step One blog tabs before Your Link Is Almost Ready. Skip Wait is the $1/month Chrome extension that stays on the short URL, brings that human check forward, skips the Step One / Step Two article tour, and finishes the Almost Ready wait so the destination can open.';
+  'ShrinkPe shares often open on Verify Your Are Human with Continue locked behind Turnstile, then push Step One blog tabs before Your Link Is Almost Ready. Skip Wait is the $1.50/month Chrome extension that stays on the short URL, brings that human check forward, skips the Step One / Step Two article tour, and finishes the Almost Ready wait so the destination can open.';
 
 const body = `## Verify Your Are Human before anything useful
 
@@ -100,7 +100,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the ShrinkPe bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. This short link bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. This short link bypass runs on supported pages.',
   },
 ];
 

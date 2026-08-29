@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A TipsGuru bypass or skip prolink wait search usually starts after a study or stream share dumps you into prolink access waits and unlock timers across rotating network hosts. Skip Wait is the $1/month Chrome extension that runs those gates so unlock timer bypass does not mean watching every clock yourself.';
+  'A TipsGuru bypass or skip prolink wait search usually starts after a study or stream share dumps you into prolink access waits and unlock timers across rotating network hosts. Skip Wait is the $1.50/month Chrome extension that runs those gates so unlock timer bypass does not mean watching every clock yourself.';
 
 const body = `## Prolink waits across a rotating network
 
@@ -80,7 +80,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

@@ -35,7 +35,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A monetized short link sfl share often opens on Wait…, then article Continues, then Your link almost ready with Open Link. Skip Wait is the $1/month Chrome extension for that sfl bypass—an sfl chrome extension and skip wait chrome extension path that clears skip waiting page sfl friction so the file can open.';
+  'A monetized short link sfl share often opens on Wait…, then article Continues, then Your link almost ready with Open Link. Skip Wait is the $1.50/month Chrome extension for that sfl bypass—an sfl chrome extension and skip wait chrome extension path that clears skip waiting page sfl friction so the file can open.';
 
 const body = `## From Wait… to Open Link on Safelinku shares
 
@@ -87,7 +87,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much is the SFL chrome extension path?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

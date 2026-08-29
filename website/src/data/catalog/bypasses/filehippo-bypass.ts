@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A FileHippo bypass search usually means you already picked a mirror, hit download, and still sat on a post-click delay before the real file path opened. Skip Wait is the $1/month Chrome extension that fetches that mirror link when the host allows it so the generating screen does not own the transfer.';
+  'A FileHippo bypass search usually means you already picked a mirror, hit download, and still sat on a post-click delay before the real file path opened. Skip Wait is the $1.50/month Chrome extension that fetches that mirror link when the host allows it so the generating screen does not own the transfer.';
 
 const body = `## After you pick a mirror, another delay
 
@@ -69,7 +69,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the FileHippo bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

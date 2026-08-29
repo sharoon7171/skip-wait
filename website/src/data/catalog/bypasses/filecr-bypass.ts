@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A FileCR bypass search usually means Direct Download, Fast Download, or a torrent button stalled on a generating page—or someone told you to install FileCR Assistant just to finish. Skip Wait is the $1/month Chrome extension that resolves those buttons to real file URLs without the wait theater or a second helper.';
+  'A FileCR bypass search usually means Direct Download, Fast Download, or a torrent button stalled on a generating page—or someone told you to install FileCR Assistant just to finish. Skip Wait is the $1.50/month Chrome extension that resolves those buttons to real file URLs without the wait theater or a second helper.';
 
 const body = `## Download buttons that stall on generating pages
 
@@ -68,7 +68,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the FileCR bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

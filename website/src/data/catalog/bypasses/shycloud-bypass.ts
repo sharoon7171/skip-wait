@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A ShyCloud bypass or inloadapi bypass search usually means a software download button opened a Secure Link Generator wait instead of the file. Skip Wait is the $1/month Chrome extension that clears that please wait bypass path—including the securing-connection hop—so waiting page bypass busywork is not the download itself.';
+  'A ShyCloud bypass or inloadapi bypass search usually means a software download button opened a Secure Link Generator wait instead of the file. Skip Wait is the $1.50/month Chrome extension that clears that please wait bypass path—including the securing-connection hop—so waiting page bypass busywork is not the download itself.';
 
 const body = `## Secure Link Generator between button and file
 
@@ -76,7 +76,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the ShyCloud bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The ShyCloud path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The ShyCloud path runs on supported pages.',
   },
 ];
 

@@ -36,7 +36,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'GAPKMOD bypass clears the download links spinner on the app post and the second download waiting page after it. Skip Wait is the $1/month Chrome extension that turns those gapkmod countdowns into direct file-host links in a new tab—version names from the download links page stay on multi-build posts.';
+  'GAPKMOD bypass clears the download links spinner on the app post and the second download waiting page after it. Skip Wait is the $1.50/month Chrome extension that turns those gapkmod countdowns into direct file-host links in a new tab—version names from the download links page stay on multi-build posts.';
 
 const body = `## Download links locked behind a countdown
 
@@ -98,7 +98,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the GAPKMOD path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The GAPKMOD bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The GAPKMOD bypass runs on supported pages.',
   },
 ];
 

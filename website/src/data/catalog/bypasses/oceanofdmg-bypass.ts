@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for an OceanofDMG bypass or download timer skip usually means Direct download opened a please-wait page instead of the DMG. Skip Wait is the $1/month Chrome extension that resolves the signed CDN file from the listing button.';
+  'Looking for an OceanofDMG bypass or download timer skip usually means Direct download opened a please-wait page instead of the DMG. Skip Wait is the $1.50/month Chrome extension that resolves the signed CDN file from the listing button.';
 
 const body = `## Software listings that stall on please-wait
 
@@ -67,7 +67,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

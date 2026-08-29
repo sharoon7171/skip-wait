@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A CPMLink bypass search usually starts after an ad-monetized short URL chains hop pages and unlock countdowns before the real destination. Skip Wait is the $1/month Chrome extension that walks those gates so you are not babysitting every verification screen by hand.';
+  'A CPMLink bypass search usually starts after an ad-monetized short URL chains hop pages and unlock countdowns before the real destination. Skip Wait is the $1.50/month Chrome extension that walks those gates so you are not babysitting every verification screen by hand.';
 
 const body = `## Ad-monetized hops before the final URL
 
@@ -76,7 +76,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the CPMLink path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The CPMLink bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The CPMLink bypass runs on supported pages.',
   },
 ];
 

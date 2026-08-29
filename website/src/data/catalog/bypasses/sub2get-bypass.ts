@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Sub2Get bypass search usually means a monetized short URL parked you on a subscribe-to-unlock waiting page instead of the file. Skip Wait is the $1/month Chrome extension that clears that please wait bypass and skip click to continue loop so the destination opens without finishing every social prompt by hand.';
+  'A Sub2Get bypass search usually means a monetized short URL parked you on a subscribe-to-unlock waiting page instead of the file. Skip Wait is the $1.50/month Chrome extension that clears that please wait bypass and skip click to continue loop so the destination opens without finishing every social prompt by hand.';
 
 const body = `## Subscribe prompts that never open the file
 
@@ -71,7 +71,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Sub2Get bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The Sub2Get path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The Sub2Get path runs on supported pages.',
   },
 ];
 

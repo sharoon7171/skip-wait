@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a SwiftUploads bypass or download timer skip usually means a free file page stuck you behind generating timers and redirect hops before the real save. Skip Wait is the $1/month Chrome extension that resolves the file URL and opens the download path when the host allows it.';
+  'Looking for a SwiftUploads bypass or download timer skip usually means a free file page stuck you behind generating timers and redirect hops before the real save. Skip Wait is the $1.50/month Chrome extension that resolves the file URL and opens the download path when the host allows it.';
 
 const body = `## Free users, generating screens, then another hop
 
@@ -72,7 +72,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the SwiftUploads bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The SwiftUploads path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The SwiftUploads path runs on supported pages.',
   },
 ];
 

@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'GETMODSAPK bypass is for the file page that thanks you for downloading, then still fills a progress track for five seconds before Download shows. Skip Wait is the $1/month Chrome extension that skips that getmodsapk download waiting page so the Download button is already on screen.';
+  'GETMODSAPK bypass is for the file page that thanks you for downloading, then still fills a progress track for five seconds before Download shows. Skip Wait is the $1.50/month Chrome extension that skips that getmodsapk download waiting page so the Download button is already on screen.';
 
 const body = `## A Download button that still makes you watch a bar
 
@@ -94,7 +94,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the GETMODSAPK path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The GETMODSAPK bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The GETMODSAPK bypass runs on supported pages.',
   },
 ];
 

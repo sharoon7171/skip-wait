@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A shared DUpload link should mean getting the file—not surviving a partner blog and Create download link wait. Skip Wait is a $1/month Chrome extension that keeps you on the file page, prepares the direct URL, and shows one Direct Download · Skip Wait control when it is ready.';
+  'A shared DUpload link should mean getting the file—not surviving a partner blog and Create download link wait. Skip Wait is a $1.50/month Chrome extension that keeps you on the file page, prepares the direct URL, and shows one Direct Download · Skip Wait control when it is ready.';
 
 const body = `## Auto hops that yank you off the file card
 
@@ -77,7 +77,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the DUpload bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

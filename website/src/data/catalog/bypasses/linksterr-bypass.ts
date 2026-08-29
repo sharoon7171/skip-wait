@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Searching for a Linksterr bypass usually means a short URL opened a gateway waiting page instead of the destination. Skip Wait is the $1/month Chrome extension that clears that please-wait gate and redirects without you tapping Continue through ads.';
+  'Searching for a Linksterr bypass usually means a short URL opened a gateway waiting page instead of the destination. Skip Wait is the $1.50/month Chrome extension that clears that please-wait gate and redirects without you tapping Continue through ads.';
 
 const body = `## Gateway pages that sit between you and the URL
 
@@ -75,7 +75,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The Linksterr path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The Linksterr path runs on supported pages.',
   },
 ];
 

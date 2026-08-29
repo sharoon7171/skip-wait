@@ -40,7 +40,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Earnlinks bypass matters when a shared short URL wants Click Banner Wait & Back articles and a Your link is almost ready Get Link screen before anything useful opens. Skip Wait is a $1/month Chrome extension that keeps you on the short link, clears those hops, and finishes unlock—including a LinksGo second hop or an Alpharede handoff when the shortener continues there.';
+  'An Earnlinks bypass matters when a shared short URL wants Click Banner Wait & Back articles and a Your link is almost ready Get Link screen before anything useful opens. Skip Wait is a $1.50/month Chrome extension that keeps you on the short link, clears those hops, and finishes unlock—including a LinksGo second hop or an Alpharede handoff when the shortener continues there.';
 
 const body = `## Short links that demand a blog tour first
 
@@ -90,7 +90,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Earnlinks bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

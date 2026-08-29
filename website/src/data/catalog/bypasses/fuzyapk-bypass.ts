@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'FUZY APK bypass is for the hop after Continue to Download, when the next page says Your link is almost ready, please wait… for about ten seconds before Download (file size) shows. Skip Wait is the $1/month Chrome extension that skips that fuzyapk download waiting page so the Download control is ready without the stare-down.';
+  'FUZY APK bypass is for the hop after Continue to Download, when the next page says Your link is almost ready, please wait… for about ten seconds before Download (file size) shows. Skip Wait is the $1.50/month Chrome extension that skips that fuzyapk download waiting page so the Download control is ready without the stare-down.';
 
 const body = `## Continue, then a ten-second almost-ready stall
 
@@ -92,7 +92,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the FUZY APK path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The FUZY APK bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The FUZY APK bypass runs on supported pages.',
   },
 ];
 

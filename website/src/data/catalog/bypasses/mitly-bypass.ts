@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Mitly bypass or skip timer unlock search usually means a short URL dumped you into a gate wait and countdown instead of the file. Skip Wait is the $1/month Chrome extension that clears those unlock layers on the live shortener page.';
+  'A Mitly bypass or skip timer unlock search usually means a short URL dumped you into a gate wait and countdown instead of the file. Skip Wait is the $1.50/month Chrome extension that clears those unlock layers on the live shortener page.';
 
 const body = `## Short links that open as gates first
 
@@ -66,7 +66,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Mitly bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

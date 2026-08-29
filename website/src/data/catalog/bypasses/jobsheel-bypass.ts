@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A JobSheel bypass search usually means a short hop parked you on a human check, then stacked Continue pages before a Babylinks Get Link wait. Skip Wait is the $1/month Chrome extension that starts on that short hop, opens jobsheel.com after the check, walks Continue, and finishes go.babylinks.in unlock in the same path.';
+  'A JobSheel bypass search usually means a short hop parked you on a human check, then stacked Continue pages before a Babylinks Get Link wait. Skip Wait is the $1.50/month Chrome extension that starts on that short hop, opens jobsheel.com after the check, walks Continue, and finishes go.babylinks.in unlock in the same path.';
 
 const body = `## Baby check, Continue stack, then Babylinks
 
@@ -76,7 +76,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The JobSheel path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The JobSheel path runs on supported pages.',
   },
 ];
 

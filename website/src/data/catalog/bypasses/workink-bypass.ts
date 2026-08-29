@@ -26,7 +26,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Work.ink bypass or workink bypass search usually means a monetized short URL stuck you behind hCaptcha and an unlock gate before the real destination. Skip Wait is the $1/month Chrome extension that pins the check, clears post-captcha unlock waits, and opens the target so skip short link is not a manual continue loop.';
+  'A Work.ink bypass or workink bypass search usually means a monetized short URL stuck you behind hCaptcha and an unlock gate before the real destination. Skip Wait is the $1.50/month Chrome extension that pins the check, clears post-captcha unlock waits, and opens the target so skip short link is not a manual continue loop.';
 
 const body = `## Captcha, then unlock, then the real URL
 
@@ -72,7 +72,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Work.ink bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

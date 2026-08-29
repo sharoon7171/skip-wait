@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching OlaMovies official website, OlaMovies new domain, or OlaMovies landing bypass usually hit a marketing portal instead of the catalog. Skip Wait is the $1/month Chrome extension that skips that landing wait and opens the live main site the portal already publishes.';
+  'People searching OlaMovies official website, OlaMovies new domain, or OlaMovies landing bypass usually hit a marketing portal instead of the catalog. Skip Wait is the $1.50/month Chrome extension that skips that landing wait and opens the live main site the portal already publishes.';
 
 const body = `## Portals that stall before the catalog
 
@@ -76,7 +76,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the OlaMovies Landing bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

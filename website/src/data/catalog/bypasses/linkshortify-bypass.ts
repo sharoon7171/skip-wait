@@ -38,7 +38,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A LinkShortify bypass search usually starts after an Indian short-link share dumps you into encrypted gates and article unlock waits instead of the file. Skip Wait is the $1/month Chrome extension that walks that network—gate pages, blog continues, countdown unlock—so you are not babysitting every hop by hand.';
+  'A LinkShortify bypass search usually starts after an Indian short-link share dumps you into encrypted gates and article unlock waits instead of the file. Skip Wait is the $1.50/month Chrome extension that walks that network—gate pages, blog continues, countdown unlock—so you are not babysitting every hop by hand.';
 
 const body = `## Encrypted gates, then articles, then another countdown
 
@@ -89,7 +89,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The LinkShortify path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The LinkShortify path runs on supported pages.',
   },
 ];
 

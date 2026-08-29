@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Moddroid bypass is for the file download page that shows Préparation du téléchargement… with an orange progress bar for five seconds before Download appears. Skip Wait is the $1/month Chrome extension that skips that moddroid download waiting page so the APK button is already on screen.';
+  'Moddroid bypass is for the file download page that shows Préparation du téléchargement… with an orange progress bar for five seconds before Download appears. Skip Wait is the $1.50/month Chrome extension that skips that moddroid download waiting page so the APK button is already on screen.';
 
 const body = `## Preparing a link that is already there
 
@@ -89,7 +89,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Moddroid path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The Moddroid bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The Moddroid bypass runs on supported pages.',
   },
 ];
 

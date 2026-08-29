@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A FilePress bypass search usually means Instant or Direct download still forced a generating timer before the file URL appeared. Skip Wait is the $1/month Chrome extension that resolves that link in the background so the download button opens the archive without the wait page.';
+  'A FilePress bypass search usually means Instant or Direct download still forced a generating timer before the file URL appeared. Skip Wait is the $1.50/month Chrome extension that resolves that link in the background so the download button opens the archive without the wait page.';
 
 const body = `## Instant download that still generates first
 
@@ -64,7 +64,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the FilePress bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'CPMlink aliases open on Please check the captcha box to proceed to the destination page—an I’m not a robot checkbox that can expand into an image grid—then a go page with Get Link under ads and a Please disable Adblock scare. Skip Wait is the $1/month Chrome extension that pins that checkbox on the overlay, keeps the image challenge usable, and opens the destination Get Link already holds.';
+  'CPMlink aliases open on Please check the captcha box to proceed to the destination page—an I’m not a robot checkbox that can expand into an image grid—then a go page with Get Link under ads and a Please disable Adblock scare. Skip Wait is the $1.50/month Chrome extension that pins that checkbox on the overlay, keeps the image challenge usable, and opens the destination Get Link already holds.';
 
 const body = `## Please check the captcha before any destination
 
@@ -83,7 +83,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The CPMlink path runs on supported alias links.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The CPMlink path runs on supported alias links.',
   },
 ];
 

@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A MultiUp bypass or waiting page bypass search usually means the aggregator parked you on please-wait before any mirror host appeared. Skip Wait is the $1/month Chrome extension that skips that download waiting page and surfaces the mirror list.';
+  'A MultiUp bypass or waiting page bypass search usually means the aggregator parked you on please-wait before any mirror host appeared. Skip Wait is the $1.50/month Chrome extension that skips that download waiting page and surfaces the mirror list.';
 
 const body = `## Aggregator waits before the mirror grid
 
@@ -66,7 +66,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

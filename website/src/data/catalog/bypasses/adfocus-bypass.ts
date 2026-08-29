@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An AdFocus bypass search usually begins after a monetized download link opens an ad interstitial instead of the file. Skip Wait is the $1/month Chrome extension that clears that waiting page so you are not repeating continue clicks on a single gate.';
+  'An AdFocus bypass search usually begins after a monetized download link opens an ad interstitial instead of the file. Skip Wait is the $1.50/month Chrome extension that clears that waiting page so you are not repeating continue clicks on a single gate.';
 
 const body = `## Download shares that open an ad interstitial
 
@@ -79,7 +79,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the AdFocus path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. This path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. This path runs on supported pages.',
   },
 ];
 

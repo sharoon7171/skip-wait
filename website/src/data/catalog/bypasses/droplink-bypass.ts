@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Droplink hides the real file behind a Get Link countdown on an AdLinkFly unlock page—and many shares only reach that screen after a long ad-link tour. Skip Wait is the $1/month Chrome extension that clears the countdown busywork and opens the destination when unlock is allowed.';
+  'Droplink hides the real file behind a Get Link countdown on an AdLinkFly unlock page—and many shares only reach that screen after a long ad-link tour. Skip Wait is the $1.50/month Chrome extension that clears the countdown busywork and opens the destination when unlock is allowed.';
 
 const body = `## Get Link locked behind a timer
 
@@ -82,7 +82,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The Droplink path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The Droplink path runs on supported pages.',
   },
 ];
 

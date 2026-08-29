@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People search Filecrypt bypass or skip security check after a shared container blocks the mirror list behind an I am human gate. Skip Wait is the $1/month Chrome extension that clears that verification lock so you can pick a host and download without staring at the security check.';
+  'People search Filecrypt bypass or skip security check after a shared container blocks the mirror list behind an I am human gate. Skip Wait is the $1.50/month Chrome extension that clears that verification lock so you can pick a host and download without staring at the security check.';
 
 const body = `## Mirror lists locked behind I am human
 
@@ -63,7 +63,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Filecrypt bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

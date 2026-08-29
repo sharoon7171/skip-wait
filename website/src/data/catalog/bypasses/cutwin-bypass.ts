@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Cutwin bypass search usually means a shared cut-style short link parked you on a blog waiting page instead of the file or page you wanted. Skip Wait is the $1/month Chrome extension that clears that please-wait gate and opens the destination when unlock is ready.';
+  'A Cutwin bypass search usually means a shared cut-style short link parked you on a blog waiting page instead of the file or page you wanted. Skip Wait is the $1.50/month Chrome extension that clears that please-wait gate and opens the destination when unlock is ready.';
 
 const body = `## Cut-style aliases that land on blog gates
 
@@ -78,7 +78,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Cutwin path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The Cutwin bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The Cutwin bypass runs on supported pages.',
   },
 ];
 

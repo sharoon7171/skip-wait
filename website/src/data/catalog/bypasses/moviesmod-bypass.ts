@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People hunting a MoviesMod bypass or skip timed reveal usually opened an archive or episode post and watched please-wait generate-links instead of download buttons. Skip Wait is the $1/month Chrome extension that shows those already-rendered links as soon as the page loads.';
+  'People hunting a MoviesMod bypass or skip timed reveal usually opened an archive or episode post and watched please-wait generate-links instead of download buttons. Skip Wait is the $1.50/month Chrome extension that shows those already-rendered links as soon as the page loads.';
 
 const body = `## Timed reveal that only hides CSS
 
@@ -73,7 +73,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the timed reveal bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

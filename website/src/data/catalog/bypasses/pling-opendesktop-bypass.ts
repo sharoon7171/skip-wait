@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a Pling / openDesktop bypass usually means an add-on or project file sat behind a redirect delay after download. Skip Wait is the $1/month Chrome extension that resolves the real package URL so direct download replaces that store wait.';
+  'Looking for a Pling / openDesktop bypass usually means an add-on or project file sat behind a redirect delay after download. Skip Wait is the $1.50/month Chrome extension that resolves the real package URL so direct download replaces that store wait.';
 
 const body = `## Storefront clicks that pause before the archive
 
@@ -41,7 +41,7 @@ VLC add-on pages, KDE project pages, and openDesktop listings share the habit ev
 
 ## Resolving the package on the live store button
 
-Skip Wait runs inside Chrome on matching store pages. After you click download it resolves the real file URL the store already prepares, skips client-only delay pages, and lets the transfer begin. You keep the normal store button—no paste workflow. Bypass is $1 per month.
+Skip Wait runs inside Chrome on matching store pages. After you click download it resolves the real file URL the store already prepares, skips client-only delay pages, and lets the transfer begin. You keep the normal store button—no paste workflow. Bypass is $1.50 per month.
 
 Required server handshakes still finish. What disappears is busywork redirect theater—the practical Pling / openDesktop bypass extension reading of file host bypass on these storefronts.
 `;
@@ -71,7 +71,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Pling bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

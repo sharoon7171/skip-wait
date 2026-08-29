@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A ShortXLinks bypass matters when a shared short URL bounces you through ad interstitials and a Too Early lock before Get Link ever appears. Skip Wait is the $1/month Chrome extension that keeps you on the short-link unlock path, finishes the real hold, and opens the destination without walking every hop by hand.';
+  'A ShortXLinks bypass matters when a shared short URL bounces you through ad interstitials and a Too Early lock before Get Link ever appears. Skip Wait is the $1.50/month Chrome extension that keeps you on the short-link unlock path, finishes the real hold, and opens the destination without walking every hop by hand.';
 
 const body = `## Too Early before Get Link
 
@@ -84,7 +84,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the ShortXLinks bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The ShortXLinks path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The ShortXLinks path runs on supported pages.',
   },
 ];
 

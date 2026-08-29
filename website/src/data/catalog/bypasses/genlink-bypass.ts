@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Genlink bypass search usually starts after a shared short URL dumps you into rotating article hops instead of the file. Skip Wait is the $1/month Chrome extension that walks that multi-step chain—continue gates, please-wait strips, unlock countdown—so you are not the one babysitting every mediator.';
+  'A Genlink bypass search usually starts after a shared short URL dumps you into rotating article hops instead of the file. Skip Wait is the $1.50/month Chrome extension that walks that multi-step chain—continue gates, please-wait strips, unlock countdown—so you are not the one babysitting every mediator.';
 
 const body = `## Article hops that keep inventing another Continue
 
@@ -82,7 +82,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The Genlink path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The Genlink path runs on supported pages.',
   },
 ];
 

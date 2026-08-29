@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A PRMovies bypass search usually means a shared entry link parked you on a landing wait instead of the streaming catalog. Skip Wait is the $1/month Chrome extension that clears that gate so a skip waiting page path opens the main site without click-to-continue busywork.';
+  'A PRMovies bypass search usually means a shared entry link parked you on a landing wait instead of the streaming catalog. Skip Wait is the $1.50/month Chrome extension that clears that gate so a skip waiting page path opens the main site without click-to-continue busywork.';
 
 const body = `## Entry hops that stall before the catalog
 
@@ -73,7 +73,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the PRMovies bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The PRMovies path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The PRMovies path runs on supported pages.',
   },
 ];
 

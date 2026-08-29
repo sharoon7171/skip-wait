@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Yasir252 bypass or yasir252 timer bypass search usually means a locked download button forced an eight-second generate wait and a mediator page before PixelDrain, MediaFire, or another host. Skip Wait is the $1/month Chrome extension that decodes those buttons into direct links so download timer skip is not sitting through every generate screen.';
+  'A Yasir252 bypass or yasir252 timer bypass search usually means a locked download button forced an eight-second generate wait and a mediator page before PixelDrain, MediaFire, or another host. Skip Wait is the $1.50/month Chrome extension that decodes those buttons into direct links so download timer skip is not sitting through every generate screen.';
 
 const body = `## Locked buttons, then a generate timer
 
@@ -74,7 +74,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Yasir252 bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

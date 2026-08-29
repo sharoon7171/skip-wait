@@ -41,7 +41,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A GPLinks bypass matters when a shared short link opens Premium upsells, then intermediate please-wait pages, then a Get Link countdown with Cloudflare Turnstile. Skip Wait is the $1/month Chrome extension that takes Continue with ads, finishes the required intermediate hold, and clears Get Link busywork so you are not babysitting every VERIFY and CONTINUE.';
+  'A GPLinks bypass matters when a shared short link opens Premium upsells, then intermediate please-wait pages, then a Get Link countdown with Cloudflare Turnstile. Skip Wait is the $1.50/month Chrome extension that takes Continue with ads, finishes the required intermediate hold, and clears Get Link busywork so you are not babysitting every VERIFY and CONTINUE.';
 
 const body = `## Premium first, then intermediate waits, then Get Link
 
@@ -96,7 +96,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the GPLinks bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. This path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. This path runs on supported pages.',
   },
 ];
 

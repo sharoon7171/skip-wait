@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for an LL Safelink bypass or WordPress safelink bypass usually means a shared unlock dumped you into generate-link forms and LLAC Continue ads instead of the real destination. Skip Wait is the $1/month Chrome extension that finishes the form chain, decodes the unlock, and opens the target when release is ready.';
+  'Looking for an LL Safelink bypass or WordPress safelink bypass usually means a shared unlock dumped you into generate-link forms and LLAC Continue ads instead of the real destination. Skip Wait is the $1.50/month Chrome extension that finishes the form chain, decodes the unlock, and opens the target when release is ready.';
 
 const body = `## Generate-link forms, then LLAC Continue ads
 
@@ -78,7 +78,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The LL Safelink path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The LL Safelink path runs on supported pages.',
   },
 ];
 

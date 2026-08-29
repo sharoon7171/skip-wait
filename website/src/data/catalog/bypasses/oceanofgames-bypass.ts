@@ -37,7 +37,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Ocean of Games bypass search usually means download sent you through getsoft, IPC Games, or wait-for-resource please-wait pages before the file. Skip Wait is the $1/month Chrome extension that resolves the signed CDN link straight from the download button.';
+  'An Ocean of Games bypass search usually means download sent you through getsoft, IPC Games, or wait-for-resource please-wait pages before the file. Skip Wait is the $1.50/month Chrome extension that resolves the signed CDN link straight from the download button.';
 
 const body = `## Game downloads that detour through mediators
 
@@ -84,7 +84,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

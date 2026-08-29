@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A ShrinkMe bypass search usually starts after a monetized short URL hits an entry captcha, a blog mediator, and another countdown before the file. Skip Wait is the $1/month Chrome extension that walks that short link bypass path in place so ad-link gates stop eating the whole session.';
+  'A ShrinkMe bypass search usually starts after a monetized short URL hits an entry captcha, a blog mediator, and another countdown before the file. Skip Wait is the $1.50/month Chrome extension that walks that short link bypass path in place so ad-link gates stop eating the whole session.';
 
 const body = `## Captcha first, then blogs, then another clock
 
@@ -78,7 +78,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the ShrinkMe bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

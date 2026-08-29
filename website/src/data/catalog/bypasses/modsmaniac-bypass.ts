@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'ModsManiac bypass is for the /file/ download page that hides Download behind a progress bar and a “Your link is almost ready” countdown for about fifteen seconds. Skip Wait is the $1/month Chrome extension that skips that ModsManiac download waiting page so Download is already on screen.';
+  'ModsManiac bypass is for the /file/ download page that hides Download behind a progress bar and a “Your link is almost ready” countdown for about fifteen seconds. Skip Wait is the $1.50/month Chrome extension that skips that ModsManiac download waiting page so Download is already on screen.';
 
 const body = `## A Download button that still makes you wait
 
@@ -84,7 +84,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the ModsManiac path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The ModsManiac bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The ModsManiac bypass runs on supported pages.',
   },
 ];
 

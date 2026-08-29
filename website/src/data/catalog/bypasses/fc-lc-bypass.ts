@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An FC.LC bypass search usually starts after a monetized short URL chained verification pages, captcha gates, and unlock timers before the destination. Skip Wait is the $1/month Chrome extension that walks that short link path so you are not clicking through every hop by hand.';
+  'An FC.LC bypass search usually starts after a monetized short URL chained verification pages, captcha gates, and unlock timers before the destination. Skip Wait is the $1.50/month Chrome extension that walks that short link path so you are not clicking through every hop by hand.';
 
 const body = `## Verification hops stacked on monetized aliases
 
@@ -73,7 +73,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the FC.LC bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

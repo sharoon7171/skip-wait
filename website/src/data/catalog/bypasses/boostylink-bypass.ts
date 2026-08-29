@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A BoostyLink bypass search usually means a content locker still wants a stack of actions plus a server unlock timer before Continue works. Skip Wait is the $1/month Chrome extension that runs those locker steps for you and opens the destination when unlock completes.';
+  'A BoostyLink bypass search usually means a content locker still wants a stack of actions plus a server unlock timer before Continue works. Skip Wait is the $1.50/month Chrome extension that runs those locker steps for you and opens the destination when unlock completes.';
 
 const body = `## Locker actions stacked before unlock
 
@@ -78,7 +78,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the BoostyLink path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The BoostyLink bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The BoostyLink bypass runs on supported pages.',
   },
 ];
 

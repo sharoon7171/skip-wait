@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Unlock To Earn aliases often keep you on unlocktoearn.com with a Please Complete Task to Unlock Link card—Subscribe, Join, then Click Here to Open Link. Skip Wait is the $1/month Chrome extension that covers that card on the short URL, skips the off-site bounce those shares still send, and opens the next URL when Click Here would have.';
+  'Unlock To Earn aliases often keep you on unlocktoearn.com with a Please Complete Task to Unlock Link card—Subscribe, Join, then Click Here to Open Link. Skip Wait is the $1.50/month Chrome extension that covers that card on the short URL, skips the off-site bounce those shares still send, and opens the next URL when Click Here would have.';
 
 const body = `## The task card is the waiting page
 
@@ -76,7 +76,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. Unlock To Earn runs on supported alias links.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. Unlock To Earn runs on supported alias links.',
   },
 ];
 

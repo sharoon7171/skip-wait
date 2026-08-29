@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'MODDED-1 bypass is for the download page that shows a Loading… progress bar for four seconds before Download appears. Skip Wait is the $1/month Chrome extension that skips that modded-1 download waiting page so the Download button is already on screen.';
+  'MODDED-1 bypass is for the download page that shows a Loading… progress bar for four seconds before Download appears. Skip Wait is the $1.50/month Chrome extension that skips that modded-1 download waiting page so the Download button is already on screen.';
 
 const body = `## A Download button that still makes you watch Loading…
 
@@ -83,7 +83,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the MODDED-1 path cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The MODDED-1 bypass runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The MODDED-1 bypass runs on supported pages.',
   },
 ];
 

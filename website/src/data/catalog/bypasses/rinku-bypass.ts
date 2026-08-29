@@ -42,7 +42,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Rinku bypass matters when a shared short URL turns into Security Check pages, Next-button delays, and Please Wait unlock screens on rotating article hops. Skip Wait is the $1/month Chrome extension that clears that short-link busywork, keeps human checks in view when required, and opens the destination after the unlock hold the shortener still enforces.';
+  'A Rinku bypass matters when a shared short URL turns into Security Check pages, Next-button delays, and Please Wait unlock screens on rotating article hops. Skip Wait is the $1.50/month Chrome extension that clears that short-link busywork, keeps human checks in view when required, and opens the destination after the unlock hold the shortener still enforces.';
 
 const body = `## Monetized short links that refuse a one-hop redirect
 
@@ -98,7 +98,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does the Rinku bypass cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup.',
   },
 ];
 

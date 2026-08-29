@@ -37,7 +37,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An HDHub4u Mediator bypass search usually means a download hop dumped you on a blog waiting page instead of the stored file link. Skip Wait is the $1/month Chrome extension that clears that please-wait gate and sends you to the destination without clicking Continue through ads.';
+  'An HDHub4u Mediator bypass search usually means a download hop dumped you on a blog waiting page instead of the stored file link. Skip Wait is the $1.50/month Chrome extension that clears that please-wait gate and sends you to the destination without clicking Continue through ads.';
 
 const body = `## Blog gates between the title page and the file
 
@@ -88,7 +88,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      'Skip Wait is $1 per month. Activate a license in the popup. The HDHub4u Mediator path runs on supported pages.',
+      'Skip Wait is $1.50 per month. Activate a license in the popup. The HDHub4u Mediator path runs on supported pages.',
   },
 ];
 
