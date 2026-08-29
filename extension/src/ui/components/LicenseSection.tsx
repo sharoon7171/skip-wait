@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { activateLicense, refreshLicense } from '../../license/gate';
 import { clearLicenseSession, getLicenseSession, getStoredLicenseKey, licenseIsLive } from '../../license/storage';
 import type { LicensePlan } from '../../license/types';
-import { CONTACT, PANEL_CARD, PRICE_CRYPTO, PRICE_LABEL } from '../constants';
+import { CONTACT, PANEL_CARD, PRICE_LABEL } from '../constants';
 import { PricingModal } from './PricingModal';
 import { IconRefresh } from './icons';
 
@@ -200,7 +200,7 @@ export function LicenseSection(): React.ReactElement {
             {busy ? 'Checking with server…' : 'Activate license'}
           </button>
           <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            {PRICE_LABEL} · {PRICE_CRYPTO} via direct crypto.{' '}
+            {PRICE_LABEL} on EAS Store.{' '}
             <button
               type="button"
               onClick={() => setPricingOpen(true)}

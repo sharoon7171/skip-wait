@@ -1,12 +1,6 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import {
-  CONTACT,
-  GUMROAD_URL,
-  PRICE_CARD,
-  PRICE_CRYPTO,
-  assetUrl,
-} from '../constants';
+import { CONTACT, EAS_STORE_URL, PRICE_LABEL, assetUrl } from '../constants';
 import { IconClose } from './icons';
 
 type Props = {
@@ -52,42 +46,33 @@ export function PricingModal({ open, onClose }: Props): React.ReactElement | nul
         </div>
 
         <div className="space-y-3 px-4 py-3">
-          <div className="grid grid-cols-2 gap-2">
-            <div className="rounded-card bg-primary-600 px-3 py-2.5 text-ink-inverse">
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-primary-200">Card</p>
-              <p className="mt-0.5 text-[1.125rem] font-extrabold tracking-tight">{PRICE_CARD}</p>
-              <p className="text-[0.75rem] font-medium text-primary-100">per month · Gumroad</p>
-            </div>
-            <div className="rounded-card bg-surface-muted px-3 py-2.5 ring-1 ring-neutral-200">
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Crypto</p>
-              <p className="mt-0.5 text-[1.125rem] font-extrabold tracking-tight text-ink">{PRICE_CRYPTO}</p>
-              <p className="text-[0.75rem] font-medium text-ink-soft">per month · direct pay</p>
-            </div>
+          <div className="rounded-card bg-primary-600 px-3 py-2.5 text-ink-inverse">
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-primary-200">
+              Monthly license
+            </p>
+            <p className="mt-0.5 text-[1.125rem] font-extrabold tracking-tight">{PRICE_LABEL}</p>
+            <p className="text-[0.75rem] font-medium text-primary-100">EAS Store</p>
           </div>
 
           <div className="space-y-2 text-[0.8125rem] font-medium leading-snug text-ink-soft">
             <p>
-              <span className="font-semibold text-ink">Card ({PRICE_CARD}/mo):</span> buy on Gumroad. The license guide
-              downloads immediately; we email your key to the Gumroad purchase address.
+              <span className="font-semibold text-ink">Buy ({PRICE_LABEL}):</span> purchase on EAS
+              Store. Your license key is delivered automatically after checkout.
             </p>
             <p>
-              <span className="font-semibold text-ink">Crypto ({PRICE_CRYPTO}/mo):</span> direct crypto only — not on
-              Gumroad. Message Telegram or email for payment details, then we send the key.
-            </p>
-            <p>
-              <span className="font-semibold text-ink">Trial:</span> available on request — email or Telegram for a
-              trial key.
+              <span className="font-semibold text-ink">Trial:</span> available on request — email or
+              Telegram for a trial key.
             </p>
             <p>One device per key.</p>
           </div>
 
           <a
-            href={GUMROAD_URL}
+            href={EAS_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-10 w-full items-center justify-center rounded-full bg-primary-600 text-[0.8125rem] font-semibold text-white no-underline transition-colors hover:bg-primary-700"
           >
-            Buy with card on Gumroad
+            Buy on EAS Store
           </a>
 
           <div className="grid grid-cols-2 gap-1.5">

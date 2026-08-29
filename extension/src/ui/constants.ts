@@ -7,11 +7,10 @@ const WEBSITE_URL = 'https://skip-wait-website.vercel.app';
 
 export const SUPPORTED_SITES_URL = `${WEBSITE_URL}/sites`;
 
-export const GUMROAD_URL = 'https://gumroad.com/l/vhjfx';
+export const EAS_STORE_URL =
+  'https://eas-x.com/products/skip-wait-bypass-timers-countdowns-chrome-extension-license';
 
-export const PRICE_CARD = '$2';
-export const PRICE_CRYPTO = '$1';
-export const PRICE_LABEL = `${PRICE_CARD} / month`;
+export const PRICE_LABEL = '$1.50 / month';
 
 export const PANEL_CARD =
   'overflow-hidden rounded-card bg-surface-canvas px-4 py-3 shadow-[0_10px_28px_-12px_oklch(0.2_0.015_264/0.45)] ring-1 ring-neutral-200';
