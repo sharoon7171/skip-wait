@@ -83,6 +83,7 @@ import { bypass as olamoviesLandingBypass } from './bypasses/olamovies-landing-b
 import { bypass as olamoviesLinkGeneratorBypass } from './bypasses/olamovies-link-generator-bypass';
 import { bypass as onhaxpkBypass } from './bypasses/onhaxpk-bypass';
 import { bypass as onlinetoolsBypass } from './bypasses/onlinetools-bypass';
+import { bypass as ontopsBypass } from './bypasses/ontops-bypass';
 import { bypass as ouoBypass } from './bypasses/ouo-bypass';
 import { bypass as pesktopBypass } from './bypasses/pesktop-bypass';
 import { bypass as playmodsBypass } from './bypasses/playmods-bypass';
@@ -111,6 +112,7 @@ import { bypass as tflyBypass } from './bypasses/tfly-bypass';
 import { bypass as theuserCloudBypass } from './bypasses/theuser-cloud-bypass';
 import { bypass as tinurlzSoftinfoBypass } from './bypasses/tinurlz-softinfo-bypass';
 import { bypass as tipsguruBypass } from './bypasses/tipsguru-bypass';
+import { bypass as tumadamBypass } from './bypasses/tumadam-bypass';
 import { bypass as jobsheelBypass } from './bypasses/jobsheel-bypass';
 import { bypass as unlocktoearnBypass } from './bypasses/unlocktoearn-bypass';
 import { bypass as uploadrarBypass } from './bypasses/uploadrar-bypass';
@@ -213,6 +215,7 @@ export const bypasses: readonly SupportedBypass[] = [
   olamoviesLinkGeneratorBypass,
   onhaxpkBypass,
   onlinetoolsBypass,
+  ontopsBypass,
   ouoBypass,
   pesktopBypass,
   playmodsBypass,
@@ -242,6 +245,7 @@ export const bypasses: readonly SupportedBypass[] = [
   theuserCloudBypass,
   tinurlzSoftinfoBypass,
   tipsguruBypass,
+  tumadamBypass,
   unlocktoearnBypass,
   uploadrarBypass,
   usersdriveBypass,
