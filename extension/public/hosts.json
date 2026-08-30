@@ -63,6 +63,11 @@
       "unlocktoearn.com"
     ]
   },
+  "tumadam": {
+    "hosts": [
+      "unlock.tumadam.com"
+    ]
+  },
   "tipsguru": {
     "hosts": [
       "tipsguru.in",
@@ -265,6 +270,11 @@
       "onlinestringtools.com",
       "onlinetexttools.com",
       "onlinetools.com"
+    ]
+  },
+  "ontops": {
+    "hosts": [
+      "ontops.link"
     ]
   },
   "onhaxpk": {
