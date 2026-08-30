@@ -583,6 +583,12 @@
   "cinefreak": {
     "hosts": ["cinefreak.ca", "cinefreak.ch", "cinefreak.net", "cinefreak.top", "cinefreak.tv"]
   },
+  "bbmkts-subtounlock": {
+    "hosts": ["bbmkts.com"]
+  },
+  "bblink": {
+    "hosts": ["web.bbmkts.com"]
+  },
   "bstshrt": {
     "hosts": ["boostellar.com", "bstlar.com", "bstshrt.com"]
   },
