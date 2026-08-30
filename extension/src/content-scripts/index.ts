@@ -61,6 +61,7 @@ import { initLootlabsUnlock } from '../sites/lootlabs';
 import { initMoviesModContentScript } from '../sites/movies-mod';
 import { initOnhaxpkCopy } from '../sites/onhaxpk';
 import { initOnlinetoolsDirectDownload } from '../sites/onlinetools';
+import { initOntopsRedirect } from '../sites/ontops';
 import { initOuoBypass } from '../sites/ouo';
 import {
   initOlamoviesLandingRedirect,
@@ -103,6 +104,7 @@ import { initMp4uploadCountdownBypass } from '../sites/mp4upload';
 import { initPlingDirectDownload } from '../sites/pling';
 import { initMuhammadniazCountdownBypass } from '../sites/muhammadniaz';
 import { initTipsguruRedirect } from '../sites/tipsguru';
+import { initTumadamUnlock } from '../sites/tumadam';
 import { initWahmiCountdownBypass } from '../sites/wahmi';
 import { initCutyGate } from '../sites/cuty';
 import { initCutwinGate } from '../sites/cutwin';
@@ -229,6 +231,7 @@ const INITS = [
   initKotakanimeidOutPage,
   initOnhaxpkCopy,
   initOnlinetoolsDirectDownload,
+  initOntopsRedirect,
   initOuoBypass,
   initOlamoviesLandingRedirect,
   initOlamoviesLinkGenerate,
@@ -272,6 +275,7 @@ const INITS = [
   initMp4uploadCountdownBypass,
   initMuhammadniazCountdownBypass,
   initTipsguruRedirect,
+  initTumadamUnlock,
   initPlingDirectDownload,
   initWahmiCountdownBypass,
   initWpSafelinkQueryRedirect,
