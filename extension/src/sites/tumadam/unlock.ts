@@ -66,6 +66,7 @@ function redirect(): void {
 
 function kick(): void {
   if (started || !tumadamUnlockSlug()) return;
+  if (!destinationFromPage() && document.readyState === 'loading') return;
   started = true;
   redirect();
 }
