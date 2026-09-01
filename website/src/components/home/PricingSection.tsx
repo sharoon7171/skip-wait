@@ -1,13 +1,13 @@
-import { EAS_STORE_URL, PRICE } from '@/data/constants';
+import { EAS_STORE_URL, LICENSE, PRICE } from '@/data/constants';
 import { homeHash } from '@/lib/routes';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
 
 const steps = [
-  'Buy on EAS Store',
+  'Get a trial or monthly license on EAS Store',
   'Install from the Chrome Web Store',
-  'Paste the license key in the popup',
+  'Paste the key in the popup and tap Activate',
 ] as const;
 
 export function PricingSection(): React.ReactElement {
@@ -16,15 +16,24 @@ export function PricingSection(): React.ReactElement {
       <Shell>
         <SectionHeader
           title="Pricing"
-          description="One monthly license. One device per key. Pay on EAS Store — license key delivered after checkout."
+          description={`${LICENSE.trialLabel} or ${PRICE.summary}. ${LICENSE.deviceLimit} Pay on EAS Store — license key delivered after checkout.`}
         />
 
         <article className="mx-auto mt-8 flex max-w-lg flex-col rounded-panel bg-surface-canvas p-8 shadow-sm ring-2 ring-primary-500/20">
-          <p className="text-overline uppercase text-primary-600">Monthly license</p>
-          <p className="mt-3 font-display text-metric text-ink">{PRICE.display}</p>
-          <p className="mt-1 text-body-sm font-medium text-ink-soft">Per month</p>
-          <p className="mt-2 text-body-sm text-ink-body">
-            Pay on EAS Store. Your license key is delivered automatically after purchase.
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-card bg-surface-muted px-3 py-2.5 ring-1 ring-neutral-200">
+              <p className="text-overline uppercase text-primary-600">{LICENSE.trialLabel}</p>
+              <p className="mt-1 font-display text-body font-bold text-ink">{LICENSE.trialDetail}</p>
+            </div>
+            <div className="rounded-card bg-surface-muted px-3 py-2.5 ring-1 ring-neutral-200">
+              <p className="text-overline uppercase text-primary-600">Monthly</p>
+              <p className="mt-1 font-display text-body font-bold text-ink">{LICENSE.monthlyDetail}</p>
+            </div>
+          </div>
+
+          <p className="mt-4 text-body-sm text-ink-body">
+            Copy your key from EAS Store after checkout, paste it in the extension popup, then tap
+            Activate.
           </p>
 
           <ol className="mt-6 m-0 flex list-none flex-col gap-3 p-0">
@@ -45,7 +54,7 @@ export function PricingSection(): React.ReactElement {
             button
             className="mt-8 w-full"
           >
-            Buy on EAS Store
+            Get license on EAS Store
           </TrackedAnchor>
         </article>
       </Shell>

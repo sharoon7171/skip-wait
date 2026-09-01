@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { CHROME_WEB_STORE_URL, CONTACT, PRICE, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, EAS_API_URL, LICENSE, PRICE, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Privacy Policy';
 const description = `Privacy policy for the ${SITE.name} Chrome extension: what data the extension accesses, what it stores, and how Skip Wait handles information on supported sites.`;
-const updated = '2026-08-20';
+const updated = '2026-09-01';
 const path = routes.privacy;
 const url = `${SITE.url}${path}`;
 
@@ -71,8 +71,9 @@ export default function PrivacyPage(): React.ReactElement {
             {SITE.name} is a Chrome extension that, on supported link shorteners and file hosts,
             bypasses countdown timers and waiting pages or automates waits and continue clicks. It is
             available from the{' '}
-            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. Bypass requires a {PRICE.summary}
-            license. No separate website account is required.
+            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. Bypass requires an active license
+            ({LICENSE.trialLabel.toLowerCase()} or {PRICE.summary}) from EAS Store. Activate the key
+            in the extension popup. No separate website account is required.
           </p>
           <p>
             The Website is the marketing site at{' '}
@@ -149,10 +150,23 @@ export default function PrivacyPage(): React.ReactElement {
               <code>hosts.json</code> file in the extension repository, plus the last refresh
               time
             </li>
+            <li>
+              license session data when you activate a key: license key, browser instance ID,
+              activation ID, activation token, signed offline lease, lease nonce, plan type (trial or
+              monthly), and lease or entitlement expiry times
+            </li>
           </ul>
           <p>
-            That data stays on your device and is not sent to us. There is no global on/off preference
-            stored.
+            That data stays on your device and is not sent to us for analytics. License activation
+            sends the key and instance ID to EAS Store as described below. There is no global on/off
+            preference stored.
+          </p>
+
+          <LegalSubheading>Alarms</LegalSubheading>
+          <p>
+            Uses the <code>alarms</code> permission to clear access when the signed offline lease or
+            entitlement expires. Bypass reads the verified local lease and does not call EAS on every
+            page. Alarms are not used for ads, tracking, notifications, or unrelated background work.
           </p>
 
           <LegalSubheading>Cookies</LegalSubheading>
@@ -233,8 +247,21 @@ export default function PrivacyPage(): React.ReactElement {
               </code>{' '}
               when the extension starts and when you tap Refresh in the popup
             </li>
+            <li>
+              EAS Store license endpoints at <code>{EAS_API_URL}</code> when you activate, validate,
+              or remove a license (license key, instance ID, activation token, and a one-time nonce).
+              Bypass itself reads the verified local lease and does not call EAS on every page
+            </li>
+            <li>
+              the EAS public-key endpoint at{' '}
+              <code>https://eas-x.com/api/v1/licenses/public-key</code> when needed to verify a lease
+              signature
+            </li>
           </ul>
-          <p>Those requests are not used by the Extension for advertising or analytics.</p>
+          <p>
+            License requests are processed by EAS Store under its terms. Those requests are not used
+            by the Extension for advertising or analytics.
+          </p>
         </LegalSection>
 
         <LegalSection title="6. Contact Links">

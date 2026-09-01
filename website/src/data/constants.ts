@@ -1,6 +1,16 @@
 export const EAS_STORE_URL =
   'https://eas-x.com/products/skip-wait-bypass-timers-countdowns-chrome-extension-license';
 
+export const EAS_API_URL = 'https://eas-x.com/api/v1/licenses';
+
+export const LICENSE = {
+  trialLabel: 'Free trial',
+  trialDetail: '30 minutes · $0',
+  monthlyDetail: '$1.50 / month',
+  deviceLimit: 'One key per device.',
+  keyExample: 'EAS-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+} as const;
+
 export const PRICE = {
   amount: '1.50',
   currency: 'USD',

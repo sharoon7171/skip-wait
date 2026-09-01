@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { CHROME_WEB_STORE_URL, CONTACT, PRICE, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, LICENSE, PRICE, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Terms of Use';
 const description = `Terms of use for the ${SITE.name} Chrome extension (${PRICE.summary}): license, supported sites, acceptable use, disclaimers, and contact for Skip Wait.`;
-const updated = '2026-08-20';
+const updated = '2026-09-01';
 const path = routes.terms;
 const url = `${SITE.url}${path}`;
 
@@ -76,9 +76,10 @@ export default function TermsPage(): React.ReactElement {
             <li>automates waits and continue clicks when a full skip is not possible</li>
           </ul>
           <p>
-            Bypass requires an active {PRICE.summary} license. Activate the key in the extension popup.
-            The Extension then runs automatically on supported flows. There is no settings panel to
-            turn bypasses off.
+            Bypass requires an active license from EAS Store ({LICENSE.trialLabel.toLowerCase()} or{' '}
+            {PRICE.summary}). Paste the key in the extension popup and tap Activate.{' '}
+            {LICENSE.deviceLimit} The Extension then runs automatically on supported flows. There is
+            no settings panel to turn bypasses off.
           </p>
           <p>
             Supported domains and unlock flows change over time as sites are added or break. The

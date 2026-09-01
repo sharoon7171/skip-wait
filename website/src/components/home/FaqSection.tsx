@@ -4,7 +4,7 @@ import { FaqAccordion, type FaqAccordionItem } from '@/components/ui/FaqAccordio
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
 import { totalBypasses, totalDomains } from '@/data/catalog';
-import { PRICE } from '@/data/constants';
+import { LICENSE, PRICE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { faqPageJsonLd } from '@/data/seo';
 import { homeHash, homeSections, routes } from '@/lib/routes';
@@ -30,10 +30,10 @@ function homeFaqItems(): readonly FaqAccordionItem[] {
         question: item.question,
         answer: (
           <>
-            Skip Wait is {PRICE.summary}. Buy on EAS Store — your license key is delivered
-            automatically after checkout. See{' '}
-            <AppLink href={homeSections.pricing}>Pricing</AppLink> for the buy link. Activate the
-            key in the extension popup. One device per key.
+            EAS Store offers a {LICENSE.trialDetail} trial and a {PRICE.summary} monthly plan. Your
+            license key is delivered after checkout. See{' '}
+            <AppLink href={homeSections.pricing}>Pricing</AppLink> for the buy link. Paste the key in
+            the extension popup and tap Activate. {LICENSE.deviceLimit}
           </>
         ),
       };
@@ -64,7 +64,7 @@ export function FaqSection(): React.ReactElement {
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
           <SectionHeader
             title="Questions Before You Install"
-            description={`How Skip Wait bypasses countdowns, when it automates waits, Android with Quetta, ${PRICE.summary} pricing, and how to request a site.`}
+            description={`How Skip Wait bypasses countdowns, when it automates waits, Android with Quetta, EAS Store licensing, and how to request a site.`}
           />
 
           <FaqAccordion items={homeFaqItems()} />

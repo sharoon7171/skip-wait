@@ -1,5 +1,5 @@
 import { bypassHowToSteps } from '@/data/catalog';
-import { CHROME_WEB_STORE_URL, PRICE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, LICENSE } from '@/data/constants';
 import { routes } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
 import { ButtonLink } from '@/components/ui/Button';
@@ -22,7 +22,8 @@ function stepBody(index: number, fallback: string): React.ReactNode {
         >
           Chrome Web Store
         </a>{' '}
-        and activate a {PRICE.summary} license in the popup. Matching pages then unlock automatically.
+        and get a {LICENSE.trialLabel.toLowerCase()} or monthly license on EAS Store. Paste the key
+        in the popup and tap Activate. Matching pages then unlock automatically.
       </>
     );
   }
