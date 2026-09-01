@@ -22,7 +22,8 @@ export const onBypassAccessChange = (fn: () => void): void => {
     if (
       HOSTS_STORAGE_KEY in changes ||
       storageKeys.licenseKey in changes ||
-      storageKeys.licenseExp in changes
+      storageKeys.leaseExp in changes ||
+      storageKeys.entExp in changes
     ) {
       fn();
     }

@@ -301,11 +301,12 @@ const MAX_TIMER_MS = 2_147_483_647;
 const armLicenseExpiryTimer = async (): Promise<void> => {
   const session = await getLicenseSession();
   if (!session) return;
-  const delay = session.exp - Date.now();
-  if (delay <= 0 || delay > MAX_TIMER_MS) return;
-  window.setTimeout(() => {
-    void verifyLicense();
-  }, delay);
+  const expiries = session.entExp !== null ? [session.leaseExp, session.entExp] : [session.leaseExp];
+  for (const exp of expiries) {
+    const delay = exp - Date.now();
+    if (delay <= 0 || delay > MAX_TIMER_MS) continue;
+    window.setTimeout(() => void verifyLicense(), delay);
+  }
 };
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;

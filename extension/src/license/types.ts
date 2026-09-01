@@ -1,29 +1,39 @@
-export type LicensePlan = 'trial30m' | 'monthly30d';
+import type { LicensePlan } from './config';
+
+export type { LicensePlan };
 
 export type LicenseSession = {
   key: string;
   plan: LicensePlan;
-  exp: number;
+  applicationId: string;
+  activationId: string;
+  activationToken: string;
+  instanceId: string;
+  lease: string;
+  nonce: string;
+  leaseExp: number;
+  entExp: number | null;
 };
 
-export type LicenseState = {
-  ok: boolean;
-  plan?: LicensePlan;
-  exp?: number;
-  error?: string;
-};
+export type LicenseState =
+  | { ok: true; plan: LicensePlan; leaseExp: number; entExp: number | null }
+  | { ok: false; error: string };
 
-export type ActivateResponse = {
-  ok: boolean;
-  plan?: LicensePlan;
-  exp?: number;
-  error?: string;
-};
-
-export const LICENSE_KEY_RE = /^SW-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+export const LICENSE_KEY_RE = /^EAS(?:-[A-Z0-9]{5}){5}$/;
 
 export const isLicensePlan = (value: unknown): value is LicensePlan =>
-  value === 'trial30m' || value === 'monthly30d';
+  value === 'monthly' || value === 'trial';
 
 export const isLicenseExp = (value: unknown): value is number =>
   typeof value === 'number' && Number.isFinite(value) && value > 0;
+
+export type EasLicenseResult = {
+  valid: boolean;
+  error?: string;
+  application_id?: string;
+  activation_id?: string;
+  activation_token?: string;
+  lease?: string;
+  lease_expires_at?: string;
+  entitlement_expires_at?: string | null;
+};

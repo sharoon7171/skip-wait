@@ -7,5 +7,3 @@ tsconfig.tsbuildinfo
 .DS_Store
 .env
 .env.local
-license-worker/.env
-.wrangler/

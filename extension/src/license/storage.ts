@@ -1,24 +1,52 @@
 import { isLicenseExp, isLicensePlan, LICENSE_KEY_RE, type LicenseSession } from './types';
+import { newInstanceId } from './lease';
 
-const DEVICE_ID_KEY = 'skipWaitDeviceId';
+const INSTANCE_ID_KEY = 'skipWaitInstanceId';
 const LICENSE_KEY = 'skipWaitLicenseKey';
-const LICENSE_EXP_KEY = 'skipWaitLicenseExp';
-const LICENSE_PLAN_KEY = 'skipWaitLicensePlan';
+const PLAN_KEY = 'skipWaitLicensePlan';
+const APP_ID_KEY = 'skipWaitApplicationId';
+const ACTIVATION_ID_KEY = 'skipWaitActivationId';
+const ACTIVATION_TOKEN_KEY = 'skipWaitActivationToken';
+const LEASE_KEY = 'skipWaitLease';
+const NONCE_KEY = 'skipWaitLeaseNonce';
+const LEASE_EXP_KEY = 'skipWaitLeaseExp';
+const ENT_EXP_KEY = 'skipWaitEntExp';
+const LEGACY_KEYS = ['skipWaitDeviceId', 'skipWaitLicenseExp'] as const;
+
+const SESSION_KEYS = [
+  LICENSE_KEY,
+  PLAN_KEY,
+  APP_ID_KEY,
+  ACTIVATION_ID_KEY,
+  ACTIVATION_TOKEN_KEY,
+  LEASE_KEY,
+  NONCE_KEY,
+  LEASE_EXP_KEY,
+  ENT_EXP_KEY,
+] as const;
 
 export const storageKeys = {
   licenseKey: LICENSE_KEY,
-  licenseExp: LICENSE_EXP_KEY,
+  leaseExp: LEASE_EXP_KEY,
+  entExp: ENT_EXP_KEY,
 } as const;
 
-export const licenseIsLive = (exp: number): boolean => Date.now() < exp;
+export const leaseIsLive = (exp: number): boolean => Date.now() < exp;
 
-export const getDeviceId = async (): Promise<string> => {
-  const stored = await chrome.storage.local.get(DEVICE_ID_KEY);
-  const current = stored[DEVICE_ID_KEY];
-  if (typeof current === 'string' && /^[a-f0-9]{32}$/.test(current)) return current;
-  const bytes = crypto.getRandomValues(new Uint8Array(16));
-  const id = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');
-  await chrome.storage.local.set({ [DEVICE_ID_KEY]: id });
+export const sessionIsLive = (session: LicenseSession): boolean =>
+  leaseIsLive(session.leaseExp) && (session.entExp === null || leaseIsLive(session.entExp));
+
+export const getInstanceId = async (): Promise<string> => {
+  const stored = await chrome.storage.local.get(INSTANCE_ID_KEY);
+  const current = stored[INSTANCE_ID_KEY];
+  if (
+    typeof current === 'string' &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(current)
+  ) {
+    return current;
+  }
+  const id = newInstanceId();
+  await chrome.storage.local.set({ [INSTANCE_ID_KEY]: id });
   return id;
 };
 
@@ -29,26 +57,64 @@ export const getStoredLicenseKey = async (): Promise<string | null> => {
 };
 
 export const getLicenseSession = async (): Promise<LicenseSession | null> => {
-  const stored = await chrome.storage.local.get([LICENSE_KEY, LICENSE_EXP_KEY, LICENSE_PLAN_KEY]);
+  const stored = await chrome.storage.local.get([...SESSION_KEYS, INSTANCE_ID_KEY]);
   const key = stored[LICENSE_KEY];
-  const exp = stored[LICENSE_EXP_KEY];
-  const plan = stored[LICENSE_PLAN_KEY];
-  if (typeof key !== 'string' || !LICENSE_KEY_RE.test(key) || !isLicensePlan(plan) || !isLicenseExp(exp)) {
+  const plan = stored[PLAN_KEY];
+  const applicationId = stored[APP_ID_KEY];
+  const activationId = stored[ACTIVATION_ID_KEY];
+  const activationToken = stored[ACTIVATION_TOKEN_KEY];
+  const instanceId = stored[INSTANCE_ID_KEY];
+  const lease = stored[LEASE_KEY];
+  const nonce = stored[NONCE_KEY];
+  const leaseExp = stored[LEASE_EXP_KEY];
+  const entExp = stored[ENT_EXP_KEY];
+  if (
+    typeof key !== 'string' ||
+    !LICENSE_KEY_RE.test(key) ||
+    !isLicensePlan(plan) ||
+    typeof applicationId !== 'string' ||
+    typeof activationId !== 'string' ||
+    typeof activationToken !== 'string' ||
+    typeof instanceId !== 'string' ||
+    typeof lease !== 'string' ||
+    typeof nonce !== 'string' ||
+    !isLicenseExp(leaseExp) ||
+    !(entExp === null || isLicenseExp(entExp))
+  ) {
     return null;
   }
-  return { key, plan, exp };
+  return {
+    key,
+    plan,
+    applicationId,
+    activationId,
+    activationToken,
+    instanceId,
+    lease,
+    nonce,
+    leaseExp,
+    entExp,
+  };
 };
 
 export const saveLicenseSession = async (session: LicenseSession): Promise<void> => {
+  await chrome.storage.local.remove([...LEGACY_KEYS]);
   await chrome.storage.local.set({
+    [INSTANCE_ID_KEY]: session.instanceId,
     [LICENSE_KEY]: session.key,
-    [LICENSE_EXP_KEY]: session.exp,
-    [LICENSE_PLAN_KEY]: session.plan,
+    [PLAN_KEY]: session.plan,
+    [APP_ID_KEY]: session.applicationId,
+    [ACTIVATION_ID_KEY]: session.activationId,
+    [ACTIVATION_TOKEN_KEY]: session.activationToken,
+    [LEASE_KEY]: session.lease,
+    [NONCE_KEY]: session.nonce,
+    [LEASE_EXP_KEY]: session.leaseExp,
+    [ENT_EXP_KEY]: session.entExp,
   });
 };
 
 export const clearLicenseSession = async (): Promise<void> => {
-  await chrome.storage.local.remove([LICENSE_KEY, LICENSE_EXP_KEY, LICENSE_PLAN_KEY]);
+  await chrome.storage.local.remove([...SESSION_KEYS, ...LEGACY_KEYS]);
   if (chrome.tabs?.query) {
     const tabs = await chrome.tabs.query({});
     for (const tab of tabs) {

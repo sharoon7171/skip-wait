@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
-import { activateLicense, refreshLicense } from '../../license/gate';
-import { clearLicenseSession, getLicenseSession, getStoredLicenseKey, licenseIsLive } from '../../license/storage';
-import type { LicensePlan } from '../../license/types';
-import { CONTACT, PANEL_CARD, PRICE_LABEL } from '../constants';
-import { PricingModal } from './PricingModal';
-import { IconRefresh } from './icons';
+import { activateLicense, deactivateLicense } from '../../license/gate';
+import { getLicenseSession, sessionIsLive } from '../../license/storage';
+import type { LicensePlan, LicenseSession } from '../../license/types';
+import { EAS_STORE_URL, LICENSE_COPY, PANEL_CARD } from '../constants';
 
-type Status = 'idle' | 'busy' | 'active' | 'missing' | 'err';
+type Status = 'busy' | 'active' | 'missing' | 'err';
+
+const copy = LICENSE_COPY;
 
 const formatWhen = (ms: number): string =>
   new Intl.DateTimeFormat(undefined, {
@@ -16,20 +16,62 @@ const formatWhen = (ms: number): string =>
     minute: '2-digit',
   }).format(new Date(ms));
 
-const planLabel = (plan: LicensePlan): string => (plan === 'trial30m' ? '30-minute trial' : PRICE_LABEL);
+const planLabel = (plan: LicensePlan): string => (plan === 'trial' ? copy.planTrial : copy.planMonthly);
+
+const easStoreButton = (label: string): React.ReactElement => (
+  <a
+    href={EAS_STORE_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex h-9 shrink-0 items-center whitespace-nowrap rounded-full bg-primary-600 px-3.5 text-[0.75rem] font-semibold text-white no-underline transition-colors hover:bg-primary-700"
+  >
+    {label}
+  </a>
+);
+
+const planOption = (title: string, detail: string): React.ReactElement => (
+  <div className="flex flex-col rounded-card bg-surface-canvas px-3 py-2.5 ring-1 ring-neutral-300">
+    <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-ink-soft">{title}</span>
+    <span className="mt-0.5 text-[0.8125rem] font-bold tracking-tight text-ink">{detail}</span>
+  </div>
+);
+
+const statusBadge = (label: string, tone: 'success' | 'warning'): React.ReactElement => (
+  <span
+    className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.6875rem] font-semibold ring-1 ${
+      tone === 'success'
+        ? 'bg-success-600/10 text-success-700 ring-success-600/25'
+        : 'bg-warning-500/10 text-warning-700 ring-warning-500/25'
+    }`}
+  >
+    <span
+      className={`size-1.5 shrink-0 rounded-full ${tone === 'success' ? 'bg-success-600' : 'bg-warning-500'}`}
+      aria-hidden
+    />
+    {label}
+  </span>
+);
 
 const errorMessage = (code: string | undefined): string => {
   switch (code) {
     case 'INVALID_KEY':
-      return 'Enter a valid key (SW-XXXX-XXXX-XXXX-XXXX).';
-    case 'LICENSE_NOT_FOUND':
-      return 'License revoked, deleted, or not found.';
+      return 'Enter a valid EAS license key.';
+    case 'LICENSE_NOT_VALID':
+      return 'License revoked, expired, or not found.';
+    case 'ACTIVATION_NOT_VALID':
+      return 'Activation is no longer valid. Activate again.';
+    case 'DEVICE_LIMIT_REACHED':
+      return 'This key is already used on another device. Unbind it in EAS Store, then activate here.';
+    case 'GRANT_INCOMPLETE':
+      return 'License server response was incomplete. Try again.';
+    case 'LEASE_INVALID':
+      return 'License grant could not be verified.';
+    case 'LEASE_EXPIRED':
+      return 'Offline lease expired. Activate again when online.';
     case 'LICENSE_EXPIRED':
       return 'License expired.';
-    case 'DEVICE_MISMATCH':
-      return 'Key is not bound to this device. Unbind it on the other device, then activate here.';
     case 'NETWORK':
-      return 'Could not reach the license server. Check your connection.';
+      return 'Could not reach EAS Store. Check your connection.';
     case 'NO_KEY':
       return 'No license on this device.';
     default:
@@ -38,71 +80,52 @@ const errorMessage = (code: string | undefined): string => {
 };
 
 export function LicenseSection(): React.ReactElement {
-  const [status, setStatus] = useState<Status>('idle');
+  const [hydrated, setHydrated] = useState(false);
+  const [status, setStatus] = useState<Status>('missing');
   const [keyInput, setKeyInput] = useState('');
   const [activeKey, setActiveKey] = useState<string | null>(null);
-  const [exp, setExp] = useState<number | null>(null);
+  const [activationId, setActivationId] = useState<string | null>(null);
+  const [entExp, setEntExp] = useState<number | null>(null);
   const [plan, setPlan] = useState<LicensePlan | null>(null);
-  const [verifiedAt, setVerifiedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [pricingOpen, setPricingOpen] = useState(false);
   const busy = status === 'busy';
 
-  const loadStatus = useCallback(async (): Promise<void> => {
-    setStatus('busy');
-    setError(null);
-    const stored = await getStoredLicenseKey();
-    if (!stored) {
+  const applySession = useCallback((session: LicenseSession | null): void => {
+    if (!session) {
       setActiveKey(null);
-      setExp(null);
+      setActivationId(null);
+      setEntExp(null);
       setPlan(null);
-      setVerifiedAt(null);
       setStatus('missing');
       return;
     }
-    setActiveKey(stored);
-    const state = await refreshLicense();
-    if (!state.ok) {
-      const session = await getLicenseSession();
-      if (state.error === 'NETWORK' && session && licenseIsLive(session.exp)) {
-        setExp(session.exp);
-        setPlan(session.plan);
-        setStatus('active');
-        return;
-      }
-      setActiveKey(await getStoredLicenseKey());
-      setExp(null);
-      setPlan(null);
-      setVerifiedAt(null);
-      setError(errorMessage(state.error));
-      setStatus('err');
-      return;
-    }
-    setExp(state.exp ?? null);
-    setPlan(state.plan ?? null);
-    setVerifiedAt(Date.now());
-    setStatus('active');
+    setActiveKey(session.key);
+    setActivationId(session.activationId);
+    setEntExp(session.entExp);
+    setPlan(session.plan);
+    setStatus(sessionIsLive(session) ? 'active' : 'err');
   }, []);
 
+  const loadFromStorage = useCallback(async (): Promise<void> => {
+    applySession(await getLicenseSession());
+    setError(null);
+  }, [applySession]);
+
   useEffect(() => {
-    void loadStatus();
-  }, [loadStatus]);
+    void loadFromStorage().then(() => setHydrated(true));
+  }, [loadFromStorage]);
 
   const onActivate = (): void => {
     setStatus('busy');
     setError(null);
     void activateLicense(keyInput)
-      .then((state) => {
+      .then(async (state) => {
         if (!state.ok) {
           setError(errorMessage(state.error));
           setStatus('err');
           return;
         }
-        setActiveKey(keyInput.trim().toUpperCase());
-        setExp(state.exp ?? null);
-        setPlan(state.plan ?? null);
-        setVerifiedAt(Date.now());
-        setStatus('active');
+        applySession(await getLicenseSession());
       })
       .catch(() => {
         setError(errorMessage('NETWORK'));
@@ -111,84 +134,88 @@ export function LicenseSection(): React.ReactElement {
   };
 
   const onClear = (): void => {
-    void clearLicenseSession().then(() => {
+    void deactivateLicense().then(() => {
       setActiveKey(null);
-      setExp(null);
+      setActivationId(null);
+      setEntExp(null);
       setPlan(null);
-      setVerifiedAt(null);
       setKeyInput('');
       setError(null);
       setStatus('missing');
     });
   };
 
+  const licensed = status === 'active' || (status === 'err' && activeKey);
+  const expired = status === 'err' && activeKey;
+
   const statusLine: ReactNode = (() => {
-    if (busy) return 'Checking with server…';
-    if (status === 'active' && verifiedAt !== null) {
-      return `Verified ${formatWhen(verifiedAt)}`;
+    if (busy) return copy.activating;
+    if (error) {
+      return <span className="text-[0.6875rem] font-semibold text-warning-700">{error}</span>;
     }
-    if (status === 'err' && error) {
-      return <span className="font-semibold text-warning-700">{error}</span>;
-    }
-    if (status === 'missing') return `Bypass requires an active ${PRICE_LABEL} license.`;
+    if (status === 'missing') return copy.missing;
+    if (expired) return statusBadge(copy.expiredStatus, 'warning');
+    if (status === 'active') return statusBadge(copy.statusActive, 'success');
     return null;
   })();
 
+  const heading = licensed ? copy.activeHeading : copy.buyHeading;
+
   return (
     <section className={PANEL_CARD}>
-      <PricingModal open={pricingOpen} onClose={() => setPricingOpen(false)} />
-
       <div className="flex items-center justify-between gap-3">
         <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">License</p>
-        {activeKey ? (
-          <button
-            type="button"
-            disabled={busy}
-            onClick={() => void loadStatus()}
-            className="inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-primary-600 px-3.5 text-[0.75rem] font-semibold text-white transition-colors hover:bg-primary-700 disabled:opacity-60"
-          >
-            <IconRefresh className={`size-4 ${busy ? 'animate-spin' : ''}`} />
-            {busy ? 'Checking…' : 'Refresh'}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setPricingOpen(true)}
-            className="inline-flex h-9 shrink-0 items-center whitespace-nowrap rounded-full bg-primary-600 px-3.5 text-[0.75rem] font-semibold text-white transition-colors hover:bg-primary-700"
-          >
-            Buy license
-          </button>
-        )}
+        {!activeKey ? easStoreButton(copy.buyButton) : expired ? easStoreButton(copy.renewButton) : null}
       </div>
-      <h2 className="mt-0.5 text-[0.875rem] font-bold tracking-tight text-ink">
-        Activate Skip Wait · {PRICE_LABEL}
-      </h2>
-      {statusLine !== null ? (
-        <p className="mt-1 text-[0.6875rem] font-medium text-ink-soft">{statusLine}</p>
-      ) : null}
-      {status === 'active' && activeKey ? (
+
+      <div className="mt-1 flex items-center justify-between gap-3">
+        <h2 className="min-w-0 text-[0.875rem] font-bold tracking-tight text-ink">{heading}</h2>
+        {statusLine !== null ? (
+          <div className="shrink-0 text-[0.6875rem] font-medium text-ink-soft">{statusLine}</div>
+        ) : null}
+      </div>
+
+      {hydrated && licensed && activeKey ? (
         <div className="mt-2 space-y-2">
           <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            <span className="font-semibold text-success-700">Active</span>
-            {plan ? ` · ${planLabel(plan)}` : ''}
-            {exp ? ` · expires ${formatWhen(exp)}` : ''}
+            {expired ? copy.expiredLead : copy.activeLead}
           </p>
-          <p className="truncate font-mono text-[0.75rem] text-ink-soft">{activeKey}</p>
+          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
+            {plan ? `${planLabel(plan)}` : ''}
+            {plan ? ' · ' : ''}
+            {entExp ? copy.validUntil(formatWhen(entExp)) : copy.noEndDate}
+          </p>
+          <div>
+            <p className="text-[0.6875rem] font-medium text-ink-soft">{copy.keyLabel}</p>
+            <p className="mt-0.5 break-all font-mono text-[0.75rem] leading-snug text-ink-soft">{activeKey}</p>
+          </div>
+          {activationId ? (
+            <div>
+              <p className="text-[0.6875rem] font-medium text-ink-soft">{copy.idLabel}</p>
+              <p className="mt-0.5 break-all font-mono text-[0.75rem] leading-snug text-ink-soft">{activationId}</p>
+            </div>
+          ) : null}
           <button
             type="button"
             onClick={onClear}
             className="inline-flex h-9 items-center rounded-full bg-surface-canvas px-3.5 text-[0.75rem] font-semibold text-ink ring-1 ring-neutral-300 transition-colors hover:bg-neutral-50"
           >
-            Remove license
+            {copy.remove}
           </button>
         </div>
-      ) : (
+      ) : hydrated ? (
         <div className="mt-2 space-y-2">
+          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">{copy.buyWhy}</p>
+          <div className="grid grid-cols-2 gap-1.5">
+            {planOption(copy.buyTrialTitle, copy.buyTrialDetail)}
+            {planOption(copy.buyMonthlyTitle, copy.buyMonthlyDetail)}
+          </div>
+          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">{copy.buyAfterPurchase}</p>
           <input
             type="text"
             value={keyInput}
             onChange={(e) => setKeyInput(e.target.value.toUpperCase())}
-            placeholder="SW-XXXX-XXXX-XXXX-XXXX"
+            placeholder="EAS-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
             className="box-border w-full rounded-card border border-neutral-300 bg-surface-canvas px-3 py-2 font-mono text-[0.8125rem] text-ink outline-none ring-primary-500 focus:border-primary-500 focus:ring-2"
           />
           <button
@@ -197,40 +224,11 @@ export function LicenseSection(): React.ReactElement {
             onClick={onActivate}
             className="inline-flex h-9 w-full items-center justify-center rounded-full bg-primary-600 px-3.5 text-[0.8125rem] font-semibold text-white transition-colors hover:bg-primary-700 disabled:opacity-60"
           >
-            {busy ? 'Checking with server…' : 'Activate license'}
+            {busy ? copy.activating : copy.activate}
           </button>
-          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            {PRICE_LABEL} on EAS Store.{' '}
-            <button
-              type="button"
-              onClick={() => setPricingOpen(true)}
-              className="font-semibold text-primary-700 underline decoration-primary-200 underline-offset-2 hover:decoration-primary-500"
-            >
-              See pricing & buy
-            </button>
-            . One device per key.
-          </p>
-          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            Trial available — ask for a trial key by{' '}
-            <a
-              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent('Skip Wait trial key')}`}
-              className="font-semibold text-primary-700 underline decoration-primary-200 underline-offset-2 hover:decoration-primary-500"
-            >
-              email
-            </a>{' '}
-            or{' '}
-            <a
-              href={CONTACT.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-primary-700 underline decoration-primary-200 underline-offset-2 hover:decoration-primary-500"
-            >
-              Telegram
-            </a>
-            .
-          </p>
+          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">{copy.buyDevice}</p>
         </div>
-      )}
+      ) : null}
     </section>
   );
 }
