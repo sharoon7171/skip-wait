@@ -1,11 +1,28 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import {
+  actionGrid,
+  actionTileBody,
+  actionTileIconSites,
+  actionTileIconWrap,
+  actionTileMeta,
+  actionTileSites,
+  actionTileTitle,
+  contactGrid,
+  contactTile,
+  heroGlow,
+  popupMain,
+  popupShell,
+  supportBody,
+  supportCard,
+  supportTitle,
+} from '../../../ui-classes/popup';
+import { DomainsTile } from '../components/DomainsTile';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { HostsUpdateSection } from '../components/HostsUpdateSection';
 import { LicenseSection } from '../components/LicenseSection';
-import { IconArrowRight } from '../components/icons';
-import { CONTACT, PANEL_CARD, SUPPORTED_SITES_URL, assetUrl, getRequestSupportUrl } from '../constants';
+import { IconGlobe } from '../components/icons';
+import { CONTACT, SUPPORTED_SITES_URL, assetUrl, getRequestSupportUrl } from '../constants';
 import '../global.css';
 
 const contacts = [
@@ -16,59 +33,52 @@ const contacts = [
 
 function PopupPage(): React.ReactElement {
   return (
-    <div className="relative box-border w-[480px] bg-surface-muted font-sans antialiased">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-40">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.96_0.025_250)_0%,oklch(0.985_0_0)_100%)]" />
+    <div className={popupShell}>
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-52">
+        <div className={heroGlow} />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.96_0.03_250)_0%,oklch(0.985_0_0)_72%)]" />
         <div
-          className="absolute inset-0 [mask-image:linear-gradient(180deg,black_0%,transparent_88%)]"
+          className="absolute inset-0 [mask-image:linear-gradient(180deg,black_0%,transparent_90%)]"
           style={{
-            backgroundImage: 'radial-gradient(oklch(0.48 0.22 255 / 0.16) 1px, transparent 1.5px)',
-            backgroundSize: '1.5rem 1.5rem',
+            backgroundImage: 'radial-gradient(oklch(0.48 0.22 255 / 0.2) 1px, transparent 1.5px)',
+            backgroundSize: '1.25rem 1.25rem',
           }}
         />
       </div>
 
       <div className="relative flex flex-col">
         <Header />
-
-        <main className="flex flex-col gap-3 px-4 pb-3">
-          <a
-            href={SUPPORTED_SITES_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 rounded-card bg-primary-600 px-4 py-3 no-underline shadow-[0_12px_28px_-14px_oklch(0.48_0.22_255/0.75)] transition-colors hover:bg-primary-700"
-          >
-            <span className="min-w-0 flex-1">
-              <span className="block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-primary-200">
-                Supported sites
-              </span>
-              <span className="mt-0.5 block text-[0.9375rem] font-bold tracking-tight text-ink-inverse">
-                See all sites Skip Wait works on
-              </span>
-            </span>
-            <IconArrowRight className="size-5 shrink-0 text-ink-inverse transition-transform group-hover:translate-x-0.5" />
-          </a>
-
+        <main className={popupMain}>
           <LicenseSection />
-          <HostsUpdateSection />
 
-          <section aria-labelledby="request-heading" className={PANEL_CARD}>
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">Report a site</p>
-            <h2 id="request-heading" className="mt-0.5 text-[0.875rem] font-bold tracking-tight text-ink">
-              Bypass not working, or a new domain?
-            </h2>
-            <p className="mt-1 text-[0.8125rem] font-medium leading-snug text-ink-soft">
-              Message us on GitHub, Telegram, or Email with the page URL. If we already support that bypass, we add the
-              domain and you tap Refresh. If it is a new site, we add support as soon as we can.
-            </p>
-            <div className="mt-2 grid grid-cols-3 gap-1.5">
+          <div className={actionGrid}>
+            <a
+              href={SUPPORTED_SITES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={actionTileSites}
+            >
+              <span className={`${actionTileIconWrap} ${actionTileIconSites}`}>
+                <IconGlobe className="size-4" />
+              </span>
+              <p className={actionTileTitle}>Supported sites</p>
+              <p className={actionTileBody}>Browse every site and host Skip Wait currently bypasses.</p>
+              <p className={actionTileMeta}>Opens the full list on our website</p>
+            </a>
+            <DomainsTile />
+          </div>
+
+          <section className={supportCard}>
+            <p className={supportTitle}>Bypass broken?</p>
+            <p className={supportBody}>Send the page URL — we add domains or new sites fast.</p>
+            <div className={contactGrid}>
               {contacts.map((contact) => (
                 <a
                   key={contact.label}
                   href={contact.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-surface-canvas text-[0.75rem] font-semibold text-ink no-underline ring-1 ring-neutral-300 transition-colors hover:bg-primary-50 hover:text-primary-700 hover:ring-primary-300"
+                  className={contactTile}
                 >
                   <img src={assetUrl(contact.icon)} alt="" className="size-4" width={16} height={16} />
                   {contact.label}
@@ -77,7 +87,6 @@ function PopupPage(): React.ReactElement {
             </div>
           </section>
         </main>
-
         <Footer />
       </div>
     </div>

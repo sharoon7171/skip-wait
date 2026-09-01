@@ -13,36 +13,31 @@ export const EAS_STORE_URL =
 export const PRICE_LABEL = '$1.50 / month';
 
 export const LICENSE_COPY = {
-  buyHeading: 'Get a license',
-  buyTrialTitle: 'Free trial',
-  buyTrialDetail: '30 minutes · $0',
-  buyMonthlyTitle: 'Monthly',
-  buyMonthlyDetail: '$1.50 / month',
-  buyAfterPurchase: 'Copy your key from EAS Store, paste it here, then tap Activate.',
-  buyWhy:
-    'The trial is free so you can see if Skip Wait helps. If you keep it, $1.50/month helps me fix bypasses when sites change and add new ones.',
-  buyDevice: 'One key per device.',
-  buyButton: 'Buy now',
-  activeHeading: 'Your license',
-  activeLead: "You're all set — bypass is working on this device.",
-  expiredLead: 'Your license ended. Grab a new trial or monthly plan on EAS Store.',
-  renewButton: 'Buy now',
-  planTrial: 'Free trial',
-  planMonthly: 'Monthly',
-  validUntil: (when: string): string => `Valid until ${when}`,
-  noEndDate: 'No end date',
+  buyHeading: 'Unlock bypass',
+  buyAfterPurchase: 'Paste your EAS key',
+  buyWhy: 'Pick a plan, grab your key, activate below.',
+  buyDevice: 'One key per device',
+  storeTrial: 'Free trial',
+  storeTrialPrice: '$0',
+  storeTrialHint: '30 minutes',
+  storeMonthly: 'Monthly',
+  storeMonthlyPrice: '$1.50',
+  storeMonthlyHint: 'per month',
+  activeHeading: 'Bypass active',
+  activeLead: 'Skip Wait is running on this device.',
+  expiredLead: 'Your license ended. Grab a new plan on EAS Store.',
+  renewAction: 'Get a new license',
+  expires: (when: string): string => `Expires ${when}`,
+  lifetime: 'Lifetime',
   statusActive: 'Active',
-  keyLabel: 'License key',
-  idLabel: 'Activation ID',
+  keyLabel: 'Key',
+  idLabel: 'Activation',
   remove: 'Remove license',
-  activate: 'Activate',
+  activate: 'Activate bypass',
   activating: 'Activating…',
-  missing: 'You need a license to use bypass.',
-  expiredStatus: 'License ended.',
+  missing: 'Needs license',
+  expiredStatus: 'Expired',
 } as const;
-
-export const PANEL_CARD =
-  'overflow-hidden rounded-card bg-surface-canvas px-4 py-3 shadow-[0_10px_28px_-12px_oklch(0.2_0.015_264/0.45)] ring-1 ring-neutral-200';
 
 export const CONTACT = {
   email: 'sharoon7171@gmail.com',

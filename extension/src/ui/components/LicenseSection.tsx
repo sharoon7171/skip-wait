@@ -1,8 +1,41 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { activateLicense, deactivateLicense } from '../../license/gate';
 import { getLicenseSession, sessionIsLive } from '../../license/storage';
-import type { LicensePlan, LicenseSession } from '../../license/types';
-import { EAS_STORE_URL, LICENSE_COPY, PANEL_CARD } from '../constants';
+import type { LicenseSession } from '../../license/types';
+import {
+  activateCard,
+  activeHero,
+  activeHeroContent,
+  activeHeroGlow,
+  activeHeroIcon,
+  activeHeroMeta,
+  activeHeroText,
+  activeHeroTitle,
+  btnActivate,
+  btnGhost,
+  btnStoreRenew,
+  errorBanner,
+  fieldInput,
+  keyLabel,
+  keyPanel,
+  keyRow,
+  keyValue,
+  licenseHero,
+  licenseHeroBody,
+  licenseHeroGlow,
+  licenseHeroTitle,
+  planGrid,
+  planTile,
+  planTileHint,
+  planTileLabel,
+  planTilePrice,
+  stackSm,
+  stepBadge,
+  stepLabel,
+  stepRow,
+} from '../../../ui-classes/popup';
+import { EAS_STORE_URL, LICENSE_COPY } from '../constants';
+import { IconCheck, IconKey } from './icons';
 
 type Status = 'busy' | 'active' | 'missing' | 'err';
 
@@ -16,40 +49,15 @@ const formatWhen = (ms: number): string =>
     minute: '2-digit',
   }).format(new Date(ms));
 
-const planLabel = (plan: LicensePlan): string => (plan === 'trial' ? copy.planTrial : copy.planMonthly);
+const expiryLabel = (entExp: number | null): string =>
+  entExp ? copy.expires(formatWhen(entExp)) : copy.lifetime;
 
-const easStoreButton = (label: string): React.ReactElement => (
-  <a
-    href={EAS_STORE_URL}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex h-9 shrink-0 items-center whitespace-nowrap rounded-full bg-primary-600 px-3.5 text-[0.75rem] font-semibold text-white no-underline transition-colors hover:bg-primary-700"
-  >
-    {label}
+const planLink = (label: string, price: string, hint: string): React.ReactElement => (
+  <a href={EAS_STORE_URL} target="_blank" rel="noopener noreferrer" className={planTile}>
+    <span className={planTileLabel}>{label}</span>
+    <span className={planTilePrice}>{price}</span>
+    <span className={planTileHint}>{hint}</span>
   </a>
-);
-
-const planOption = (title: string, detail: string): React.ReactElement => (
-  <div className="flex flex-col rounded-card bg-surface-canvas px-3 py-2.5 ring-1 ring-neutral-300">
-    <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-ink-soft">{title}</span>
-    <span className="mt-0.5 text-[0.8125rem] font-bold tracking-tight text-ink">{detail}</span>
-  </div>
-);
-
-const statusBadge = (label: string, tone: 'success' | 'warning'): React.ReactElement => (
-  <span
-    className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.6875rem] font-semibold ring-1 ${
-      tone === 'success'
-        ? 'bg-success-600/10 text-success-700 ring-success-600/25'
-        : 'bg-warning-500/10 text-warning-700 ring-warning-500/25'
-    }`}
-  >
-    <span
-      className={`size-1.5 shrink-0 rounded-full ${tone === 'success' ? 'bg-success-600' : 'bg-warning-500'}`}
-      aria-hidden
-    />
-    {label}
-  </span>
 );
 
 const errorMessage = (code: string | undefined): string => {
@@ -86,7 +94,6 @@ export function LicenseSection(): React.ReactElement {
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [activationId, setActivationId] = useState<string | null>(null);
   const [entExp, setEntExp] = useState<number | null>(null);
-  const [plan, setPlan] = useState<LicensePlan | null>(null);
   const [error, setError] = useState<string | null>(null);
   const busy = status === 'busy';
 
@@ -95,14 +102,12 @@ export function LicenseSection(): React.ReactElement {
       setActiveKey(null);
       setActivationId(null);
       setEntExp(null);
-      setPlan(null);
       setStatus('missing');
       return;
     }
     setActiveKey(session.key);
     setActivationId(session.activationId);
     setEntExp(session.entExp);
-    setPlan(session.plan);
     setStatus(sessionIsLive(session) ? 'active' : 'err');
   }, []);
 
@@ -138,7 +143,6 @@ export function LicenseSection(): React.ReactElement {
       setActiveKey(null);
       setActivationId(null);
       setEntExp(null);
-      setPlan(null);
       setKeyInput('');
       setError(null);
       setStatus('missing');
@@ -148,87 +152,88 @@ export function LicenseSection(): React.ReactElement {
   const licensed = status === 'active' || (status === 'err' && activeKey);
   const expired = status === 'err' && activeKey;
 
-  const statusLine: ReactNode = (() => {
-    if (busy) return copy.activating;
-    if (error) {
-      return <span className="text-[0.6875rem] font-semibold text-warning-700">{error}</span>;
-    }
-    if (status === 'missing') return copy.missing;
-    if (expired) return statusBadge(copy.expiredStatus, 'warning');
-    if (status === 'active') return statusBadge(copy.statusActive, 'success');
-    return null;
-  })();
+  if (!hydrated) return <div className="h-40 animate-pulse rounded-card bg-neutral-200/50" aria-hidden />;
 
-  const heading = licensed ? copy.activeHeading : copy.buyHeading;
-
-  return (
-    <section className={PANEL_CARD}>
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-ink-soft">License</p>
-        {!activeKey ? easStoreButton(copy.buyButton) : expired ? easStoreButton(copy.renewButton) : null}
-      </div>
-
-      <div className="mt-1 flex items-center justify-between gap-3">
-        <h2 className="min-w-0 text-[0.875rem] font-bold tracking-tight text-ink">{heading}</h2>
-        {statusLine !== null ? (
-          <div className="shrink-0 text-[0.6875rem] font-medium text-ink-soft">{statusLine}</div>
-        ) : null}
-      </div>
-
-      {hydrated && licensed && activeKey ? (
-        <div className="mt-2 space-y-2">
-          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            {expired ? copy.expiredLead : copy.activeLead}
-          </p>
-          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">
-            {plan ? `${planLabel(plan)}` : ''}
-            {plan ? ' · ' : ''}
-            {entExp ? copy.validUntil(formatWhen(entExp)) : copy.noEndDate}
-          </p>
-          <div>
-            <p className="text-[0.6875rem] font-medium text-ink-soft">{copy.keyLabel}</p>
-            <p className="mt-0.5 break-all font-mono text-[0.75rem] leading-snug text-ink-soft">{activeKey}</p>
-          </div>
-          {activationId ? (
-            <div>
-              <p className="text-[0.6875rem] font-medium text-ink-soft">{copy.idLabel}</p>
-              <p className="mt-0.5 break-all font-mono text-[0.75rem] leading-snug text-ink-soft">{activationId}</p>
+  if (licensed && activeKey) {
+    return (
+      <section className={stackSm} aria-labelledby="license-heading">
+        <h2 id="license-heading" className="sr-only">
+          {copy.activeHeading}
+        </h2>
+        <div className={activeHero}>
+          <div className={activeHeroGlow} aria-hidden />
+          <div className={activeHeroContent}>
+            <span className={activeHeroIcon}>
+              <IconCheck className="size-5" />
+            </span>
+            <div className={activeHeroText}>
+              <p className={activeHeroTitle}>{expired ? copy.expiredLead : copy.activeHeading}</p>
+              <p className={activeHeroMeta}>{expiryLabel(entExp)}</p>
             </div>
+          </div>
+          {expired ? (
+            <a href={EAS_STORE_URL} target="_blank" rel="noopener noreferrer" className={`${btnStoreRenew} mt-3`}>
+              {copy.renewAction}
+            </a>
           ) : null}
-          <button
-            type="button"
-            onClick={onClear}
-            className="inline-flex h-9 items-center rounded-full bg-surface-canvas px-3.5 text-[0.75rem] font-semibold text-ink ring-1 ring-neutral-300 transition-colors hover:bg-neutral-50"
-          >
+        </div>
+        <div className={keyPanel}>
+          <dl className={keyRow}>
+            <dt className={keyLabel}>{copy.keyLabel}</dt>
+            <dd className={keyValue}>{activeKey}</dd>
+            {activationId ? (
+              <>
+                <dt className={keyLabel}>{copy.idLabel}</dt>
+                <dd className={keyValue}>{activationId}</dd>
+              </>
+            ) : null}
+          </dl>
+          <button type="button" onClick={onClear} className={`${btnGhost} mt-3 w-full`}>
             {copy.remove}
           </button>
         </div>
-      ) : hydrated ? (
-        <div className="mt-2 space-y-2">
-          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">{copy.buyWhy}</p>
-          <div className="grid grid-cols-2 gap-1.5">
-            {planOption(copy.buyTrialTitle, copy.buyTrialDetail)}
-            {planOption(copy.buyMonthlyTitle, copy.buyMonthlyDetail)}
-          </div>
-          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">{copy.buyAfterPurchase}</p>
-          <input
-            type="text"
-            value={keyInput}
-            onChange={(e) => setKeyInput(e.target.value.toUpperCase())}
-            placeholder="EAS-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
-            className="box-border w-full rounded-card border border-neutral-300 bg-surface-canvas px-3 py-2 font-mono text-[0.8125rem] text-ink outline-none ring-primary-500 focus:border-primary-500 focus:ring-2"
-          />
-          <button
-            type="button"
-            disabled={busy || keyInput.trim().length < 8}
-            onClick={onActivate}
-            className="inline-flex h-9 w-full items-center justify-center rounded-full bg-primary-600 px-3.5 text-[0.8125rem] font-semibold text-white transition-colors hover:bg-primary-700 disabled:opacity-60"
-          >
-            {busy ? copy.activating : copy.activate}
-          </button>
-          <p className="text-[0.8125rem] font-medium leading-snug text-ink-soft">{copy.buyDevice}</p>
+      </section>
+    );
+  }
+
+  return (
+    <section className={stackSm} aria-labelledby="license-heading">
+      <h2 id="license-heading" className="sr-only">
+        {copy.buyHeading}
+      </h2>
+      <div className={licenseHero}>
+        <div className={licenseHeroGlow} aria-hidden />
+        <p className={licenseHeroTitle}>{copy.buyHeading}</p>
+        <p className={`${licenseHeroBody} mt-1`}>{copy.buyWhy}</p>
+        <div className={`${planGrid} mt-3`}>
+          {planLink(copy.storeTrial, copy.storeTrialPrice, copy.storeTrialHint)}
+          {planLink(copy.storeMonthly, copy.storeMonthlyPrice, copy.storeMonthlyHint)}
         </div>
-      ) : null}
+      </div>
+      <div className={activateCard}>
+        <div className={stepRow}>
+          <span className={stepBadge}>2</span>
+          <span className={stepLabel}>{copy.buyAfterPurchase}</span>
+        </div>
+        {error ? <p className={`${errorBanner} mb-2`}>{error}</p> : null}
+        <input
+          type="text"
+          value={keyInput}
+          onChange={(e) => setKeyInput(e.target.value.toUpperCase())}
+          placeholder="EAS-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+          className={fieldInput}
+        />
+        <button
+          type="button"
+          disabled={busy || keyInput.trim().length < 8}
+          onClick={onActivate}
+          className={`${btnActivate} mt-2`}
+        >
+          <IconKey className="size-4" />
+          {busy ? copy.activating : copy.activate}
+        </button>
+        <p className="mt-2 text-center text-[0.6875rem] font-semibold text-ink-soft">{copy.buyDevice}</p>
+      </div>
     </section>
   );
 }
