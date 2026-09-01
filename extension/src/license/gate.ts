@@ -2,23 +2,23 @@ import { EAS_API, LICENSE_APPS, type LicenseApp } from './config';
 import { randomBase64Url, verifyLease } from './lease';
 import {
   clearLicenseSession,
+  dropExpiredLicense,
   getInstanceId,
   getLicenseSession,
+  leaseIsLive,
   saveLicenseSession,
 } from './storage';
 import { LICENSE_KEY_RE, type EasLicenseResult, type LicenseSession, type LicenseState } from './types';
 import { verifyLicense } from './verify';
 
-const REVOKE_ERRORS = new Set(['LICENSE_NOT_VALID', 'ACTIVATION_NOT_VALID', 'LICENSE_EXPIRED']);
+const REVOKE_ERRORS = new Set(['LICENSE_NOT_VALID', 'ACTIVATION_NOT_VALID']);
 
 type PostResult =
   | { kind: 'network' }
   | { kind: 'response'; data: EasLicenseResult };
 
-const hasGrant = (data: EasLicenseResult): data is EasLicenseResult & {
-  lease: string;
-  activation_token: string;
-} => typeof data.lease === 'string' && typeof data.activation_token === 'string';
+const hasLease = (data: EasLicenseResult): data is EasLicenseResult & { lease: string } =>
+  typeof data.lease === 'string';
 
 const isoMs = (value: string | null | undefined): number | null => {
   if (typeof value !== 'string' || !value) return null;
@@ -26,9 +26,9 @@ const isoMs = (value: string | null | undefined): number | null => {
   return Number.isFinite(ms) ? ms : null;
 };
 
-const mergeEntExp = (jwtEntExp: number | null, apiEntExp: number | null): number | null => {
-  if (jwtEntExp !== null && apiEntExp !== null) return Math.min(jwtEntExp, apiEntExp);
-  return jwtEntExp ?? apiEntExp;
+const mergeEntExp = (jwt: number | null, api: number | null, prior: number | null): number | null => {
+  const fromGrant = jwt !== null && api !== null ? Math.min(jwt, api) : jwt ?? api;
+  return fromGrant ?? prior;
 };
 
 const postJson = async (
@@ -69,21 +69,17 @@ const sessionState = (session: LicenseSession): LicenseState => ({
   entExp: session.entExp,
 });
 
-const offlineWhileUnreachable = async (): Promise<LicenseState> => {
-  const session = await getLicenseSession();
-  if (!session) return { ok: false, error: 'NO_KEY' };
-  if (await verifyLicense()) return sessionState(session);
-  return { ok: false, error: 'LEASE_EXPIRED' };
-};
-
 const acceptGrant = async (
   key: string,
   instanceId: string,
   nonce: string,
   applicationId: string,
   data: EasLicenseResult,
+  prior?: { token?: string; entExp: number | null },
 ): Promise<LicenseState> => {
-  if (!data.valid || !hasGrant(data)) return { ok: false, error: data.error ?? 'GRANT_INCOMPLETE' };
+  if (!data.valid || !hasLease(data)) return { ok: false, error: data.error ?? 'GRANT_INCOMPLETE' };
+  const activationToken = data.activation_token ?? prior?.token;
+  if (!activationToken) return { ok: false, error: 'GRANT_INCOMPLETE' };
   const appId = typeof data.application_id === 'string' ? data.application_id : applicationId;
   const verified = await verifyLease(data.lease, { applicationId: appId, nonce });
   if (!verified) return { ok: false, error: 'LEASE_INVALID' };
@@ -95,18 +91,19 @@ const acceptGrant = async (
     plan: verified.plan,
     applicationId: verified.applicationId,
     activationId: verified.activationId,
-    activationToken: data.activation_token,
+    activationToken,
     instanceId,
     lease: data.lease,
     nonce,
     leaseExp: verified.leaseExp,
-    entExp: mergeEntExp(verified.entExp, isoMs(data.entitlement_expires_at)),
+    entExp: mergeEntExp(verified.entExp, isoMs(data.entitlement_expires_at), prior?.entExp ?? null),
   };
   await saveLicenseSession(session);
   return sessionState(session);
 };
 
 const validateWithServer = async (session: LicenseSession): Promise<LicenseState> => {
+  if (await dropExpiredLicense(session)) return { ok: false, error: 'LICENSE_EXPIRED' };
   const nonce = randomBase64Url(32);
   const res = await postJson(
     '/validate',
@@ -117,20 +114,21 @@ const validateWithServer = async (session: LicenseSession): Promise<LicenseState
     },
     false,
   );
-  if (res.kind === 'network') return offlineWhileUnreachable();
+  if (res.kind === 'network') {
+    return (await verifyLicense()) ? sessionState(session) : { ok: false, error: 'LEASE_EXPIRED' };
+  }
   if (!res.data.valid) {
     const error = res.data.error ?? 'VALIDATE_FAILED';
-    if (REVOKE_ERRORS.has(error)) await clearLicenseSession();
+    if (error === 'LICENSE_EXPIRED' || REVOKE_ERRORS.has(error)) await clearLicenseSession();
     return { ok: false, error };
   }
-  if (hasGrant(res.data)) {
-    const granted = await acceptGrant(session.key, session.instanceId, nonce, session.applicationId, res.data);
-    if (!granted.ok) await clearLicenseSession();
-    return granted;
+  if (hasLease(res.data)) {
+    return acceptGrant(session.key, session.instanceId, nonce, session.applicationId, res.data, {
+      token: session.activationToken,
+      entExp: session.entExp,
+    });
   }
-  if (!(await verifyLicense())) return { ok: false, error: 'LEASE_EXPIRED' };
-  const current = await getLicenseSession();
-  return current ? sessionState(current) : { ok: false, error: 'NO_KEY' };
+  return (await verifyLicense()) ? sessionState(session) : { ok: false, error: 'LEASE_EXPIRED' };
 };
 
 const activateOnApp = async (app: LicenseApp, key: string, instanceId: string): Promise<LicenseState> => {
@@ -175,20 +173,29 @@ export const activateLicense = async (rawKey: string): Promise<LicenseState> => 
   return last;
 };
 
+let refreshInFlight: Promise<LicenseState> | null = null;
+
 export const refreshLicense = async (): Promise<LicenseState> => {
-  const session = await getLicenseSession();
-  if (!session) return { ok: false, error: 'NO_KEY' };
-  return validateWithServer(session);
+  if (refreshInFlight) return refreshInFlight;
+  const run = async (): Promise<LicenseState> => {
+    const session = await getLicenseSession();
+    if (!session) return { ok: false, error: 'NO_KEY' };
+    if (await dropExpiredLicense(session)) return { ok: false, error: 'LICENSE_EXPIRED' };
+    return validateWithServer(session);
+  };
+  refreshInFlight = run().finally(() => {
+    refreshInFlight = null;
+  });
+  return refreshInFlight;
 };
 
 export const ensureLicense = async (): Promise<boolean> => {
   if (await verifyLicense()) return true;
   const session = await getLicenseSession();
-  if (!session) return false;
-  const now = Date.now();
-  if (session.entExp !== null && session.entExp <= now) return false;
-  if (session.leaseExp <= now) return (await refreshLicense()).ok;
-  return false;
+  if (!session || (await dropExpiredLicense(session))) return false;
+  if (leaseIsLive(session.leaseExp)) return false;
+  const refreshed = await refreshLicense();
+  return refreshed.ok && (await verifyLicense());
 };
 
 export const deactivateLicense = async (): Promise<void> => {

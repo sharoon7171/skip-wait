@@ -141,8 +141,7 @@ import {
 } from '../sites/vegamovies';
 import { initCinefreakMediator } from '../sites/cinefreak';
 import { refreshLicense } from '../license/gate';
-import { getLicenseSession, storageKeys } from '../license/storage';
-import { verifyLicense } from '../license/verify';
+import { dropExpiredLicense, getLicenseSession, storageKeys } from '../license/storage';
 
 const INITS = [
   initStorylineCoursePlayBrand,
@@ -301,7 +300,7 @@ const MAX_TIMER_MS = 2_147_483_647;
 
 const armLicenseExpiryTimer = async (): Promise<void> => {
   const session = await getLicenseSession();
-  if (!session) return;
+  if (!session || (await dropExpiredLicense(session))) return;
   const now = Date.now();
   const arm = (exp: number, run: () => Promise<unknown>): void => {
     const delay = exp - now;
@@ -313,7 +312,7 @@ const armLicenseExpiryTimer = async (): Promise<void> => {
     window.setTimeout(() => void run(), delay);
   };
   arm(session.leaseExp, refreshLicense);
-  if (session.entExp !== null) arm(session.entExp, async () => verifyLicense());
+  if (session.entExp !== null) arm(session.entExp, dropExpiredLicense);
 };
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;

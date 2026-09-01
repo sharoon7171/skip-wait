@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { activateLicense, deactivateLicense } from '../../license/gate';
-import { getLicenseSession, sessionIsLive } from '../../license/storage';
+import { getLicenseSession, storageKeys } from '../../license/storage';
 import type { LicenseSession } from '../../license/types';
 import {
   activateCard,
@@ -13,7 +13,6 @@ import {
   activeHeroTitle,
   btnActivate,
   btnGhost,
-  btnStoreRenew,
   errorBanner,
   fieldInput,
   keyLabel,
@@ -36,8 +35,6 @@ import {
 } from '../../../ui-classes/popup';
 import { EAS_STORE_URL, LICENSE_COPY } from '../constants';
 import { IconCheck, IconLicenseKey } from './icons';
-
-type Status = 'busy' | 'active' | 'missing' | 'err';
 
 const copy = LICENSE_COPY;
 
@@ -75,7 +72,7 @@ const errorMessage = (code: string | undefined): string => {
     case 'LEASE_INVALID':
       return 'License grant could not be verified.';
     case 'LEASE_EXPIRED':
-      return 'Offline lease expired. Activate again when online.';
+      return 'Offline lease expired. Check your connection.';
     case 'LICENSE_EXPIRED':
       return 'License expired.';
     case 'NETWORK':
@@ -89,53 +86,60 @@ const errorMessage = (code: string | undefined): string => {
 
 export function LicenseSection(): React.ReactElement {
   const [hydrated, setHydrated] = useState(false);
-  const [status, setStatus] = useState<Status>('missing');
+  const [busy, setBusy] = useState(false);
   const [keyInput, setKeyInput] = useState('');
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [activationId, setActivationId] = useState<string | null>(null);
   const [entExp, setEntExp] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const busy = status === 'busy';
 
   const applySession = useCallback((session: LicenseSession | null): void => {
     if (!session) {
       setActiveKey(null);
       setActivationId(null);
       setEntExp(null);
-      setStatus('missing');
       return;
     }
     setActiveKey(session.key);
     setActivationId(session.activationId);
     setEntExp(session.entExp);
-    setStatus(sessionIsLive(session) ? 'active' : 'err');
   }, []);
 
   const loadFromStorage = useCallback(async (): Promise<void> => {
     applySession(await getLicenseSession());
-    setError(null);
   }, [applySession]);
 
   useEffect(() => {
     void loadFromStorage().then(() => setHydrated(true));
+    const onChanged = (changes: { [key: string]: chrome.storage.StorageChange }, area: string): void => {
+      if (area !== 'local') return;
+      if (
+        storageKeys.licenseKey in changes ||
+        storageKeys.entExp in changes ||
+        storageKeys.leaseExp in changes
+      ) {
+        void loadFromStorage();
+      }
+    };
+    chrome.storage.onChanged.addListener(onChanged);
+    return () => chrome.storage.onChanged.removeListener(onChanged);
   }, [loadFromStorage]);
 
   const onActivate = (): void => {
-    setStatus('busy');
+    setBusy(true);
     setError(null);
     void activateLicense(keyInput)
       .then(async (state) => {
         if (!state.ok) {
           setError(errorMessage(state.error));
-          setStatus('err');
+          applySession(await getLicenseSession());
           return;
         }
+        setError(null);
         applySession(await getLicenseSession());
       })
-      .catch(() => {
-        setError(errorMessage('NETWORK'));
-        setStatus('err');
-      });
+      .catch(() => setError(errorMessage('NETWORK')))
+      .finally(() => setBusy(false));
   };
 
   const onClear = (): void => {
@@ -145,16 +149,12 @@ export function LicenseSection(): React.ReactElement {
       setEntExp(null);
       setKeyInput('');
       setError(null);
-      setStatus('missing');
     });
   };
 
-  const licensed = status === 'active' || (status === 'err' && activeKey);
-  const expired = status === 'err' && activeKey;
-
   if (!hydrated) return <div className="h-40 animate-pulse rounded-card bg-neutral-200/50" aria-hidden />;
 
-  if (licensed && activeKey) {
+  if (activeKey) {
     return (
       <section className={stackSm} aria-labelledby="license-heading">
         <h2 id="license-heading" className="sr-only">
@@ -167,16 +167,12 @@ export function LicenseSection(): React.ReactElement {
               <IconCheck className="size-5" />
             </span>
             <div className={activeHeroText}>
-              <p className={activeHeroTitle}>{expired ? copy.expiredLead : copy.activeHeading}</p>
+              <p className={activeHeroTitle}>{copy.activeHeading}</p>
               <p className={activeHeroMeta}>{expiryLabel(entExp)}</p>
             </div>
           </div>
-          {expired ? (
-            <a href={EAS_STORE_URL} target="_blank" rel="noopener noreferrer" className={`${btnStoreRenew} mt-3`}>
-              {copy.renewAction}
-            </a>
-          ) : null}
         </div>
+        {error ? <p className={errorBanner}>{error}</p> : null}
         <div className={keyPanel}>
           <dl className={keyRow}>
             <dt className={keyLabel}>{copy.keyLabel}</dt>

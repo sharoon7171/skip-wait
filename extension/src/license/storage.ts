@@ -33,8 +33,15 @@ export const storageKeys = {
 
 export const leaseIsLive = (exp: number): boolean => Date.now() < exp;
 
-export const sessionIsLive = (session: LicenseSession): boolean =>
-  leaseIsLive(session.leaseExp) && (session.entExp === null || leaseIsLive(session.entExp));
+export const entitlementIsLive = (entExp: number | null): boolean =>
+  entExp === null || Date.now() < entExp;
+
+export const dropExpiredLicense = async (session?: LicenseSession | null): Promise<boolean> => {
+  const current = session ?? (await getLicenseSession());
+  if (!current || entitlementIsLive(current.entExp)) return false;
+  await clearLicenseSession();
+  return true;
+};
 
 export const getInstanceId = async (): Promise<string> => {
   const stored = await chrome.storage.local.get(INSTANCE_ID_KEY);

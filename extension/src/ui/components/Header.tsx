@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getLicenseSession, sessionIsLive, storageKeys } from '../../license/storage';
+import { entitlementIsLive, getLicenseSession, storageKeys } from '../../license/storage';
 import { headerBar, headerBrand, headerIcon, headerTag, headerTitle } from '../../../ui-classes/popup';
 import { LICENSE_COPY, assetUrl } from '../constants';
 import { StatusPill } from './StatusPill';
@@ -15,7 +15,7 @@ export function Header(): React.ReactElement {
       setStatus('missing');
       return;
     }
-    setStatus(sessionIsLive(session) ? 'active' : 'expired');
+    setStatus(entitlementIsLive(session.entExp) ? 'active' : 'expired');
   }, []);
 
   useEffect(() => {
