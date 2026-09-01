@@ -108,6 +108,8 @@ import { initMuhammadniazCountdownBypass } from '../sites/muhammadniaz';
 import { initTipsguruRedirect } from '../sites/tipsguru';
 import { initTumadamUnlock } from '../sites/tumadam';
 import { initWahmiCountdownBypass } from '../sites/wahmi';
+import { initWeadownRedirect } from '../sites/weadown';
+import { initZifuryBypass } from '../sites/zifury';
 import { initCutyGate } from '../sites/cuty';
 import { initCutwinGate } from '../sites/cutwin';
 import { initExeioGate } from '../sites/exeio';
@@ -282,6 +284,8 @@ const INITS = [
   initTumadamUnlock,
   initPlingDirectDownload,
   initWahmiCountdownBypass,
+  initWeadownRedirect,
+  initZifuryBypass,
   initWpSafelinkQueryRedirect,
   initWpSafelinkRedirect,
   initSwiftuploadsDirectDownload,

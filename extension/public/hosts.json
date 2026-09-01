@@ -31,9 +31,15 @@
       "wahmi.org"
     ]
   },
+  "weadown": {
+    "hosts": [
+      "weadown.com"
+    ]
+  },
   "vegamovies": {
     "hosts": [
       "1vegamovies.cc",
+      "1vegamovies.me",
       "1vegamovies.tw"
     ]
   },
@@ -657,5 +663,8 @@
   },
   "link4m": {
     "hosts": ["link4m.co"]
+  },
+  "zifury": {
+    "hosts": ["zifury.com"]
   }
 }

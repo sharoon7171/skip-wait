@@ -1,0 +1,1 @@
+export { initWeadownRedirect } from './redirect';
