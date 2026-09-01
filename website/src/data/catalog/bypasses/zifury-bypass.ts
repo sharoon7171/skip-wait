@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Zifury free saves open on a guest gate: tap GUEST DOWNLOAD, sit through PLEASE WAIT seconds, then wait again while Fetching download link runs before the green Download button appears. Skip Wait is the $1.50/month Chrome extension that runs that guest path for you and opens the save as soon as the host allows it.';
+  'Zifury free saves open on a guest gate: tap GUEST DOWNLOAD, sit through PLEASE WAIT seconds, then wait again while Fetching download link runs before the green Download button appears. Skip Wait is the Chrome extension that runs that guest path for you and opens the save as soon as the host allows it.';
 
 const body = `## GUEST DOWNLOAD and a second wait after it
 
@@ -73,8 +73,9 @@ const faq: readonly BypassFaq[] = [
       'Skip Wait follows the same multi-hop guest path the site would show and keeps advancing until the final download is ready.',
   },
   {
-    question: 'How much does the Zifury bypass cost?',
-    answer: 'Skip Wait is $1.50 per month. Activate a license in the popup.',
+    question: 'Do I need a license?',
+    answer:
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

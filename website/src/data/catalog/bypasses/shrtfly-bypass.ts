@@ -5,7 +5,7 @@ const name = 'ShrtFly';
 const bypassType = 'Skip Short Link';
 
 const description =
-  '$1.50/month ShrtFly bypass for Chrome that skips ad-gated short-link timers, human checks, and publisher waits so you reach the destination faster.';
+  'ShrtFly bypass for Chrome that skips ad-gated short-link timers, human checks, and publisher waits so you reach the destination faster.';
 
 const domains = [
   'shrtslug.biz',
@@ -33,7 +33,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching for a ShrtFly bypass or shrtslug bypass usually cleared a verify hop only to land on publisher pages with Turnstile, progress bars, and another countdown. Skip Wait is the $1.50/month Chrome extension that runs that ad link shortener bypass on the live chain so skip waiting page busywork is not your job.';
+  'People searching for a ShrtFly bypass or shrtslug bypass usually cleared a verify hop only to land on publisher pages with Turnstile, progress bars, and another countdown. Skip Wait is the Chrome extension that runs that ad link shortener bypass on the live chain so skip waiting page busywork is not your job.';
 
 const body = `## Verify hops into rotating publisher pages
 
@@ -78,9 +78,9 @@ const faq: readonly BypassFaq[] = [
       'Client busywork and continue loops go away. Timers the network still enforces server-side are waited honestly before redirect.',
   },
   {
-    question: 'How much does the ShrtFly bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

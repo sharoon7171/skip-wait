@@ -26,7 +26,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Ontops /st links park traffic on a hop gate before the real destination. Skip Wait is the $1.50/month Chrome extension that clears that Ontops hop so you open the stored URL without babysitting the intermediate page.';
+  'Ontops /st links park traffic on a hop gate before the real destination. Skip Wait is the Chrome extension that clears that Ontops hop so you open the stored URL without babysitting the intermediate page.';
 
 const body = `## The /st hop is the stall
 
@@ -65,9 +65,9 @@ const faq: readonly BypassFaq[] = [
       'Skip Wait still targets the destination on the /st URL when that value is present, so a blocked hop UI does not have to succeed first.',
   },
   {
-    question: 'How much does Ontops support cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. Ontops runs on supported /st links.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

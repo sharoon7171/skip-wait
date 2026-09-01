@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'LiteAPKs bypass clears the please-wait Download apk screen after you pick a build. Skip Wait is the $1.50/month Chrome extension that turns that liteapks download waiting page into a direct download from the version list—no progress stall, no skip countdown timer busywork on supported posts.';
+  'LiteAPKs bypass clears the please-wait Download apk screen after you pick a build. Skip Wait is the Chrome extension that turns that liteapks download waiting page into a direct download from the version list—no progress stall, no skip countdown timer busywork on supported posts.';
 
 const body = `## Download apk that still opens a waiting page
 
@@ -95,9 +95,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the download page, click Download apk, and let the LiteAPKs bypass extension run on that tab.',
   },
   {
-    question: 'How much does the LiteAPKs path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The LiteAPKs bypass runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

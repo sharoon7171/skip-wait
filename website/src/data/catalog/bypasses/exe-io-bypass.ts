@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Exe.io bypass searches spike when a short link stops on please-wait chrome, a captcha, or a Get Link countdown instead of the file or article. Skip Wait is the $1.50/month Chrome extension that runs the live unlock path on exe.io and exeygo.com—continue, captcha, then go-link—without you clicking through every gate by hand.';
+  'Exe.io bypass searches spike when a short link stops on please-wait chrome, a captcha, or a Get Link countdown instead of the file or article. Skip Wait is the Chrome extension that runs the live unlock path on exe.io and exeygo.com—continue, captcha, then go-link—without you clicking through every gate by hand.';
 
 const body = `## Three gates before the real redirect
 
@@ -83,9 +83,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported pages. Open the shared alias normally; matching mirror hosts use the same bypass path.',
   },
   {
-    question: 'How much does the Exe.io bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

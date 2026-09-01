@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A PeskTop bypass search usually means Direct download opened a generating wait instead of the file. Skip Wait is the $1.50/month Chrome extension that resolves the signed CDN link from that button so skip waiting page replaces the timer screen.';
+  'A PeskTop bypass search usually means Direct download opened a generating wait instead of the file. Skip Wait is the Chrome extension that resolves the signed CDN link from that button so skip waiting page replaces the timer screen.';
 
 const body = `## Direct download that still generates a wait
 
@@ -63,9 +63,9 @@ const faq: readonly BypassFaq[] = [
       'On supported flows, Skip Wait handles the wait that follows the download control you already use, including common mirror hops.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

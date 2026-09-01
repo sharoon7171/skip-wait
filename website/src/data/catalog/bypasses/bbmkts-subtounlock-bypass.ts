@@ -26,7 +26,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'BBMKTS Sub to Unlock pages open with a SUB TO UNLOCK card, Join Discord / Sub + Like + Cmt rows, and a locked UNLOCK control. Skip Wait is the $1.50/month Chrome extension that clears those waits on supported subtounlock links.';
+  'BBMKTS Sub to Unlock pages open with a SUB TO UNLOCK card, Join Discord / Sub + Like + Cmt rows, and a locked UNLOCK control. Skip Wait is the Chrome extension that clears those waits on supported subtounlock links.';
 
 const body = `## Subscribe rows that only delay UNLOCK
 
@@ -45,7 +45,7 @@ None of those rows verify a subscription in the browser. They burn ten-plus seco
 
 Skip Wait runs on supported BBMKTS subtounlock pages, skips the subscribe busywork, and opens the destination the locker already holds for that id. You stay on the tab with an overlay until the link loads.
 
-No paste tool and no social checklist—just the Sub to Unlock path at $1.50/month after license activation.
+No paste tool and no social checklist—just the Sub to Unlock path after license activation.
 `;
 
 const faq: readonly BypassFaq[] = [
@@ -65,9 +65,9 @@ const faq: readonly BypassFaq[] = [
       'Skip Wait targets the destination from the locker id, so you are not babysitting Unlock 2 timers.',
   },
   {
-    question: 'How much does this path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. BBMKTS Sub to Unlock runs on supported subtounlock links.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

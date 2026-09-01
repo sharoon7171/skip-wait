@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for an AnyGame bypass or MOD APK download bypass usually means Fast Download and Torrent still hide behind a countdown. Skip Wait is the $1.50/month Chrome extension that unlocks those direct file links when you click—without sitting on the generating timer.';
+  'Looking for an AnyGame bypass or MOD APK download bypass usually means Fast Download and Torrent still hide behind a countdown. Skip Wait is the Chrome extension that unlocks those direct file links when you click—without sitting on the generating timer.';
 
 const body = `## Fast Download and Torrent behind a countdown
 
@@ -78,9 +78,9 @@ const faq: readonly BypassFaq[] = [
       'Yes. Supported torrent controls follow the same unlock path—click once and let Skip Wait clear the intermediary wait.',
   },
   {
-    question: 'How much does the AnyGame path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The AnyGame bypass runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

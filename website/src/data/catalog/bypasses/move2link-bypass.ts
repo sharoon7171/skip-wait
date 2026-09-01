@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a Move2Link bypass or please wait bypass usually means a short link sent you through blog session waits and a go page before the real URL. Skip Wait is the $1.50/month Chrome extension that clears those waiting pages so continue loops stop eating the session.';
+  'Looking for a Move2Link bypass or please wait bypass usually means a short link sent you through blog session waits and a go page before the real URL. Skip Wait is the Chrome extension that clears those waiting pages so continue loops stop eating the session.';
 
 const body = `## Shortener entry, blog middle, go-page exit
 
@@ -66,9 +66,9 @@ const faq: readonly BypassFaq[] = [
       'If the waiting-page pattern is the same, the extension follows live behavior. You do not paste the URL into a third-party tool when mediators rotate.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Move2Link path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A FilesPayouts bypass search usually means Free Download still forced a countdown or mediator page before the archive. Skip Wait is the $1.50/month Chrome extension that posts through to the download step on that click so the free path does not stall on wait chrome.';
+  'A FilesPayouts bypass search usually means Free Download still forced a countdown or mediator page before the archive. Skip Wait is the Chrome extension that posts through to the download step on that click so the free path does not stall on wait chrome.';
 
 const body = `## Free Download that still forces a countdown
 
@@ -62,9 +62,9 @@ const faq: readonly BypassFaq[] = [
       'No. Skip Wait automates the free path. Premium is unrelated to the extension.',
   },
   {
-    question: 'How much does the FilesPayouts bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A 1shortlink bypass search usually starts when an ad shortener drops you on a timed gate instead of the page or file behind the share. Skip Wait is the $1.50/month Chrome extension that clears that waiting page and opens the destination once unlock is allowed.';
+  'A 1shortlink bypass search usually starts when an ad shortener drops you on a timed gate instead of the page or file behind the share. Skip Wait is the Chrome extension that clears that waiting page and opens the destination once unlock is allowed.';
 
 const body = `## Ad shortener shares that stall on Continue
 
@@ -75,9 +75,9 @@ const faq: readonly BypassFaq[] = [
       'No. Open the short link in Chrome with Skip Wait enabled and stay on that tab.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The 1shortlink path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Tfly bypass or Tfly timer bypass search usually means a monetized short URL parked you on a continue gate, captcha, and unlock countdown instead of the real destination. Skip Wait is the $1.50/month Chrome extension that clears those waiting-page steps so skip click to continue is not a manual loop.';
+  'A Tfly bypass or Tfly timer bypass search usually means a monetized short URL parked you on a continue gate, captcha, and unlock countdown instead of the real destination. Skip Wait is the Chrome extension that clears those waiting-page steps so skip click to continue is not a manual loop.';
 
 const body = `## Please-wait, then check, then unlock
 
@@ -71,9 +71,9 @@ const faq: readonly BypassFaq[] = [
       'Yes when the site shows one. Skip Wait pins the check; after you finish it, unlock continues without hunting Continue through ads.',
   },
   {
-    question: 'How much does the Tfly bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. This path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

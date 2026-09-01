@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'APKVision bypass is for the download page that shows “Your download link is almost ready” with a green countdown circle before Download APK. Skip Wait is the $1.50/month Chrome extension that skips that apkvision download waiting page so the file button is already on screen.';
+  'APKVision bypass is for the download page that shows “Your download link is almost ready” with a green countdown circle before Download APK. Skip Wait is the Chrome extension that skips that apkvision download waiting page so the file button is already on screen.';
 
 const body = `## Almost ready that still makes you wait
 
@@ -87,9 +87,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the download page and use Download APK there. Bypass countdown timer relief for this host runs in Chrome on that tab.',
   },
   {
-    question: 'How much does the APKVision path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The APKVision bypass runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

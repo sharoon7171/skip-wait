@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Coomeet iframe bypass search usually means the chat embed is still stuck on a long please-wait countdown inside the frame. Skip Wait is the $1.50/month Chrome extension that shortens that embedded timer so the loading screen finishes in seconds instead of dragging for minutes.';
+  'A Coomeet iframe bypass search usually means the chat embed is still stuck on a long please-wait countdown inside the frame. Skip Wait is the Chrome extension that shortens that embedded timer so the loading screen finishes in seconds instead of dragging for minutes.';
 
 const body = `## Chat embeds stuck on a long iframe load
 
@@ -71,9 +71,9 @@ const faq: readonly BypassFaq[] = [
       'No. Skip Wait runs as a Chrome extension on matching iframe pages with no Tampermonkey requirement.',
   },
   {
-    question: 'How much does the Coomeet Iframe path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Coomeet Iframe bypass runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

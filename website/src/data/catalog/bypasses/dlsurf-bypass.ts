@@ -43,7 +43,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A dl.surf bypass matters when Continue to Download opens an ads modal with countdown steps before the file. Skip Wait is the $1.50/month Chrome extension that skips those ad timers on supported file pages and unlocks the download with the account you already signed in with.';
+  'A dl.surf bypass matters when Continue to Download opens an ads modal with countdown steps before the file. Skip Wait is the Chrome extension that skips those ad timers on supported file pages and unlocks the download with the account you already signed in with.';
 
 const body = `## Continue to Download that turns into ads
 
@@ -99,8 +99,9 @@ const faq: readonly BypassFaq[] = [
       'Use Try again on the Skip Wait panel. That starts a fresh check without sending you back through the ads modal.',
   },
   {
-    question: 'How much does the dl.surf bypass cost?',
-    answer: 'Skip Wait is $1.50 per month. Activate a license in the popup.',
+    question: 'Do I need a license?',
+    answer:
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

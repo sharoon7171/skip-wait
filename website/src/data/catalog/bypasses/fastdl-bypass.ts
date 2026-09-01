@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A FastDL bypass search usually means you clicked download and got parked on a countdown or generating page instead of the archive. Skip Wait is the $1.50/month Chrome extension that resolves the real file URL behind that click so the intermediary screen never owns the transfer.';
+  'A FastDL bypass search usually means you clicked download and got parked on a countdown or generating page instead of the archive. Skip Wait is the Chrome extension that resolves the real file URL behind that click so the intermediary screen never owns the transfer.';
 
 const body = `## Generating screens between click and file
 
@@ -62,9 +62,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported paths. Extra wait screens on mirror and host buttons are bypassed so the file opens from the button you pressed.',
   },
   {
-    question: 'How much does the FastDL bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

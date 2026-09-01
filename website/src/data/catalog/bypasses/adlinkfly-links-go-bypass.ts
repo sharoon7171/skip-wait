@@ -38,7 +38,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Links Go waiting pages on linkjust.com, pahe.plus, go.zovo.ink, and shortnest.com stack please-wait seconds, Continue or Proceed, then Get Link. Skip Wait is the $1.50/month Chrome extension that runs that interstitial on those hosts so the listed short URL is an overlay, not a manual timer sit.';
+  'Links Go waiting pages on linkjust.com, pahe.plus, go.zovo.ink, and shortnest.com stack please-wait seconds, Continue or Proceed, then Get Link. Skip Wait is the Chrome extension that runs that interstitial on those hosts so the listed short URL is an overlay, not a manual timer sit.';
 
 const body = `## Please wait, then Get Link again
 
@@ -88,9 +88,9 @@ const faq: readonly BypassFaq[] = [
       'No. If captcha appears, Skip Wait pins it on the overlay. Supported Links Go waiting pages do not need a userscript.',
   },
   {
-    question: 'How much does the AdLinkFly Links Go path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

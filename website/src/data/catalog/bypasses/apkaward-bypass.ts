@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'APKAward bypass is for the download page that shows Preparing your download link… with a green countdown before Download appears. Skip Wait is the $1.50/month Chrome extension that skips that apkaward download waiting page so the Download button is already on screen.';
+  'APKAward bypass is for the download page that shows Preparing your download link… with a green countdown before Download appears. Skip Wait is the Chrome extension that skips that apkaward download waiting page so the Download button is already on screen.';
 
 const body = `## Preparing a link that is already there
 
@@ -84,9 +84,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the download page and use Download there. Bypass countdown timer relief for this host runs in Chrome on that tab.',
   },
   {
-    question: 'How much does the APKAward path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The APKAward bypass runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A UsersDrive bypass or Create Download Link countdown search usually means a file page forced a timer, then an ad mediator, before the real CDN URL. Skip Wait is the $1.50/month Chrome extension that posts the create-download form, reads the CDN link, and starts that file from a branded button after Turnstile when required.';
+  'A UsersDrive bypass or Create Download Link countdown search usually means a file page forced a timer, then an ad mediator, before the real CDN URL. Skip Wait is the Chrome extension that posts the create-download form, reads the CDN link, and starts that file from a branded button after Turnstile when required.';
 
 const body = `## Create Download Link as a timer wall
 
@@ -72,9 +72,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported flows. Mediator popups on download click stay out of the way while the branded button uses the real CDN URL.',
   },
   {
-    question: 'How much does the UsersDrive bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

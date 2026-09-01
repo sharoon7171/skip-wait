@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching an iCutLink bypass or icutlink go page skip usually clicked a monetized short URL and landed in blog waits plus a go-page countdown instead of the file. Skip Wait is the $1.50/month Chrome extension that walks those gates and finishes unlock without you hunting Continue on every hop.';
+  'People searching an iCutLink bypass or icutlink go page skip usually clicked a monetized short URL and landed in blog waits plus a go-page countdown instead of the file. Skip Wait is the Chrome extension that walks those gates and finishes unlock without you hunting Continue on every hop.';
 
 const body = `## Go pages after a tour of blog waits
 
@@ -79,9 +79,9 @@ const faq: readonly BypassFaq[] = [
       'Yes when those hosts are supported and follow the same unlock pattern. Open the share as usual; Skip Wait runs on matching pages.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The iCutLink path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

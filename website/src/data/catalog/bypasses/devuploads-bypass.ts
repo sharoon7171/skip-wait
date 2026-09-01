@@ -48,7 +48,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Searching how to download from DevUploads or for a DevUploads bypass usually means a shared file URL bounced you into a long article with Scroll Down, Generate Download Link, and Link Generated waits. Skip Wait is a $1.50/month Chrome extension that locks the mediator file card, prepares the CDN link, and shows one Direct Download · Skip Wait control.';
+  'Searching how to download from DevUploads or for a DevUploads bypass usually means a shared file URL bounced you into a long article with Scroll Down, Generate Download Link, and Link Generated waits. Skip Wait is a Chrome extension that locks the mediator file card, prepares the CDN link, and shows one Direct Download · Skip Wait control.';
 
 const body = `## Partner articles that bury Download Now
 
@@ -99,9 +99,9 @@ const faq: readonly BypassFaq[] = [
       'No. Skip Wait only shows a ready Direct Download button. You choose when to click.',
   },
   {
-    question: 'How much does the DevUploads bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A WP Safelink bypass matters when a wrapped download opens a countdown card, ads, and a generate-link sequence instead of the file. Skip Wait is the $1.50/month Chrome extension that runs skip safelink wait on that hop so a wordpress safelink bypass is not fifteen seconds of please wait plus another generate click.';
+  'A WP Safelink bypass matters when a wrapped download opens a countdown card, ads, and a generate-link sequence instead of the file. Skip Wait is the Chrome extension that runs skip safelink wait on that hop so a wordpress safelink bypass is not fifteen seconds of please wait plus another generate click.';
 
 const body = `## Countdown, generate link, then get link
 
@@ -82,9 +82,9 @@ const faq: readonly BypassFaq[] = [
       'No. This entry is WP Safelink / Themeson-style hosts listed here. Other safelink families use different continue hops.',
   },
   {
-    question: 'How much does the WP Safelink bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

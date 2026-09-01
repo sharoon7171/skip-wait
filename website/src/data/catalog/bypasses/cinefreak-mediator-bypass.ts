@@ -32,7 +32,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Cinefreak download links often stop on a securing-your-connection page with a countdown, an adblock warning, and a two-step verify button before the file host opens. Skip Wait is the $1.50/month Chrome extension that clears that mediator hop so you are not stuck on please-wait and disable-adblock loops.';
+  'Cinefreak download links often stop on a securing-your-connection page with a countdown, an adblock warning, and a two-step verify button before the file host opens. Skip Wait is the Chrome extension that clears that mediator hop so you are not stuck on please-wait and disable-adblock loops.';
 
 const body = `## Generate pages that block the file twice
 
@@ -80,9 +80,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on the listed mirror domains that use the same generate.php mediator. Domains outside that list are not covered until added.',
   },
   {
-    question: 'How much does the Cinefreak bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Cinefreak mediator path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

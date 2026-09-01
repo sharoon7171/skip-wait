@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Kitokola bypass search usually means the download button started an on-page countdown instead of the file. Skip Wait is the $1.50/month Chrome extension that clears that timer busywork and opens the direct link when the page allows it—without a separate wait screen.';
+  'A Kitokola bypass search usually means the download button started an on-page countdown instead of the file. Skip Wait is the Chrome extension that clears that timer busywork and opens the direct link when the page allows it—without a separate wait screen.';
 
 const body = `## Download buttons that start a clock first
 
@@ -78,9 +78,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported paths. Extra wait screens before the file are cleared from the button you pressed.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Kitokola path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

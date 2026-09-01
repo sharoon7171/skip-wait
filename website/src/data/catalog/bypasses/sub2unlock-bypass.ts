@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People searching for a Sub2Unlock bypass or sub2unlock social unlock usually hit a page where YouTube subscribe, hit bell, like, comment, and share must turn green before Instagram, Facebook, or Twitter steps unlock the link. Skip Wait is the $1.50/month Chrome extension that reads the destination already on the page so skip waiting page busywork is not a full social checklist.';
+  'People searching for a Sub2Unlock bypass or sub2unlock social unlock usually hit a page where YouTube subscribe, hit bell, like, comment, and share must turn green before Instagram, Facebook, or Twitter steps unlock the link. Skip Wait is the Chrome extension that reads the destination already on the page so skip waiting page busywork is not a full social checklist.';
 
 const body = `## YouTube-first lockers that greenlight one block at a time
 
@@ -72,9 +72,9 @@ const faq: readonly BypassFaq[] = [
       'Not for Skip Wait’s redirect path on supported pages. The extension does not require you to complete each subscribe or like step when the destination is already on the page.',
   },
   {
-    question: 'How much does the Sub2Unlock bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Sub2Unlock path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

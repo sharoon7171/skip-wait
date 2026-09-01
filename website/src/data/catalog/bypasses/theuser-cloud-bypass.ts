@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a Theuser.cloud bypass or download timer skip usually means a file card stuck you behind a custom captcha and a generated-link waiting screen. Skip Wait is the $1.50/month Chrome extension that clears those gates after you verify, then starts the direct download path when the host allows it.';
+  'Looking for a Theuser.cloud bypass or download timer skip usually means a file card stuck you behind a custom captcha and a generated-link waiting screen. Skip Wait is the Chrome extension that clears those gates after you verify, then starts the direct download path when the host allows it.';
 
 const body = `## Captcha first, generating screen second
 
@@ -77,9 +77,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported free-download flows. Extra waits on mirror and host buttons are cleared the same way.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

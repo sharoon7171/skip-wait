@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A LiteShort share usually opens Continue to Destination on liteshort.com, then a Get Link countdown on link.liteshort.com. Skip Wait is the $1.50/month Chrome extension that keeps you on those two hosts, skips the off-site hop the disclaimer wants, and finishes Get Link when the shortener actually allows it.';
+  'A LiteShort share usually opens Continue to Destination on liteshort.com, then a Get Link countdown on link.liteshort.com. Skip Wait is the Chrome extension that keeps you on those two hosts, skips the off-site hop the disclaimer wants, and finishes Get Link when the shortener actually allows it.';
 
 const body = `## Continue to Destination is not the destination
 
@@ -78,9 +78,9 @@ const faq: readonly BypassFaq[] = [
       'Whatever URL Get Link returns for that alias. Skip Wait’s LiteShort path stops when that URL opens.',
   },
   {
-    question: 'How much does LiteShort support cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

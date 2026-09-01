@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People hunting a Goost bypass or Goost recaptcha fix usually hit a monetized short URL that parks them on continue gates, a blog wait, then a human check before any destination appears. Skip Wait is the $1.50/month Chrome extension that advances those timers, pins the captcha once, and finishes unlock from the statistics page.';
+  'People hunting a Goost bypass or Goost recaptcha fix usually hit a monetized short URL that parks them on continue gates, a blog wait, then a human check before any destination appears. Skip Wait is the Chrome extension that advances those timers, pins the captcha once, and finishes unlock from the statistics page.';
 
 const body = `## Short links that end in a statistics unlock
 
@@ -80,9 +80,9 @@ const faq: readonly BypassFaq[] = [
       'On supported pages, no. Skip Wait advances continue and blog wait steps so ads do not hide the control you were meant to press.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Goost path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'BBLINK short aliases open a Step 1/5 card with a Seconds timer and a locked Click here to continue button. Skip Wait is the $1.50/month Chrome extension that clears those continue steps and the later Get Link wait on supported pages.';
+  'BBLINK short aliases open a Step 1/5 card with a Seconds timer and a locked Click here to continue button. Skip Wait is the Chrome extension that clears those continue steps and the later Get Link wait on supported pages.';
 
 const body = `## Five continue cards before Get Link
 
@@ -47,7 +47,7 @@ Reload mid-chain and the step counter starts over. That stacked continue path is
 
 Skip Wait runs on the BBLINK alias you already opened. It advances the continue forms the page already posts, skips client-only delay theater on those cards, honors the short unlock hold when the server still requires it, then opens the destination Get Link would have returned.
 
-You stay on the tab through the chain. No paste tool—just the BBLINK path at $1.50/month after license activation.
+You stay on the tab through the chain. No paste tool—just the BBLINK path after license activation.
 `;
 
 const faq: readonly BypassFaq[] = [
@@ -67,9 +67,9 @@ const faq: readonly BypassFaq[] = [
       'Client chrome is skipped. When BBLINK still enforces a short unlock hold, Skip Wait waits that once, then opens the destination.',
   },
   {
-    question: 'How much does BBLINK support cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. BBLINK runs on supported aliases.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

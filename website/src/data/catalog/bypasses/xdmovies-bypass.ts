@@ -26,7 +26,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An XDMovies bypass or skip landing wait search usually means the entry page forced an Open main site delay before the streaming homepage. Skip Wait is the $1.50/month Chrome extension that clears that landing wait so you start browsing without sitting through connection chrome on every visit.';
+  'An XDMovies bypass or skip landing wait search usually means the entry page forced an Open main site delay before the streaming homepage. Skip Wait is the Chrome extension that clears that landing wait so you start browsing without sitting through connection chrome on every visit.';
 
 const body = `## Landing first, homepage second
 
@@ -70,9 +70,9 @@ const faq: readonly BypassFaq[] = [
       'No. This entry covers the homepage landing wait. Mediator please-wait pages after download clicks are a separate path.',
   },
   {
-    question: 'How much does the XDMovies bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

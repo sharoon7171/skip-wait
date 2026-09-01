@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Linclik bypass search usually means a short URL parked you on a continue gate and an AdLinkFly-style unlock countdown instead of the destination. Skip Wait is the $1.50/month Chrome extension that advances that waiting page and redirects when unlock is ready.';
+  'A Linclik bypass search usually means a short URL parked you on a continue gate and an AdLinkFly-style unlock countdown instead of the destination. Skip Wait is the Chrome extension that advances that waiting page and redirects when unlock is ready.';
 
 const body = `## Continue, then unlock countdown, then the real URL
 
@@ -74,9 +74,9 @@ const faq: readonly BypassFaq[] = [
       'Client-only delays go away. When unlock still needs a real wait, Skip Wait stays until it is allowed—so the linclik countdown bypass stays stable.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Linclik path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

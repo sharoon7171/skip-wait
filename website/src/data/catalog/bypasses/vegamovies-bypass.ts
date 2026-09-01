@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Vegamovies bypass or vglist bypass search usually means Quick Access parked you on a “securing connection” delay before VegaMovies, RogMovies, Anime, or Xprime. Skip Wait is the $1.50/month Chrome extension that resolves the live destination from that connecting page so skip landing wait is not a forced hub timer.';
+  'A Vegamovies bypass or vglist bypass search usually means Quick Access parked you on a “securing connection” delay before VegaMovies, RogMovies, Anime, or Xprime. Skip Wait is the Chrome extension that resolves the live destination from that connecting page so skip landing wait is not a forced hub timer.';
 
 const body = `## Hub Quick Access, then a connecting stall
 
@@ -71,9 +71,9 @@ const faq: readonly BypassFaq[] = [
       'Yes. Open the hub and Quick Access as usual. Skip Wait only removes the connecting wait behind those links.',
   },
   {
-    question: 'How much does the Vegamovies bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

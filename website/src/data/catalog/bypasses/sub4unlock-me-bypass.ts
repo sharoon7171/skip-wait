@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Searching for a Sub4Unlock.me bypass or Sub2Unlock.me bypass usually means a locker mixed WhatsApp, Telegram, Discord, and TikTok joins with Instagram/Facebook/Twitter follows, YouTube steps, custom links, a password, and an AdLinkFly-style countdown. Skip Wait is the $1.50/month Chrome extension that completes the supported unlock path so please wait bypass busywork is not every chat app at once.';
+  'Searching for a Sub4Unlock.me bypass or Sub2Unlock.me bypass usually means a locker mixed WhatsApp, Telegram, Discord, and TikTok joins with Instagram/Facebook/Twitter follows, YouTube steps, custom links, a password, and an AdLinkFly-style countdown. Skip Wait is the Chrome extension that completes the supported unlock path so please wait bypass busywork is not every chat app at once.';
 
 const body = `## Chat apps and TikTok before the go-link countdown
 
@@ -76,9 +76,9 @@ const faq: readonly BypassFaq[] = [
       'Yes. This catalog entry covers both Sub4Unlock and Sub2Unlock on the .me hosts that share this locker pattern.',
   },
   {
-    question: 'How much does the Sub4Unlock.me bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The.me unlock path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

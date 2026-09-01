@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An XDMovies mediator bypass search usually means the homepage was fine, but the download path dumped you on another please-wait page before the file. Skip Wait is the $1.50/month Chrome extension that clears that mediator hop so skip click to continue is not the whole download ritual.';
+  'An XDMovies mediator bypass search usually means the homepage was fine, but the download path dumped you on another please-wait page before the file. Skip Wait is the Chrome extension that clears that mediator hop so skip click to continue is not the whole download ritual.';
 
 const body = `## After the homepage: the download mediator hop
 
@@ -67,9 +67,9 @@ const faq: readonly BypassFaq[] = [
       'On supported hops, Skip Wait completes that flow so you are not hunting buttons through ads.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The mediator path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

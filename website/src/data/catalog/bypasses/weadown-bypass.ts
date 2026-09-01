@@ -22,7 +22,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'WeaDown sends plugin and theme saves through file gate pages that show Generate Secure Link, Verifying Link Safety, and View & Download File before the real host opens. Skip Wait is the $1.50/month Chrome extension that runs that gate automatically and takes you to the file host.';
+  'WeaDown sends plugin and theme saves through file gate pages that show Generate Secure Link, Verifying Link Safety, and View & Download File before the real host opens. Skip Wait is the Chrome extension that runs that gate automatically and takes you to the file host.';
 
 const body = `## Three screens before the host opens
 
@@ -70,8 +70,9 @@ const faq: readonly BypassFaq[] = [
       'The button tour and consent overlays are skipped on your side. If WeaDown still needs a short server hold, Skip Wait continues as soon as that hold clears.',
   },
   {
-    question: 'How much does the WeaDown bypass cost?',
-    answer: 'Skip Wait is $1.50 per month. Activate a license in the popup.',
+    question: 'Do I need a license?',
+    answer:
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -45,7 +45,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Tech8s and Ez4Short shares open a safe redirect, dump you on a PLEASE WAIT blog, then a step 3/3 screen that wants you to watch ads before Continue appears. Skip Wait is the $1.50/month Chrome extension that walks that ad-link chain so a skip short link path does not mean tapping every gate yourself.';
+  'Tech8s and Ez4Short shares open a safe redirect, dump you on a PLEASE WAIT blog, then a step 3/3 screen that wants you to watch ads before Continue appears. Skip Wait is the Chrome extension that walks that ad-link chain so a skip short link path does not mean tapping every gate yourself.';
 
 const body = `## Safe redirects stacked with rotating blogs
 
@@ -106,9 +106,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported pages. After Tech8s / Ez4Short gates, Skip Wait clears the Droplink Get Link countdown on the unlock tab you reach.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Tech8s / Ez4Short path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

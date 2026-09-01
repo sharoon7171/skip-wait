@@ -29,7 +29,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Mirrored.to bypass matters when a share opens a mirror-files countdown, then every Download button still dumps you into a short URL before the host. Skip Wait is the $1.50/month Chrome extension that clears the unlock wait and puts the real host link on Download so short URL hops never own the click.';
+  'A Mirrored.to bypass matters when a share opens a mirror-files countdown, then every Download button still dumps you into a short URL before the host. Skip Wait is the Chrome extension that clears the unlock wait and puts the real host link on Download so short URL hops never own the click.';
 
 const body = `## Mirror landings that hide every host
 
@@ -87,9 +87,9 @@ const faq: readonly BypassFaq[] = [
       'No. It unlocks the list and clears the short URL hop. You still choose which mirror Download button to use.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Mirrored.to path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -30,7 +30,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A GamesNostalgia bypass search usually means you clicked Download this File and got stuck in a generating modal instead of the archive. Skip Wait is a $1.50/month Chrome extension that resolves the CDN link in the background so the same button opens the file without the forced wait.';
+  'A GamesNostalgia bypass search usually means you clicked Download this File and got stuck in a generating modal instead of the archive. Skip Wait is a Chrome extension that resolves the CDN link in the background so the same button opens the file without the forced wait.';
 
 const body = `## Generating modal between Download this File and the archive
 
@@ -72,9 +72,9 @@ const faq: readonly BypassFaq[] = [
       'Yes on supported download paths. Extra wait screens and intermediary redirects before the file are skipped so the archive opens from the button you pressed.',
   },
   {
-    question: 'How much does the GamesNostalgia bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

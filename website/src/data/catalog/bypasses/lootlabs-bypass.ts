@@ -39,7 +39,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a LootLabs bypass or content locker bypass usually means a shared unlock dropped you into ad gates and locker release timers instead of the file. Skip Wait is the $1.50/month Chrome extension that works through that locker flow and redirects when the destination becomes available.';
+  'Looking for a LootLabs bypass or content locker bypass usually means a shared unlock dropped you into ad gates and locker release timers instead of the file. Skip Wait is the Chrome extension that works through that locker flow and redirects when the destination becomes available.';
 
 const body = `## Lockers that restart if you blink
 
@@ -88,9 +88,9 @@ const faq: readonly BypassFaq[] = [
       'Yes. Keep the tab active and the extension works through the locker on supported hosts, redirecting when the link becomes available.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The LootLabs path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

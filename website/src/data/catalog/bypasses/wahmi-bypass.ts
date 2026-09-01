@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Wahmi bypass or wahmi timer bypass search usually means a free file page forced a download countdown before Get Link. Skip Wait is the $1.50/month Chrome extension that clears that unlock delay so skip countdown is not watching the clock on every archive.';
+  'A Wahmi bypass or wahmi timer bypass search usually means a free file page forced a download countdown before Get Link. Skip Wait is the Chrome extension that clears that unlock delay so skip countdown is not watching the clock on every archive.';
 
 const body = `## Countdown before the download link
 
@@ -71,9 +71,9 @@ const faq: readonly BypassFaq[] = [
       'Client-only countdown chrome goes away. When the host still needs a real hold, Skip Wait stays until unlock is allowed, then continues.',
   },
   {
-    question: 'How much does the Wahmi bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

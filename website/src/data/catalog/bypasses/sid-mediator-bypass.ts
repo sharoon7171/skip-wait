@@ -34,7 +34,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Please verify that you are human, a ticking human verification timer, Start Verification, then Checking Request / Generating Links before Go to download—that is the SID waiting page. Skip Wait is the $1.50/month Chrome extension for a sid mediator bypass that opens the destination instead of making you finish every beat.';
+  'Please verify that you are human, a ticking human verification timer, Start Verification, then Checking Request / Generating Links before Go to download—that is the SID waiting page. Skip Wait is the Chrome extension for a sid mediator bypass that opens the destination instead of making you finish every beat.';
 
 const body = `## Please verify that you are human is the whole product
 
@@ -84,9 +84,9 @@ const faq: readonly BypassFaq[] = [
       'No. The SID Mediator bypass extension runs on the page you already opened and unlocks the destination there.',
   },
   {
-    question: 'What does Skip Wait cost for SID?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

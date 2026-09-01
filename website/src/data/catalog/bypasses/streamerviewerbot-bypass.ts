@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Streamerviewerbot bypass or skip preparing timer search usually means a free trial form stuck on Preparing for minutes before Start Free Trial unlocks. Skip Wait is the $1.50/month Chrome extension that clears that preparing countdown bypass so free stream followers bypass busywork is not a multi-minute clock.';
+  'A Streamerviewerbot bypass or skip preparing timer search usually means a free trial form stuck on Preparing for minutes before Start Free Trial unlocks. Skip Wait is the Chrome extension that clears that preparing countdown bypass so free stream followers bypass busywork is not a multi-minute clock.';
 
 const body = `## Multi-minute Preparing before Start Free Trial
 
@@ -69,9 +69,9 @@ const faq: readonly BypassFaq[] = [
       'No. The extension unlocks the page’s own ready state. You still submit the form on the live site.',
   },
   {
-    question: 'How much does the Streamerviewerbot bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Streamerviewerbot path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -24,7 +24,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a RomsFun bypass usually means a ROM page locked the download behind a countdown. Skip Wait is the $1.50/month Chrome extension that runs a romsfun timer bypass and skip countdown path so the download control unlocks without babysitting the clock.';
+  'Looking for a RomsFun bypass usually means a ROM page locked the download behind a countdown. Skip Wait is the Chrome extension that runs a romsfun timer bypass and skip countdown path so the download control unlocks without babysitting the clock.';
 
 const body = `## Download buttons trapped behind a clock
 
@@ -69,9 +69,9 @@ const faq: readonly BypassFaq[] = [
       'No. The extension works on the page you opened. That is a countdown timer bypass in Chrome, not a third-party decoder.',
   },
   {
-    question: 'How much does the RomsFun bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The RomsFun path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

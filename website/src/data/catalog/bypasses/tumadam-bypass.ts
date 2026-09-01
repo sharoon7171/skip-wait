@@ -26,7 +26,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Tumadam unlock pages open with Đang chuẩn bị link của bạn, a ring countdown, and a disabled Tiếp tục control. Skip Wait is the $1.50/month Chrome extension that clears that waiting page so you are not stuck watching còn lại ticks.';
+  'Tumadam unlock pages open with Đang chuẩn bị link của bạn, a ring countdown, and a disabled Tiếp tục control. Skip Wait is the Chrome extension that clears that waiting page so you are not stuck watching còn lại ticks.';
 
 const body = `## The prepare-link card is the whole gate
 
@@ -45,7 +45,7 @@ That card is the product pain—not a multi-blog tour. The timer and spinner are
 
 Skip Wait runs on the Tumadam unlock page you already opened. It skips the client-only countdown busywork and advances the same continue path Tiếp tục would use when the page marks itself ready.
 
-Cosmetic seconds disappear; you stay on the tab until the unlock destination loads. No paste site, no second tool—just the Tumadam waiting page path at $1.50/month after license activation.
+Cosmetic seconds disappear; you stay on the tab until the unlock destination loads. No paste site, no second tool—just the Tumadam waiting page path after license activation.
 `;
 
 const faq: readonly BypassFaq[] = [
@@ -65,9 +65,9 @@ const faq: readonly BypassFaq[] = [
       'Client countdown theater is skipped. If a real hold remains, Skip Wait finishes that step once, then continues.',
   },
   {
-    question: 'How much does Tumadam support cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. Tumadam runs on supported unlock pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

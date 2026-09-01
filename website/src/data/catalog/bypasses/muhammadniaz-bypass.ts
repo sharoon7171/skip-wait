@@ -23,7 +23,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'People search MuhammadNiaz bypass or create download link bypass after a software page locks generate behind a countdown. Skip Wait is the $1.50/month Chrome extension that clears that pre-generate wait on the host page you already opened.';
+  'People search MuhammadNiaz bypass or create download link bypass after a software page locks generate behind a countdown. Skip Wait is the Chrome extension that clears that pre-generate wait on the host page you already opened.';
 
 const body = `## Create download link stuck behind a clock
 
@@ -60,9 +60,9 @@ const faq: readonly BypassFaq[] = [
       'Client busywork goes away. If the host still requires a short hold, Skip Wait finishes it—so the muhammadniaz timer bypass stays stable.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

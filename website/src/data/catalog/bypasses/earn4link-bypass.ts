@@ -49,7 +49,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An Earn4link bypass search usually means a Telegram or download short URL dumped you into hosting-style safelink blogs instead of the drive folder you wanted. Skip Wait is a $1.50/month Chrome extension that advances the dual-blog chain and finishes Your link is almost ready Get Link without babysitting every hop.';
+  'An Earn4link bypass search usually means a Telegram or download short URL dumped you into hosting-style safelink blogs instead of the drive folder you wanted. Skip Wait is a Chrome extension that advances the dual-blog chain and finishes Your link is almost ready Get Link without babysitting every hop.';
 
 const body = `## Click Image Wait & Back, then another blog
 
@@ -100,9 +100,9 @@ const faq: readonly BypassFaq[] = [
       'It tries immediately. Cosmetic countdowns do not block you. If the server rejects early Get Link, Skip Wait waits the enforced delay once, then retries.',
   },
   {
-    question: 'How much does the Earn4link bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

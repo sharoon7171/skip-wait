@@ -28,7 +28,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A FreeDlink or frdl free download should not mean staring at Normal Download for a full minute, then solving hCaptcha, only to hit You have to wait till next download on the next file. Skip Wait is the $1.50/month Chrome extension that skips that client wait on supported frdl pages, keeps the cooldown honest when the host enforces it, and puts Direct Download ready after you finish the human check.';
+  'A FreeDlink or frdl free download should not mean staring at Normal Download for a full minute, then solving hCaptcha, only to hit You have to wait till next download on the next file. Skip Wait is the Chrome extension that skips that client wait on supported frdl pages, keeps the cooldown honest when the host enforces it, and puts Direct Download ready after you finish the human check.';
 
 const body = `## Normal Download that burns a minute first
 
@@ -76,9 +76,9 @@ const faq: readonly BypassFaq[] = [
       'No. This entry is the Normal Download free path only—not the Free Premium ads session.',
   },
   {
-    question: 'How much does the FreeDlink bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

@@ -27,7 +27,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Cuty bypass matters when a shared short link on cuttty.com or cuty.io leaves Continue grey, asks for a captcha, then holds another countdown before the destination opens. Skip Wait is the $1.50/month Chrome extension that runs that unlock path on supported Cuty pages so you are not babysitting every step.';
+  'A Cuty bypass matters when a shared short link on cuttty.com or cuty.io leaves Continue grey, asks for a captcha, then holds another countdown before the destination opens. Skip Wait is the Chrome extension that runs that unlock path on supported Cuty pages so you are not babysitting every step.';
 
 const body = `## Continue, captcha, then another clock
 
@@ -82,9 +82,9 @@ const faq: readonly BypassFaq[] = [
       'Cuty often blocks unlock when an adblocker is active and restarts the flow after the timer. Pause your blocker for Cuty, reload, and the destination can open.',
   },
   {
-    question: 'How much does Skip Wait cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Cuty path runs.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

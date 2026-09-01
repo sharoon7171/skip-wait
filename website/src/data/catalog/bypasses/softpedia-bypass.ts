@@ -25,7 +25,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a Softpedia bypass or download timer skip usually means you already picked a mirror and still hit a generating wait before the real file. Skip Wait is the $1.50/month Chrome extension that resolves the direct download path after mirror selection so skip waiting page busywork is not another hop.';
+  'Looking for a Softpedia bypass or download timer skip usually means you already picked a mirror and still hit a generating wait before the real file. Skip Wait is the Chrome extension that resolves the direct download path after mirror selection so skip waiting page busywork is not another hop.';
 
 const body = `## Mirror chosen—then another generating screen
 
@@ -70,9 +70,9 @@ const faq: readonly BypassFaq[] = [
       'No. You click download on Softpedia as usual. The extension works on that page.',
   },
   {
-    question: 'How much does the Softpedia bypass cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The Softpedia path runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 

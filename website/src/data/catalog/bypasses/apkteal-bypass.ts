@@ -31,7 +31,7 @@ const keywords = [
 ] as const;
 
 const intro =
-  'An ApkTeal bypass search usually means Premium APK or MOD download still sits behind a waiting page after you already chose the build. Skip Wait is the $1.50/month Chrome extension that opens the direct file link for MOD and latest release versions without parking you on that generating screen.';
+  'An ApkTeal bypass search usually means Premium APK or MOD download still sits behind a waiting page after you already chose the build. Skip Wait is the Chrome extension that opens the direct file link for MOD and latest release versions without parking you on that generating screen.';
 
 const body = `## Premium walls on MOD and latest APKs
 
@@ -46,7 +46,7 @@ ApkTeal often parks a download wait or intermediary screen in front of the real 
 
 ## Opening the file the waiting page was hiding
 
-Skip Wait resolves the real file URL in the background when you use the same download controls already on the page. Instead of babysitting the Premium APK wait, you move to the destination as soon as the host allows it. One ApkTeal bypass extension install covers MOD and latest release flows—no paste tool. Bypass is $1.50 per month.
+Skip Wait resolves the real file URL in the background when you use the same download controls already on the page. Instead of babysitting the Premium APK wait, you move to the destination as soon as the host allows it. One ApkTeal bypass extension install covers MOD and latest release flows—no paste tool.
 
 You still choose which build you want; Skip Wait only removes the busywork layer between the click and the APK.
 `;
@@ -74,9 +74,9 @@ const faq: readonly BypassFaq[] = [
       'No. Stay on the ApkTeal page, click download, and let Skip Wait run on that tab.',
   },
   {
-    question: 'How much does the ApkTeal path cost?',
+    question: 'Do I need a license?',
     answer:
-      'Skip Wait is $1.50 per month. Activate a license in the popup. The ApkTeal bypass runs on supported pages.',
+      'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
   },
 ];
 
