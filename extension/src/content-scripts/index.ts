@@ -140,6 +140,7 @@ import {
   initVegamoviesLandingRedirect,
 } from '../sites/vegamovies';
 import { initCinefreakMediator } from '../sites/cinefreak';
+import { refreshLicense } from '../license/gate';
 import { getLicenseSession, storageKeys } from '../license/storage';
 import { verifyLicense } from '../license/verify';
 
@@ -301,12 +302,18 @@ const MAX_TIMER_MS = 2_147_483_647;
 const armLicenseExpiryTimer = async (): Promise<void> => {
   const session = await getLicenseSession();
   if (!session) return;
-  const expiries = session.entExp !== null ? [session.leaseExp, session.entExp] : [session.leaseExp];
-  for (const exp of expiries) {
-    const delay = exp - Date.now();
-    if (delay <= 0 || delay > MAX_TIMER_MS) continue;
-    window.setTimeout(() => void verifyLicense(), delay);
-  }
+  const now = Date.now();
+  const arm = (exp: number, run: () => Promise<unknown>): void => {
+    const delay = exp - now;
+    if (delay <= 0) {
+      void run();
+      return;
+    }
+    if (delay > MAX_TIMER_MS) return;
+    window.setTimeout(() => void run(), delay);
+  };
+  arm(session.leaseExp, refreshLicense);
+  if (session.entExp !== null) arm(session.entExp, async () => verifyLicense());
 };
 
 const isExtensionContext = typeof chrome !== 'undefined' && !!chrome.runtime?.id;

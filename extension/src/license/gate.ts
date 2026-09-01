@@ -175,6 +175,22 @@ export const activateLicense = async (rawKey: string): Promise<LicenseState> => 
   return last;
 };
 
+export const refreshLicense = async (): Promise<LicenseState> => {
+  const session = await getLicenseSession();
+  if (!session) return { ok: false, error: 'NO_KEY' };
+  return validateWithServer(session);
+};
+
+export const ensureLicense = async (): Promise<boolean> => {
+  if (await verifyLicense()) return true;
+  const session = await getLicenseSession();
+  if (!session) return false;
+  const now = Date.now();
+  if (session.entExp !== null && session.entExp <= now) return false;
+  if (session.leaseExp <= now) return (await refreshLicense()).ok;
+  return false;
+};
+
 export const deactivateLicense = async (): Promise<void> => {
   const session = await getLicenseSession();
   if (session) {

@@ -1,10 +1,10 @@
 import { HOSTS_STORAGE_KEY, hostMatchesSite, siteHosts } from './hosts/check';
+import { ensureLicense } from './license/gate';
 import { storageKeys } from './license/storage';
-import { verifyLicense } from './license/verify';
 
 export const canBypassHost = async (hostname: string, site: string): Promise<boolean> => {
   if (!(await hostMatchesSite(hostname, site))) return false;
-  return verifyLicense();
+  return ensureLicense();
 };
 
 export const canBypass = (site: string): Promise<boolean> => canBypassHost(location.hostname, site);
@@ -12,7 +12,7 @@ export const canBypass = (site: string): Promise<boolean> => canBypassHost(locat
 export const licensedHosts = async (site: string): Promise<string[]> => {
   const hosts = await siteHosts(site);
   if (!hosts.length) return [];
-  if (!(await verifyLicense())) return [];
+  if (!(await ensureLicense())) return [];
   return hosts;
 };
 
