@@ -1,5 +1,6 @@
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
+import { isAliasPath } from './hosts';
 
 const isPremiumGate = (): boolean => {
   if (/[?&](?:pid|vid|skip_sub)=/.test(location.search)) return false;
@@ -23,6 +24,7 @@ const skipPremium = (): void => {
 };
 
 export function initGplinksGate(): void {
+  if (window !== window.top || !isAliasPath()) return;
   void canBypass('gplinks').then((ok) => {
     if (!ok) return;
     whenDomParsed(skipPremium);

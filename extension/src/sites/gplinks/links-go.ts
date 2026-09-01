@@ -50,13 +50,7 @@ const isUnlockQuery = (): boolean => /[?&](?:pid|vid)=/.test(location.search);
 
 const isLinksGoShell = (doc: Document = document): boolean => !!doc.querySelector(LINKS_GO_SHELL_SEL);
 
-const hasLinksGoHint = (): boolean => {
-  if (isUnlockQuery() || isLinksGoShell()) return true;
-  for (const s of document.scripts) {
-    if (s.textContent?.includes('/links/go') || s.textContent?.includes('counter_value')) return true;
-  }
-  return false;
-};
+const shouldEngage = (): boolean => isUnlockQuery() || isLinksGoShell();
 
 const goLinkForm = (): HTMLFormElement | null =>
   document.querySelector<HTMLFormElement>('#go-link, form[action*="/links/go"]');
@@ -281,9 +275,10 @@ const runWhenNotLoading = (run: () => void): void => {
 };
 
 export function initGplinksLinksGo(): void {
+  if (window !== window.top) return;
   void canBypass('gplinks').then((ok) => {
     if (!ok) return;
-    if (hasLinksGoHint()) {
+    if (shouldEngage()) {
       requestVisibilitySpoof();
       bootOverlayLock();
     }
@@ -298,7 +293,7 @@ export function initGplinksLinksGo(): void {
     tryStart();
     if (engaged) return;
     if (document.readyState === 'complete') return;
-    if (document.readyState === 'interactive' && !hasLinksGoHint()) return;
+    if (document.readyState === 'interactive' && !shouldEngage()) return;
 
     const root = document.documentElement;
     if (!root) return void runWhenNotLoading(tryStart);
@@ -313,7 +308,7 @@ export function initGplinksLinksGo(): void {
       if (document.readyState === 'loading') return;
       tryStart();
       if (engaged) return stop();
-      if (document.readyState === 'interactive' && !hasLinksGoHint()) stop();
+      if (document.readyState === 'interactive' && !shouldEngage()) stop();
       else if (document.readyState === 'complete') stop();
     };
 
