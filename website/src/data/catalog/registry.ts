@@ -99,7 +99,8 @@ import { bypass as shrtflyBypass } from './bypasses/shrtfly-bypass';
 import { bypass as shrinkmeBypass } from './bypasses/shrinkme-bypass';
 import { bypass as shrinkpeBypass } from './bypasses/shrinkpe-bypass';
 import { bypass as shycloudBypass } from './bypasses/shycloud-bypass';
-import { bypass as sidMediatorBypass } from './bypasses/sid-mediator-bypass';import { bypass as softpediaBypass } from './bypasses/softpedia-bypass';
+import { bypass as sidMediatorBypass } from './bypasses/sid-mediator-bypass';
+import { bypass as softpediaBypass } from './bypasses/softpedia-bypass';
 import { bypass as storylineScormBypass } from './bypasses/storyline-scorm-bypass';
 import { bypass as streamerviewerbotBypass } from './bypasses/streamerviewerbot-bypass';
 import { bypass as sub2getBypass } from './bypasses/sub2get-bypass';
@@ -122,6 +123,8 @@ import { bypass as usersdriveBypass } from './bypasses/usersdrive-bypass';
 import { bypass as vegamoviesBypass } from './bypasses/vegamovies-bypass';
 import { bypass as vexfileBypass } from './bypasses/vexfile-bypass';
 import { bypass as wahmiBypass } from './bypasses/wahmi-bypass';
+import { bypass as weadownBypass } from './bypasses/weadown-bypass';
+import { bypass as zifuryBypass } from './bypasses/zifury-bypass';
 import { bypass as workinkBypass } from './bypasses/workink-bypass';
 import { bypass as wpSafelinkBypass } from './bypasses/wp-safelink-bypass';
 import { bypass as xdmoviesBypass } from './bypasses/xdmovies-bypass';
@@ -256,6 +259,8 @@ export const bypasses: readonly SupportedBypass[] = [
   vegamoviesBypass,
   vexfileBypass,
   wahmiBypass,
+  weadownBypass,
+  zifuryBypass,
   workinkBypass,
   wpSafelinkBypass,
   xdmoviesBypass,
