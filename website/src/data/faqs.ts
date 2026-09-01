@@ -25,7 +25,7 @@ export const faqs: readonly FaqItem[] = [
   {
     question: 'How much does Skip Wait cost?',
     answer:
-      `EAS Store offers a ${LICENSE.trialDetail} trial and a ${PRICE.summary} monthly plan. Your license key is delivered after checkout. Paste it in the extension popup and tap Activate. ${LICENSE.deviceLimit}`,
+      `EAS Store offers a ${LICENSE.trialLabel.toLowerCase()} and a ${PRICE.summary} monthly plan. Your license key is delivered after checkout. Paste it in the extension popup and tap Activate. ${LICENSE.deviceLimit}`,
   },
   {
     question: 'What sites are supported?',

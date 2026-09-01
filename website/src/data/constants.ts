@@ -5,10 +5,13 @@ export const EAS_API_URL = 'https://eas-x.com/api/v1/licenses';
 
 export const LICENSE = {
   trialLabel: 'Free trial',
-  trialDetail: '30 minutes · $0',
+  trialDetail: 'Free',
   monthlyDetail: '$1.50 / month',
   deviceLimit: 'One key per device.',
   keyExample: 'EAS-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+  pricingLine: 'a free trial and a $1.50 per month plan',
+  faqAnswer:
+    'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
 } as const;
 
 export const PRICE = {
@@ -25,7 +28,7 @@ export const SITE = {
   tagline:
     'Bypass countdown timers and link shorteners or automate waits and clicks when a full skip isn’t possible.',
   title: 'Skip Wait — Bypass Countdown Timers & Link Shorteners (Chrome)',
-  description: `A ${PRICE.summary} Chrome extension to bypass countdown timers, waiting pages, and link shorteners, or automate the wait when a full skip is not possible.`,
+  description: `A Chrome extension with ${LICENSE.pricingLine} to bypass countdown timers, waiting pages, and link shorteners, or automate the wait when a full skip is not possible.`,
   keywords: [
     'skip wait',
     'skip wait extension',

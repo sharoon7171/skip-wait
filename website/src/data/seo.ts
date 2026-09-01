@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, EAS_STORE_URL, LICENSE, PRICE, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, EAS_STORE_URL, PRICE, SITE } from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { homeSections } from '@/lib/routes';
 
@@ -57,7 +57,7 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
       priceCurrency: PRICE.currency,
       availability: 'https://schema.org/InStock',
       url: EAS_STORE_URL,
-      description: `${LICENSE.trialDetail} trial or ${PRICE.summary} on EAS Store`,
+      description: `Free trial and ${PRICE.summary} on EAS Store`,
     },
     author: {
       '@type': 'Person',
@@ -75,7 +75,7 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
       'Skip waiting pages and link shortener redirects',
       'Automate waits and continue clicks when a full bypass is not possible',
       'Instant redirect to the destination when the site allows it',
-      `${LICENSE.trialDetail} trial or ${PRICE.summary}. Activate a license in the popup`,
+      `Free trial and ${PRICE.summary}. Activate a license in the popup`,
     ],
     keywords: SITE.keywords.join(', '),
   };

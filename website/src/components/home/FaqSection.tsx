@@ -30,7 +30,7 @@ function homeFaqItems(): readonly FaqAccordionItem[] {
         question: item.question,
         answer: (
           <>
-            EAS Store offers a {LICENSE.trialDetail} trial and a {PRICE.summary} monthly plan. Your
+            EAS Store offers a {LICENSE.trialLabel.toLowerCase()} and a {PRICE.summary} monthly plan. Your
             license key is delivered after checkout. See{' '}
             <AppLink href={homeSections.pricing}>Pricing</AppLink> for the buy link. Paste the key in
             the extension popup and tap Activate. {LICENSE.deviceLimit}
