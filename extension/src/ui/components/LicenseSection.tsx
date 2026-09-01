@@ -35,7 +35,7 @@ import {
   stepRow,
 } from '../../../ui-classes/popup';
 import { EAS_STORE_URL, LICENSE_COPY } from '../constants';
-import { IconCheck, IconKey } from './icons';
+import { IconCheck, IconLicenseKey } from './icons';
 
 type Status = 'busy' | 'active' | 'missing' | 'err';
 
@@ -229,7 +229,7 @@ export function LicenseSection(): React.ReactElement {
           onClick={onActivate}
           className={`${btnActivate} mt-2`}
         >
-          <IconKey className="size-4" />
+          <IconLicenseKey className="size-4" />
           {busy ? copy.activating : copy.activate}
         </button>
         <p className="mt-2 text-center text-[0.6875rem] font-semibold text-ink-soft">{copy.buyDevice}</p>

@@ -36,12 +36,13 @@ export function IconStar({ className = '' }: IconProps): React.ReactElement {
   );
 }
 
-export function IconKey({ className = '' }: IconProps): React.ReactElement {
+export function IconLicenseKey({ className = '' }: IconProps): React.ReactElement {
   return (
-    <svg {...stroke} className={className} aria-hidden>
-      <path d="m15.5 7.5 2.9 2.9" />
-      <path d="M11 11 6.5 15.5 4 18l-1-1 2.5-2.5L10 10" />
-      <circle cx="14" cy="10" r="3.5" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path
+        fillRule="evenodd"
+        d="M7 5C3.1545455 5 0 8.1545455 0 12C0 15.845455 3.1545455 19 7 19C9.7749912 19 12.089412 17.314701 13.271484 15H16v3h6v-3h2V9h-1L13.287109 9C12.172597 6.6755615 9.8391582 5 7 5zM7 7C9.2802469 7 11.092512 8.4210017 11.755859 10.328125L11.988281 11H22v2h-2v3h-2v-3H12.017578l-.248.635C11.010114 15.575499 9.1641026 17 7 17C4.2454545 17 2 14.754545 2 12C2 9.2454545 4.2454545 7 7 7zM7 9C5.3545455 9 4 10.354545 4 12C4 13.645455 5.3545455 15 7 15C8.6454545 15 10 13.645455 10 12C10 10.354545 8.6454545 9 7 9zM7 11C7.5545455 11 8 11.445455 8 12C8 12.554545 7.5545455 13 7 13C6.4454545 13 6 12.554545 6 12C6 11.445455 6.4454545 11 7 11z"
+      />
     </svg>
   );
 }
