@@ -9,6 +9,7 @@ import {
   neutral,
   primary,
   radius,
+  shadows,
   success,
   surface,
   warning,
@@ -26,6 +27,7 @@ export default {
         ink: { ...ink },
       },
       borderRadius: { ...radius },
+      boxShadow: { ...shadows },
       fontFamily: {
         sans: [...fontFamilies.sans],
         display: [...fontFamilies.display],

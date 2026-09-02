@@ -11,7 +11,7 @@ import {
   softwareApplicationJsonLd,
   websiteJsonLd,
 } from '@/data/seo';
-import { ibmPlexMono, poppins } from '@/fonts';
+import { poppins } from '@/fonts';
 import { GA_MEASUREMENT_ID, isAnalyticsEnabled } from '@/lib/analytics';
 import '@/styles/global.css';
 export const dynamic = 'force-static';
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: '/icon.png',
         width: 128,
         height: 128,
-        alt: `${SITE.name} — bypass and automate countdown timers`,
+        alt: `${SITE.name} Chrome extension`,
       },
     ],
   },
@@ -70,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`[color-scheme:light] ${poppins.variable} ${ibmPlexMono.variable}`}
+      className={`[color-scheme:light] ${poppins.variable}`}
     >
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-surface-canvas font-sans text-ink antialiased">
         <JsonLd data={[organizationJsonLd(), websiteJsonLd(), softwareApplicationJsonLd()]} />

@@ -1,38 +1,60 @@
 export const fontFamilies = {
   sans: ['var(--font-sans)'],
   display: ['var(--font-sans)'],
-  mono: ['var(--font-mono)'],
+  mono: ['var(--font-sans)'],
 } as const;
 
 export const fontSize = {
   overline: [
+    '0.6875rem',
+    { lineHeight: '1.25', fontWeight: '600', letterSpacing: '0.08em' },
+  ],
+  domain: [
     '0.75rem',
-    { lineHeight: '1.3', fontWeight: '600', letterSpacing: '0.06em' },
+    { lineHeight: '1.35', fontWeight: '500', letterSpacing: '-0.01em' },
   ],
-  domain: ['0.8125rem', { lineHeight: '1.5', fontWeight: '400' }],
-  caption: ['0.875rem', { lineHeight: '1.5', fontWeight: '500' }],
-  'body-sm': ['1rem', { lineHeight: '1.65', fontWeight: '400' }],
-  body: ['1.0625rem', { lineHeight: '1.7', fontWeight: '400' }],
-  ui: ['0.9375rem', { lineHeight: '1.3', fontWeight: '600' }],
+  caption: [
+    '0.8125rem',
+    { lineHeight: '1.4', fontWeight: '500' },
+  ],
+  ui: [
+    '0.875rem',
+    { lineHeight: '1.25', fontWeight: '600' },
+  ],
+  'body-sm': [
+    '0.9375rem',
+    { lineHeight: '1.55', fontWeight: '400' },
+  ],
+  body: [
+    '1rem',
+    { lineHeight: '1.6', fontWeight: '400' },
+  ],
   title: [
-    '1.25rem',
-    { lineHeight: '1.3', fontWeight: '700', letterSpacing: '-0.015em' },
-  ],
-  'title-lg': [
-    '1.5rem',
+    '1.125rem',
     { lineHeight: '1.25', fontWeight: '700', letterSpacing: '-0.02em' },
   ],
-  lead: ['clamp(1.125rem, 1.7vw, 1.3125rem)', { lineHeight: '1.6', fontWeight: '400' }],
+  'title-lg': [
+    '1.25rem',
+    { lineHeight: '1.2', fontWeight: '700', letterSpacing: '-0.025em' },
+  ],
+  lead: [
+    'clamp(1.0625rem, 1.15vw, 1.125rem)',
+    { lineHeight: '1.55', fontWeight: '400' },
+  ],
   headline: [
-    'clamp(2rem, 4.2vw, 3rem)',
-    { lineHeight: '1.12', fontWeight: '800', letterSpacing: '-0.025em' },
+    'clamp(1.875rem, 2.8vw, 2.375rem)',
+    { lineHeight: '1.15', fontWeight: '800', letterSpacing: '-0.03em' },
   ],
   display: [
-    'clamp(2.25rem, 8vw, 4.75rem)',
-    { lineHeight: '1.05', fontWeight: '800', letterSpacing: '-0.03em' },
+    'clamp(2.125rem, 4.5vw, 3.25rem)',
+    { lineHeight: '1.05', fontWeight: '800', letterSpacing: '-0.035em' },
   ],
   metric: [
-    'clamp(2.25rem, 4vw, 3.25rem)',
-    { lineHeight: '1.05', fontWeight: '800', letterSpacing: '-0.025em' },
+    'clamp(2rem, 2.8vw, 2.5rem)',
+    { lineHeight: '1', fontWeight: '800', letterSpacing: '-0.03em' },
+  ],
+  timer: [
+    'clamp(1.75rem, 2.4vw, 2.125rem)',
+    { lineHeight: '1', fontWeight: '600', letterSpacing: '-0.02em' },
   ],
 } as const;
