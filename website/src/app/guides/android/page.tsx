@@ -4,14 +4,13 @@ import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { FaqAccordion } from '@/components/ui/FaqAccordion';
-import { CHROME_WEB_STORE_URL, QUETTA, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, FREE, QUETTA, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Install Skip Wait on Android with Quetta';
-const description =
-  'Step-by-step: install Quetta Browser from Google Play, add Skip Wait from the Chrome Web Store, and use it on supported wait pages on Android.';
-const updated = '2026-08-10';
+const description = `Install Quetta Browser from Google Play, add Skip Wait from the Chrome Web Store, and use it on supported wait pages on Android. Same ${FREE.dailyLimit} free bypasses per day as desktop.`;
+const updated = '2026-09-03';
 const path = routes.guidesAndroid;
 const url = `${SITE.url}${path}`;
 
@@ -115,7 +114,7 @@ function howToJsonLd(): Record<string, unknown> {
         '@type': 'HowToStep',
         position: 3,
         name: 'Enable and test',
-        text: 'Confirm Skip Wait is enabled in Quetta’s extension manager, then open a supported wait or short-link page.',
+        text: `Confirm Skip Wait is enabled in Quetta’s extension manager, then open a supported wait or URL shortener page. ${FREE.dailyLimit} free bypasses each day work with no key, same as desktop.`,
       },
     ],
   };
@@ -158,7 +157,7 @@ export default function AndroidQuettaGuidePage(): React.ReactElement {
       <LegalPage
         title={title}
         updated={updated}
-        summary="Skip Wait is a Chrome Web Store extension. On Android, install it through Quetta Browser—Chrome for Android cannot run store extensions on the phone."
+        summary="Skip Wait is a Chrome Web Store extension. On Android, install it through Quetta Browser—Chrome for Android cannot run store extensions on the phone. The same daily free allowance applies as on desktop."
       >
         <LegalSection title="Before you start">
           <p>
@@ -214,13 +213,14 @@ export default function AndroidQuettaGuidePage(): React.ReactElement {
             <li>
               Open any link from{' '}
               <AppLink href={routes.sites}>Supported Sites</AppLink>. On matching pages, Skip Wait
-              bypasses the wait when the site allows it, or automates the remaining continue steps.
+              skips the wait when it can, or clicks Continue for you.{' '}
+              {FREE.dailyLimit} free bypasses each day work with no key, same as desktop.
             </li>
           </ol>
           <p>
             Not every Chrome extension behaves the same on a phone as on desktop. Quetta notes that
             some desktop-oriented UI or APIs can differ on Android even when install succeeds. Skip
-            Wait’s main unlock flows have been verified in Quetta on Android; if a specific host
+            Wait’s main flows have been verified in Quetta on Android; if a specific host
             misbehaves only on mobile, use the FAQ below.
           </p>
         </LegalSection>

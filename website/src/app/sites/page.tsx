@@ -2,21 +2,25 @@ import type { Metadata } from 'next';
 import { SupportedSitesPage } from '@/components/sites/SupportedSitesPage';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { bypasses, bypassSlug, totalBypasses, totalDomains } from '@/data/catalog';
-import { SITE } from '@/data/constants';
+import { FREE, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots } from '@/data/seo';
 import { bypassSitePath, routes } from '@/lib/routes';
 
-const title = 'Supported Sites — Link Shortener & Countdown Bypasses';
-const description = `Browse ${totalBypasses()} bypasses across ${totalDomains()} websites. Search by site name or domain for countdown skips, waiting-page bypasses, and link shortener support with Skip Wait.`;
+const title = 'Supported Sites — Countdown Bypass & URL Shorteners';
+const description = `Browse ${totalBypasses()} bypasses across ${totalDomains()} websites. Skip countdown timers, bypass URL shorteners, waiting pages, and download timers. ${FREE.dailyLimit} free bypasses per day.`;
 const keywords = [
   'supported sites',
   'skip wait supported sites',
-  'link shortener bypass list',
   'countdown bypass list',
+  'bypass url shorteners',
+  'bypass timers',
+  'link shortener bypass list',
   'waiting page bypass sites',
   'download timer bypass sites',
   'safelink bypass list',
   'ad link bypass list',
+  'fastforward alternative',
+  'universal bypass alternative',
 ] as const;
 const path = routes.sites;
 const url = `${SITE.url}${path}`;

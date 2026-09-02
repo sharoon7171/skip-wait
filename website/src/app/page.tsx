@@ -40,7 +40,7 @@ export const metadata: Metadata = {
         url: '/icon.png',
         width: 128,
         height: 128,
-        alt: `${SITE.name} — skip countdown timers and link shorteners`,
+        alt: `${SITE.name} Chrome extension`,
       },
     ],
   },
