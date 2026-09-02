@@ -1,5 +1,5 @@
 import { totalBypasses, totalDomains } from '@/data/catalog';
-import { LICENSE, PRICE } from '@/data/constants';
+import { FREE, LICENSE, PRICE } from '@/data/constants';
 
 export type FaqItem = {
   question: string;
@@ -9,32 +9,39 @@ export type FaqItem = {
 export const faqs: readonly FaqItem[] = [
   {
     question: 'How do I use Skip Wait?',
+    answer: `Install Skip Wait from the Chrome Web Store. You get ${FREE.dailyLimit} free bypasses each day with no key. Open supported links as usual. Skip Wait skips the countdown when it can, or waits and clicks Continue for you. For unlimited use, get a 30-minute trial or ${PRICE.summary} license on EAS Store, paste the key in the popup, and tap Activate.`,
+  },
+  {
+    question: 'Do I need a license?',
+    answer: LICENSE.faqAnswer,
+  },
+  {
+    question: 'How much does Skip Wait cost?',
+    answer: `${FREE.dailyLimit} free bypasses each day with no key. A short link that uses a few pages still counts as one use. EAS Store also offers a 30-minute ${LICENSE.trialLabel.toLowerCase()} and a ${PRICE.summary} plan with no daily limit. Paste a key in the popup and tap Activate. ${LICENSE.deviceLimit} A live license does not use the daily free count.`,
+  },
+  {
+    question: 'Is Skip Wait a FastForward or Universal Bypass alternative?',
     answer:
-      `Install Skip Wait from the Chrome Web Store, get a ${LICENSE.trialLabel.toLowerCase()} or ${PRICE.summary} license on EAS Store, paste the key in the popup and tap Activate, then open supported links as usual. On matching pages the extension either bypasses the countdown and redirects, or automates the wait and continue steps so you reach the file or destination faster.`,
+      'Yes. Skip Wait is a Chrome extension to skip wait, bypass timers, run a countdown bypass, and bypass URL shorteners on supported sites. It is not FastForward or Universal Bypass—those are separate products. Skip Wait skips the wait when it can. If the site still needs Continue, Skip Wait clicks it for you.',
+  },
+  {
+    question: 'Does it bypass timers, or only wait for me?',
+    answer:
+      'Both. Skip Wait skips countdown timers, waiting pages, and URL shorteners when the site allows it. If the site still needs a wait or Continue, Skip Wait does those steps for you.',
+  },
+  {
+    question: 'What sites are supported?',
+    answer: `Skip Wait works on ${totalBypasses()} bypasses across ${totalDomains()} websites—URL shorteners like Linkvertise, GPLinks, and Ouo, plus waiting pages, safelinks, file-host timers, content lockers, and direct downloads. Open Supported Sites and search by name or website address. Tap Refresh in the extension popup to pull the latest domain list without reinstalling.`,
+  },
+  {
+    question: 'Can it handle “please wait” and “click to continue” pages?',
+    answer:
+      'Yes on supported sites. Skip Wait skips please-wait pages and countdown timers when it can. If the site still needs a wait or Continue, Skip Wait handles those clicks.',
   },
   {
     question: 'Can I use Skip Wait on Android?',
     answer:
       'Yes on Android with Quetta Browser, which installs Chrome Web Store extensions. Chrome for Android itself does not. Follow the Install on Android guide for Quetta’s official install steps. Quetta’s iOS app does not document Chrome extension support, so Skip Wait is not offered there.',
-  },
-  {
-    question: 'Does it bypass timers, or only automate waits?',
-    answer:
-      'Both. When a site allows an instant skip, Skip Wait bypasses the timer and waiting page. When a full bypass isn’t possible, it automates waiting, unlocking, and clicking continue so you still save time without babysitting the page.',
-  },
-  {
-    question: 'How much does Skip Wait cost?',
-    answer:
-      `EAS Store offers a ${LICENSE.trialLabel.toLowerCase()} and a ${PRICE.summary} monthly plan. Your license key is delivered after checkout. Paste it in the extension popup and tap Activate. ${LICENSE.deviceLimit}`,
-  },
-  {
-    question: 'What sites are supported?',
-    answer: `Skip Wait works on ${totalBypasses()} bypasses across ${totalDomains()} websites—link shorteners like Linkvertise, GPLinks, and Ouo, plus safelinks, file hosts, and download countdown pages. Open Supported Sites and search by name or website address. Tap Refresh in the extension popup to pull the latest domain list without reinstalling.`,
-  },
-  {
-    question: 'Can it handle “please wait” and “click to continue” pages?',
-    answer:
-      'On supported sites, yes. The extension detects waiting pages, countdowns, and continue gates, then completes the unlock path—instant redirect when possible, or automated waits and clicks when the site still requires a timed step.',
   },
   {
     question: 'How do I get newly added sites?',
@@ -44,6 +51,6 @@ export const faqs: readonly FaqItem[] = [
   {
     question: 'How do I request a new site?',
     answer:
-      'Open a support request on GitHub, Telegram, or email with the page URL and how the wait or unlock flow works. After we add it, tap Refresh in the popup to pick up new domains.',
+      'Open a support request on GitHub, Telegram, or email with the page URL and how the wait works. After we add it, tap Refresh in the popup to pick up new domains.',
   },
 ] as const;

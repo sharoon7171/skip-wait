@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
-import { CHROME_WEB_STORE_URL, CONTACT, DEVELOPER, EAS_STORE_URL, PRICE, SITE } from '@/data/constants';
+import {
+  CHROME_WEB_STORE_URL,
+  CONTACT,
+  DEVELOPER,
+  FREE,
+  LICENSE,
+  PRICE,
+  SITE,
+} from '@/data/constants';
 import { faqs } from '@/data/faqs';
 import { homeSections } from '@/lib/routes';
 
@@ -52,12 +60,14 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
     downloadUrl: CHROME_WEB_STORE_URL,
     installUrl: CHROME_WEB_STORE_URL,
     offers: {
-      '@type': 'Offer',
-      price: PRICE.amount,
+      '@type': 'AggregateOffer',
+      lowPrice: '0',
+      highPrice: PRICE.amount,
       priceCurrency: PRICE.currency,
+      offerCount: 2,
       availability: 'https://schema.org/InStock',
-      url: EAS_STORE_URL,
-      description: `Free trial and ${PRICE.summary} on EAS Store`,
+      url: CHROME_WEB_STORE_URL,
+      description: LICENSE.pricingLine,
     },
     author: {
       '@type': 'Person',
@@ -71,11 +81,12 @@ export function softwareApplicationJsonLd(): Record<string, unknown> {
       url: DEVELOPER.url,
     },
     featureList: [
-      'Bypass countdown timers on supported download and link pages',
-      'Skip waiting pages and link shortener redirects',
-      'Automate waits and continue clicks when a full bypass is not possible',
-      'Instant redirect to the destination when the site allows it',
-      `Free trial and ${PRICE.summary}. Activate a license in the popup`,
+      'Skip wait, bypass timers, and countdown bypass on supported pages',
+      'Bypass URL shorteners, waiting pages, and download timers',
+      'If a site still needs a wait or Continue, Skip Wait does that step',
+      'Opens the destination when the page is ready',
+      `${FREE.dailyLimit} free bypasses each day with no key`,
+      `30-minute trial and ${PRICE.summary} for unlimited use`,
     ],
     keywords: SITE.keywords.join(', '),
   };

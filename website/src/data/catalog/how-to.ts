@@ -1,10 +1,10 @@
 import type { BypassStep } from '@/types/catalog';
-import { LICENSE } from '@/data/constants';
+import { FREE, LICENSE } from '@/data/constants';
 
 export const bypassHowToSteps: readonly BypassStep[] = [
   {
     title: 'Install Skip Wait',
-    body: `Add Skip Wait from the Chrome Web Store, get a ${LICENSE.trialLabel.toLowerCase()} or monthly license on EAS Store, paste the key in the popup, and tap Activate. Matching pages then unlock automatically.`,
+    body: `Add Skip Wait from the Chrome Web Store. You get ${FREE.dailyLimit} free bypasses each day with no key. Skip Wait then runs on matching pages. For unlimited use, get a ${LICENSE.trialLabel.toLowerCase()} or monthly license on EAS Store, paste the key in the popup, and tap Activate.`,
   },
   {
     title: 'Leave it enabled',
@@ -16,6 +16,6 @@ export const bypassHowToSteps: readonly BypassStep[] = [
   },
   {
     title: 'Stay on the tab',
-    body: 'Skip Wait handles the wait or unlock path. When it is ready, you continue to the destination.',
+    body: 'Keep the tab open. Skip Wait skips the timer or clicks Continue for you, then opens the destination.',
   },
 ] as const;

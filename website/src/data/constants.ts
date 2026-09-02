@@ -3,17 +3,6 @@ export const EAS_STORE_URL =
 
 export const EAS_API_URL = 'https://eas-x.com/api/v1/licenses';
 
-export const LICENSE = {
-  trialLabel: 'Free trial',
-  trialDetail: 'Free',
-  monthlyDetail: '$1.50 / month',
-  deviceLimit: 'One key per device.',
-  keyExample: 'EAS-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
-  pricingLine: 'a free trial and a $1.50 per month plan',
-  faqAnswer:
-    'Yes. Get a free trial or monthly license on EAS Store and activate your key in the extension popup.',
-} as const;
-
 export const PRICE = {
   amount: '1.50',
   currency: 'USD',
@@ -22,19 +11,40 @@ export const PRICE = {
   summary: '$1.50 per month',
 } as const;
 
+export const FREE = {
+  dailyLimit: 5,
+} as const;
+
+export const LICENSE = {
+  trialLabel: 'Free trial',
+  trialDetail: 'Free',
+  trialHint: '30 minutes',
+  monthlyDetail: '$1.50 / month',
+  deviceLimit: 'One key per device.',
+  keyExample: 'EAS-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX',
+  pricingLine: `30-minute trial and ${PRICE.summary} on EAS Store. ${FREE.dailyLimit} free bypasses per day with no key after Chrome install`,
+  faqAnswer: `No. After you install, you get ${FREE.dailyLimit} free bypasses each day with no key. For unlimited use, get a 30-minute trial or a monthly license on EAS Store and activate the key in the popup.`,
+} as const;
+
 export const SITE = {
   name: 'Skip Wait',
   url: 'https://skip-wait-website.vercel.app',
   tagline:
-    'Bypass countdown timers and link shorteners or automate waits and clicks when a full skip isn’t possible.',
-  title: 'Skip Wait — Bypass Countdown Timers & Link Shorteners (Chrome)',
-  description: `A Chrome extension with ${LICENSE.pricingLine} to bypass countdown timers, waiting pages, and link shorteners, or automate the wait when a full skip is not possible.`,
+    'Skip wait, bypass timers, and countdown bypass for URL shorteners. If a site still asks you to wait or click Continue, Skip Wait does that for you.',
+  title: 'Skip Wait — Bypass Timers, Countdowns & URL Shorteners (Chrome)',
+  description: `Skip wait, bypass timers, and countdown bypass for URL shorteners in Chrome. ${FREE.dailyLimit} free bypasses a day. If a page still needs Continue, Skip Wait clicks it. FastForward and Universal Bypass alternative.`,
   keywords: [
     'skip wait',
     'skip wait extension',
     'skip wait chrome extension',
+    'bypass timers',
+    'countdown bypass',
+    'bypass url shorteners',
+    'bypass url shortners',
+    'fastforward',
     'fastforward alternative',
     'fast forward extension',
+    'universal bypass',
     'universal bypass alternative',
     'universal bypass chrome',
     'link shortener bypass',
@@ -59,7 +69,6 @@ export const SITE = {
     'automate waiting page',
     'timer skip extension',
     'bypass short link',
-    'countdown bypass',
   ],
 } as const;
 
