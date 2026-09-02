@@ -8,9 +8,9 @@ export function SectionHeader({
   description,
 }: SectionHeaderProps): React.ReactElement {
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-measure">
       <h2 className="font-display text-headline text-ink">{title}</h2>
-      <p className="mt-3 text-body text-ink-body">{description}</p>
+      <p className="mt-3 text-body-sm text-ink-body sm:text-body">{description}</p>
     </div>
   );
 }

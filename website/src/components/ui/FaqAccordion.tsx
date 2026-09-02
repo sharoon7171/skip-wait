@@ -32,17 +32,17 @@ export function FaqAccordion({ items }: FaqAccordionProps): React.ReactElement {
               aria-expanded={open}
               aria-controls={panelId}
               onClick={() => setOpenIndex(open ? null : index)}
-              className={`flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left outline-none transition-colors sm:px-6 sm:py-5 ${
+              className={`flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left outline-none transition-colors ${
                 open
                   ? 'bg-neutral-200'
                   : 'bg-neutral-100 hover:bg-neutral-200/70'
               }`}
             >
-              <span className="min-w-0 flex-1 font-display text-body font-semibold text-ink sm:text-title">
+              <span className="min-w-0 flex-1 font-display text-body-sm font-semibold text-ink sm:text-title">
                 {item.question}
               </span>
               <IconChevronRight
-                className={`size-5 shrink-0 transition-transform ${
+                className={`size-5 shrink-0 transition-transform duration-200 ${
                   open ? 'rotate-90 text-ink' : 'text-neutral-400'
                 }`}
               />
@@ -52,7 +52,7 @@ export function FaqAccordion({ items }: FaqAccordionProps): React.ReactElement {
                 id={panelId}
                 role="region"
                 aria-labelledby={buttonId}
-                className="bg-white px-5 py-4 ring-1 ring-neutral-200 ring-inset sm:px-6 sm:py-5"
+                className="bg-white px-5 py-4 ring-1 ring-neutral-200 ring-inset"
               >
                 <p className="m-0 max-w-prose text-body-sm leading-relaxed text-ink [&_a]:font-medium [&_a]:text-primary-700 [&_a]:underline [&_a]:underline-offset-2 [&_a]:hover:text-primary-800">
                   {item.answer}

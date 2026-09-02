@@ -7,7 +7,7 @@ type ShellProps = {
 
 export function Shell({ children, className = '' }: ShellProps): React.ReactElement {
   return (
-    <div className={`mx-auto w-full max-w-shell px-5 sm:px-8 lg:px-10 ${className}`.trim()}>
+    <div className={`mx-auto w-full max-w-shell px-4 sm:px-6 lg:px-8 ${className}`.trim()}>
       {children}
     </div>
   );
