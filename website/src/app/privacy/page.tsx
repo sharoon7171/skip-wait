@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { CHROME_WEB_STORE_URL, CONTACT, EAS_API_URL, LICENSE, PRICE, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, EAS_API_URL, FREE, LICENSE, PRICE, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Privacy Policy';
 const description = `Privacy policy for the ${SITE.name} Chrome extension: what data the extension accesses, what it stores, and how Skip Wait handles information on supported sites.`;
-const updated = '2026-09-01';
+const updated = '2026-09-03';
 const path = routes.privacy;
 const url = `${SITE.url}${path}`;
 
@@ -68,12 +68,14 @@ export default function PrivacyPage(): React.ReactElement {
       >
         <LegalSection title="1. Scope">
           <p>
-            {SITE.name} is a Chrome extension that, on supported link shorteners and file hosts,
-            bypasses countdown timers and waiting pages or automates waits and continue clicks. It is
-            available from the{' '}
-            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. Bypass requires an active license
-            ({LICENSE.trialLabel.toLowerCase()} or {PRICE.summary}) from EAS Store. Activate the key
-            in the extension popup. No separate website account is required.
+            {SITE.name} is a Chrome extension that, on supported URL shorteners and file hosts,
+            skips countdown timers and waiting pages, or waits and clicks Continue for you when the
+            site still requires that. It is available from the{' '}
+            <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. After install you may use{' '}
+            {FREE.dailyLimit} free bypasses per local calendar day with no key. Unlimited bypass
+            while a {LICENSE.trialLabel.toLowerCase()} ({LICENSE.trialHint}) or {PRICE.summary} license
+            from EAS Store is live; activate an optional key in the extension popup. No separate
+            website account is required.
           </p>
           <p>
             The Website is the marketing site at{' '}
@@ -149,6 +151,10 @@ export default function PrivacyPage(): React.ReactElement {
               the cached supported-site list downloaded from the public{' '}
               <code>hosts.json</code> file in the extension repository, plus the last refresh
               time
+            </li>
+            <li>
+              a local daily count of free bypasses used while no license is live (calendar day and
+              number used), so the free daily limit can be enforced on this device
             </li>
             <li>
               license session data when you activate a key: license key, browser instance ID,

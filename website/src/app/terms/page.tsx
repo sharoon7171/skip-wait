@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { AppLink } from '@/components/nav/AppLink';
 import { LegalPage, LegalSection, LegalSubheading } from '@/components/legal/LegalPage';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { CHROME_WEB_STORE_URL, CONTACT, LICENSE, PRICE, SITE } from '@/data/constants';
+import { CHROME_WEB_STORE_URL, CONTACT, FREE, LICENSE, PRICE, SITE } from '@/data/constants';
 import { breadcrumbJsonLd, indexRobots, legalWebPageJsonLd } from '@/data/seo';
 import { routes } from '@/lib/routes';
 
 const title = 'Terms of Use';
-const description = `Terms of use for the ${SITE.name} Chrome extension (${PRICE.summary}): license, supported sites, acceptable use, disclaimers, and contact for Skip Wait.`;
-const updated = '2026-09-01';
+const description = `Terms of use for the ${SITE.name} Chrome extension: ${FREE.dailyLimit} free bypasses per day, ${PRICE.summary} license, supported sites, acceptable use, disclaimers, and contact.`;
+const updated = '2026-09-03';
 const path = routes.terms;
 const url = `${SITE.url}${path}`;
 
@@ -68,21 +68,24 @@ export default function TermsPage(): React.ReactElement {
       >
         <LegalSection title="1. The Extension">
           <p>
-            {SITE.name} is a {PRICE.summary} Chrome extension distributed on the{' '}
+            {SITE.name} is a Chrome extension distributed on the{' '}
             <a href={CHROME_WEB_STORE_URL}>Chrome Web Store</a>. On supported pages it either:
           </p>
           <ul>
-            <li>bypasses countdown timers and waiting pages when possible, or</li>
-            <li>automates waits and continue clicks when a full skip is not possible</li>
+            <li>skips countdown timers and waiting pages when the site allows it, or</li>
+            <li>waits and clicks Continue for you when the site still requires that</li>
           </ul>
           <p>
-            Bypass requires an active license from EAS Store ({LICENSE.trialLabel.toLowerCase()} or{' '}
-            {PRICE.summary}). Paste the key in the extension popup and tap Activate.{' '}
-            {LICENSE.deviceLimit} The Extension then runs automatically on supported flows. There is
-            no settings panel to turn bypasses off.
+            After install you may use up to {FREE.dailyLimit} free bypasses per local calendar
+            day with no license key. When a {LICENSE.trialLabel.toLowerCase()} ({LICENSE.trialHint}) or{' '}
+            {PRICE.summary} license from EAS Store is live, bypass is unlimited and does not use that
+            daily count. After the daily count is used and no live license is present, bypass does not
+            run until the next local calendar day or you activate a key. Paste the key in the
+            extension popup and tap Activate. {LICENSE.deviceLimit} The Extension then runs
+            automatically on supported pages. There is no settings panel to turn bypasses off.
           </p>
           <p>
-            Supported domains and unlock flows change over time as sites are added or break. The
+            Supported domains and wait pages change over time as sites are added or break. The
             Extension only modifies pages that match its supported-host checks.
           </p>
           <p>
