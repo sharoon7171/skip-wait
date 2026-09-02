@@ -406,6 +406,13 @@
   "linkjust": {
     "hosts": ["linkjust.com"]
   },
+  "link4sub": {
+    "hosts": [
+      "blog.tapvietcode.com",
+      "pro.tapvietcode.com",
+      "link4sub.com"
+    ]
+  },
   "linclik": {
     "hosts": ["linclik.com"]
   },
