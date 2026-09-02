@@ -1,12 +1,9 @@
 import { canBypassHost, licensedHosts, onBypassAccessChange } from '../../gate';
+import { MSG_ARM, MSG_MEDIATOR, MSG_OPEN } from './hosts';
+import { fetchLastMediatorReferer } from './hop';
 
-const MSG_ARM = 'AROLINKS_ARM_REFERER' as const;
-const MSG_OPEN = 'AROLINKS_OPEN_DEST' as const;
 const RULE_BASE = 917301;
 const CSP_RULE = 917300;
-
-type ArmMsg = { type: typeof MSG_ARM; url: string; referer: string };
-type OpenMsg = { type: typeof MSG_OPEN; url: string };
 
 const isHttp = (v: string): boolean => /^https?:\/\//i.test(v);
 
@@ -79,62 +76,71 @@ export const initArolinksBackground = (): void => {
   chrome.tabs.onRemoved.addListener((tabId) => {
     void clearReferer(tabId);
   });
-  chrome.runtime.onMessage.addListener((msg: { type?: string; url?: string; referer?: string }, sender, reply) => {
-    const tabId = sender.tab?.id;
-    if (msg.type === MSG_OPEN) {
+  chrome.runtime.onMessage.addListener(
+    (msg: { type?: string; url?: string; referer?: string; shortUrl?: string; assigned?: string }, sender, reply) => {
+      const tabId = sender.tab?.id;
+      if (msg.type === MSG_MEDIATOR) {
+        const shortUrl = typeof msg.shortUrl === 'string' ? msg.shortUrl : '';
+        const assigned = typeof msg.assigned === 'string' ? msg.assigned : '';
+        if (!isHttp(shortUrl) || !isHttp(assigned)) {
+          reply(null);
+          return false;
+        }
+        void (async () => {
+          try {
+            const host = new URL(shortUrl).hostname;
+            if (!(await canBypassHost(host, 'arolinks'))) {
+              reply(null);
+              return;
+            }
+            reply(await fetchLastMediatorReferer(shortUrl, assigned));
+          } catch {
+            reply(null);
+          }
+        })();
+        return true;
+      }
+      if (msg.type === MSG_OPEN) {
+        const url = typeof msg.url === 'string' ? msg.url : '';
+        if (tabId == null || !isHttp(url)) {
+          reply(false);
+          return false;
+        }
+        void (async () => {
+          try {
+            const tabHost = sender.tab?.url ? new URL(sender.tab.url).hostname : '';
+            if (!tabHost || !(await canBypassHost(tabHost, 'arolinks'))) {
+              reply(false);
+              return;
+            }
+            await clearReferer(tabId);
+            await chrome.tabs.update(tabId, { url });
+            reply(true);
+          } catch {
+            reply(false);
+          }
+        })();
+        return true;
+      }
+      if (msg.type !== MSG_ARM) return false;
       const url = typeof msg.url === 'string' ? msg.url : '';
-      if (tabId == null || !isHttp(url)) {
+      const referer = typeof msg.referer === 'string' ? msg.referer : '';
+      if (tabId == null || !isHttp(url) || !isHttp(referer)) {
         reply(false);
         return false;
       }
       void (async () => {
         try {
-          const tabHost = sender.tab?.url ? new URL(sender.tab.url).hostname : '';
-          if (!tabHost || !(await canBypassHost(tabHost, 'arolinks'))) {
+          if (!(await canBypassHost(new URL(url).hostname, 'arolinks'))) {
             reply(false);
             return;
           }
-          await clearReferer(tabId);
-          await chrome.tabs.update(tabId, { url });
-          reply(true);
+          reply(await armReferer(tabId, url, referer));
         } catch {
           reply(false);
         }
       })();
       return true;
-    }
-    if (msg.type !== MSG_ARM) return false;
-    const url = typeof msg.url === 'string' ? msg.url : '';
-    const referer = typeof msg.referer === 'string' ? msg.referer : '';
-    if (tabId == null || !isHttp(url) || !isHttp(referer)) {
-      reply(false);
-      return false;
-    }
-    void (async () => {
-      try {
-        if (!(await canBypassHost(new URL(url).hostname, 'arolinks'))) {
-          reply(false);
-          return;
-        }
-        reply(await armReferer(tabId, url, referer));
-      } catch {
-        reply(false);
-      }
-    })();
-    return true;
-  });
+    },
+  );
 };
-
-export const armUnlockReferer = (url: string, referer: string): Promise<boolean> =>
-  new Promise((resolve) => {
-    chrome.runtime.sendMessage({ type: MSG_ARM, url, referer } satisfies ArmMsg, (ok?: boolean) => {
-      resolve(!chrome.runtime.lastError && ok === true);
-    });
-  });
-
-export const openDestinationTab = (url: string): Promise<boolean> =>
-  new Promise((resolve) => {
-    chrome.runtime.sendMessage({ type: MSG_OPEN, url } satisfies OpenMsg, (ok?: boolean) => {
-      resolve(!chrome.runtime.lastError && ok === true);
-    });
-  });

@@ -12,8 +12,7 @@ export const spoofVisibility = (): void => {
   chrome.runtime.sendMessage({ type: 'INJECT_VISIBILITY_SPOOF' }).catch(() => {});
 };
 
-export const countdown = async (overlay: FullPageOverlay, ms: number, status: string): Promise<void> => {
-  overlay.setStatus(status);
+export const countdown = async (overlay: FullPageOverlay, ms: number): Promise<void> => {
   overlay.startCountdown(Date.now() + ms);
   await new Promise<void>((r) => setTimeout(r, ms));
   overlay.hideCountdown();

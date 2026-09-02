@@ -1,6 +1,6 @@
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
-import { armUnlockReferer, openDestinationTab } from './background';
+import { armUnlockReferer, openDestinationTab, resolveMediatorReferer } from './client';
 import { isVpnPage, pleaseWaitTarget, unlockDestination } from './gate';
 import {
   AROLINKS_DEST_WAIT_MS,
@@ -17,7 +17,7 @@ let done = false;
 const openDestination = async (dest: string): Promise<void> => {
   if (await isTimedDestUrl(dest)) {
     const overlay = mount('Waiting for access window…');
-    await countdown(overlay, AROLINKS_DEST_WAIT_MS, 'Waiting for access window…');
+    await countdown(overlay, AROLINKS_DEST_WAIT_MS);
   }
   const overlay = mount('Opening your link…');
   if (!(await openDestinationTab(dest))) overlay.setStatus('Could not open link');
@@ -25,10 +25,13 @@ const openDestination = async (dest: string): Promise<void> => {
 
 const openUnlockPage = async (alias: string, assigned: string): Promise<void> => {
   const overlay = mount('Getting things ready…');
-  await countdown(overlay, AROLINKS_UNLOCK_READY_MS, 'Almost ready…');
+  const [, referer] = await Promise.all([
+    countdown(overlay, AROLINKS_UNLOCK_READY_MS),
+    resolveMediatorReferer(location.href, assigned),
+  ]);
   overlay.setStatus('Opening unlock page…');
   const url = `${location.origin}/${alias}`;
-  if (!(await armUnlockReferer(url, `${new URL(assigned).origin}/`))) {
+  if (!referer || !(await armUnlockReferer(url, referer))) {
     overlay.setStatus('Could not open link');
     return;
   }
