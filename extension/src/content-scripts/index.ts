@@ -7,6 +7,7 @@ import {
 } from './coomeet-iframe';
 import { init1shortlinkRedirect } from '../sites/1shortlink';
 import { initAdfocusRedirect } from '../sites/adfocus';
+import { initAdsterraBypass } from '../sites/adsterra';
 import { initAdlinkflyLinksGo } from '../sites/adlinkfly';
 import { initArolinksUnlock } from '../sites/arolinks';
 import { initLink4subUnlock } from '../sites/link4sub';
@@ -45,6 +46,9 @@ import { initFilecrFileDownload, initFilecrProductPage } from '../sites/filecr';
 import { initFilecryptGate } from '../sites/filecrypt';
 import { initFilehippoBypass } from '../sites/filehippo';
 import { initFilePressDirectDownload } from '../sites/filepress';
+import { initFlightsimCount } from '../sites/flightsim';
+import { initFuzyapkCount } from '../sites/fuzyapk';
+import { initGetmodsapkCount } from '../sites/getmodsapk';
 import { initSoftpediaBypass } from '../sites/softpedia';
 import {
   initHdhub4uLandingPageMed,
@@ -103,6 +107,9 @@ import { initUsersdriveAutomation } from '../sites/usersdrive';
 import { initVexfileBypass } from '../sites/vexfile';
 import { initMega4uploadBypass } from '../sites/mega4upload';
 import { initMirroredFilesPage } from '../sites/mirrored';
+import { initModded1Count } from '../sites/modded-1';
+import { initModdroidCount } from '../sites/moddroid';
+import { initModsmaniacCount } from '../sites/modsmaniac';
 import { initMove2linkGate } from '../sites/move2link';
 import { initMp4uploadCountdownBypass } from '../sites/mp4upload';
 import { initPlingDirectDownload } from '../sites/pling';
@@ -125,6 +132,7 @@ import { initGaeaOperationsLockrGate } from '../sites/gaea-operations-lockr';
 import { initWorkinkGate } from '../sites/workink';
 
 import { initStorylineCoursePlayBrand } from '../sites/storyline-scorm';
+import { initStreamerviewerbotCount } from '../sites/streamerviewerbot';
 import { initSwiftuploadsDirectDownload } from '../sites/swiftuploads';
 import { initUploadrarBypass } from '../sites/uploadrar';
 import { initFilespayoutsBypass } from '../sites/filespayouts';
@@ -133,6 +141,8 @@ import { initOceanofdmgBypass } from '../sites/oceanofdmg';
 import { initPesktopBypass } from '../sites/pesktop';
 import { initGoostEntry, initGoostMediator } from '../sites/goost';
 import { initAnkergamesMediator } from '../sites/ankergames';
+import { initApkawardCount } from '../sites/apkaward';
+import { initApkvisionCount } from '../sites/apkvision';
 import { initApunkagamesVlink, initApunkagamesDownloadProcess } from '../sites/apunkagames';
 import { initGamesnostalgiaDirectDownload } from '../sites/gamesnostalgia';
 import { initOceanofgamesDirectDownload } from '../sites/oceanofgames';
@@ -147,6 +157,7 @@ import { dropExpiredLicense, getLicenseSession, storageKeys } from '../license/s
 
 const INITS = [
   initStorylineCoursePlayBrand,
+  initStreamerviewerbotCount,
   initLinknextGate,
   initLinkvertiseAccessPage,
   initCutyGate,
@@ -170,6 +181,7 @@ const INITS = [
   initShortxlinksUnlock,
   init1shortlinkRedirect,
   initAdfocusRedirect,
+  initAdsterraBypass,
   initGplinksGate,
   initGplinksMediator,
   initGplinksLinksGo,
@@ -201,6 +213,8 @@ const INITS = [
   initAdlinkflyLinksGo,
   initFourDownloadDirectLinks,
   initAnkergamesMediator,
+  initApkawardCount,
+  initApkvisionCount,
   initApunkagamesVlink,
   initApunkagamesDownloadProcess,
   initGamesnostalgiaDirectDownload,
@@ -218,6 +232,9 @@ const INITS = [
   initApktealProductPage,
   initAn1Bypass,
   initGapkmodBypass,
+  initGetmodsapkCount,
+  initFuzyapkCount,
+  initFlightsimCount,
   initPlaymodsBypass,
   initLiteapksDirectDownload,
   initLatestmodapksDirectDownload,
@@ -281,6 +298,9 @@ const INITS = [
   initVexfileBypass,
   initMega4uploadBypass,
   initMirroredFilesPage,
+  initModded1Count,
+  initModdroidCount,
+  initModsmaniacCount,
   initMove2linkGate,
   initMp4uploadCountdownBypass,
   initMuhammadniazCountdownBypass,
