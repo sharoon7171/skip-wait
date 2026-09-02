@@ -9,6 +9,7 @@ import { init1shortlinkRedirect } from '../sites/1shortlink';
 import { initAdfocusRedirect } from '../sites/adfocus';
 import { initAdlinkflyLinksGo } from '../sites/adlinkfly';
 import { initArolinksUnlock } from '../sites/arolinks';
+import { initVuotnhanhUnlock } from '../sites/vuotnhanh';
 import { initBblinkGate } from '../sites/bblink';
 import { initBbmktsSubtounlock } from '../sites/bbmkts-subtounlock';
 import {
@@ -172,6 +173,7 @@ const INITS = [
   initGplinksMediator,
   initGplinksLinksGo,
   initArolinksUnlock,
+  initVuotnhanhUnlock,
   initBblinkGate,
   initBbmktsSubtounlock,
   initUnlocktoearnPage,

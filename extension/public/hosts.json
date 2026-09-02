@@ -54,6 +54,12 @@
       "vexfile.com"
     ]
   },
+  "vuotnhanh": {
+    "hosts": [
+      "vuotnhanh.com",
+      "gtraffic.io"
+    ]
+  },
   "usersdrive": {
     "hosts": [
       "usersdrive.com"

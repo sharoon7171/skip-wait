@@ -122,6 +122,7 @@ import { bypass as uploadrarBypass } from './bypasses/uploadrar-bypass';
 import { bypass as usersdriveBypass } from './bypasses/usersdrive-bypass';
 import { bypass as vegamoviesBypass } from './bypasses/vegamovies-bypass';
 import { bypass as vexfileBypass } from './bypasses/vexfile-bypass';
+import { bypass as vuotnhanhBypass } from './bypasses/vuotnhanh-bypass';
 import { bypass as wahmiBypass } from './bypasses/wahmi-bypass';
 import { bypass as weadownBypass } from './bypasses/weadown-bypass';
 import { bypass as zifuryBypass } from './bypasses/zifury-bypass';
@@ -258,6 +259,7 @@ export const bypasses: readonly SupportedBypass[] = [
   usersdriveBypass,
   vegamoviesBypass,
   vexfileBypass,
+  vuotnhanhBypass,
   wahmiBypass,
   weadownBypass,
   zifuryBypass,
