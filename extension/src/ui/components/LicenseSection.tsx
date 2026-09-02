@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { FREE_DAILY_KEY, getFreeUsage, type FreeUsage } from '../../free-bypass';
 import { activateLicense, deactivateLicense } from '../../license/gate';
-import { getLicenseSession, storageKeys } from '../../license/storage';
+import {
+  entitlementIsLive,
+  getLicenseSession,
+  leaseIsLive,
+  storageKeys,
+} from '../../license/storage';
 import type { LicenseSession } from '../../license/types';
 import {
   activateCard,
@@ -15,6 +21,9 @@ import {
   btnGhost,
   errorBanner,
   fieldInput,
+  freeBanner,
+  freeBannerMeta,
+  freeBannerTitle,
   keyLabel,
   keyPanel,
   keyRow,
@@ -48,6 +57,9 @@ const formatWhen = (ms: number): string =>
 
 const expiryLabel = (entExp: number | null): string =>
   entExp ? copy.expires(formatWhen(entExp)) : copy.lifetime;
+
+const sessionIsLive = (session: LicenseSession): boolean =>
+  entitlementIsLive(session.entExp) && leaseIsLive(session.leaseExp);
 
 const planLink = (label: string, price: string, hint: string): React.ReactElement => (
   <a href={EAS_STORE_URL} target="_blank" rel="noopener noreferrer" className={planTile}>
@@ -88,25 +100,31 @@ export function LicenseSection(): React.ReactElement {
   const [hydrated, setHydrated] = useState(false);
   const [busy, setBusy] = useState(false);
   const [keyInput, setKeyInput] = useState('');
+  const [paidLive, setPaidLive] = useState(false);
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [activationId, setActivationId] = useState<string | null>(null);
   const [entExp, setEntExp] = useState<number | null>(null);
+  const [free, setFree] = useState<FreeUsage | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const applySession = useCallback((session: LicenseSession | null): void => {
-    if (!session) {
+    if (!session || !sessionIsLive(session)) {
+      setPaidLive(false);
       setActiveKey(null);
       setActivationId(null);
       setEntExp(null);
       return;
     }
+    setPaidLive(true);
     setActiveKey(session.key);
     setActivationId(session.activationId);
     setEntExp(session.entExp);
   }, []);
 
   const loadFromStorage = useCallback(async (): Promise<void> => {
-    applySession(await getLicenseSession());
+    const [session, usage] = await Promise.all([getLicenseSession(), getFreeUsage()]);
+    applySession(session);
+    setFree(usage);
   }, [applySession]);
 
   useEffect(() => {
@@ -116,7 +134,8 @@ export function LicenseSection(): React.ReactElement {
       if (
         storageKeys.licenseKey in changes ||
         storageKeys.entExp in changes ||
-        storageKeys.leaseExp in changes
+        storageKeys.leaseExp in changes ||
+        FREE_DAILY_KEY in changes
       ) {
         void loadFromStorage();
       }
@@ -132,11 +151,11 @@ export function LicenseSection(): React.ReactElement {
       .then(async (state) => {
         if (!state.ok) {
           setError(errorMessage(state.error));
-          applySession(await getLicenseSession());
+          await loadFromStorage();
           return;
         }
         setError(null);
-        applySession(await getLicenseSession());
+        await loadFromStorage();
       })
       .catch(() => setError(errorMessage('NETWORK')))
       .finally(() => setBusy(false));
@@ -144,17 +163,19 @@ export function LicenseSection(): React.ReactElement {
 
   const onClear = (): void => {
     void deactivateLicense().then(() => {
+      setPaidLive(false);
       setActiveKey(null);
       setActivationId(null);
       setEntExp(null);
       setKeyInput('');
       setError(null);
+      void getFreeUsage().then(setFree);
     });
   };
 
   if (!hydrated) return <div className="h-40 animate-pulse rounded-card bg-neutral-200/50" aria-hidden />;
 
-  if (activeKey) {
+  if (paidLive && activeKey) {
     return (
       <section className={stackSm} aria-labelledby="license-heading">
         <h2 id="license-heading" className="sr-only">
@@ -192,11 +213,22 @@ export function LicenseSection(): React.ReactElement {
     );
   }
 
+  const freeUsed = free?.used ?? 0;
+  const freeLimit = free?.limit ?? 0;
+  const freeDone = freeUsed >= freeLimit && freeLimit > 0;
+
   return (
     <section className={stackSm} aria-labelledby="license-heading">
       <h2 id="license-heading" className="sr-only">
         {copy.buyHeading}
       </h2>
+      <div className={freeBanner} role="status">
+        <p className={freeBannerTitle}>{copy.usingFree}</p>
+        <p className={freeBannerMeta}>
+          {free ? copy.freeToday(freeUsed, freeLimit) : '…'}
+          {freeDone ? ` — ${copy.freeExhausted}` : null}
+        </p>
+      </div>
       <div className={licenseHero}>
         <div className={licenseHeroGlow} aria-hidden />
         <p className={licenseHeroTitle}>{copy.buyHeading}</p>

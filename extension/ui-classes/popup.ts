@@ -145,3 +145,10 @@ export const errorBanner =
 export const stackSm = 'flex flex-col gap-2';
 
 export const stackMd = 'flex flex-col gap-3';
+
+export const freeBanner =
+  'rounded-card bg-primary-600/8 px-3 py-2.5 ring-1 ring-primary-600/20';
+
+export const freeBannerTitle = 'text-[0.8125rem] font-bold text-ink';
+
+export const freeBannerMeta = 'mt-0.5 text-[0.75rem] font-medium text-ink-soft';

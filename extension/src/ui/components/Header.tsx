@@ -1,21 +1,28 @@
 import { useCallback, useEffect, useState } from 'react';
-import { entitlementIsLive, getLicenseSession, storageKeys } from '../../license/storage';
+import { FREE_DAILY_KEY, getFreeUsage } from '../../free-bypass';
+import {
+  entitlementIsLive,
+  getLicenseSession,
+  leaseIsLive,
+  storageKeys,
+} from '../../license/storage';
 import { headerBar, headerBrand, headerIcon, headerTag, headerTitle } from '../../../ui-classes/popup';
 import { LICENSE_COPY, assetUrl } from '../constants';
 import { StatusPill } from './StatusPill';
 
-type HeaderStatus = 'missing' | 'active' | 'expired';
+type HeaderStatus = 'active' | 'free' | 'freeDone';
 
 export function Header(): React.ReactElement {
-  const [status, setStatus] = useState<HeaderStatus>('missing');
+  const [status, setStatus] = useState<HeaderStatus>('free');
 
   const refresh = useCallback(async (): Promise<void> => {
     const session = await getLicenseSession();
-    if (!session) {
-      setStatus('missing');
+    if (session && entitlementIsLive(session.entExp) && leaseIsLive(session.leaseExp)) {
+      setStatus('active');
       return;
     }
-    setStatus(entitlementIsLive(session.entExp) ? 'active' : 'expired');
+    const usage = await getFreeUsage();
+    setStatus(usage.used >= usage.limit ? 'freeDone' : 'free');
   }, []);
 
   useEffect(() => {
@@ -25,7 +32,8 @@ export function Header(): React.ReactElement {
       if (
         storageKeys.licenseKey in changes ||
         storageKeys.entExp in changes ||
-        storageKeys.leaseExp in changes
+        storageKeys.leaseExp in changes ||
+        FREE_DAILY_KEY in changes
       ) {
         void refresh();
       }
@@ -37,10 +45,10 @@ export function Header(): React.ReactElement {
   const pill =
     status === 'active' ? (
       <StatusPill label={LICENSE_COPY.statusActive} tone="live" />
-    ) : status === 'expired' ? (
-      <StatusPill label={LICENSE_COPY.expiredStatus} tone="need" />
+    ) : status === 'freeDone' ? (
+      <StatusPill label={LICENSE_COPY.freeExhaustedStatus} tone="need" />
     ) : (
-      <StatusPill label={LICENSE_COPY.missing} tone="need" />
+      <StatusPill label={LICENSE_COPY.freeStatus} tone="busy" />
     );
 
   return (

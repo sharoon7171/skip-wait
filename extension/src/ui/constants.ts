@@ -34,6 +34,11 @@ export const LICENSE_COPY = {
   activating: 'Activating…',
   missing: 'Needs license',
   expiredStatus: 'Expired',
+  usingFree: 'Using free',
+  freeToday: (used: number, limit: number): string => `Free today: ${used} / ${limit}`,
+  freeExhausted: 'Daily free limit reached — activate a key for unlimited.',
+  freeStatus: 'Free',
+  freeExhaustedStatus: 'Free used up',
 } as const;
 
 export const CONTACT = {
