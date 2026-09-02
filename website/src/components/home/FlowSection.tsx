@@ -1,50 +1,46 @@
+import { FREE } from '@/data/constants';
 import { homeHash } from '@/lib/routes';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
+import { cardGrid3, cardPad, sectionY } from '@/ui-classes/layout';
+import { cardNeutralHover, stepBadgeSolid } from '@/ui-classes/surfaces';
 
 const steps: readonly { number: string; title: string; body: string; tone: string }[] = [
   {
     number: '01',
     title: 'Install Once',
-    body: 'Add Skip Wait from the Chrome Web Store. Tap Refresh in the popup when we add new sites—no reinstall.',
-    tone: 'bg-primary-100 text-primary-700',
+    body: `Add Skip Wait from the Chrome Web Store. ${FREE.dailyLimit} free bypasses each day start with no key. Tap Refresh in the popup when we add new sites—no reinstall.`,
+    tone: 'bg-primary-600',
   },
   {
     number: '02',
     title: 'Open Any Supported Link',
-    body: 'Click link shorteners, safelinks, file hosts, and download countdown pages the same way you always do.',
-    tone: 'bg-warning-100 text-warning-700',
+    body: 'Open URL shorteners, safelinks, file hosts, waiting pages, and download countdown pages the same way you always do.',
+    tone: 'bg-warning-600',
   },
   {
     number: '03',
-    title: 'Bypass or Automate',
-    body: 'Skip Wait bypasses the timer when possible, or automates the wait and continue steps when the site still requires them—then lands you on the destination.',
-    tone: 'bg-success-100 text-success-700',
+    title: 'Skip or Continue for You',
+    body: 'Skip Wait skips the timer when it can. If the site still needs a wait or Continue, Skip Wait handles those clicks, then opens the destination.',
+    tone: 'bg-success-600',
   },
 ];
 
 export function FlowSection(): React.ReactElement {
   return (
-    <section id={homeHash.howItWorks} className="scroll-mt-20 bg-surface-canvas py-12 lg:py-16">
+    <section id={homeHash.howItWorks} className={`scroll-mt-20 bg-surface-canvas ${sectionY}`}>
       <Shell>
         <SectionHeader
           title="How to Skip Countdown Timers and Waiting Pages"
-          description="Skip Wait stays idle everywhere else—it only runs on countdown, short-link, and delay pages it recognizes, then bypasses or automates the flow."
+          description="Skip Wait only runs on supported countdown, URL shortener, and waiting pages. Other sites stay unchanged."
         />
 
-        <ol className="mt-8 grid list-none gap-5 p-0 lg:grid-cols-3">
+        <ol className={cardGrid3}>
           {steps.map((step) => (
-            <li
-              key={step.number}
-              className="rounded-panel bg-surface-muted p-8 shadow-sm ring-1 ring-neutral-200"
-            >
-              <span
-                className={`inline-flex size-11 items-center justify-center rounded-full text-caption font-bold ${step.tone}`}
-              >
-                {step.number}
-              </span>
-              <h3 className="mt-5 font-display text-title-lg text-ink">{step.title}</h3>
-              <p className="mt-3 text-body-sm text-ink-body">{step.body}</p>
+            <li key={step.number} className={`${cardNeutralHover} ${cardPad}`}>
+              <span className={`${stepBadgeSolid} ${step.tone}`}>{step.number}</span>
+              <h3 className="mt-4 font-display text-title text-ink sm:text-title-lg">{step.title}</h3>
+              <p className="mt-2 text-body-sm text-ink-body">{step.body}</p>
             </li>
           ))}
         </ol>

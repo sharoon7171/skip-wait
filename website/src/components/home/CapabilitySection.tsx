@@ -1,34 +1,39 @@
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
+import { cardGrid2, cardPad, sectionY } from '@/ui-classes/layout';
+import { cardBlueHover, cardGreenHover } from '@/ui-classes/surfaces';
 
-const capabilities: readonly { title: string; body: string }[] = [
+const capabilities: readonly {
+  title: string;
+  body: string;
+  surface: string;
+}[] = [
   {
-    title: 'Bypass When Possible',
-    body: 'Skip countdown timers, waiting pages, and link shortener redirects. On supported sites Skip Wait jumps straight to the destination or download as soon as the page loads.',
+    title: 'Skip the Timer',
+    body: 'On supported sites, Skip Wait skips countdown timers, waiting pages, and URL shortener redirects so the destination or download opens right away.',
+    surface: cardBlueHover,
   },
   {
-    title: 'Automate When Required',
-    body: 'When a site still needs a timed unlock, Skip Wait automates the wait, continue clicks, and unlock steps so you don’t babysit the page—and still get there faster.',
+    title: 'Click Continue for You',
+    body: 'Some sites still need a wait or a Continue click. Skip Wait waits and clicks those steps so you don’t sit on the page.',
+    surface: cardGreenHover,
   },
 ];
 
 export function CapabilitySection(): React.ReactElement {
   return (
-    <section className="bg-surface-muted py-12 lg:py-16">
+    <section className={`bg-surface-muted ${sectionY}`}>
       <Shell>
         <SectionHeader
-          title="Bypass Countdowns or Automate the Wait"
-          description="Looking for a timer skip, link shortener bypass, or a tool that finishes “please wait” pages when a full skip isn’t allowed? Skip Wait does both."
+          title="Skip Countdowns. Click Continue for You."
+          description="Skip Wait bypasses timers, skips waiting pages, and bypasses URL shorteners. If a site still needs a short wait or Continue, Skip Wait does those steps."
         />
 
-        <ul className="mt-8 m-0 grid list-none gap-5 p-0 lg:grid-cols-2">
+        <ul className={cardGrid2}>
           {capabilities.map((item) => (
-            <li
-              key={item.title}
-              className="rounded-panel bg-surface-canvas p-8 shadow-sm ring-1 ring-neutral-200"
-            >
-              <h3 className="font-display text-title-lg text-ink">{item.title}</h3>
-              <p className="mt-3 text-body-sm text-ink-body">{item.body}</p>
+            <li key={item.title} className={`${item.surface} ${cardPad}`}>
+              <h3 className="font-display text-title text-ink sm:text-title-lg">{item.title}</h3>
+              <p className="mt-2 text-body-sm text-ink-body">{item.body}</p>
             </li>
           ))}
         </ul>

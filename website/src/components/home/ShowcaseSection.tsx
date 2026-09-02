@@ -5,6 +5,7 @@ import { BypassRow } from '@/components/sites/BypassRow';
 import { IconArrowRight } from '@/components/ui/icons';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { Shell } from '@/components/ui/Shell';
+import { listRowPad, sectionY, stackAfterHeader } from '@/ui-classes/layout';
 
 const SAMPLE_SIZE = 5;
 
@@ -12,14 +13,16 @@ export function ShowcaseSection(): React.ReactElement {
   const sample = sampleBypasses(SAMPLE_SIZE);
 
   return (
-    <section className="bg-surface-canvas py-12 lg:py-16">
+    <section className={`bg-surface-canvas ${sectionY}`}>
       <Shell>
         <SectionHeader
-          title="Link Shortener Bypasses and Wait Automations"
-          description={`${totalBypasses()} bypasses across ${totalDomains()} websites—Linkvertise, GPLinks, Ouo, file hosts, and more. Bypass the timer when possible, or finish the wait for you. Full list on Supported Sites.`}
+          title="URL Shortener Bypasses and Countdown Skips"
+          description={`${totalBypasses()} bypasses across ${totalDomains()} websites—Linkvertise, GPLinks, Ouo, file hosts, safelinks, and more. Skip Wait skips the countdown when it can. If the site still needs Continue, it clicks that for you.`}
         />
 
-        <div className="mt-8 overflow-hidden rounded-panel bg-surface-muted shadow-sm ring-1 ring-neutral-200">
+        <div
+          className={`${stackAfterHeader} overflow-hidden rounded-panel bg-surface-canvas shadow-card ring-1 ring-neutral-200/70`}
+        >
           <ul className="m-0 list-none divide-y divide-neutral-200 p-0">
             {sample.map((entry) => (
               <li key={entry.name}>
@@ -28,7 +31,7 @@ export function ShowcaseSection(): React.ReactElement {
                   domains="summary"
                   titleAs="h3"
                   linked
-                  className="px-6 py-5 sm:px-8"
+                  className={listRowPad}
                 />
               </li>
             ))}
@@ -36,7 +39,7 @@ export function ShowcaseSection(): React.ReactElement {
 
           <AppLink
             href={routes.sites}
-            className="flex items-center justify-between gap-4 border-t border-neutral-200 px-6 py-5 text-ui text-primary-700 no-underline transition-colors hover:bg-primary-50/60 sm:px-8"
+            className={`flex items-center justify-between gap-4 border-t border-neutral-200 text-ui text-primary-700 no-underline transition-colors hover:bg-primary-50/70 ${listRowPad}`}
           >
             View All {totalBypasses()} Bypasses Across {totalDomains()} Websites
             <IconArrowRight className="size-4 shrink-0" />
