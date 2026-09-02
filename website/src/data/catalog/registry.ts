@@ -1,6 +1,7 @@
 import { bypass as b1shortlinkBypass } from './bypasses/1shortlink-bypass';
 import { bypass as b4downloadBypass } from './bypasses/4download-bypass';
 import { bypass as adfocusBypass } from './bypasses/adfocus-bypass';
+import { bypass as adsterraBypass } from './bypasses/adsterra-bypass';
 import { bypass as adlinkflyLinksGoBypass } from './bypasses/adlinkfly-links-go-bypass';
 import { bypass as alpharedeBypass } from './bypasses/alpharede-bypass';
 import { bypass as an1Bypass } from './bypasses/an1-bypass';
@@ -139,6 +140,7 @@ export const bypasses: readonly SupportedBypass[] = [
   b1shortlinkBypass,
   b4downloadBypass,
   adfocusBypass,
+  adsterraBypass,
   adlinkflyLinksGoBypass,
   alpharedeBypass,
   an1Bypass,
