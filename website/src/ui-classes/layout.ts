@@ -1,0 +1,20 @@
+export const sectionY = 'py-12 lg:py-16';
+export const bandY = 'py-10 sm:py-12';
+export const pageHeroY = 'relative py-10 sm:py-12';
+export const homeHeroShell =
+  'relative grid items-center gap-10 py-12 sm:gap-12 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:py-20';
+export const footerMainY = 'py-12';
+export const footerBarY = 'py-4';
+export const articleSectionY = 'scroll-mt-24 border-b border-neutral-200 py-8 sm:py-10';
+export const legalSectionY = 'py-8 sm:py-10';
+export const cardPad = 'p-6';
+export const stackAfterHeader = 'mt-8';
+export const cardGrid2 = `${stackAfterHeader} m-0 grid list-none gap-5 p-0 lg:grid-cols-2`;
+export const cardGrid3 = `${stackAfterHeader} m-0 grid list-none gap-5 p-0 lg:grid-cols-3`;
+export const listRowPad = 'px-5 py-4 sm:px-6';
+export const ctaPanelPad = 'px-6 py-8 sm:px-10 sm:py-10';
+export const pageTitle = 'font-display text-title-lg text-ink sm:text-headline';
+export const pageLead = 'mt-3 text-body-sm text-ink-body';
+export const actionsRow = 'mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap';
+export const chip = 'rounded-chip px-2.5 py-1 font-mono text-domain';
+export const emptyStateY = 'px-6 py-16';
