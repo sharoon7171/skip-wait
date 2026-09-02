@@ -1,6 +1,9 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { decodeYasir252Link, encodedAttr } from './decode';
+
+let counted = false;
 
 function markReady(): void {
   for (const el of document.querySelectorAll('.download div, .download p')) {
@@ -29,7 +32,13 @@ function unlock(): void {
     el.replaceWith(el.cloneNode(true));
     any = true;
   }
-  if (any) markReady();
+  if (any) {
+    if (!counted) {
+      counted = true;
+      recordBypassSuccess();
+    }
+    markReady();
+  }
 }
 
 export function initYasir252MediatorPage(): void {

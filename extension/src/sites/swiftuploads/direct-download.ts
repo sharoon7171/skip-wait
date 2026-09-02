@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -178,7 +179,9 @@ function wire(id: string): void {
 
     void resolveDirectUrl(id)
       .then((url) => {
-        if (url) location.assign(url);
+        if (!url) return;
+        recordBypassSuccess();
+        location.assign(url);
       })
       .finally(() => {
         busy = false;

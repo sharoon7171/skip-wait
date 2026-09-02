@@ -1,9 +1,12 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 function redirect(): void {
   const u = document.querySelector<HTMLAnchorElement>('#butunlock a')?.href;
-  if (u) location.replace(u);
+  if (!u) return;
+  recordBypassSuccess();
+  location.replace(u);
 }
 
 export function initSub2getRedirect(): void {

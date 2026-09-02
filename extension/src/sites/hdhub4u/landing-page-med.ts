@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createOverlay } from './overlay';
 
@@ -40,7 +41,10 @@ export function initHdhub4uLandingPageMed(): void {
     const overlay = mount('Opening the main site…');
     const version = lookupVersion(new Date());
     void Promise.any(HOST_LOOKUP_URLS.map((base) => fetchMirror(base, version)))
-      .then((mirror) => location.replace(mirror))
+      .then((mirror) => {
+        recordBypassSuccess();
+        location.replace(mirror);
+      })
       .catch(() => overlay.setError('Could not find the main site. Reload and try again.'));
   });
 }

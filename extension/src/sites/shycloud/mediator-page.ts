@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -101,6 +102,7 @@ const submitUnlock = (d: Data): void => {
 
 const navigate = (url: string): void => {
   mount('Opening your link…');
+  recordBypassSuccess();
   location.replace(url);
 };
 
@@ -115,6 +117,7 @@ const triggerDownload = (url: string): void => {
 const finishDownload = async (url: string, flush = false): Promise<void> => {
   const o = mount('Starting download…');
   if (flush) await fetch(new URL('iii/index.php?action=flush_session', location.href).href, { credentials: 'include' });
+  if (/^https?:\/\//i.test(url)) recordBypassSuccess();
   triggerDownload(url);
   o.remove();
   ui = null;

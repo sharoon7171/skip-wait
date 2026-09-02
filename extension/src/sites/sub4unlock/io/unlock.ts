@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../../free-bypass';
 import { canBypass } from '../../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../../injected-ui/overlay-styles';
@@ -51,6 +52,7 @@ const unlock = (): void => {
   if (!url) return;
   const overlay = mountUi('Unlocking your link…');
   overlay.setStatus('Opening your link…');
+  recordBypassSuccess();
   location.replace(url);
 };
 

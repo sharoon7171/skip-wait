@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed, whenDomReady } from '../../utils/domain-check';
 
@@ -32,6 +33,7 @@ function mountBrand(anchor: Element): void {
 
   panel.append(brand, detail);
   anchor.after(panel);
+  recordBypassSuccess();
 }
 
 async function run(): Promise<void> {

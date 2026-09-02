@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
@@ -106,6 +107,7 @@ const runUnlock = async (): Promise<void> => {
   if (existing?.href && isRealUrl(existing.href)) {
     overlay.setStatus('Opening your link…');
     await clearNitrolinkChain();
+    recordBypassSuccess();
     location.replace(existing.href);
     return;
   }
@@ -127,6 +129,7 @@ const runUnlock = async (): Promise<void> => {
 
   overlay.setStatus('Opening your link…');
   await clearNitrolinkChain();
+  recordBypassSuccess();
   location.replace(url);
 };
 

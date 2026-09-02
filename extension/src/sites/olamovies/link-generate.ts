@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -247,6 +248,7 @@ function banner(): SetBanner {
 function showLink(set: SetBanner, url: string): void {
   lockVisitUi();
   set('Your link is ready', 'Tap the link below to continue.', 'ok', 100, url);
+  recordBypassSuccess();
 }
 
 async function unlock(set: SetBanner): Promise<void> {

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -102,6 +103,7 @@ export const initTendrivesMediator = (): void => {
         overlay.setNote(fileNote(name, size));
         overlay.setStatus('Ready — tap Direct Download when you want the file.');
         overlay.setAction(url, ACTION);
+        recordBypassSuccess();
       })
       .catch(() => {
         started = false;

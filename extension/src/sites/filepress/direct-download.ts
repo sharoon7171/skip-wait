@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 
 const FILEPRESS_API = '/api/file';
@@ -76,7 +77,9 @@ export function initFilePressDirectDownload(): void {
         e.preventDefault();
         e.stopImmediatePropagation();
         void pending.then((url) => {
-          if (url) location.replace(url);
+          if (!url) return;
+          recordBypassSuccess();
+          location.replace(url);
         });
       },
       true,

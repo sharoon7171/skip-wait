@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -57,6 +58,7 @@ export const initTech8sRedirect = (): void => {
       bootOverlay('Opening destination…');
       const url = urlFromQuery();
       if (!url) throw new Error('tech8s st');
+      recordBypassSuccess();
       location.replace(url);
       return;
     }
@@ -73,6 +75,7 @@ export const initTech8sRedirect = (): void => {
       if (!url) return;
       done = true;
       mo.disconnect();
+      recordBypassSuccess();
       location.replace(url);
     };
 

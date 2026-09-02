@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -61,7 +62,9 @@ function wire(btn: HTMLButtonElement, g: string, f: string, gpath: string, lang:
       e.preventDefault();
       e.stopImmediatePropagation();
       void pending.then((url) => {
-        if (url) location.assign(url);
+        if (!url) return;
+        recordBypassSuccess();
+        location.assign(url);
       });
     },
     true

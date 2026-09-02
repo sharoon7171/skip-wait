@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -76,6 +77,7 @@ function wire(form: HTMLFormElement, btn: Element): void {
 
   const start = (): void => {
     if (cached) {
+      recordBypassSuccess();
       location.assign(cached);
       return;
     }
@@ -85,6 +87,7 @@ function wire(form: HTMLFormElement, btn: Element): void {
       .then((url) => {
         cached = url;
         busy = false;
+        recordBypassSuccess();
         location.assign(url);
       })
       .catch(() => {
@@ -123,6 +126,7 @@ export function initTheuserCloudBypass(): void {
     void allowed.then((ok) => {
       if (!ok) return;
       if (ready) {
+        recordBypassSuccess();
         location.assign(ready);
         return;
       }

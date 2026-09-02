@@ -1,3 +1,5 @@
+import { recordBypassSuccess } from '../../free-bypass';
+
 export type UnlockData = {
   final?: string;
   next_page?: string;
@@ -49,6 +51,7 @@ export const finishUnlock = (overlay: { setStatus: (s: string) => void }, data: 
   const final = data.final?.trim() ?? '';
   if (final) {
     overlay.setStatus('Opening your link…');
+    recordBypassSuccess();
     location.replace(final);
     return;
   }

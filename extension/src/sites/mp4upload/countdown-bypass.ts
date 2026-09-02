@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -54,6 +55,7 @@ function runTimerPage(): void {
   if (!form || !free) return;
   free.disabled = false;
   free.removeAttribute('disabled');
+  recordBypassSuccess();
   free.click();
 }
 

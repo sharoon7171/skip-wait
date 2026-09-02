@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -35,6 +36,7 @@ async function resolve(reUrl: string): Promise<string | null> {
 }
 
 function go(dest: string, blank: boolean): void {
+  recordBypassSuccess();
   if (blank) window.open(dest, '_blank', 'noopener,noreferrer');
   else location.replace(dest);
 }
@@ -117,6 +119,7 @@ export function initVegamoviesLandingRedirect(): void {
     void allowed.then((ok) => {
       if (!ok) return;
       if (waitDest) {
+        recordBypassSuccess();
         location.replace(waitDest);
         return;
       }

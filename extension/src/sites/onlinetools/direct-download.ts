@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 
 const NOTICE_ID = 'skipwait-onlinetools-bypass';
@@ -11,6 +12,8 @@ const SELECTORS = {
   outputText: '#tool-output textarea.data',
   toolOutput: '#tool-output',
 } as const;
+
+let counted = false;
 
 function getCanvas(): HTMLCanvasElement | null {
   const out = document.querySelector(SELECTORS.canvas);
@@ -132,6 +135,10 @@ function run(): void {
   hijack(copyBtn, copy);
   if (downloadBtn) hijack(downloadBtn, download);
   showBypassNotice();
+  if (!counted) {
+    counted = true;
+    recordBypassSuccess();
+  }
 }
 
 export function initOnlinetoolsDirectDownload(): void {

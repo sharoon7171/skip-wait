@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 
@@ -36,6 +37,7 @@ function go(url: string): void {
   try {
     window.stop();
   } catch {}
+  recordBypassSuccess();
   location.replace(url);
 }
 

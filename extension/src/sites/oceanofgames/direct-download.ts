@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { requestOceanofgamesCdn } from './resolve';
@@ -53,6 +54,7 @@ function wire(form: HTMLFormElement): void {
       .then((url) => {
         if (!url) throw new Error('cdn');
         paint(btn, IDLE);
+        recordBypassSuccess();
         window.open(url, '_blank', 'noopener,noreferrer');
       })
       .catch(() => paint(btn, FAIL, 'err'))

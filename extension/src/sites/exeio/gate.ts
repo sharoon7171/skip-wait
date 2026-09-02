@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -245,7 +246,11 @@ async function runGoLink(overlay: FullPageOverlay): Promise<void> {
 
   overlay.setStatus('Posting /links/go…');
   const res = await requestGoUnlock();
-  if (!res.ok) overlay.setError(res.err ?? 'Unlock failed.');
+  if (!res.ok) {
+    overlay.setError(res.err ?? 'Unlock failed.');
+    return;
+  }
+  recordBypassSuccess();
 }
 
 async function runPipeline(): Promise<void> {

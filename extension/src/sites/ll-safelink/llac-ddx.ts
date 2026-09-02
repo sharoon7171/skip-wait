@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -39,6 +40,7 @@ export function initLlacDdx(): void {
       void resolveDdx(`${location.pathname}${qs}`)
         .then((dest) => {
           ui.setStatus('Redirecting now…');
+          recordBypassSuccess();
           location.replace(dest);
         })
         .catch(() => ui.remove());

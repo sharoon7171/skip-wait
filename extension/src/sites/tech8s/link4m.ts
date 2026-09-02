@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypassHost } from '../../gate';
 
 const FULL_RE = /^https:\/\/link4m\.co\/full\/\?/i;
@@ -16,6 +17,7 @@ export const initLink4mRedirect = (): void => {
         if (!raw) throw new Error('link4m url');
         const decoded = atob(raw);
         if (!/^https?:\/\//i.test(decoded)) throw new Error('link4m dest');
+        recordBypassSuccess();
         void chrome.tabs.update(details.tabId, { url: decoded });
       })();
     },

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -65,6 +66,7 @@ const isAccessPath = (): boolean =>
 const openDestination = (url: string, overlay: FullPageOverlay): void => {
   overlay.hideCountdown();
   overlay.setStatus('Opening your link…');
+  recordBypassSuccess();
   location.replace(url);
 };
 

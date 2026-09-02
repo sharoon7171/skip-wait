@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from './unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
@@ -233,6 +234,7 @@ const finishRedirect = (url: string, overlay: FullPageOverlay): void => {
   finished = true;
   aliasFetchSucceeded = true;
   overlay.setStatus('Opening your link…');
+  recordBypassSuccess();
   location.replace(url);
 };
 
@@ -506,6 +508,7 @@ const runShellTimerPhase = async (state: { done: boolean; inFlight: boolean }): 
     state.done = true;
     finished = true;
     mountUi().setStatus('Redirecting now…');
+    recordBypassSuccess();
     location.href = link.href;
     return true;
   }
@@ -521,6 +524,7 @@ const runShellTimerPhase = async (state: { done: boolean; inFlight: boolean }): 
     state.done = true;
     finished = true;
     overlay.setStatus('Redirecting now…');
+    recordBypassSuccess();
     location.href = url;
     return true;
   } finally {

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -107,6 +108,7 @@ const bind = (text: HTMLElement, value: string | null, label: string): void => {
 };
 
 let mounted = false;
+let counted = false;
 
 function run(): void {
   if (mounted) return;
@@ -130,6 +132,10 @@ function run(): void {
     const data = parse(html);
     bind(session.text, data.session, 'Session share');
     bind(editor.text, data.editor, 'Cookie Editor');
+    if (!counted && (data.session || data.editor)) {
+      counted = true;
+      recordBypassSuccess();
+    }
   };
 
   apply(document.documentElement.innerHTML);

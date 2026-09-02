@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { createOverlay } from './overlay';
@@ -47,10 +48,16 @@ export function initHdhub4uMediatorPage(): void {
     if (!ok) return;
 
     const overlay = mount('Opening the next page…');
+    let counted = false;
     const open = (): boolean => {
       const destination = resolveDestination();
-      if (destination) location.replace(destination);
-      return destination !== null;
+      if (!destination) return false;
+      if (!counted) {
+        counted = true;
+        recordBypassSuccess();
+      }
+      location.replace(destination);
+      return true;
     };
 
     if (!isEntry && open()) return;

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 const IDLE = 'Free Download · Skip Wait — Direct CDN, No Mediator';
@@ -108,6 +109,7 @@ export function initUsersdriveAutomation(): void {
           label(BUSY);
           void ensure()
             .then((url) => {
+              recordBypassSuccess();
               Object.assign(document.createElement('a'), { href: url }).click();
               label(IDLE);
             })

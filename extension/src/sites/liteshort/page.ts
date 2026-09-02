@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { MSG_OPEN, MSG_PROGRESS, MSG_RESOLVE, SITE, aliasFromPath } from './hosts';
 import { createOverlay } from './overlay';
@@ -40,7 +41,9 @@ const run = async (): Promise<void> => {
     if (!(await openDestination(dest))) {
       done = false;
       ui.setError('Couldn’t open your LiteShort destination. Reload and try again.');
+      return;
     }
+    recordBypassSuccess();
   } catch {
     done = false;
     ui.setError('Couldn’t finish this LiteShort link. Reload and try again.');

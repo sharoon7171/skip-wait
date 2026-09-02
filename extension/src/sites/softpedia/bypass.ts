@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { destinationFromWaitDocument, resolveWaitDestination } from './resolve';
@@ -76,6 +77,7 @@ function applyLaunch(el: Element, dest: string): void {
     (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
+      recordBypassSuccess();
       location.assign(dest);
     },
     true,
@@ -111,6 +113,7 @@ function scanMirrors(): void {
 
 function runWaitPage(): void {
   try {
+    recordBypassSuccess();
     location.replace(destinationFromWaitDocument(document));
   } catch {
     return;

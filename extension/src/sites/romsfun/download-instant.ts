@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -64,9 +65,13 @@ async function resolveAndShow(): Promise<void> {
     });
     if (!res.ok) throw new Error('ajax');
     const j = (await res.json()) as AjaxJson;
-    if (j.success && j.data?.html && applyDownloadHtml(j.data.html)) return;
+    if (j.success && j.data?.html && applyDownloadHtml(j.data.html)) {
+      recordBypassSuccess();
+      return;
+    }
   } catch {}
   if (revealExistingButton()) {
+    recordBypassSuccess();
     showNotice(box, 'Skip Wait skipped the wait timer. Your download is ready.');
   }
 }

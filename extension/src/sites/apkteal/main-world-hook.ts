@@ -22,6 +22,13 @@ export function runApktealDirectDownload(): void {
   const cache = new Map<number, Promise<string | null>>();
   let actionId: string | undefined;
   let actionPending: Promise<string | null> | null = null;
+  let signaled = false;
+
+  const signalCdn = (): void => {
+    if (signaled) return;
+    signaled = true;
+    window.postMessage({ source: 'skip-wait-apkteal', type: 'cdn' }, location.origin);
+  };
 
   const onDownload = (): boolean => /^\/download\/?$/i.test(location.pathname);
 
@@ -178,6 +185,7 @@ export function runApktealDirectDownload(): void {
       urls.set(btn, url);
       wired.add(btn);
       if (btn instanceof HTMLAnchorElement) btn.href = url;
+      signalCdn();
     });
   };
 
@@ -201,6 +209,7 @@ export function runApktealDirectDownload(): void {
         urls.get(hit) ||
         (hit instanceof HTMLAnchorElement && /^https?:/i.test(hit.href) ? hit.href : '');
       if (ready && /^https?:/i.test(ready)) {
+        signalCdn();
         location.assign(ready);
         return;
       }
@@ -217,6 +226,7 @@ export function runApktealDirectDownload(): void {
         linkIds.set(hit, linkId);
         wired.add(hit);
         if (hit instanceof HTMLAnchorElement) hit.href = url;
+        signalCdn();
         location.assign(url);
       });
     },

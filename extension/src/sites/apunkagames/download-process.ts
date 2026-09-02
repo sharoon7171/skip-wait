@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -15,7 +16,10 @@ export function initApunkagamesDownloadProcess(): void {
     if (!ok) return;
     whenDomParsed(() => {
       const url = destination();
-      if (url) location.replace(url);
+      if (url) {
+        recordBypassSuccess();
+        location.replace(url);
+      }
     });
   });
 }

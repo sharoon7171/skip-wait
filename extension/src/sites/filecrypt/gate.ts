@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -12,6 +13,7 @@ const NOTE = {
 } as const;
 
 let started = false;
+let counted = false;
 let ui: FullPageOverlay | null = null;
 
 const mountUi = (status = 'Unlocking downloads…'): FullPageOverlay => {
@@ -31,6 +33,12 @@ const mountUi = (status = 'Unlocking downloads…'): FullPageOverlay => {
 const clearUi = (): void => {
   ui?.remove();
   ui = null;
+};
+
+const count = (): void => {
+  if (counted) return;
+  counted = true;
+  recordBypassSuccess();
 };
 
 const isUnlockedContainer = (): boolean =>
@@ -54,6 +62,7 @@ export function initFilecryptGate(): void {
       const data = ev.data as { source?: string; type?: string; text?: string } | null;
       if (!data || data.source !== MSG_SOURCE) return;
       if (data.type === 'done') {
+        count();
         clearUi();
         return;
       }
@@ -68,7 +77,10 @@ export function initFilecryptGate(): void {
     });
 
     whenDomParsed(() => {
-      if (isUnlockedContainer()) clearUi();
+      if (isUnlockedContainer()) {
+        count();
+        clearUi();
+      }
     });
   });
 }

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { decodeYasir252Link, encodedAttr } from './decode';
@@ -5,6 +6,7 @@ import { decodeYasir252Link, encodedAttr } from './decode';
 const LINK_SEL = '#downloadForm [data-og-url], #downloadForm [data-elink]';
 const BRAND_ID = 'skipwait-yasir252-brand';
 let formBlocked = false;
+let counted = false;
 
 function mountBrand(): void {
   if (document.getElementById(BRAND_ID)) return;
@@ -45,6 +47,10 @@ function rewrite(): void {
     any = true;
   }
   if (!any) return;
+  if (!counted) {
+    counted = true;
+    recordBypassSuccess();
+  }
   mountBrand();
   if (!formBlocked) {
     formBlocked = true;

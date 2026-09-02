@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -50,7 +51,10 @@ function wire(form: HTMLFormElement): void {
     (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      void ready.then((url) => window.open(url, '_blank', 'noopener,noreferrer'));
+      void ready.then((url) => {
+        recordBypassSuccess();
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
     },
     true,
   );
@@ -62,6 +66,7 @@ export function initOceanofdmgBypass(): void {
     void allowed.then((ok) => {
       if (!ok) return;
       if (/^\/download\/?$/i.test(location.pathname)) {
+        recordBypassSuccess();
         location.replace(cdnFromHtml(document.documentElement.innerHTML));
         return;
       }

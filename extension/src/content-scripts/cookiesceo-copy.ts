@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../free-bypass';
 import { canBypass } from '../gate';
 const ACTIONS_ID = 'skipwait-cookiesceo-actions';
 const SESSION_PASTE_RE = /session_paste\s+([A-Za-z0-9+/=]+)/;
@@ -60,6 +61,7 @@ async function run(): Promise<void> {
     cookieText = extractCookie(html);
     if (cookieText) {
       copyBtn.style.display = 'inline-block';
+      recordBypassSuccess();
       try {
         await navigator.clipboard.writeText(cookieText);
       } catch {}

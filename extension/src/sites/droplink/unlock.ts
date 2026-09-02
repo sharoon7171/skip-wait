@@ -1,4 +1,5 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -80,6 +81,7 @@ const runUnlock = async (): Promise<void> => {
   const existing = document.querySelector<HTMLAnchorElement>('a.get-link, #gt-link');
   if (existing?.href && isRealUrl(existing.href)) {
     overlay.setStatus('Opening your link…');
+    recordBypassSuccess();
     location.replace(existing.href);
     return;
   }
@@ -114,6 +116,7 @@ const runUnlock = async (): Promise<void> => {
   }
 
   overlay.setStatus('Opening your link…');
+  recordBypassSuccess();
   location.replace(url);
 };
 

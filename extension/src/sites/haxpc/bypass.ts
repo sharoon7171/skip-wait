@@ -1,9 +1,11 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
 const GO = /^\/go\/?$/i;
 const DEST = /decodeURIComponent\s*\(\s*atob\s*\(\s*['"]([A-Za-z0-9+/=]+)['"]\s*\)\s*\)/;
 const BRAND = 'skipwait-haxpc-brand';
+let listingCounted = false;
 
 function mountBrand(): void {
   if (document.getElementById(BRAND)) return;
@@ -20,8 +22,13 @@ function mountBrand(): void {
 }
 
 function unlockListing(): void {
-  document.querySelectorAll('a.haxpc-intercept').forEach((a) => a.classList.remove('haxpc-intercept'));
+  const intercepts = document.querySelectorAll('a.haxpc-intercept');
+  intercepts.forEach((a) => a.classList.remove('haxpc-intercept'));
   mountBrand();
+  if (listingCounted) return;
+  if (!intercepts.length && !document.getElementById(BRAND)) return;
+  listingCounted = true;
+  recordBypassSuccess();
 }
 
 export function initHaxpcListing(): void {
@@ -41,6 +48,7 @@ export function initHaxpcGoPage(): void {
     const open = (): void => {
       const hash = DEST.exec(document.documentElement.innerHTML)?.[1];
       if (!hash) return;
+      recordBypassSuccess();
       location.replace(decodeURIComponent(atob(hash)));
     };
     open();

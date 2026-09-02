@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -76,7 +77,11 @@ function wire(direct: Promise<string | null>): void {
   const go = (e: Event): void => {
     e.preventDefault();
     e.stopImmediatePropagation();
-    void direct.then((url) => url && location.assign(url));
+    void direct.then((url) => {
+      if (!url) return;
+      recordBypassSuccess();
+      location.assign(url);
+    });
   };
   document.addEventListener(
     'click',

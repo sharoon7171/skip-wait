@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -144,6 +145,7 @@ const unlock = async (): Promise<void> => {
     if (ready) {
       overlay.setStatus('Ready — tap Direct Download when you want the file.');
       overlay.setAction(ready, ACTION);
+      recordBypassSuccess();
       return;
     }
     releasePin = await waitVerified(overlay);
@@ -152,6 +154,7 @@ const unlock = async (): Promise<void> => {
     releasePin();
     overlay.setStatus('Ready — tap Direct Download when you want the file.');
     overlay.setAction(url, ACTION);
+    recordBypassSuccess();
   } catch {
     releasePin?.();
     started = false;

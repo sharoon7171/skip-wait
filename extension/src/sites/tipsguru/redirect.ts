@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -114,6 +115,7 @@ function waitOnHome(state: WaitState): void {
   const left = state.endAt - Date.now();
   if (left <= 0) {
     sessionStorage.removeItem(WAIT_KEY);
+    recordBypassSuccess();
     location.replace(state.dest);
     return;
   }
@@ -133,6 +135,7 @@ function waitOnHome(state: WaitState): void {
   window.setTimeout(() => {
     sessionStorage.removeItem(WAIT_KEY);
     ui.setStatus('Opening access…');
+    recordBypassSuccess();
     location.replace(state.dest);
   }, left);
 }
@@ -178,6 +181,7 @@ async function redirect(): Promise<void> {
     },
     status: 'Redirecting…',
   });
+  recordBypassSuccess();
   location.replace(dest);
 }
 

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -54,6 +55,7 @@ export function initVegamoviesEntryRedirect(): void {
     void allowed.then((ok) => {
       if (!ok) return;
       mountOverlay('Opening the live catalog…');
+      recordBypassSuccess();
       location.replace(href);
     });
   });

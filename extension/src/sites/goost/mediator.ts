@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -102,6 +103,7 @@ const runStage2 = (root: HTMLElement): boolean => {
   if (!dest) return false;
   stage2Started = true;
   prepGate(root);
+  recordBypassSuccess();
   location.replace(dest);
   return true;
 };

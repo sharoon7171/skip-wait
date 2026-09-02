@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -150,6 +151,7 @@ const runFree = async (): Promise<void> => {
       const url = await requestFreeDownload(form);
       done = true;
       ui!.setReady({ status: COPY.ready, ...fileMeta(), url, action: ACTION });
+      recordBypassSuccess();
     } catch (err) {
       submitting = false;
       if (err instanceof FreedlinkError && err.code === 'cooldown' && err.cooldownSeconds) {

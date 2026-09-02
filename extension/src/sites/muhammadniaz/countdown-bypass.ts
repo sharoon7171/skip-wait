@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -13,6 +14,7 @@ function run(): void {
   btn.querySelectorAll('[data-status="disabled"]').forEach((el) => el.remove());
 
   if (document.getElementById(NOTICE_ID)) return;
+  recordBypassSuccess();
   btn.insertAdjacentHTML(
     'beforebegin',
     `<div id="${NOTICE_ID}" class="info-card" role="status"><div class="info-label">Skip Wait</div><ul><li><span class="infoname">Status</span><span>Timer skipped. Click Create download link.</span></li></ul></div>`,

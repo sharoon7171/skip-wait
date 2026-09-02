@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -50,7 +51,9 @@ const runBlogUnlock = async (): Promise<void> => {
   if (!token) throw new Error('token');
   mountUi('Opening destination…');
   requestVisibilitySpoof();
-  location.replace(await unlockDestination(token));
+  const dest = await unlockDestination(token);
+  recordBypassSuccess();
+  location.replace(dest);
 };
 
 const kickBlog = (): void => {
@@ -93,7 +96,10 @@ const initGoGate = (): void => {
     try {
       const to = new URL(location.href).searchParams.get('to');
       const dest = to ? decodeGoToParam(to) : null;
-      if (dest) location.replace(dest);
+      if (dest) {
+        recordBypassSuccess();
+        location.replace(dest);
+      }
     } catch {}
   });
 };

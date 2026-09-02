@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -12,6 +13,13 @@ const BRAND_STATUS = 'Short URLs skipped — Download opens the host directly.';
 type HostTarget = { href: string; post?: FormData };
 
 const pending = new WeakMap<HTMLFormElement, Promise<HostTarget | null>>();
+let counted = false;
+
+function count(): void {
+  if (counted) return;
+  counted = true;
+  recordBypassSuccess();
+}
 
 function fileHash(): string | null {
   const hash = new URLSearchParams(location.search).get('hash');
@@ -206,7 +214,10 @@ function armHostForms(root: ParentNode): void {
   for (const form of root.querySelectorAll<HTMLFormElement>(HOST_FORM_SELECTOR)) {
     if (pending.has(form)) continue;
     void hostTarget(form).then((target) => {
-      if (target && form.isConnected) exposeHostLink(form, target);
+      if (target && form.isConnected) {
+        count();
+        exposeHostLink(form, target);
+      }
     });
   }
 }
@@ -222,7 +233,10 @@ function wireHostClicks(root: Element): void {
       e.preventDefault();
       e.stopImmediatePropagation();
       void hostTarget(form).then((resolved) => {
-        if (resolved) openHostTarget(form, resolved);
+        if (resolved) {
+          count();
+          openHostTarget(form, resolved);
+        }
       });
     },
     true,
@@ -241,13 +255,17 @@ function runMirrorsPage(): void {
 function runGetlinkPage(): void {
   const host = hostUrlFromDocument(document) ?? hostFromCutyWrap(document.documentElement.innerHTML);
   if (host) {
+    count();
     location.replace(host);
     return;
   }
   const dl = document.querySelector<HTMLFormElement>('form[action*="dl_out.php"]');
   if (!dl) return;
   void resolveDlOut(dl).then((target) => {
-    if (target) openHostTarget(dl, target);
+    if (target) {
+      count();
+      openHostTarget(dl, target);
+    }
   });
 }
 

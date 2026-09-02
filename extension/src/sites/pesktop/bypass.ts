@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -46,7 +47,10 @@ export function initPesktopBypass(): void {
           if (!(e.target instanceof Element) || !e.target.closest('.download_link')) return;
           e.preventDefault();
           e.stopImmediatePropagation();
-          void ready.then((url) => location.replace(url));
+          void ready.then((url) => {
+            recordBypassSuccess();
+            location.replace(url);
+          });
         },
         true,
       );

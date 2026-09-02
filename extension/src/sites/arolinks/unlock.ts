@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { armUnlockReferer, openDestinationTab, resolveMediatorReferer } from './client';
@@ -20,7 +21,8 @@ const openDestination = async (dest: string): Promise<void> => {
     await countdown(overlay, AROLINKS_DEST_WAIT_MS);
   }
   const overlay = mount('Opening your link…');
-  if (!(await openDestinationTab(dest))) overlay.setStatus('Could not open link');
+  if (await openDestinationTab(dest)) recordBypassSuccess();
+  else overlay.setStatus('Could not open link');
 };
 
 const openUnlockPage = async (alias: string, assigned: string): Promise<void> => {

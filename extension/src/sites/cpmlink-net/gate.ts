@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -139,6 +140,7 @@ const runGo = (): boolean => {
   if (!dest) return false;
   goStarted = true;
   mountUi(NOTE, 'Opening your link…');
+  recordBypassSuccess();
   location.replace(dest);
   return true;
 };

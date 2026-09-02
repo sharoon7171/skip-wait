@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -44,7 +45,10 @@ const wire = (btn: HTMLAnchorElement, hop: Promise<string>, labelEl: Element | n
     (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      void hop.then((url) => location.assign(url));
+      void hop.then((url) => {
+        recordBypassSuccess();
+        location.assign(url);
+      });
     },
     true,
   );

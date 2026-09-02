@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { linksGoFormFromHtml, postLinksGo } from '../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
@@ -89,6 +90,7 @@ const openDestination = async (html: string, referer: string, overlay: FullPageO
     return;
   }
   overlay.setStatus('Opening your link…');
+  recordBypassSuccess();
   location.replace(url);
 };
 

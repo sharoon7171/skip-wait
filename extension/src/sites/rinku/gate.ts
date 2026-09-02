@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import {
@@ -39,11 +40,15 @@ const submitPaced = (form: HTMLFormElement, overlay: FullPageOverlay): void => {
   form.setAttribute(FORM_PACED, '1');
   const wait = UNLOCK_MIN_MS - performance.now();
   if (wait <= 0) {
+    recordBypassSuccess();
     submitOnce(form);
     return;
   }
   overlay.startCountdown(Date.now() + wait);
-  window.setTimeout(() => submitOnce(form), wait);
+  window.setTimeout(() => {
+    recordBypassSuccess();
+    submitOnce(form);
+  }, wait);
 };
 
 const mountUi = (

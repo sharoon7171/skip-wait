@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypassHost, canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -221,6 +222,7 @@ const runUnlock = async (): Promise<void> => {
     const decoded = await resolveLinkshortifyUrl(readyHref, alias);
     if (decoded && !(await isInternalUrl(decoded))) {
       overlay.setStatus('Opening your link…');
+      recordBypassSuccess();
       location.replace(decoded);
       return;
     }
@@ -261,6 +263,7 @@ const runUnlock = async (): Promise<void> => {
   }
 
   overlay.setStatus('Opening your link…');
+  recordBypassSuccess();
   location.replace(url);
 };
 

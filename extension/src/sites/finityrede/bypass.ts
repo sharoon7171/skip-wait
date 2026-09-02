@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -103,6 +104,7 @@ export const initFinityredeBypass = (): void => {
     void resolve(dest)
       .then((url) => {
         overlay.setStatus('Redirecting now…');
+        recordBypassSuccess();
         location.replace(url);
       })
       .catch(() => {

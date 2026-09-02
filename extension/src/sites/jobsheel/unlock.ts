@@ -1,4 +1,5 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { babylinksAliasFromPath } from './hosts';
 import { createOverlay, spoofVisibility } from './overlay';
@@ -113,6 +114,7 @@ async function unlock(): Promise<void> {
     return;
   }
   overlay.setStatus('Opening…');
+  recordBypassSuccess();
   location.replace(url);
 }
 

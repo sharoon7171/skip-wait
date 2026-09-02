@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../free-bypass';
 import { canBypass } from '../gate';
 
 export function initFastdlZipRedirect(): void {
@@ -19,6 +20,7 @@ export function initFastdlZipRedirect(): void {
       return;
     }
     if (target.startsWith('http://') || target.startsWith('https://')) {
+      recordBypassSuccess();
       window.location.href = target;
     }
   });

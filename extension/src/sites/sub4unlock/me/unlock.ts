@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../../free-bypass';
 import { canBypass } from '../../../gate';
 import { linksGoFormFromHtml, type LinksGoForm } from '../../adlinkfly/unlock';
 import { createFullPageOverlay, type FullPageOverlay } from '../../../injected-ui/full-page-overlay';
@@ -129,6 +130,7 @@ const unlock = async (): Promise<void> => {
   }
 
   overlay.setStatus('Opening your link…');
+  recordBypassSuccess();
   location.replace(dest);
 };
 

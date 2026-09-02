@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -72,6 +73,7 @@ export function initLlSafelinkHqChain(): void {
         .then((dest) => {
           if (dest) {
             ui.setStatus('Redirecting now…');
+            recordBypassSuccess();
             location.replace(dest);
             return;
           }

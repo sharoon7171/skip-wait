@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -230,6 +231,7 @@ const runStep2 = (overlay: FullPageOverlay): void => {
     const url = await unlockOnce(mountUi(NOTE, 'Unlocking…'), token);
     if (url) {
       mountUi().setStatus('Redirecting now…');
+      recordBypassSuccess();
       location.replace(url);
     }
   })().catch(() => {

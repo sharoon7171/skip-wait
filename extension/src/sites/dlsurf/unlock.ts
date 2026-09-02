@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import {
@@ -156,6 +157,7 @@ const run = async (): Promise<void> => {
             panel.setStatus('Ready — tap Download File · Skip Wait when needed.');
             panel.setError(null);
             panel.showDownload(url);
+            recordBypassSuccess();
           })
           .catch((err: unknown) => {
             if (!stillCurrent(gen, slug) || !panelEl()) return;

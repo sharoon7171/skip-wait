@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { unlockShrinkearnInPage } from './earn';
@@ -136,6 +137,7 @@ const finishDest = async (dest: string): Promise<void> => {
   ui.hideCountdown();
   ui.progress();
   if (!(await openDestination(dest))) throw new Error('open');
+  recordBypassSuccess();
 };
 
 const runShrinkpe = (form: HTMLFormElement): void => {

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -113,6 +114,7 @@ const run = async (): Promise<void> => {
   try {
     const dest = await unlockDestination(overlay);
     overlay.setStatus('Opening your link…');
+    recordBypassSuccess();
     location.replace(dest);
   } catch (err) {
     started = false;

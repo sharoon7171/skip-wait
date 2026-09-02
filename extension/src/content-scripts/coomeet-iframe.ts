@@ -1,3 +1,4 @@
+import { countOnMessage } from '../free-bypass';
 import { canBypass } from '../gate';
 
 const MIN_MS = 400;
@@ -27,6 +28,7 @@ export function runCoomeetMainWorldAccelerator(): void {
   if (w[FLAG]) return;
   w[FLAG] = true;
   installAcceleratedTimers();
+  window.postMessage({ source: 'skip-wait-coomeet', type: 'on' }, location.origin);
 }
 
 export const isOnCoomeetIframeHost = (): Promise<boolean> => canBypass('coomeet-iframe');
@@ -34,6 +36,7 @@ export const isOnCoomeetIframeHost = (): Promise<boolean> => canBypass('coomeet-
 export function initCoomeetIframeBootstrap(): void {
   void isOnCoomeetIframeHost().then((ok) => {
     if (!ok) return;
+    countOnMessage('skip-wait-coomeet', 'on');
     if (typeof chrome !== 'undefined' && chrome.runtime?.id) {
       chrome.runtime.sendMessage({ type: 'SKIP_WAIT_COOMEET_MAIN' }).catch(() => {});
       return;

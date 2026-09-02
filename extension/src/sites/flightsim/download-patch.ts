@@ -41,6 +41,7 @@ export function runFlightsimDownloadPatch(): void {
       queueMicrotask(() => {
         try {
           (fn as (...args: unknown[]) => void)(...rest);
+          window.postMessage({ source: 'skip-wait-flightsim', type: 'skip' }, location.origin);
         } catch {}
       });
       return ++fakeTimerId as unknown as ReturnType<typeof setTimeout>;

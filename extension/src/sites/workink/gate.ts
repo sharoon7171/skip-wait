@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -167,6 +168,7 @@ export function initWorkinkGate(): void {
           stopPin?.();
           stopPin = null;
           mount('Opening your link…');
+          recordBypassSuccess();
           location.replace(ev.data.url);
           break;
       }

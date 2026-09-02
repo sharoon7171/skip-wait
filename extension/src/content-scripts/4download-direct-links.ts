@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../free-bypass';
 import { canBypass } from '../gate';
 import { whenDomParsed } from '../utils/domain-check';
 const PROVIDER_IDS = [
@@ -64,6 +65,7 @@ function runDownloadView(): void {
     if (ok && !revealed) {
       revealDownloadButtons();
       revealed = true;
+      recordBypassSuccess();
     }
   };
   const obs = new MutationObserver(apply);

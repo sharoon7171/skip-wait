@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -57,6 +58,7 @@ async function openMainSite(): Promise<void> {
   const overlay = mountUi('Resolving main site…');
   const href = await resolveMainSite();
   overlay.setStatus('Opening destination…');
+  recordBypassSuccess();
   location.replace(href);
 }
 

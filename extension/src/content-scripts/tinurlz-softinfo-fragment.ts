@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../free-bypass';
 import { canBypass } from '../gate';
 
 const KITOKOLA_HOST = 'kitokola.id';
@@ -32,6 +33,7 @@ export function initTinurlzSoftinfoFragment(): void {
     const inner = decodeFragment(raw);
     if (!inner || !/^https?:\/\//i.test(inner)) return;
     const finalUrl = unwrapKitokola(inner) ?? inner;
+    recordBypassSuccess();
     window.location.replace(finalUrl);
   });
 }

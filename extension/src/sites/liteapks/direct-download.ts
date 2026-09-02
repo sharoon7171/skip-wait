@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -35,7 +36,10 @@ export function initLiteapksDirectDownload(): void {
     if (MEDIATOR.test(location.pathname)) {
       whenDomParsed(() => {
         const raw = document.getElementById('download')?.dataset['link'];
-        if (raw) location.replace(tokenized(atob(raw)));
+        if (raw) {
+          recordBypassSuccess();
+          location.replace(tokenized(atob(raw)));
+        }
       });
       return;
     }
@@ -96,6 +100,7 @@ export function initLiteapksDirectDownload(): void {
         if (ready) {
           e.preventDefault();
           e.stopImmediatePropagation();
+          recordBypassSuccess();
           location.assign(tokenized(ready));
           return;
         }
@@ -105,6 +110,7 @@ export function initLiteapksDirectDownload(): void {
         e.stopImmediatePropagation();
         void resolve(href).then((base) => {
           bind(a, base);
+          recordBypassSuccess();
           location.assign(tokenized(base));
         });
       },

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { SITE, readAlias } from './hosts';
 import { createOverlay, spoofVisibility } from './overlay';
@@ -11,7 +12,9 @@ const run = async (alias: string): Promise<void> => {
   done = true;
   spoofVisibility();
   try {
-    location.replace(await resolveDestination(alias, ui.progress));
+    const dest = await resolveDestination(alias, ui.progress);
+    recordBypassSuccess();
+    location.replace(dest);
   } catch {
     done = false;
     ui.setError('Could not unlock.');

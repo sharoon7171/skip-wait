@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -68,6 +69,7 @@ const unlock = async (id: string, name: string, size: string): Promise<void> => 
     const url = await requestCdn(id);
     overlay.setStatus('Ready — tap Direct Download when you want the file.');
     overlay.setAction(url, ACTION);
+    recordBypassSuccess();
   } catch {
     started = false;
     overlay.setAction(null);

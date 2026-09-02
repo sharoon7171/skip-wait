@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypassHost } from '../../gate';
 import { destinationFromQuickSearch, isCutyQuickPath } from './unlock';
 
@@ -16,7 +17,9 @@ export function initCutyQuickRedirect(): void {
   chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     if (details.frameId !== 0) return;
     void quickDestination(details.url).then((dest) => {
-      if (dest) void chrome.tabs.update(details.tabId, { url: dest });
+      if (!dest) return;
+      recordBypassSuccess();
+      void chrome.tabs.update(details.tabId, { url: dest });
     });
   });
 }

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -252,7 +253,11 @@ async function finishFromLast(overlay: FullPageOverlay): Promise<void> {
 
   overlay.setStatus('Opening destination…');
   const res = await requestGoUnlock();
-  if (!res.ok) overlay.setError(res.err ?? 'Unlock failed.');
+  if (!res.ok) {
+    overlay.setError(res.err ?? 'Unlock failed.');
+    return;
+  }
+  recordBypassSuccess();
 }
 
 async function runCaptchaThenGo(overlay: FullPageOverlay): Promise<void> {
@@ -328,6 +333,7 @@ export function initCutyGate(): void {
     if (isCutyQuickPath()) {
       const dest = destinationFromQuickSearch();
       if (dest) {
+        recordBypassSuccess();
         location.replace(dest);
         return;
       }

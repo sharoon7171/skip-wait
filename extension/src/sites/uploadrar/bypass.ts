@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -47,6 +48,7 @@ export function initUploadrarBypass(): void {
           btn.textContent = 'Starting…';
           void cdn(id)
             .then((url) => {
+              recordBypassSuccess();
               Object.assign(document.createElement('a'), { href: url }).click();
               btn.textContent = IDLE;
             })

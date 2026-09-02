@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypassHost } from '../../gate';
 import { MSG_PROGRESS, MSG_RESOLVE, SITE, isShortUrl, isWorkingPage } from './hosts';
 import { createOverlay } from './overlay';
@@ -39,7 +40,9 @@ const run = async (unlockUrl: string): Promise<void> => {
       return;
     }
 
-    location.replace(await requestDestination(unlockUrl));
+    const dest = await requestDestination(unlockUrl);
+    recordBypassSuccess();
+    location.replace(dest);
   } catch {
     ui.setError('Could not unlock.');
   } finally {

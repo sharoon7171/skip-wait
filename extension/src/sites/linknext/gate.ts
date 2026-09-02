@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { overlayActiveClass, buildFullPageOverlayCss } from '../../injected-ui/overlay-styles';
 import { linknextPhase } from './match';
@@ -133,6 +134,7 @@ async function runBlog(overlay: FullPageOverlay): Promise<void> {
     const hit = await sessionIncrement(overlay, ssid, token, n);
     if (hit.completed && hit.finalDestination) {
       overlay.setStatus(stepStatus(n, BLOG_STEPS, 'Opening destination gate…'));
+      recordBypassSuccess();
       location.replace(hit.finalDestination);
       return;
     }
@@ -145,7 +147,9 @@ async function runTkGate(overlay: FullPageOverlay): Promise<void> {
   const form = await waitFor(() => linksGoForm(), 20_000);
   await countdownWait(overlay, counterSecFromPage() * 1000, 'Waiting for unlock timer…');
   overlay.setStatus('Opening destination…');
-  location.replace(await postLinksGo(form, location.href));
+  const dest = await postLinksGo(form, location.href);
+  recordBypassSuccess();
+  location.replace(dest);
 }
 
 async function runUnlock(phase: NonNullable<Awaited<ReturnType<typeof linknextPhase>>>): Promise<void> {

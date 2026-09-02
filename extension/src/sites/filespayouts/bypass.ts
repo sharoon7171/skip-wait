@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -23,6 +24,7 @@ function download2(id: string): void {
     form.append(input);
   }
   document.body.append(form);
+  recordBypassSuccess();
   form.submit();
 }
 

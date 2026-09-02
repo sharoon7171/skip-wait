@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypassHost, canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { LINKJUST_ALIAS_RE, LINKJUST_ORIGIN } from './hosts';
@@ -60,6 +61,7 @@ const leaveGate = async (): Promise<boolean> => {
   const url = await resolveShortUrl();
   if (!url) return false;
   done = true;
+  recordBypassSuccess();
   location.replace(url);
   return true;
 };

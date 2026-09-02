@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { DUPLOAD_ID_RE } from './hosts';
@@ -55,6 +56,7 @@ export const initDuploadBypass = (): void => {
             url,
             action: ACTION,
           });
+          recordBypassSuccess();
         })
         .catch((err: unknown) => {
           started = false;

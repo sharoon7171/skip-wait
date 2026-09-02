@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 
 const HUBCDN_DL_PATH_RE = /^\/dl\/?$/i;
@@ -17,6 +18,7 @@ export function initHubcdnDl(): void {
     } catch {
       return;
     }
+    recordBypassSuccess();
     location.replace(target);
   });
 }

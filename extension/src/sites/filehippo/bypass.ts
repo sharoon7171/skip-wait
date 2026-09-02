@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { filehippoRouteId } from './hosts';
@@ -102,6 +103,7 @@ function run(): void {
     if (routeId === 'programPostDownload') disarmAutoIframe();
     applyLaunchButtons(url);
     mountBrand();
+    recordBypassSuccess();
   });
 }
 

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -24,9 +25,11 @@ function unlock(): void {
   const forms = [...document.querySelectorAll<HTMLFormElement>(FORM)];
   const first = forms[0];
   if (!first) return;
+  let any = false;
   for (const form of forms) {
     const file = form.querySelector<HTMLInputElement>('input[name="file"]')?.value.trim();
     if (!file || !/^https?:\/\//i.test(file)) continue;
+    any = true;
     form.addEventListener(
       'submit',
       (e) => {
@@ -37,6 +40,7 @@ function unlock(): void {
       true,
     );
   }
+  if (any) recordBypassSuccess();
   mountBrand(first);
 }
 

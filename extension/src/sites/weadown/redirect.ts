@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -147,6 +148,7 @@ const submitGoUrl = (goUrl: string): void => {
   marker.value = '1';
   form.append(marker);
   document.body.append(form);
+  recordBypassSuccess();
   form.submit();
   form.remove();
 };

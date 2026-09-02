@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -200,6 +201,7 @@ const unlock = async (gate: Gate): Promise<void> => {
   mountOverlay(gate, 'start');
   const url = await resolveChain(gate);
   paint(gate, 'ready');
+  recordBypassSuccess();
   location.assign(url);
 };
 

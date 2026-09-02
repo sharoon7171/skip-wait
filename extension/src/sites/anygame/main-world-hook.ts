@@ -20,6 +20,13 @@ export function runAnygameDirectDownload(): void {
   const urls = new WeakMap<HTMLElement, string>();
   const linkIds = new WeakMap<HTMLElement, number>();
   const cache = new Map<number, Promise<string | null>>();
+  let signaled = false;
+
+  const signalCdn = (): void => {
+    if (signaled) return;
+    signaled = true;
+    window.postMessage({ source: 'skip-wait-anygame', type: 'cdn' }, location.origin);
+  };
 
   const onDownload = (): boolean => /^\/download\/?$/i.test(location.pathname);
 
@@ -126,6 +133,7 @@ export function runAnygameDirectDownload(): void {
       urls.set(btn, url);
       wired.add(btn);
       if (btn instanceof HTMLAnchorElement) btn.href = url;
+      signalCdn();
     });
   };
 
@@ -148,6 +156,7 @@ export function runAnygameDirectDownload(): void {
         urls.get(hit) ||
         (hit instanceof HTMLAnchorElement && /^https?:/i.test(hit.href) ? hit.href : '');
       if (ready && /^https?:/i.test(ready)) {
+        signalCdn();
         location.assign(ready);
         return;
       }
@@ -164,6 +173,7 @@ export function runAnygameDirectDownload(): void {
         linkIds.set(hit, linkId);
         wired.add(hit);
         if (hit instanceof HTMLAnchorElement) hit.href = url;
+        signalCdn();
         location.assign(url);
       });
     },

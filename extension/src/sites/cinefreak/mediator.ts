@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -69,6 +70,7 @@ function resolve(): string | null {
 
 function redirect(dest: string): void {
   mountUi('Opening your download…');
+  recordBypassSuccess();
   const go = (): void => location.replace(dest);
   const wait = Math.max(0, OVERLAY_MIN_MS - (Date.now() - overlayAt));
   requestAnimationFrame(() => {

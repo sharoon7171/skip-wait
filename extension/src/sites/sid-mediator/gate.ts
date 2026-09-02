@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { decryptSidDestination } from './decode';
 import { mountOverlay, NOTE, NOTE_OPEN } from './overlay';
@@ -13,6 +14,7 @@ const run = async (sid: string): Promise<void> => {
     const dest = await decryptSidDestination(sid);
     overlay.setNote(NOTE_OPEN);
     overlay.setStatus('Opening your link…');
+    recordBypassSuccess();
     location.replace(dest);
   } catch (e) {
     overlay.setNote(NOTE);

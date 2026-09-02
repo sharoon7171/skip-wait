@@ -1,4 +1,5 @@
 import { linksGoFormFromHtml, postLinksGo, revealTimerLinks } from '../adlinkfly/unlock';
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -147,6 +148,7 @@ const redirectTo = async (url: string): Promise<void> => {
     overlay.hideCountdown();
   }
   overlay.setStatus('Redirecting now…');
+  recordBypassSuccess();
   location.assign(url);
 };
 
@@ -209,6 +211,7 @@ const runTimerPhase = async (state: { done: boolean; inFlight: boolean }): Promi
       return true;
     }
     overlay.setStatus('Opening destination…');
+    recordBypassSuccess();
     form.submit();
     return true;
   } finally {

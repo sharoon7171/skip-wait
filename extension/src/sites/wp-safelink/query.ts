@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -57,7 +58,10 @@ const open = (url: string): void => {
     return;
   }
   mountUi('Opening your link…');
-  const go = (): void => location.replace(url);
+  const go = (): void => {
+    recordBypassSuccess();
+    location.replace(url);
+  };
   const wait = Math.max(0, OVERLAY_MIN_MS - (Date.now() - overlayAt));
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {

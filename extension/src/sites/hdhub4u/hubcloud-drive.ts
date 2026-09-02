@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/overlay-styles';
@@ -90,6 +91,7 @@ export function initHubcloudDrive(): void {
       mount();
       const url = resolveTarget();
       if (url && /^https?:\/\//i.test(url)) {
+        recordBypassSuccess();
         location.replace(url);
         return;
       }
@@ -97,6 +99,7 @@ export function initHubcloudDrive(): void {
         const next = resolveTarget();
         if (!next || !/^https?:\/\//i.test(next)) return;
         clearInterval(id);
+        recordBypassSuccess();
         location.replace(next);
       }, 50);
     });

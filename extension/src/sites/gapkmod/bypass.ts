@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { hostnameMatches, whenDomParsed } from '../../utils/domain-check';
 import { requestGapkmodFinal } from './resolve';
@@ -15,6 +16,13 @@ type Entry = { url: string; name: string };
 
 const cache = new Map<string, Promise<string>>();
 let pageEntries: Entry[] | null = null;
+let counted = false;
+
+function count(): void {
+  if (counted) return;
+  counted = true;
+  recordBypassSuccess();
+}
 
 function own(href: string): URL | null {
   if (!URL.canParse(href, location.href)) return null;
@@ -87,6 +95,7 @@ function launch(from: HTMLAnchorElement, url: string, name = from.getAttribute(N
   const icon = from.querySelector('i') ?? Object.assign(document.createElement('i'), { className: 'fa fa-download' });
   next.replaceChildren(icon.cloneNode(true), document.createTextNode(` ${name}`));
   from.replaceWith(next);
+  count();
 }
 
 function entriesFrom(html: string, base: string): { token: string; name: string }[] {
@@ -137,6 +146,7 @@ function paintList(entries: Entry[]): void {
       return li;
     }),
   );
+  count();
 }
 
 export function initGapkmodBypass(): void {

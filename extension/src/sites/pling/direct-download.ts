@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -23,6 +24,7 @@ function run(): void {
         a.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopImmediatePropagation();
+          recordBypassSuccess();
           location.assign(decodeURIComponent(url));
         }, true);
       }

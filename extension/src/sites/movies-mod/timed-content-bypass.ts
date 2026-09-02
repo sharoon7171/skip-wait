@@ -1,4 +1,6 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
+import { whenDomParsed } from '../../utils/domain-check';
 
 const STYLE_ID = 'skipwait-movies-mod-timed-content';
 
@@ -15,5 +17,10 @@ export function initMoviesModContentScript(): void {
   void canBypass('movies-mod').then((ok) => {
     if (!ok) return;
     injectBypassStyle();
+    whenDomParsed(() => {
+      if (document.querySelector('[class*="timed-content-client_show"], [class*="timed-content-client_hide"]')) {
+        recordBypassSuccess();
+      }
+    });
   });
 }

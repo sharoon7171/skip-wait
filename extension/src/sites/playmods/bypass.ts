@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -134,6 +135,7 @@ function boot(): void {
       if (cached) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        recordBypassSuccess();
         location.assign(cached);
         return;
       }
@@ -155,11 +157,16 @@ export function initPlaymodsBypass(): void {
     if (!ok) return;
     const pathVid = versionIdInPath(location.pathname);
     if (pathVid) {
+      recordBypassSuccess();
       location.replace(hop(pathVid));
       return;
     }
     if (isMediator(location.pathname)) {
-      whenDomParsed(() => location.replace(hop(versionIdFromDoc(document))));
+      whenDomParsed(() => {
+        const url = hop(versionIdFromDoc(document));
+        recordBypassSuccess();
+        location.replace(url);
+      });
       return;
     }
     boot();

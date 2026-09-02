@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
@@ -104,6 +105,7 @@ async function runMediatorPageFlow(code: string, fingerprint: string): Promise<v
     if (d.phase === 'redirect') {
       stopChrome();
       ui.setStatus('Opening your download…');
+      recordBypassSuccess();
       return;
     }
     if (d.phase === 'error') {

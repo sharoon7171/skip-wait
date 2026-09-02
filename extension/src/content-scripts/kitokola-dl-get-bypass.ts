@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../free-bypass';
 import { canBypass } from '../gate';
 const STORAGE_KEYS = ['mi-active', 'mi-dl', 'mi-start', 'mi-total'];
 
@@ -41,6 +42,7 @@ export function initKitokolaDlGetBypass(): void {
     const target = decodeTarget(candidate);
     if (!target) return;
     clearTimerState();
+    recordBypassSuccess();
     window.location.replace(target);
   });
 }

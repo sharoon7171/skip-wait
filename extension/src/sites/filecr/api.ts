@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { requestExtractLink } from './extract-link';
 
 export type FilecrLink = {
@@ -212,6 +213,7 @@ export function prefetchDownloads(downloads: FilecrDownload[]): void {
 }
 
 export function go(url: string): void {
+  recordBypassSuccess();
   if (url.startsWith('magnet:')) {
     const a = document.createElement('a');
     a.href = url;

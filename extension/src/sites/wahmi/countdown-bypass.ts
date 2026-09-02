@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 
@@ -38,6 +39,7 @@ async function run(): Promise<void> {
   showNotice();
   const url = await resolveDownload(fileId);
   if (!url) return;
+  recordBypassSuccess();
   box.innerHTML = `<a class="download-link" href="${url}">Download</a>`;
 }
 

@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { whenDomParsed } from '../../utils/domain-check';
 import { ANKERGAMES_MEDIATOR_PATH } from './hosts';
@@ -24,6 +25,7 @@ function mountBanner(): boolean {
   });
   banner.setAttribute('role', 'status');
   anchor.parentElement.insertBefore(banner, anchor);
+  recordBypassSuccess();
   return true;
 }
 

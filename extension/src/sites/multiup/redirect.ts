@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypassHost } from '../../gate';
 
 const BASE = 'https://multiup.io/en/mirror/';
@@ -27,6 +28,7 @@ export function initMultiup(): void {
       }
       const id = mirrorId(details.url);
       if (!id) return;
+      recordBypassSuccess();
       void chrome.tabs.update(details.tabId, { url: `${BASE}${id}` });
     })();
   });

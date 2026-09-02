@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { createFullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { whenDomParsed } from '../../utils/domain-check';
@@ -42,6 +43,7 @@ export function initLootlabsUnlock(): void {
         if (data.type === 'dest') {
           ui.stopCountdown();
           ui.setStatus('Opening your link…');
+          recordBypassSuccess();
           return;
         }
         if (data.type === 'err') {

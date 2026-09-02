@@ -1,3 +1,4 @@
+import { recordBypassSuccess } from '../../free-bypass';
 import { canBypass } from '../../gate';
 import { pinSiteWidgetOverOverlay } from '../../injected-ui/pin-site-widget';
 import { MSG_OPEN, MSG_RESOLVE, SITE, aliasFromPath } from './hosts';
@@ -45,7 +46,9 @@ const unlockAlias = async (alias: string): Promise<void> => {
     if (!(await openDestination(dest))) {
       done = false;
       ui.setError('Couldn’t open your UnlockToEarn destination. Reload and try again.');
+      return;
     }
+    recordBypassSuccess();
   } catch {
     done = false;
     ui.setError('Couldn’t finish UnlockToEarn. Reload this link and try again.');
