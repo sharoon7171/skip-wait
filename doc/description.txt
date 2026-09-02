@@ -1,144 +1,92 @@
-Skip Wait is a $1 per month Chrome extension that helps you bypass countdown timers and clear delay pages on supported link shorteners, safelinks, and file hosts. On matching pages it either opens the destination right away or finishes the on-page unlock steps so you reach the final URL or file sooner.
+Skip Wait is a Chrome extension for skip wait, countdown bypass, and link shortener bypass. It skips countdown timers and waiting pages on supported URL shorteners and file hosts. If a site still asks you to wait or click Continue, Skip Wait does that for you, then opens the destination or file.
 
-Bypass requires a $1 per month license. Activate the key in the popup. There is nothing else to configure for supported sites. Pages outside supported short-link and delay flows are left alone.
+Start with no key: 5 free bypasses each day. The count resets at midnight on your device. A short link that uses a few pages still counts as one use. For no daily limit, get a 30-minute trial or $1.50 per month on EAS Store, paste the key in the popup, and tap Activate. One key per device. A live trial or monthly key does not use the daily free count.
 
-
---------------------------------------------------------------------------------
-OVERVIEW
---------------------------------------------------------------------------------
-
-Mandatory pauses, “please wait” screens, and multi-step unlock chains slow down ordinary browsing. This product targets that single problem: on supported flows it removes or completes the unlock delay so you spend less time babysitting the page.
-
-Open a supported link as you normally would. The content script detects the page type and runs the matching handler. Some sites allow an instant jump to the destination. Others still need gate unlocks, mediator hops, or timed steps—in those cases the handler completes the supported path for you instead of leaving the continue button or delay UI untouched.
-
-Coverage is site-specific and grows over time. Unsupported sites are not modified for this purpose.
+Skip Wait is a FastForward and Universal Bypass alternative. It is not FastForward or Universal Bypass. It is skip wait in Chrome: bypass timers, skip countdown, and link shortener bypass on matching pages only. Other sites stay unchanged. No paste tool and no site-by-site setup.
 
 
 --------------------------------------------------------------------------------
-WHAT IT DOES
+What Skip Wait Does
 --------------------------------------------------------------------------------
 
-• Bypass countdown screens on supported file-host and link pages
-• Skip waiting UI and “click to continue” gates where a supported unlock path exists
-• Short-link delay relief when the destination can be resolved from the page or chain
-• Short-link and short-URL unshorten-style jumps on matching hosts
-• Safelink flows and multi-step unlock chains—walk hops until the real link appears
-• File-host delay relief on supported hosts
-• Instant destination open when the site allows it
-• When a full jump is not possible, finish the unlock steps so you still arrive sooner
-• Runs automatically on supported pages—no site-by-site setup
+Skip Wait runs when you open a supported delay page. It either skips the wait or finishes the Continue steps for you.
+
+• Skip wait and skip countdown on delay and download-timer pages
+• Countdown bypass and bypass timers on please-wait screens
+• Link shortener bypass on URL shorteners and short-link chains
+• Direct download when a file host hides the real link behind a generating wait
+• Safelink, locker, landing, and multi-step waits on supported hosts
 
 
 --------------------------------------------------------------------------------
-FEATURES
+Bypass Types
 --------------------------------------------------------------------------------
 
-• $1 per month—activate a license key in the popup
-• Automatic detection when you land on a matching short link, safelink, or file host
-• Popup focused on help—not a settings panel
-• “View supported sites” opens the current coverage list
-• “Refresh” in the popup downloads the latest supported domains—no reinstall
-• Request a missing website via GitHub, email, or Telegram from the popup
-• No global on/off switch; real work stays limited to matched supported flows
-• Does not collect personal data for ads, inject advertisements, or add unrelated tools
+Coverage is by flow, not a frozen brand list. These are the bypass types Skip Wait ships for supported pages.
 
+Skip Countdown and Bypass Timers
 
---------------------------------------------------------------------------------
-HOW TO USE
---------------------------------------------------------------------------------
+• Skip Countdown — skip the on-page countdown so the next control is ready
+• Skip Countdown Timer — skip countdown timer UI on generate or guest cards
+• Skip Download Timer — skip the download timer before the file starts
+• Skip Preparing Timer — skip preparing or trial-ready timers
+• Skip Timed Reveal — skip timed reveal of hidden download or article blocks
 
-1. Install from the Chrome Web Store.
-2. Activate a $1 per month license in the popup.
-3. Browse as usual. Open any supported short link, delay page, or file interstitial.
-4. The product detects the page and either opens the destination or completes the unlock flow.
+URL Shorteners and Link Shortener Bypass
 
-That is the full workflow. You do not turn sites on one by one, and you do not paste URLs into a separate tool—the handler runs on the page when it matches a supported flow.
+• Skip Short Link — skip short link hops and open the destination when the site allows it
+• Skip Waiting Page — skip waiting page and please-wait interstitials
+• Skip Safelink Wait — skip safelink wait, generate-link, and wrapped hops
+• Skip Landing Wait — skip landing wait before a mirror or catalog loads
+• Skip multi step Waits — skip multi-step waits across blog, gate, and unlock pages
+• Skip Countdown & Short Link — skip countdown and short link on the same host path
+• Skip Secure Link — skip secure-link delay before the real URL
+• Skip Prolink Wait — skip prolink wait on supported access hops
 
+Downloads
 
---------------------------------------------------------------------------------
-SUPPORTED BEHAVIOR
---------------------------------------------------------------------------------
+• Direct Download — resolve the file URL so you skip the generating wait
+• Skip Ads Download — skip ads download waits on supported download buttons
 
-Coverage is organized by behavior, not by a fixed brand list (hosts change and new ones are added):
+Lockers, Checks, and Extra Waits
 
-• Short links and safelinks — follow the chain to the final URL when possible
-• File hosts and file pages — complete unlock steps where supported
-• Pages that delay access with gates or session checks — complete the supported unlock path
-• Multi-step mediator or blog-hop chains — keep progress locally while the chain advances
-• Instant hop pages — open the destination early when it is already known from the site’s own flow
-
-For the live list of domains and flows, open the popup and choose “View supported sites.” If a delay page you use is missing, send the URL through the popup support options and we will add an unlock path when it is possible.
-
-
---------------------------------------------------------------------------------
-WHO IT IS FOR
---------------------------------------------------------------------------------
-
-• Anyone who opens short links and wants less time on interstitial screens
-• People who get files from hosts with mandatory pauses before the link appears
-• Users who hit continue gates or multi-step unlock pages on supported sites
-• Anyone looking for a $1 per month Chrome tool that clears supported short-link and file-host delays
+• Skip Content Locker — skip content locker tasks and unlock cards
+• Skip Access Steps — skip access steps on supported unlock pages
+• Skip Human Check — skip human-check busywork after you complete the check
+• Skip Security Check — skip security-check delay once the page allows continue
+• Skip Copy Step — skip copy-step waits and put the result on your clipboard
+• Skip Embedded Wait — skip embedded wait inside supported iframes
+• Skip Course Wait — skip course wait on supported training players
 
 
 --------------------------------------------------------------------------------
-REQUEST A WEBSITE
+How to Use
 --------------------------------------------------------------------------------
 
-New sites are added over time. If a page you use is not covered yet:
+1. Add Skip Wait from the Chrome Web Store.
+2. Open a supported URL shortener, waiting page, or file-host link as usual.
+3. Optional: get a 30-minute trial or $1.50 per month on EAS Store and activate the key in the popup.
 
-1. Open the popup from the toolbar.
-2. Use Ask on GitHub, Email, or Telegram.
-3. Include the page URL and a short note about how the unlock works.
-
-We add a handler when the flow can be completed reliably. The popup is for support and the supported-sites list—it is not a control panel for disabling the product.
+After 5 free uses with no live key, wait until the next day on your device or activate a key.
 
 
 --------------------------------------------------------------------------------
-HOW SUPPORT WORKS OVER TIME
+New Sites
 --------------------------------------------------------------------------------
 
-Supported hosts and mediators change. New shorteners appear; old domains move. Because of that:
+Supported URL shorteners and file hosts change over time.
 
-• Handlers are added and updated as flows are verified
-• Supported domains live in a remote list on GitHub (hosts.json)
-• Tap Refresh in the popup to download new domains without reinstalling
-• The live domain list also appears on the supported-sites page linked from the popup
-• You keep the same install and the same automatic behavior—no reconfiguration when coverage expands
-• Requests from users help prioritize the next unlock paths
-
-This keeps the listing accurate without freezing a brand roster that would go stale.
+• Tap New domains in the popup to download the latest list from GitHub — no reinstall
+• Open Supported sites for the current bypass list
+• Missing a page? Send the URL from the popup. We add support when the flow can run reliably
 
 
 --------------------------------------------------------------------------------
-PRIVACY AND DATA
+Privacy
 --------------------------------------------------------------------------------
 
-• No ads injected by the product
-• Device-local storage for short-lived progress on multi-step shortener chains and for the cached supported-site list
-• Cookie reads only on certain supported pages where the destination lives in an HttpOnly cookie, and only to finish that jump locally
-• A single fetch to the public hosts.json list on GitHub when the extension starts and when you tap Refresh in the popup
-• Permissions exist to complete supported unlock flows—not for analytics, advertising, or selling browsing history
+Skip Wait does not inject ads.
 
-See the store listing permission justifications and the privacy policy for the exact permission reasons.
+On this device it stores short-lived progress on multi-step chains and the cached site list. Cookie reads happen only on certain supported pages where the destination is in an HttpOnly cookie, used locally to finish that jump. License checks go to EAS Store only when you activate, validate, or remove a key. The public hosts.json list on GitHub is fetched when the extension starts and when you tap New domains.
 
-
---------------------------------------------------------------------------------
-PERMISSIONS AT A GLANCE
---------------------------------------------------------------------------------
-
-Chrome will show permissions for scripting, storage, cookies, web navigation, and broad host access. Each exists only so supported unlock flows can run:
-
-• Scripting — small page-context helpers some gates require
-• Storage — short-lived chain progress on the device
-• Cookies — read HttpOnly destination values on certain supported pages
-• Web navigation — catch supported navigations early enough for the flow
-• Host access — many short-link and mediator domains change over time
-
-Detailed justifications for each permission are provided in the Chrome Web Store developer dashboard fields for this item.
-
-
---------------------------------------------------------------------------------
-SUMMARY
---------------------------------------------------------------------------------
-
-Install once, activate a $1 per month license, open a supported short link or delay page, and let the product handle the interstitial, gate, or unlock chain. Automatic on supported sites—so you get to the final URL or file with less friction.
+See the privacy policy for details.
