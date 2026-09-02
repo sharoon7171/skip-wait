@@ -13,12 +13,17 @@ import { FaqAccordion } from '@/components/ui/FaqAccordion';
 import { HeroBackdrop } from '@/components/ui/HeroBackdrop';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
+import {
+  actionsRow,
+  articleSectionY,
+  chip,
+  pageHeroY,
+  pageTitle,
+} from '@/ui-classes/layout';
 
 type BypassDetailPageProps = {
   entry: SupportedBypass;
 };
-
-const sectionClassName = 'scroll-mt-24 border-b border-neutral-200 py-8 sm:py-9';
 
 export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactElement {
   const { article } = entry;
@@ -33,7 +38,7 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
     <>
       <section className="relative bg-surface-canvas">
         <HeroBackdrop />
-        <Shell className="relative py-8 sm:py-10 lg:py-12">
+        <Shell className={pageHeroY}>
           <nav aria-label="Breadcrumb" className="mb-5">
             <ol className="m-0 flex list-none flex-wrap items-center gap-1 p-0 text-caption text-ink-soft">
               <li>
@@ -64,19 +69,17 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
             </ol>
           </nav>
 
-          <div className="max-w-2xl">
+          <div className="max-w-measure">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2">
-              <h1 className="font-display text-title-lg text-ink sm:text-headline">
-                {entry.name} Bypass
-              </h1>
+              <h1 className={pageTitle}>{entry.name} Bypass</h1>
               <p className="rounded-full bg-primary-50 px-2.5 py-0.5 text-caption font-semibold text-primary-700 ring-1 ring-primary-100">
                 {entry.bypass}
               </p>
             </div>
-            <p className="mt-4 text-body text-ink-body">{article.intro}</p>
+            <p className="mt-3 text-body-sm text-ink-body sm:text-body">{article.intro}</p>
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className={actionsRow}>
             <TrackedAnchor
               href={CHROME_WEB_STORE_URL}
               target="_blank"
@@ -104,16 +107,16 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
           <div className="min-w-0 lg:col-start-1 lg:row-start-1">
             <BypassArticleMarkdown markdown={article.body} />
 
-            <section id="faq" className={sectionClassName}>
+            <section id="faq" className={articleSectionY}>
               <h2 className="font-display text-title text-ink">FAQ</h2>
               <div className="mt-5">
                 <FaqAccordion items={article.faq} />
               </div>
             </section>
 
-            <section id="supported-websites" className={sectionClassName}>
+            <section id="supported-websites" className={articleSectionY}>
               <h2 className="font-display text-title text-ink">Supported websites</h2>
-              <p className="mt-4 max-w-prose text-body-sm leading-relaxed text-ink-body">
+              <p className="mt-3 max-w-prose text-body-sm leading-relaxed text-ink-body">
                 This {entry.name} bypass runs on the hosts below when Skip Wait is enabled in Chrome.
               </p>
               <ul
@@ -123,7 +126,7 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
                 {entry.domains.map((domain) => (
                   <li
                     key={domain}
-                    className="rounded-chip bg-neutral-100 px-3 py-1.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-300"
+                    className={`${chip} bg-neutral-100 text-ink ring-1 ring-neutral-300`}
                   >
                     {domain}
                   </li>
@@ -135,7 +138,7 @@ export function BypassDetailPage({ entry }: BypassDetailPageProps): React.ReactE
           </div>
 
           <aside className="hidden min-w-0 lg:col-start-2 lg:row-start-1 lg:block">
-            <div className="sticky top-24 pt-12 lg:pt-16">
+            <div className="sticky top-24 pt-10 lg:pt-12">
               <BypassArticleToc items={toc} />
             </div>
           </aside>

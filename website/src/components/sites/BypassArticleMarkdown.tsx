@@ -11,8 +11,8 @@ import { headingId } from '@/components/sites/markdown-toc';
 const prose = 'max-w-prose text-body-sm leading-relaxed text-ink-body';
 
 const articleClassName = [
-  'border-b border-neutral-200 py-8 sm:py-9',
-  '[&>*:first-child]:mt-0 [&_h2]:mt-0 [&_h2~h2]:mt-10 [&_h1~h2]:mt-10',
+  'border-b border-neutral-200 py-8 sm:py-10',
+  '[&>*:first-child]:mt-0 [&_h2]:mt-0 [&_h2~h2]:mt-8 [&_h1~h2]:mt-8',
   '[&_.hljs]:bg-transparent [&_.hljs]:text-neutral-200',
   '[&_.hljs-comment]:italic [&_.hljs-comment]:text-neutral-400 [&_.hljs-quote]:italic [&_.hljs-quote]:text-neutral-400',
   '[&_.hljs-keyword]:text-blue-300 [&_.hljs-selector-tag]:text-blue-300 [&_.hljs-addition]:text-blue-300',
@@ -111,7 +111,7 @@ const components: Components = {
     <mark className="rounded-sm bg-primary-50 px-0.5 text-ink ring-1 ring-primary-100">{children}</mark>
   ),
   kbd: ({ children }) => (
-    <kbd className="rounded-sm bg-neutral-100 px-1.5 py-0.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-300">
+    <kbd className="rounded-sm bg-neutral-100 px-1.5 py-0.5 font-mono text-domain text-ink ring-1 ring-neutral-300">
       {children}
     </kbd>
   ),
@@ -165,7 +165,7 @@ const components: Components = {
       return <code className={className}>{children}</code>;
     }
     return (
-      <code className="rounded-sm bg-neutral-100 px-1.5 py-0.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-200">
+      <code className="rounded-sm bg-neutral-100 px-1.5 py-0.5 font-mono text-domain text-ink ring-1 ring-neutral-200">
         {children}
       </code>
     );

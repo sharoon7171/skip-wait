@@ -2,6 +2,7 @@ import type { SupportedBypass } from '@/types/catalog';
 import { bypassSlug } from '@/data/catalog';
 import { bypassSitePath } from '@/lib/routes';
 import { AppLink } from '@/components/nav/AppLink';
+import { chip } from '@/ui-classes/layout';
 
 type BypassRowProps = {
   entry: SupportedBypass;
@@ -32,7 +33,7 @@ export function BypassRow({
         <Title className={linked ? `${titleClass} transition-colors group-hover:text-primary-700` : titleClass}>
           {entry.name}
         </Title>
-        <p className="rounded-full bg-primary-50 px-2.5 py-0.5 text-caption font-semibold text-primary-700 ring-1 ring-primary-100">
+        <p className="rounded-full bg-primary-50 px-2.5 py-0.5 text-caption font-semibold text-primary-700 ring-1 ring-primary-200/80">
           {entry.bypass}
         </p>
       </div>
@@ -56,13 +57,13 @@ export function BypassRow({
           {shown.map((domain) => (
             <li
               key={domain}
-              className="rounded-chip bg-neutral-100 px-3 py-1.5 font-mono text-caption font-medium text-ink ring-1 ring-neutral-300"
+              className={`${chip} bg-neutral-100 text-ink ring-1 ring-neutral-300`}
             >
               {domain}
             </li>
           ))}
           {hiddenCount > 0 ? (
-            <li className="rounded-chip bg-primary-50 px-3 py-1.5 text-caption font-semibold text-primary-700 ring-1 ring-primary-200">
+            <li className="rounded-chip bg-primary-50 px-2.5 py-1 text-domain font-semibold text-primary-700 ring-1 ring-primary-200">
               +{hiddenCount} more
             </li>
           ) : null}
@@ -78,7 +79,7 @@ export function BypassRow({
   return (
     <AppLink
       href={detailPath}
-      className={`group block no-underline transition-colors hover:bg-primary-50/60 ${className}`.trim()}
+      className={`group block no-underline transition-colors hover:bg-primary-50/70 ${className}`.trim()}
     >
       {body}
     </AppLink>
