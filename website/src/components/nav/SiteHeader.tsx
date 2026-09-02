@@ -48,20 +48,20 @@ export function SiteHeader(): React.ReactElement {
 
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-surface-canvas/85 backdrop-blur-md">
-      <Shell className="flex h-[4.5rem] items-center justify-between gap-3 sm:gap-6">
+      <Shell className="flex h-14 items-center justify-between gap-3 sm:h-16 sm:gap-6">
         <AppLink
           href={routes.home}
-          className="inline-flex min-w-0 items-center gap-2 sm:gap-2.5 no-underline"
+          className="inline-flex min-w-0 items-center gap-2 no-underline sm:gap-2.5"
           onClick={closeMenu}
         >
-          <BrandIcon size={30} priority className="size-[1.875rem] shrink-0" />
-          <span className="truncate font-display text-[1.05rem] font-extrabold tracking-tight text-ink sm:text-[1.15rem]">
+          <BrandIcon size={28} priority className="size-7 shrink-0" />
+          <span className="truncate font-display text-title font-extrabold tracking-tight text-ink">
             {SITE.name}
           </span>
         </AppLink>
 
-        <div className="flex shrink-0 items-center gap-3 lg:gap-8">
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+        <div className="flex shrink-0 items-center gap-3 lg:gap-6">
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
             <AppLink href={routes.sites} className={`${navLink} ${sitesClass}`}>
               Supported Sites
             </AppLink>

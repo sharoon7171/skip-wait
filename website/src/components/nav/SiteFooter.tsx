@@ -4,14 +4,16 @@ import { AppLink } from '@/components/nav/AppLink';
 import { BrandIcon } from '@/components/ui/icons';
 import { Shell } from '@/components/ui/Shell';
 import { TrackedAnchor } from '@/components/ui/TrackedAnchor';
+import { footerBarY, footerMainY } from '@/ui-classes/layout';
+import { bandGradient } from '@/ui-classes/surfaces';
 
 const footerLink =
   'text-caption font-medium text-ink-inverse-body no-underline transition-colors hover:text-white';
 
 export function SiteFooter(): React.ReactElement {
   return (
-    <footer className="bg-primary-950">
-      <Shell className="py-12 lg:py-14">
+    <footer className={bandGradient}>
+      <Shell className={footerMainY}>
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-sm">
             <div className="inline-flex items-center gap-2.5">
@@ -20,13 +22,13 @@ export function SiteFooter(): React.ReactElement {
                 {SITE.name}
               </span>
             </div>
-            <p className="mt-4 text-body-sm text-ink-inverse-body">{SITE.tagline}</p>
+            <p className="mt-3 text-body-sm text-ink-inverse-body">{SITE.tagline}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 sm:gap-14">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-12">
             <div>
               <p className="text-overline uppercase text-primary-300">Product</p>
-              <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
+              <ul className="mt-3 flex list-none flex-col gap-2 p-0">
                 <li>
                   <AppLink href={routes.home} className={footerLink}>
                     Home
@@ -73,7 +75,7 @@ export function SiteFooter(): React.ReactElement {
 
             <div>
               <p className="text-overline uppercase text-primary-300">Support</p>
-              <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
+              <ul className="mt-3 flex list-none flex-col gap-2 p-0">
                 <li>
                   <TrackedAnchor
                     href={REQUEST_SUPPORT_URL}
@@ -112,7 +114,7 @@ export function SiteFooter(): React.ReactElement {
 
             <div className="col-span-2 sm:col-span-1">
               <p className="text-overline uppercase text-primary-300">Legal</p>
-              <ul className="mt-4 flex list-none flex-col gap-2.5 p-0">
+              <ul className="mt-3 flex list-none flex-col gap-2 p-0">
                 <li>
                   <AppLink href={routes.privacy} className={footerLink}>
                     Privacy Policy
@@ -139,7 +141,9 @@ export function SiteFooter(): React.ReactElement {
       </Shell>
 
       <div className="border-t border-white/10">
-        <Shell className="flex flex-col gap-2 py-5 text-caption text-ink-inverse-soft sm:flex-row sm:items-center sm:justify-between">
+        <Shell
+          className={`flex flex-col gap-2 text-caption text-ink-inverse-soft sm:flex-row sm:items-center sm:justify-between ${footerBarY}`}
+        >
           <p>
             © {new Date().getFullYear()} {SITE.name}
           </p>
