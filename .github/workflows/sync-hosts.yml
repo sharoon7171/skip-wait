@@ -14,33 +14,23 @@ jobs:
       - name: Checkout private repo
         uses: actions/checkout@v4
 
-      - name: Push hosts.json via API
-        env:
-          GH_TOKEN: ${{ secrets.PUBLIC_HOSTS_SYNC_TOKEN }}
+      - name: Checkout public repo
+        uses: actions/checkout@v4
+        with:
+          repository: sharoon7171/skip-wait-bypass-timers-countdowns
+          ssh-key: ${{ secrets.PUBLIC_HOSTS_SYNC_SSH_KEY }}
+          path: public-repo
+
+      - name: Copy and push hosts.json
+        working-directory: public-repo
         run: |
-          if [ -z "$GH_TOKEN" ]; then
-            echo "PUBLIC_HOSTS_SYNC_TOKEN is empty"
-            exit 1
-          fi
-          REPO=sharoon7171/skip-wait-bypass-timers-countdowns
-          PATH_IN_REPO=hosts.json
-          SRC=extension/public/hosts.json
-          gh api user --jq '"login=\(.login)"'
-          PUSH=$(gh api "repos/${REPO}" --jq '.permissions.push')
-          if [ "$PUSH" != "true" ]; then
-            echo "Token permissions.push is not true on ${REPO}"
-            exit 1
-          fi
-          NEW_HASH=$(sha256sum "$SRC" | awk '{print $1}')
-          OLD_HASH=$(gh api "repos/${REPO}/contents/${PATH_IN_REPO}" --jq .content 2>/dev/null | tr -d '\n' | base64 -d | sha256sum | awk '{print $1}' || true)
-          if [ -n "$OLD_HASH" ] && [ "$OLD_HASH" = "$NEW_HASH" ]; then
+          cp ../extension/public/hosts.json hosts.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hosts.json
+          if git diff --staged --quiet; then
             echo "hosts.json already up to date"
             exit 0
           fi
-          NEW_B64=$(base64 -w0 "$SRC")
-          OLD_SHA=$(gh api "repos/${REPO}/contents/${PATH_IN_REPO}" --jq .sha 2>/dev/null || true)
-          ARGS=(--method PUT "repos/${REPO}/contents/${PATH_IN_REPO}" -f message='sync hosts.json from extension repo' -f content="$NEW_B64")
-          if [ -n "$OLD_SHA" ]; then
-            ARGS+=(-f sha="$OLD_SHA")
-          fi
-          gh api "${ARGS[@]}" --jq '"commit=\(.commit.sha[0:7]) path=\(.content.path)"'
+          git commit -m "sync hosts.json from extension repo"
+          git push
