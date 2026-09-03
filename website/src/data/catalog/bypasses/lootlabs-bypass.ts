@@ -5,19 +5,27 @@ const name = 'LootLabs';
 const bypassType = 'Skip Content Locker';
 
 const description =
-  'LootLabs bypass that works through content-locker waits and ad gate timers on monetized unlock links so Skip Wait can redirect when the destination releases.';
+  'LootLabs bypass that auto-runs locker wait timers on supported `/s` unlock links, handles Turnstile when required, and redirects to the destination without completing survey tasks.';
 
 const domains = [
   'links.lootlabs.gg',
-  'rapid-links.com',
+  'lootlabs.gg',
   'loot-link.com',
   'lootlinks.com',
+  'lootlinks.co',
+  'lootdest.org',
+  'lootdest.com',
+  'lootdest.net',
+  'rapid-links.com',
+  'rapid-links.net',
   'speedy-links.com',
   'best-links.org',
   'free-leaks.com',
   'fast-links.org',
-  'beta.luadefender.xyz',
-  'egirls.wtf',
+  'free-content.pro',
+  'direct-links.net',
+  'direct-links.org',
+  'ultra-links.net',
 ] as const;
 
 const keywords = [
@@ -27,10 +35,11 @@ const keywords = [
   'bypass lootlabs',
   'skip lootlabs',
   'lootlabs timer bypass',
-  'skip content locker',
-  'content locker bypass',
   'loot link bypass',
   'lootlinks bypass',
+  'lootdest bypass',
+  'skip content locker',
+  'content locker bypass',
   'skip countdown timer',
   'bypass countdown timer',
   'skip waiting page',
@@ -39,30 +48,30 @@ const keywords = [
 ] as const;
 
 const intro =
-  'Looking for a LootLabs bypass or content locker bypass usually means a shared unlock dropped you into ad gates and locker release timers instead of the file. Skip Wait is the Chrome extension that works through that locker flow and redirects when the destination becomes available.';
+  'A LootLabs bypass usually means a shared unlock dropped you onto a content locker with a wait timer and survey copy instead of the file. Skip Wait is the Chrome extension that runs the locker timer automatically, handles Turnstile when the page requires it, and redirects when the destination releases.';
 
-const body = `## Lockers that restart if you blink
+const body = `## Lockers that stall on timers, not one click
 
-A LootLabs monetized link rarely opens the destination in one step. You land on a content locker, sit through ad gates and release timers, then wait again before the real URL appears. Close the tab early, miss a gate, or fight overlays and you restart from the first screen.
+A LootLabs monetized link lands on a content locker—often \`/s\` on \`links.lootlabs.gg\` or a partner host—with a countdown and task text that implies surveys or ad gates. Close the tab early or refresh mid-flow and you restart from the first screen.
 
-That friction is why loot link bypass and skip content locker sit next to lootlabs timer bypass—the payload is gated behind a release checklist, not a single redirect.
+That friction is why loot link bypass and lootlabs timer bypass searches cluster together—the payload sits behind a release timer, not a single redirect.
 
-### What the locker usually stacks
+### What the locker usually shows
 
-- Content-locker screens that hide the destination
-- Ad gates before locker release
-- Release wait timers after the gates
-- Manual retries when a gate fails mid-flow
+- A wait countdown before the destination unlocks
+- Survey-style task titles on the locker page
+- Turnstile human verification on some unlocks
+- Partner domains that redirect into the same locker stack
 
-## Working the locker on the live unlock page
+## Bypassing the locker inside Chrome
 
-Skip Wait’s LootLabs support follows the live locker path inside Chrome. On supported unlock hosts it advances the flow the page already expects, then redirects when the server releases the destination.
+Skip Wait runs on supported LootLabs-family locker pages. It hooks the live unlock flow, runs the wait timer automatically, and shows a Skip Wait overlay with the remaining countdown—no survey tasks to click through.
 
-Client-only busywork gets out of the way; required locker steps still finish honestly. That is skip content locker as a browser session—not a one-shot paste that breaks when the next locker host rotates.
+When the locker requires Turnstile, the check appears in the overlay while the timer keeps running. Once the server releases the link, Skip Wait redirects automatically without showing the destination URL in the overlay.
 
-## Partner redirects into the same locker family
+## Partner locker hosts use the same pattern
 
-Paste boxes fail when LootLabs hosts reshuffle. Skip Wait runs on the pages you already opened—including partner unlocks that land on a supported locker—so a LootLabs bypass extension install keeps working as long as the locker pattern stays the same.
+Paste boxes go stale when locker domains rotate. Skip Wait keys off the live \`/s\` locker page on supported hosts—including \`loot-link.com\`, \`lootdest\` mirrors, and \`rapid-links\` family domains—so the bypass keeps working after partner redirects land on the same locker stack.
 `;
 
 
@@ -70,22 +79,27 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'What does a LootLabs bypass skip?',
     answer:
-      'Content-locker wait busywork and ad gate timers on monetized unlocks. Skip Wait works through the locker flow and redirects when the destination becomes available.',
+      'Manual survey tasks and timer babysitting on supported locker pages. Skip Wait runs the wait countdown automatically and redirects when the destination releases.',
   },
   {
-    question: 'Does every locker timer vanish instantly?',
+    question: 'Do I still need to complete surveys?',
     answer:
-      'Client-only delays go away. When a locker still requires a real wait before release, Skip Wait stays until it is allowed—so the lootlabs timer bypass stays stable.',
+      'No. Skip Wait does not walk through survey or ad-gate tasks. The locker timer runs down automatically while the Skip Wait overlay shows bypass progress.',
+  },
+  {
+    question: 'What about Turnstile on the locker?',
+    answer:
+      'When the locker requires Turnstile, the human check appears inside the Skip Wait overlay while the timer continues. Complete it once and the bypass keeps going.',
   },
   {
     question: 'Do partner unlocks that redirect into LootLabs work?',
     answer:
-      'Yes when the final locker host is supported. Open the unlock as usual; after the redirect Skip Wait runs on the locker page the same way.',
+      'Yes when the final locker host is supported and the URL is a locker path such as `/s`. Open the unlock as usual; after the redirect Skip Wait runs on that page.',
   },
   {
     question: 'Does Skip Wait redirect automatically on release?',
     answer:
-      'Yes. Keep the tab active and the extension works through the locker on supported hosts, redirecting when the link becomes available.',
+      'Yes. Keep the tab open with Skip Wait active on a supported locker host and it redirects when the link becomes available.',
   },
   {
     question: 'Do I need a license?',
