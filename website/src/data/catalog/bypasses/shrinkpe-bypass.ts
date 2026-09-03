@@ -5,9 +5,9 @@ const name = 'ShrinkPe';
 const bypassType = 'Skip Short Link';
 
 const description =
-  'ShrinkPe bypass clears Verify Your Are Human and Your Link Is Almost Ready so Skip Wait opens the destination without Step One blogs.';
+  'ShrinkPe bypass clears Step One / Step Two blog hops and Your Link Is Almost Ready so Skip Wait opens the destination without babysitting article tabs.';
 
-const domains = ['aii.sh', 'lnbz.la', 'oii.la', 'shrink.pe', 'tpi.li'] as const;
+const domains = ['aii.sh', 'lnbz.la', 'shrink.pe'] as const;
 
 const keywords = [
   'shrinkpe bypass',
@@ -15,14 +15,14 @@ const keywords = [
   'loanbuzz bypass',
   'lnbz bypass',
   'shrinkbixby bypass',
-  'verify your are human bypass',
-  'shrinkpe turnstile bypass',
-  'shrinkpe captcha skip',
+  'aii.sh bypass',
   'step one step two shortlink',
   'your link is almost ready bypass',
   'almost ready seconds bypass',
   'get link countdown bypass',
   'shrinkpe get link skip',
+  'shrinkpe timer bypass',
+  'shrinkpe countdown bypass',
   'please wait shortlink bypass',
   'skip waiting page shrinkpe',
   'monetized short link bypass',
@@ -37,65 +37,52 @@ const keywords = [
 ] as const;
 
 const intro =
-  'ShrinkPe shares often open on Verify Your Are Human with Continue locked behind Turnstile, then push Step One blog tabs before Your Link Is Almost Ready. Skip Wait is the Chrome extension that stays on the short URL, brings that human check forward, skips the Step One / Step Two article tour, and finishes the Almost Ready wait so the destination can open.';
+  'LoanBuzz and ShrinkBixby aliases on the ShrinkPe network often send you through Step One and Step Two article tabs before Your Link Is Almost Ready. Skip Wait is the $1.50/month Chrome extension that keeps you on the short link, clears those blog hops, and finishes the Almost Ready Get Link wait on the same tab.';
 
-const body = `## Verify Your Are Human before anything useful
+const body = `## Step One and Step Two eat the click
 
-[ShrinkPe](https://shrink.pe/) style aliases (including LoanBuzz-branded fronts on the same network) start with a captcha card titled Verify Your Are Human. Continue stays disabled until Cloudflare Turnstile completes. That check is real—Skip Wait does not fake it. It brings the widget forward so you can finish the box without digging under page chrome.
+[ShrinkPe](https://shrink.pe/) style shares—including LoanBuzz and ShrinkBixby links—rarely land on the file or video in one jump. The alias can show human verification first, then push Step One on a blog host, then Step Two on another article before the shortener is willing to show Your Link Is Almost Ready. Leave during a hop, close the wrong tab, or reload and the shrinkpe timer bypass loop starts again on a fresh article.
 
-Miss the check, reload mid-run, or trip an adblock wall and you restart on the same card. A shrinkpe captcha skip or verify your are human bypass has to keep that Turnstile result on the live alias—not restart the card after every mistimed Continue.
+That tour is monetization, not the destination. The real unlock still lives back on the short link with a seconds counter and a Get Link control that stays disabled until the wait is honest.
 
-### What the chain still wants after Turnstile
+### Screens you actually see
 
-- Step One and Step Two buttons on rotating blog articles
-- Ad tabs that only count while you stay on them
-- Continue… that only appears after both steps
-- Your Link Is Almost Ready with a live seconds countdown before Get Link unlocks
+- Captcha or verification on some aliases before hops begin
+- Step One / Step Two article pages with Continue-style gates
+- Your Link Is Almost Ready with a seconds readout and Get Link
+- Download or Get a link tiles around the page that are ads—not unlock
 
-## Step One blogs are not the file
+## Same tab, live progress, then unlock
 
-After Continue, the shortener posts you into article pages that ask you to watch ads, complete Step One, then Step Two, then hit Continue… again. Closing an ad tab early or leaving the article pauses their client timers. None of that HTML holds the final URL for you to copy—it only gates the return trip to the shortener.
+Skip Wait runs on the live ShrinkPe-network alias in Chrome—you do not walk every Step One article by hand. The Skip Wait screen tells you what stage is running: clearing wait pages, skipping each blog hop, then showing the Almost Ready countdown while Get Link is still locked. When unlock is allowed, Skip Wait finishes Get Link and opens the destination.
 
-Skip Wait does not open those article tabs for you to babysit. After Turnstile succeeds on the short link page, it advances the unlock path for you so Step One / Step Two theater is not your job.
+That is a shrinkpe get link skip and shrinkpe countdown bypass without babysitting rotating blog tabs. Paste shortlink tools miss when blog hosts rotate; this path stays on your session from the short URL you opened.
 
-## Your Link Is Almost Ready is a real wait
+## PolicyBuzz and Health Shield use another rule
 
-When the shortener is ready, you land on Your Link Is Almost Ready with a seconds counter (often about fifteen). That countdown is not decoration: posting Get Link too early returns an error. Skip Wait shows that wait clearly, holds for the full Almost Ready length the page publishes, then unlocks and opens the destination.
-
-### OlaMovies drive holds
-
-If the unlocked URL is a protected OlaMovies drive download, Skip Wait still waits a full careful visit length before opening so the drive does not treat the arrival as an instant skip. That extra hold is only for those drive links.
-
-## Live tab vs paste sites
-
-Paste shortlink tools and one-shot scripts break when Turnstile is required or the blog host rotates. Skip Wait runs on the live ShrinkPe-network alias in Chrome, keeps your own captcha result, and finishes Your Link Is Almost Ready on that session—a durable paste shortlink bypass alternative for this chain.
+oii.la and tpi.li look like the same family but start on advertisingcamps Turnstile with different blog hosts. Those shares use the [Oii / Tpi bypass](/sites/oii-bypass), not this ShrinkPe catalog page.
 `;
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'Which hosts does this ShrinkPe bypass cover?',
+    question: 'Which aliases does this ShrinkPe bypass cover?',
     answer:
-      'The domains listed on this page—ShrinkPe and LoanBuzz-style captcha shortlinks on the same network. Open the shared alias normally; Skip Wait runs when the Verify Your Are Human card is present.',
+      'ShrinkPe-network short links on shrink.pe, LoanBuzz (lnbz.la), and ShrinkBixby (aii.sh). oii.la and tpi.li use the separate Oii / Tpi bypass.',
   },
   {
-    question: 'Do I still need to solve Turnstile?',
+    question: 'Do I still open Step One and Step Two articles?',
     answer:
-      'Yes. Verify Your Are Human must complete. Skip Wait brings that check forward, then takes over so you are not stuck on Step One blogs and Almost Ready clicking.',
+      'No on supported aliases. Skip Wait clears those blog hops while you stay on the short link tab instead of clicking through each article.',
   },
   {
-    question: 'Why does Skip Wait still wait on Your Link Is Almost Ready?',
+    question: 'Why does Skip Wait show its own countdown on Almost Ready?',
     answer:
-      'The shortener rejects an early Get Link. Skip Wait waits the full Almost Ready seconds the page sets, then unlocks. That is separate from the optional longer hold used only for protected OlaMovies drive destinations.',
+      'The shortener rejects an early Get Link. Skip Wait mirrors the published seconds wait on the Skip Wait screen, then unlocks when that delay has actually passed.',
   },
   {
-    question: 'Will I see the Step One article pages?',
+    question: 'Will the status text change while it works?',
     answer:
-      'You should not need to. After Turnstile, Skip Wait advances past that blog tour while you stay on the short link tab.',
-  },
-  {
-    question: 'Is this the same as pasting into an online bypasser?',
-    answer:
-      'No. Paste sites often fail when Turnstile is required or blogs rotate. Skip Wait keeps your Chrome session and captcha on the live alias.',
+      'Yes. You see when wait pages are being skipped, when each hop clears, when Almost Ready is counting down, and when the destination is opening—without tapping Continue on blog tabs.',
   },
   {
     question: 'Do I need a license?',

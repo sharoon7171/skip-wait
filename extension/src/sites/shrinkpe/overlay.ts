@@ -1,110 +1,99 @@
-import {
-  createFullPageOverlay,
-  type FullPageOverlay,
-  type FullPageOverlayNote,
-} from '../../injected-ui/full-page-overlay';
+import { createFullPageOverlay, type FullPageOverlay } from '../../injected-ui/full-page-overlay';
 import { overlayActiveClass } from '../../injected-ui/overlay-styles';
+import type { ShrinkpeProgress } from './hosts';
 
-export const OVERLAY_ID = 'skip-wait-shrinkpe';
+const ID = 'skip-wait-shrinkpe';
 
-const INITIAL_STATUS = 'Preparing your link';
-const COUNTDOWN_STATUS = 'Waiting out the unlock timer';
+const stripDots = (text: string): string => text.replace(/\.+$/, '');
 
-const NOTE = {
-  lead: 'Skip Wait is unlocking your link.',
-  detail: 'Sit tight — Skip Wait clears the ads and wait, then opens your destination automatically.',
-} as const;
-
-const CAPTCHA_NOTE = {
-  lead: 'Verify you are human.',
-  detail: 'Complete the check below. Skip Wait continues automatically once it passes.',
-} as const;
-
-const CAPTCHA_STATUS = 'Waiting for the human check…';
-
-export type ShrinkpeOverlay = {
-  turnstileMount: () => HTMLElement;
-  captcha: () => void;
-  progress: () => void;
-  setPhase: (text: string) => void;
-  startCountdown: (endTs: number) => void;
-  hideCountdown: () => void;
-  setError: (status: string) => void;
-};
-
-export const createOverlay = (): ShrinkpeOverlay => {
+export const createOverlay = () => {
   let ui: FullPageOverlay | null = null;
   let pulseTimer: number | null = null;
   let pulseDots = 0;
-  let baseStatus = INITIAL_STATUS;
-  let locked = false;
+  let baseStatus = '';
+  let baseLead = 'Hang tight — unlocking your link.';
+  let baseDetail = "You don't need to tap anything on the page.";
+  let onCountdown = false;
 
   const stopPulse = (): void => {
-    if (pulseTimer != null) clearInterval(pulseTimer);
+    if (pulseTimer == null) return;
+    clearInterval(pulseTimer);
     pulseTimer = null;
   };
 
-  const liveStatus = (): string => `${baseStatus}${'.'.repeat(pulseDots + 1)}`;
+  const pulsedStatus = (): string => `${baseStatus}${'.'.repeat(pulseDots + 1)}`;
 
-  const paint = (note: FullPageOverlayNote, status: string): FullPageOverlay => {
-    document.documentElement.classList.add(overlayActiveClass(OVERLAY_ID));
-    if (ui) {
-      ui.setNote(note);
-      ui.setStatus(status);
-      ui.setError(null);
-      return ui;
-    }
+  const paintNote = (): void => {
+    ui?.setNote({ lead: baseLead, detail: baseDetail });
+  };
+
+  const tick = (): void => {
+    if (!ui || onCountdown) return;
+    pulseDots = (pulseDots + 1) % 3;
+    ui.setStatus(pulsedStatus());
+  };
+
+  const syncPulse = (): void => {
+    pulseDots = 0;
+    if (!ui || onCountdown) return;
+    paintNote();
+    ui.setStatus(pulsedStatus());
+    if (pulseTimer != null) return;
+    pulseTimer = window.setInterval(tick, 450);
+  };
+
+  const ensure = (): FullPageOverlay => {
+    document.documentElement.classList.add(overlayActiveClass(ID));
+    if (ui) return ui;
     ui = createFullPageOverlay({
-      id: OVERLAY_ID,
+      id: ID,
       brand: 'Skip Wait',
-      note,
-      status,
+      note: { lead: baseLead, detail: baseDetail },
+      status: pulsedStatus(),
       countdownLabel: 'Get Link ready in',
     });
     return ui;
   };
 
-  const startPulse = (): void => {
-    if (locked || pulseTimer != null) return;
-    pulseTimer = window.setInterval(() => {
-      if (locked || !ui) return;
-      pulseDots = (pulseDots + 1) % 3;
-      ui.setStatus(liveStatus());
-    }, 450);
-  };
-
-  const showStatus = (text: string): void => {
-    locked = false;
-    baseStatus = text;
-    pulseDots = 0;
-    paint(NOTE, liveStatus());
-    startPulse();
-  };
-
   return {
-    turnstileMount: () => paint(CAPTCHA_NOTE, CAPTCHA_STATUS).turnstileMount,
-    captcha: () => {
-      locked = true;
-      stopPulse();
-      paint(CAPTCHA_NOTE, CAPTCHA_STATUS);
-    },
-    progress: () => showStatus(INITIAL_STATUS),
-    setPhase: (text) => showStatus(text),
-    startCountdown: (endTs) => {
-      locked = true;
-      stopPulse();
-      paint(NOTE, COUNTDOWN_STATUS);
-      ui?.startCountdown(endTs);
-    },
-    hideCountdown: () => {
+    progress: (p: ShrinkpeProgress) => {
+      onCountdown = false;
       ui?.hideCountdown();
-      showStatus(baseStatus);
+      baseStatus = stripDots(p.status);
+      baseLead = p.lead;
+      baseDetail = p.detail;
+      ensure();
+      syncPulse();
+      return ui!;
     },
-    setError: (status) => {
-      locked = true;
+    waitCountdown: (p: ShrinkpeProgress, sec: number) => {
+      onCountdown = true;
+      stopPulse();
+      baseStatus = stripDots(p.status);
+      baseLead = p.lead;
+      baseDetail = p.detail;
+      const overlay = ensure();
+      paintNote();
+      overlay.setStatus(baseStatus);
+      overlay.startCountdown(Date.now() + sec * 1000);
+      return overlay;
+    },
+    finishWait: () => {
+      onCountdown = false;
+      ui?.hideCountdown();
+    },
+    setError: (status: string) => {
+      onCountdown = false;
       stopPulse();
       ui?.hideCountdown();
-      paint({ lead: 'Skip Wait hit a snag.', detail: 'Reload this link and try again.' }, status);
+      baseStatus = status;
+      baseLead = 'Something went wrong.';
+      baseDetail = 'Reload the short link and try again.';
+      const overlay = ensure();
+      overlay.setStatus(status);
+      overlay.setNote({ lead: baseLead, detail: baseDetail });
+      overlay.setError(status);
+      return overlay;
     },
   };
 };

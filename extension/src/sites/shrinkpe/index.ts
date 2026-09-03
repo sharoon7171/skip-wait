@@ -1,2 +1,2 @@
-export { initShrinkpePage } from './page';
 export { initShrinkpeBackground } from './background';
+export { initShrinkpe } from './unlock';

@@ -79,7 +79,7 @@ import { initPrmoviesRedirect } from '../sites/prmovies';
 import { initSidMediatorBypass } from '../sites/sid-mediator';
 import { initRomsfunDownloadInstant } from '../sites/romsfun';
 import { initShortxlinksUnlock } from '../sites/shortxlinks';
-import { initShrinkpePage } from '../sites/shrinkpe';
+import { initShrinkpe } from '../sites/shrinkpe';
 import { initShrtflyEntry, initShrtflyMediator } from '../sites/shrtfly';
 import { initShrinkmeEntry, initShrinkmeMediator, initShrinkmeUnlock } from '../sites/shrinkme';
 import { initWpSafelinkQueryRedirect, initWpSafelinkRedirect } from '../sites/wp-safelink';
@@ -267,7 +267,7 @@ const INITS = [
   initVegamoviesLandingRedirect,
   initCinefreakMediator,
   initRomsfunDownloadInstant,
-  initShrinkpePage,
+  initShrinkpe,
   initShrtflyEntry,
   initShrtflyMediator,
   initShrinkmeEntry,
