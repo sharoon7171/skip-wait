@@ -70,7 +70,7 @@ import { initMoviesModContentScript } from '../sites/movies-mod';
 import { initOnhaxpkCopy } from '../sites/onhaxpk';
 import { initOnlinetoolsDirectDownload } from '../sites/onlinetools';
 import { initOntopsRedirect } from '../sites/ontops';
-import { initReshortflyUnlock } from '../sites/reshortfly';
+import { initShrinkEarn, initShrinkEarnMediator } from '../sites/shrinkearn';
 import { initOuoBypass } from '../sites/ouo';
 import {
   initOlamoviesLandingRedirect,
@@ -98,6 +98,7 @@ import { initDuploadBypass } from '../sites/dupload';
 import { initFreedlinkGate } from '../sites/freedlink';
 import { initEarn4linkMediator, initEarn4linkUnlock } from '../sites/earn4link';
 import { initEarnlinksUnlock } from '../sites/earnlinks';
+import { initReshortflyUnlock } from '../sites/reshortfly';
 import { initAlpharedeUnlock } from '../sites/alpharede';
 import { initFinityredeBypass } from '../sites/finityrede';
 import { initTendrivesMediator } from '../sites/tendrives';
@@ -260,6 +261,8 @@ const INITS = [
   initOnhaxpkCopy,
   initOnlinetoolsDirectDownload,
   initOntopsRedirect,
+  initShrinkEarn,
+  initShrinkEarnMediator,
   initOuoBypass,
   initOlamoviesLandingRedirect,
   initOlamoviesLinkGenerate,
