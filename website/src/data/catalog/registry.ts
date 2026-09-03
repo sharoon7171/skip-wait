@@ -17,6 +17,7 @@ import { bypass as bbmktsSubtounlockBypass } from './bypasses/bbmkts-subtounlock
 import { bypass as boostellarBstshrtBypass } from './bypasses/boostellar-bstshrt-bypass';
 import { bypass as boostylinkBypass } from './bypasses/boostylink-bypass';
 import { bypass as clipiBypass } from './bypasses/clipi-bypass';
+import { bypass as cloverhubBypass } from './bypasses/cloverhub-bypass';
 import { bypass as cinefreakMediatorBypass } from './bypasses/cinefreak-mediator-bypass';
 import { bypass as cookiesceoBypass } from './bypasses/cookiesceo-bypass';
 import { bypass as coomeetIframeBypass } from './bypasses/coomeet-iframe-bypass';
@@ -158,6 +159,7 @@ export const bypasses: readonly SupportedBypass[] = [
   boostellarBstshrtBypass,
   boostylinkBypass,
   clipiBypass,
+  cloverhubBypass,
   cinefreakMediatorBypass,
   cookiesceoBypass,
   coomeetIframeBypass,
