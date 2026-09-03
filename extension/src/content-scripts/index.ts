@@ -70,6 +70,7 @@ import { initMoviesModContentScript } from '../sites/movies-mod';
 import { initOnhaxpkCopy } from '../sites/onhaxpk';
 import { initOnlinetoolsDirectDownload } from '../sites/onlinetools';
 import { initOntopsRedirect } from '../sites/ontops';
+import { initReshortflyUnlock } from '../sites/reshortfly';
 import { initOuoBypass } from '../sites/ouo';
 import {
   initOlamoviesLandingRedirect,
@@ -286,6 +287,7 @@ const INITS = [
   initEarn4linkMediator,
   initEarn4linkUnlock,
   initEarnlinksUnlock,
+  initReshortflyUnlock,
   initAlpharedeUnlock,
   initFinityredeBypass,
   initTendrivesMediator,

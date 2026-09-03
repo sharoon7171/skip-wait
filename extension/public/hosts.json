@@ -256,6 +256,9 @@
       "studyspark.study"
     ]
   },
+  "reshortfly": {
+    "hosts": ["reshortfly.com"]
+  },
   "rinku": {
     "hosts": ["rinku.me", "rinku.pro", "7mb.io"]
   },
