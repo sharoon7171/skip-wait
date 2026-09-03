@@ -602,6 +602,9 @@
   "clipi": {
     "hosts": ["clipi.cc"]
   },
+  "cloverhub": {
+    "hosts": ["cloverhub.app"]
+  },
   "cinefreak": {
     "hosts": ["cinefreak.ca", "cinefreak.ch", "cinefreak.net", "cinefreak.top", "cinefreak.tv"]
   },

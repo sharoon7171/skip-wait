@@ -65,6 +65,7 @@ import { initLinksterrGateway } from '../sites/linksterr';
 import { initLinkvertiseAccessPage } from '../sites/linkvertise';
 import { initLiteshortPage } from '../sites/liteshort';
 import { initLlSafelinkHqChain, initLlacDdx } from '../sites/ll-safelink';
+import { initCloverhubGetkey } from '../sites/cloverhub';
 import { initLootlabsCaptchaFrame, initLootlabsUnlock } from '../sites/lootlabs';
 import { initMoviesModContentScript } from '../sites/movies-mod';
 import { initOnhaxpkCopy } from '../sites/onhaxpk';
@@ -174,6 +175,7 @@ const INITS = [
   initLinkunlockerGate,
   initGaeaOperationsLockrGate,
   initWorkinkGate,
+  initCloverhubGetkey,
   initLootlabsUnlock,
   initLlSafelinkHqChain,
   initLlacDdx,
