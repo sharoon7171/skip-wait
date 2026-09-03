@@ -249,7 +249,7 @@ export default function PrivacyPage(): React.ReactElement {
             <li>
               the public supported-site list at{' '}
               <code>
-                raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/main/extension/public/hosts.json
+                raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns/main/extension/public/hosts.json
               </code>{' '}
               when the extension starts and when you tap Refresh in the popup
             </li>

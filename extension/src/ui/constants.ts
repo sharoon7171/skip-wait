@@ -1,5 +1,5 @@
 const REPO_ISSUES_NEW =
-  'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/issues/new';
+  'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns/issues/new';
 
 export const CHROME_WEB_STORE_LISTING_URL =
   'https://chromewebstore.google.com/detail/hdoecnlghjglmnjpnhaaeofcgocdgkhd';

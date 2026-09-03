@@ -70,7 +70,7 @@ URL shorteners and file hosts change often. The domain list updates separately f
 
 - Browse **Supported sites** for the current bypass list
 - In the popup, tap **New domains** to download the latest list from GitHub—no reinstall
-- Missing a page? Check the list first, then [request support](https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/issues/new?template=request_support.yml)
+- Missing a page? Check the list first, then [request support](https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns/issues/new?template=request_support.yml)
 
 Put the **main domain only** in the issue title (where the timer shows), and list the steps from a new tab until the wait screen appears.
 
