@@ -149,7 +149,7 @@ export default function PrivacyPage(): React.ReactElement {
             </li>
             <li>
               the cached supported-site list downloaded from the public{' '}
-              <code>hosts.json</code> file in the extension repository, plus the last refresh
+              <code>hosts.json</code> file in the Skip Wait GitHub repository, plus the last refresh
               time
             </li>
             <li>
@@ -249,9 +249,9 @@ export default function PrivacyPage(): React.ReactElement {
             <li>
               the public supported-site list at{' '}
               <code>
-                raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/main/extension/public/hosts.json
+                raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns/main/hosts.json
               </code>{' '}
-              when the extension starts and when you tap Refresh in the popup
+              when the extension starts and when you tap New domains in the popup
             </li>
             <li>
               EAS Store license endpoints at <code>{EAS_API_URL}</code> when you activate, validate,
