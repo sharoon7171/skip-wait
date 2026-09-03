@@ -88,6 +88,7 @@ import { bypass as olamoviesLinkGeneratorBypass } from './bypasses/olamovies-lin
 import { bypass as onhaxpkBypass } from './bypasses/onhaxpk-bypass';
 import { bypass as onlinetoolsBypass } from './bypasses/onlinetools-bypass';
 import { bypass as ontopsBypass } from './bypasses/ontops-bypass';
+import { bypass as shrinkearnBypass } from './bypasses/shrinkearn-bypass';
 import { bypass as ouoBypass } from './bypasses/ouo-bypass';
 import { bypass as pesktopBypass } from './bypasses/pesktop-bypass';
 import { bypass as playmodsBypass } from './bypasses/playmods-bypass';
@@ -229,6 +230,7 @@ export const bypasses: readonly SupportedBypass[] = [
   onhaxpkBypass,
   onlinetoolsBypass,
   ontopsBypass,
+  shrinkearnBypass,
   ouoBypass,
   pesktopBypass,
   playmodsBypass,
