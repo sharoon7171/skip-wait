@@ -81,12 +81,12 @@ export const QUETTA = {
 } as const;
 
 export const REQUEST_SUPPORT_URL =
-  'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns/issues/new?template=request_support.yml&labels=request-support';
+  'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/issues/new?template=request_support.yml&labels=request-support';
 
 export const CONTACT = {
   email: 'sharoon7171@gmail.com',
   telegram: 'https://t.me/sharoon1998',
-  github: 'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns',
+  github: 'https://github.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension',
 } as const;
 
 export const DEVELOPER = {

@@ -1,7 +1,7 @@
 export const HOSTS_STORAGE_KEY = 'skipWaitHosts';
 export const HOSTS_UPDATED_AT_KEY = 'skipWaitHostsUpdatedAt';
 const HOSTS_URL =
-  'https://raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns/main/hosts.json';
+  'https://raw.githubusercontent.com/sharoon7171/skip-wait-bypass-timers-countdowns-extension/main/extension/public/hosts.json';
 const HOST_RE = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$/;
 const SITE_RE = /^[a-z][a-z0-9-]{0,63}$/;
 
