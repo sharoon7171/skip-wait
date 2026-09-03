@@ -1,5 +1,6 @@
 import { initHostsSync } from '../hosts/check';
 import { initLicenseSync } from '../license/sync';
+import { initSurveyPrompt } from '../survey';
 import { initCoomeetMainWorldInject } from './coomeet-main-world-inject';
 import { initDocumentVisibilitySpoof } from './document-visibility-spoof';
 import { initFclcAlertSuppress, initFclcLinksGo } from '../sites/fclc';
@@ -94,3 +95,4 @@ initShrinkpeBackground();
 initCpmlinkNetAdblockInject();
 initHostsSync();
 initLicenseSync();
+initSurveyPrompt();
