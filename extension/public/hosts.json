@@ -1,9 +1,4 @@
 {
-  "tmp-sync-test": {
-    "hosts": [
-      "tmp-sync-test.example"
-    ]
-  },
   "yasir252": {
     "hosts": [
       "yasir252.com"
