@@ -69,7 +69,9 @@ export function overlayTurnstileMountCss(id: string): string {
   const c = overlayColors;
   const f = OVERLAY_FONT;
   return (
-    `#${id} .${cl.turnstile}{display:flex;align-items:center;justify-content:center;min-height:72px;margin-top:16px;pointer-events:auto!important;isolation:isolate}#${id} .${cl.turnstile} iframe,#${id} .${cl.turnstile} input{pointer-events:auto!important}` +
+    `#${id} .${cl.turnstile}{display:flex;align-items:stretch;justify-content:center;flex-direction:column;min-height:72px;margin-top:16px;pointer-events:auto!important;isolation:isolate;width:100%;overflow:hidden;border-radius:8px}` +
+    `#${id} .${cl.turnstile} iframe{width:100%;min-height:380px;border:0;border-radius:8px;background:transparent;pointer-events:auto!important}` +
+    `#${id} .${cl.turnstile} input{pointer-events:auto!important}` +
     `#${id} .${cl.action}{display:block;width:100%;box-sizing:border-box;margin-top:16px;padding:14px 18px;border-radius:10px;background:${c.accent};color:#0f172a;font-family:${f};font-size:1em;font-weight:800;line-height:1.3;text-align:center;text-decoration:none;pointer-events:auto!important;cursor:pointer}` +
     `#${id} .${cl.action}.${cl.hidden}{display:none!important}`
   );
