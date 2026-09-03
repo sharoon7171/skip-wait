@@ -65,7 +65,7 @@ import { initLinksterrGateway } from '../sites/linksterr';
 import { initLinkvertiseAccessPage } from '../sites/linkvertise';
 import { initLiteshortPage } from '../sites/liteshort';
 import { initLlSafelinkHqChain, initLlacDdx } from '../sites/ll-safelink';
-import { initLootlabsUnlock } from '../sites/lootlabs';
+import { initLootlabsCaptchaFrame, initLootlabsUnlock } from '../sites/lootlabs';
 import { initMoviesModContentScript } from '../sites/movies-mod';
 import { initOnhaxpkCopy } from '../sites/onhaxpk';
 import { initOnlinetoolsDirectDownload } from '../sites/onlinetools';
@@ -353,6 +353,7 @@ async function boot(): Promise<void> {
   }
   if (window !== window.top) {
     if (await isOnCoomeetIframeHost()) initCoomeetIframeBootstrap();
+    initLootlabsCaptchaFrame();
     return;
   }
   const onWorkingPage = location.href.startsWith(chrome.runtime.getURL('working.html'));
