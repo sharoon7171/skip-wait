@@ -14,23 +14,44 @@ jobs:
       - name: Checkout private repo
         uses: actions/checkout@v4
 
+      - name: Verify token can write to public repo
+        env:
+          GH_TOKEN: ${{ secrets.PUBLIC_HOSTS_SYNC_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "PUBLIC_HOSTS_SYNC_TOKEN is empty"
+            exit 1
+          fi
+          gh api user --jq '"login=\(.login)"'
+          gh api repos/sharoon7171/skip-wait-bypass-timers-countdowns --jq '"full_name=\(.full_name) push=\(.permissions.push) admin=\(.permissions.admin)"'
+          PUSH=$(gh api repos/sharoon7171/skip-wait-bypass-timers-countdowns --jq '.permissions.push')
+          if [ "$PUSH" != "true" ]; then
+            echo "Token authenticates but permissions.push is not true on the public repo."
+            echo "Fine-grained PAT must include skip-wait-bypass-timers-countdowns with Contents: Read and write, then update the secret."
+            exit 1
+          fi
+
       - name: Checkout public repo
         uses: actions/checkout@v4
         with:
           repository: sharoon7171/skip-wait-bypass-timers-countdowns
           token: ${{ secrets.PUBLIC_HOSTS_SYNC_TOKEN }}
           path: public-repo
+          persist-credentials: false
 
       - name: Copy and push hosts.json
         working-directory: public-repo
+        env:
+          GH_TOKEN: ${{ secrets.PUBLIC_HOSTS_SYNC_TOKEN }}
         run: |
           cp ../extension/public/hosts.json hosts.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/sharoon7171/skip-wait-bypass-timers-countdowns.git"
           git add hosts.json
           if git diff --staged --quiet; then
             echo "hosts.json already up to date"
             exit 0
           fi
           git commit -m "sync hosts.json from extension repo"
-          git push
+          git push origin HEAD:main
