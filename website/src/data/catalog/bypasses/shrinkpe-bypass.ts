@@ -33,15 +33,14 @@ const keywords = [
   'short link bypass',
   'skip wait chrome extension',
   'chrome extension shortlink bypass',
-  'paste shortlink bypass alternative',
 ] as const;
 
 const intro =
-  'LoanBuzz and ShrinkBixby aliases on the ShrinkPe network often send you through Step One and Step Two article tabs before Your Link Is Almost Ready. Skip Wait is the $1.50/month Chrome extension that keeps you on the short link, clears those blog hops, and finishes the Almost Ready Get Link wait on the same tab.';
+  'ShrinkPe short links on shrink.pe, LoanBuzz, and ShrinkBixby aliases often send you through Step One and Step Two article tabs before Your Link Is Almost Ready. Skip Wait is the Chrome extension that keeps you on the short link, clears those blog hops, and finishes the Almost Ready Get Link wait on the same tab.';
 
 const body = `## Step One and Step Two eat the click
 
-[ShrinkPe](https://shrink.pe/) style shares—including LoanBuzz and ShrinkBixby links—rarely land on the file or video in one jump. The alias can show human verification first, then push Step One on a blog host, then Step Two on another article before the shortener is willing to show Your Link Is Almost Ready. Leave during a hop, close the wrong tab, or reload and the shrinkpe timer bypass loop starts again on a fresh article.
+ShrinkPe shares rarely land on the file or video in one jump. The alias can show human verification first, then push Step One on a blog host, then Step Two on another article before the shortener is willing to show Your Link Is Almost Ready. Leave during a hop, close the wrong tab, or reload and the shrinkpe timer bypass loop starts again on a fresh article.
 
 That tour is monetization, not the destination. The real unlock still lives back on the short link with a seconds counter and a Get Link control that stays disabled until the wait is honest.
 
@@ -54,20 +53,16 @@ That tour is monetization, not the destination. The real unlock still lives back
 
 ## Same tab, live progress, then unlock
 
-Skip Wait runs on the live ShrinkPe-network alias in Chrome—you do not walk every Step One article by hand. The Skip Wait screen tells you what stage is running: clearing wait pages, skipping each blog hop, then showing the Almost Ready countdown while Get Link is still locked. When unlock is allowed, Skip Wait finishes Get Link and opens the destination.
+Skip Wait runs on the live ShrinkPe alias in Chrome—you do not walk every Step One article by hand. The Skip Wait screen tells you what stage is running: clearing wait pages, skipping each blog hop, then showing the Almost Ready countdown while Get Link is still locked. When unlock is allowed, Skip Wait finishes Get Link and opens the destination.
 
-That is a shrinkpe get link skip and shrinkpe countdown bypass without babysitting rotating blog tabs. Paste shortlink tools miss when blog hosts rotate; this path stays on your session from the short URL you opened.
-
-## PolicyBuzz and Health Shield use another rule
-
-oii.la and tpi.li look like the same family but start on advertisingcamps Turnstile with different blog hosts. Those shares use the [Oii / Tpi bypass](/sites/oii-bypass), not this ShrinkPe catalog page.
+Client chrome gets out of the way; server-side holds still finish honestly. That is a shrinkpe get link skip and shrinkpe countdown bypass without babysitting rotating blog tabs on the short URL you opened.
 `;
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'Which aliases does this ShrinkPe bypass cover?',
+    question: 'What does a ShrinkPe bypass skip?',
     answer:
-      'ShrinkPe-network short links on shrink.pe, LoanBuzz (lnbz.la), and ShrinkBixby (aii.sh). oii.la and tpi.li use the separate Oii / Tpi bypass.',
+      'It skips babysitting Step One and Step Two blog tabs, hunting Continue on article pages, and watching the Almost Ready timer by hand. Required checks still complete before the destination opens.',
   },
   {
     question: 'Do I still open Step One and Step Two articles?',
