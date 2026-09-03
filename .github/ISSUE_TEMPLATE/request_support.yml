@@ -1,0 +1,21 @@
+name: Request a website
+description: Ask to add support for a website that shows a countdown or wait page
+labels: ["request-support"]
+assignees:
+  - sharoon7171
+body:
+  - type: markdown
+    attributes:
+      value: |
+        In **Title** above, enter the **main domain only** (hostname from the address bar where the timer shows), e.g. `example.com` or `sub.example.com`.
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps — how we can see the timer
+      description: From a new tab, list the full path until the countdown or wait screen is visible—each click, paste, or navigation and what loads next.
+      placeholder: |
+        1. Open …
+        2. Click …
+        3. Timer appears on …
+    validations:
+      required: true
