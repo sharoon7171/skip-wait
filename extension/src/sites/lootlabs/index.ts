@@ -1,2 +1,3 @@
 export { initLootlabsMainWorldInject } from './main-world-inject';
-export { initLootlabsUnlock } from './unlock';
+export { initLootlabsCaptchaFrame, initLootlabsUnlock } from './unlock';
+export { isLootLockerPath, isLootLockerUrl } from './locker';
