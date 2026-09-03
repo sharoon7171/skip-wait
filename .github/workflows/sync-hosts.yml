@@ -1,0 +1,36 @@
+name: Sync hosts.json
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'extension/public/hosts.json'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+
+      - name: Checkout public repo
+        uses: actions/checkout@v4
+        with:
+          repository: sharoon7171/skip-wait-bypass-timers-countdowns
+          token: ${{ secrets.PUBLIC_HOSTS_SYNC_TOKEN }}
+          path: public-repo
+
+      - name: Copy and push hosts.json
+        working-directory: public-repo
+        run: |
+          cp ../extension/public/hosts.json hosts.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hosts.json
+          if git diff --staged --quiet; then
+            echo "hosts.json already up to date"
+            exit 0
+          fi
+          git commit -m "sync hosts.json from extension repo"
+          git push
