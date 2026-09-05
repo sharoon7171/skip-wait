@@ -6,6 +6,7 @@ import { buildFullPageOverlayCss, overlayActiveClass } from '../../injected-ui/o
 const OVERLAY_ID = 'skip-wait-gaea-operations-lockr-overlay';
 const BOOT_STYLE_ID = 'skip-wait-gaea-operations-lockr-boot';
 const RESERVED = /^(auth|browse|dashboard|subscriptions|api-keys|terms-of-service|privacy-policy|discord|premium-auth)$/i;
+const UNLOCK_WAIT_MS = 32_000;
 const NOTE = {
   lead: 'Hang tight — unlocking your link.',
   detail: "Skip Wait is working. You don't need to tap anything.",
@@ -40,25 +41,14 @@ const mount = (status: string): FullPageOverlay => {
 };
 
 const resolve = async (id: string, overlay: FullPageOverlay): Promise<string> => {
-  const { data } = await api<{
-    data: { token: string; waitingTimeSeconds: number; tasks: unknown[] };
-  }>(`/api/v1/lockers/${id}/view`);
+  const { data } = await api<{ data: { token: string } }>(`/api/v1/lockers/${id}/view`);
   if (!data.token) throw new Error('Unlock token missing.');
 
-  if (data.tasks.length) {
-    overlay.setStatus('Completing tasks…');
-    const task = `/api/v1/lockers/${id}/task?token=${encodeURIComponent(data.token)}`;
-    await Promise.all(data.tasks.map(() => api(task)));
-  }
-
-  if (data.waitingTimeSeconds > 0) {
-    overlay.setStatus('Unlocking destination…');
-    overlay.startCountdown(Date.now() + data.waitingTimeSeconds * 1000);
-    await sleep(data.waitingTimeSeconds * 1000);
-    overlay.hideCountdown();
-  }
-
   overlay.setStatus('Unlocking destination…');
+  overlay.startCountdown(Date.now() + UNLOCK_WAIT_MS);
+  await sleep(UNLOCK_WAIT_MS);
+  overlay.hideCountdown();
+
   const target = (
     await api<{ data?: { target?: string } }>(
       `/api/v1/lockers/${id}/unlock?token=${encodeURIComponent(data.token)}`,
