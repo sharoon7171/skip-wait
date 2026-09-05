@@ -5,7 +5,7 @@ const name = 'Gaea Operations / Lockr';
 const bypassType = 'Skip Content Locker';
 
 const description =
-  'Lockr bypass for Gaea Operations lockers: skip offer tasks, popup walls, adblock warnings, and the Unlock content waitlist without buying Premium.';
+  'Lockr bypass clears Unlock content tasks, ad-blocker walls, and Unlocks in waitlists so Skip Wait opens the destination without Premium.';
 
 const domains = ['lockr.net', 'lockr.so', 'lockr.to'] as const;
 
@@ -46,11 +46,11 @@ const keywords = [
 ] as const;
 
 const intro =
-  'A Lockr share rarely ends at the file or channel you were promised. You land on Unlock content, grind Complete the 5 steps after a popup, browser-install offers, and Quick Step clicks, then sit on Unlocks in while Premium begs you to pay. Skip Wait is the Chrome extension built for that locker card—cover the noise, finish the unlock path, open the real destination.';
+  'A Lockr share rarely ends at the file or channel you were promised. You land on Unlock content, grind Complete the 5 steps after a popup, browser-install offers, and Quick Step clicks, then sit on Unlocks in while Premium begs you to pay. Skip Wait is the $1.50/month Chrome extension for that locker card—cover the noise, clear the waitlist, open the real destination.';
 
 const body = `## Unlock content cards that never feel finished
 
-Gaea Operations runs Lockr as monetization middleware. Free visitors hit task stacks that change by device and region—step farms, Download the Best Gaming Browser offers, After the Popup article walls—then often a red waitlist or Instant access Premium checkout. Disable your ad-blocker warnings, VPN soft-blocks, and nested lockers (one Lockr pointing at another) make it feel broken rather than monetized. Closing the wrong tab resets progress, which is why lockr chrome extension and skip lockr waitlist searches spike around the same Discord shares.
+Gaea Operations runs Lockr as monetization middleware. Free visitors hit task stacks that change by device and region—step farms, Download the Best Gaming Browser offers, After the Popup article walls—then a red Unlocks in waitlist or Instant access Premium checkout. Disable your ad-blocker warnings, VPN soft-blocks, and nested lockers (one Lockr pointing at another) make it feel broken rather than monetized. Closing the wrong tab resets progress on the same Unlock content card.
 
 ### Noise on a typical free locker
 
@@ -60,15 +60,14 @@ Gaea Operations runs Lockr as monetization middleware. Free visitors hit task st
 - Unlock content waitlist timers and Unlocks in countdowns
 - Premium Instant access as the only “fast” path
 
-## Overlay on the offer wall, unlock on Lockr’s path
+## Overlay on the offer wall, unlock when Lockr releases
 
-When a supported locker loads, Skip Wait covers the offer wall so fake unlock buttons cannot steal the click. It marks required tasks complete on Lockr’s own unlock path, honors the wait free traffic still owes, then follows the real target Unlock content would open—not a homepage guessed from a favicon. Status text stays plain; surveys, second-browser installs, and Premium trials stay optional for people who want them.
+When a supported locker loads, Skip Wait covers the offer wall so fake unlock buttons cannot steal the click. It drives Lockr’s unlock path past the task checklist and the long Unlocks in waitlist, then opens the real destination Unlock content would unlock—not a homepage guessed from a favicon. Status text stays plain; surveys, second-browser installs, and Premium trials stay optional for people who want them.
 
 ## Nested lockers and waitlists that outlast the checklist
 
-Finishing every checkmark does not always release the file. Many free lockers add a long waiting list, stack another Lockr behind the first, or soft-block VPN users. Skip Wait targets that stuck Unlock content state—skip lockr tasks and skip lockr premium without pretending Lockr stopped monetizing free traffic entirely.
+Finishing every checkmark does not always feel finished. Many free lockers stack a long waiting list, nest another Lockr behind the first, or soft-block VPN users. Skip Wait targets that stuck Unlock content state—skip lockr tasks, skip lockr waitlist, and skip lockr premium without buying Instant access.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
@@ -79,12 +78,12 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'What does a Lockr bypass skip?',
     answer:
-      'Visible task lists, popup/article walls, and Unlock content busywork. Skip Wait still follows Lockr’s unlock release for free traffic, then opens the real target.',
+      'Visible task lists, popup/article walls, ad-blocker stalls, and the Unlock content / Unlocks in waitlist. Skip Wait opens the real destination when Lockr releases it.',
   },
   {
     question: 'Will I still see Unlock content or a waitlist?',
     answer:
-      'The page underneath may still show those labels. The overlay is what you use—Skip Wait drives unlock and redirects when ready.',
+      'The page underneath may still show those labels. The overlay is what you use—Skip Wait clears the waitlist path and redirects when ready.',
   },
   {
     question: 'Do I need Lockr Premium?',
@@ -94,7 +93,7 @@ const faq: readonly BypassFaq[] = [
   {
     question: 'Why do some Lockr links feel endless after tasks?',
     answer:
-      'Long waitlists, nested lockers, or VPN/ad-blocker soft-blocks. That is why skip lockr waitlist and lockr unlock bypass searches cluster around stuck Unlock content cards.',
+      'Long Unlocks in waitlists, nested lockers, or VPN/ad-blocker soft-blocks. Skip Wait is built for that stuck Unlock content card.',
   },
   {
     question: 'Do I need a license?',
