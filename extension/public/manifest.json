@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Skip Wait - Bypass Timers & Countdowns",
-  "version": "1.4.76",
+  "version": "1.4.77",
   "description": "Skip countdown timers and waiting pages on URL shorteners and file hosts. Clicks Continue when needed. 5 free a day.",
   "icons": {
     "16": "icon.png",
