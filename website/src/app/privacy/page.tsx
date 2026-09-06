@@ -143,7 +143,7 @@ export default function PrivacyPage(): React.ReactElement {
               <ul>
                 <li>Arolinks</li>
                 <li>Cut4Money</li>
-                <li>Nitrolink</li>
+                <li>Nitro Link</li>
                 <li>ShortXLinks-style flows</li>
               </ul>
             </li>

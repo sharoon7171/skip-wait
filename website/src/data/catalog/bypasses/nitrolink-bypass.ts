@@ -1,70 +1,73 @@
 import type { BypassFaq, SupportedBypass } from '@/types/catalog';
 
-const name = 'Nitrolink';
+const name = 'Nitro Link';
 
-const bypassType = 'Skip multi step Waits';
+const bypassType = 'Skip Short Link';
 
 const description =
-  'Nitrolink bypass for multi-page waiting chains and blog mediator hops: Skip Wait advances the redirect sequence so you are not clicking Continue on every intermediate article.';
+  'Nitro Link bypass clears the article wait tour and Your link is almost ready so Skip Wait opens the destination on the short link.';
 
-const domains = ['nitro-link.com', 'almontsf.com'] as const;
+const domains = ['nitro-link.com'] as const;
 
 const keywords = [
+  'nitro link bypass',
   'nitrolink bypass',
-  'Nitrolink bypass extension',
-  'nitrolink timer bypass',
-  'skip multi step waits',
+  'nitro-link bypass',
+  'nitro link timer bypass',
+  'your link is almost ready bypass',
+  'get link timer bypass',
+  'please wait continue bypass',
+  'nitro link get link bypass',
+  'skip waiting page nitro',
   'skip countdown timer',
   'bypass countdown timer',
-  'skip waiting page',
   'link shortener bypass',
-  'skip wait extension',
-  'multi step bypass',
-  'redirect chain bypass',
+  'short link bypass',
+  'skip wait chrome extension',
 ] as const;
 
 const intro =
-  'A Nitrolink bypass search usually starts after a short URL turns into a multi-page waiting chain and blog mediator tour. Skip Wait is the Chrome extension that walks that redirect chain so skip multi step waits does not mean babysitting every hop.';
+  'Nitro Link short URLs try to send you through Please wait / Continue article pages before Your link is almost ready and Get Link. Skip Wait is the $1.50/month Chrome extension that keeps you on the Nitro Link short URL and finishes unlock there.';
 
-const body = `## Short links that become a blog tour
+const body = `## Stay on the Nitro Link short URL
 
-Nitrolink-style shares rarely end in one redirect. You leave the shortener, land on mediator blogs with please-wait and Continue, sometimes bounce again, then finally reach the destination. Close a tab early or lose session tracking and the whole redirect chain bypass hunt restarts—exactly why nitrolink timer bypass and multi step bypass searches spike.
+Open a Nitro Link alias and the shortener wants to leave for article waits—Level Step labels, Please wait, Continue, Next Step—before Your link is almost ready. Skip Wait keeps the tab on Nitro Link. You do not open those article pages yourself.
 
-### Hops people restart by hand
+TinyURL or other wrappers that only forward into a Nitro Link alias land on the same short link. Once you are on Nitro Link, this bypass applies.
 
-- Blog mediator pages with locked Continue under ads
-- Multi-page unlock sequences that expect an ordered visit
-- Session tracking between shortener and destination
-- Countdown scraps on intermediate unlock screens
+### What you actually see
 
-## Walking the chain inside Chrome
+- The Nitro Link short URL you opened
+- Your link is almost ready with a short Get Link timer
+- Get Link after that timer
 
-Skip Wait treats Nitrolink as a multi-step wait, not a paste-box riddle. On matching shortener and mediator pages it completes the same continue actions the flow already expects, then follows the next location without you hunting buttons through overlays.
+## Your link is almost ready
 
-Client chrome gets out of the way; server-side waits still finish honestly. Paste tools break when the next mediator appears. A Nitrolink bypass extension that keys off hop behavior stays useful for link shortener bypass and skip waiting page work as long as the chain pattern matches.
+The real hold is the Get Link timer on Your link is almost ready. Skip Wait shows that countdown from the page, waits only that time, then unlocks and opens the destination.
+
+No babysitting Continue on article hops. That is a Nitro Link bypass that treats the short link as the whole job.
 `;
-
 
 const faq: readonly BypassFaq[] = [
   {
-    question: 'What multi-page chain does a Nitrolink bypass skip?',
+    question: 'What does a Nitro Link bypass clear?',
     answer:
-      'Blog mediator hops, continue hunting, and unlock busywork after the shortener starts the tour. Required holds still complete before the destination opens.',
+      'The article Please wait / Continue tour and the Your link is almost ready Get Link timer, while you stay on the Nitro Link short URL.',
   },
   {
-    question: 'Do I still click through every blog myself?',
+    question: 'Do I visit every article page?',
     answer:
-      'On supported hops, no. Open the shared link once and Skip Wait advances each step until the final URL opens.',
+      'No. Skip Wait keeps you on Nitro Link and unlocks from the short link.',
   },
   {
-    question: 'Is every timer removed instantly?',
+    question: 'Why does Skip Wait show a countdown?',
     answer:
-      'Client-only delays go away. When a hop still needs a real wait, Skip Wait stays on that step—so the nitrolink timer bypass stays stable.',
+      'Your link is almost ready rejects an early Get Link. Skip Wait uses the timer from that page, then continues when it ends.',
   },
   {
-    question: 'What if a new mediator host appears?',
+    question: 'What about TinyURL into Nitro Link?',
     answer:
-      'If the unlock pattern is the same, the extension follows live behavior. You do not re-paste into a third-party tool for every rotation.',
+      'If TinyURL only opens a Nitro Link alias, this same Nitro Link bypass runs once you are on Nitro Link.',
   },
   {
     question: 'Do I need a license?',
