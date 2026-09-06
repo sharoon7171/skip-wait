@@ -1,0 +1,1 @@
+export { initMolynPage } from './page';

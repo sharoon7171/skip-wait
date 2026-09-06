@@ -67,6 +67,7 @@ import { initLiteshortPage } from '../sites/liteshort';
 import { initLlSafelinkHqChain, initLlacDdx } from '../sites/ll-safelink';
 import { initCloverhubGetkey } from '../sites/cloverhub';
 import { initLootlabsCaptchaFrame, initLootlabsUnlock } from '../sites/lootlabs';
+import { initMolynPage } from '../sites/molyn';
 import { initMoviesModContentScript } from '../sites/movies-mod';
 import { initOnhaxpkCopy } from '../sites/onhaxpk';
 import { initOnlinetoolsDirectDownload } from '../sites/onlinetools';
@@ -176,6 +177,7 @@ const INITS = [
   initGaeaOperationsLockrGate,
   initWorkinkGate,
   initCloverhubGetkey,
+  initMolynPage,
   initLootlabsUnlock,
   initLlSafelinkHqChain,
   initLlacDdx,
