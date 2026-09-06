@@ -44,6 +44,7 @@ import { initEarnlinksBackground } from '../sites/earnlinks';
 import { initShrinkpeBackground } from '../sites/shrinkpe';
 import { initSflBackground } from '../sites/sfl';
 import { initLiteshortBackground } from '../sites/liteshort';
+import { initNitrolinkBackground } from '../sites/nitrolink';
 import { initUnlocktoearnBackground } from '../sites/unlocktoearn';
 import { initCpmlinkNetAdblockInject } from '../sites/cpmlink-net';
 
@@ -93,6 +94,7 @@ initEarnlinksBackground();
 initShrinkpeBackground();
 initSflBackground();
 initLiteshortBackground();
+initNitrolinkBackground();
 initUnlocktoearnBackground();
 initCpmlinkNetAdblockInject();
 initHostsSync();

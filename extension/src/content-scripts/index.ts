@@ -21,7 +21,7 @@ import {
 } from '../sites/jobsheel';
 import { initUnlocktoearnPage } from '../sites/unlocktoearn';
 import { initGplinksGate, initGplinksLinksGo, initGplinksMediator } from '../sites/gplinks';
-import { initNitrolinkMediator, initNitrolinkUnlock } from '../sites/nitrolink';
+import { initNitrolinkPage } from '../sites/nitrolink';
 import { initCut4moneyMediator, initCut4moneyUnlock } from '../sites/cut4money';
 import { initTflyGate } from '../sites/tfly';
 import { initMitlyGate } from '../sites/mitly';
@@ -198,8 +198,7 @@ const INITS = [
   initJobsheelMediator,
   initJobsheelBaby,
   initJobsheelBabylinksUnlock,
-  initNitrolinkMediator,
-  initNitrolinkUnlock,
+  initNitrolinkPage,
   initCut4moneyMediator,
   initCut4moneyUnlock,
   initTflyGate,

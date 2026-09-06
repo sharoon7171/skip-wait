@@ -310,9 +310,6 @@
   "nitrolink": {
     "hosts": ["nitro-link.com"]
   },
-  "nitrolink-mediator": {
-    "hosts": ["almontsf.com"]
-  },
   "multiup": {
     "hosts": ["multiup.io"]
   },

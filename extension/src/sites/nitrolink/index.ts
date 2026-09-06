@@ -1,2 +1,2 @@
-export { initNitrolinkUnlock } from './unlock';
-export { initNitrolinkMediator } from './mediator';
+export { initNitrolinkBackground } from './background';
+export { initNitrolinkPage } from './page';
